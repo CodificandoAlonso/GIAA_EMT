@@ -25,8 +25,6 @@ import "routes_loader.gaml"
 
 
 
-
-
 global 
 {
 	
@@ -114,7 +112,7 @@ global
 		
 		
 		
-		//CALC NEW DISTAMCE VECTOR
+		//CALC DISTAMCE VECTOR
 		distance_vector[0] <- stop_reference.x - bus_actual_position.x;
 		distance_vector[1] <- stop_reference.y - bus_actual_position.y;
 		
@@ -124,12 +122,12 @@ global
 		//CALC THE MOD OF THE RESULTANT VECTOR
 		float new_mod <- sqrt(distance_vector[0]* distance_vector[0] + distance_vector[1] * distance_vector[1]);
 		
-		if (new_mod < 5.00)
+		
+		if (new_mod < 2.00)
 		{
 			return true;
 		}
 		
-
 		return false;
 		
 	}//END FUNCTION CALL iisr
@@ -187,17 +185,19 @@ global
  */
 species bus {
 	
+	
 	//INITIAL_POS
     string initial_stop;
+    
     
     //GOAL
     string destination_stopname;
     
+    
     //COORDINATES GOAL
     point location_goal;
     
-    
-    
+     
     //DISTANCE MOVED
     int makespan;
     
@@ -210,8 +210,6 @@ species bus {
     bool stopped <- false;
     
 
-    
-    
     //MAX SPEED
     float speed_module_vector <- 5.00;
     
@@ -249,48 +247,49 @@ species bus {
      * 
      * 
      */
-    reflex move_to_destination when: (arrived = false and stopped = false) {
+    reflex move_to_destination when: (arrived = false and stopped = false) 
+    {
     
 
-    //INVOICE THE CALCULATION OF THE MOVEMENT OF THE BUS
-	list<float> new_point <- world.vector_distance_calc(self.location,
-									stops_list[self.stops_reached].location, self.speed_module_vector);
-
+	    //INVOICE THE CALCULATION OF THE MOVEMENT OF THE BUS
+		list<float> new_point <- world.vector_distance_calc(self.location,
+										stops_list[self.stops_reached].location, self.speed_module_vector);
 	
-	//UPDATE THE MOVEMENT
-	self.location <- self.location + {new_point[0], new_point[1]};
-	
-	
-	//CHECK ARRIVAL TO STOP
-	
-	if (world.is_inside_stop_range(self.location, stops_list[self.stops_reached].location) = true)
-	{
-		//IF THE FUNCTION ENTERS HERE, IT MEANS A STOP HAS BEEN REACHED
+		
+		//UPDATE THE MOVEMENT
+		self.location <- self.location + {new_point[0], new_point[1]};
 		
 		
-		//FIRST, CHECK IF ITS THE GOAL DESTINATION
-		if (world.is_inside_stop_range(self.location, self.location_goal) = true)
+		//CHECK ARRIVAL TO STOP
+		
+		if (world.is_inside_stop_range(self.location, stops_list[self.stops_reached].location) = true)
 		{
+			//IF THE FUNCTION ENTERS HERE, IT MEANS A STOP HAS BEEN REACHED
 			
-		//THIS MEANS THE TARGET HAS BEEN REACHED
-		self.arrived <- true;
-		
-		do die;
-		}//END IF GOAL DESTINATION
-		
-		
-		//IF IT REACES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES WITH THE STOP AGENT WITH THE
-		//ACTION HANDLE_STOP
-		
-		write "[DEBUG]: " + "THE BUS ARRIVED TO THE STOP";
-		
-		//BOOL VARIABLE TO TRUE
-		self.stopped <- true;
-		
-		
-		
-		
-	}//END IF STOP REACHED
+			
+			//FIRST, CHECK IF ITS THE GOAL DESTINATION
+			if (world.is_inside_stop_range(self.location, self.location_goal) = true)
+			{
+				
+			//THIS MEANS THE TARGET HAS BEEN REACHED
+			self.arrived <- true;
+			
+			do die;
+			}//END IF GOAL DESTINATION
+			
+			
+			//IF IT REACES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES WITH THE STOP AGENT WITH THE
+			//ACTION HANDLE_STOP
+			
+			write "[DEBUG]: " + "THE BUS ARRIVED TO THE STOP";
+			
+			//BOOL VARIABLE TO TRUE
+			self.stopped <- true;
+			
+			
+			
+			
+		}//END IF STOP REACHED
 
 
     }//END REFLEX mtd
@@ -306,7 +305,8 @@ species bus {
      *
      *
      */
-    reflex handle_stop when: (stopped = true){
+    reflex handle_stop when: (stopped = true)
+    {
     	
     	//LOGIC TO COMMUNICATE WITH THE AGENT STOP WHICH IS IN
     	
