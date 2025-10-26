@@ -36,7 +36,7 @@ global
 	 * Then calculates the module of that resultant distance vector
 	 * Consecuently, it refresh the value of the return_vector by multiplying the result calculated before with the relation
 	 * between SPEED_MODULE/DISTANCE_MODULE
-	 * Returns the 2 float vector to update the position of the bus
+	 * Returns the 2 elem float vector to update the position of the bus
 	 */
 	list <float> vector_distance_calc(point bus_actual_position, point stop_reference, float speed_module) {
 		
@@ -88,16 +88,13 @@ global
 	 * coordinates of the bus must be inside the +- 5 meters range from the stop coordinates
 	 * 
 	 * As parameters, the function takes the bus location and the reference stop coordinates.
-	 * To verify the catching aceptation area, the function must convert the EPGS type coordinates to meters or vice versa
-	 * 
-	 * Theoretically, 
-	 * 
 	 * 
 	 */
 	bool is_inside_stop_range(point bus_actual_position, point stop_reference) {
 		
 		//CASE 1. THE COORDINATES MATCHES EXACTY
-		if (bus_actual_position = stop_reference){
+		if (bus_actual_position = stop_reference)
+		{
 			return true;
 			
 		}//END IF EQUAL MATCH
@@ -123,7 +120,7 @@ global
 		float new_mod <- sqrt(distance_vector[0]* distance_vector[0] + distance_vector[1] * distance_vector[1]);
 		
 		
-		if (new_mod < 2.00)
+		if (new_mod < 5.00)
 		{
 			return true;
 		}
@@ -157,7 +154,8 @@ global
     		destination_stopname :: last(stops_list).stopName,
     		location :: first(stops_list).location,
     		makespan :: first(stop).distance,
-    		location_goal :: last(stops_list).location
+    		location_goal :: last(stops_list).location,
+    		passengers :: first(stops_list).passengers
     	]; //END WITH
         
         
@@ -181,9 +179,10 @@ global
  * 
  * 
  * 
+ * Skills fipa means that this agent inherit the FIPA communication protocol. Used to communicate between bus agents and stops agents
  * 
  */
-species bus {
+species bus skills: [fipa] {
 	
 	
 	//INITIAL_POS
@@ -219,6 +218,16 @@ species bus {
     
     
     
+    //NUMBER OF PASSENGERS LOADED. INITIALLY ITS GONNA BE THE START STOP'S PASSENGERS
+    int passengers;
+    
+    //BOOL VARIABLE TO DEFINE WHETHER OR NOT THE AGENT IS MOUNTING PASSENGERS
+    bool processing_passengers <- false;
+    
+    
+    //AUXILIAR VARIABLE. IF THIS WOORSK. CHECK THIS LATER
+    int passengers_to_process;
+    
     
     //DEFAULT ASPECT FOR THE GUI EXPERIMENT
     aspect default {
@@ -241,11 +250,13 @@ species bus {
     
     
     /*
+     * Reflex function to handle the abstraction of moving the bus between stops.
      * 
-     * 
+     * It invoices auxiliary global functions to handle the movement and verify if the agent is in the area of acceptance
+     * The area of acceptance is necesarry because the code is using float coordinates with very exact precision, so with module 5 vector speed
+     * Not always(mainly never) the coordinates will be the same, so a logical function to stablish certain minimum range is necesarry
      *
-     * 
-     * 
+     * Once the agent has reached its destination, dies
      */
     reflex move_to_destination when: (arrived = false and stopped = false) 
     {
@@ -274,6 +285,7 @@ species bus {
 			//THIS MEANS THE TARGET HAS BEEN REACHED
 			self.arrived <- true;
 			
+			
 			do die;
 			}//END IF GOAL DESTINATION
 			
@@ -299,31 +311,99 @@ species bus {
 
     /*
      * 
+     *Reflex function to handle the abstraction of communicating with the agent stop
      *
-     *
-     *
-     *
+     *It simply stablish a conversation using FIPA protocol with the stop agent. The fipa protocol is a standar and mainly its being used
+     * for the propose/acceptance_propose  kinda type of communication
+     * 
+     *The last line, as specified in the comment below, its a particular case, because the next cycle after the message has been sent,
+     * the flag processing passengers will not have change, as this reflex is read before handle_answer.
      *
      */
-    reflex handle_stop when: (stopped = true)
+    reflex handle_stop when: (self.stopped = true and self.processing_passengers = false)
     {
     	
-    	//LOGIC TO COMMUNICATE WITH THE AGENT STOP WHICH IS IN
-    	
-    	
-    	
-    	
-    	
-    	//CHANGE TO FALSE SO THE BUS MOVES IN THE NEXT CYCLE
-    	self.stopped <- false;
-    	
-    	
-		//UPDATE FOR THE INDEX OF THE NEXT STOP.
-    	self.stops_reached <- self.stops_reached +1;
-    	
-    	
+    	/*LOGIC TO COMMUNICATE WITH THE AGENT STOP WHICH IS IN
+    	 * 
+    	 *This is gonna use FIPA protocol. It will launch a fipa propose to the agent stop which is in
+    	 *The returning message will be processed in the handle_answer reflex
+    	 * 
+    	 */
+
+		
+		//INICIATE CONVERSATION
+    	do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-propose' performative: 'propose' contents: ['Bus arrived to stop'];
+		
+		
+		//THIS LINE IS JUST FOR THE BUS IN THE NEXT CYCLE NOT REPEATING THE SENDING MESSAGE
+		self.processing_passengers <- true;
+		
+
     }//END REFLEX hs
     
+    
+    
+    /*
+     * Reflex function to handle the abstraction of charging passengers in the bus
+     *
+     *It has 2 main cases. First up, if the message received has not yet being read, it reads its content, the passengers in that stop,
+     * And save into a self. variable
+     *
+     *The other case, when the process of mounting passengers has begun, once per cycle, it process one passenger.
+     * 
+     *Once every passenger has been processed, the self. variables to move to the next stop reactivates.
+     */
+     reflex handle_answer when: (self.processing_passengers = true or !(empty(accept_proposals)))
+     {
+     	
+     	//CASE_0. The message has just been received. needs to be processed
+     	if (!(empty(accept_proposals)))
+     	{
+     		//SAVE IT INTO A VARIABLE
+     		message answer <- accept_proposals at 0;
+     		
+     		//CAST THE CONTENT INTO A LIST AND PICK UP THE FIRST ELEM(THE PASSENGERS IN THAT STOP RECEIVED
+     		self.passengers_to_process <- list(answer.contents)[0];
+     		
+     		//BOOL FLAG TO START PROCESSING
+     		self.processing_passengers <- true;
+     		
+     		
+     	}//END IF
+     	
+     	else 
+     	{
+     		//PROCESS PASSENGERS, CASE_1. THE MESSAGE HAS ALREADY BEEN READ.
+     		self.passengers <- self.passengers + 1;
+     		self.passengers_to_process <- self.passengers_to_process - 1;
+     		
+     		//DEBUG
+     		write "[DEBUG]: " + "A passenger is being processed up";
+     		
+     		
+     	}//END ELSE
+     	
+     	
+     	//FINAL CASE. PROCESSING HAS BEEN ENDED
+     	if (self.passengers_to_process = 0)
+     	{
+     		
+     		
+     		//CHANGE TO FALSE SO THE BUS MOVES IN THE NEXT CYCLE
+    		self.stopped <- false;
+    	
+    	
+			//UPDATE FOR THE INDEX OF THE NEXT STOP.
+	    	self.stops_reached <- self.stops_reached +1;
+	    	
+	    	//STOP PROCESSING PASSENGERS
+	    	self.processing_passengers <- false;
+	    	
+     	}
+     	
+     	
+     	
+     }//END REFLEX ha
   
     
     
@@ -335,11 +415,10 @@ species bus {
 
 
 /*
+ * Experiment to test out the result of the code
  * 
- * 
- * 
- * 
- * 
+ *
+ * It visualizes the agent bus as it navigates throughout the route.
  * 
  */
 experiment test type: gui {
