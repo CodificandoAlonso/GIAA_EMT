@@ -134,11 +134,12 @@ global
     
     
     /*
-     * Init function for main test. This firstly initialize the routes_loader model init, to read the geojson info in .shp format
-     * and generate the routes and the bus_stop agents. It saves the ordered bus info in a global list variable called stops_list
+     * Init function for main test. This firstly initialize the routes_loader model init, to read the geojson info in .shp 
+     * format and generate the routes and the bus_stop agents. It saves the ordered bus info in a global list 
+     * variable called stops_list
      * 
-     * Then it creates a bus specie starting in the initial stop of the route and saving the goal destination, which hard codded rn
-     * is the final stop.
+     * Then it creates a bus specie starting in the initial stop of the route and saving the goal destination, 
+     * which hard codded rn is the final stop.
      */
     init 
     {
@@ -179,7 +180,8 @@ global
  * 
  * 
  * 
- * Skills fipa means that this agent inherit the FIPA communication protocol. Used to communicate between bus agents and stops agents
+ * Skills fipa means that this agent inherit the FIPA communication protocol. Used to communicate between bus agents 
+ * and stops agents
  * 
  */
 species bus skills: [fipa] {
@@ -225,7 +227,7 @@ species bus skills: [fipa] {
     bool processing_passengers <- false;
     
     
-    //AUXILIAR VARIABLE. IF THIS WOORSK. CHECK THIS LATER
+    //AUXILIAR VARIABLE TO PROCESS THE PASSENGERS
     int passengers_to_process;
     
     
@@ -253,8 +255,9 @@ species bus skills: [fipa] {
      * Reflex function to handle the abstraction of moving the bus between stops.
      * 
      * It invoices auxiliary global functions to handle the movement and verify if the agent is in the area of acceptance
-     * The area of acceptance is necesarry because the code is using float coordinates with very exact precision, so with module 5 vector speed
-     * Not always(mainly never) the coordinates will be the same, so a logical function to stablish certain minimum range is necesarry
+     * The area of acceptance is necesarry because the code is using float coordinates with very exact precision, 
+     * so with module 5 vector speed,not always(mainly never) the coordinates will be the same, so a logical function 
+     * to stablish certain minimum range is necesarry
      *
      * Once the agent has reached its destination, dies
      */
@@ -290,8 +293,8 @@ species bus skills: [fipa] {
 			}//END IF GOAL DESTINATION
 			
 			
-			//IF IT REACES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES WITH THE STOP AGENT WITH THE
-			//ACTION HANDLE_STOP
+			//IF IT REACES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
+			//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
 			
 			write "[DEBUG]: " + "THE BUS ARRIVED TO THE STOP";
 			
@@ -313,11 +316,12 @@ species bus skills: [fipa] {
      * 
      *Reflex function to handle the abstraction of communicating with the agent stop
      *
-     *It simply stablish a conversation using FIPA protocol with the stop agent. The fipa protocol is a standar and mainly its being used
-     * for the propose/acceptance_propose  kinda type of communication
+     *It simply stablish a conversation using FIPA protocol with the stop agent. The fipa protocol is a standar 
+     * and mainly its being used for the propose/acceptance_propose  kinda type of communication
      * 
-     *The last line, as specified in the comment below, its a particular case, because the next cycle after the message has been sent,
-     * the flag processing passengers will not have change, as this reflex is read before handle_answer.
+     *The last line, as specified in the comment below, its a particular case, because the next cycle 
+     * after the message has been sent, the flag processing passengers will not have change, as this reflex is 
+     * read before handle_answer.
      *
      */
     reflex handle_stop when: (self.stopped = true and self.processing_passengers = false)
@@ -346,8 +350,8 @@ species bus skills: [fipa] {
     /*
      * Reflex function to handle the abstraction of charging passengers in the bus
      *
-     *It has 2 main cases. First up, if the message received has not yet being read, it reads its content, the passengers in that stop,
-     * And save into a self. variable
+     *It has 2 main cases. First up, if the message received has not yet being read, it reads its content, 
+     * extract the passengers in that stop and save into a self variable
      *
      *The other case, when the process of mounting passengers has begun, once per cycle, it process one passenger.
      * 
