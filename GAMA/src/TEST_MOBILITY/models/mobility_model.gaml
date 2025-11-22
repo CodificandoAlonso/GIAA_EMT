@@ -375,7 +375,7 @@ species bus skills: [fipa] {
      		
      	}//END IF
      	
-     	else 
+     	else
      	{
      		//PROCESS PASSENGERS, CASE_1. THE MESSAGE HAS ALREADY BEEN READ.
      		self.passengers <- self.passengers + 1;
