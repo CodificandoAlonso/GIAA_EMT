@@ -20,7 +20,7 @@ Gemfile.lock
 
 DATOS/.venv
 DATOS/csv_build/*.o
-DATOS/csv_build/bin
+DATOS/csv_build/bin/*
 
 .idea
 

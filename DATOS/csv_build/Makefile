@@ -5,8 +5,8 @@ DEBUG_FLAGS = -g -DDEBUG
 
 # Directories
 SRC_DIR = src
-BUILD_DIR = /home/hectoralv22/Desktop/CATEDRA/GIAA_DATOS/csv_build
-BIN_DIR = /home/hectoralv22/Desktop/CATEDRA/GIAA_DATOS/csv_build/bin
+BUILD_DIR = .
+BIN_DIR = bin
 
 
 # Output executable

@@ -15,8 +15,8 @@ int main(int argc, char **argv) {
     char *input;
     char * output;
 
-    auto counter_input = static_cast<int>(strlen(input));
-    auto counter_output = static_cast<int>(strlen(output));
+    auto counter_input = static_cast<int>(strlen(argv[1]));
+    auto counter_output = static_cast<int>(strlen(argv[2]));
 
 
     input = static_cast<char *>(malloc(sizeof(char) * counter_input));
@@ -62,7 +62,6 @@ int main(int argc, char **argv) {
 
 
     //READ CONTENT. SKIP THE FIRST LINE, THEN EXCHANGE THE TABS WITH ;, TO MAKE IT A REAL CSV
-
     int first_line_skipped = 0;
 
 
@@ -91,8 +90,6 @@ int main(int argc, char **argv) {
             }
         }
     }
-
-
     output_file.write(content, static_cast<int>(bytesRead));
 
     delete[] content;
