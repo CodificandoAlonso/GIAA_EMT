@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
 
 
     if( argc != 3) {
-        cerr << "INCORRECT INPUT FORMAT. SHOULD BE ./EXE INPUT OUTPUT\n";
+        cerr << "INCORRECT INPUT FORMAT. SHOULD BE ./EXECUTABLE INPUT OUTPUT\n";
         return -1;
     }
 
