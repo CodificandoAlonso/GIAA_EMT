@@ -10,34 +10,67 @@ def format_string_list(list_input):
 
     return ret_str
 
+
+
+
+
 class Allocation:
 
-    def __init__(self, data: str, day: str):
+    def __init__(self, data, day: str):
         self.buses = []
         self.allocation = {}
-        self.allocation_per_Timeslot = {}
-        self.data = pd.read_csv(data)
-        self.day = day
+        self.allocation_per_timeslot = {}
+        self.data = pd.read_csv(data) if not isinstance(data, pd.DataFrame) else data
+        self.__day = day
         self.calculate_allocation()
         self.ordered_allocation()
 
+
+
+
+    @property
+    def day(self):
+        return self.__day
+
+
+    @day.setter
+    def day(self, value):
+        self.__day = value
+        self.buses = []
+        self.allocation = {}
+        self.allocation_per_timeslot = {}
+        self.calculate_allocation()
+        self.ordered_allocation()
+
+
+
+
     def calculate_allocation(self):
-        self.only_day_data = self.data[self.data["EventDate"] == self.day]
+        self.only_day_data = self.data[self.data["EventDate"] == self.__day]
         self.buses = self.only_day_data["LogicVehicle"].unique()
         for bus in self.buses:
             self.allocation[bus] = []
             itinerary = self.only_day_data[self.only_day_data["LogicVehicle"] == bus]
             for idx, row in itinerary.iterrows():
                 self.allocation[bus].append(row.EventTime)
-
+    
+    
+    
+    
+    
 
     def ordered_allocation(self):
-        for idx, bus in self.only_day_data.iterrows():
-            print("ponga")
+        for i in range(5,24):
+            self.allocation_per_timeslot[i] = 0
 
+        for idx, bus in self.only_day_data.iterrows():
+            self.allocation_per_timeslot[bus.TimeSlot] += 1
 
     def __str__(self):
-        return f"Class containing the Allocation of {self.day} events"
+        return f"Class containing the Allocation of {self.__day} events"
+
+
+
 
     def __format__(self, spec):
         """
@@ -51,13 +84,13 @@ class Allocation:
             raise ValueError("Spec must be either 'logicBus' or 'TimeSeries'")
         return_str = ""
         if spec == "LogicBus":
-            return_str += f"For day: {self.day}, we have {len(self.buses)} different Logical Buses\n\n"
+            return_str += f"For day: {self.__day}, we have {len(self.buses)} different Logical Buses\n\n"
             for key, value in self.allocation.items():
                 return_str += f" The bus {key}, has the following Exit Times from Header Stop:\n{format_string_list(value)}\n"
             return return_str
 
         if spec == "TimeSeries":
-            return_str += f"For day: {self.day}, we have {sum(len(v) for v in self.allocation.values())} different header stop departures\n\n"
+            return_str += f"For day: {self.__day}, we have {sum(len(v) for v in self.allocation.values())} different header stop departures\n\n"
             time_to_bus = {}
             for bus, times in self.allocation.items():
                 for time in times:
@@ -69,13 +102,7 @@ class Allocation:
 
             return return_str
 
-
-
-
-
-
-
-
+        return None
 
 
 
