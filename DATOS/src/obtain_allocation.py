@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import sys
 
 
@@ -17,6 +16,7 @@ def format_string_list(list_input):
 class Allocation:
 
     def __init__(self, data, day: str):
+        self.only_day_data = None
         self.buses = []
         self.allocation = {}
         self.allocation_per_timeslot = {}
@@ -113,3 +113,4 @@ if __name__ == "__main__":
     test = Allocation(data=sys.argv[1], day=sys.argv[2])
     print(test)
     print(f"{test:TimeSeries}")
+    print(test.allocation_per_timeslot)
