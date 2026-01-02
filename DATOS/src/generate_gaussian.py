@@ -1,8 +1,3 @@
-
-
-
-
-
 import numpy as np
 
 import matplotlib as plt
@@ -33,6 +28,7 @@ import math
 from math import sqrt
 from scipy.stats import t as t_student
 
+
 def calculate_lambda(iter_value, n_elems, significance_level: float = 0.05):
     """
 
@@ -47,6 +43,7 @@ def calculate_lambda(iter_value, n_elems, significance_level: float = 0.05):
 
     return ((n_elems - iter_value) * t_p_v)/sqrt((n_elems - iter_value - 1 + t_p_v*t_p_v)* (n_elems - iter_value + 1))
 
+
 def calc_r_value(element, variables):
     """
     Function to calculate the R value of a data given the sample it belongs
@@ -59,6 +56,8 @@ def calc_r_value(element, variables):
     mean = np.mean(variables)
     s = sqrt(sum((xi - mean) ** 2 for xi in variables) / (len(variables) -1))
     return abs(element - mean)/s
+
+
 
 def extract_r_parameters(variables: list, r:int):
     """
@@ -162,7 +161,14 @@ def general_behaviour(skew_value, kurt_value):
     return return_statement
 
 
-def is_normal(variables: list):
+def is_normal_modified(dataset: pd.DataFrame, day: str, timeslot: int, variable: str):
+
+
+    variables_daily = dataset[dataset["Weekday"] == day]
+    variables_timeslot = variables_daily[variables_daily["TimeSlot"] == timeslot]
+
+    variables = variables_timeslot[variable]
+
     if len(variables) < 50: #CASO Z score 1.96
         z_crit = 1.96
     elif len(variables) < 300: #CASO Z score 3.29
@@ -200,75 +206,85 @@ def is_normal(variables: list):
               f"La distribución presenta una media:  {mean} y una desviación estandar σ: {std_dev}\n\n"
               f"-El comportamiento general de esta distribución es:\n{general_behaviour(skew, kurt)}")
 
-    return approx_normal
+    return approx_normal, variables
 
 
 
 
 
-#De momento SOLO PRUEBA TODO cambiar luego
-data = "../data/clean_data_5939_new.csv"
 
-dataframe = pd.read_csv(data)
+def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gauss: str):
+    """
 
-
-#FUERA CASOS MAL MEDIDOS
-dataframe = dataframe[dataframe["Occupation"] <= 80]
-dataframe = dataframe[dataframe["Occupation"] >= 0]
-
+    :param dataframeinput:
+    :param param_to_gauss:
+    :return new_dataframe:
+    """
 
 
-#TRABAJAMOS SOBRE SOLO LABORABLES
-dataframe = dataframe[dataframe["DayType"] == "LA"]
-
-
-#VAMOS A TRABAJAR DIA A DIA
-
-daytype = ["L", "M", "X", "J", "V"]
-
-timeslot = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-
-
-columns = ["day"]
-
-strvar = ""
-
-for time in timeslot:
-    strvar = f"Mean_{time}"
-    columns.append(strvar)
-    strvar = f"std_{time}"
-    columns.append(strvar)
-    strvar = f"IsNormal_{time}"
-    columns.append(strvar)
-    strvar = ""
-
-
-new_dataframe = pd.DataFrame(columns=columns)
+    #FUERA CASOS MAL MEDIDOS
+    dataframe = dataframeinput[dataframeinput["Occupation"] <= 65]
+    dataframe = dataframe[dataframe["Occupation"] >= 0]
 
 
 
-tuple_array = []
+    #TRABAJAMOS SOBRE SOLO LABORABLES SIN GRATUIDAD
+    dataframe = dataframe[dataframe["DayType"] == "LA"]
 
-for day in daytype:
+    dataframe = dataframe[dataframe["FreeDay"] == 0]
 
-    data_daily = dataframe[dataframe["Weekday"] == day]
-    print(f"For day {day}:")
+
+    #VAMOS A TRABAJAR DIA A DIA
+    daytype = ["L", "M", "X", "J", "V"]
+    timeslot = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
+
+    #Inittialy column day to specify L, M, X, J, V
+    columns = ["day"]
+
+    #For each timeslot t add columns Mean_t, std_t and IsNormal_t
     for time in timeslot:
-        #DEBUG
-        print(f"\n\n\n\t for timeslot {time}:")
+        strvar = f"Mean_{time}"
+        columns.append(strvar)
+        strvar = f"std_{time}"
+        columns.append(strvar)
+        strvar = f"IsNormal_{time}"
+        columns.append(strvar)
 
-        #Filter by timeslot
-        data_per_timeslot = data_daily[data_daily["TimeSlot"] == time]
-
-        #calculate normal hypotesis
-        gauss_hypotesis = is_normal(data_per_timeslot["Occupation"])
-
-        #save in a 5 tuple
-        four_tuple = (day, time, np.mean(data_per_timeslot["Occupation"]), sqrt(central_moment(data_per_timeslot["Occupation"], 2)), gauss_hypotesis)
-
-        tuple_array.append(four_tuple)
+    #generate df
+    new_dataframe = pd.DataFrame(columns=columns)
 
 
+    #aux
+    tuple_array = []
 
-print(tuple_array)
-print(new_dataframe.columns)
+    #loop for each day and timeslot
+    for day in daytype:
+
+        #only daily darta
+        data_daily = dataframe[dataframe["Weekday"] == day]
+
+        for time in timeslot:
+
+            #Filter by timeslot
+            data_per_timeslot = data_daily[data_daily["TimeSlot"] == time]
+
+            #calculate normal hypothesis
+            gauss_hypothesis, nothing  = is_normal_modified(pd.DataFrame(data_per_timeslot), day, time, param_to_gauss)
+
+            #save in a 5 tuple
+            five_tuple = (day, time, np.mean(data_per_timeslot[param_to_gauss]), sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis)
+
+            #add to aux daily
+            tuple_array.append(five_tuple)
+
+        #select only the new added(For each day select the daily)
+        select_day= [tuple for tuple in tuple_array if tuple[0] == day]
+
+        #add to df
+        select_day = np.array(select_day)
+        row_data = np.concatenate([[select_day[0, 0]], select_day[:, 2:5].flatten()])
+        new_dataframe.loc[len(new_dataframe)] = row_data
+
+
+    return new_dataframe

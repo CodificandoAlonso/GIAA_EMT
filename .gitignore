@@ -22,6 +22,8 @@ DATOS/.venv
 DATOS/csv_build/*.o
 DATOS/csv_build/bin/*
 
+DATOS/src/__pycache__
+
 .idea
 
 
