@@ -1,6 +1,6 @@
 import numpy as np
 
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 import pandas as pd
 
@@ -129,6 +129,8 @@ def calculate_lambda(iter_value, n_elems, significance_level: float = 0.05):
     :param n_elems:
     :return: The lambda value for that iteration
     """
+    iter_value = iter_value + 1
+
     calculate_p = 1 - (significance_level / (2*(n_elems - iter_value +1)))
 
     t_p_v = t_student.ppf(calculate_p, (n_elems - iter_value - 1))
@@ -169,14 +171,12 @@ def extract_r_parameters(variables: list, r:int):
             variables_as_dict[variable] = calc_r_value(variable, variables)
 
 
-        item, max_r = 0, 0
+        item, max_r = variables[0], 0
         for key,value in variables_as_dict.items():
             if value > max_r:
                 max_r = value
                 item = key
         r_parameters.append((item, max_r))
-        #print(f"DEBUG voy a eliminar {item} con {max_r}")
-
         variables.remove(item)
         variables_as_dict = {}
 
@@ -190,6 +190,11 @@ def estimate_outliers(variables:list, outliers_hipotesis: int, significance_leve
     :param significance_level:
     :return:
     """
+
+    if outliers_hipotesis > len(variables):
+        return []
+
+    n_original = len(variables)
     r_parameters = extract_r_parameters(variables, outliers_hipotesis)
 
     #FOR THE FORMATTED EXIT
@@ -204,12 +209,26 @@ def estimate_outliers(variables:list, outliers_hipotesis: int, significance_leve
     print(f"Outliers, i         Value, R_i                     5%")
     print(f"-----------------------------------------------------------")
 
+    solution = []
+    enum = 1
     for iteration in range(outliers_hipotesis):
-        iteration_value = calculate_lambda(iteration, len(variables))
+        iteration_value = calculate_lambda(iteration, n_original)
 
-        print(f"\t{iteration + 1}\t\t\t{r_parameters[iteration][1]}\t\t\t{iteration_value}") if iteration_value >= r_parameters[iteration][1] else print(f"\t{iteration + 1}\t\t\t{r_parameters[iteration][1]}\t\t\t{iteration_value} *")
+        print(f"\t{iteration + 1}\t\t\t{r_parameters[iteration][1]}\t\t\t{iteration_value}") if iteration_value >= r_parameters[iteration][1] \
+            else print(f"\t{iteration + 1}\t\t\t{r_parameters[iteration][1]}\t\t\t{iteration_value} *")
 
-    return r_parameters
+        solution.append((enum, r_parameters[iteration][1], iteration_value, r_parameters[iteration][1] > iteration_value ))
+        enum += 1
+
+    outliers = 0
+    for tuple_val in solution:
+        if tuple_val[3] == np.bool(True):
+            outliers = tuple_val[0]
+
+    solution = r_parameters[0:outliers]
+    solution = [elem[0] for elem in solution ]
+
+    return solution
 
 
 
@@ -256,12 +275,18 @@ def general_behaviour(skew_value, kurt_value):
 def is_normal_modified(dataset: pd.DataFrame, day: str, timeslot: int, variable: str):
 
 
-    variables_daily = dataset[dataset["Weekday"] == day]
-    variables_timeslot = variables_daily[variables_daily["TimeSlot"] == timeslot]
+    if day != "ALL":
+        vars = dataset[dataset["Weekday"] == day]
+    else:
+        vars = dataset
 
-    variables = variables_timeslot[variable]
+    vars = vars[vars["TimeSlot"] == timeslot]
+    variables = vars[variable].tolist()
 
-    if len(variables) < 50: #CASO Z score 1.96
+    if len(variables) == 0:
+        return np.bool(False), []
+
+    elif len(variables) < 50: #CASO Z score 1.96
         z_crit = 1.96
     elif len(variables) < 300: #CASO Z score 3.29
         z_crit = 3.29
@@ -298,7 +323,7 @@ def is_normal_modified(dataset: pd.DataFrame, day: str, timeslot: int, variable:
               f"La distribución presenta una media:  {mean} y una desviación estandar σ: {std_dev}\n\n"
               f"-El comportamiento general de esta distribución es:\n{general_behaviour(skew, kurt)}")
 
-    return approx_normal, variables
+    return approx_normal, vars
 
 
 
@@ -318,7 +343,7 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
     dataframe = dataframeinput[dataframeinput["Occupation"] <= 65]
     dataframe = dataframe[dataframe["Occupation"] >= 0]
 
-
+    stopnum = dataframe["Stop"].iloc[0]
 
     #TRABAJAMOS SOBRE SOLO LABORABLES SIN GRATUIDAD
     dataframe = dataframe[dataframe["DayType"] == "LA"]
@@ -333,6 +358,7 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
 
     #Inittialy column day to specify L, M, X, J, V
     columns = ["day"]
+    columns.append("Stop")
 
     #For each timeslot t add columns Mean_t, std_t and IsNormal_t
     for time in timeslot:
@@ -341,6 +367,8 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
         strvar = f"std_{time}"
         columns.append(strvar)
         strvar = f"IsNormal_{time}"
+        columns.append(strvar)
+        strvar = f"outliers_{time}"
         columns.append(strvar)
 
     #generate df
@@ -362,10 +390,14 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
             data_per_timeslot = data_daily[data_daily["TimeSlot"] == time]
 
             #calculate normal hypothesis
-            gauss_hypothesis, nothing  = is_normal_modified(pd.DataFrame(data_per_timeslot), day, time, param_to_gauss)
+            gauss_hypothesis, instances_involved  = is_normal_modified(pd.DataFrame(data_per_timeslot), day, time, param_to_gauss)
 
-            #save in a 5 tuple
-            five_tuple = (day, time, np.mean(data_per_timeslot[param_to_gauss]), sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis)
+            if not isinstance(instances_involved, list):
+                outliers = estimate_outliers(instances_involved[param_to_gauss].tolist(), 10)
+                #save in a 5 tuple
+                five_tuple = (day, time, np.mean(data_per_timeslot[param_to_gauss]), sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis, outliers)
+            else:
+                five_tuple = (day, time, 0, 0 , "NO DATA", 0)
 
             #add to aux daily
             tuple_array.append(five_tuple)
@@ -373,10 +405,60 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
         #select only the new added(For each day select the daily)
         select_day= [tuple for tuple in tuple_array if tuple[0] == day]
 
+
         #add to df
-        select_day = np.array(select_day)
-        row_data = np.concatenate([[select_day[0, 0]], select_day[:, 2:5].flatten()])
+        row_data = [select_day[0][0], stopnum]  # day + stop number
+        for t in select_day:
+            row_data.append(t[2])  # Mean
+            row_data.append(t[3])  # std
+            row_data.append(t[4])  # IsNormal
+            row_data.append(t[5])  # Outliers
         new_dataframe.loc[len(new_dataframe)] = row_data
 
 
+
+    tuple_array = []
+    for time in timeslot:
+
+        # Filter by timeslot
+        data_per_timeslot = dataframe[dataframe["TimeSlot"] == time]
+
+        # calculate normal hypothesis
+        gauss_hypothesis, instances_involved = is_normal_modified(pd.DataFrame(data_per_timeslot), "ALL", time,
+                                                                  param_to_gauss)
+
+        if not isinstance(instances_involved, list):
+            outliers = estimate_outliers(instances_involved[param_to_gauss].tolist(), 10)
+            # save in a 5 tuple
+            five_tuple = ("ALL", time, np.mean(data_per_timeslot[param_to_gauss]),
+                          sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis, outliers)
+        else:
+            five_tuple = ("ALL", time, 0, 0, "NO DATA", 0)
+
+        # add to aux daily
+        tuple_array.append(five_tuple)
+
+    row_data = ["ALL", stopnum]  # day + stop number
+    for t in tuple_array:
+        row_data.append(t[2])  # Mean
+        row_data.append(t[3])  # std
+        row_data.append(t[4])  # IsNormal
+        row_data.append(t[5])  # Outliers
+    new_dataframe.loc[len(new_dataframe)] = row_data
+
+
+
     return new_dataframe
+
+
+
+
+def clean_dataframe(data: pd.DataFrame, direction: int):
+    antes = data.shape
+    data = data[data["Occupation"] >= 0]
+    data = data[data["Occupation"] < 75]
+    data = data[data["Direction"] == direction]
+    despues = data.shape
+    print(f"SE HAN BORRADO {antes[0] - despues[0]} filas")
+    return data
+
