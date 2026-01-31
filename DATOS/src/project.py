@@ -52,3 +52,7 @@ def histogram(data_hist, variable):
     plt.xticks(rotation=29)
     plt.grid(True, alpha=0.3)
     plt.show()
+
+
+
+
