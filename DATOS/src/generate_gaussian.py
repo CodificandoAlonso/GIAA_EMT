@@ -46,7 +46,6 @@ def extract_first_value(data: pd.DataFrame):
 
 
 #Esto se usará más adelante si se tratan las series temporales a lo largo de cada día
-
 def project_occupation_in_daytime(data_to_project, highlight_trip_id=None):
     data_to_project = data_to_project.copy()
     data_to_project["EventTime"] = pd.to_datetime(
@@ -370,6 +369,8 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
         columns.append(strvar)
         strvar = f"outliers_{time}"
         columns.append(strvar)
+        strvar = f"instances_{time}"
+        columns.append(strvar)
 
     #generate df
     new_dataframe = pd.DataFrame(columns=columns)
@@ -395,12 +396,12 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
             if not isinstance(instances_involved, list):
                 outliers = estimate_outliers(instances_involved[param_to_gauss].tolist(), 10)
                 #save in a 5 tuple
-                five_tuple = (day, time, np.mean(data_per_timeslot[param_to_gauss]), sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis, outliers)
+                six_tuple = (day, time, np.mean(data_per_timeslot[param_to_gauss]), sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis, outliers, instances_involved["Occupation"].tolist())
             else:
-                five_tuple = (day, time, 0, 0 , "NO DATA", 0)
+                six_tuple = (day, time, 0, 0 , "NO DATA", 0, 0)
 
             #add to aux daily
-            tuple_array.append(five_tuple)
+            tuple_array.append(six_tuple)
 
         #select only the new added(For each day select the daily)
         select_day= [tuple for tuple in tuple_array if tuple[0] == day]
@@ -413,6 +414,7 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
             row_data.append(t[3])  # std
             row_data.append(t[4])  # IsNormal
             row_data.append(t[5])  # Outliers
+            row_data.append(t[6])  # Instances
         new_dataframe.loc[len(new_dataframe)] = row_data
 
 
@@ -430,13 +432,13 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
         if not isinstance(instances_involved, list):
             outliers = estimate_outliers(instances_involved[param_to_gauss].tolist(), 10)
             # save in a 5 tuple
-            five_tuple = ("ALL", time, np.mean(data_per_timeslot[param_to_gauss]),
-                          sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis, outliers)
+            six_tuple = ("ALL", time, np.mean(data_per_timeslot[param_to_gauss]),
+                          sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis, outliers, instances_involved["Occupation"].tolist())
         else:
-            five_tuple = ("ALL", time, 0, 0, "NO DATA", 0)
+            six_tuple = ("ALL", time, 0, 0, "NO DATA", 0, 0)
 
         # add to aux daily
-        tuple_array.append(five_tuple)
+        tuple_array.append(six_tuple)
 
     row_data = ["ALL", stopnum]  # day + stop number
     for t in tuple_array:
@@ -444,6 +446,7 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
         row_data.append(t[3])  # std
         row_data.append(t[4])  # IsNormal
         row_data.append(t[5])  # Outliers
+        row_data.append(t[6])  # instances
     new_dataframe.loc[len(new_dataframe)] = row_data
 
 
