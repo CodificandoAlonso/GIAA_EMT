@@ -95,6 +95,17 @@ def histogram(data_hist, variable):
     plt.grid(True, alpha=0.3)
     plt.show()
 
+def histogram_lognormal(data_hist, variable):
+    plt.hist(np.log(data_hist[variable] + 1), bins= 15)
+    plt.xlabel(variable)
+    plt.ylabel('Count')
+    plt.title(f"Histograma de {variable}")
+    plt.xticks(rotation=29)
+    plt.grid(True, alpha=0.3)
+    plt.show()
+
+
+
 
 #Funcion para visualizar un histograma con su normal teórica ajustada(sigma1 y sigma2 == 0
 def histogram_with_normal(data_to_hist, variable):
