@@ -55,4 +55,13 @@ def histogram(data_hist, variable):
 
 
 
+def histogram_simplified(data, variable):
+    plt.hist(data, bins=15)
+    plt.xlabel(variable)
+    plt.ylabel('Count')
+    plt.title(f"Histograma de {variable}")
+    plt.xticks(rotation=29)
+    plt.grid(True, alpha=0.3)
+    plt.show()
+
 

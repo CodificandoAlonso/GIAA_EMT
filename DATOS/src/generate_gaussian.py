@@ -468,11 +468,20 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
 
 
 def clean_dataframe(data: pd.DataFrame, direction: int):
-    antes = data.shape
     data = data[data["Occupation"] >= 0]
     data = data[data["Occupation"] < 75]
     data = data[data["Direction"] == direction]
-    despues = data.shape
-    print(f"SE HAN BORRADO {antes[0] - despues[0]} filas")
+    return data
+
+
+
+def clean_dataframe_advanced(data: pd.DataFrame, daytype: str):
+    data = data[data["Board"] >= 0]
+    data = data[data["DropOff"] >= 0]
+    data = data[data["Board"] <  80]
+    data = data[data["DropOff"] < 80]
+
+    data = data[data["DayType"] == daytype]
+    data = data[data["FreeDay"] == 0]
     return data
 
