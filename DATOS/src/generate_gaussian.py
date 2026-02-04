@@ -192,7 +192,7 @@ def extract_r_parameters(variables: list, r:int):
 
     return r_parameters
 
-def estimate_outliers(variables:list, outliers_hipotesis: int, significance_level: float = 0.05):
+def estimate_outliers(variables:list, outliers_hipotesis: int, printable: bool, significance_level: float = 0.05):
     """
 
     :param variables:
@@ -205,27 +205,30 @@ def estimate_outliers(variables:list, outliers_hipotesis: int, significance_leve
         return []
 
     n_original = len(variables)
-    r_parameters = extract_r_parameters(variables, outliers_hipotesis)
+    r_parameters = extract_r_parameters(variables.copy(), outliers_hipotesis)
 
     #FOR THE FORMATTED EXIT
-    print(f"H_0:\tThere are No outliers")
-    print(f"H_a:\tThere are up to {outliers_hipotesis} outliers in the data")
-    print(f"\nSignificance level : {significance_level}")
-    print(f"Critical Region: Reject H_0 if R_i > Critical value")
-    print(f"\nSummary Table for EDC Test")
-    print(f"-----------------------------------------------------------")
-    print(f" Exact              Test                        Critical")
-    print(f"Number of           Statistic                   Value, λ ")
-    print(f"Outliers, i         Value, R_i                     5%")
-    print(f"-----------------------------------------------------------")
+    if printable:
+        print(f"H_0:\tThere are No outliers")
+        print(f"H_a:\tThere are up to {outliers_hipotesis} outliers in the data")
+        print(f"\nSignificance level : {significance_level}")
+        print(f"Critical Region: Reject H_0 if R_i > Critical value")
+        print(f"\nSummary Table for EDC Test")
+        print(f"-----------------------------------------------------------")
+        print(f" Exact              Test                        Critical")
+        print(f"Number of           Statistic                   Value, λ ")
+        print(f"Outliers, i         Value, R_i                     5%")
+        print(f"-----------------------------------------------------------")
+
 
     solution = []
     enum = 1
     for iteration in range(outliers_hipotesis):
         iteration_value = calculate_lambda(iteration, n_original)
 
-        print(f"\t{iteration + 1}\t\t\t{r_parameters[iteration][1]}\t\t\t{iteration_value}") if iteration_value >= r_parameters[iteration][1] \
-            else print(f"\t{iteration + 1}\t\t\t{r_parameters[iteration][1]}\t\t\t{iteration_value} *")
+        if printable:
+            print(f"\t{iteration + 1}\t\t\t{r_parameters[iteration][1]}\t\t\t{iteration_value}") if iteration_value >= r_parameters[iteration][1] \
+                else print(f"\t{iteration + 1}\t\t\t{r_parameters[iteration][1]}\t\t\t{iteration_value} *")
 
         solution.append((enum, r_parameters[iteration][1], iteration_value, r_parameters[iteration][1] > iteration_value ))
         enum += 1
@@ -282,7 +285,7 @@ def general_behaviour(skew_value, kurt_value):
     return return_statement
 
 
-def is_normal_modified(dataset: pd.DataFrame, day: str, timeslot: int, variable: str):
+def is_normal_modified(dataset: pd.DataFrame, day: str, timeslot: int, variable: str, printable: bool):
 
 
     if day != "ALL":
@@ -318,7 +321,8 @@ def is_normal_modified(dataset: pd.DataFrame, day: str, timeslot: int, variable:
 
     if z_crit != "False":
         approx_normal = (abs(z_skew) <= z_crit) and (abs(z_kurt) <= z_crit)
-        print(f"-Para {n} valores, con valor skewness: {skew} y kurtosis: {kurt}, \n\n"
+        if printable:
+            print(f"-Para {n} valores, con valor skewness: {skew} y kurtosis: {kurt}, \n\n"
           f"-Con valores de SE, SE_skewness: {se_skew}, SE_kurtosis: {se_kurt}, \n\n"
           f"-Se obtienen los siguientes valores de Z; Z_skew: {z_skew} y Z_kurtosis: {z_kurt}, \n\n"
           f"-Se concluye por lo tanto que la hipótesis de que la distribución es normal es: {approx_normal}\n\n"
@@ -327,7 +331,8 @@ def is_normal_modified(dataset: pd.DataFrame, day: str, timeslot: int, variable:
 
     else:
         approx_normal = (abs(skew) <= 2) and (abs(kurt) + 3 <= 7) #para muestras grandes de Z > 300 no se utilizan los errores, sino valores absolutos  de medida
-        print(f"-Para {n} valores, con valor skewness: {skew} y kurtosis: {kurt}, \n\n"
+        if printable:
+            print(f"-Para {n} valores, con valor skewness: {skew} y kurtosis: {kurt}, \n\n"
               f"-Con valores de SE, SE_skewness: {se_skew}, SE_kurtosis: {se_kurt}, \n\n"
               f"-Se concluye por lo tanto que la hipótesis de que la distribución es normal es: {approx_normal}\n\n"
               f"La distribución presenta una media:  {mean} y una desviación estandar σ: {std_dev}\n\n"
@@ -402,10 +407,10 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
             data_per_timeslot = data_daily[data_daily["TimeSlot"] == time]
 
             #calculate normal hypothesis
-            gauss_hypothesis, instances_involved  = is_normal_modified(pd.DataFrame(data_per_timeslot), day, time, param_to_gauss)
+            gauss_hypothesis, instances_involved  = is_normal_modified(pd.DataFrame(data_per_timeslot), day, time, param_to_gauss, False)
 
             if not isinstance(instances_involved, list):
-                outliers = estimate_outliers(instances_involved[param_to_gauss].tolist(), 10)
+                outliers = estimate_outliers(instances_involved[param_to_gauss].tolist(), 10, False)
                 #save in a 5 tuple
                 six_tuple = (day, time, np.mean(data_per_timeslot[param_to_gauss]), sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis, outliers, instances_involved["Occupation"].tolist())
             else:
@@ -438,10 +443,10 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
 
         # calculate normal hypothesis
         gauss_hypothesis, instances_involved = is_normal_modified(pd.DataFrame(data_per_timeslot), "ALL", time,
-                                                                  param_to_gauss)
+                                                                  param_to_gauss, False)
 
         if not isinstance(instances_involved, list):
-            outliers = estimate_outliers(instances_involved[param_to_gauss].tolist(), 10)
+            outliers = estimate_outliers(instances_involved[param_to_gauss].tolist(), 10, False)
             # save in a 5 tuple
             six_tuple = ("ALL", time, np.mean(data_per_timeslot[param_to_gauss]),
                           sqrt(central_moment(data_per_timeslot[param_to_gauss], 2)), gauss_hypothesis, outliers, instances_involved["Occupation"].tolist())

@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     }
 
     char *input;
-    char * output;
+    char *output;
 
     auto counter_input = static_cast<int>(strlen(argv[1]));
     auto counter_output = static_cast<int>(strlen(argv[2]));

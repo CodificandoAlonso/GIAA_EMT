@@ -3,3 +3,27 @@ Generalized ESD Test for Outliers: https://www.itl.nist.gov/div898/handbook/eda/
 
 
 Diferenciar entre dagostino pearson test y el que he aplicado yo
+
+
+
+
+1. Negative Binomial = Gamma-Poisson Mixture
+Primary reference (the canonical textbook):
+
+Johnson, N.L., Kemp, A.W., & Kotz, S. (2005). Univariate Discrete Distributions (3rd ed.). Hoboken, NJ: John Wiley & Sons.
+
+ISBN: 978-0-471-27246-5
+DOI: https://doi.org/10.1002/0471715816
+Chapter 5: Negative Binomial Distribution — Section on "Gamma-Poisson Mixture" derivation
+
+
+
+2. Geometric Distribution — Inverse Transform Sampling
+Primary reference (the canonical textbook for random variate generation):
+
+Devroye, L. (1986). Non-Uniform Random Variate Generation. New York: Springer-Verlag.
+
+ISBN: 978-0-387-96305-1
+DOI: https://doi.org/10.1007/978-1-4613-8643-8
+Chapter 10: Discrete Univariate Distributions — Section 10.2 covers Geometric distribution
+Free PDF available: http://luc.devroye.org/rnbookindex.html
