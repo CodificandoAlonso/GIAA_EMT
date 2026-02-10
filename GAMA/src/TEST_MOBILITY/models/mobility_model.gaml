@@ -25,9 +25,52 @@ import "routes_loader.gaml"
 
 
 
+
 global 
 {
+
+		
+		float step <- 10 #seconds;
+		
+
+		float time <- cycle * step;
+		
+
+		int minutes <- 0;
+
+		
+		//Initialize sim TimeSlot
+		int TimeSlot;
+		
+		
+		string current_time -> string(TimeSlot) + ":" + string(minutes);
+		
+		
+		reflex update_time {
+			
+        // Convert total simulated time to minutes
+        int total_minutes <- int(time / 60);  // time is in seconds
+        
+        
+        // Calculate hours and minutes from simulation start (5:00)
+        TimeSlot <- 5 + int(total_minutes / 60);
+       
+        //Calculate minutes passed in the hour by dividing by 60
+        minutes <- mod(total_minutes, 60);
+        
+        
+        	
+        if (minutes = 0) {
+            write "Now: " + current_time;
+        }
+    }
 	
+	
+	file input_bus_gateaways <- file("../includes/INPUTS/input_data_buses.txt");
+	
+	
+	
+		
 	
 	/*
 	 * Auxiliar global function to calculate the distance vector between the actual bus position and the next stop scheduled.
@@ -144,13 +187,17 @@ global
     init 
     {
     	
-    	//LOAD THE 402 ROUTE
-    	do load_402;
-
-    	
-    	
-    	//CREATE THE BUS SPECIE WITH THE REQUIRED NECESSARY INFO
-    	create bus with:[
+    	//LOAD THE 401 ROUTE
+    	do load_401;
+			
+		
+		
+		loop el over: input_bus_gateaways {
+			
+						
+			//CREATE THE BUS SPECIE WITH THE REQUIRED NECESSARY INFO
+			create bus with:[
+			departure_time :: el,
     		initial_stop :: first(stops_list).stopName,
     		destination_stopname :: last(stops_list).stopName,
     		location :: first(stops_list).location,
@@ -158,8 +205,12 @@ global
     		location_goal :: last(stops_list).location,
     		passengers :: first(stops_list).passengers
     	]; //END WITH
-        
-        
+			
+			
+			
+    	}//End loop input_buses_gateaways
+    	
+
         
     }//END INIT
     
@@ -198,6 +249,10 @@ species bus skills: [fipa] {
     //COORDINATES GOAL
     point location_goal;
     
+    
+    //DEPARTURE TIME
+    string departure_time;
+    
      
     //DISTANCE MOVED
     int makespan;
@@ -220,7 +275,7 @@ species bus skills: [fipa] {
     
     
     
-    //NUMBER OF PASSENGERS LOADED. INITIALLY ITS GONNA BE THE START STOP'S PASSENGERS
+    //NUMBER OF PASSENGERS LOADED.
     int passengers;
     
     //BOOL VARIABLE TO DEFINE WHETHER OR NOT THE AGENT IS MOUNTING PASSENGERS
@@ -229,6 +284,18 @@ species bus skills: [fipa] {
     
     //AUXILIAR VARIABLE TO PROCESS THE PASSENGERS
     int passengers_to_process;
+    
+    
+    //All buses have the same maximum capacity 
+    int max_passengers <- 80;
+    
+    
+    //Seatable capacity
+    int seatable_capacity <- 28;
+    
+    
+    
+    
     
     
     //DEFAULT ASPECT FOR THE GUI EXPERIMENT
@@ -248,6 +315,10 @@ species bus skills: [fipa] {
         
         }//END ASPECT DEF
     
+    
+    
+    
+
     
     
     
@@ -415,6 +486,31 @@ species bus skills: [fipa] {
 
 
 
+species passenger skills: [fipa]
+{
+	
+	//Stop code in which this passenger is generated
+	int stop_origin;
+	
+	
+	//Boolean to know when it is stopped or when it is on a bus. On starting it is False
+	bool on_bus <- false;
+	
+	
+	
+	//Boolean to knwo wheter it is seated or no(Estimation based on the total number of seats in the bus). To measure KPIs of seatability
+	bool seated;
+	
+	
+	
+	//To measure KPIs of wait time
+	int wait_time;
+	
+	
+	
+	
+}
+
 
 
 
@@ -436,6 +532,18 @@ experiment test type: gui {
           
           	//RENDER THE BUS SPECIE
             species bus aspect: default;
+            
+            
+            graphics "clock" {
+                draw "Time: " + current_time 
+                    at: {100, 100} 
+                    color: #black 
+                    font: font("TimesNewRoman", 20, #bold);
+                draw "Timeslot: " + int(TimeSlot)
+                    at: {100, 350} 
+                    color: #gray 
+                    font: font("TimesNewRoman", 14, #plain);
+            }
             
         }//END DISPLAY
 
