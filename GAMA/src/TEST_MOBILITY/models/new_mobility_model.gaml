@@ -12,7 +12,7 @@ model mobility_model
 
 
 
-
+//Unnecesary import since the routes_loader.gaml is fully implemented in this code
 //import "routes_loader.gaml"
 
 
@@ -20,6 +20,7 @@ model mobility_model
 //--------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------GLOBAL_STATEMENT-----------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
+
 
 
 global 
@@ -116,30 +117,138 @@ global
       	//Convert it as matrix
       	matrix input_as_matrix <- matrix(input_data_e01);
       	
-      	
-      	
-      	loop i from: 0 to: input_as_matrix.rows - 1 {
-      		write "ROW  "+  " " + input_as_matrix[0, i]+  " " + input_as_matrix[1, i] +  " "+ input_as_matrix[2, i]+  " " + 
-      		input_as_matrix[3, i]+  " " + input_as_matrix[4, i]+  " " + input_as_matrix[5, i];
-      		
-      	}
-      	
+
+      	//All stops willbe using the same Timeslots. Starting at 5 ending at 23
+      	list<int> timeslots <- [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+		
+		
+		
+		
+		//Declaration of the dictionary	
+		map<int, map<int,map<string,list>>> distribution_values;
+		
 		
 		/*
 		 * Loop to obtain all the stopNums and store the data from the stops related to that num
 		 * The skeleton of the distribution map will be the following:
-		 * Dictionary "VARNAME": {Key(StopNum): Value: Dict}
+		 * Dictionary distribution_values: {Key(StopNum): Value: Dict}
 		 * Secondary Dict: {Key(TimeSlot: Value: Dict}
 		 * Third Dict: {Key(Board): Value: ["DistrType", Param1, Param2], Key(DropOff): Value: ["DistrType", Param1, Param2]}
-		 */
+	     */
 		loop stops_iter over: file_401stops {
-			geometry point_iter <- stops_iter;
-			map attr <- point_iter.attributes;
-    		int stop_code <-int(attr["stopNum"]);
-		}//TODO ACABAR TODO ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOooo
-		
-      	
-      	
+			
+			/*
+			 * Map the file stops iteration element to a point. 
+			 * Required to extract the attrs and obtain the stopNu
+			 */
+				geometry point_iter <- stops_iter;
+			
+				map attr <- point_iter.attributes;
+			
+    			int stop_code <-int(attr["stopNum"]);
+    		
+    		
+    		/*
+    		 * Now, obtain from the input_as_matrix, all the rows referencing that stop code
+    		 * From this, it will order the daata as specified in the loop definition above
+    		 */
+    		 
+    		     			
+    			list<list> elements_from_stop <- [];
+    			
+    			
+    			/*
+    			 * Secondary loop itering the matrix. It obtain all the row content, and if row[0] == stop_code then save it. ¡
+    			 * Once thellop is over, use the list to store the data 
+    			 */
+    			loop i from: 0 to: input_as_matrix.rows {
+    				
+    				list row <- row_at(input_as_matrix, i);					
+					
+					//This is put because matrix saves an empty list out of the EOF line in csv
+					if (row != []){
+					
+						if (int(row[0]) = stop_code){
+							elements_from_stop << row;
+						}	
+					}
+    			}//End loop mat_row
+    		    			
+    			
+    			/*
+    			 * Case first stop. Different because only have boards, no dropoffs, so the third dict will contain only Board
+    			 */
+    			if (stop_code = 2646){
+    				
+    				
+    			}
+    			
+    			/*
+    			 * Case last stop. Different because only have dropoffs and the dropoffs are all the passengers. The dropoffs here
+    			 * Can serve as a metric to identify normal cases and extreme cases.
+    			 */
+    			if (stop_code = 5727){
+    				
+    				
+    			}
+    			
+    			
+    			
+    			
+    			/*
+    			 * Rest of the cases
+    			 */
+    			if (stop_code != 2646 and stop_code != 5727){
+    				
+    				
+    				
+    				
+    				
+    				//Secondary dictionary for each 
+    				map<int,map<string,list>> map_per_stop;
+    				
+    				loop timeslot over: timeslots {
+    					
+    					/*
+	    				 * The structure for each stop iteration, is, the elements 0 and 1 for TS 5, the 2 and 3 for 6,......
+	    				 * For each timeslot, it will take the i and i + 1 elements where i == (TS -5)*2
+	    				 * The i, will be BOARDS, and i + 1 DROPOFFS
+	       				 */
+    					
+    					
+    					//Third dictionary
+    					map<string, list> boards_dropoffs_per_timeslot;
+						
+						//Boards
+	    				list element_boards <-  elements_from_stop[(timeslot - 5)*2];	
+						
+						//Dropoffs
+						list element_dropoffs <- elements_from_stop[(timeslot - 5)*2 + 1];
+						
+						
+						//Save in the third dictionary 
+						boards_dropoffs_per_timeslot << "Boards"::[element_boards[3], element_boards[4], element_boards[5]];
+						
+						boards_dropoffs_per_timeslot << "DropOffs"::[element_dropoffs[3], element_dropoffs[4], element_dropoffs[5]];
+							
+							
+						//Save the third dictionary in the second dictionary				
+						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
+						
+    				}//End loop Timeslots
+
+    				//Save the second dictionary in the first dictionary
+    				distribution_values << stop_code::map_per_stop;
+    				
+    			}//End if general case
+    			
+			
+				
+    		
+		}//End loop stops_iter
+
+
+
       	
         // CREATE ROUTE FROM .SHP FILE
         create route from: file_401route with: [
@@ -199,13 +308,6 @@ global
 	
 	
 	
-		
-	
-	
-	
-	
-	
-	
 	/*
 	 * Global reflex to handle each iteration the time that has passed. It will save
 	 */
@@ -220,6 +322,8 @@ global
        
         //Calculate minutes passed in the hour by dividing by 60
         minutes <- mod(total_minutes, 60);
+       
+       
        
         //DEBUG
         if (minutes = 0) {
@@ -310,9 +414,7 @@ global
 		distance_vector[0] <- stop_reference.x - bus_actual_position.x;
 		distance_vector[1] <- stop_reference.y - bus_actual_position.y;
 		
-		
-		
-		
+
 		//CALC THE MOD OF THE RESULTANT VECTOR
 		float new_mod <- sqrt(distance_vector[0]* distance_vector[0] + distance_vector[1] * distance_vector[1]);
 		
@@ -802,6 +904,19 @@ species stop skills: [fipa]  {
 
     //list<passengers> passengers_list;
     
+    
+    
+    /*
+     * List variables containing the info about the behaviour of boards and dropoffs for the stop.
+     * Each TimeSlot, will be updated acording to the behaviour of that TS
+     * The list params are always the same [ "DistrType", param1, param2]
+     * Where DistrType RN is NORMAL, NEGATIVE BINOMIAL, GEOMETRIC
+     */
+     */
+    	
+    list distribution_per_timeslot_boards <- [];
+    
+    list distribution_per_timeslot_dropoffs <- [];
     
     
     
