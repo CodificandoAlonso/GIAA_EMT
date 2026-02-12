@@ -39,6 +39,11 @@ global
 	
 	
 	
+	//CREATE GLOBAL VARIABLE MAP FOR DISTRIBUTIONS TO SAVE GLOBAL SCOPE OF THE VALS
+	map<int, map<int,map<string,list>>> global_distribution_values;
+	
+	
+	
 	
 	//INPUT FILES
     file file_401route <- file("../includes/ROUTE/E01/E01_toA.shp");
@@ -84,11 +89,11 @@ global
     /*
      * As geometrical distribution is not implemented, using the inverse transform method, taking ln's
      */
-	int sample_geometric(float p) {
+	float sample_geometric(float p) {
 		
     	float u <- rnd(0.0001, 0.9999);
     	
-    	return int(floor(ln(u) / ln(1 - p)));
+    	return floor(ln(u) / ln(1 - p));
     	
 	}//End function sample_geometric
      
@@ -173,7 +178,12 @@ global
 						}	
 					}
     			}//End loop mat_row
-    		    			
+    		    	
+    		    	
+    		    	
+    		    	
+    		    //Secondary dictionary for each 
+				map<int,map<string,list>> map_per_stop;		
     			
     			/*
     			 * Case first stop. Different because only have boards, no dropoffs, so the third dict will contain only Board
@@ -181,7 +191,43 @@ global
     			if (stop_code = 2646){
     				
     				
-    			}
+    				loop timeslot over: timeslots {
+    					
+    					/*
+	    				 * The structure for each stop iteration, is, the element 0 for TS 5, 1 for TS 6,....
+	    				 * For each timeslot, it will take the i and i elements where i == (TS -5)
+	    				 * The i, will be BOARDS, as is the first stop, there will be no DropOffs
+	       				 */
+    					
+    					
+    					//Third dictionary
+    					map<string, list> boards_dropoffs_per_timeslot;
+						
+						//Boards
+	    				list element_boards <-  elements_from_stop[(timeslot - 5)];	
+						
+						//Dropoffs
+						list element_dropoffs <- ["NO DATA", 0, 0];
+						
+						
+						//Save in the third dictionary 
+						boards_dropoffs_per_timeslot << "Boards"::[element_boards[3], element_boards[4], element_boards[5]];
+						
+						boards_dropoffs_per_timeslot << "DropOffs"::element_dropoffs;
+							
+						//Save the third dictionary in the second dictionary				
+						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
+						
+    				}//End loop Timeslots
+
+    				//Save the second dictionary in the first dictionary
+    				distribution_values << stop_code::map_per_stop;
+
+    				
+    				
+    			}//End if First Stop
+    			
+    			
     			
     			/*
     			 * Case last stop. Different because only have dropoffs and the dropoffs are all the passengers. The dropoffs here
@@ -190,7 +236,43 @@ global
     			if (stop_code = 5727){
     				
     				
-    			}
+    				loop timeslot over: timeslots {
+    					
+    					/*
+	    				 * The structure for each stop iteration, is, the element 0 for TS 5, 1 for TS 6,....
+	    				 * For each timeslot, it will take the i and i elements where i == (TS -5)
+	    				 * The i, will be DropOffs, as is the last stop, there will be no Boards
+	       				 */
+    					
+    					
+    					//Third dictionary
+    					map<string, list> boards_dropoffs_per_timeslot;
+						
+						//DropOffs
+	    				list element_dropoffs <-  elements_from_stop[(timeslot - 5)];	
+						
+						//Boards
+						list element_boards <- ["NO DATA", 0, 0];
+						
+						
+						//Save in the third dictionary 
+						boards_dropoffs_per_timeslot << "Boards"::element_boards;
+						
+						
+						boards_dropoffs_per_timeslot << "DropOffs"::[element_dropoffs[3], element_dropoffs[4], element_dropoffs[5]];
+							
+						//Save the third dictionary in the second dictionary				
+						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
+						
+    				}//End loop Timeslots
+
+
+    				//Save the second dictionary in the first dictionary
+    				distribution_values << stop_code::map_per_stop;
+    				
+		
+    				
+    			}//End If Last Stop
     			
     			
     			
@@ -200,12 +282,6 @@ global
     			 */
     			if (stop_code != 2646 and stop_code != 5727){
     				
-    				
-    				
-    				
-    				
-    				//Secondary dictionary for each 
-    				map<int,map<string,list>> map_per_stop;
     				
     				loop timeslot over: timeslots {
     					
@@ -247,7 +323,7 @@ global
     		
 		}//End loop stops_iter
 
-
+		global_distribution_values <- distribution_values;
 
       	
         // CREATE ROUTE FROM .SHP FILE
@@ -266,7 +342,10 @@ global
             stopNum :: int(read("stopNum")),
             distance :: int(read("distance")),
             name :: string(read("stopName")),
-            passengers ::  one_of([5,14,19,26,41])//THIS WILL GET DELETED
+            passengers ::  one_of([5,14,19,26,41]),//THIS WILL GET DELETED,
+            stop_distributions:: distribution_values[int(read("stopNum"))],
+            distribution_per_timeslot_boards::distribution_values[int(read("stopNum"))][5]["Boards"],
+            distribution_per_timeslot_dropoffs::distribution_values[int(read("stopNum"))][5]["DropOffs"]
         ];
         
         
@@ -336,8 +415,18 @@ global
 	//Map the TimeSlot + minutes into a string, to compare with the input
 	string current_time -> string(TimeSlot) + ":" + (minutes < 10 ? "0" + string(minutes) : string(minutes));	
 	
+	
+	
+	
+	/*
+	 * Reflex to handle the END of the sim once TS 24 is reached. todo ESTO LUEGO FUERA
+	 */
+	reflex end_simulation when: TimeSlot >= 24 {
+	        write "End of day reached at " + current_time;
+	        do pause;  //CHAO CHAO CHAO CHAO
+	    }
 
-
+	
 	
 	/*
 	 * Auxiliar global function to calculate the distance vector between the actual bus position and the next stop scheduled.
@@ -430,6 +519,14 @@ global
 	}//END FUNCTION CALL iisr
     
 
+
+
+	int smooth_data_function(float first_value, float second_value){
+		
+		
+		
+		return 0;
+	}
 		
 //--------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -878,7 +975,6 @@ species passenger skills: [fipa]
 //--------------------------------------------------------------------------------------------------------------------------------
 		
 
-		
 /*
  * Specie stop definition
  * 
@@ -905,18 +1001,30 @@ species stop skills: [fipa]  {
     //list<passengers> passengers_list;
     
     
+    //MAP CONTAINING THE DISTRIBUTIONS FOR THE DAY
+    map<int, map<string,list>> stop_distributions;
+    
+    //VALUE FOR PASSENGER GENERATION RATIO
+    float board_generation_ratio;
+    
+    //VAUE FOR THE NEXT GENERATIO RATIO
+    float next_board_generation_ratio;
+    
+    
     
     /*
      * List variables containing the info about the behaviour of boards and dropoffs for the stop.
      * Each TimeSlot, will be updated acording to the behaviour of that TS
      * The list params are always the same [ "DistrType", param1, param2]
      * Where DistrType RN is NORMAL, NEGATIVE BINOMIAL, GEOMETRIC
-     */
-     */
-    	
+     */  	
     list distribution_per_timeslot_boards <- [];
     
     list distribution_per_timeslot_dropoffs <- [];
+    
+    list next_distribution_per_timeslot_boards <- [];
+    
+    list next_distribution_per_timeslot_dropoffs <- [];
     
     
     
@@ -944,12 +1052,123 @@ species stop skills: [fipa]  {
     
     /*
      * Reflex function to handle the change of the boards and dropoffs distribution every hour. So this will happen when mod(minutes, 60) == 0
+     * Apart from that. Every distribution change, the sim will load the next params(distribution of TS +1) Unless last TS.
+     * Then, it will recalculate, to smooth the transition between distributions. With the calculations done, instead of being the same value for
+     * every iteration of the TS, it will create a function y = mx + n, which will have the same under the curve area. This, will imply that
+     * in the course of a full TimeSlot, the result of the passengers created will be the same under the curve area as it would be with a constant
+     * function, but smoothing the transition to the following value.
+     * 
+     * This behaviour is only for boards, for dropoffs, it will pick up a random value everytime a bus arrives.
      */
-    reflex update_distributions when: mod(world.minutes, 60) = 0 {
+    reflex update_distributions when: (mod(world.minutes, 60) = 0 and mod(world.time, 60)= 0 ) {
+		
+		
+		
+		
+		if (TimeSlot = 5){
+			
+			//Loading the distros
+			distribution_per_timeslot_boards <- world.global_distribution_values[stopNum][TimeSlot]["Boards"];
+			distribution_per_timeslot_dropoffs <- world.global_distribution_values[stopNum][TimeSlot]["DropOffs"];
+			
+			
+			//Loading the following distros
+			next_distribution_per_timeslot_boards <- world.global_distribution_values[stopNum][TimeSlot + 1]["Boards"];
+			next_distribution_per_timeslot_dropoffs <- world.global_distribution_values[stopNum][TimeSlot + 1]["DropOffs"];
+			
+			
+			
+			//Infer the new and the following exact random values based on the distribution. JUST FOR BOARDS
+			
+			
+			//Actual VAL
+			if(distribution_per_timeslot_boards[0] = "NORMAL"){
+				board_generation_ratio <- gauss(float(distribution_per_timeslot_boards[1]), float(distribution_per_timeslot_boards[2]));
+			}
+			if(distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
+				board_generation_ratio <- float(world.sample_negative_binomial(float(distribution_per_timeslot_boards[1]),
+					float(distribution_per_timeslot_boards[2])));			
+			}
+			if (distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
+				board_generation_ratio <- world.sample_geometric(float(distribution_per_timeslot_boards[1]));
+			}
+			if (distribution_per_timeslot_boards[0] = "NO DATA"){
+				board_generation_ratio <- 0.0;
+			}
 
+		
+			//Following VAL
+			if(next_distribution_per_timeslot_boards[0] = "NORMAL"){
+				next_board_generation_ratio <- gauss(float(next_distribution_per_timeslot_boards[1]), float(next_distribution_per_timeslot_boards[2]));
+			}
+			if(next_distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
+				next_board_generation_ratio <- float(world.sample_negative_binomial(float(next_distribution_per_timeslot_boards[1]),
+					float(next_distribution_per_timeslot_boards[2])));			
+			}
+			if (next_distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
+				next_board_generation_ratio <- world.sample_geometric(float(next_distribution_per_timeslot_boards[1]));
+			}
+			if (next_distribution_per_timeslot_boards[0] = "NO DATA"){
+				next_board_generation_ratio <- 0.0;
+			}
 
+			
+		}
+		else if (TimeSlot < 23){
+			
+			//For Boards, the random value is actually infer already, because it was calc in the iteration before
+			board_generation_ratio <- next_board_generation_ratio;
+			
+			
+			//Loading the following distros
+			next_distribution_per_timeslot_boards <- world.global_distribution_values[stopNum][TimeSlot + 1]["Boards"];
+			next_distribution_per_timeslot_dropoffs <- world.global_distribution_values[stopNum][TimeSlot + 1]["DropOffs"];
+			
+			//Following VAL
+			if(next_distribution_per_timeslot_boards[0] = "NORMAL"){
+				next_board_generation_ratio <- gauss(float(next_distribution_per_timeslot_boards[1]), float(next_distribution_per_timeslot_boards[2]));
+			}
+			if(next_distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
+				next_board_generation_ratio <- float(world.sample_negative_binomial(float(next_distribution_per_timeslot_boards[1]),
+					float(next_distribution_per_timeslot_boards[2])));			
+			}
+			if (next_distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
+				next_board_generation_ratio <- world.sample_geometric(float(next_distribution_per_timeslot_boards[1]));
+			}
+			if (next_distribution_per_timeslot_boards[0] = "NO DATA"){
+				next_board_generation_ratio <- 0.0;
+			}
+			
+		}
+		else{
+			
+			//Last TimeSlot, no next, but for no error will be 0.0
+			board_generation_ratio <- next_board_generation_ratio;
+			next_board_generation_ratio <- 0.0;
+		}//End Ifs Cases Timeslot
+		
+	/*
+	 * After this loop, board will contain the value of the random choice selected and next too.
+	 * Now apply trigonometric formulas to be able to smooth down the transitions
+	 */
+	
+	
+	
+	//IMPLEMENT
+	
+	//smooth_generated_data <- world.smooth_data_function(board_generation_ratio, next_board_generation_ratio);
+		
+		
 
-    }
+    }//End reflex Update Distributions
+    
+    
+    
+    
+    /*
+     *  Reflex to handle the generation of board passengers every simulation iteration
+     */
+     
     
 
     
