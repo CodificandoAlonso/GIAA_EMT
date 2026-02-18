@@ -73,6 +73,12 @@ global
      */
 	int sample_negative_binomial(float r, float p) {
 		
+		
+		//Extreme case. If r detects a 0, value, just return, 0
+		if (r = 0.0){
+			return 0;
+		}
+		
 	    float gamma_val <- gamma_rnd(r, (1-p)/p);
 	    
 	    int result <- poisson(gamma_val);
@@ -103,10 +109,8 @@ global
     /*
      * Action module to be invoiced from other models .gaml
      *
-     * 
      * This simply reads the files stops and routes (Both with .shp[shapefile] extension) and process all the agents
      * required to satisfy the content of the file
-     * 
      */
     action load_401 {
         
@@ -119,10 +123,13 @@ global
       	//Read input for normal days distributions
       	file input_data_e01 <- csv_file("../includes/INPUTS/input_data_E01_toA.csv");
       	
+      	
       	//Convert it as matrix
       	matrix input_as_matrix <- matrix(input_data_e01);
       	
-
+		
+		
+		
       	//All stops willbe using the same Timeslots. Starting at 5 ending at 23
       	list<int> timeslots <- [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
 		
@@ -144,7 +151,7 @@ global
 			
 			/*
 			 * Map the file stops iteration element to a point. 
-			 * Required to extract the attrs and obtain the stopNu
+			 * Required to extract the attrs and obtain the stopNum
 			 */
 				geometry point_iter <- stops_iter;
 			
@@ -158,7 +165,7 @@ global
     		 * From this, it will order the daata as specified in the loop definition above
     		 */
     		 
-    		     			
+    		     		
     			list<list> elements_from_stop <- [];
     			
     			
@@ -323,9 +330,17 @@ global
     		
 		}//End loop stops_iter
 
+
 		global_distribution_values <- distribution_values;
 
-      	
+
+
+
+		//----------------------------------------------------------------------------
+		//Now create both the route and the stop, for the agent representation of them.
+		//----------------------------------------------------------------------------
+
+
         // CREATE ROUTE FROM .SHP FILE
         create route from: file_401route with: [
             routename :: read("name"),
@@ -342,7 +357,6 @@ global
             stopNum :: int(read("stopNum")),
             distance :: int(read("distance")),
             name :: string(read("stopName")),
-            passengers ::  one_of([5,14,19,26,41]),//THIS WILL GET DELETED,
             stop_distributions:: distribution_values[int(read("stopNum"))],
             distribution_per_timeslot_boards::distribution_values[int(read("stopNum"))][5]["Boards"],
             distribution_per_timeslot_dropoffs::distribution_values[int(read("stopNum"))][5]["DropOffs"]
@@ -370,7 +384,7 @@ global
 		
 		
 		
-		
+	//#DEFINE. CHANGE THIS IN CASE THE SIMULATION HAS TO RUN ON LOWER/HIGHER ITERATIONS
 	float step <- 30 #seconds;
 	
 
@@ -419,14 +433,15 @@ global
 	
 	
 	/*
-	 * Reflex to handle the END of the sim once TS 24 is reached. todo ESTO LUEGO FUERA
-	 */
-	reflex end_simulation when: TimeSlot >= 24 {
-	        write "End of day reached at " + current_time;
-	        do pause;  //CHAO CHAO CHAO CHAO
-	    }
+	 * Reflex to handle the END of the sim once no bus is kept alive
+	 */ 
+	reflex end_real_simulation when: empty(bus){
+		write "BUSES FINIQUITEN " + current_time;
+        do pause;  //CHAO CHAO CHAO CHAO
+	}
 
-	
+
+
 	
 	/*
 	 * Auxiliar global function to calculate the distance vector between the actual bus position and the next stop scheduled.
@@ -449,7 +464,7 @@ global
 		return_vector[0] <- stop_reference.x - bus_actual_position.x;
 		return_vector[1] <- stop_reference.y - bus_actual_position.y;
 		
-		write "[DEBUG]: The resultant vector of distances is " + return_vector;
+		//write "[DEBUG]: The resultant vector of distances is " + return_vector;
 		
 		
 		
@@ -457,7 +472,7 @@ global
 		float new_mod <- sqrt(return_vector[0]* return_vector[0] + return_vector[1] * return_vector[1]);
 		
 		
-		/*READJUST TO MATCH MOD 5 FOR THE BUS SPEED
+		/*READJUST TO MATCH MOD speed_module FOR THE BUS SPEED
 		*
 		* 
 		*/
@@ -475,16 +490,15 @@ global
 		
 	}//END FUNCTION CALL vdc
 	
-	
-	
-	
+
+
 	/* Auxiliar global function to verify if a bus is inside the "stop catching area". It establish the criteria that the 
 	 * coordinates of the bus must be inside the +- 5 meters range from the stop coordinates
 	 * 
 	 * As parameters, the function takes the bus location and the reference stop coordinates.
 	 * 
 	 */
-	bool is_inside_stop_range(point bus_actual_position, point stop_reference) {
+	bool is_inside_stop_range(point bus_actual_position, point stop_reference, float speed_module) {
 		
 		//CASE 1. THE COORDINATES MATCHES EXACTY
 		if (bus_actual_position = stop_reference)
@@ -509,7 +523,7 @@ global
 		
 		
 		//RN HARCODED, IF THE MODULE OF THE DISTANCE IS < 5. THE FUNCTION WOULD RETURN TRUE
-		if (new_mod < 5.00)
+		if (new_mod < speed_module)
 		{
 			return true;
 		}
@@ -521,12 +535,40 @@ global
 
 
 
-	int smooth_data_function(float first_value, float second_value){
-		
-		
-		
-		return 0;
-	}
+
+
+/*
+ * Global function to handle the smoothness of the change between distribution.
+ * Returns a list of float values, one per simulation step within the timeslot.
+ * The sum of all values in the list equals first_value.
+ * The line tilts to connect smoothly toward second_value's rate.
+ */
+list<float> smooth_data_function(float first_value, float second_value) {
+
+    // Number of simulation steps in one timeslot (3600 seconds)
+    float simple_step <- 3600 / step;
+
+    // The average per-step rate that the next timeslot would have
+    float rate_end <- second_value / simple_step;
+
+    // y_intercept is solved so that the sum across all steps = first_value
+    // From: sum = y_intercept * N + slope * N*(N-1)/2 = first_value
+    // And:  f(N-1) = slope*(N-1) + y_intercept = rate_end
+    float y_intercept <- (2 * first_value / simple_step) - rate_end;
+    float slope <- (rate_end - y_intercept) / (simple_step - 1);
+
+    list<float> return_statement;
+
+    loop i from: 0 to: (simple_step - 1) {
+
+        float new_val <- slope * i + y_intercept;
+        return_statement << new_val;
+    }
+
+    return return_statement;
+}
+	
+	
 		
 //--------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -566,8 +608,7 @@ global
     		destination_stopname :: last(stops_list).stopName,
     		location :: first(stops_list).location,
     		makespan :: first(stop).distance,
-    		location_goal :: last(stops_list).location,
-    		passengers :: first(stops_list).passengers
+    		location_goal :: last(stops_list).location
     		]; //END WITH
 			
 			
@@ -634,7 +675,7 @@ species bus skills: [fipa] {
     
 
     //MAX SPEED
-    float speed_module_vector <- 10.00;
+    float speed_module_vector <- 60.00;
     
     
     //NUMBER OF STOPS REACHED, FOR THE INDEX. INITIALLY 1, AS THE BUS STARTS IN A STOP
@@ -642,8 +683,11 @@ species bus skills: [fipa] {
     
     
     
+    //LIST OF PASSENGERS LOADED
+    list<passenger> passengers;
+    
     //NUMBER OF PASSENGERS LOADED.
-    int passengers;
+    int passengers_length <- length(self.passengers);
     
     //BOOL VARIABLE TO DEFINE WHETHER OR NOT THE AGENT IS MOUNTING PASSENGERS
     bool processing_passengers <- false;
@@ -661,7 +705,8 @@ species bus skills: [fipa] {
     int seatable_capacity <- 28;
     
     
-    
+    //To wait for the acceptance of the proposals
+    bool waiting <- false;
     
     
     
@@ -677,6 +722,8 @@ species bus skills: [fipa] {
         {
         	//SI ESTA EN MOVIMIENTO SE COLOREA EN VERDE
         	draw square(100) color: #green;
+	        draw string(passengers_length) color: #black size: 1 at: location + {0, -80};
+        	
         	
         }//END ELSE ASPECT DEF
         
@@ -726,13 +773,13 @@ species bus skills: [fipa] {
 		
 		//CHECK ARRIVAL TO STOP
 		
-		if (world.is_inside_stop_range(self.location, stops_list[self.stops_reached].location) = true)
+		if (world.is_inside_stop_range(self.location, stops_list[self.stops_reached].location, self.speed_module_vector) = true)
 		{
 			//IF THE FUNCTION ENTERS HERE, IT MEANS A STOP HAS BEEN REACHED
 			
 			
 			//FIRST, CHECK IF ITS THE GOAL DESTINATION
-			if (world.is_inside_stop_range(self.location, self.location_goal) = true)
+			if (world.is_inside_stop_range(self.location, self.location_goal, self.speed_module_vector) = true)
 			{
 				
 			//THIS MEANS THE TARGET HAS BEEN REACHED
@@ -748,7 +795,7 @@ species bus skills: [fipa] {
 			//IF IT REACES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
 			//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
 			
-			write "[DEBUG]: " + "THE BUS ARRIVED TO THE STOP";
+			//write "[DEBUG]: " + "THE BUS ARRIVED TO THE STOP";
 			
 			//BOOL VARIABLE TO TRUE
 			self.stopped <- true;
@@ -788,7 +835,7 @@ species bus skills: [fipa] {
 
 		
 		//INICIATE CONVERSATION
-    	do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-propose' performative: 'propose' contents: ['Bus arrived to stop'];
+    	do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-query' performative: 'query' contents: ['Bus arrived to stop'];
 		
 		
 		//THIS LINE IS JUST FOR THE BUS IN THE NEXT CYCLE NOT REPEATING THE SENDING MESSAGE
@@ -802,68 +849,64 @@ species bus skills: [fipa] {
     
     
     /*
-     * Reflex function to handle the abstraction of charging passengers in the bus
-     *
-     *It has 2 main cases. First up, if the message received has not yet being read, it reads its content, 
-     * extract the passengers in that stop and save into a self variable
-     *
-     *The other case, when the process of mounting passengers has begun, once per cycle, it process one passenger.
-     * 
-     *Once every passenger has been processed, the self. variables to move to the next stop reactivates.
+     * Reflex function to handle the abstraction of charging/discharging passengers in the bus.
+     * First, it discharges the number of passengers that the stop tells the bus to dischargeº
+     * Process of mounting passengers has begun,it will comunicate with the passengers in the bus via FIPA protocol
+     * Once every passenger has been processed, the self. variables to move to the next stop reactivates.
      */
-     reflex handle_answer when: (self.processing_passengers = true or !(empty(accept_proposals)))
-     {
-     	
-     	//CASE_0. The message has just been received. needs to be processed
-     	if (!(empty(accept_proposals)))
-     	{
-     		//SAVE IT INTO A VARIABLE
-     		message answer <- accept_proposals at 0;
-     		
-     		//CAST THE CONTENT INTO A LIST AND PICK UP THE FIRST ELEM(THE PASSENGERS IN THAT STOP RECEIVED
-     		self.passengers_to_process <- list(answer.contents)[0];
-     		
-     		//BOOL FLAG TO START PROCESSING
-     		self.processing_passengers <- true;
-     		
-     		
-     	}//END IF
-     	
-     	else
-     	{
-     		//PROCESS PASSENGERS, CASE_1. THE MESSAGE HAS ALREADY BEEN READ.
-     		self.passengers <- self.passengers + 1;
-     		self.passengers_to_process <- self.passengers_to_process - 1;
-     		
-     		//DEBUG
-     		write "[DEBUG]: " + "A passenger is being processed up";
-     		
-     		
-     	}//END ELSE
-     	
-     	
-     	//FINAL CASE. PROCESSING HAS BEEN ENDED
-     	if (self.passengers_to_process = 0)
-     	{
-     		
-     		
-     		//CHANGE TO FALSE SO THE BUS MOVES IN THE NEXT CYCLE
-    		self.stopped <- false;
-    	
-    	
-			//UPDATE FOR THE INDEX OF THE NEXT STOP.
-	    	self.stops_reached <- self.stops_reached +1;
-	    	
-	    	//STOP PROCESSING PASSENGERS
-	    	self.processing_passengers <- false;
-	    	
-     	}
-     	
-     	
-     	
-     }//END REFLEX handle answer
+	reflex handle_answer when: !(empty(informs))
+	{
+	    message answer <- informs at 0;
+	    
+	    write "ESto essss: " + answer.contents;
+	    
+	    
+	    list<passenger> received_passengers <- list(answer.contents)[0];
+		
+		int passengers_to_pop <- int(list(answer.contents)[1]);
+		
+		
+		//If the number to drop is lower than the number of passengers on the bus and that number is not 0, drop those passengers
+		if (passengers_to_pop <= self.passengers_length and self.passengers != 0){
+			
+			loop i from: 0 to: (passengers_to_pop -1){
+				
+				do start_conversation to: [self.passengers[i]] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
+			}
+		}
+		
+		
+		
+	    loop one_passenger over: received_passengers {
+	        if (self.passengers_length < max_passengers) {
+	            if (self.passengers_length < seatable_capacity) {
+	                do start_conversation to: [one_passenger] protocol: 'fipa-propose' performative: 'propose' contents: ['Mount and seat'];
+	            } else {
+	                do start_conversation to: [one_passenger] protocol: 'fipa-propose' performative: 'propose' contents: ['Mount but not seat'];
+	            }
+	            self.passengers << one_passenger;
+	            self.passengers_length <- length(self.passengers);
+	        }
+	        else {
+                do start_conversation to: [one_passenger] protocol: 'fipa-propose' performative: 'propose' contents: ['Bus full'];
+	        }//End if bus full
+	    }
+	
+	    self.waiting <- true;
+	}//END REFLEX handle answer
   
-    
+  
+  	/*
+  	 * Reflex function to, in the saame loop the passengers are processing the information 
+  	 * from the bus, change the variables that control the movement
+  	 */
+  	reflex wait_for_acceptance when: (self.waiting = true and empty(accept_proposals)) {
+    self.waiting <- false;
+    self.processing_passengers <- false;
+    self.stopped <- false;
+    self.stops_reached <- self.stops_reached + 1;
+}
+  
     
 }//END SPECIE BUS
 
@@ -906,6 +949,9 @@ species passenger skills: [fipa]
 	float wait_time;
 
 	
+	//variable to know the mood of the passenger depending on the time waiting, if he can seat on the bus or if the bus its full
+	string mood;
+	
 	
 	//For drawing
 	aspect default {
@@ -931,8 +977,7 @@ species passenger skills: [fipa]
 	reflex update_movement when: self.on_bus = true {
 		
 		self.location <- mounted_bus.location;
-		
-		
+
 	}//End reflex update_movement
 	
 	
@@ -945,21 +990,31 @@ species passenger skills: [fipa]
 		
 		//Advance the wait time counter. This will not stop until a bus picks this passenger up
 		wait_time <- wait_time + world.step;
-		
-		
-		
 		/*
 		 * Each instance of passenger will be on a Specie Stop list variable. Once the bus reaches the stop, it will fetch the list via FIPA request
 		 * And communicate with each passenger to offer board. So now, what the code does is, once the proposals is not empty, stablish comm with bus
-		 */
-		 
-		 
-		 
-		 
+		 */ 
 		
 	}//End reflex wait_on_stop
 	
 	
+	reflex comm_with_bus when: !(empty(proposes)){
+		
+		message answer <- proposes at 0;
+				
+		if (answer.contents = 'Mount and seat'){
+			self.mood <- "very happy";
+			self.seated <- true;
+			self.mounted_bus <- answer.sender;
+			self.on_bus <- true;
+		}
+		if (answer.contents = 'Mount but not seat'){
+			self.mood <- "happy";
+			self.seated <- true;
+			self.mounted_bus <- answer.sender;
+			self.on_bus <- true;
+		}
+	}
 	
 }//End Species Passenger
 
@@ -994,11 +1049,8 @@ species stop skills: [fipa]  {
     int distance;
     
     
-    //HARCODED INVENTED NUMBER OF PASSENGERS. THIS WILL BE DELETEED
-    int passengers;
-    
-
-    //list<passengers> passengers_list;
+    //Variable which will contain the passengers that are waiting in the stop.
+    list<passenger> passengers_list;
     
     
     //MAP CONTAINING THE DISTRIBUTIONS FOR THE DAY
@@ -1010,6 +1062,9 @@ species stop skills: [fipa]  {
     //VAUE FOR THE NEXT GENERATIO RATIO
     float next_board_generation_ratio;
     
+    
+    //Value that serve as an accumulator for the passengers that are generated over the course of an hour.
+    float passengers_to_be_generated <- 0.0;
     
     
     /*
@@ -1028,6 +1083,12 @@ species stop skills: [fipa]  {
     
     
     
+    /*
+     * List variable containing, for each iteration of the timeslot, the ratio of generation of passengers that has to be added
+     * to fulfill the needs of the variable selected.
+     */
+    list<float> smooth_generated_data;
+    
     //Pair of floats wich holds the parameters of the distributions
     pair<float, float> board_generator_variables;
     
@@ -1037,7 +1098,7 @@ species stop skills: [fipa]  {
     aspect default {
     	
         draw circle(50) color: #purple border: #black;
-        draw stopName + " " + passengers color: #black size: 1 at: location + {0, -80};
+        draw stopName + " " + length(passengers_list) color: #black size: 1 at: location + {0, -80};
        	
     }
     
@@ -1062,9 +1123,7 @@ species stop skills: [fipa]  {
      */
     reflex update_distributions when: (mod(world.minutes, 60) = 0 and mod(world.time, 60)= 0 ) {
 		
-		
-		
-		
+
 		if (TimeSlot = 5){
 			
 			//Loading the distros
@@ -1152,22 +1211,41 @@ species stop skills: [fipa]  {
 	 * Now apply trigonometric formulas to be able to smooth down the transitions
 	 */
 	
-	
-	
-	//IMPLEMENT
-	
-	//smooth_generated_data <- world.smooth_data_function(board_generation_ratio, next_board_generation_ratio);
-		
-		
+	//obtain the value in wich you will generate passengers
+	smooth_generated_data <- world.smooth_data_function(board_generation_ratio, next_board_generation_ratio);
+
 
     }//End reflex Update Distributions
     
     
-    
-    
     /*
-     *  Reflex to handle the generation of board passengers every simulation iteration
+     * Reflex to handle the abstraction of generating passengers Each iteration, the needed value has to be added.
+     * When a truncate to int generates a positive result, generate that number of passengers and
+     * substract the number generated
      */
+     reflex generate_passengers {
+     	//add the value for this iteration			
+		passengers_to_be_generated <- passengers_to_be_generated + smooth_generated_data[int(mod(world.time, 3600) / step)];
+		
+		
+		int to_generate <- int(passengers_to_be_generated);
+		
+		
+	    if (to_generate > 0) {
+	        // Generate that number of passengers
+	        create passenger number: to_generate with: [
+	            stop_origin :: self.stopNum,
+	            location :: self.location
+	        ] returns: new_passengers;
+
+    		passengers_list <- passengers_list + new_passengers;
+	
+	        // Subtract only the integer part, keep the fractional remainder
+	        passengers_to_be_generated <- passengers_to_be_generated - to_generate;
+	    	}//End if to_generate
+	    	
+    	}//End reflex generate passengers
+    
      
     
 
@@ -1179,15 +1257,44 @@ species stop skills: [fipa]  {
      * It simply reads the message metadata and answer back with the number of passengers rn in the stop
      * 
      */
-    reflex communicate_with_bus when: !(empty(proposes)) 
+    reflex communicate_with_bus when: !(empty(queries)) 
     {
     	
     	//CHECK OUT THE RECEIVING MESSAGE
-		message proposalFromInitiator <- proposes at 0;
+		message queryFromInitiator <- queries at 0;
 		
 		
-		//ANSWER BACK WITH FIPA PROTOCOL ACCEPT_PROPOSAL
-		do accept_proposal message: proposalFromInitiator contents: [self.passengers] ;
+		//Infer the number of passengers that are gonna drop off 
+		int dropoff_passengers;
+		
+		if (distribution_per_timeslot_dropoffs[0] = "NORMAL"){
+			
+			dropoff_passengers <- floor(gauss(float(distribution_per_timeslot_dropoffs[1]),
+												float(distribution_per_timeslot_dropoffs[2])));
+			
+		}
+		if (distribution_per_timeslot_dropoffs[0] = "NEGATIVE BINOMIAL"){
+			
+			dropoff_passengers <- floor(world.sample_negative_binomial(float(distribution_per_timeslot_dropoffs[1]),
+												float(distribution_per_timeslot_dropoffs[2])));
+			
+		}
+		if (distribution_per_timeslot_dropoffs[0] = "GEOMETRICAL"){
+			
+			dropoff_passengers <- floor(world.sample_geometric(float(distribution_per_timeslot_dropoffs[1])));
+			
+		}
+		
+		if (distribution_per_timeslot_dropoffs[0] = "NO DATA"){
+			
+			dropoff_passengers <- 0;
+		}
+		
+		
+		//ANSWER BACK WITH FIPA PROTOCOL QUERY
+		do query_ref message: queryFromInitiator contents: [self.passengers_list, dropoff_passengers];		
+		
+		self.passengers_list <- [];
 		
     }//END REFLEX cwb
     
@@ -1242,7 +1349,7 @@ experiment test type: gui {
         	//LOAD THE BACKGROUNDS GUI INFORMATION
             species route aspect: default;
             species stop aspect: default;
-          
+          	species passenger aspect: default;
           
           	//RENDER THE BUS SPECIE
             species bus aspect: default;

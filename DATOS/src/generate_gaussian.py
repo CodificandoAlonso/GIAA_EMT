@@ -485,7 +485,6 @@ def clean_dataframe_advanced(data: pd.DataFrame, daytype: str):
     data = data[data["DropOff"] >= 0]
     data = data[data["Board"] <  80]
     data = data[data["DropOff"] < 80]
-
     data = data[data["DayType"] == daytype]
     data = data[data["FreeDay"] == 0]
     return data
