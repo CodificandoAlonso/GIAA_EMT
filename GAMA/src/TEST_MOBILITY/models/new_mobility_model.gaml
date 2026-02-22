@@ -385,7 +385,7 @@ global
 		
 		
 	//#DEFINE. CHANGE THIS IN CASE THE SIMULATION HAS TO RUN ON LOWER/HIGHER ITERATIONS
-	float step <- 30 #seconds;
+	float step <- 10 #seconds;
 	
 
 	float time <- cycle * step;
@@ -476,6 +476,11 @@ global
 		*
 		* 
 		*/
+		
+		if (new_mod = 0.0){
+			return return_vector;
+		}
+		
 		
 			//CALC OF THE RELATION BETWEEN THE DISTANCE MOD AND THE SPEED MOD
 		float relation <- speed_module / new_mod;
@@ -678,8 +683,8 @@ species bus skills: [fipa] {
     float speed_module_vector <- 60.00;
     
     
-    //NUMBER OF STOPS REACHED, FOR THE INDEX. INITIALLY 1, AS THE BUS STARTS IN A STOP
-    int stops_reached <- 1;
+    //NUMBER OF STOPS REACHED, FOR THE INDEX. INITIALLY 0, to board the first passengers from the stop
+    int stops_reached <- 0;
     
     
     
@@ -715,7 +720,7 @@ species bus skills: [fipa] {
         if (self.stopped) 
         {
         	//SI ESTA PARADO, SE COLOREA EN ROJO
-        	draw square(100) color: #red;	
+        	draw square(100) color: #orange;	
         	
         }//END IF ASPECT DEF
         else
@@ -727,7 +732,7 @@ species bus skills: [fipa] {
         	
         }//END ELSE ASPECT DEF
         
-        }//END ASPECT DEF
+    }//END ASPECT DEF
     
    
 	/*
@@ -786,6 +791,12 @@ species bus skills: [fipa] {
 			self.arrived <- true;
 			
 			
+			
+			loop passenger_to_dropoff over: self.passengers{
+				do start_conversation to: [passenger_to_dropoff] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
+			}
+			
+			
 			do die;//NOW THE AGENT DIES, LATER TODO THE BUS WILL BE LOGICAL BUS AND WILL START ITS RETURN AS TIME SCHEDULED.
 			
 			
@@ -794,15 +805,11 @@ species bus skills: [fipa] {
 			
 			//IF IT REACES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
 			//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
-			
-			//write "[DEBUG]: " + "THE BUS ARRIVED TO THE STOP";
-			
+						
 			//BOOL VARIABLE TO TRUE
 			self.stopped <- true;
 			
-			
-			
-			
+
 		}//END IF STOP REACHED
 
 
@@ -857,9 +864,7 @@ species bus skills: [fipa] {
 	reflex handle_answer when: !(empty(informs))
 	{
 	    message answer <- informs at 0;
-	    
-	    write "ESto essss: " + answer.contents;
-	    
+	    	    
 	    
 	    list<passenger> received_passengers <- list(answer.contents)[0];
 		
@@ -867,45 +872,56 @@ species bus skills: [fipa] {
 		
 		
 		//If the number to drop is lower than the number of passengers on the bus and that number is not 0, drop those passengers
-		if (passengers_to_pop <= self.passengers_length and self.passengers != 0){
+		if (passengers_to_pop <= self.passengers_length and self.passengers_length != 0 and passengers_to_pop != 0){
 			
 			loop i from: 0 to: (passengers_to_pop -1){
 				
-				do start_conversation to: [self.passengers[i]] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
+				do start_conversation to: [self.passengers[0]] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
+				
+				remove index: 0 from: self.passengers;
 			}
+			
+			self.passengers_length <- length(self.passengers);
 		}
 		
+		/*
+		 * Local variable to know how many passengers from the stop the bus can process. Later on, the bus will inform the stop the value of
+		 * number_of_boards, so the stop removes those passengers from its queue
+		 */
+		int number_of_boards <- 0;
 		
 		
 	    loop one_passenger over: received_passengers {
 	        if (self.passengers_length < max_passengers) {
-	            if (self.passengers_length < seatable_capacity) {
-	                do start_conversation to: [one_passenger] protocol: 'fipa-propose' performative: 'propose' contents: ['Mount and seat'];
-	            } else {
-	                do start_conversation to: [one_passenger] protocol: 'fipa-propose' performative: 'propose' contents: ['Mount but not seat'];
-	            }
+                do start_conversation to: [one_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Mount'];
 	            self.passengers << one_passenger;
 	            self.passengers_length <- length(self.passengers);
-	        }
+	            number_of_boards +<- 1;
+			}
 	        else {
-                do start_conversation to: [one_passenger] protocol: 'fipa-propose' performative: 'propose' contents: ['Bus full'];
+                do start_conversation to: [one_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Bus full'];
 	        }//End if bus full
 	    }
-	
+	    
+	    //Answer back to the stop the number of passengers picked up by the bus agent
+	    do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-inform' performative: 'inform' contents: [number_of_boards];
+		
+		//self variable to handle the acceptance of the messages from the passengers.
 	    self.waiting <- true;
+	    
+	    
 	}//END REFLEX handle answer
-  
   
   	/*
   	 * Reflex function to, in the saame loop the passengers are processing the information 
   	 * from the bus, change the variables that control the movement
   	 */
   	reflex wait_for_acceptance when: (self.waiting = true and empty(accept_proposals)) {
-    self.waiting <- false;
-    self.processing_passengers <- false;
-    self.stopped <- false;
-    self.stops_reached <- self.stops_reached + 1;
-}
+	    self.waiting <- false;
+	    self.processing_passengers <- false;
+	    self.stopped <- false;
+	    self.stops_reached <- self.stops_reached + 1;
+	}
   
     
 }//END SPECIE BUS
@@ -998,22 +1014,20 @@ species passenger skills: [fipa]
 	}//End reflex wait_on_stop
 	
 	
-	reflex comm_with_bus when: !(empty(proposes)){
+	reflex comm_with_bus when: (!(empty(requests)) and self.seated = false){
 		
-		message answer <- proposes at 0;
-				
-		if (answer.contents = 'Mount and seat'){
-			self.mood <- "very happy";
+		message answer <- requests at 0;
+
+		if (answer.contents = 'Mount'){
 			self.seated <- true;
 			self.mounted_bus <- answer.sender;
 			self.on_bus <- true;
 		}
-		if (answer.contents = 'Mount but not seat'){
-			self.mood <- "happy";
-			self.seated <- true;
-			self.mounted_bus <- answer.sender;
-			self.on_bus <- true;
-		}
+	}
+	
+	
+	reflex comm_to_dropoff when: (!(empty(requests)) and self.seated = true) {
+		do die;	
 	}
 	
 }//End Species Passenger
@@ -1269,19 +1283,19 @@ species stop skills: [fipa]  {
 		
 		if (distribution_per_timeslot_dropoffs[0] = "NORMAL"){
 			
-			dropoff_passengers <- floor(gauss(float(distribution_per_timeslot_dropoffs[1]),
-												float(distribution_per_timeslot_dropoffs[2])));
+			dropoff_passengers <- max(floor(gauss(float(distribution_per_timeslot_dropoffs[1]),
+												float(distribution_per_timeslot_dropoffs[2]))), 0);
 			
 		}
 		if (distribution_per_timeslot_dropoffs[0] = "NEGATIVE BINOMIAL"){
 			
-			dropoff_passengers <- floor(world.sample_negative_binomial(float(distribution_per_timeslot_dropoffs[1]),
-												float(distribution_per_timeslot_dropoffs[2])));
+			dropoff_passengers <- max(floor(world.sample_negative_binomial(float(distribution_per_timeslot_dropoffs[1]),
+												float(distribution_per_timeslot_dropoffs[2]))), 0);
 			
 		}
 		if (distribution_per_timeslot_dropoffs[0] = "GEOMETRICAL"){
 			
-			dropoff_passengers <- floor(world.sample_geometric(float(distribution_per_timeslot_dropoffs[1])));
+			dropoff_passengers <- max(floor(world.sample_geometric(float(distribution_per_timeslot_dropoffs[1]))), 0);
 			
 		}
 		
@@ -1292,7 +1306,8 @@ species stop skills: [fipa]  {
 		
 		
 		//ANSWER BACK WITH FIPA PROTOCOL QUERY
-		do query_ref message: queryFromInitiator contents: [self.passengers_list, dropoff_passengers];		
+		do agree message: queryFromInitiator contents: ["Ok copy"];
+		do inform message: queryFromInitiator contents: [self.passengers_list, dropoff_passengers];		
 		
 		self.passengers_list <- [];
 		
