@@ -297,8 +297,7 @@ global
 	    				 * For each timeslot, it will take the i and i + 1 elements where i == (TS -5)*2
 	    				 * The i, will be BOARDS, and i + 1 DROPOFFS
 	       				 */
-    					
-    					
+
     					//Third dictionary
     					map<string, list> boards_dropoffs_per_timeslot;
 						
@@ -325,21 +324,14 @@ global
     				
     			}//End if general case
     			
-			
-				
-    		
 		}//End loop stops_iter
 
-
+		//Update the global variable so every agent can access this data.
 		global_distribution_values <- distribution_values;
-
-
-
 
 		//----------------------------------------------------------------------------
 		//Now create both the route and the stop, for the agent representation of them.
 		//----------------------------------------------------------------------------
-
 
         // CREATE ROUTE FROM .SHP FILE
         create route from: file_401route with: [
@@ -347,9 +339,6 @@ global
             distance :: int(read("distance")),
             id :: int(read("id"))	
         ];
-        
-        
-        
         
         // CREATE EACH STOP FROM .SHP FILE
         create stop from: file_401stops with: [
@@ -362,18 +351,12 @@ global
             distribution_per_timeslot_dropoffs::distribution_values[int(read("stopNum"))][5]["DropOffs"]
         ];
         
-        
-        
+
         //SAVE TO GLOBAL LIST
         stops_list <- list(stop);
-        
-        
 
     }//END ACTION STATEMENT
 
-
-
-		
 		
 //--------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -381,15 +364,12 @@ global
 //--------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
 
-		
-		
-		
+	
 	//#DEFINE. CHANGE THIS IN CASE THE SIMULATION HAS TO RUN ON LOWER/HIGHER ITERATIONS
 	float step <- 10 #seconds;
 	
 
 	float time <- cycle * step;
-	
 	
 	
 	//Initialize minutes
@@ -399,8 +379,7 @@ global
 	//Initialize sim TimeSlot
 	int TimeSlot;
 	
-	
-	
+
 	/*
 	 * Global reflex to handle each iteration the time that has passed. It will save
 	 */
@@ -415,13 +394,7 @@ global
        
         //Calculate minutes passed in the hour by dividing by 60
         minutes <- mod(total_minutes, 60);
-       
-       
-       
-        //DEBUG
-        if (minutes = 0) {
-            write "[DEBUG]: Now: " + current_time;
-        }//End If
+
     
 	}//End reflex update_time
 
@@ -863,8 +836,9 @@ species bus skills: [fipa] {
      */
 	reflex handle_answer when: !(empty(informs))
 	{
+		
 	    message answer <- informs at 0;
-	    	    
+	    
 	    
 	    list<passenger> received_passengers <- list(answer.contents)[0];
 		
@@ -884,45 +858,80 @@ species bus skills: [fipa] {
 			self.passengers_length <- length(self.passengers);
 		}
 		
-		/*
-		 * Local variable to know how many passengers from the stop the bus can process. Later on, the bus will inform the stop the value of
-		 * number_of_boards, so the stop removes those passengers from its queue
-		 */
-		int number_of_boards <- 0;
-		
+
 		
 	    loop one_passenger over: received_passengers {
 	        if (self.passengers_length < max_passengers) {
                 do start_conversation to: [one_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Mount'];
 	            self.passengers << one_passenger;
 	            self.passengers_length <- length(self.passengers);
-	            number_of_boards +<- 1;
 			}
 	        else {
                 do start_conversation to: [one_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Bus full'];
 	        }//End if bus full
 	    }
 	    
-	    //Answer back to the stop the number of passengers picked up by the bus agent
-	    do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-inform' performative: 'inform' contents: [number_of_boards];
+	    
+	    
+	    
+		
 		
 		//self variable to handle the acceptance of the messages from the passengers.
 	    self.waiting <- true;
-	    
-	    
+
+
 	}//END REFLEX handle answer
+  
+  
   
   	/*
   	 * Reflex function to, in the saame loop the passengers are processing the information 
   	 * from the bus, change the variables that control the movement
-  	 */
+  	 
   	reflex wait_for_acceptance when: (self.waiting = true and empty(accept_proposals)) {
 	    self.waiting <- false;
 	    self.processing_passengers <- false;
 	    self.stopped <- false;
 	    self.stops_reached <- self.stops_reached + 1;
 	}
-  
+	* 
+	*/
+	
+	
+	/*
+	 * Reflex function that gets used the right next iteration  */
+	reflex verify_passengers when: (self.waiting = true and !(empty(agrees))){
+
+
+		int not_boards <- 0;
+		
+		
+		//Loop to process all the answers from the passengers. If the content of the message is 'I wait to the next one' means that the passenger accepts the not boarding
+		loop message_from_passenger over: agrees{
+			
+			if (list(message_from_passenger.contents)[0] = "I wait to the next one"){
+				not_boards +<- 1;
+			}
+		}//end loop
+		
+		
+		//The bus here, reads the query petition from the stop, and answer back with the number of passengers not mounted.
+	    //Answer back to the stop the number of passengers picked up by the bus agent
+	    
+	    message query_passengers <- queries at 0;
+	    
+	    do agree message: query_passengers contents: ["Here are the number of passengers"];
+	    do inform message: query_passengers contents: [not_boards];
+
+		write "No c pudieron subir " + not_boards;
+
+		//After all this, the bus starts moving
+		self.waiting <- false;
+	    self.processing_passengers <- false;
+	    self.stopped <- false;
+	    self.stops_reached <- self.stops_reached + 1;
+	}//End reflex verify passengers
+
     
 }//END SPECIE BUS
 
@@ -1022,12 +1031,31 @@ species passenger skills: [fipa]
 			self.seated <- true;
 			self.mounted_bus <- answer.sender;
 			self.on_bus <- true;
+			do agree message: answer contents: ["Seated"];
 		}
-	}
+		else if (answer.contents = 'Bus Full'){
+			//If the content of the message is not Mount, it means its Bus full. But, in case other message shown, the passenger answers back with not-understood.
+			
+			//Here with bus full,  end the conversation with bus answering back accepting the bus full request.
+			do agree message: answer contents: ["I wait to the next one"];
+		}
+		else
+		{
+			do refuse message: answer contents: ["I dont understand"];
+		}//Ebd ifs cases contents for the request
+		
+	}//ebd reflex comm_weith_bus
 	
 	
+	
+	/*
+	 * Reflex function design to handle the dropoff from the bus of the agent passenger. Her, it will accept the request of the bus, answer back to confirm it, and then diesç
+	 * IN THE FUTURE, it will send statistics to report this passenger and add its values to extract KPIs
+	 */
 	reflex comm_to_dropoff when: (!(empty(requests)) and self.seated = true) {
-		do die;	
+		message request <- requests at 0;
+		do agree message: request contents: ["I will Drop Off"];
+		do die;
 	}
 	
 }//End Species Passenger
@@ -1079,6 +1107,9 @@ species stop skills: [fipa]  {
     
     //Value that serve as an accumulator for the passengers that are generated over the course of an hour.
     float passengers_to_be_generated <- 0.0;
+    
+    //Variable to wait for the answer back from the bus when its processing passengers
+    bool waiting_for_bus_answer<- false;
     
     
     /*
@@ -1220,13 +1251,14 @@ species stop skills: [fipa]  {
 			next_board_generation_ratio <- 0.0;
 		}//End Ifs Cases Timeslot
 		
-	/*
-	 * After this loop, board will contain the value of the random choice selected and next too.
-	 * Now apply trigonometric formulas to be able to smooth down the transitions
-	 */
+		
+		/*
+		 * After this loop, board will contain the value of the random choice selected and next too.
+		 * Now apply trigonometric formulas to be able to smooth down the transitions
+		 */
 	
-	//obtain the value in wich you will generate passengers
-	smooth_generated_data <- world.smooth_data_function(board_generation_ratio, next_board_generation_ratio);
+		//obtain the value in wich you will generate passengers
+		smooth_generated_data <- world.smooth_data_function(board_generation_ratio, next_board_generation_ratio);
 
 
     }//End reflex Update Distributions
@@ -1271,7 +1303,7 @@ species stop skills: [fipa]  {
      * It simply reads the message metadata and answer back with the number of passengers rn in the stop
      * 
      */
-    reflex communicate_with_bus when: !(empty(queries)) 
+    reflex communicate_with_bus when: !(empty(queries))
     {
     	
     	//CHECK OUT THE RECEIVING MESSAGE
@@ -1306,12 +1338,29 @@ species stop skills: [fipa]  {
 		
 		
 		//ANSWER BACK WITH FIPA PROTOCOL QUERY
-		do agree message: queryFromInitiator contents: ["Ok copy"];
+		do agree message: queryFromInitiator contents: ["Here is the passenger list"];
 		do inform message: queryFromInitiator contents: [self.passengers_list, dropoff_passengers];		
 		
-		self.passengers_list <- [];
+		do start_conversation to: queryFromInitiator.sender protocol: 'fipa-query' performative: 'query' contents: ["Tell me the passengers not boarded"];
+		waiting_for_bus_answer <- true;
 		
     }//END REFLEX cwb
+    
+    
+    
+    reflex process_bus_answer when: (waiting_for_bus_answer = true and !(empty(informs))){
+    	
+		message inform_from_bus <- informs at 0;
+		
+		
+		self.passengers_list <- last(int(list(inform_from_bus.contents)[0]), self.passengers_list);
+		
+		
+		write "Recibi " + int(list(inform_from_bus.contents)[0]);
+		
+		waiting_for_bus_answer <- false;
+		
+    }
     
     
     
