@@ -686,14 +686,16 @@ species bus skills: [fipa] {
     //To wait for the acceptance of the proposals
     bool waiting <- false;
     
+    //Bool variable to know wether the bus has finished a shift(Arrive to its destintation, or not). It will trigger a reflextu change the direction or die.
+    bool finished_shift <- false;
     
     
     //DEFAULT ASPECT FOR THE GUI EXPERIMENT
     aspect default {
         if (self.stopped) 
         {
-        	//SI ESTA PARADO, SE COLOREA EN ROJO
-        	draw square(100) color: #orange;	
+        	//SI ESTA PARADO, SE COLOREA EN naranja
+        	draw square(100) color: #orange;
         	
         }//END IF ASPECT DEF
         else
@@ -769,8 +771,8 @@ species bus skills: [fipa] {
 				do start_conversation to: [passenger_to_dropoff] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
 			}
 			
-			
-			do die;//NOW THE AGENT DIES, LATER TODO THE BUS WILL BE LOGICAL BUS AND WILL START ITS RETURN AS TIME SCHEDULED.
+			self.finished_shift <- true;
+			write "ACABEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE";
 			
 			
 			}//END IF GOAL DESTINATION
@@ -788,6 +790,15 @@ species bus skills: [fipa] {
 
     }//END REFLEX mtd
 
+
+	
+	reflex handle_shifts when: (self.finished_shift = true and length(agrees) >= length(passengers)){
+		
+		agrees <- [];
+		
+		do die;
+
+	}
 
 
 
@@ -834,10 +845,29 @@ species bus skills: [fipa] {
      * Process of mounting passengers has begun,it will comunicate with the passengers in the bus via FIPA protocol
      * Once every passenger has been processed, the self. variables to move to the next stop reactivates.
      */
-	reflex handle_answer when: !(empty(informs))
+	reflex handle_answer when: (!(empty(informs)) and !(empty(agrees)))
 	{
 		
+		//Clears the agree message of the bus to the query request.
+		message accepts_for_clearance <- agrees at 0;
+		
+		write "Se que acc_f_c vale Here is the pass list " + accepts_for_clearance.contents;
+		
+		//Clears it after reading
+		
+		//remove index: 0 from: agrees;
+		
+		agrees <- [];
+		
+		write "agREES TIENE QUE SER [] " + agrees;
+		
+		
+		//Receives the inform message
 	    message answer <- informs at 0;
+	    
+	    //Clean if after readit
+	    
+	    remove index: 0 from: informs;
 	    
 	    
 	    list<passenger> received_passengers <- list(answer.contents)[0];
@@ -860,11 +890,15 @@ species bus skills: [fipa] {
 		
 
 		
+		int new_passengers_generated <- 0;
+		
+		
 	    loop one_passenger over: received_passengers {
 	        if (self.passengers_length < max_passengers) {
                 do start_conversation to: [one_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Mount'];
 	            self.passengers << one_passenger;
 	            self.passengers_length <- length(self.passengers);
+	            new_passengers_generated +<- 1;
 			}
 	        else {
                 do start_conversation to: [one_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Bus full'];
@@ -872,47 +906,53 @@ species bus skills: [fipa] {
 	    }
 	    
 	    
-	    
-	    
-		
-		
+	    //If a new passenger is gonna board,activate this. If not, just advance to the nextstop
+	    if (new_passengers_generated > 0){
 		//self variable to handle the acceptance of the messages from the passengers.
 	    self.waiting <- true;
+	    }
+	    else{
+	    	self.processing_passengers <- false;
+		    self.stopped <- false;
+		    self.stops_reached <- self.stops_reached + 1;
+	    }
 
 
 	}//END REFLEX handle answer
   
   
-  
-  	/*
-  	 * Reflex function to, in the saame loop the passengers are processing the information 
-  	 * from the bus, change the variables that control the movement
-  	 
-  	reflex wait_for_acceptance when: (self.waiting = true and empty(accept_proposals)) {
-	    self.waiting <- false;
-	    self.processing_passengers <- false;
-	    self.stopped <- false;
-	    self.stops_reached <- self.stops_reached + 1;
-	}
-	* 
-	*/
 	
 	
 	/*
-	 * Reflex function that gets used the right next iteration  */
+	 * Reflex function that gets used the right next iteration  
+	 */
 	reflex verify_passengers when: (self.waiting = true and !(empty(agrees))){
 
 
-		int not_boards <- 0;
+		int boards <- 0;
+		int total <- 0;
+		
+		//Loop to process all the answers from the passengers. If the content of the message is 'Boarded' means that the passenger accepts the boarding
+		// so update the counter
+		write "MI len es " + length(agrees) + " en la parada " + stops_list[self.stops_reached];
 		
 		
-		//Loop to process all the answers from the passengers. If the content of the message is 'I wait to the next one' means that the passenger accepts the not boarding
 		loop message_from_passenger over: agrees{
 			
-			if (list(message_from_passenger.contents)[0] = "I wait to the next one"){
-				not_boards +<- 1;
+			write "   aafagag " + list(message_from_passenger.contents)[0];
+			
+			
+			
+			if (list(message_from_passenger.contents)[0] = 'Boarded'){
+				boards +<- 1;
 			}
+			
+			total +<- 1;
+			
 		}//end loop
+		
+		//Clean it after reading
+		agrees <- [];
 		
 		
 		//The bus here, reads the query petition from the stop, and answer back with the number of passengers not mounted.
@@ -920,10 +960,14 @@ species bus skills: [fipa] {
 	    
 	    message query_passengers <- queries at 0;
 	    
+	    //Clean it after reading
+	    
+	    remove index: 0 from: queries;
+	    
 	    do agree message: query_passengers contents: ["Here are the number of passengers"];
-	    do inform message: query_passengers contents: [not_boards];
+	    do inform message: query_passengers contents: [boards];
 
-		write "No c pudieron subir " + not_boards;
+		write "C cubieron " + boards + " from a tota pf " + total;
 
 		//After all this, the bus starts moving
 		self.waiting <- false;
@@ -1023,17 +1067,26 @@ species passenger skills: [fipa]
 	}//End reflex wait_on_stop
 	
 	
+	
+	
+	
+	
 	reflex comm_with_bus when: (!(empty(requests)) and self.seated = false){
 		
 		message answer <- requests at 0;
+		
+		//Clean it after reading
+		remove index: 0 from: requests;
 
-		if (answer.contents = 'Mount'){
+		if (list(answer.contents)[0] = 'Mount'){
+			do agree message: answer contents: ['Ok ill board'];
 			self.seated <- true;
 			self.mounted_bus <- answer.sender;
 			self.on_bus <- true;
-			do agree message: answer contents: ["Seated"];
+			do inform message: answer contents: ['Boarded'];
+			
 		}
-		else if (answer.contents = 'Bus Full'){
+		else if (list(answer.contents)[0] = 'Bus Full'){
 			//If the content of the message is not Mount, it means its Bus full. But, in case other message shown, the passenger answers back with not-understood.
 			
 			//Here with bus full,  end the conversation with bus answering back accepting the bus full request.
@@ -1041,6 +1094,7 @@ species passenger skills: [fipa]
 		}
 		else
 		{
+			write "What a cujons+ " + answer.contents;
 			do refuse message: answer contents: ["I dont understand"];
 		}//Ebd ifs cases contents for the request
 		
@@ -1052,8 +1106,12 @@ species passenger skills: [fipa]
 	 * Reflex function design to handle the dropoff from the bus of the agent passenger. Her, it will accept the request of the bus, answer back to confirm it, and then diesç
 	 * IN THE FUTURE, it will send statistics to report this passenger and add its values to extract KPIs
 	 */
-	reflex comm_to_dropoff when: (!(empty(requests)) and self.seated = true) {
+	reflex comm_to_dropoff when: (!(empty(requests)) and self.on_bus = true) {
 		message request <- requests at 0;
+		
+		//Clean it after reading
+		remove index:0 from: requests;
+		
 		do agree message: request contents: ["I will Drop Off"];
 		do die;
 	}
@@ -1309,6 +1367,7 @@ species stop skills: [fipa]  {
     	//CHECK OUT THE RECEIVING MESSAGE
 		message queryFromInitiator <- queries at 0;
 		
+		remove index: 0 from: queries;
 		
 		//Infer the number of passengers that are gonna drop off 
 		int dropoff_passengers;
@@ -1339,7 +1398,7 @@ species stop skills: [fipa]  {
 		
 		//ANSWER BACK WITH FIPA PROTOCOL QUERY
 		do agree message: queryFromInitiator contents: ["Here is the passenger list"];
-		do inform message: queryFromInitiator contents: [self.passengers_list, dropoff_passengers];		
+		do inform message: queryFromInitiator contents: [self.passengers_list, dropoff_passengers];
 		
 		do start_conversation to: queryFromInitiator.sender protocol: 'fipa-query' performative: 'query' contents: ["Tell me the passengers not boarded"];
 		waiting_for_bus_answer <- true;
@@ -1352,8 +1411,11 @@ species stop skills: [fipa]  {
     	
 		message inform_from_bus <- informs at 0;
 		
+		//Clean it after readi t
+		remove index: 0 from: informs;
 		
-		self.passengers_list <- last(int(list(inform_from_bus.contents)[0]), self.passengers_list);
+		
+		self.passengers_list <- self.passengers_list copy_between(int(list(inform_from_bus.contents)[0]), length(self.passengers_list));
 		
 		
 		write "Recibi " + int(list(inform_from_bus.contents)[0]);
@@ -1361,9 +1423,7 @@ species stop skills: [fipa]  {
 		waiting_for_bus_answer <- false;
 		
     }
-    
-    
-    
+
 }//END SPECIE STOP
 
 
