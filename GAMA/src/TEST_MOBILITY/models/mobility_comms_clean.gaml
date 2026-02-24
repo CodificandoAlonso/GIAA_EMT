@@ -649,7 +649,7 @@ species bus skills: [fipa] {
     
 
     //MAX SPEED
-    float speed_module_vector <- 10.00;
+    float speed_module_vector <- 30.00;
     
     
     //NUMBER OF STOPS REACHED, FOR THE INDEX. INITIALLY 0, to board the first passengers from the stop
@@ -886,7 +886,7 @@ species bus skills: [fipa] {
 			if ( int(self.data_from_stop[1]) > 0){
 				
 				
-				write "VOy por vosotros " + int(self.data_from_stop[1]) + " pescabichos";
+				//write "VOy por vosotros " + int(self.data_from_stop[1]) + " pescabichos";
 				
 				//Case dropoffs bigger or equal than actual value of the bus. Means everybody DropOff
 				if (int(self.data_from_stop[1]) >= self.passengers_length){
@@ -935,7 +935,7 @@ species bus skills: [fipa] {
 		//First of all. It needs to be resolved the messages from the passengers Dropping Off
 		
 		//If not passengers were to be dropped off, skip, only do it if
-		if (int(self.data_from_stop[1]) > 0){
+		if (int(self.data_from_stop[1]) > 0 and self.passengers_length > 0){
 			
 			list<passenger> to_remove;	
 			
@@ -976,7 +976,7 @@ species bus skills: [fipa] {
 		
 		
 		//NOw pAssengers
-		write "AGreesss and informssss should be cliiiiiin " + agrees + informs;
+		//write "AGreesss and informssss should be cliiiiiin " + agrees + informs;
 			
 			
 			//Now, iter the passengers given in the first parameter
@@ -985,7 +985,7 @@ species bus skills: [fipa] {
 			
 			loop new_passenger over: self.data_from_stop[0]{
 				
-				write "new pass es " + new_passenger;
+				//write "new pass es " + new_passenger;
 				
 				if ((self.passengers_length + passengers_processed) < self.max_passengers){
 					
@@ -1033,7 +1033,6 @@ species bus skills: [fipa] {
 			
 			//Loop to cleanup the messages and count
 			loop i from: 1 to: length(list(self.data_from_stop[0])){
-				write "Holi";
 				message agree_resp <- agrees at 0;
 				message inform_resp <- informs at 0;
 				
@@ -1046,9 +1045,9 @@ species bus skills: [fipa] {
 				}
 			}//End loop
 			
-			write "Update length to " + self.passengers_length;
+			//write "Update length to " + self.passengers_length;
 			
-			write "NEW HAY " + passengers_boarded;
+			//write "NEW HAY " + passengers_boarded;
 			
 			do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
 									contents: ['Update passengers. I boarded',passengers_boarded];
@@ -1075,7 +1074,7 @@ species bus skills: [fipa] {
 	    self.stops_reached <- self.stops_reached + 1;
 	    self.comms_param <- 1;
 	    
-	    write "\n\n\nTHE BUS IS GONNA GO TO THE NEXT STOP. ACTUAL VALUES\n " + "passengers length " + self.passengers_length + "\npassengers " + self.passengers;
+	    //write "\n\n\nTHE BUS IS GONNA GO TO THE NEXT STOP. ACTUAL VALUES\n " + "passengers length " + self.passengers_length + "\npassengers " + self.passengers;
 		
 	}
 	
@@ -1198,12 +1197,12 @@ species passenger skills: [fipa]
 			self.mounted_bus <- answer.sender;
 			self.on_bus <- true;
 			do inform message: answer contents: ['Boarded'];
-			write "ME quiero montar puñet";
+			//write "ME quiero montar puñet";
 		}
 		else if (list(answer.contents)[0] = 'Bus Full'){
 			//If the content of the message is not Mount, it means its Bus full. But, in case other message shown, the passenger answers back with not-understood.
 			
-			write "No me puedo montar puñet";
+			//write "No me puedo montar puñet";
 			//Here with bus full,  end the conversation with bus answering back accepting the bus full request.
 			do agree message: answer contents: ['Ok'];
 			do inform message: answer contents: ['I wait'];
@@ -1225,7 +1224,7 @@ species passenger skills: [fipa]
 	 */
 	reflex comm_to_dropoff when: (!(empty(requests)) and self.on_bus = true) {
 		
-		write "Me queiren matar puñet " + self;
+		//write "Me queiren matar puñet " + self;
 		
 		message request <- requests at 0;
 		
@@ -1544,7 +1543,7 @@ species stop skills: [fipa]  {
 		int number_of_boards <- int(list(inform_from_bus.contents)[1]);
 		
 		
-		write "SRGUN EL BUS SE MONTARON " + number_of_boards;
+		//write "SRGUN EL BUS SE MONTARON " + number_of_boards;
 		
 		do agree message: inform_from_bus contents: ['Ok'];
 		

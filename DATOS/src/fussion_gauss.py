@@ -45,7 +45,7 @@ def is_normal_simplified(variables:list):
 
 
     if len(variables) == 0:
-        return np.bool(False), []
+        return np.bool(False), [], 0, 0
 
     elif len(variables) < 50: #CASO Z score 1.96
         z_crit = 1.96
@@ -72,6 +72,5 @@ def is_normal_simplified(variables:list):
 
     else:
         approx_normal = (abs(skew) <= 2) and (abs(kurt) + 3 <= 7)
-
 
     return approx_normal, variables, mean, std_dev
