@@ -697,6 +697,8 @@ species bus skills: [fipa] {
     //List of ints to save between reflexes the value obtained by the comms with the stop informing number of boards and dropoffs
     list data_from_stop;
     
+    
+    //TEMPORAL. JUST FOR GAMA TO CLEANUP THE MESSAGES. GAMA EXPLICITLY DELETES A MESSAGE ONCE THE CONTENTS OF THE MESSAGE IS READ
     list trash_can;
     
     
@@ -787,7 +789,7 @@ species bus skills: [fipa] {
 			}//END IF GOAL DESTINATION
 			
 			
-			//IF IT REACES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
+			//IF IT REACHES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
 			//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
 						
 			//BOOL VARIABLE TO TRUE
@@ -866,17 +868,12 @@ species bus skills: [fipa] {
 			
 			message agree_query <- agrees at 0;
 			
-			//Clears it after read
-			//remove index: 0 from: agrees;
-			
+
 			trash_can <- agree_query.contents;
 			
 		
 			message inform_data_stop <- informs at 0;
 			
-			
-			//Clears it after read			
-			trash_can <- inform_data_stop.contents;
 			
 			
 			//Save the data received in a self scope, to use it in the next refelex(verify_dropoffs_and_call_boards)
@@ -952,16 +949,11 @@ species bus skills: [fipa] {
 					write "ESTO NO DEBERIA PASAR PUÑETAAA";
 				}
 				
-				//Clean both messages
-				
-				//remove index: 0 from: agrees;
-				//remove  index: 0 from: informs;
 				
 				trash_can <- agree_dropoff.contents;
 				trash_can <- inform_dropoff.contents;
 				to_remove << agree_dropoff.sender;
 				
-				//Verify that self.passengers[0] is the sender, if not, RARO PUÑETTA
 				
 
 			}//End loop
@@ -1002,7 +994,6 @@ species bus skills: [fipa] {
 		self.comms_cycle <- cycle;
 		self.comms_param <- 3;
 		
-
 	}//End reflex verify passengers
 
 
@@ -1057,10 +1048,15 @@ species bus skills: [fipa] {
 		self.comms_param <- 4;
 		
 		self.comms_cycle <- cycle;
-
+		
 	}
 	
 	
+	
+	/*
+	 * Reflex 4/4 in the 4-part communication reflexesto handle board/disboard of passengers. Here, just cleans the verifying of the request to the
+	 * stop and change the variables needed to move to the next stop
+	 */
 	reflex move_back when: (self.processing_passengers = true and self.comms_param = 4 and cycle > self.comms_cycle){
 		
 		message agree_resp <- agrees at 0;
@@ -1146,7 +1142,6 @@ species passenger skills: [fipa]
 
 	reflex dropoff when: self.dropoff = true{
 			do die;
-			
 		}
 
 
@@ -1224,7 +1219,7 @@ species passenger skills: [fipa]
 	 */
 	reflex comm_to_dropoff when: (!(empty(requests)) and self.on_bus = true) {
 		
-		//write "Me queiren matar puñet " + self;
+		//write "Me queiren matar puñeta " + self;
 		
 		message request <- requests at 0;
 		
@@ -1436,6 +1431,8 @@ species stop skills: [fipa]  {
 			//Last TimeSlot, no next, but for no error will be 0.0
 			board_generation_ratio <- next_board_generation_ratio;
 			next_board_generation_ratio <- 0.0;
+			
+			
 		}//End Ifs Cases Timeslot
 		
 		
@@ -1496,7 +1493,6 @@ species stop skills: [fipa]  {
     	//CHECK OUT THE RECEIVING MESSAGE
 		message queryFromInitiator <- queries at 0;
 		
-		remove index: 0 from: queries;
 		
 		//Infer the number of passengers that are gonna drop off 
 		int dropoff_passengers;
