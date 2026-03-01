@@ -410,7 +410,7 @@ global
 	 */ 
 	reflex end_real_simulation when: empty(bus){
 		write "BUSES FINIQUITEN " + current_time;
-        do pause;  //CHAO CHAO CHAO CHAO
+        do die;  //CHAO CHAO CHAO CHAO
 	}
 
 
@@ -698,7 +698,7 @@ species bus skills: [fipa] {
     list data_from_stop;
     
     
-    //TEMPORAL. JUST FOR GAMA TO CLEANUP THE MESSAGES. GAMA EXPLICITLY DELETES A MESSAGE ONCE THE CONTENTS OF THE MESSAGE IS READ
+    //TEMPORAL. JUST FOR GAMA TO CLEANUP THE MESSAGES. GAMA EXPLICITLY DELETES A MESSAGE ONCE THE .CONTENTS OF THE MESSAGE IS READ
     list trash_can;
     
     
@@ -1624,3 +1624,19 @@ experiment test type: gui {
     
 
 }//END EXPERIMENT
+
+
+
+
+experiment batch_100 type: batch repeat: 100 until: empty(bus) {
+    
+
+    
+    permanent {
+        display "Batch Progress" {
+            chart "Simulations completed" type: series {
+            }
+        }
+    }
+}
+
