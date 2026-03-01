@@ -346,9 +346,9 @@ global
             stopNum :: int(read("stopNum")),
             distance :: int(read("distance")),
             name :: string(read("stopName")),
-            stop_distributions:: distribution_values[int(read("stopNum"))],
-            distribution_per_timeslot_boards::distribution_values[int(read("stopNum"))][5]["Boards"],
-            distribution_per_timeslot_dropoffs::distribution_values[int(read("stopNum"))][5]["DropOffs"]
+            stop_distributions:: distribution_values[int(read("stopNum"))]
+            //distribution_per_timeslot_boards::distribution_values[int(read("stopNum"))][5]["Boards"],
+            //distribution_per_timeslot_dropoffs::distribution_values[int(read("stopNum"))][5]["DropOffs"]
         ];
         
 
@@ -364,6 +364,12 @@ global
 //--------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
 
+
+
+//------------------------------------------------------------------
+//-----------------TIME REFLEXES AND VARIABLES----------------------
+//------------------------------------------------------------------
+	
 	
 	//#DEFINE. CHANGE THIS IN CASE THE SIMULATION HAS TO RUN ON LOWER/HIGHER ITERATIONS
 	float step <- 10 #seconds;
@@ -404,6 +410,154 @@ global
 	
 	
 	
+	map<int, list<float>> stops_distribution_values;
+	
+	
+	/*
+	 * Reflex function to update the new distrinutions values to add every step of the simulation
+	 */
+	 reflex update_distributions when: (mod(minutes, 60) = 0 and mod(time, 60)= 0 ){
+	 	
+	 	
+	 	loop stop_iter over: stops_list{
+	 		
+	 		list distribution_per_timeslot_boards;
+		 	list distribution_per_timeslot_dropoffs;
+		 	list next_distribution_per_timeslot_boards;
+		 	list next_distribution_per_timeslot_dropoffs;
+		 	float board_generation_ratio;
+		 	float next_board_generation_ratio;
+
+	 		if (TimeSlot < 23){
+			
+			//Loading the distros
+			distribution_per_timeslot_boards <- global_distribution_values[stop_iter.stopNum][TimeSlot]["Boards"];
+			
+			
+			//Loading the following distros
+			next_distribution_per_timeslot_boards <- global_distribution_values[stop_iter.stopNum][TimeSlot + 1]["Boards"];
+			
+			
+			//Infer the new and the following exact random values based on the distribution.
+
+			//Actual VAL
+			if(distribution_per_timeslot_boards[0] = "NORMAL"){
+				board_generation_ratio <- gauss(float(distribution_per_timeslot_boards[1]), float(distribution_per_timeslot_boards[2]));
+			}
+			if(distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
+				board_generation_ratio <- float(sample_negative_binomial(float(distribution_per_timeslot_boards[1]),
+					float(distribution_per_timeslot_boards[2])));			
+			}
+			if (distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
+				board_generation_ratio <- sample_geometric(float(distribution_per_timeslot_boards[1]));
+			}
+			if (distribution_per_timeslot_boards[0] = "NO DATA"){
+				board_generation_ratio <- 0.0;
+			}
+
+		
+			//Following VAL
+			if(next_distribution_per_timeslot_boards[0] = "NORMAL"){
+				next_board_generation_ratio <- gauss(float(next_distribution_per_timeslot_boards[1]), float(next_distribution_per_timeslot_boards[2]));
+			}
+			if(next_distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
+				next_board_generation_ratio <- float(sample_negative_binomial(float(next_distribution_per_timeslot_boards[1]),
+					float(next_distribution_per_timeslot_boards[2])));			
+			}
+			if (next_distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
+				next_board_generation_ratio <- sample_geometric(float(next_distribution_per_timeslot_boards[1]));
+			}
+			if (next_distribution_per_timeslot_boards[0] = "NO DATA"){
+				next_board_generation_ratio <- 0.0;
+			}
+
+			
+		}
+		else if (TimeSlot = 23){
+			
+			//Last TimeSlot, no next, but for no error will be 0.0
+			distribution_per_timeslot_boards <- global_distribution_values[stop_iter.stopNum][TimeSlot]["Boards"];
+			
+			//Actual VAL
+			if(distribution_per_timeslot_boards[0] = "NORMAL"){
+				board_generation_ratio <- gauss(float(distribution_per_timeslot_boards[1]), float(distribution_per_timeslot_boards[2]));
+			}
+			if(distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
+				board_generation_ratio <- float(sample_negative_binomial(float(distribution_per_timeslot_boards[1]),
+					float(distribution_per_timeslot_boards[2])));			
+			}
+			if (distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
+				board_generation_ratio <- sample_geometric(float(distribution_per_timeslot_boards[1]));
+			}
+			if (distribution_per_timeslot_boards[0] = "NO DATA"){
+				board_generation_ratio <- 0.0;
+			}
+			
+			//The next 0.0 as no TimeSlot 24
+			next_board_generation_ratio <- 0.0;
+			
+			
+		}
+		else{
+			board_generation_ratio <- 0.0;
+			next_board_generation_ratio <- 0.0;
+		}//End Ifs Cases Timeslot
+		
+		
+		/*
+		 * After this loop, board will contain the value of the random choice selected and next too.
+		 * Now apply trigonometric formulas to be able to smooth down the transitions
+		 */
+	
+		//obtain the value in wich you will generate passengers
+		stops_distribution_values[stop_iter.stopNum] <- smooth_data_function(board_generation_ratio, next_board_generation_ratio);
+		
+	 	}//End loop
+	 	
+	 }//End reflex update distributions
+	
+	
+
+	/*
+	 * Reflex function to handle the update of the generation of passengers for every stop.
+	 * In this model, as its focused onperformance, it just represents int values.
+	 */
+	reflex generate_passengers_from_distributions {
+		
+		loop stop_iter over: stops_list{
+			stop_iter.passengers_to_be_generated <- stop_iter.passengers_to_be_generated + 
+						stops_distribution_values[stop_iter.stopNum][int(mod(time, 3600) / step)];
+			
+			//int to_generate <- int(stop_iter.passengers_to_be_generated);
+			
+			
+			int passengers_generated_new <- int(stop_iter.passengers_to_be_generated);
+			
+			if (passengers_generated_new > 0){
+				stop_iter.passengers_to_be_generated <- stop_iter.passengers_to_be_generated - passengers_generated_new;
+				stop_iter.passengers_generated <- stop_iter.passengers_generated + passengers_generated_new;
+			}
+			
+			//DEPRECATED. IN THIS SIM NO SPECIES PASSENGERS
+			
+//		    if (to_generate > 0) {
+//		        // Generate that number of passengers
+//		        create passenger number: to_generate with: [
+//		            stop_origin :: self.stopNum,
+//		            location :: self.location
+//		        ] returns: new_passengers;
+//	
+//	    		passengers_list <- passengers_list + new_passengers;
+//		
+//		        // Subtract only the integer part, keep the fractional remainder
+//		        passengers_to_be_generated <- passengers_to_be_generated - to_generate;
+//	    	}//End if to_generate
+
+		}//End loop
+
+	}//End reflex generate passengers from distributions
+
+
 	
 	/*
 	 * Reflex to handle the END of the sim once no bus is kept alive
@@ -414,8 +568,6 @@ global
 	}
 
 
-
-	
 	/*
 	 * Auxiliar global function to calculate the distance vector between the actual bus position and the next stop scheduled.
 	 * It has for parameters the initial position of the bus, the goal destination and the speed module of the bus
@@ -672,6 +824,9 @@ species bus skills: [fipa] {
     //All buses have the same maximum capacity 
     int max_passengers <- 80;
     
+    //To handle the comms in the next iteration, not in the same
+    int comms_cycle;
+    
     
     //Deprecated, The EMT did not like this as KPI
     /* 
@@ -763,22 +918,26 @@ species bus skills: [fipa] {
 			self.arrived <- true;
 			
 			
-			
-			loop passenger_to_dropoff over: self.passengers{
-				do start_conversation to: [passenger_to_dropoff] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
-			}
+			//DEPRECATED HERE
+//			loop passenger_to_dropoff over: self.passengers{
+//				do start_conversation to: [passenger_to_dropoff] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
+//			}
+			self.passengers <- 0;
 			
 			self.finished_shift <- true;
 			
 			
+			}else{
+				//IF IT REACHES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
+				//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
+							
+				//BOOL VARIABLE TO TRUE
+				
+				self.stopped <- true;
 			}//END IF GOAL DESTINATION
 			
 			
-			//IF IT REACHES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
-			//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
-						
-			//BOOL VARIABLE TO TRUE
-			self.stopped <- true;
+			
 			
 
 		}//END IF STOP REACHED
@@ -792,7 +951,7 @@ species bus skills: [fipa] {
 	/*
 	 * Reflex used to handle the shifting process. NIGHT NOW, IT MEANS END OF THE BUS SO DIEEEE
 	 */
-	reflex handle_shifts when: (self.finished_shift = true and length(agrees) >= length(passengers)){
+	reflex handle_shifts when: (self.finished_shift = true){
 		do die;
 	}
 
@@ -819,7 +978,7 @@ species bus skills: [fipa] {
     	 *The returning message will be processed in the handle_answer reflex
     	 * 
     	 */
-
+		
 		
 		//INICIATE CONVERSATION
     	do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-query' performative: 'query' contents: ['Bus arrived to stop'];
@@ -828,13 +987,78 @@ species bus skills: [fipa] {
 		//THIS LINE IS JUST FOR THE BUS IN THE NEXT CYCLE NOT REPEATING THE SENDING MESSAGE
 		self.processing_passengers <- true;
 		
-		
-		//Deprecated in this model
-		//self.comms_param <- 1;
+		//To not trigger handle_stop_answer till next cycle
+		self.comms_cycle <- cycle;
 
-    }//END REFLEX hs
+    }//END REFLEX handle stop
     
     
+    /*
+     * Reflex function to handle the board/Dropoff of passengers. It reads the content */
+    reflex handle_stop_answer when: (self.processing_passengers = true and cycle > self.comms_cycle and self.waiting = false)
+	{
+		
+		if (empty(agrees)){
+			write "NO DIBIRIA PASIAR";
+		}
+		
+		message agree_query <- agrees at 0;
+		
+		list hi <- agree_query.contents;
+
+		message inform_data_stop <- informs at 0;
+		
+		//First, handle dropoffs
+		int dropoffs <- int(list(inform_data_stop.contents)[1]);
+		
+		if (dropoffs > self.passengers){
+			self.passengers <- 0;
+		}
+		else{
+			self.passengers <- self.passengers - dropoffs;
+		}
+		
+		//handle boards
+		int boards <- int(list(inform_data_stop.contents)[0]);
+		
+		//to handle excess of boards
+		int residual_boards <- 0;
+		
+		
+		if (boards + self.passengers > self.max_passengers){
+			//How many cannot board
+			residual_boards <- (boards + self.passengers) -self.max_passengers;
+			self.passengers <- self.max_passengers;
+		}
+		else {
+			self.passengers <- self.passengers + boards;
+		}
+	
+	
+	self.waiting <- true;
+	self.comms_cycle <- cycle;
+	
+	do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
+								contents: ['Update passengers. I boarded',(boards-residual_boards)];
+		
+	}//end reflex handle stop answer
+    
+    
+    /*
+     * Reflex function to verify that the stop updated its value of passengers based on the new boards */
+    reflex verify_stop_and_restart_way when: (self.waiting = true and cycle > self.comms_cycle){
+    	
+    	message agree_resp <- agrees at 0;
+		message inform_resp <- informs at 0;
+		
+		list ha <- agree_resp.contents;
+		ha <- inform_resp.contents;
+    	
+    	self.processing_passengers <- false;
+    	self.waiting <- false;
+    	self.stops_reached <- self.stops_reached + 1;
+    	self.stopped <- false;
+    }
     
     
 //    
@@ -1284,34 +1508,37 @@ species stop skills: [fipa]  {
     //Value that serve as an accumulator for the passengers that are generated over the course of an hour.
     float passengers_to_be_generated <- 0.0;
     
+    int passengers_generated;
+    
     //Variable to wait for the answer back from the bus when its processing passengers
     bool waiting_for_bus_answer<- false;
     
     
-    /*
-     * List variables containing the info about the behaviour of boards and dropoffs for the stop.
-     * Each TimeSlot, will be updated acording to the behaviour of that TS
-     * The list params are always the same [ "DistrType", param1, param2]
-     * Where DistrType RN is NORMAL, NEGATIVE BINOMIAL, GEOMETRIC
-     */  	
-    list distribution_per_timeslot_boards <- [];
+    //DEPRECATED
+//    /*
+//     * List variables containing the info about the behaviour of boards and dropoffs for the stop.
+//     * Each TimeSlot, will be updated acording to the behaviour of that TS
+//     * The list params are always the same [ "DistrType", param1, param2]
+//     * Where DistrType RN is NORMAL, NEGATIVE BINOMIAL, GEOMETRIC
+//     */  	
+//    list distribution_per_timeslot_boards <- [];
+//    
+//    list distribution_per_timeslot_dropoffs <- [];
+//    
+//    list next_distribution_per_timeslot_boards <- [];
+//    
+//    list next_distribution_per_timeslot_dropoffs <- [];
     
-    list distribution_per_timeslot_dropoffs <- [];
-    
-    list next_distribution_per_timeslot_boards <- [];
-    
-    list next_distribution_per_timeslot_dropoffs <- [];
-    
-    
-    
-    /*
-     * List variable containing, for each iteration of the timeslot, the ratio of generation of passengers that has to be added
-     * to fulfill the needs of the variable selected.
-     */
-    list<float> smooth_generated_data;
-    
-    //Pair of floats wich holds the parameters of the distributions
-    pair<float, float> board_generator_variables;
+//    
+//    
+//    /*
+//     * List variable containing, for each iteration of the timeslot, the ratio of generation of passengers that has to be added
+//     * to fulfill the needs of the variable selected.
+//     */
+//    list<float> smooth_generated_data;
+//    
+//    //Pair of floats wich holds the parameters of the distributions
+//    pair<float, float> board_generator_variables;
     
     
     
@@ -1319,7 +1546,7 @@ species stop skills: [fipa]  {
     aspect default {
     	
         draw circle(50) color: #purple border: #black;
-        draw stopName  color: #black size: 1 at: location + {0, -80};
+        draw stopName + " " + passengers_generated color: #black size: 1 at: location + {0, -80};
        	
     }
     
@@ -1331,144 +1558,54 @@ species stop skills: [fipa]  {
     
     
     
-    
-    /*
-     * Reflex function to handle the change of the boards and dropoffs distribution every hour. So this will happen when mod(minutes, 60) == 0
-     * Apart from that. Every distribution change, the sim will load the next params(distribution of TS +1) Unless last TS.
-     * Then, it will recalculate, to smooth the transition between distributions. With the calculations done, instead of being the same value for
-     * every iteration of the TS, it will create a function y = mx + n, which will have the same under the curve area. This, will imply that
-     * in the course of a full TimeSlot, the result of the passengers created will be the same under the curve area as it would be with a constant
-     * function, but smoothing the transition to the following value.
-     * 
-     * This behaviour is only for boards, for dropoffs, it will pick up a random value everytime a bus arrives.
-     */
-    reflex update_distributions when: (mod(world.minutes, 60) = 0 and mod(world.time, 60)= 0 ) {
-		
-
-		if (TimeSlot = 5){
-			
-			//Loading the distros
-			distribution_per_timeslot_boards <- world.global_distribution_values[stopNum][TimeSlot]["Boards"];
-			distribution_per_timeslot_dropoffs <- world.global_distribution_values[stopNum][TimeSlot]["DropOffs"];
-			
-			
-			//Loading the following distros
-			next_distribution_per_timeslot_boards <- world.global_distribution_values[stopNum][TimeSlot + 1]["Boards"];
-			next_distribution_per_timeslot_dropoffs <- world.global_distribution_values[stopNum][TimeSlot + 1]["DropOffs"];
-			
-			
-			
-			//Infer the new and the following exact random values based on the distribution. JUST FOR BOARDS
-			
-			
-			//Actual VAL
-			if(distribution_per_timeslot_boards[0] = "NORMAL"){
-				board_generation_ratio <- gauss(float(distribution_per_timeslot_boards[1]), float(distribution_per_timeslot_boards[2]));
-			}
-			if(distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
-				board_generation_ratio <- float(world.sample_negative_binomial(float(distribution_per_timeslot_boards[1]),
-					float(distribution_per_timeslot_boards[2])));			
-			}
-			if (distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
-				board_generation_ratio <- world.sample_geometric(float(distribution_per_timeslot_boards[1]));
-			}
-			if (distribution_per_timeslot_boards[0] = "NO DATA"){
-				board_generation_ratio <- 0.0;
-			}
-
-		
-			//Following VAL
-			if(next_distribution_per_timeslot_boards[0] = "NORMAL"){
-				next_board_generation_ratio <- gauss(float(next_distribution_per_timeslot_boards[1]), float(next_distribution_per_timeslot_boards[2]));
-			}
-			if(next_distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
-				next_board_generation_ratio <- float(world.sample_negative_binomial(float(next_distribution_per_timeslot_boards[1]),
-					float(next_distribution_per_timeslot_boards[2])));			
-			}
-			if (next_distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
-				next_board_generation_ratio <- world.sample_geometric(float(next_distribution_per_timeslot_boards[1]));
-			}
-			if (next_distribution_per_timeslot_boards[0] = "NO DATA"){
-				next_board_generation_ratio <- 0.0;
-			}
-
-			
-		}
-		else if (TimeSlot < 23){
-			
-			//For Boards, the random value is actually infer already, because it was calc in the iteration before
-			board_generation_ratio <- next_board_generation_ratio;
-			
-			
-			//Loading the following distros
-			next_distribution_per_timeslot_boards <- world.global_distribution_values[stopNum][TimeSlot + 1]["Boards"];
-			next_distribution_per_timeslot_dropoffs <- world.global_distribution_values[stopNum][TimeSlot + 1]["DropOffs"];
-			
-			//Following VAL
-			if(next_distribution_per_timeslot_boards[0] = "NORMAL"){
-				next_board_generation_ratio <- gauss(float(next_distribution_per_timeslot_boards[1]), float(next_distribution_per_timeslot_boards[2]));
-			}
-			if(next_distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
-				next_board_generation_ratio <- float(world.sample_negative_binomial(float(next_distribution_per_timeslot_boards[1]),
-					float(next_distribution_per_timeslot_boards[2])));			
-			}
-			if (next_distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
-				next_board_generation_ratio <- world.sample_geometric(float(next_distribution_per_timeslot_boards[1]));
-			}
-			if (next_distribution_per_timeslot_boards[0] = "NO DATA"){
-				next_board_generation_ratio <- 0.0;
-			}
-			
-		}
-		else{
-			
-			//Last TimeSlot, no next, but for no error will be 0.0
-			board_generation_ratio <- next_board_generation_ratio;
-			next_board_generation_ratio <- 0.0;
-			
-			
-		}//End Ifs Cases Timeslot
-		
-		
-		/*
-		 * After this loop, board will contain the value of the random choice selected and next too.
-		 * Now apply trigonometric formulas to be able to smooth down the transitions
-		 */
-	
-		//obtain the value in wich you will generate passengers
-		smooth_generated_data <- world.smooth_data_function(board_generation_ratio, next_board_generation_ratio);
-
-
-    }//End reflex Update Distributions
-    
-    
-    /*
-     * Reflex to handle the abstraction of generating passengers Each iteration, the needed value has to be added.
-     * When a truncate to int generates a positive result, generate that number of passengers and
-     * substract the number generated
-     */
-     reflex generate_passengers {
-     	//add the value for this iteration			
-		passengers_to_be_generated <- passengers_to_be_generated + smooth_generated_data[int(mod(world.time, 3600) / step)];
-		
-		
-		int to_generate <- int(passengers_to_be_generated);
-		
-		
-	    if (to_generate > 0) {
-	        // Generate that number of passengers
-	        create passenger number: to_generate with: [
-	            stop_origin :: self.stopNum,
-	            location :: self.location
-	        ] returns: new_passengers;
-
-    		passengers_list <- passengers_list + new_passengers;
-	
-	        // Subtract only the integer part, keep the fractional remainder
-	        passengers_to_be_generated <- passengers_to_be_generated - to_generate;
-	    	}//End if to_generate
-	    	
-    	}//End reflex generate passengers
+    //DEPRECATED.
+//     
+//    /*
+//     * Reflex function to handle the change of the boards and dropoffs distribution every hour. So this will happen when mod(minutes, 60) == 0
+//     * Apart from that. Every distribution change, the sim will load the next params(distribution of TS +1) Unless last TS.
+//     * Then, it will recalculate, to smooth the transition between distributions. With the calculations done, instead of being the same value for
+//     * every iteration of the TS, it will create a function y = mx + n, which will have the same under the curve area. This, will imply that
+//     * in the course of a full TimeSlot, the result of the passengers created will be the same under the curve area as it would be with a constant
+//     * function, but smoothing the transition to the following value.
+//     * 
+//     * This behaviour is only for boards, for dropoffs, it will pick up a random value everytime a bus arrives.
+//     */
+//    reflex update_distributions when: (mod(world.minutes, 60) = 0 and mod(world.time, 60)= 0 ) {
+//		
+//
+//		
+//
+//
+//    }//End reflex Update Distributions
+//    
+//    
+//    /*
+//     * Reflex to handle the abstraction of generating passengers Each iteration, the needed value has to be added.
+//     * When a truncate to int generates a positive result, generate that number of passengers and
+//     * substract the number generated
+//     */
+//     reflex generate_passengers {
+//     	//add the value for this iteration			
+//		passengers_to_be_generated <- passengers_to_be_generated + smooth_generated_data[int(mod(world.time, 3600) / step)];
+//		
+//		
+//		int to_generate <- int(passengers_to_be_generated);
+//		
+//		
+//	    if (to_generate > 0) {
+//	        // Generate that number of passengers
+//	        create passenger number: to_generate with: [
+//	            stop_origin :: self.stopNum,
+//	            location :: self.location
+//	        ] returns: new_passengers;
+//
+//    		passengers_list <- passengers_list + new_passengers;
+//	
+//	        // Subtract only the integer part, keep the fractional remainder
+//	        passengers_to_be_generated <- passengers_to_be_generated - to_generate;
+//	    	}//End if to_generate
+//	    	
+//    	}//End reflex generate passengers
     
      
     
@@ -1481,55 +1618,62 @@ species stop skills: [fipa]  {
      * It simply reads the message metadata and answer back with the number of passengers rn in the stop
      * 
      */
-    reflex communicate_with_bus when: !(empty(queries))
+    reflex communicate_with_bus when: (!(empty(queries)) and waiting_for_bus_answer = false)
     {
     	
     	//CHECK OUT THE RECEIVING MESSAGE
 		message queryFromInitiator <- queries at 0;
 		
+		if (list(queryFromInitiator.contents)[0] = 'Bus arrived to stop'){
+		}
+		
+		//THIS IS WRONG. THIS SHOULD BE GENERATED FROM THE SIM. In this case of performance, DropOff is just the indicator of how many it
+		//Decrease the occupation value.
 		
 		//Infer the number of passengers that are gonna drop off 
 		int dropoff_passengers;
 		
-		if (distribution_per_timeslot_dropoffs[0] = "NORMAL"){
+		if (global_distribution_values[stopNum][TimeSlot]["DropOffs"][0] = "NORMAL"){
 			
-			dropoff_passengers <- max(floor(gauss(float(distribution_per_timeslot_dropoffs[1]),
-												float(distribution_per_timeslot_dropoffs[2]))), 0);
+			dropoff_passengers <- max(floor(gauss(float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][1]),
+												float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][2]))), 0);
+		}
+		if (global_distribution_values[stopNum][TimeSlot]["DropOffs"][0] = "NEGATIVE BINOMIAL"){
+			
+			dropoff_passengers <- max(floor(world.sample_negative_binomial(float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][1]),
+												float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][2]))), 0);
 			
 		}
-		if (distribution_per_timeslot_dropoffs[0] = "NEGATIVE BINOMIAL"){
+		if (global_distribution_values[stopNum][TimeSlot]["DropOffs"][0] = "GEOMETRICAL"){
 			
-			dropoff_passengers <- max(floor(world.sample_negative_binomial(float(distribution_per_timeslot_dropoffs[1]),
-												float(distribution_per_timeslot_dropoffs[2]))), 0);
-			
-		}
-		if (distribution_per_timeslot_dropoffs[0] = "GEOMETRICAL"){
-			
-			dropoff_passengers <- max(floor(world.sample_geometric(float(distribution_per_timeslot_dropoffs[1]))), 0);
+			dropoff_passengers <- max(floor(world.sample_geometric(float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][1]))), 0);
 			
 		}
 		
-		if (distribution_per_timeslot_dropoffs[0] = "NO DATA"){
+		if (global_distribution_values[stopNum][TimeSlot]["DropOffs"][0] = "NO DATA"){
 			
 			dropoff_passengers <- 0;
 		}
 		
 		
+
 		//ANSWER BACK WITH FIPA PROTOCOL QUERY
 		do agree message: queryFromInitiator contents: ["Here is the passenger list"];
-		do inform message: queryFromInitiator contents: [self.passengers_list, dropoff_passengers];
-		
+		do inform message: queryFromInitiator contents: [int(self.passengers_generated), dropoff_passengers];
 		waiting_for_bus_answer <- true;
+		
 		
     }//END REFLEX cwb
     
     
-    
+    /*
+     * Reflex process to handle the pick up of the message from the bus indicating how many passengers was able to pick up
+     */
     reflex process_bus_answer when: (waiting_for_bus_answer = true and !(empty(requests))){
     	
 		message inform_from_bus <- requests at 0;
 
-
+		
 		int number_of_boards <- int(list(inform_from_bus.contents)[1]);
 		
 		
@@ -1537,14 +1681,16 @@ species stop skills: [fipa]  {
 		
 		do agree message: inform_from_bus contents: ['Ok'];
 		
-		self.passengers_list <- self.passengers_list copy_between(number_of_boards, length(self.passengers_list));
+		//self.passengers_list <- self.passengers_list copy_between(number_of_boards, length(self.passengers_list));
+
+		self.passengers_generated <- self.passengers_generated - number_of_boards;
 
 		do inform message: inform_from_bus contents: ['Done'];
 		
 		
 		waiting_for_bus_answer <- false;
 		
-    }
+    }//End reflex process_bus_answer
 
 }//END SPECIE STOP
 
@@ -1596,11 +1742,8 @@ experiment test type: gui {
             species route aspect: default;
             species stop aspect: default;
             species bus aspect: default;
-          	species passenger aspect: default;
           
-          	
-            
-            
+  
             graphics "clock" {
                 draw "Time: " + current_time 
                     at: {100, 100} 
@@ -1622,15 +1765,6 @@ experiment test type: gui {
 
 
 
-experiment batch_100 type: batch repeat: 100 until: empty(bus) {
-    
-
-    
-    permanent {
-        display "Batch Progress" {
-            chart "Simulations completed" type: series {
-            }
-        }
-    }
+experiment batch_100 type: batch repeat: 100 parallel: 10 until: empty(bus) {
 }
 
