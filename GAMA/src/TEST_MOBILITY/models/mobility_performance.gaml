@@ -35,8 +35,14 @@ global
 
 
 	//CREATE GLOBAL VARIABLES TO SAVE GLOBAL SCOPE OF THE AGENTS CREATED
-	list <stop> stops_list;
+	list <stop> stops_list_toA;
 	
+	list <stop> stops_list_toB;
+	
+
+    map<string, list<stop>> stops_list;
+	
+	list<stop> all_unique_stops;
 	
 	
 	//CREATE GLOBAL VARIABLE MAP FOR DISTRIBUTIONS TO SAVE GLOBAL SCOPE OF THE VALS
@@ -46,14 +52,15 @@ global
 	
 	
 	//INPUT FILES
-    file file_401route <- file("../includes/ROUTE/E01/E01_toA.shp");
-    file file_401stops <- file("../includes/STOPS/E01/E01_stops_toA.shp");
+    file file_401_toA_route <- file("../includes/ROUTE/E01/E01_toA.shp");
+    file file_401_toA_stops <- file("../includes/STOPS/E01/E01_stops_toA.shp");
     
-    
+    file file_401_toB_route <- file("../includes/ROUTE/E01/E01_toB.shp");
+    file file_401_toB_stops <- file("../includes/STOPS/E01/E01_stops_toB.shp");
     
     
     //ADAPT THE SCALE TO MATCH THE 401 RESOLUTION
-    geometry shape <- envelope(file_401route);
+    geometry shape <- envelope(file_401_toA_route);
 
     
     
@@ -97,6 +104,11 @@ global
      */
 	float sample_geometric(float p) {
 		
+		
+		if (p >= 1.0) {
+        return 0.0;
+    	}
+		
     	float u <- rnd(0.0001, 0.9999);
     	
     	return floor(ln(u) / ln(1 - p));
@@ -121,13 +133,13 @@ global
       	
       	
       	//Read input for normal days distributions
-      	file input_data_e01 <- csv_file("../includes/INPUTS/input_data_E01_toA.csv");
-      	
+      	file input_data_e01_toA <- csv_file("../includes/INPUTS/input_data_E01_toA.csv");
+      	file input_data_e01_toB <- csv_file("../includes/INPUTS/input_data_E01_toB.csv");
       	
       	//Convert it as matrix
-      	matrix input_as_matrix <- matrix(input_data_e01);
+      	matrix input_as_matrix_toA <- matrix(input_data_e01_toA);
       	
-		
+		matrix input_as_matrix_toB <- matrix(input_data_e01_toB);
 		
 		
       	//All stops willbe using the same Timeslots. Starting at 5 ending at 23
@@ -147,7 +159,7 @@ global
 		 * Secondary Dict: {Key(TimeSlot: Value: Dict}
 		 * Third Dict: {Key(Board): Value: ["DistrType", Param1, Param2], Key(DropOff): Value: ["DistrType", Param1, Param2]}
 	     */
-		loop stops_iter over: file_401stops {
+		loop stops_iter over: file_401_toA_stops {
 			
 			/*
 			 * Map the file stops iteration element to a point. 
@@ -173,9 +185,9 @@ global
     			 * Secondary loop itering the matrix. It obtain all the row content, and if row[0] == stop_code then save it. ¡
     			 * Once thellop is over, use the list to store the data 
     			 */
-    			loop i from: 0 to: input_as_matrix.rows {
+    			loop i from: 0 to: input_as_matrix_toA.rows {
     				
-    				list row <- row_at(input_as_matrix, i);					
+    				list row <- row_at(input_as_matrix_toA, i);					
 					
 					//This is put because matrix saves an empty list out of the EOF line in csv
 					if (row != []){
@@ -186,13 +198,15 @@ global
 					}
     			}//End loop mat_row
     		    	
-    		    	
+    		    
+    		    
     		    	
     		    	
     		    //Secondary dictionary for each 
 				map<int,map<string,list>> map_per_stop;		
-    			
-    			/*
+				
+				
+				/*
     			 * Case first stop. Different because only have boards, no dropoffs, so the third dict will contain only Board
     			 */
     			if (stop_code = 2646){
@@ -233,8 +247,111 @@ global
     				
     				
     			}//End if First Stop
+				
+				
+    			
+    			/*
+    			 * Rest of the cases
+    			 */
+    			if (stop_code != 2646 and stop_code != 5727){
+    				
+    				
+    				loop timeslot over: timeslots {
+    					
+    					/*
+	    				 * The structure for each stop iteration, is, the elements 0 and 1 for TS 5, the 2 and 3 for 6,......
+	    				 * For each timeslot, it will take the i and i + 1 elements where i == (TS -5)*2
+	    				 * The i, will be BOARDS, and i + 1 DROPOFFS
+	       				 */
+
+    					//Third dictionary
+    					map<string, list> boards_dropoffs_per_timeslot;
+						
+						//Boards
+	    				list element_boards <-  elements_from_stop[(timeslot - 5)*2];	
+						
+						//Dropoffs
+						list element_dropoffs <- elements_from_stop[(timeslot - 5)*2 + 1];
+						
+						
+						//Save in the third dictionary 
+						boards_dropoffs_per_timeslot << "Boards"::[element_boards[3], element_boards[4], element_boards[5]];
+						
+						boards_dropoffs_per_timeslot << "DropOffs"::[element_dropoffs[3], element_dropoffs[4], element_dropoffs[5]];
+							
+							
+						//Save the third dictionary in the second dictionary				
+						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
+						
+    				}//End loop Timeslots
+
+    				//Save the second dictionary in the first dictionary
+    				distribution_values << stop_code::map_per_stop;
+    				
+    			}//End if general case
+    			
+		}//End loop stops_iter
+		
+		
+		
+		//---------------------------------------------
+		//-----Loop again for the Inverse route--------
+		//---------------------------------------------		
+		
+		/*
+		 * Loop to obtain all the stopNums and store the data from the stops related to that num
+		 * The skeleton of the distribution map will be the following:
+		 * Dictionary distribution_values: {Key(StopNum): Value: Dict}
+		 * Secondary Dict: {Key(TimeSlot: Value: Dict}
+		 * Third Dict: {Key(Board): Value: ["DistrType", Param1, Param2], Key(DropOff): Value: ["DistrType", Param1, Param2]}
+	     */
+		loop stops_iter over: file_401_toB_stops {
+			
+			/*
+			 * Map the file stops iteration element to a point. 
+			 * Required to extract the attrs and obtain the stopNum
+			 */
+				geometry point_iter <- stops_iter;
+			
+				map attr <- point_iter.attributes;
+			
+    			int stop_code <-int(attr["stopNum"]);
+    		
+    		
+    		/*
+    		 * Now, obtain from the input_as_matrix, all the rows referencing that stop code
+    		 * From this, it will order the daata as specified in the loop definition above
+    		 */
+    		 
+    		     		
+    			list<list> elements_from_stop <- [];
     			
     			
+    			/*
+    			 * Secondary loop itering the matrix. It obtain all the row content, and if row[0] == stop_code then save it. ¡
+    			 * Once thellop is over, use the list to store the data 
+    			 */
+    			loop i from: 0 to: input_as_matrix_toB.rows {
+    				
+    				list row <- row_at(input_as_matrix_toB, i);					
+					
+					//This is put because matrix saves an empty list out of the EOF line in csv
+					if (row != []){
+					
+						if (int(row[0]) = stop_code){
+							elements_from_stop << row;
+						}	
+					}
+    			}//End loop mat_row
+    		    	
+    		    	
+    		    	
+    		    	
+    		    //Secondary dictionary for each 
+				map<int,map<string,list>> map_per_stop;		
+    			
+    			
+    			write "ESTO ES elements_from_stop "+ elements_from_stop;
     			
     			/*
     			 * Case last stop. Different because only have dropoffs and the dropoffs are all the passengers. The dropoffs here
@@ -254,19 +371,19 @@ global
     					
     					//Third dictionary
     					map<string, list> boards_dropoffs_per_timeslot;
+    					
+    					//Boards
+    					list element_boards <- elements_from_stop[(timeslot - 5)];
 						
 						//DropOffs
-	    				list element_dropoffs <-  elements_from_stop[(timeslot - 5)];	
+	    				list element_dropoffs <-  ["NO DATA", 0, 0];	
 						
-						//Boards
-						list element_boards <- ["NO DATA", 0, 0];
-						
-						
+
 						//Save in the third dictionary 
-						boards_dropoffs_per_timeslot << "Boards"::element_boards;
+						boards_dropoffs_per_timeslot << "Boards"::[element_boards[3], element_boards[4], element_boards[5]];
 						
 						
-						boards_dropoffs_per_timeslot << "DropOffs"::[element_dropoffs[3], element_dropoffs[4], element_dropoffs[5]];
+						boards_dropoffs_per_timeslot << "DropOffs"::[element_dropoffs[0], element_dropoffs[1], element_dropoffs[2]];
 							
 						//Save the third dictionary in the second dictionary				
 						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
@@ -280,7 +397,6 @@ global
 		
     				
     			}//End If Last Stop
-    			
     			
     			
     			
@@ -325,7 +441,8 @@ global
     			}//End if general case
     			
 		}//End loop stops_iter
-
+		
+		
 		//Update the global variable so every agent can access this data.
 		global_distribution_values <- distribution_values;
 
@@ -334,14 +451,36 @@ global
 		//----------------------------------------------------------------------------
 
         // CREATE ROUTE FROM .SHP FILE
-        create route from: file_401route with: [
+        create route from: file_401_toA_route with: [
+            routename :: read("name"),
+            distance :: int(read("distance")),
+            id :: int(read("id"))	
+        ];
+        
+        create route from: file_401_toB_route with: [
             routename :: read("name"),
             distance :: int(read("distance")),
             id :: int(read("id"))	
         ];
         
         // CREATE EACH STOP FROM .SHP FILE
-        create stop from: file_401stops with: [
+        create stop from: file_401_toA_stops returns: created_stops_toA with: [
+            stopName :: string(read("stopName")),
+            stopNum :: int(read("stopNum")),
+            distance :: int(read("distance")),
+            name :: string(read("stopName")),
+            stop_distributions:: distribution_values[int(read("stopNum"))]
+            //distribution_per_timeslot_boards::distribution_values[int(read("stopNum"))][5]["Boards"],
+            //distribution_per_timeslot_dropoffs::distribution_values[int(read("stopNum"))][5]["DropOffs"]
+        ];
+        
+        
+        //SAVE TO GLOBAL LIST
+        stops_list_toA <- list<stop>(created_stops_toA);
+        
+        
+        // CREATE EACH STOP FROM .SHP FILE
+        create stop from: file_401_toB_stops returns: created_stops_toB with: [
             stopName :: string(read("stopName")),
             stopNum :: int(read("stopNum")),
             distance :: int(read("distance")),
@@ -353,7 +492,12 @@ global
         
 
         //SAVE TO GLOBAL LIST
-        stops_list <- list(stop);
+        stops_list_toB <- list<stop>(created_stops_toB);
+        
+        
+        stops_list <<  "toA"::stops_list_toA;
+        stops_list << "toB"::stops_list_toB;
+		all_unique_stops <- remove_duplicates(stops_list.values accumulate each);
 
     }//END ACTION STATEMENT
 
@@ -419,12 +563,11 @@ global
 	 reflex update_distributions when: (mod(minutes, 60) = 0 and mod(time, 60)= 0 ){
 	 	
 	 	
-	 	loop stop_iter over: stops_list{
+	 	
+	 	loop stop_iter over: all_unique_stops{
 	 		
 	 		list distribution_per_timeslot_boards;
-		 	list distribution_per_timeslot_dropoffs;
 		 	list next_distribution_per_timeslot_boards;
-		 	list next_distribution_per_timeslot_dropoffs;
 		 	float board_generation_ratio;
 		 	float next_board_generation_ratio;
 
@@ -471,7 +614,6 @@ global
 				next_board_generation_ratio <- 0.0;
 			}
 
-			
 		}
 		else if (TimeSlot = 23){
 			
@@ -495,10 +637,10 @@ global
 			
 			//The next 0.0 as no TimeSlot 24
 			next_board_generation_ratio <- 0.0;
-			
-			
+
 		}
 		else{
+			//For timeslots bigger than 24 in case a bus still gets running
 			board_generation_ratio <- 0.0;
 			next_board_generation_ratio <- 0.0;
 		}//End Ifs Cases Timeslot
@@ -512,7 +654,9 @@ global
 		//obtain the value in wich you will generate passengers
 		stops_distribution_values[stop_iter.stopNum] <- smooth_data_function(board_generation_ratio, next_board_generation_ratio);
 		
+		
 	 	}//End loop
+	 	
 	 	
 	 }//End reflex update distributions
 	
@@ -524,7 +668,7 @@ global
 	 */
 	reflex generate_passengers_from_distributions {
 		
-		loop stop_iter over: stops_list{
+		loop stop_iter over: all_unique_stops{
 			stop_iter.passengers_to_be_generated <- stop_iter.passengers_to_be_generated + 
 						stops_distribution_values[stop_iter.stopNum][int(mod(time, 3600) / step)];
 			
@@ -537,22 +681,6 @@ global
 				stop_iter.passengers_to_be_generated <- stop_iter.passengers_to_be_generated - passengers_generated_new;
 				stop_iter.passengers_generated <- stop_iter.passengers_generated + passengers_generated_new;
 			}
-			
-			//DEPRECATED. IN THIS SIM NO SPECIES PASSENGERS
-			
-//		    if (to_generate > 0) {
-//		        // Generate that number of passengers
-//		        create passenger number: to_generate with: [
-//		            stop_origin :: self.stopNum,
-//		            location :: self.location
-//		        ] returns: new_passengers;
-//	
-//	    		passengers_list <- passengers_list + new_passengers;
-//		
-//		        // Subtract only the integer part, keep the fractional remainder
-//		        passengers_to_be_generated <- passengers_to_be_generated - to_generate;
-//	    	}//End if to_generate
-
 		}//End loop
 
 	}//End reflex generate passengers from distributions
@@ -620,6 +748,10 @@ global
 		
 	}//END FUNCTION CALL vdc
 	
+	
+	
+	
+	
 
 
 	/* Auxiliar global function to verify if a bus is inside the "stop catching area". It establish the criteria that the 
@@ -662,42 +794,52 @@ global
 		
 	}//END FUNCTION CALL iisr
     
+    
+    
+    /*
+     * Global function to pass to minutes the time in hh:mm
+     */
+	int time_to_minutes(string t) {
+		
+	    list<string> parts <- t split_with ":";
+	    
+	    return int(parts[0]) * 60 + int(parts[1]);
+	}
 
 
 
 
-
-/*
- * Global function to handle the smoothness of the change between distribution.
- * Returns a list of float values, one per simulation step within the timeslot.
- * The sum of all values in the list equals first_value.
- * The line tilts to connect smoothly toward second_value's rate.
- */
-list<float> smooth_data_function(float first_value, float second_value) {
-
-    // Number of simulation steps in one timeslot (3600 seconds)
-    float simple_step <- 3600 / step;
-
-    // The average per-step rate that the next timeslot would have
-    float rate_end <- second_value / simple_step;
-
-    // y_intercept is solved so that the sum across all steps = first_value
-    // From: sum = y_intercept * N + slope * N*(N-1)/2 = first_value
-    // And:  f(N-1) = slope*(N-1) + y_intercept = rate_end
-    float y_intercept <- (2 * first_value / simple_step) - rate_end;
-    float slope <- (rate_end - y_intercept) / (simple_step - 1);
-
-    list<float> return_statement;
-
-    loop i from: 0 to: (simple_step - 1) {
-
-        float new_val <- slope * i + y_intercept;
-        return_statement << new_val;
-    }
-
-    return return_statement;
-}
+	/*
+	 * Global function to handle the smoothness of the change between distribution.
+	 * Returns a list of float values, one per simulation step within the timeslot.
+	 * The sum of all values in the list equals first_value.
+	 * The line tilts to connect smoothly toward second_value's rate.
+	 */
+	list<float> smooth_data_function(float first_value, float second_value) {
 	
+	    // Number of simulation steps in one timeslot (3600 seconds)
+	    float simple_step <- 3600 / step;
+	
+	    // The average per-step rate that the next timeslot would have
+	    float rate_end <- second_value / simple_step;
+	
+	    // y_intercept is solved so that the sum across all steps = first_value
+	    // From: sum = y_intercept * N + slope * N*(N-1)/2 = first_value
+	    // And:  f(N-1) = slope*(N-1) + y_intercept = rate_end
+	    float y_intercept <- (2 * first_value / simple_step) - rate_end;
+	    float slope <- (rate_end - y_intercept) / (simple_step - 1);
+	
+	    list<float> return_statement;
+	
+	    loop i from: 0 to: (simple_step - 1) {
+	
+	        float new_val <- slope * i + y_intercept;
+	        return_statement << new_val;
+	    }
+	
+	    return return_statement;
+	}
+		
 	
 		
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -712,7 +854,7 @@ list<float> smooth_data_function(float first_value, float second_value) {
     /*
      * Init function for main test. This firstly initialize the routes_loader model init, to read the geojson info in .shp 
      * format and generate the routes and the bus_stop agents. It saves the ordered bus info in a global list 
-     * variable called stops_list
+     * variable called stops_list_toA
      * 
      * Then it creates a bus specie starting in the initial stop of the route and saving the goal destination, 
      * which hard codded rn is the final stop.
@@ -726,22 +868,54 @@ list<float> smooth_data_function(float first_value, float second_value) {
 		//Load the input bus departure scheduled times
 		file input_bus_departures <- file("../includes/INPUTS/input_data_buses.txt");
 		
+		file input_json <- json_file("../includes/INPUTS/input_data_buses.json");
 		
-		//Create one bus for each input departure parameter
-		loop dep_time over: input_bus_departures {
+		
+		loop logical_bus over: input_json {
 			
-						
-			//CREATE THE BUS SPECIE WITH THE REQUIRED NECESSARY INFO
-			create bus with:[
-			departure_time :: dep_time,
-    		initial_stop :: first(stops_list).stopName,
-    		destination_stopname :: last(stops_list).stopName,
-    		location :: first(stops_list).location,
-    		location_goal :: last(stops_list).location
-    		]; //END WITH
+			string departure_direction;
+			if (list(list(logical_bus)[0])[0] = '2646'){
+					departure_direction <- "toA";
+				}
+				else{
+					departure_direction <- "toB";
+				}
+
+			list <string> departure_times;
+			loop departures over: list(logical_bus){
+				departure_times << list(departures)[1];
+			}
 			
+			write "for bus starting at " + departure_direction + " we have " + departure_times;
 			
-    	}//End loop input_buses_gateaways
+			create bus with: [
+				departure_time:: first(departure_times),
+				direction::departure_direction,
+				initial_stop::first(stops_list[departure_direction]).stopName,
+				location::first(stops_list[departure_direction]).location,
+				location_goal::last(stops_list[departure_direction]).location,
+				departure_times:: departure_times
+			];
+		}//End loop json
+		
+		
+		
+//		//Create one bus for each input departure parameter
+//		loop dep_time over: input_bus_departures {
+//			
+//						
+//			//CREATE THE BUS SPECIE WITH THE REQUIRED NECESSARY INFO
+//			create bus with:[
+//			departure_time :: dep_time,
+//			direction::"toA",
+//    		initial_stop :: first(stops_list_toA).stopName,
+//    		destination_stopname :: last(stops_list_toA).stopName,
+//    		location :: first(stops_list_toA).location,
+//    		location_goal :: last(stops_list_toA).location
+//    		]; //END WITH
+//			
+//			
+//    	}//End loop input_buses_gateaways
     	
 
     }//END INIT
@@ -775,9 +949,9 @@ species bus skills: [fipa] {
 	//INITIAL_POS
     string initial_stop;
     
-    
-    //GOAL
-    string destination_stopname;
+
+    //Which direction hes managing(either 'toA' or 'toB')
+    string direction;
     
     
     //COORDINATES GOAL
@@ -800,8 +974,8 @@ species bus skills: [fipa] {
     bool stopped <- false;
     
 
-    //MAX SPEED
-    float speed_module_vector <- 30.00;
+    //MAX SPEED. TODO CHANGE THIS TO HANDLE THE SPEED BY TIME RANDOM VARIABLE
+    float speed_module_vector <- 80.00;
     
     
     //NUMBER OF STOPS REACHED, FOR THE INDEX. INITIALLY 0, to board the first passengers from the stop
@@ -809,9 +983,15 @@ species bus skills: [fipa] {
     
     
     //Number of passengers
-    int passengers;
+    int passengers <- 0;
     
     
+    //List container of the departure times for the bus
+    list<string> departure_times;
+    
+    
+    //Number of travels completed
+    int travels_completed <- 0;
     
     //BOOL VARIABLE TO DEFINE WHETHER OR NOT THE AGENT IS MOUNTING PASSENGERS
     bool processing_passengers <- false;
@@ -871,7 +1051,7 @@ species bus skills: [fipa] {
     { 
 	    
 		//Check and compare if the bus can leave
-    	if (departure_time = world.current_time)
+    	if (world.time_to_minutes(world.current_time) >= world.time_to_minutes(departure_time))
     	{
     		allowed_to_leave <- true;
     	}//End IF
@@ -896,7 +1076,7 @@ species bus skills: [fipa] {
 
 	    //INVOICE THE CALCULATION OF THE MOVEMENT OF THE BUS
 		list<float> new_point <- world.vector_distance_calc(self.location,
-										stops_list[self.stops_reached].location, self.speed_module_vector);
+										stops_list[direction][self.stops_reached].location, self.speed_module_vector);
 	
 		
 		//UPDATE THE MOVEMENT
@@ -905,7 +1085,7 @@ species bus skills: [fipa] {
 		
 		//CHECK ARRIVAL TO STOP
 		
-		if (world.is_inside_stop_range(self.location, stops_list[self.stops_reached].location, self.speed_module_vector) = true)
+		if (world.is_inside_stop_range(self.location, stops_list[direction][self.stops_reached].location, self.speed_module_vector) = true)
 		{
 			//IF THE FUNCTION ENTERS HERE, IT MEANS A STOP HAS BEEN REACHED
 			
@@ -917,13 +1097,9 @@ species bus skills: [fipa] {
 			//THIS MEANS THE TARGET HAS BEEN REACHED
 			self.arrived <- true;
 			
-			
-			//DEPRECATED HERE
-//			loop passenger_to_dropoff over: self.passengers{
-//				do start_conversation to: [passenger_to_dropoff] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
-//			}
 			self.passengers <- 0;
 			
+
 			self.finished_shift <- true;
 			
 			
@@ -935,13 +1111,8 @@ species bus skills: [fipa] {
 				
 				self.stopped <- true;
 			}//END IF GOAL DESTINATION
-			
-			
-			
-			
 
 		}//END IF STOP REACHED
-
 
     }//END REFLEX mtd
 
@@ -952,9 +1123,37 @@ species bus skills: [fipa] {
 	 * Reflex used to handle the shifting process. NIGHT NOW, IT MEANS END OF THE BUS SO DIEEEE
 	 */
 	reflex handle_shifts when: (self.finished_shift = true){
-		do die;
+		
+		self.finished_shift <- false;
+		
+		
+		if (departure_times[travels_completed] = last(departure_times)){
+			write "me mato a " + current_time + " con trav com " + travels_completed + " y " + departure_times;
+			do die;
+		}
+		
+		travels_completed <- travels_completed + 1;
+		departure_time <- departure_times[travels_completed];
+		if (direction = "toA"){
+			direction <- "toB";
+		}else{
+			direction <- "toA";
+		}
+		
+		if (world.time_to_minutes(self.departure_time) < world.time_to_minutes(current_time)){
+			//Delayed, but allowed to leave
+			allowed_to_leave <- true;
+			
+		}else{
+			allowed_to_leave <- false;
+		}
+		
+		//reset the variables
+		stops_reached <- 0;
+	    arrived <- false;
+	    location <- first(stops_list[direction]).location;
+	    location_goal <- last(stops_list[direction]).location;
 	}
-
 
 
     /*
@@ -981,7 +1180,7 @@ species bus skills: [fipa] {
 		
 		
 		//INICIATE CONVERSATION
-    	do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-query' performative: 'query' contents: ['Bus arrived to stop'];
+    	do start_conversation to: [stops_list[self.direction][self.stops_reached]] protocol: 'fipa-query' performative: 'query' contents: ['Bus arrived to stop'];
 		
 		
 		//THIS LINE IS JUST FOR THE BUS IN THE NEXT CYCLE NOT REPEATING THE SENDING MESSAGE
@@ -995,7 +1194,7 @@ species bus skills: [fipa] {
     
     /*
      * Reflex function to handle the board/Dropoff of passengers. It reads the content */
-    reflex handle_stop_answer when: (self.processing_passengers = true and cycle > self.comms_cycle and self.waiting = false)
+    reflex handle_stop_answer when: (self.processing_passengers = true and cycle > self.comms_cycle and self.waiting = false and !empty(agrees))
 	{
 		
 		if (empty(agrees)){
@@ -1038,7 +1237,7 @@ species bus skills: [fipa] {
 	self.waiting <- true;
 	self.comms_cycle <- cycle;
 	
-	do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
+	do start_conversation to: [stops_list[self.direction][self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
 								contents: ['Update passengers. I boarded',(boards-residual_boards)];
 		
 	}//end reflex handle stop answer
@@ -1061,401 +1260,7 @@ species bus skills: [fipa] {
     }
     
     
-//    
-//
-//     /*
-//      * Reflex function to handle the three-band communication between bus-stop-passengers. After the query message from the buss, here it process the 
-//      * acceptance and inform of the stop.
-//      * In this reflex, the buswill communicate with the passengers to Drop Off acording to what the stop says.
-//      * It is marked in a 4 reflex Timeline with the COMMS_PARAM value 1, so this is 1/4 reflexes handling the boarding/discharging
-//      */
-//	reflex handle_stop_answer when: (self.processing_passengers = true and self.comms_param = 1)
-//	{
-//		
-//		//here, the query answer(agree and inform) is processed and deleted from the mailbox, Hence, the fipa-query is finished.
-//		
-//		//Jus in case, verify that the lists are not empty
-//		if (!(empty(agrees)) and !(empty(informs))){
-//			
-//			message agree_query <- agrees at 0;
-//			
-//
-//			trash_can <- agree_query.contents;
-//			
-//		
-//			message inform_data_stop <- informs at 0;
-//			
-//			
-//			
-//			//Save the data received in a self scope, to use it in the next refelex(verify_dropoffs_and_call_boards)
-//			self.data_from_stop <- [list(inform_data_stop.contents)[0],int(list(inform_data_stop.contents)[1])];
-//			
-//			//Now, if dropoffs value is bigger than 0, proceed to the comms via FIPA-Request
-//			if ( int(self.data_from_stop[1]) > 0){
-//				
-//				
-//				//write "VOy por vosotros " + int(self.data_from_stop[1]) + " pescabichos";
-//				
-//				//Case dropoffs bigger or equal than actual value of the bus. Means everybody DropOff
-//				if (int(self.data_from_stop[1]) >= self.passengers_length){
-//					
-//					loop iter_passenger over: self.passengers{
-//
-//						do start_conversation to: [iter_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
-//					}//End loop
-//					
-//				}
-//				else{
-//					
-//					//Communicate from passenger[0] to passenger[to_dropoff - 1] to start the procotol of Dropping them Off
-//					loop i from: 0 to: (int(self.data_from_stop[1]) - 1){
-//						
-//						
-//						do start_conversation to: [self.passengers[i]] protocol: 'fipa-request' performative: 'request' contents: ['Drop Off'];
-//					}//End loop
-//
-//				}//End ifs cases dropoff values
-//	
-//			}
-//			else{
-//				self.comms_param <- 2;
-//				self.comms_cycle <- cycle;
-//			}
-//			
-//			//Update so the reflex 2/3 gets launched in the NEXT iteration
-//			self.comms_param <- 2;
-//			self.comms_cycle <- cycle;
-//			
-//		}//End if agrees and informs
-//		
-//	}//END REFLEX handle answer
-//  
-//  
-//	
-//	
-//	/*
-//	 * Reflex function that gets used the right next iteration after handle_stop_anseer. It is used to verify and clean the agree and inform-done of the 
-//	 * passengers that are gonna drop off, and, once clean, communicate with the passengers that might/might not board, depending on the capacities of the bus.
-//	 * Reflex 2/3 of the 3 reflex timeline handling the boarding/disboarding of passengers.
-//	 */
-//	reflex verify_dropoffs_and_call_boards when: (self.processing_passengers = true and self.comms_param = 2 and cycle > self.comms_cycle){
-//
-//		//First of all. It needs to be resolved the messages from the passengers Dropping Off
-//		
-//		//If not passengers were to be dropped off, skip, only do it if
-//		if (int(self.data_from_stop[1]) > 0 and self.passengers_length > 0){
-//			
-//			list<passenger> to_remove;	
-//			
-//			//2 cases, either loop until self.data_from_stop[1] - 1 or until length of passengers
-//			loop i from: 0 to: min((int(self.data_from_stop[1]) - 1), (self.passengers_length - 1)){
-//						
-//				
-//				
-//				message agree_dropoff <- agrees at 0;
-//				
-//				message inform_dropoff <-informs at 0;
-//				
-//				if (agree_dropoff.sender != inform_dropoff.sender){
-//					write "ESTO NO DEBERIA PASAR PUÑETAAA";
-//				}
-//				
-//				
-//				trash_can <- agree_dropoff.contents;
-//				trash_can <- inform_dropoff.contents;
-//				to_remove << agree_dropoff.sender;
-//				
-//				
-//
-//			}//End loop
-//			
-//			//Clean the passenger from the bus(If agree and inform the request means its dead, or will be dead.
-//			self.passengers <- self.passengers - to_remove;
-//			
-//			//Update the passengers length
-//			
-//
-//		}//End handling Dropoffs
-//		
-//		
-//		//NOw pAssengers
-//		//write "AGreesss and informssss should be cliiiiiin " + agrees + informs;
-//			
-//			
-//			//Now, iter the passengers given in the first parameter
-//			
-//			int passengers_processed <- 0;
-//			
-//			loop new_passenger over: self.data_from_stop[0]{
-//				
-//				//write "new pass es " + new_passenger;
-//				
-//				if ((self.passengers_length + passengers_processed) < self.max_passengers){
-//					
-//					do start_conversation to: [new_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Mount'];
-//					passengers_processed +<- 1;
-//				}
-//				else{
-//					do start_conversation to: [new_passenger] protocol: 'fipa-request' performative: 'request' contents: ['Bus Full'];
-//				}
-//				
-//			}//End loop
-//	
-//					
-//		self.comms_cycle <- cycle;
-//		self.comms_param <- 3;
-//		
-//	}//End reflex verify passengers
-//
-//
-//	
-//	
-//	/*
-//	 * Refflex value to finalize the process of boarding/Disboarding passengers when on a stop. In this reflex, It will validate the agree and inform 
-//	 * of the passengers who are going to board, update the number to the self scope, and tell the stop which passengers of the total indicated were able to board.
-//	 */
-//	reflex verify_boards_and_resolve_query when: (self.processing_passengers = true and self.comms_param = 3 and cycle > self.comms_cycle){
-//		
-//		
-//		//Here, if no need to verify passengers, means length self.data_from_stop[0] = 0, just update the params so the bus moves, and starting the request
-//		//to the stop
-//		
-//		if (empty(agrees) and empty(informs)){
-//		
-//		do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
-//											contents: ['Update passengers. I boarded',0];
-//		
-//		}
-//		else{
-//			
-//			
-//			//variable to know how many new boards
-//			int passengers_boarded;
-//			
-//			
-//			//Loop to cleanup the messages and count
-//			loop i from: 1 to: length(list(self.data_from_stop[0])){
-//				message agree_resp <- agrees at 0;
-//				message inform_resp <- informs at 0;
-//				
-//				trash_can <- agree_resp.contents;
-//				
-//				if (list(inform_resp.contents)[0] = 'Boarded'){
-//					
-//					self.passengers << agree_resp.sender;
-//					passengers_boarded <- passengers_boarded + 1;
-//				}
-//			}//End loop
-//			
-//			//write "Update length to " + self.passengers_length;
-//			
-//			//write "NEW HAY " + passengers_boarded;
-//			
-//			do start_conversation to: [stops_list[self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
-//									contents: ['Update passengers. I boarded',passengers_boarded];
-//			
-//		}//End if conversations
-//
-//		self.comms_param <- 4;
-//		
-//		self.comms_cycle <- cycle;
-//		
-//	}
-//	
-//	
-//	
-//	/*
-//	 * Reflex 4/4 in the 4-part communication reflexesto handle board/disboard of passengers. Here, just cleans the verifying of the request to the
-//	 * stop and change the variables needed to move to the next stop
-//	 */
-//	reflex move_back when: (self.processing_passengers = true and self.comms_param = 4 and cycle > self.comms_cycle){
-//		
-//		message agree_resp <- agrees at 0;
-//		message inform_resp <- informs at 0;
-//		
-//		trash_can <- agree_resp.contents;
-//		trash_can <- inform_resp.contents;
-//				
-//		self.processing_passengers <- false;
-//	    self.stopped <- false;
-//	    self.stops_reached <- self.stops_reached + 1;
-//	    self.comms_param <- 1;
-//	    
-//	    //write "\n\n\nTHE BUS IS GONNA GO TO THE NEXT STOP. ACTUAL VALUES\n " + "passengers length " + self.passengers_length + "\npassengers " + self.passengers;
-//	}//End reflex move back
-	
-    
-    
-    
-}//END SPECIE BUS
-
-
-
-
-
-
-//
-///*
-// *Definition of the type specie PASSENGER 
-// * 
-// * 
-// * 
-// * Skills fipa means that this agent inherit the FIPA communication protocol. Used to communicate between bus agents,
-// * stops agents and this passengers agent
-// * 
-// */
-//species passenger skills: [fipa]
-//{
-//	
-//	//Stop code in which this passenger is generated
-//	int stop_origin;
-//	
-//	
-//	//Boolean to know when it is stopped or when it is on a bus. On starting it is False
-//	bool on_bus <- false;
-//	
-//	
-//	
-//	//Boolean to knwo wheter it is seated or no(Estimation based on the total number of seats in the bus). To measure KPIs of seatability
-//	bool seated;
-//	
-//	
-//	
-//	//Agent bus variable
-//	bus mounted_bus;
-//	
-//	
-//	
-//	//To measure KPIs of wait time
-//	float wait_time;
-//
-//	
-//	//variable to know the mood of the passenger depending on the time waiting, if he can seat on the bus or if the bus its full
-//	string mood;
-//	
-//	
-//	//Bool value to know whether the bus ask this agent to die or not
-//	bool dropoff <- false;
-//	
-//	
-//	//For drawing
-//	aspect default {
-//		
-//		if (self.on_bus = false){
-//			
-//			draw circle(50) color: #red;
-//		}
-//		else {
-//			
-//			draw circle(50) color: #yellow;
-//		}
-//		
-//		
-//	}//End aspcet DEF
-//	
-//
-//	reflex dropoff when: self.dropoff = true{
-//			do die;
-//		}
-//
-//
-//
-//
-//	/*
-//	 * Reflex to handle the movement of the passenger. Initially will be in the stop, buth when the bus arrives, using FIPA it will pass the
-//	 * reference to the bus specie instance, so the passenger wont be calling global function vec_dist_calc which willbe a redundant call
-//	 */
-//	reflex update_movement when: self.on_bus = true and self.dropoff = false {
-//		
-//		self.location <- mounted_bus.location;
-//
-//	}//End reflex update_movement
-//	
-//	
-//	
-//	/*
-//	 * Reflex to handle the wait of the passenger in the stop. Every cicle the self.on_bus = false, it will add 10 seconds out of variable wait_time
-//	 * 
-//	 */
-//	reflex wait_on_stop when: self.on_bus = false and self.dropoff = false{
-//		
-//		//Advance the wait time counter. This will not stop until a bus picks this passenger up
-//		wait_time <- wait_time + world.step;
-//		/*
-//		 * Each instance of passenger will be on a Specie Stop list variable. Once the bus reaches the stop, it will fetch the list via FIPA request
-//		 * And communicate with each passenger to offer board. So now, what the code does is, once the proposals is not empty, stablish comm with bus
-//		 */ 
-//		
-//	}//End reflex wait_on_stop
-//	
-//	
-//	
-//	
-//	
-//	
-//	reflex comm_with_bus when: (!(empty(requests)) and self.on_bus = false){
-//		
-//		
-//		message answer <- requests at 0;
-//		
-//
-//
-//		if (list(answer.contents)[0] = 'Mount'){
-//			do agree message: answer contents: ['Ok ill board'];
-//			self.seated <- true;
-//			self.mounted_bus <- answer.sender;
-//			self.on_bus <- true;
-//			do inform message: answer contents: ['Boarded'];
-//			//write "ME quiero montar puñet";
-//		}
-//		else if (list(answer.contents)[0] = 'Bus Full'){
-//			//If the content of the message is not Mount, it means its Bus full. But, in case other message shown, the passenger answers back with not-understood.
-//			
-//			//write "No me puedo montar puñet";
-//			//Here with bus full,  end the conversation with bus answering back accepting the bus full request.
-//			do agree message: answer contents: ['Ok'];
-//			do inform message: answer contents: ['I wait'];
-//		}
-//		else
-//		{
-//			write "What a cujons+ " + answer.contents;
-//			do refuse message: answer contents: ['I dont understand'];
-//			
-//		}//Ebd ifs cases contents for the request
-//		
-//	}//ebd reflex comm_weith_bus
-//	
-//	
-//	
-//	/*
-//	 * Reflex function design to handle the dropoff from the bus of the agent passenger. Her, it will accept the request of the bus, answer back to confirm it, and then diesç
-//	 * IN THE FUTURE, it will send statistics to report this passenger and add its values to extract KPIs
-//	 */
-//	reflex comm_to_dropoff when: (!(empty(requests)) and self.on_bus = true) {
-//		
-//		//write "Me queiren matar puñeta " + self;
-//		
-//		message request <- requests at 0;
-//		
-//		//Clean it after reading
-//		
-//		list trash <- request.contents;
-//		
-//		do agree message: request contents: ["I will Drop Off"];
-//		
-//		do inform message: request contents: ["Dropped Off"];
-//
-//		//do die;
-//		
-//		self.dropoff <- true;
-//		self.on_bus <- false;
-//	}
-//	
-//	
-//	
-//	
-//}//End Species Passenger
-//
+}//End specie bus
 
 
 
@@ -1508,109 +1313,25 @@ species stop skills: [fipa]  {
     //Value that serve as an accumulator for the passengers that are generated over the course of an hour.
     float passengers_to_be_generated <- 0.0;
     
+    
+    //Int value containing the passengers that are actually generated. In case the value sto add to the float self.passengers to be generated
+    //is negative, that wont affect the passengers already created
     int passengers_generated;
     
     //Variable to wait for the answer back from the bus when its processing passengers
     bool waiting_for_bus_answer<- false;
     
-    
-    //DEPRECATED
-//    /*
-//     * List variables containing the info about the behaviour of boards and dropoffs for the stop.
-//     * Each TimeSlot, will be updated acording to the behaviour of that TS
-//     * The list params are always the same [ "DistrType", param1, param2]
-//     * Where DistrType RN is NORMAL, NEGATIVE BINOMIAL, GEOMETRIC
-//     */  	
-//    list distribution_per_timeslot_boards <- [];
-//    
-//    list distribution_per_timeslot_dropoffs <- [];
-//    
-//    list next_distribution_per_timeslot_boards <- [];
-//    
-//    list next_distribution_per_timeslot_dropoffs <- [];
-    
-//    
-//    
-//    /*
-//     * List variable containing, for each iteration of the timeslot, the ratio of generation of passengers that has to be added
-//     * to fulfill the needs of the variable selected.
-//     */
-//    list<float> smooth_generated_data;
-//    
-//    //Pair of floats wich holds the parameters of the distributions
-//    pair<float, float> board_generator_variables;
-    
-    
-    
-    
+
     aspect default {
     	
         draw circle(50) color: #purple border: #black;
         draw stopName + " " + passengers_generated color: #black size: 1 at: location + {0, -80};
        	
     }
-    
-    
-    
+
     aspect simple {
         draw shape color: #red;
     }
-    
-    
-    
-    //DEPRECATED.
-//     
-//    /*
-//     * Reflex function to handle the change of the boards and dropoffs distribution every hour. So this will happen when mod(minutes, 60) == 0
-//     * Apart from that. Every distribution change, the sim will load the next params(distribution of TS +1) Unless last TS.
-//     * Then, it will recalculate, to smooth the transition between distributions. With the calculations done, instead of being the same value for
-//     * every iteration of the TS, it will create a function y = mx + n, which will have the same under the curve area. This, will imply that
-//     * in the course of a full TimeSlot, the result of the passengers created will be the same under the curve area as it would be with a constant
-//     * function, but smoothing the transition to the following value.
-//     * 
-//     * This behaviour is only for boards, for dropoffs, it will pick up a random value everytime a bus arrives.
-//     */
-//    reflex update_distributions when: (mod(world.minutes, 60) = 0 and mod(world.time, 60)= 0 ) {
-//		
-//
-//		
-//
-//
-//    }//End reflex Update Distributions
-//    
-//    
-//    /*
-//     * Reflex to handle the abstraction of generating passengers Each iteration, the needed value has to be added.
-//     * When a truncate to int generates a positive result, generate that number of passengers and
-//     * substract the number generated
-//     */
-//     reflex generate_passengers {
-//     	//add the value for this iteration			
-//		passengers_to_be_generated <- passengers_to_be_generated + smooth_generated_data[int(mod(world.time, 3600) / step)];
-//		
-//		
-//		int to_generate <- int(passengers_to_be_generated);
-//		
-//		
-//	    if (to_generate > 0) {
-//	        // Generate that number of passengers
-//	        create passenger number: to_generate with: [
-//	            stop_origin :: self.stopNum,
-//	            location :: self.location
-//	        ] returns: new_passengers;
-//
-//    		passengers_list <- passengers_list + new_passengers;
-//	
-//	        // Subtract only the integer part, keep the fractional remainder
-//	        passengers_to_be_generated <- passengers_to_be_generated - to_generate;
-//	    	}//End if to_generate
-//	    	
-//    	}//End reflex generate passengers
-    
-     
-    
-
-    
     
     /*
      * Reflex function to handle the comms between this agent and the requesting agents
@@ -1655,8 +1376,6 @@ species stop skills: [fipa]  {
 			dropoff_passengers <- 0;
 		}
 		
-		
-
 		//ANSWER BACK WITH FIPA PROTOCOL QUERY
 		do agree message: queryFromInitiator contents: ["Here is the passenger list"];
 		do inform message: queryFromInitiator contents: [int(self.passengers_generated), dropoff_passengers];
@@ -1715,8 +1434,6 @@ species route {
     //UNIQUE IDENTIFIER
     int id;
     
-    
-    
     aspect default {
         draw shape color: #blue width: 3;
     }
@@ -1742,8 +1459,8 @@ experiment test type: gui {
             species route aspect: default;
             species stop aspect: default;
             species bus aspect: default;
-          
-  
+
+
             graphics "clock" {
                 draw "Time: " + current_time 
                     at: {100, 100} 
@@ -1753,13 +1470,12 @@ experiment test type: gui {
                     at: {100, 350} 
                     color: #gray 
                     font: font("TimesNewRoman", 14, #plain);
-            }
-            
+            }//End graphics
+
         }//END DISPLAY
 
     }//END OUTPUT
-    
-
+  
 }//END EXPERIMENT
 
 

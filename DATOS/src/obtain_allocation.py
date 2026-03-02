@@ -15,12 +15,13 @@ def format_string_list(list_input):
 
 class Allocation:
 
-    def __init__(self, data, day: str):
+    def __init__(self, data1, data2, day: str):
         self.only_day_data = None
         self.buses = []
         self.allocation = {}
         self.allocation_per_timeslot = {}
-        self.data = pd.read_csv(data) if not isinstance(data, pd.DataFrame) else data
+        self.data1 = pd.read_csv(data1) if not isinstance(data1, pd.DataFrame) else data1
+        self.data2 = pd.read_csv(data2) if not isinstance(data2, pd.DataFrame) else data2
         self.__day = day
         self.calculate_allocation()
         self.ordered_allocation()
@@ -46,13 +47,51 @@ class Allocation:
 
 
     def calculate_allocation(self):
-        self.only_day_data = self.data[self.data["EventDate"] == self.__day]
-        self.buses = self.only_day_data["LogicVehicle"].unique()
+        self.only_day_data1 = self.data1[self.data1["EventDate"] == self.__day]
+        self.only_day_data2 = self.data2[self.data2["EventDate"] == self.__day]
+
+        self.buses = self.only_day_data1["LogicVehicle"].unique()
+
+        stop_code_1 = "2646"
+        stop_code_2 = "5727"
+
         for bus in self.buses:
             self.allocation[bus] = []
-            itinerary = self.only_day_data[self.only_day_data["LogicVehicle"] == bus]
+            itinerary = self.only_day_data1[self.only_day_data1["LogicVehicle"] == bus]
+            itinerary_turnaround = self.only_day_data2[self.only_day_data2["LogicVehicle"] == bus]
+
+            # Find absolute earliest EventTime across both datasets for this bus
+            earliest_time = None
+            earliest_source = None
+            earliest_row = None
+
             for idx, row in itinerary.iterrows():
-                self.allocation[bus].append(row.EventTime)
+                if earliest_time is None or row.EventTime < earliest_time:
+                    earliest_time = row.EventTime
+                    earliest_source = stop_code_1
+                    earliest_row = row
+
+            for idx, row in itinerary_turnaround.iterrows():
+                if earliest_time is None or row.EventTime < earliest_time:
+                    earliest_time = row.EventTime
+                    earliest_source = stop_code_2
+                    earliest_row = row
+
+            # Case 2: earliest record has EventTime != EventTime.1 → hidden departure from opposite stop
+            if earliest_row is not None and earliest_row.EventTime != earliest_row["EventTime.1"]:
+                opposite = stop_code_2 if earliest_source == stop_code_1 else stop_code_1
+                self.allocation[bus].append([earliest_row.EventTime, opposite])
+
+            # Case 1: all records where EventTime == EventTime.1 → confirmed departures
+            for idx, row in itinerary.iterrows():
+                if row.EventTime == row["EventTime.1"]:
+                    self.allocation[bus].append([row.EventTime, stop_code_1])
+
+            for idx, row in itinerary_turnaround.iterrows():
+                if row.EventTime == row["EventTime.1"]:
+                    self.allocation[bus].append([row.EventTime, stop_code_2])
+
+
     
     
     
@@ -63,8 +102,9 @@ class Allocation:
         for i in range(5,24):
             self.allocation_per_timeslot[i] = 0
 
-        for idx, bus in self.only_day_data.iterrows():
+        for idx, bus in self.only_day_data1.iterrows():
             self.allocation_per_timeslot[bus.TimeSlot] += 1
+
 
     def __str__(self):
         return f"Class containing the Allocation of {self.__day} events"
@@ -90,27 +130,25 @@ class Allocation:
             return return_str
 
         if spec == "TimeSeries":
-            return_str += f"For day: {self.__day}, we have {sum(len(v) for v in self.allocation.values())} different header stop departures\n\n"
-            time_to_bus = {}
-            for bus, times in self.allocation.items():
-                for time in times:
-                    time_to_bus[time] = bus
-            ordered = dict(sorted(time_to_bus.items(), key=lambda x: x[0]))
+            import json
+            output = {}
+            for bus, departures in self.allocation.items():
+                # Sort by departure time, then build [stop_code, departure_time] pairs
+                sorted_deps = sorted(departures, key=lambda x: x[0])
+                output[str(bus)] = [[dep[1], dep[0]] for dep in sorted_deps]
 
-            for time, bus in ordered.items():
-                return_str += f"\t- {time}: Bus {bus}\n"
 
-            return return_str
+            with open("../../GAMA/src/TEST_MOBILITY/includes/INPUTS/input_data_buses.json", "w") as f:
+                json.dump(output,f, indent=2)
 
+            return json.dumps(output, indent=2)
         return None
 
 
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        sys.exit("Usa la instrucciones python3 obtain_allocation.py <data> <day>")
-    test = Allocation(data=sys.argv[1], day=sys.argv[2])
-    print(test)
-    print(f"{test:TimeSeries}")
-    print(test.allocation_per_timeslot)
+    if len(sys.argv) != 4:
+        sys.exit("Usa la instrucciones python3 obtain_allocation.py <data> <data2> <day>")
+    test = Allocation(data1=sys.argv[1],data2= sys.argv[2], day=sys.argv[3])
+    print(f"LogicBus: {test:TimeSeries}")
