@@ -33,6 +33,9 @@ global
 //--------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
 
+	//FOR THE LOG
+	int sim_id <- 0;
+	
 
 	//CREATE GLOBAL VARIABLES TO SAVE GLOBAL SCOPE OF THE AGENTS CREATED
 	list <stop> stops_list_toA;
@@ -128,7 +131,7 @@ global
         
       	
       	
-      	write "LOADING THE MAP WITH ROUTES AND STOPS";
+      	//write "LOADING THE MAP WITH ROUTES AND STOPS";
       	
       	
       	
@@ -351,7 +354,6 @@ global
 				map<int,map<string,list>> map_per_stop;		
     			
     			
-    			write "ESTO ES elements_from_stop "+ elements_from_stop;
     			
     			/*
     			 * Case last stop. Different because only have dropoffs and the dropoffs are all the passengers. The dropoffs here
@@ -470,9 +472,25 @@ global
             distance :: int(read("distance")),
             name :: string(read("stopName")),
             stop_distributions:: distribution_values[int(read("stopNum"))]
-            //distribution_per_timeslot_boards::distribution_values[int(read("stopNum"))][5]["Boards"],
-            //distribution_per_timeslot_dropoffs::distribution_values[int(read("stopNum"))][5]["DropOffs"]
         ];
+        
+        
+        //Remove 2646 and 5727. When creating them in toB
+        
+        stop stop_to_remove <- first(created_stops_toA);
+        
+        //pop it from the stop list
+        created_stops_toA >> first(created_stops_toA);
+        //Kill it
+        ask stop_to_remove {do die;}
+        
+        //Same with the last
+        stop_to_remove <- last(created_stops_toA);
+        
+        //pop it from the stop list
+        created_stops_toA >> last(created_stops_toA);
+        //Kill it
+        ask stop_to_remove {do die;}
         
         
         //SAVE TO GLOBAL LIST
@@ -486,10 +504,14 @@ global
             distance :: int(read("distance")),
             name :: string(read("stopName")),
             stop_distributions:: distribution_values[int(read("stopNum"))]
-            //distribution_per_timeslot_boards::distribution_values[int(read("stopNum"))][5]["Boards"],
-            //distribution_per_timeslot_dropoffs::distribution_values[int(read("stopNum"))][5]["DropOffs"]
         ];
         
+        //Add the last element of toB (2646) to the first spot of toA list
+        stops_list_toA <- [last(created_stops_toB)] + stops_list_toA;
+        
+        //Append the first of toB to toA
+        stops_list_toA << first(created_stops_toB);
+
 
         //SAVE TO GLOBAL LIST
         stops_list_toB <- list<stop>(created_stops_toB);
@@ -691,7 +713,6 @@ global
 	 * Reflex to handle the END of the sim once no bus is kept alive
 	 */ 
 	reflex end_real_simulation when: empty(bus){
-		write "BUSES FINIQUITEN " + current_time;
         do die;  //CHAO CHAO CHAO CHAO
 	}
 
@@ -886,7 +907,6 @@ global
 				departure_times << list(departures)[1];
 			}
 			
-			write "for bus starting at " + departure_direction + " we have " + departure_times;
 			
 			create bus with: [
 				departure_time:: first(departure_times),
@@ -1128,7 +1148,6 @@ species bus skills: [fipa] {
 		
 		
 		if (departure_times[travels_completed] = last(departure_times)){
-			write "me mato a " + current_time + " con trav com " + travels_completed + " y " + departure_times;
 			do die;
 		}
 		
@@ -1196,11 +1215,7 @@ species bus skills: [fipa] {
      * Reflex function to handle the board/Dropoff of passengers. It reads the content */
     reflex handle_stop_answer when: (self.processing_passengers = true and cycle > self.comms_cycle and self.waiting = false and !empty(agrees))
 	{
-		
-		if (empty(agrees)){
-			write "NO DIBIRIA PASIAR";
-		}
-		
+
 		message agree_query <- agrees at 0;
 		
 		list hi <- agree_query.contents;
@@ -1239,6 +1254,16 @@ species bus skills: [fipa] {
 	
 	do start_conversation to: [stops_list[self.direction][self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
 								contents: ['Update passengers. I boarded',(boards-residual_boards)];
+		
+		
+		
+	/*
+	 * Write in the .log the result of the stop procedure. IN this log, it will be saved (Simulation ID, Bus realizing it, StopCode, Time
+	 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
+	 */
+	save [world.name, self.name, stops_list[self.direction][self.stops_reached].stopNum, 
+			current_time, boards, residual_boards,dropoffs,self.passengers] 
+    	to: '../logs/log_' + world.name + '.csv' format: "csv" rewrite: false;
 		
 	}//end reflex handle stop answer
     
@@ -1396,11 +1421,9 @@ species stop skills: [fipa]  {
 		int number_of_boards <- int(list(inform_from_bus.contents)[1]);
 		
 		
-		//write "SRGUN EL BUS SE MONTARON " + number_of_boards;
 		
 		do agree message: inform_from_bus contents: ['Ok'];
 		
-		//self.passengers_list <- self.passengers_list copy_between(number_of_boards, length(self.passengers_list));
 
 		self.passengers_generated <- self.passengers_generated - number_of_boards;
 
@@ -1481,6 +1504,6 @@ experiment test type: gui {
 
 
 
-experiment batch_100 type: batch repeat: 100 parallel: 10 until: empty(bus) {
+experiment batch_1000 type: batch repeat: 1000 parallel: 10 until: empty(bus) {
 }
 
