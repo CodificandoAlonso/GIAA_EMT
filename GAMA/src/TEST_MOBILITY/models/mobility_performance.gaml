@@ -48,9 +48,12 @@ global
 	list<stop> all_unique_stops;
 	
 	
-	//CREATE GLOBAL VARIABLE MAP FOR DISTRIBUTIONS TO SAVE GLOBAL SCOPE OF THE VALS
+	//CREATE GLOBAL VARIABLE MAP FOR DISTRIBUTIONS TO SAVE GLOBAL SCOPE OF THE VALS. FOR BOARD DROPOFFS
 	map<int, map<int,map<string,list>>> global_distribution_values;
 	
+	
+	//CREAYE GLOBAL VARIABLE MAP FOR DISTRIBUTIONS TO SAVE GLOBAL SCOPE OF THE VALS. FOR TBS(TIME BETWEEN STOPS)
+	map<string, map<int,list<float>>> global_time_stops_values;
 	
 	
 	
@@ -147,6 +150,16 @@ global
 		
       	//All stops willbe using the same Timeslots. Starting at 5 ending at 23
       	list<int> timeslots <- [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+		
+		
+		//Hardcodded stopNums in both directions
+		list<int> stopNums_toA <- [2646, 562, 4090, 4188, 5939, 3995, 3991, 3903, 2539, 2535, 1929, 4032, 5360, 82, 5727];
+		
+		list<int> stopNums_toB <- [5727, 81, 1167, 2538, 3929, 3990, 3994, 5938, 4187, 2964, 649, 2646];
+		
+		
+		
+		
 		
 		
 		
@@ -447,6 +460,100 @@ global
 		
 		//Update the global variable so every agent can access this data.
 		global_distribution_values <- distribution_values;
+		
+		
+		
+		
+		//treat the time-between stops distributions.
+		file time_between_stops_toA <- csv_file("../includes/INPUTS/input_times_stops_toA.csv");
+		file time_between_stops_toB <- csv_file("../includes/INPUTS/input_times_stops_toB.csv");
+		
+		
+		
+		/* 
+		 * Loop to create the map for the time between stops. The structure of the map wil be the following:
+		 * A first map<string, map> containing a map for each Direction of the route, so keys 'toA' and 'toB'
+		 * A second map(One for each direction) containing as keys the stopNums and values the mean and std for the tbs between
+		 * Them and its following. For the last stop for no error in the agents will be mean 0 and std 0.
+		 */
+		 
+		 //local action variable to save the data. Then change the reference to the global variable scope
+		 
+		 map<string, map<int,list<float>>> local_time_stops_values;
+		 
+		 matrix matrix_time_stops_toA <- matrix(time_between_stops_toA);
+ 		 matrix matrix_time_stops_toB <- matrix(time_between_stops_toB);
+		 
+		 map<int,list<float>> local_toA_times;
+		 
+		 //Do case toA
+		 loop iter from: 0 to: (length(stopNums_toA) -1){
+		 	
+		 	
+		 	if (iter < (length(stopNums_toA) -1)){
+			 	//locate first stopNum
+			 	int stop_code <- stopNums_toA[iter];
+			 	
+			 	//pick up the values and store
+			 	float mean_val <- float(matrix_time_stops_toA[1, iter]);
+			 	
+				float std_val <- float(matrix_time_stops_toA[2, iter]);
+				
+				local_toA_times << stop_code::[mean_val, std_val];	
+				
+				write "for direction toA i have for stop " + stop_code + " the " + mean_val +" " +  std_val;	
+				
+			} else{
+				int stop_code <- stopNums_toA[iter];
+				local_toA_times << stop_code::[0, 0];
+				write "for direction toA i have for stop " + stop_code + " the " + 0 + " " +  0;	
+				
+			}//End ifs
+			
+			
+		 }//End case toA for time between stops data.
+		 
+		 //Save to the local map
+		 local_time_stops_values << "toA"::local_toA_times;
+		 
+		 
+		 
+		 //do case toB
+		 map<int,list<float>> local_toB_times;
+		 
+		 
+		 loop iter from: 0 to: (length(stopNums_toB) -1){
+		 	
+		 	
+		 	if (iter < (length(stopNums_toB) -1)){
+			 	//locate first stopNum
+			 	int stop_code <- stopNums_toB[iter];
+			 	
+			 	//pick up the values and store
+			 	float mean_val <- float(matrix_time_stops_toB[1, iter]);
+			 	
+				float std_val <- float(matrix_time_stops_toB[2, iter]);
+				
+				local_toA_times << stop_code::[mean_val, std_val];	
+				
+				write "for direction toB i have for stop " + stop_code + " the " + mean_val +" " +  std_val;	
+				
+			} else{
+				int stop_code <- stopNums_toB[iter];
+				local_toA_times << stop_code::[0, 0];
+				write "for direction toB i have for stop " + stop_code + " the " + 0 + " " +  0;	
+				
+			}//End ifs
+		
+		}//End case toB for time between stops data.
+		
+		
+		//update the local value map
+	    local_time_stops_values << "toB"::local_toB_times;
+		
+		//Save it to the global scope
+		global_time_stops_values <- local_time_stops_values;
+
 
 		//----------------------------------------------------------------------------
 		//Now create both the route and the stop, for the agent representation of them.
@@ -476,7 +583,6 @@ global
         
         
         //Remove 2646 and 5727. When creating them in toB
-        
         stop stop_to_remove <- first(created_stops_toA);
         
         //pop it from the stop list
@@ -566,7 +672,7 @@ global
        
         //Calculate minutes passed in the hour by dividing by 60
         minutes <- mod(total_minutes, 60);
-
+		
     
 	}//End reflex update_time
 
@@ -716,7 +822,7 @@ global
         do die;  //CHAO CHAO CHAO CHAO
 	}
 
-
+	
 	/*
 	 * Auxiliar global function to calculate the distance vector between the actual bus position and the next stop scheduled.
 	 * It has for parameters the initial position of the bus, the goal destination and the speed module of the bus
@@ -886,9 +992,7 @@ global
     	//LOAD THE 401 ROUTE
     	do load_401;
 			
-		//Load the input bus departure scheduled times
-		file input_bus_departures <- file("../includes/INPUTS/input_data_buses.txt");
-		
+		//Load the input bus departure scheduled times		
 		file input_json <- json_file("../includes/INPUTS/input_data_buses.json");
 		
 		
