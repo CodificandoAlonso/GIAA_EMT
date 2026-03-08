@@ -486,28 +486,43 @@ global
 		 
 		 map<int,list<float>> local_toA_times;
 		 
+		 list<float> mean_std_values;
+		 
 		 //Do case toA
 		 loop iter from: 0 to: (length(stopNums_toA) -1){
 		 	
+		 	mean_std_values <- [];
 		 	
 		 	if (iter < (length(stopNums_toA) -1)){
 			 	//locate first stopNum
 			 	int stop_code <- stopNums_toA[iter];
 			 	
-			 	//pick up the values and store
-			 	float mean_val <- float(matrix_time_stops_toA[1, iter]);
 			 	
-				float std_val <- float(matrix_time_stops_toA[2, iter]);
+			 	//loop every timeslot for saving its mean and std
+			 	loop timeslot over: timeslots{
+			 		
+				 	float mean_val <- float(matrix_time_stops_toA[(timeslot-5)*2 + 1, iter]);
+				 	
+					float std_val <- float(matrix_time_stops_toA[(timeslot-5)*2 + 2, iter]);
+					
+					mean_std_values << mean_val;
+					mean_std_values << std_val;
+					
+				}
 				
-				local_toA_times << stop_code::[mean_val, std_val];	
-				
-				write "for direction toA i have for stop " + stop_code + " the " + mean_val +" " +  std_val;	
+				local_toA_times << stop_code::mean_std_values;	
 				
 			} else{
-				int stop_code <- stopNums_toA[iter];
-				local_toA_times << stop_code::[0, 0];
-				write "for direction toA i have for stop " + stop_code + " the " + 0 + " " +  0;	
 				
+				//Case last stop. No conections with stops in this direction so 0.0 all the time
+				int stop_code <- stopNums_toA[iter];
+				
+				loop timeslot over: timeslots{
+					mean_std_values << 0.0;
+					mean_std_values << 0.0;
+				}
+				
+				local_toA_times << stop_code::mean_std_values;					
 			}//End ifs
 			
 			
@@ -524,24 +539,38 @@ global
 		 
 		 loop iter from: 0 to: (length(stopNums_toB) -1){
 		 	
+		 	mean_std_values <- [];
 		 	
 		 	if (iter < (length(stopNums_toB) -1)){
 			 	//locate first stopNum
 			 	int stop_code <- stopNums_toB[iter];
 			 	
 			 	//pick up the values and store
-			 	float mean_val <- float(matrix_time_stops_toB[1, iter]);
 			 	
-				float std_val <- float(matrix_time_stops_toB[2, iter]);
-				
-				local_toA_times << stop_code::[mean_val, std_val];	
-				
-				write "for direction toB i have for stop " + stop_code + " the " + mean_val +" " +  std_val;	
+			 	//List to store all the data
+			 	
+			 	loop timeslot over: timeslots{
+			 		
+				 	float mean_val <- float(matrix_time_stops_toB[(timeslot-5)*2 + 1, iter]);
+				 	
+					float std_val <- float(matrix_time_stops_toB[(timeslot-5)*2 + 2, iter]);
+					
+					mean_std_values << mean_val;
+					mean_std_values << std_val;
+					
+				}
+				local_toB_times << stop_code::mean_std_values;	
 				
 			} else{
+				//Case last stop. No conections with stops in this direction so 0.0 all the time
 				int stop_code <- stopNums_toB[iter];
-				local_toA_times << stop_code::[0, 0];
-				write "for direction toB i have for stop " + stop_code + " the " + 0 + " " +  0;	
+				
+				loop timeslot over: timeslots{
+					mean_std_values << 0.0;
+					mean_std_values << 0.0;
+				}
+				
+				local_toB_times << stop_code::mean_std_values;	
 				
 			}//End ifs
 		
@@ -823,105 +852,109 @@ global
 	}
 
 	
-	/*
-	 * Auxiliar global function to calculate the distance vector between the actual bus position and the next stop scheduled.
-	 * It has for parameters the initial position of the bus, the goal destination and the speed module of the bus
-	 * It first calulates the difference for each coordinate
-	 * Then calculates the module of that resultant distance vector
-	 * Consecuently, it refresh the value of the return_vector by multiplying the result calculated before with the relation
-	 * between SPEED_MODULE/DISTANCE_MODULE
-	 * Returns the 2 elem float vector to update the position of the bus
-	 */
-	list <float> vector_distance_calc(point bus_actual_position, point stop_reference, float speed_module) {
-		
-		
-		//RESRVING THE VECTOR COMPONENT DECOMPOSITION TO THE RETURN TYPE
-		list<float> return_vector <- [0.0,0.0];
-		
-		
-		
-		//CALC NEW DISTAMCE VECTOR
-		return_vector[0] <- stop_reference.x - bus_actual_position.x;
-		return_vector[1] <- stop_reference.y - bus_actual_position.y;
-		
-		//write "[DEBUG]: The resultant vector of distances is " + return_vector;
-		
-		
-		
-		//CALC THE MOD OF THE RESULTANT VECTOR
-		float new_mod <- sqrt(return_vector[0]* return_vector[0] + return_vector[1] * return_vector[1]);
-		
-		
-		/*READJUST TO MATCH MOD speed_module FOR THE BUS SPEED
-		*
-		* 
-		*/
-		
-		if (new_mod = 0.0){
-			return return_vector;
-		}
-		
-		
-			//CALC OF THE RELATION BETWEEN THE DISTANCE MOD AND THE SPEED MOD
-		float relation <- speed_module / new_mod;
-		
-			//READJUST THE ELEMENTS OF THE VECTOR TO MATCH THE SCALE
-		return_vector[0] <- return_vector[0] * relation;
-		return_vector[1] <- return_vector[1] * relation;
-		
-		
-		//RETURN
-		return return_vector;
-		
-	}//END FUNCTION CALL vdc
 	
+//DEPRECATED FUNCTIONSSSSS	
 	
-	
-	
-	
-
-
-	/* Auxiliar global function to verify if a bus is inside the "stop catching area". It establish the criteria that the 
-	 * coordinates of the bus must be inside the +- 5 meters range from the stop coordinates
-	 * 
-	 * As parameters, the function takes the bus location and the reference stop coordinates.
-	 * 
-	 */
-	bool is_inside_stop_range(point bus_actual_position, point stop_reference, float speed_module) {
-		
-		//CASE 1. THE COORDINATES MATCHES EXACTY
-		if (bus_actual_position = stop_reference)
-		{
-			return true;
-			
-		}//END IF EQUAL MATCH
-		
-			
-		//CASE INSIDE RANGE 5 MTRS ++
-		list<float> distance_vector <- [0.0,0.0];
-		
-		
-		
-		//CALC DISTAMCE VECTOR
-		distance_vector[0] <- stop_reference.x - bus_actual_position.x;
-		distance_vector[1] <- stop_reference.y - bus_actual_position.y;
-		
-
-		//CALC THE MOD OF THE RESULTANT VECTOR
-		float new_mod <- sqrt(distance_vector[0]* distance_vector[0] + distance_vector[1] * distance_vector[1]);
-		
-		
-		//RN HARCODED, IF THE MODULE OF THE DISTANCE IS < 5. THE FUNCTION WOULD RETURN TRUE
-		if (new_mod < speed_module)
-		{
-			return true;
-		}
-		
-		return false;
-		
-	}//END FUNCTION CALL iisr
-    
-    
+//	
+//	/*
+//	 * Auxiliar global function to calculate the distance vector between the actual bus position and the next stop scheduled.
+//	 * It has for parameters the initial position of the bus, the goal destination and the speed module of the bus
+//	 * It first calulates the difference for each coordinate
+//	 * Then calculates the module of that resultant distance vector
+//	 * Consecuently, it refresh the value of the return_vector by multiplying the result calculated before with the relation
+//	 * between SPEED_MODULE/DISTANCE_MODULE
+//	 * Returns the 2 elem float vector to update the position of the bus
+//	 */
+//	list <float> vector_distance_calc(point bus_actual_position, point stop_reference, float speed_module) {
+//		
+//		
+//		//RESRVING THE VECTOR COMPONENT DECOMPOSITION TO THE RETURN TYPE
+//		list<float> return_vector <- [0.0,0.0];
+//		
+//		
+//		
+//		//CALC NEW DISTAMCE VECTOR
+//		return_vector[0] <- stop_reference.x - bus_actual_position.x;
+//		return_vector[1] <- stop_reference.y - bus_actual_position.y;
+//		
+//		//write "[DEBUG]: The resultant vector of distances is " + return_vector;
+//		
+//		
+//		
+//		//CALC THE MOD OF THE RESULTANT VECTOR
+//		float new_mod <- sqrt(return_vector[0]* return_vector[0] + return_vector[1] * return_vector[1]);
+//		
+//		
+//		/*READJUST TO MATCH MOD speed_module FOR THE BUS SPEED
+//		*
+//		* 
+//		*/
+//		
+//		if (new_mod = 0.0){
+//			return return_vector;
+//		}
+//		
+//		
+//			//CALC OF THE RELATION BETWEEN THE DISTANCE MOD AND THE SPEED MOD
+//		float relation <- speed_module / new_mod;
+//		
+//			//READJUST THE ELEMENTS OF THE VECTOR TO MATCH THE SCALE
+//		return_vector[0] <- return_vector[0] * relation;
+//		return_vector[1] <- return_vector[1] * relation;
+//		
+//		
+//		//RETURN
+//		return return_vector;
+//		
+//	}//END FUNCTION CALL vdc
+//	
+//	
+//	
+//	
+//	
+//
+//
+//	/* Auxiliar global function to verify if a bus is inside the "stop catching area". It establish the criteria that the 
+//	 * coordinates of the bus must be inside the +- 5 meters range from the stop coordinates
+//	 * 
+//	 * As parameters, the function takes the bus location and the reference stop coordinates.
+//	 * 
+//	 */
+//	bool is_inside_stop_range(point bus_actual_position, point stop_reference, float speed_module) {
+//		
+//		//CASE 1. THE COORDINATES MATCHES EXACTY
+//		if (bus_actual_position = stop_reference)
+//		{
+//			return true;
+//			
+//		}//END IF EQUAL MATCH
+//		
+//			
+//		//CASE INSIDE RANGE 5 MTRS ++
+//		list<float> distance_vector <- [0.0,0.0];
+//		
+//		
+//		
+//		//CALC DISTAMCE VECTOR
+//		distance_vector[0] <- stop_reference.x - bus_actual_position.x;
+//		distance_vector[1] <- stop_reference.y - bus_actual_position.y;
+//		
+//
+//		//CALC THE MOD OF THE RESULTANT VECTOR
+//		float new_mod <- sqrt(distance_vector[0]* distance_vector[0] + distance_vector[1] * distance_vector[1]);
+//		
+//		
+//		//RN HARCODED, IF THE MODULE OF THE DISTANCE IS < 5. THE FUNCTION WOULD RETURN TRUE
+//		if (new_mod < speed_module)
+//		{
+//			return true;
+//		}
+//		
+//		return false;
+//		
+//	}//END FUNCTION CALL iisr
+//    
+//    
     
     /*
      * Global function to pass to minutes the time in hh:mm
@@ -966,7 +999,26 @@ global
 	
 	    return return_statement;
 	}
+	
+	
+	
+	
+	float estimate_time_between_stops(int stopNum, string direction){
 		
+		//Define a special case. If timeslot 5 and directions are toB. All the distros are 0.0 because no bus recorded left in ts5 and arrive in ts5to any stops
+		//Just for precaution, in that case, load the TS 6 distributions.
+		if (TimeSlot = 5 and direction = "toB"){
+			float mean <- global_time_stops_values[direction][stopNum][((TimeSlot+1)-5)*2];
+			float std <- global_time_stops_values[direction][stopNum][((TimeSlot+1)-5)*2 + 1];
+			return gauss(mean, std);
+		}
+		
+		float mean <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2];
+		float std <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2 + 1];
+		return gauss(mean, std);	
+
+	}//end function stimate times betwween stops
+	
 	
 		
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -1016,8 +1068,8 @@ global
 				departure_time:: first(departure_times),
 				direction::departure_direction,
 				initial_stop::first(stops_list[departure_direction]).stopName,
-				location::first(stops_list[departure_direction]).location,
-				location_goal::last(stops_list[departure_direction]).location,
+				//location::first(stops_list[departure_direction]).location,
+				//location_goal::last(stops_list[departure_direction]).location,
 				departure_times:: departure_times
 			];
 		}//End loop json
@@ -1077,9 +1129,9 @@ species bus skills: [fipa] {
     //Which direction hes managing(either 'toA' or 'toB')
     string direction;
     
-    
-    //COORDINATES GOAL
-    point location_goal;
+    //DEPRECATED
+//    //COORDINATES GOAL
+//    point location_goal;
     
     
     //DEPARTURE TIME
@@ -1097,9 +1149,6 @@ species bus skills: [fipa] {
     //INITIALLY IN A BUS STOP
     bool stopped <- false;
     
-
-    //MAX SPEED. TODO CHANGE THIS TO HANDLE THE SPEED BY TIME RANDOM VARIABLE
-    float speed_module_vector <- 80.00;
     
     
     //NUMBER OF STOPS REACHED, FOR THE INDEX. INITIALLY 0, to board the first passengers from the stop
@@ -1120,6 +1169,12 @@ species bus skills: [fipa] {
     //BOOL VARIABLE TO DEFINE WHETHER OR NOT THE AGENT IS MOUNTING PASSENGERS
     bool processing_passengers <- false;
     
+    
+    //to know the time between stops. Once reaches 0, it is "considered in the next stop"
+    float time_between_stops;
+    
+    //Variable which acts as an accumulator for the bus distance time between stops. Once its >= self.time_between_stops, is in the next stop.
+    float time_travelled <- 0.0;
     
     //AUXILIAR VARIABLE TO PROCESS THE PASSENGERS
     int passengers_to_process;
@@ -1178,13 +1233,19 @@ species bus skills: [fipa] {
     	if (world.time_to_minutes(world.current_time) >= world.time_to_minutes(departure_time))
     	{
     		allowed_to_leave <- true;
+    		
+    		
+    		//Now calculate the time between points, extracted from the stop the bus is in and the time hes in and the direction hes taking.
+    		time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
+    		
+    		
+    		
     	}//End IF
     	
     }//END reflex start_movements
     
 
-
-    /*
+	/*
      * Reflex function to handle the abstraction of moving the bus between stops.
      * 
      * It invoices auxiliary global functions to handle the movement and verify if the agent is in the area of acceptance
@@ -1196,57 +1257,104 @@ species bus skills: [fipa] {
      */
     reflex move_to_destination when: (arrived = false and stopped = false and allowed_to_leave = true) 
     {
-    
-
-	    //INVOICE THE CALCULATION OF THE MOVEMENT OF THE BUS
-		list<float> new_point <- world.vector_distance_calc(self.location,
-										stops_list[direction][self.stops_reached].location, self.speed_module_vector);
-	
-		
-		//UPDATE THE MOVEMENT
-		self.location <- self.location + {new_point[0], new_point[1]};
-		
-		
-		//CHECK ARRIVAL TO STOP
-		
-		if (world.is_inside_stop_range(self.location, stops_list[direction][self.stops_reached].location, self.speed_module_vector) = true)
-		{
-			//IF THE FUNCTION ENTERS HERE, IT MEANS A STOP HAS BEEN REACHED
-			
-			
-			//FIRST, CHECK IF ITS THE GOAL DESTINATION
-			if (world.is_inside_stop_range(self.location, self.location_goal, self.speed_module_vector) = true)
-			{
+    	
+     	self.time_travelled <- self.time_travelled + step;
+    	
+    	if (self.time_travelled >=  self.time_between_stops){
+    		
+    		//Check if its last stop
+    		if (stops_list[direction][self.stops_reached + 1].stopNum = last(stops_list[direction]).stopNum){
+    			
+    			self.arrived <- true;
+    				
+				self.finished_shift <- true;
 				
-			//THIS MEANS THE TARGET HAS BEEN REACHED
-			self.arrived <- true;
-			
-			self.passengers <- 0;
-			
+    		}else{
+    			//If it enters here, a sop has been reached, but no end destination, so simply stopped = true so it starts handling the board/dropoff
+    			
+    			self.stopped <- true;
 
-			self.finished_shift <- true;
-			
-			
-			}else{
-				//IF IT REACHES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
-				//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
-							
-				//BOOL VARIABLE TO TRUE
-				
-				self.stopped <- true;
-			}//END IF GOAL DESTINATION
+    		}//End if else last direction
 
-		}//END IF STOP REACHED
-
-    }//END REFLEX mtd
+    	}//End if in new stop
+    	
+    	
+    }//end reflex move_to_destination
 
 
-	
+
+//DEPRECATED
+
+//
+//    /*
+//     * Reflex function to handle the abstraction of moving the bus between stops.
+//     * 
+//     * It invoices auxiliary global functions to handle the movement and verify if the agent is in the area of acceptance
+//     * The area of acceptance is necesarry because the code is using float coordinates with very exact precision, 
+//     * so with module 5 vector speed,not always(mainly never) the coordinates will be the same, so a logical function 
+//     * to stablish certain minimum range is necesarry
+//     *
+//     * Once the agent has reached its destination, dies todo THIS WILL CHANGE WHEN LOGICAL BUSES ARE INSERTED
+//     */
+//    reflex move_to_destination when: (arrived = false and stopped = false and allowed_to_leave = true) 
+//    {
+//    
+//
+//	    //INVOICE THE CALCULATION OF THE MOVEMENT OF THE BUS
+//		list<float> new_point <- world.vector_distance_calc(self.location,
+//										stops_list[direction][self.stops_reached].location, self.speed_module_vector);
+//	
+//		
+//		//UPDATE THE MOVEMENT
+//		self.location <- self.location + {new_point[0], new_point[1]};
+//		
+//		
+//		//CHECK ARRIVAL TO STOP
+//		
+//		if (world.is_inside_stop_range(self.location, stops_list[direction][self.stops_reached].location, self.speed_module_vector) = true)
+//		{
+//			//IF THE FUNCTION ENTERS HERE, IT MEANS A STOP HAS BEEN REACHED
+//			
+//			
+//			//FIRST, CHECK IF ITS THE GOAL DESTINATION
+//			if (world.is_inside_stop_range(self.location, self.location_goal, self.speed_module_vector) = true)
+//			{
+//				
+//			//THIS MEANS THE TARGET HAS BEEN REACHED
+//			self.arrived <- true;
+//			
+//			self.passengers <- 0;
+//			
+//
+//			self.finished_shift <- true;
+//			
+//			
+//			}else{
+//				//IF IT REACHES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
+//				//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
+//							
+//				//BOOL VARIABLE TO TRUE
+//				
+//				self.stopped <- true;
+//			}//END IF GOAL DESTINATION
+//
+//		}//END IF STOP REACHED
+//
+//    }//END REFLEX mtd
+//
+//
+//	
 	
 	/*
-	 * Reflex used to handle the shifting process. NIGHT NOW, IT MEANS END OF THE BUS SO DIEEEE
+	 * Reflex used to handle the shifting process.
 	 */
 	reflex handle_shifts when: (self.finished_shift = true){
+		
+		
+		//it needs to write the last stop information.
+		save [world.name, self.name, stops_list[self.direction][self.stops_reached].stopNum, 
+			current_time, 0, 0,self.passengers,0 ,self.time_travelled] 
+    	to: '../logs/log_' + world.name + '.csv' format: "csv" rewrite: false;
 		
 		self.finished_shift <- false;
 		
@@ -1274,8 +1382,9 @@ species bus skills: [fipa] {
 		//reset the variables
 		stops_reached <- 0;
 	    arrived <- false;
-	    location <- first(stops_list[direction]).location;
-	    location_goal <- last(stops_list[direction]).location;
+	    //DEPREATED
+	    //location <- first(stops_list[direction]).location;
+	    //location_goal <- last(stops_list[direction]).location;
 	}
 
 
@@ -1366,7 +1475,7 @@ species bus skills: [fipa] {
 	 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
 	 */
 	save [world.name, self.name, stops_list[self.direction][self.stops_reached].stopNum, 
-			current_time, boards, residual_boards,dropoffs,self.passengers] 
+			current_time, boards, residual_boards,dropoffs,self.passengers,self.time_travelled] 
     	to: '../logs/log_' + world.name + '.csv' format: "csv" rewrite: false;
 		
 	}//end reflex handle stop answer
@@ -1382,6 +1491,7 @@ species bus skills: [fipa] {
 		list ha <- agree_resp.contents;
 		ha <- inform_resp.contents;
     	
+    	self.time_travelled <- 0.0;
     	self.processing_passengers <- false;
     	self.waiting <- false;
     	self.stops_reached <- self.stops_reached + 1;
