@@ -1143,7 +1143,7 @@ species bus skills: [fipa] {
      
     
     //INITIALLY NOT IN GOAL DESTINATION
-    bool arrived <- false;
+    bool arrived_to_end <- false;
     
     
     //INITIALLY IN A BUS STOP
@@ -1200,7 +1200,6 @@ species bus skills: [fipa] {
     bool finished_shift <- false;
     
         
-    
     //DEFAULT ASPECT FOR THE GUI EXPERIMENT
     aspect default {
         if (self.stopped) 
@@ -1220,7 +1219,8 @@ species bus skills: [fipa] {
         
     }//END ASPECT DEF
     
-   
+
+
 	/*
      * Reflex function to handle the abstraction not allowing the bus to leave
      * Until the departure_time is set.
@@ -1234,12 +1234,10 @@ species bus skills: [fipa] {
     	{
     		allowed_to_leave <- true;
     		
-    		
-    		//Now calculate the time between points, extracted from the stop the bus is in and the time hes in and the direction hes taking.
-    		time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
-    		
-    		
-    		
+    		//as it is the first stop, no need to trigger the time between stops. Just starts the comms with the bus
+    		//time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
+    		//Set stopped as true so comm with the first stop
+    		self.stopped <- true;
     	}//End IF
     	
     }//END reflex start_movements
@@ -1255,7 +1253,7 @@ species bus skills: [fipa] {
      *
      * Once the agent has reached its destination, dies todo THIS WILL CHANGE WHEN LOGICAL BUSES ARE INSERTED
      */
-    reflex move_to_destination when: (arrived = false and stopped = false and allowed_to_leave = true) 
+    reflex move_to_destination when: (arrived_to_end = false and stopped = false and allowed_to_leave = true)
     {
     	
      	self.time_travelled <- self.time_travelled + step;
@@ -1265,7 +1263,7 @@ species bus skills: [fipa] {
     		//Check if its last stop
     		if (stops_list[direction][self.stops_reached + 1].stopNum = last(stops_list[direction]).stopNum){
     			
-    			self.arrived <- true;
+    			self.arrived_to_end <- true;
     				
 				self.finished_shift <- true;
 				
@@ -1282,68 +1280,6 @@ species bus skills: [fipa] {
     }//end reflex move_to_destination
 
 
-
-//DEPRECATED
-
-//
-//    /*
-//     * Reflex function to handle the abstraction of moving the bus between stops.
-//     * 
-//     * It invoices auxiliary global functions to handle the movement and verify if the agent is in the area of acceptance
-//     * The area of acceptance is necesarry because the code is using float coordinates with very exact precision, 
-//     * so with module 5 vector speed,not always(mainly never) the coordinates will be the same, so a logical function 
-//     * to stablish certain minimum range is necesarry
-//     *
-//     * Once the agent has reached its destination, dies todo THIS WILL CHANGE WHEN LOGICAL BUSES ARE INSERTED
-//     */
-//    reflex move_to_destination when: (arrived = false and stopped = false and allowed_to_leave = true) 
-//    {
-//    
-//
-//	    //INVOICE THE CALCULATION OF THE MOVEMENT OF THE BUS
-//		list<float> new_point <- world.vector_distance_calc(self.location,
-//										stops_list[direction][self.stops_reached].location, self.speed_module_vector);
-//	
-//		
-//		//UPDATE THE MOVEMENT
-//		self.location <- self.location + {new_point[0], new_point[1]};
-//		
-//		
-//		//CHECK ARRIVAL TO STOP
-//		
-//		if (world.is_inside_stop_range(self.location, stops_list[direction][self.stops_reached].location, self.speed_module_vector) = true)
-//		{
-//			//IF THE FUNCTION ENTERS HERE, IT MEANS A STOP HAS BEEN REACHED
-//			
-//			
-//			//FIRST, CHECK IF ITS THE GOAL DESTINATION
-//			if (world.is_inside_stop_range(self.location, self.location_goal, self.speed_module_vector) = true)
-//			{
-//				
-//			//THIS MEANS THE TARGET HAS BEEN REACHED
-//			self.arrived <- true;
-//			
-//			self.passengers <- 0;
-//			
-//
-//			self.finished_shift <- true;
-//			
-//			
-//			}else{
-//				//IF IT REACHES HERE, NO GOAL DESTINATION YET, BUT STILL IN A STOP, SO IT COMUNICATES 
-//				//WITH THE STOP AGENT WITH THE ACTION HANDLE_STOP
-//							
-//				//BOOL VARIABLE TO TRUE
-//				
-//				self.stopped <- true;
-//			}//END IF GOAL DESTINATION
-//
-//		}//END IF STOP REACHED
-//
-//    }//END REFLEX mtd
-//
-//
-//	
 	
 	/*
 	 * Reflex used to handle the shifting process.
@@ -1374,17 +1310,16 @@ species bus skills: [fipa] {
 		if (world.time_to_minutes(self.departure_time) < world.time_to_minutes(current_time)){
 			//Delayed, but allowed to leave
 			allowed_to_leave <- true;
-			
+			stops_reached <- 0;
+			time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
 		}else{
 			allowed_to_leave <- false;
 		}
 		
 		//reset the variables
 		stops_reached <- 0;
-	    arrived <- false;
-	    //DEPREATED
-	    //location <- first(stops_list[direction]).location;
-	    //location_goal <- last(stops_list[direction]).location;
+	    arrived_to_end <- false;
+	    self.passengers <- 0;
 	}
 
 
@@ -1431,8 +1366,12 @@ species bus skills: [fipa] {
 
 		message agree_query <- agrees at 0;
 		
-		list hi <- agree_query.contents;
+		list content_agree <- agree_query.contents;
 
+		if (content_agree != ["Here is the passenger list"]){
+			write "RARUNO";
+		}
+		
 		message inform_data_stop <- informs at 0;
 		
 		//First, handle dropoffs
@@ -1496,6 +1435,7 @@ species bus skills: [fipa] {
     	self.waiting <- false;
     	self.stops_reached <- self.stops_reached + 1;
     	self.stopped <- false;
+		time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
     }
     
     
@@ -1584,7 +1524,8 @@ species stop skills: [fipa]  {
     	//CHECK OUT THE RECEIVING MESSAGE
 		message queryFromInitiator <- queries at 0;
 		
-		if (list(queryFromInitiator.contents)[0] = 'Bus arrived to stop'){
+		if (list(queryFromInitiator.contents)[0] != 'Bus arrived to stop'){
+			write "QUE PUÑETAAS";
 		}
 		
 		//THIS IS WRONG. THIS SHOULD BE GENERATED FROM THE SIM. In this case of performance, DropOff is just the indicator of how many it
