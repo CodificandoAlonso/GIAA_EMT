@@ -355,7 +355,7 @@ def generate_gaussian_per_slot_daily(dataframeinput: pd.DataFrame, param_to_gaus
 
 
     #FUERA CASOS MAL MEDIDOS
-    dataframe = dataframeinput[dataframeinput["Occupation"] <= 65]
+    dataframe = dataframeinput[dataframeinput["Occupation"] <= 80]
     dataframe = dataframe[dataframe["Occupation"] >= 0]
 
     stopnum = dataframe["Stop"].iloc[0]

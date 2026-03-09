@@ -251,9 +251,23 @@ global
 						boards_dropoffs_per_timeslot << "Boards"::[element_boards[3], element_boards[4], element_boards[5]];
 						
 						boards_dropoffs_per_timeslot << "DropOffs"::element_dropoffs;
+						
+						//Limit case for those buses finishing later than24:00
+						if (timeslot = 23){
+							//Save in the third dictionary 
+							boards_dropoffs_per_timeslot << "Boards"::[element_boards[3], element_boards[4], element_boards[5]];
+							
+							boards_dropoffs_per_timeslot << "DropOffs"::element_dropoffs;
+						}
 							
 						//Save the third dictionary in the second dictionary				
 						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
+						
+						//Limit case for those buses finishing later than24:00
+						if (timeslot = 23){
+							map_per_stop << (timeslot +1) ::boards_dropoffs_per_timeslot;
+							map_per_stop << (timeslot +2) ::boards_dropoffs_per_timeslot;
+						}
 						
     				}//End loop Timeslots
 
@@ -298,6 +312,12 @@ global
 							
 						//Save the third dictionary in the second dictionary				
 						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
+						
+						//Limit case for those buses finishing later than24:00
+						if (timeslot = 23){
+							map_per_stop << (timeslot +1) ::boards_dropoffs_per_timeslot;
+							map_per_stop << (timeslot +2) ::boards_dropoffs_per_timeslot;
+						}
 						
     				}//End loop Timeslots
 
@@ -400,8 +420,17 @@ global
 						
 						boards_dropoffs_per_timeslot << "DropOffs"::[element_dropoffs[0], element_dropoffs[1], element_dropoffs[2]];
 							
+
+						
+						
 						//Save the third dictionary in the second dictionary				
 						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
+						
+						//Limit case for those buses finishing later than24:00
+						if (timeslot = 23){
+							map_per_stop << (timeslot +1) ::boards_dropoffs_per_timeslot;
+							map_per_stop << (timeslot +2) ::boards_dropoffs_per_timeslot;
+						}
 						
     				}//End loop Timeslots
 
@@ -443,10 +472,17 @@ global
 						boards_dropoffs_per_timeslot << "Boards"::[element_boards[3], element_boards[4], element_boards[5]];
 						
 						boards_dropoffs_per_timeslot << "DropOffs"::[element_dropoffs[3], element_dropoffs[4], element_dropoffs[5]];
-							
-							
+
+						
+						
 						//Save the third dictionary in the second dictionary				
 						map_per_stop << timeslot::boards_dropoffs_per_timeslot;
+						
+						//Limit case for those buses finishing later than24:00
+						if (timeslot = 23){
+							map_per_stop << (timeslot +1) ::boards_dropoffs_per_timeslot;
+							map_per_stop << (timeslot +2) ::boards_dropoffs_per_timeslot;
+						}
 						
     				}//End loop Timeslots
 
@@ -508,6 +544,12 @@ global
 					mean_std_values << mean_val;
 					mean_std_values << std_val;
 					
+					
+					if (timeslot = 23){
+						mean_std_values << mean_val;
+						mean_std_values << std_val;
+					}
+					
 				}
 				
 				local_toA_times << stop_code::mean_std_values;	
@@ -520,6 +562,11 @@ global
 				loop timeslot over: timeslots{
 					mean_std_values << 0.0;
 					mean_std_values << 0.0;
+					
+					if (timeslot = 23){
+						mean_std_values << 0.0;
+						mean_std_values << 0.0;
+					}
 				}
 				
 				local_toA_times << stop_code::mean_std_values;					
@@ -558,7 +605,14 @@ global
 					mean_std_values << mean_val;
 					mean_std_values << std_val;
 					
-				}
+					if (timeslot = 23){
+						mean_std_values << mean_val;
+						mean_std_values << std_val;
+					}
+					
+				}//End loop timeslot
+				
+				
 				local_toB_times << stop_code::mean_std_values;	
 				
 			} else{
@@ -568,7 +622,13 @@ global
 				loop timeslot over: timeslots{
 					mean_std_values << 0.0;
 					mean_std_values << 0.0;
+					
+					if (timeslot = 23){
+						mean_std_values << 0.0;
+						mean_std_values << 0.0;
+					}
 				}
+				
 				
 				local_toB_times << stop_code::mean_std_values;	
 				
@@ -828,9 +888,7 @@ global
 		loop stop_iter over: all_unique_stops{
 			stop_iter.passengers_to_be_generated <- stop_iter.passengers_to_be_generated + 
 						stops_distribution_values[stop_iter.stopNum][int(mod(time, 3600) / step)];
-			
-			//int to_generate <- int(stop_iter.passengers_to_be_generated);
-			
+						
 			
 			int passengers_generated_new <- int(stop_iter.passengers_to_be_generated);
 			
@@ -848,113 +906,11 @@ global
 	 * Reflex to handle the END of the sim once no bus is kept alive
 	 */ 
 	reflex end_real_simulation when: empty(bus){
+		write "Ending execution " + world.name;
         do die;  //CHAO CHAO CHAO CHAO
 	}
 
 	
-	
-//DEPRECATED FUNCTIONSSSSS	
-	
-//	
-//	/*
-//	 * Auxiliar global function to calculate the distance vector between the actual bus position and the next stop scheduled.
-//	 * It has for parameters the initial position of the bus, the goal destination and the speed module of the bus
-//	 * It first calulates the difference for each coordinate
-//	 * Then calculates the module of that resultant distance vector
-//	 * Consecuently, it refresh the value of the return_vector by multiplying the result calculated before with the relation
-//	 * between SPEED_MODULE/DISTANCE_MODULE
-//	 * Returns the 2 elem float vector to update the position of the bus
-//	 */
-//	list <float> vector_distance_calc(point bus_actual_position, point stop_reference, float speed_module) {
-//		
-//		
-//		//RESRVING THE VECTOR COMPONENT DECOMPOSITION TO THE RETURN TYPE
-//		list<float> return_vector <- [0.0,0.0];
-//		
-//		
-//		
-//		//CALC NEW DISTAMCE VECTOR
-//		return_vector[0] <- stop_reference.x - bus_actual_position.x;
-//		return_vector[1] <- stop_reference.y - bus_actual_position.y;
-//		
-//		//write "[DEBUG]: The resultant vector of distances is " + return_vector;
-//		
-//		
-//		
-//		//CALC THE MOD OF THE RESULTANT VECTOR
-//		float new_mod <- sqrt(return_vector[0]* return_vector[0] + return_vector[1] * return_vector[1]);
-//		
-//		
-//		/*READJUST TO MATCH MOD speed_module FOR THE BUS SPEED
-//		*
-//		* 
-//		*/
-//		
-//		if (new_mod = 0.0){
-//			return return_vector;
-//		}
-//		
-//		
-//			//CALC OF THE RELATION BETWEEN THE DISTANCE MOD AND THE SPEED MOD
-//		float relation <- speed_module / new_mod;
-//		
-//			//READJUST THE ELEMENTS OF THE VECTOR TO MATCH THE SCALE
-//		return_vector[0] <- return_vector[0] * relation;
-//		return_vector[1] <- return_vector[1] * relation;
-//		
-//		
-//		//RETURN
-//		return return_vector;
-//		
-//	}//END FUNCTION CALL vdc
-//	
-//	
-//	
-//	
-//	
-//
-//
-//	/* Auxiliar global function to verify if a bus is inside the "stop catching area". It establish the criteria that the 
-//	 * coordinates of the bus must be inside the +- 5 meters range from the stop coordinates
-//	 * 
-//	 * As parameters, the function takes the bus location and the reference stop coordinates.
-//	 * 
-//	 */
-//	bool is_inside_stop_range(point bus_actual_position, point stop_reference, float speed_module) {
-//		
-//		//CASE 1. THE COORDINATES MATCHES EXACTY
-//		if (bus_actual_position = stop_reference)
-//		{
-//			return true;
-//			
-//		}//END IF EQUAL MATCH
-//		
-//			
-//		//CASE INSIDE RANGE 5 MTRS ++
-//		list<float> distance_vector <- [0.0,0.0];
-//		
-//		
-//		
-//		//CALC DISTAMCE VECTOR
-//		distance_vector[0] <- stop_reference.x - bus_actual_position.x;
-//		distance_vector[1] <- stop_reference.y - bus_actual_position.y;
-//		
-//
-//		//CALC THE MOD OF THE RESULTANT VECTOR
-//		float new_mod <- sqrt(distance_vector[0]* distance_vector[0] + distance_vector[1] * distance_vector[1]);
-//		
-//		
-//		//RN HARCODED, IF THE MODULE OF THE DISTANCE IS < 5. THE FUNCTION WOULD RETURN TRUE
-//		if (new_mod < speed_module)
-//		{
-//			return true;
-//		}
-//		
-//		return false;
-//		
-//	}//END FUNCTION CALL iisr
-//    
-//    
     
     /*
      * Global function to pass to minutes the time in hh:mm
@@ -1010,12 +966,17 @@ global
 		if (TimeSlot = 5 and direction = "toB"){
 			float mean <- global_time_stops_values[direction][stopNum][((TimeSlot+1)-5)*2];
 			float std <- global_time_stops_values[direction][stopNum][((TimeSlot+1)-5)*2 + 1];
-			return gauss(mean, std);
+			return max(gauss(mean, std), step);
+		}
+		if (TimeSlot >= 24){
+			float mean <- global_time_stops_values[direction][stopNum][((23)-5)*2];
+			float std <- global_time_stops_values[direction][stopNum][((23)-5)*2 + 1];
+			return max(gauss(mean, std), step);
 		}
 		
 		float mean <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2];
 		float std <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2 + 1];
-		return gauss(mean, std);	
+		return max(gauss(mean, std), step);	
 
 	}//end function stimate times betwween stops
 	
@@ -1046,52 +1007,37 @@ global
 			
 		//Load the input bus departure scheduled times		
 		file input_json <- json_file("../includes/INPUTS/input_data_buses.json");
+		map json_map <- input_json.contents;
 		
+		loop bus_key over: json_map.keys {
+		    
+		    list logical_bus <- json_map[bus_key];
+		    
+		    //Map the bus id code
+		    string bus_id <- string(bus_key);
+		    
+		    string departure_direction;
+		    if (list(list(logical_bus)[0])[0] = '2646'){
+		        departure_direction <- "toA";
+		    } else {
+		        departure_direction <- "toB";
+		    }
 		
-		loop logical_bus over: input_json {
-			
-			string departure_direction;
-			if (list(list(logical_bus)[0])[0] = '2646'){
-					departure_direction <- "toA";
-				}
-				else{
-					departure_direction <- "toB";
-				}
+		    list<string> departure_times;
+		    loop departures over: list(logical_bus){
+		        departure_times << list(departures)[1];
+		    }
+		
+		    create bus with: [
+		        id:: bus_id,
+		        departure_time:: first(departure_times),
+		        direction:: departure_direction,
+		        initial_stop:: first(stops_list[departure_direction]).stopName,
+		        departure_times:: departure_times
+		    ];
+		}
+		
 
-			list <string> departure_times;
-			loop departures over: list(logical_bus){
-				departure_times << list(departures)[1];
-			}
-			
-			
-			create bus with: [
-				departure_time:: first(departure_times),
-				direction::departure_direction,
-				initial_stop::first(stops_list[departure_direction]).stopName,
-				//location::first(stops_list[departure_direction]).location,
-				//location_goal::last(stops_list[departure_direction]).location,
-				departure_times:: departure_times
-			];
-		}//End loop json
-		
-		
-		
-//		//Create one bus for each input departure parameter
-//		loop dep_time over: input_bus_departures {
-//			
-//						
-//			//CREATE THE BUS SPECIE WITH THE REQUIRED NECESSARY INFO
-//			create bus with:[
-//			departure_time :: dep_time,
-//			direction::"toA",
-//    		initial_stop :: first(stops_list_toA).stopName,
-//    		destination_stopname :: last(stops_list_toA).stopName,
-//    		location :: first(stops_list_toA).location,
-//    		location_goal :: last(stops_list_toA).location
-//    		]; //END WITH
-//			
-//			
-//    	}//End loop input_buses_gateaways
     	
 
     }//END INIT
@@ -1125,7 +1071,9 @@ species bus skills: [fipa] {
 	//INITIAL_POS
     string initial_stop;
     
-
+	
+	string id;
+	
     //Which direction hes managing(either 'toA' or 'toB')
     string direction;
     
@@ -1260,10 +1208,14 @@ species bus skills: [fipa] {
     	
     	if (self.time_travelled >=  self.time_between_stops){
     		
+    		
     		//Check if its last stop
-    		if (stops_list[direction][self.stops_reached + 1].stopNum = last(stops_list[direction]).stopNum){
+    		if (stops_list[direction][self.stops_reached].stopNum = last(stops_list[direction]).stopNum){
     			
     			self.arrived_to_end <- true;
+    			
+    			//"move" to the last stop
+    			//self.stops_reached <- self.stops_reached + 1;
     				
 				self.finished_shift <- true;
 				
@@ -1286,12 +1238,12 @@ species bus skills: [fipa] {
 	 */
 	reflex handle_shifts when: (self.finished_shift = true){
 		
-		
 		//it needs to write the last stop information.
-		save [world.name, self.name, stops_list[self.direction][self.stops_reached].stopNum, 
-			current_time, 0, 0,self.passengers,0 ,self.time_travelled] 
-    	to: '../logs/log_' + world.name + '.csv' format: "csv" rewrite: false;
-		
+		save [world.name, self.id, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+		current_time, TimeSlot,0, 0,self.passengers,0,self.time_travelled]
+    	to: '../logs/RESULTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
+    	
+    	
 		self.finished_shift <- false;
 		
 		
@@ -1311,15 +1263,26 @@ species bus skills: [fipa] {
 			//Delayed, but allowed to leave
 			allowed_to_leave <- true;
 			stops_reached <- 0;
-			time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
-		}else{
-			allowed_to_leave <- false;
+			//No need to  ths, as in the first sop no need of travelling. The bus is already there
+			self.stopped <- true;
+			//time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
+			
+			//If it enters here, it means a delay is produced,so there will be a writing inside a EVENTS.log
+			//The order of the variables will be world.name, id of the bus, StopCode, EVENTCODE, Current Time, Departure Time
+			//And Current time - departure time
+			save [world.name, self.id, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+				"DELAY", current_time, self.departure_time, world.time_to_minutes(current_time) -world.time_to_minutes(self.departure_time)] 
+    			to: '../logs/EVENTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
 		}
+		else{
+			allowed_to_leave <- false;
+		}//End case if the bus is arriving late to its next departure
 		
 		//reset the variables
 		stops_reached <- 0;
 	    arrived_to_end <- false;
 	    self.passengers <- 0;
+	    self.time_travelled <- 0.0;
 	}
 
 
@@ -1359,6 +1322,7 @@ species bus skills: [fipa] {
     }//END REFLEX handle stop
     
     
+    
     /*
      * Reflex function to handle the board/Dropoff of passengers. It reads the content */
     reflex handle_stop_answer when: (self.processing_passengers = true and cycle > self.comms_cycle and self.waiting = false and !empty(agrees))
@@ -1379,6 +1343,7 @@ species bus skills: [fipa] {
 		
 		if (dropoffs > self.passengers){
 			self.passengers <- 0;
+			dropoffs <- self.passengers;
 		}
 		else{
 			self.passengers <- self.passengers - dropoffs;
@@ -1413,10 +1378,11 @@ species bus skills: [fipa] {
 	 * Write in the .log the result of the stop procedure. IN this log, it will be saved (Simulation ID, Bus realizing it, StopCode, Time
 	 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
 	 */
-	save [world.name, self.name, stops_list[self.direction][self.stops_reached].stopNum, 
-			current_time, boards, residual_boards,dropoffs,self.passengers,self.time_travelled] 
-    	to: '../logs/log_' + world.name + '.csv' format: "csv" rewrite: false;
-		
+	save [world.name, self.id, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+			current_time, TimeSlot, boards, residual_boards,dropoffs,self.passengers,self.time_travelled] 
+    	to: '../logs/RESULTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
+    	
+	
 	}//end reflex handle stop answer
     
     
@@ -1427,8 +1393,12 @@ species bus skills: [fipa] {
     	message agree_resp <- agrees at 0;
 		message inform_resp <- informs at 0;
 		
-		list ha <- agree_resp.contents;
-		ha <- inform_resp.contents;
+		if (agree_resp.contents != ["Ok"]){
+			write "ERROR";
+		}
+		if (inform_resp.contents != ["Done"]){
+			write "ERROR";
+		}
     	
     	self.time_travelled <- 0.0;
     	self.processing_passengers <- false;
@@ -1436,7 +1406,8 @@ species bus skills: [fipa] {
     	self.stops_reached <- self.stops_reached + 1;
     	self.stopped <- false;
 		time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
-    }
+		
+    }//End reflex verify stop and restart way
     
     
 }//End specie bus
@@ -1471,11 +1442,6 @@ species stop skills: [fipa]  {
     //DISTANCE FROM ORIGIN
     int distance;
     
-    
-    //Variable which will contain the passengers that are waiting in the stop.
-    
-    //DEPRECATED
-    //list<passenger> passengers_list;
     
     
     //MAP CONTAINING THE DISTRIBUTIONS FOR THE DAY
@@ -1620,8 +1586,6 @@ species route {
 
 
 
-
-
 /*
  * Experiment to test out the result of the code
  * 
@@ -1655,7 +1619,6 @@ experiment test type: gui {
     }//END OUTPUT
   
 }//END EXPERIMENT
-
 
 
 
