@@ -17,9 +17,10 @@ HPC_CORES=10
 
 # ----------------------------- DIRECTORIOS --------------------------------
 
-TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
-BASE_DIR="./GAMA/src/TEST_MOBILITY/logs/SIMULATION_${TIMESTAMP}"
 
+TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
+BASE_DIR="./WEB_DEVEL/data/logs/SIMULATION_${TIMESTAMP}"
+mkdir -p "./WEB_DEVEL/data/logs"
 mkdir -p "$BASE_DIR/RESULTS"
 mkdir -p "$BASE_DIR/EVENTS"
 
