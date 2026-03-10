@@ -1,0 +1,2072 @@
+[2026-03-09 19:20:00] [INFO] ==========================================
+[2026-03-09 19:20:00] [INFO]   GAMA BATCH EXECUTION PIPELINE
+[2026-03-09 19:20:00] [INFO] ==========================================
+[2026-03-09 19:20:00] [INFO] Batch experiment: batch_1000
+[2026-03-09 19:20:00] [INFO] HPC cores: 10
+[2026-03-09 19:20:00] [INFO] Model: GAMA/src/TEST_MOBILITY/models/mobility_performance.gaml
+[2026-03-09 19:20:00] [INFO] Output directory: ./GAMA/src/TEST_MOBILITY/logs/SIMULATION_20260309_192000
+[2026-03-09 19:20:00] [INFO] --- Phase 1: Cleanup ---
+[2026-03-09 19:20:00] [INFO] Cleaning up previous GAMA workspace directories...
+[2026-03-09 19:20:00] [SUCCESS] Cleanup completed in 0s
+[2026-03-09 19:20:00] [INFO] --- Phase 2: Batch Execution ---
+[2026-03-09 19:20:00] [INFO] Starting GAMA headless batch execution...
+******************************************************************
+* GAMA version 2025.6.4                                         *
+* http://gama-platform.org                                       *
+* (c) 2007-2025 UMI 209 UMMISCO IRD/SU & Partners                *
+******************************************************************
+> FLAG  : enable_debug                                  set to________ true
+> FLAG  : enable_logging                                set to________ true
+> FLAG  : use_global_preference_store                   set to________ true
+> JAI   : ImageIO extensions                            loaded for____ BTF|TF8|TIF|TIFF|arx|asc|bmp|btf|gif|jp2|jpeg|jpg|pbm|pgm|png|ppm|tf8|tif|tiff|wbmp
+> GAMA  : version 2025.6.4                              loading on____ Linux 6.17.0-14-generic, processor amd64, JDK OpenJDK 64-Bit Server VM Eclipse Adoptium version 21.0.7+6-LTS
+> GAMA  : Plugin gama.core                              loaded in_____ 307ms
+> GAMA  : Plugin gama.extension.bdi                     loaded in_____ 21ms
+> GAMA  : Plugin gama.extension.database                loaded in_____ 36ms
+> GAMA  : Plugin gama.extension.fipa                    loaded in_____ 3ms
+> GAMA  : Snapshot services                             active________ (gui mode)
+> GAMA  : Plugin gama.extension.image                   loaded in_____ 48ms
+> GAMA  : Plugin gama.extension.maths                   loaded in_____ 18ms
+> GAMA  : Plugin gama.extension.network                 loaded in_____ 1ms
+> GAMA  : Plugin gama.extension.pedestrian              loaded in_____ 6ms
+> GAMA  : Plugin gama.extension.physics                 loaded in_____ 4ms
+> GAMA  : Plugin gama.extension.serialize               loaded in_____ 3ms
+> GAMA  : Plugin gama.extension.stats                   loaded in_____ 8ms
+> GAMA  : Plugin gama.extension.traffic                 loaded in_____ 8ms
+> GAMA  : Plugin gama.headless                          loaded in_____ 1ms
+> GAML  : Initializing parser                           done in_______ 82ms
+> GAMA  : Plugin gaml.compiler                          loaded in_____ 85ms
+> GAMA  : Loading extensions to 'create'                done in_______ 1ms
+> GAMA  : Loading extensions to 'save'                  done in_______ 28ms
+> GAMA  : Loading extensions to 'draw'                  done in_______ 1ms
+> GAMA  : Loading extensions to 'event'                 done in_______ 0ms
+> GAMA  : Gathering built-in models                     done in_______ 1ms
+> GAMA  : Loading constants                             done in_______ 49ms
+> GAML  : Plugins with language additions               loaded in_____ 658ms
+GAMA configuring and loading...
+> GAML  : Artifacts                                     built in______ 17ms
+Ending execution Simulation 9
+
+Ending execution Simulation 1
+
+Ending execution Simulation 4
+
+Ending execution Simulation 2
+
+Ending execution Simulation 5
+
+Ending execution Simulation 6
+
+Ending execution Simulation 8
+
+Ending execution Simulation 7
+
+Ending execution Simulation 3
+
+Ending execution Simulation 0
+
+Ending execution Simulation 14
+
+Ending execution Simulation 10
+
+Ending execution Simulation 17
+
+Ending execution Simulation 12
+
+Ending execution Simulation 13
+
+Ending execution Simulation 16
+
+Ending execution Simulation 15
+
+Ending execution Simulation 11
+
+Ending execution Simulation 18
+
+Ending execution Simulation 19
+
+Ending execution Simulation 20
+
+Ending execution Simulation 21
+
+Ending execution Simulation 24
+
+Ending execution Simulation 25
+
+Ending execution Simulation 22
+
+Ending execution Simulation 23
+
+Ending execution Simulation 26
+
+Ending execution Simulation 27
+
+Ending execution Simulation 28
+
+Ending execution Simulation 34
+
+Ending execution Simulation 33
+
+Ending execution Simulation 32
+
+Ending execution Simulation 29
+
+Ending execution Simulation 30
+
+Ending execution Simulation 31
+
+Ending execution Simulation 35
+
+Ending execution Simulation 36
+
+Ending execution Simulation 37
+
+Ending execution Simulation 40
+
+Ending execution Simulation 41
+
+Ending execution Simulation 39
+
+Ending execution Simulation 38
+
+Ending execution Simulation 42
+
+Ending execution Simulation 44
+
+Ending execution Simulation 43
+
+Ending execution Simulation 45
+
+Ending execution Simulation 46
+
+Ending execution Simulation 49
+
+Ending execution Simulation 48
+
+Ending execution Simulation 47
+
+Ending execution Simulation 50
+
+Ending execution Simulation 51
+
+Ending execution Simulation 52
+
+Ending execution Simulation 53
+
+Ending execution Simulation 57
+
+Ending execution Simulation 55
+
+Ending execution Simulation 56
+
+Ending execution Simulation 54
+
+Ending execution Simulation 58
+
+Ending execution Simulation 59
+
+Ending execution Simulation 60
+
+Ending execution Simulation 64
+
+Ending execution Simulation 62
+
+Ending execution Simulation 61
+
+Ending execution Simulation 63
+
+Ending execution Simulation 65
+
+Ending execution Simulation 66
+
+Ending execution Simulation 68
+
+Ending execution Simulation 67
+
+Ending execution Simulation 69
+
+Ending execution Simulation 72
+
+Ending execution Simulation 70
+
+Ending execution Simulation 71
+
+Ending execution Simulation 73
+
+Ending execution Simulation 75
+
+Ending execution Simulation 74
+
+Ending execution Simulation 77
+
+Ending execution Simulation 76
+
+Ending execution Simulation 78
+
+Ending execution Simulation 79
+
+Ending execution Simulation 80
+
+Ending execution Simulation 81
+
+Ending execution Simulation 82
+
+Ending execution Simulation 83
+
+Ending execution Simulation 84
+
+Ending execution Simulation 85
+
+Ending execution Simulation 87
+
+Ending execution Simulation 86
+
+Ending execution Simulation 88
+
+Ending execution Simulation 89
+
+Ending execution Simulation 90
+
+Ending execution Simulation 91
+
+Ending execution Simulation 92
+
+Ending execution Simulation 93
+
+Ending execution Simulation 94
+
+Ending execution Simulation 95
+
+Ending execution Simulation 96
+
+Ending execution Simulation 98
+
+Ending execution Simulation 97
+
+Ending execution Simulation 99
+
+Ending execution Simulation 100
+
+Ending execution Simulation 101
+
+Ending execution Simulation 103
+
+Ending execution Simulation 102
+
+Ending execution Simulation 104
+
+Ending execution Simulation 105
+
+Ending execution Simulation 106
+
+Ending execution Simulation 107
+
+Ending execution Simulation 108
+
+Ending execution Simulation 109
+
+Ending execution Simulation 110
+
+Ending execution Simulation 111
+
+Ending execution Simulation 113
+
+Ending execution Simulation 112
+
+Ending execution Simulation 114
+
+Ending execution Simulation 116
+
+Ending execution Simulation 117
+
+Ending execution Simulation 115
+
+Ending execution Simulation 118
+
+Ending execution Simulation 119
+
+Ending execution Simulation 120
+
+Ending execution Simulation 121
+
+Ending execution Simulation 122
+
+Ending execution Simulation 123
+
+Ending execution Simulation 125
+
+Ending execution Simulation 124
+
+Ending execution Simulation 126
+
+Ending execution Simulation 127
+
+Ending execution Simulation 128
+
+Ending execution Simulation 129
+
+Ending execution Simulation 130
+
+Ending execution Simulation 131
+
+Ending execution Simulation 132
+
+Ending execution Simulation 133
+
+Ending execution Simulation 134
+
+Ending execution Simulation 135
+
+Ending execution Simulation 137
+
+Ending execution Simulation 136
+
+Ending execution Simulation 138
+
+Ending execution Simulation 139
+
+Ending execution Simulation 140
+
+Ending execution Simulation 141
+
+Ending execution Simulation 142
+
+Ending execution Simulation 143
+
+Ending execution Simulation 145
+
+Ending execution Simulation 144
+
+Ending execution Simulation 146
+
+Ending execution Simulation 147
+
+Ending execution Simulation 148
+
+Ending execution Simulation 149
+
+Ending execution Simulation 150
+
+Ending execution Simulation 151
+
+Ending execution Simulation 152
+
+Ending execution Simulation 153
+
+Ending execution Simulation 154
+
+Ending execution Simulation 155
+
+Ending execution Simulation 156
+
+Ending execution Simulation 157
+
+Ending execution Simulation 158
+
+Ending execution Simulation 159
+
+Ending execution Simulation 160
+
+Ending execution Simulation 161
+
+Ending execution Simulation 162
+
+Ending execution Simulation 163
+
+Ending execution Simulation 164
+
+Ending execution Simulation 165
+
+Ending execution Simulation 166
+
+Ending execution Simulation 167
+
+Ending execution Simulation 168
+
+Ending execution Simulation 169
+
+Ending execution Simulation 170
+
+Ending execution Simulation 171
+
+Ending execution Simulation 172
+
+Ending execution Simulation 173
+
+Ending execution Simulation 174
+
+Ending execution Simulation 175
+
+Ending execution Simulation 177
+
+Ending execution Simulation 176
+
+Ending execution Simulation 178
+
+Ending execution Simulation 179
+
+Ending execution Simulation 180
+
+Ending execution Simulation 181
+
+Ending execution Simulation 182
+
+Ending execution Simulation 183
+
+Ending execution Simulation 184
+
+Ending execution Simulation 185
+
+Ending execution Simulation 186
+
+Ending execution Simulation 187
+
+Ending execution Simulation 188
+
+Ending execution Simulation 189
+
+Ending execution Simulation 190
+
+Ending execution Simulation 191
+
+Ending execution Simulation 192
+
+Ending execution Simulation 193
+
+Ending execution Simulation 194
+
+Ending execution Simulation 195
+
+Ending execution Simulation 196
+
+Ending execution Simulation 197
+
+Ending execution Simulation 198
+
+Ending execution Simulation 199
+
+Ending execution Simulation 200
+
+Ending execution Simulation 201
+
+Ending execution Simulation 202
+
+Ending execution Simulation 203
+
+Ending execution Simulation 204
+
+Ending execution Simulation 205
+
+Ending execution Simulation 206
+
+Ending execution Simulation 207
+
+Ending execution Simulation 208
+
+Ending execution Simulation 209
+
+Ending execution Simulation 210
+
+Ending execution Simulation 211
+
+Ending execution Simulation 212
+
+Ending execution Simulation 213
+
+Ending execution Simulation 214
+
+Ending execution Simulation 215
+
+Ending execution Simulation 216
+
+Ending execution Simulation 217
+
+Ending execution Simulation 218
+
+Ending execution Simulation 219
+
+Ending execution Simulation 220
+
+Ending execution Simulation 221
+
+Ending execution Simulation 222
+
+Ending execution Simulation 223
+
+Ending execution Simulation 226
+
+Ending execution Simulation 225
+
+Ending execution Simulation 224
+
+Ending execution Simulation 227
+
+Ending execution Simulation 228
+
+Ending execution Simulation 229
+
+Ending execution Simulation 230
+
+Ending execution Simulation 231
+
+Ending execution Simulation 232
+
+Ending execution Simulation 233
+
+Ending execution Simulation 234
+
+Ending execution Simulation 235
+
+Ending execution Simulation 236
+
+Ending execution Simulation 237
+
+Ending execution Simulation 238
+
+Ending execution Simulation 239
+
+Ending execution Simulation 240
+
+Ending execution Simulation 241
+
+Ending execution Simulation 242
+
+Ending execution Simulation 243
+
+Ending execution Simulation 244
+
+Ending execution Simulation 245
+
+Ending execution Simulation 246
+
+Ending execution Simulation 247
+
+Ending execution Simulation 248
+
+Ending execution Simulation 249
+
+Ending execution Simulation 250
+
+Ending execution Simulation 251
+
+Ending execution Simulation 252
+
+Ending execution Simulation 253
+
+Ending execution Simulation 254
+
+Ending execution Simulation 255
+
+Ending execution Simulation 256
+
+Ending execution Simulation 257
+
+Ending execution Simulation 258
+
+Ending execution Simulation 259
+
+Ending execution Simulation 260
+
+Ending execution Simulation 261
+
+Ending execution Simulation 262
+
+Ending execution Simulation 263
+
+Ending execution Simulation 264
+
+Ending execution Simulation 265
+
+Ending execution Simulation 266
+
+Ending execution Simulation 267
+
+Ending execution Simulation 268
+
+Ending execution Simulation 269
+
+Ending execution Simulation 270
+
+Ending execution Simulation 271
+
+Ending execution Simulation 272
+
+Ending execution Simulation 274
+
+Ending execution Simulation 273
+
+Ending execution Simulation 275
+
+Ending execution Simulation 276
+
+Ending execution Simulation 277
+
+Ending execution Simulation 278
+
+Ending execution Simulation 279
+
+Ending execution Simulation 280
+
+Ending execution Simulation 281
+
+Ending execution Simulation 282
+
+Ending execution Simulation 283
+
+Ending execution Simulation 284
+
+Ending execution Simulation 285
+
+Ending execution Simulation 286
+
+Ending execution Simulation 287
+
+Ending execution Simulation 288
+
+Ending execution Simulation 289
+
+Ending execution Simulation 290
+
+Ending execution Simulation 291
+
+Ending execution Simulation 292
+
+Ending execution Simulation 293
+
+Ending execution Simulation 294
+
+Ending execution Simulation 295
+
+Ending execution Simulation 296
+
+Ending execution Simulation 297
+
+Ending execution Simulation 298
+
+Ending execution Simulation 299
+
+Ending execution Simulation 300
+
+Ending execution Simulation 301
+
+Ending execution Simulation 302
+
+Ending execution Simulation 303
+
+Ending execution Simulation 304
+
+Ending execution Simulation 305
+
+Ending execution Simulation 306
+
+Ending execution Simulation 307
+
+Ending execution Simulation 308
+
+Ending execution Simulation 310
+
+Ending execution Simulation 309
+
+Ending execution Simulation 311
+
+Ending execution Simulation 312
+
+Ending execution Simulation 313
+
+Ending execution Simulation 314
+
+Ending execution Simulation 315
+
+Ending execution Simulation 316
+
+Ending execution Simulation 317
+
+Ending execution Simulation 318
+
+Ending execution Simulation 319
+
+Ending execution Simulation 320
+
+Ending execution Simulation 321
+
+Ending execution Simulation 322
+
+Ending execution Simulation 323
+
+Ending execution Simulation 324
+
+Ending execution Simulation 325
+
+Ending execution Simulation 326
+
+Ending execution Simulation 327
+
+Ending execution Simulation 328
+
+Ending execution Simulation 329
+
+Ending execution Simulation 330
+
+Ending execution Simulation 331
+
+Ending execution Simulation 332
+
+Ending execution Simulation 333
+
+Ending execution Simulation 334
+
+Ending execution Simulation 335
+
+Ending execution Simulation 336
+
+Ending execution Simulation 337
+
+Ending execution Simulation 338
+
+Ending execution Simulation 339
+
+Ending execution Simulation 340
+
+Ending execution Simulation 341
+
+Ending execution Simulation 342
+
+Ending execution Simulation 343
+
+Ending execution Simulation 344
+
+Ending execution Simulation 345
+
+Ending execution Simulation 346
+
+Ending execution Simulation 347
+
+Ending execution Simulation 348
+
+Ending execution Simulation 349
+
+Ending execution Simulation 350
+
+Ending execution Simulation 351
+
+Ending execution Simulation 352
+
+Ending execution Simulation 353
+
+Ending execution Simulation 354
+
+Ending execution Simulation 355
+
+Ending execution Simulation 356
+
+Ending execution Simulation 357
+
+Ending execution Simulation 358
+
+Ending execution Simulation 359
+
+Ending execution Simulation 360
+
+Ending execution Simulation 361
+
+Ending execution Simulation 362
+
+Ending execution Simulation 363
+
+Ending execution Simulation 364
+
+Ending execution Simulation 365
+
+Ending execution Simulation 366
+
+Ending execution Simulation 367
+
+Ending execution Simulation 368
+
+Ending execution Simulation 369
+
+Ending execution Simulation 370
+
+Ending execution Simulation 371
+
+Ending execution Simulation 372
+
+Ending execution Simulation 373
+
+Ending execution Simulation 374
+
+Ending execution Simulation 375
+
+Ending execution Simulation 376
+
+Ending execution Simulation 377
+
+Ending execution Simulation 379
+
+Ending execution Simulation 378
+
+Ending execution Simulation 380
+
+Ending execution Simulation 381
+
+Ending execution Simulation 382
+
+Ending execution Simulation 383
+
+Ending execution Simulation 384
+
+Ending execution Simulation 385
+
+Ending execution Simulation 386
+
+Ending execution Simulation 387
+
+Ending execution Simulation 388
+
+Ending execution Simulation 389
+
+Ending execution Simulation 390
+
+Ending execution Simulation 391
+
+Ending execution Simulation 392
+
+Ending execution Simulation 393
+
+Ending execution Simulation 394
+
+Ending execution Simulation 395
+
+Ending execution Simulation 396
+
+Ending execution Simulation 397
+
+Ending execution Simulation 398
+
+Ending execution Simulation 399
+
+Ending execution Simulation 400
+
+Ending execution Simulation 401
+
+Ending execution Simulation 402
+
+Ending execution Simulation 403
+
+Ending execution Simulation 404
+
+Ending execution Simulation 406
+
+Ending execution Simulation 405
+
+Ending execution Simulation 408
+
+Ending execution Simulation 407
+
+Ending execution Simulation 409
+
+Ending execution Simulation 410
+
+Ending execution Simulation 412
+
+Ending execution Simulation 411
+
+Ending execution Simulation 413
+
+Ending execution Simulation 414
+
+Ending execution Simulation 415
+
+Ending execution Simulation 416
+
+Ending execution Simulation 417
+
+Ending execution Simulation 418
+
+Ending execution Simulation 419
+
+Ending execution Simulation 420
+
+Ending execution Simulation 421
+
+Ending execution Simulation 422
+
+Ending execution Simulation 424
+
+Ending execution Simulation 423
+
+Ending execution Simulation 425
+
+Ending execution Simulation 426
+
+Ending execution Simulation 427
+
+Ending execution Simulation 428
+
+Ending execution Simulation 429
+
+Ending execution Simulation 430
+
+Ending execution Simulation 431
+
+Ending execution Simulation 432
+
+Ending execution Simulation 433
+
+Ending execution Simulation 434
+
+Ending execution Simulation 435
+
+Ending execution Simulation 436
+
+Ending execution Simulation 437
+
+Ending execution Simulation 438
+
+Ending execution Simulation 439
+
+Ending execution Simulation 440
+
+Ending execution Simulation 441
+
+Ending execution Simulation 442
+
+Ending execution Simulation 443
+
+Ending execution Simulation 444
+
+Ending execution Simulation 445
+
+Ending execution Simulation 446
+
+Ending execution Simulation 447
+
+Ending execution Simulation 448
+
+Ending execution Simulation 449
+
+Ending execution Simulation 450
+
+Ending execution Simulation 451
+
+Ending execution Simulation 452
+
+Ending execution Simulation 453
+
+Ending execution Simulation 454
+
+Ending execution Simulation 455
+
+Ending execution Simulation 456
+
+Ending execution Simulation 457
+
+Ending execution Simulation 458
+
+Ending execution Simulation 459
+
+Ending execution Simulation 460
+
+Ending execution Simulation 461
+
+Ending execution Simulation 462
+
+Ending execution Simulation 463
+
+Ending execution Simulation 464
+
+Ending execution Simulation 465
+
+Ending execution Simulation 466
+
+Ending execution Simulation 467
+
+Ending execution Simulation 468
+
+Ending execution Simulation 469
+
+Ending execution Simulation 470
+
+Ending execution Simulation 471
+
+Ending execution Simulation 472
+
+Ending execution Simulation 473
+
+Ending execution Simulation 474
+
+Ending execution Simulation 475
+
+Ending execution Simulation 476
+
+Ending execution Simulation 477
+
+Ending execution Simulation 478
+
+Ending execution Simulation 479
+
+Ending execution Simulation 480
+
+Ending execution Simulation 481
+
+Ending execution Simulation 482
+
+Ending execution Simulation 483
+
+Ending execution Simulation 484
+
+Ending execution Simulation 485
+
+Ending execution Simulation 486
+
+Ending execution Simulation 487
+
+Ending execution Simulation 488
+
+Ending execution Simulation 489
+
+Ending execution Simulation 490
+
+Ending execution Simulation 491
+
+Ending execution Simulation 492
+
+Ending execution Simulation 493
+
+Ending execution Simulation 494
+
+Ending execution Simulation 495
+
+Ending execution Simulation 496
+
+Ending execution Simulation 497
+
+Ending execution Simulation 498
+
+Ending execution Simulation 499
+
+Ending execution Simulation 500
+
+Ending execution Simulation 501
+
+Ending execution Simulation 502
+
+Ending execution Simulation 503
+
+Ending execution Simulation 504
+
+Ending execution Simulation 505
+
+Ending execution Simulation 506
+
+Ending execution Simulation 507
+
+Ending execution Simulation 508
+
+Ending execution Simulation 509
+
+Ending execution Simulation 510
+
+Ending execution Simulation 511
+
+Ending execution Simulation 512
+
+Ending execution Simulation 513
+
+Ending execution Simulation 514
+
+Ending execution Simulation 515
+
+Ending execution Simulation 516
+
+Ending execution Simulation 517
+
+Ending execution Simulation 518
+
+Ending execution Simulation 519
+
+Ending execution Simulation 520
+
+Ending execution Simulation 521
+
+Ending execution Simulation 522
+
+Ending execution Simulation 523
+
+Ending execution Simulation 524
+
+Ending execution Simulation 525
+
+Ending execution Simulation 526
+
+Ending execution Simulation 527
+
+Ending execution Simulation 528
+
+Ending execution Simulation 529
+
+Ending execution Simulation 530
+
+Ending execution Simulation 531
+
+Ending execution Simulation 532
+
+Ending execution Simulation 533
+
+Ending execution Simulation 534
+
+Ending execution Simulation 535
+
+Ending execution Simulation 536
+
+Ending execution Simulation 537
+
+Ending execution Simulation 538
+
+Ending execution Simulation 539
+
+Ending execution Simulation 540
+
+Ending execution Simulation 541
+
+Ending execution Simulation 542
+
+Ending execution Simulation 543
+
+Ending execution Simulation 544
+
+Ending execution Simulation 545
+
+Ending execution Simulation 546
+
+Ending execution Simulation 547
+
+Ending execution Simulation 548
+
+Ending execution Simulation 549
+
+Ending execution Simulation 550
+
+Ending execution Simulation 551
+
+Ending execution Simulation 552
+
+Ending execution Simulation 553
+
+Ending execution Simulation 554
+
+Ending execution Simulation 555
+
+Ending execution Simulation 556
+
+Ending execution Simulation 557
+
+Ending execution Simulation 558
+
+Ending execution Simulation 559
+
+Ending execution Simulation 560
+
+Ending execution Simulation 561
+
+Ending execution Simulation 562
+
+Ending execution Simulation 563
+
+Ending execution Simulation 564
+
+Ending execution Simulation 565
+
+Ending execution Simulation 566
+
+Ending execution Simulation 567
+
+Ending execution Simulation 568
+
+Ending execution Simulation 569
+
+Ending execution Simulation 570
+
+Ending execution Simulation 571
+
+Ending execution Simulation 572
+
+Ending execution Simulation 573
+
+Ending execution Simulation 574
+
+Ending execution Simulation 575
+
+Ending execution Simulation 576
+
+Ending execution Simulation 577
+
+Ending execution Simulation 578
+
+Ending execution Simulation 579
+
+Ending execution Simulation 580
+
+Ending execution Simulation 581
+
+Ending execution Simulation 582
+
+Ending execution Simulation 583
+
+Ending execution Simulation 584
+
+Ending execution Simulation 585
+
+Ending execution Simulation 586
+
+Ending execution Simulation 587
+
+Ending execution Simulation 588
+
+Ending execution Simulation 589
+
+Ending execution Simulation 590
+
+Ending execution Simulation 591
+
+Ending execution Simulation 592
+
+Ending execution Simulation 593
+
+Ending execution Simulation 594
+
+Ending execution Simulation 595
+
+Ending execution Simulation 596
+
+Ending execution Simulation 597
+
+Ending execution Simulation 598
+
+Ending execution Simulation 599
+
+Ending execution Simulation 600
+
+Ending execution Simulation 601
+
+Ending execution Simulation 602
+
+Ending execution Simulation 603
+
+Ending execution Simulation 604
+
+Ending execution Simulation 605
+
+Ending execution Simulation 606
+
+Ending execution Simulation 607
+
+Ending execution Simulation 608
+
+Ending execution Simulation 609
+
+Ending execution Simulation 610
+
+Ending execution Simulation 611
+
+Ending execution Simulation 612
+
+Ending execution Simulation 613
+
+Ending execution Simulation 614
+
+Ending execution Simulation 615
+
+Ending execution Simulation 616
+
+Ending execution Simulation 617
+
+Ending execution Simulation 618
+
+Ending execution Simulation 619
+
+Ending execution Simulation 620
+
+Ending execution Simulation 621
+
+Ending execution Simulation 622
+
+Ending execution Simulation 623
+
+Ending execution Simulation 624
+
+Ending execution Simulation 625
+
+Ending execution Simulation 626
+
+Ending execution Simulation 627
+
+Ending execution Simulation 628
+
+Ending execution Simulation 629
+
+Ending execution Simulation 630
+
+Ending execution Simulation 631
+
+Ending execution Simulation 632
+
+Ending execution Simulation 633
+
+Ending execution Simulation 634
+
+Ending execution Simulation 635
+
+Ending execution Simulation 636
+
+Ending execution Simulation 637
+
+Ending execution Simulation 638
+
+Ending execution Simulation 639
+
+Ending execution Simulation 640
+
+Ending execution Simulation 641
+
+Ending execution Simulation 642
+
+Ending execution Simulation 643
+
+Ending execution Simulation 644
+
+Ending execution Simulation 645
+
+Ending execution Simulation 646
+
+Ending execution Simulation 647
+
+Ending execution Simulation 648
+
+Ending execution Simulation 649
+
+Ending execution Simulation 650
+
+Ending execution Simulation 651
+
+Ending execution Simulation 652
+
+Ending execution Simulation 653
+
+Ending execution Simulation 654
+
+Ending execution Simulation 655
+
+Ending execution Simulation 656
+
+Ending execution Simulation 657
+
+Ending execution Simulation 658
+
+Ending execution Simulation 659
+
+Ending execution Simulation 660
+
+Ending execution Simulation 661
+
+Ending execution Simulation 662
+
+Ending execution Simulation 663
+
+Ending execution Simulation 664
+
+Ending execution Simulation 665
+
+Ending execution Simulation 666
+
+Ending execution Simulation 667
+
+Ending execution Simulation 668
+
+Ending execution Simulation 669
+
+Ending execution Simulation 670
+
+Ending execution Simulation 671
+
+Ending execution Simulation 672
+
+Ending execution Simulation 673
+
+Ending execution Simulation 674
+
+Ending execution Simulation 675
+
+Ending execution Simulation 676
+
+Ending execution Simulation 677
+
+Ending execution Simulation 678
+
+Ending execution Simulation 679
+
+Ending execution Simulation 680
+
+Ending execution Simulation 681
+
+Ending execution Simulation 682
+
+Ending execution Simulation 683
+
+Ending execution Simulation 684
+
+Ending execution Simulation 685
+
+Ending execution Simulation 686
+
+Ending execution Simulation 687
+
+Ending execution Simulation 688
+
+Ending execution Simulation 689
+
+Ending execution Simulation 690
+
+Ending execution Simulation 691
+
+Ending execution Simulation 692
+
+Ending execution Simulation 693
+
+Ending execution Simulation 694
+
+Ending execution Simulation 695
+
+Ending execution Simulation 696
+
+Ending execution Simulation 698
+
+Ending execution Simulation 697
+
+Ending execution Simulation 699
+
+Ending execution Simulation 700
+
+Ending execution Simulation 702
+
+Ending execution Simulation 701
+
+Ending execution Simulation 703
+
+Ending execution Simulation 704
+
+Ending execution Simulation 705
+
+Ending execution Simulation 706
+
+Ending execution Simulation 707
+
+Ending execution Simulation 708
+
+Ending execution Simulation 709
+
+Ending execution Simulation 710
+
+Ending execution Simulation 711
+
+Ending execution Simulation 712
+
+Ending execution Simulation 713
+
+Ending execution Simulation 714
+
+Ending execution Simulation 715
+
+Ending execution Simulation 716
+
+Ending execution Simulation 718
+
+Ending execution Simulation 717
+
+Ending execution Simulation 719
+
+Ending execution Simulation 720
+
+Ending execution Simulation 721
+
+Ending execution Simulation 722
+
+Ending execution Simulation 724
+
+Ending execution Simulation 723
+
+Ending execution Simulation 726
+
+Ending execution Simulation 725
+
+Ending execution Simulation 727
+
+Ending execution Simulation 728
+
+Ending execution Simulation 729
+
+Ending execution Simulation 730
+
+Ending execution Simulation 731
+
+Ending execution Simulation 732
+
+Ending execution Simulation 734
+
+Ending execution Simulation 733
+
+Ending execution Simulation 735
+
+Ending execution Simulation 736
+
+Ending execution Simulation 737
+
+Ending execution Simulation 738
+
+Ending execution Simulation 739
+
+Ending execution Simulation 740
+
+Ending execution Simulation 741
+
+Ending execution Simulation 742
+
+Ending execution Simulation 743
+
+Ending execution Simulation 744
+
+Ending execution Simulation 745
+
+Ending execution Simulation 746
+
+Ending execution Simulation 747
+
+Ending execution Simulation 748
+
+Ending execution Simulation 749
+
+Ending execution Simulation 750
+
+Ending execution Simulation 751
+
+Ending execution Simulation 752
+
+Ending execution Simulation 753
+
+Ending execution Simulation 754
+
+Ending execution Simulation 755
+
+Ending execution Simulation 756
+
+Ending execution Simulation 757
+
+Ending execution Simulation 758
+
+Ending execution Simulation 759
+
+Ending execution Simulation 760
+
+Ending execution Simulation 761
+
+Ending execution Simulation 762
+
+Ending execution Simulation 763
+
+Ending execution Simulation 764
+
+Ending execution Simulation 765
+
+Ending execution Simulation 766
+
+Ending execution Simulation 767
+
+Ending execution Simulation 768
+
+Ending execution Simulation 769
+
+Ending execution Simulation 770
+
+Ending execution Simulation 771
+
+Ending execution Simulation 772
+
+Ending execution Simulation 773
+
+Ending execution Simulation 774
+
+Ending execution Simulation 775
+
+Ending execution Simulation 776
+
+Ending execution Simulation 777
+
+Ending execution Simulation 778
+
+Ending execution Simulation 779
+
+Ending execution Simulation 780
+
+Ending execution Simulation 781
+
+Ending execution Simulation 782
+
+Ending execution Simulation 783
+
+Ending execution Simulation 784
+
+Ending execution Simulation 785
+
+Ending execution Simulation 786
+
+Ending execution Simulation 787
+
+Ending execution Simulation 788
+
+Ending execution Simulation 789
+
+Ending execution Simulation 790
+
+Ending execution Simulation 791
+
+Ending execution Simulation 792
+
+Ending execution Simulation 793
+
+Ending execution Simulation 794
+
+Ending execution Simulation 795
+
+Ending execution Simulation 796
+
+Ending execution Simulation 797
+
+Ending execution Simulation 798
+
+Ending execution Simulation 799
+
+Ending execution Simulation 800
+
+Ending execution Simulation 801
+
+Ending execution Simulation 802
+
+Ending execution Simulation 803
+
+Ending execution Simulation 804
+
+Ending execution Simulation 805
+
+Ending execution Simulation 806
+
+Ending execution Simulation 807
+
+Ending execution Simulation 808
+
+Ending execution Simulation 809
+
+Ending execution Simulation 810
+
+Ending execution Simulation 811
+
+Ending execution Simulation 812
+
+Ending execution Simulation 813
+
+Ending execution Simulation 814
+
+Ending execution Simulation 815
+
+Ending execution Simulation 816
+
+Ending execution Simulation 817
+
+Ending execution Simulation 818
+
+Ending execution Simulation 819
+
+Ending execution Simulation 820
+
+Ending execution Simulation 821
+
+Ending execution Simulation 822
+
+Ending execution Simulation 823
+
+Ending execution Simulation 824
+
+Ending execution Simulation 825
+
+Ending execution Simulation 826
+
+Ending execution Simulation 827
+
+Ending execution Simulation 828
+
+Ending execution Simulation 829
+
+Ending execution Simulation 830
+
+Ending execution Simulation 831
+
+Ending execution Simulation 832
+
+Ending execution Simulation 833
+
+Ending execution Simulation 834
+
+Ending execution Simulation 835
+
+Ending execution Simulation 836
+
+Ending execution Simulation 837
+
+Ending execution Simulation 838
+
+Ending execution Simulation 839
+
+Ending execution Simulation 840
+
+Ending execution Simulation 841
+
+Ending execution Simulation 842
+
+Ending execution Simulation 843
+
+Ending execution Simulation 844
+
+Ending execution Simulation 845
+
+Ending execution Simulation 846
+
+Ending execution Simulation 847
+
+Ending execution Simulation 848
+
+Ending execution Simulation 849
+
+Ending execution Simulation 850
+
+Ending execution Simulation 851
+
+Ending execution Simulation 852
+
+Ending execution Simulation 853
+
+Ending execution Simulation 854
+
+Ending execution Simulation 855
+
+Ending execution Simulation 856
+
+Ending execution Simulation 857
+
+Ending execution Simulation 858
+
+Ending execution Simulation 859
+
+Ending execution Simulation 860
+
+Ending execution Simulation 861
+
+Ending execution Simulation 862
+
+Ending execution Simulation 863
+
+Ending execution Simulation 864
+
+Ending execution Simulation 865
+
+Ending execution Simulation 866
+
+Ending execution Simulation 867
+
+Ending execution Simulation 868
+
+Ending execution Simulation 869
+
+Ending execution Simulation 870
+
+Ending execution Simulation 871
+
+Ending execution Simulation 872
+
+Ending execution Simulation 873
+
+Ending execution Simulation 874
+
+Ending execution Simulation 875
+
+Ending execution Simulation 876
+
+Ending execution Simulation 877
+
+Ending execution Simulation 878
+
+Ending execution Simulation 879
+
+Ending execution Simulation 880
+
+Ending execution Simulation 881
+
+Ending execution Simulation 882
+
+Ending execution Simulation 883
+
+Ending execution Simulation 884
+
+Ending execution Simulation 885
+
+Ending execution Simulation 886
+
+Ending execution Simulation 887
+
+Ending execution Simulation 888
+
+Ending execution Simulation 889
+
+Ending execution Simulation 890
+
+Ending execution Simulation 891
+
+Ending execution Simulation 892
+
+Ending execution Simulation 893
+
+Ending execution Simulation 894
+
+Ending execution Simulation 895
+
+Ending execution Simulation 896
+
+Ending execution Simulation 897
+
+Ending execution Simulation 898
+
+Ending execution Simulation 900
+
+Ending execution Simulation 899
+
+Ending execution Simulation 901
+
+Ending execution Simulation 902
+
+Ending execution Simulation 903
+
+Ending execution Simulation 904
+
+Ending execution Simulation 905
+
+Ending execution Simulation 906
+
+Ending execution Simulation 908
+
+Ending execution Simulation 907
+
+Ending execution Simulation 910
+
+Ending execution Simulation 909
+
+Ending execution Simulation 911
+
+Ending execution Simulation 912
+
+Ending execution Simulation 913
+
+Ending execution Simulation 914
+
+Ending execution Simulation 915
+
+Ending execution Simulation 916
+
+Ending execution Simulation 917
+
+Ending execution Simulation 918
+
+Ending execution Simulation 919
+
+Ending execution Simulation 920
+
+Ending execution Simulation 921
+
+Ending execution Simulation 922
+
+Ending execution Simulation 923
+
+Ending execution Simulation 924
+
+Ending execution Simulation 925
+
+Ending execution Simulation 926
+
+Ending execution Simulation 927
+
+Ending execution Simulation 928
+
+Ending execution Simulation 929
+
+Ending execution Simulation 930
+
+Ending execution Simulation 931
+
+Ending execution Simulation 932
+
+Ending execution Simulation 933
+
+Ending execution Simulation 934
+
+Ending execution Simulation 935
+
+Ending execution Simulation 936
+
+Ending execution Simulation 937
+
+Ending execution Simulation 938
+
+Ending execution Simulation 939
+
+Ending execution Simulation 940
+
+Ending execution Simulation 941
+
+Ending execution Simulation 942
+
+Ending execution Simulation 944
+
+Ending execution Simulation 943
+
+Ending execution Simulation 945
+
+Ending execution Simulation 946
+
+Ending execution Simulation 948
+
+Ending execution Simulation 947
+
+Ending execution Simulation 949
+
+Ending execution Simulation 950
+
+Ending execution Simulation 951
+
+Ending execution Simulation 952
+
+Ending execution Simulation 953
+
+Ending execution Simulation 954
+
+Ending execution Simulation 955
+
+Ending execution Simulation 956
+
+Ending execution Simulation 958
+
+Ending execution Simulation 957
+
+Ending execution Simulation 959
+
+Ending execution Simulation 960
+
+Ending execution Simulation 962
+
+Ending execution Simulation 961
+
+Ending execution Simulation 963
+
+Ending execution Simulation 964
+
+Ending execution Simulation 965
+
+Ending execution Simulation 966
+
+Ending execution Simulation 967
+
+Ending execution Simulation 968
+
+Ending execution Simulation 969
+
+Ending execution Simulation 970
+
+Ending execution Simulation 971
+
+Ending execution Simulation 972
+
+Ending execution Simulation 973
+
+Ending execution Simulation 974
+
+Ending execution Simulation 975
+
+Ending execution Simulation 976
+
+Ending execution Simulation 977
+
+Ending execution Simulation 978
+
+Ending execution Simulation 979
+
+Ending execution Simulation 980
+
+Ending execution Simulation 981
+
+Ending execution Simulation 982
+
+Ending execution Simulation 983
+
+Ending execution Simulation 984
+
+Ending execution Simulation 985
+
+Ending execution Simulation 986
+
+Ending execution Simulation 987
+
+Ending execution Simulation 988
+
+Ending execution Simulation 989
+
+Ending execution Simulation 990
+
+Ending execution Simulation 991
+
+Ending execution Simulation 992
+
+Ending execution Simulation 993
+
+Ending execution Simulation 994
+
+Ending execution Simulation 995
+
+Ending execution Simulation 996
+
+Ending execution Simulation 997
+
+Ending execution Simulation 998
+
+[2026-03-09 19:30:20] [SUCCESS] Batch execution completed in 10m 20s
+[2026-03-09 19:30:20] [INFO] --- Phase 3: Post-execution Cleanup ---
+[2026-03-09 19:30:20] [INFO] Removing GAMA workspace directories...
+[2026-03-09 19:30:20] [SUCCESS] Post-cleanup completed in 0s
+[2026-03-09 19:30:20] [INFO] --- Phase 4: Results Validation ---
+[2026-03-09 19:30:20] [INFO] Result CSV files generated: 1000
+[2026-03-09 19:30:20] [INFO] Total results size: 137M
+==========================================
+     EXECUTION SUMMARY
+==========================================
+
+1. Pre-cleanup:                     0s
+
+2. Batch execution:                 10m 20s
+   - Exit code:                     0
+   - Result files:                  1000
+   - Total size:                    137M
+
+3. Post-cleanup:                    0s
+
+------------------------------------------
+TOTAL PIPELINE TIME:                10m 20s
+==========================================
+
+Log file: ./GAMA/src/TEST_MOBILITY/logs/SIMULATION_20260309_192000/log_result_20260309_192000.log
+
+[2026-03-09 19:30:20] [SUCCESS] === Pipeline finished ===
