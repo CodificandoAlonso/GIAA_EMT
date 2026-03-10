@@ -1,0 +1,13 @@
+{
+  "name": "giaa-emt-web",
+  "version": "1.0.0",
+  "description": "GAMA Simulation Dashboard - EMT Madrid",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

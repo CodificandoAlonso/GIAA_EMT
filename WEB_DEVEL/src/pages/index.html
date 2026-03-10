@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMA Dashboard — EMT Madrid</title>
+  <link rel="stylesheet" href="/styles/general.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a class="header-brand" href="/">
+      <span class="logo-badge">EMT</span>
+      <div>
+        <h1>GAMA Simulation Dashboard</h1>
+        <span>Cátedra EMT-GIAA</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <button class="btn btn-white" id="btn-generate">
+        &#9654; Nueva simulación
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main>
+
+    <!-- Page header -->
+    <div class="page-header">
+      <div>
+        <h2>Simulaciones GAMA</h2>
+        <p>Resultados de experimentos sobre movilidad urbana EMT Madrid</p>
+      </div>
+      <div id="sim-count-badge" style="font-size:0.85rem;color:var(--emt-gray-600);"></div>
+    </div>
+
+    <!-- Global stats bar -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">Total Simulaciones</div>
+        <div class="stat-value" id="stat-total">—</div>
+        <div class="stat-sub">carpetas en /data/logs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Con Gráficas</div>
+        <div class="stat-value" id="stat-charts">—</div>
+        <div class="stat-sub">listas para visualizar</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Última Ejecución</div>
+        <div class="stat-value" id="stat-latest" style="font-size:1.1rem;padding-top:0.4rem;">—</div>
+        <div class="stat-sub">más reciente</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Runs</div>
+        <div class="stat-value" id="stat-runs">—</div>
+        <div class="stat-sub">archivos CSV acumulados</div>
+      </div>
+    </div>
+
+    <!-- Simulation cards -->
+    <div id="sim-container">
+      <div class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Cargando simulaciones...</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <strong>EMT Madrid</strong> · Héctor Álvarez Marcos · GIAA UC3M Research Group &nbsp;|&nbsp; GIAA_EMT Dashboard
+  </footer>
+
+  <!-- Generate modal -->
+  <div class="modal-overlay" id="modal-generate">
+    <div class="modal">
+      <h3>&#9654; Lanzar nueva simulación</h3>
+      <p>
+        Se ejecutará el pipeline GAMA batch. Esto puede tardar varios minutos dependiendo
+        del número de réplicas configurado. ¿Deseas continuar?
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="btn-modal-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="btn-modal-confirm">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/scripts/index.js"></script>
+</body>
+</html>

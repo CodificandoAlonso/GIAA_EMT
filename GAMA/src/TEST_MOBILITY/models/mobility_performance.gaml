@@ -1342,8 +1342,8 @@ species bus skills: [fipa] {
 		int dropoffs <- int(list(inform_data_stop.contents)[1]);
 		
 		if (dropoffs > self.passengers){
-			self.passengers <- 0;
 			dropoffs <- self.passengers;
+			self.passengers <- 0;
 		}
 		else{
 			self.passengers <- self.passengers - dropoffs;
@@ -1379,7 +1379,7 @@ species bus skills: [fipa] {
 	 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
 	 */
 	save [world.name, self.id, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-			current_time, TimeSlot, boards, residual_boards,dropoffs,self.passengers,self.time_travelled] 
+			current_time, TimeSlot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] 
     	to: '../logs/RESULTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
     	
 	

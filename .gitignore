@@ -17,6 +17,11 @@ _site/
 # Details at https://github.com/github/pages-gem/issues/768
 Gemfile.lock
 
+WEB_DEVEL/node_modules
+
+
+.claude
+
 
 DATOS/.venv
 DATOS/csv_build/*.o
@@ -26,7 +31,7 @@ DATOS/src/__pycache__
 
 GAMA/src/TEST_MOBILITY/logs/*
 
-GTFS/gtfs_emt*
+GTFS
 
 .idea
 

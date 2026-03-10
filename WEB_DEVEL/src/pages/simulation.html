@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulación — EMT Madrid</title>
+  <link rel="stylesheet" href="/styles/general.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a class="header-brand" href="/">
+      <span class="logo-badge">EMT</span>
+      <div>
+        <h1>GAMA Simulation Dashboard</h1>
+        <span>Madrid Urban Mobility · GIAA</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="/" class="btn btn-white btn-sm">&#8592; Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main>
+
+    <!-- Loading state -->
+    <div id="loading-state" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Cargando datos de la simulación...</p>
+    </div>
+
+    <!-- Content (hidden until loaded) -->
+    <div id="sim-content" style="display:none;">
+
+      <!-- Back + breadcrumb -->
+      <div class="back-bar">
+        <a href="/" class="btn btn-outline btn-sm">&#8592; Volver al dashboard</a>
+      </div>
+
+      <!-- Hero -->
+      <div class="detail-hero">
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;margin-bottom:0.3rem;font-family:monospace;" id="hero-id"></div>
+          <h2 id="hero-date"></h2>
+          <div class="detail-subtitle" id="hero-subtitle"></div>
+        </div>
+        <div class="detail-hero-actions">
+          <button class="btn btn-white btn-sm" id="btn-gen-charts">
+            &#128202; Generar gráficas
+          </button>
+          <button class="btn btn-white btn-sm" id="btn-download-log">
+            &#8595; Descargar log
+          </button>
+        </div>
+      </div>
+
+      <!-- Key stats -->
+      <div class="stats-bar" style="margin-bottom:1.5rem;" id="detail-stats-bar">
+        <div class="stat-card">
+          <div class="stat-label">Réplicas</div>
+          <div class="stat-value" id="ds-runs">—</div>
+          <div class="stat-sub">archivos CSV</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Boards</div>
+          <div class="stat-value" id="ds-boards">—</div>
+          <div class="stat-sub">pasajeros subidos (muestra)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Dropoffs</div>
+          <div class="stat-value" id="ds-dropoffs">—</div>
+          <div class="stat-sub">pasajeros bajados (muestra)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ocupación Media</div>
+          <div class="stat-value" id="ds-occ">—</div>
+          <div class="stat-sub">pasajeros por registro</div>
+        </div>
+      </div>
+
+      <!-- Main detail grid -->
+      <div class="detail-grid">
+
+        <!-- Direction breakdown -->
+        <div class="section-card">
+          <div class="section-card-header">
+            <span class="section-icon">&#8644;</span>
+            Desglose por dirección
+          </div>
+          <div class="section-card-body">
+            <div class="direction-row">
+              <div class="direction-box">
+                <h4>&#8594; Dirección A</h4>
+                <div class="dir-val" id="dir-a-boards">—</div>
+                <div class="dir-sub">boards</div>
+              </div>
+              <div class="direction-box">
+                <h4>&#8592; Dirección B</h4>
+                <div class="dir-val" id="dir-b-boards">—</div>
+                <div class="dir-sub">boards</div>
+              </div>
+            </div>
+            <div class="direction-row">
+              <div class="direction-box" style="border-left-color:#555;">
+                <h4>&#8595; Dropoffs A</h4>
+                <div class="dir-val" id="dir-a-dropoffs" style="color:var(--emt-gray-900);">—</div>
+                <div class="dir-sub">bajadas</div>
+              </div>
+              <div class="direction-box" style="border-left-color:#555;">
+                <h4>&#8595; Dropoffs B</h4>
+                <div class="dir-val" id="dir-b-dropoffs" style="color:var(--emt-gray-900);">—</div>
+                <div class="dir-sub">bajadas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Time slot heatmap -->
+        <div class="section-card">
+          <div class="section-card-header">
+            <span class="section-icon">&#128336;</span>
+            Actividad por franja horaria
+          </div>
+          <div class="section-card-body">
+            <div id="timeslot-table" style="font-size:0.85rem;"></div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="section-card full-width">
+          <div class="section-card-header">
+            <span class="section-icon">&#128202;</span>
+            Gráficas generadas
+            <span id="charts-count" style="margin-left:auto;font-size:0.78rem;color:var(--emt-gray-600);"></span>
+          </div>
+          <div class="section-card-body">
+            <div id="charts-area">
+              <div class="empty-state">
+                <div class="empty-icon">&#128202;</div>
+                <p>No hay gráficas generadas aún.</p>
+                <p style="margin-top:0.5rem;font-size:0.85rem;">Pulsa <strong>"Generar gráficas"</strong> para ejecutar el script Python.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Log viewer -->
+        <div class="section-card full-width">
+          <div class="section-card-header">
+            <span class="section-icon">&#128196;</span>
+            Log de ejecución
+            <span style="margin-left:auto;font-size:0.78rem;color:var(--emt-gray-600);">Primeras 50 líneas</span>
+          </div>
+          <div class="section-card-body" style="padding:0;">
+            <div class="log-viewer" id="log-viewer">Cargando log...</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <strong>EMT Madrid</strong> · GAMA Platform · GIAA Research Group &nbsp;|&nbsp; GIAA_EMT Dashboard
+  </footer>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/scripts/simulation.js"></script>
+</body>
+</html>
