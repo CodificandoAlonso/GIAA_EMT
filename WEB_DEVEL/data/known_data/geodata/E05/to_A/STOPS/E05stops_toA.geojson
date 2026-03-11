@@ -1,0 +1,200 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5049,
+        "stopName": "Blas de Lezo-Ilusión",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.552954201700978,
+          40.40543594135496
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4722,
+        "stopName": "Miguel Delibes-Cantinflas",
+        "distance": 763
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.559907150618561,
+          40.40514132199178
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4803,
+        "stopName": "Miguel Delibes-Alto del Esparragal",
+        "distance": 1105
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.563246704445234,
+          40.40686391273891
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5108,
+        "stopName": "Puerta Arganda",
+        "distance": 5110
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5963898154925933,
+          40.40243685924534
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5322,
+        "stopName": "San Cipriano-Minerva",
+        "distance": 5427
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.599169639184219,
+          40.40332794019285
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1069,
+        "stopName": "San Cipriano",
+        "distance": 5900
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.604668282292514,
+          40.404029126125465
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1074,
+        "stopName": "Metro Vicálvaro",
+        "distance": 6226
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.608500010196471,
+          40.4042162845518
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1065,
+        "stopName": "Avenida de Daroca-Casalarreina",
+        "distance": 6911
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.614659083195966,
+          40.40762526475671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5620,
+        "stopName": "Metro O Donnell",
+        "distance": 12090
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.668282164991778,
+          40.42108521989515
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5619,
+        "stopName": "O Donnell-Narváez",
+        "distance": 12715
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.675631208240942,
+          40.42150655033419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 2215,
+        "stopName": "Felipe II",
+        "distance": 13023
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.675598951536713,
+          40.4239166590337
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 682,
+        "stopName": "Alcalá-Manuel Becerra",
+        "distance": 13688
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6697972804397843,
+          40.427292711898176
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3761,
+        "stopName": "Manuel Becerra",
+        "distance": 14030
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.669506416761315,
+          40.42887097616371
+        ]
+      }
+    }
+  ]
+}

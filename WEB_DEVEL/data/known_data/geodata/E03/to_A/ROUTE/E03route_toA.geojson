@@ -1,0 +1,4528 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 31238,
+        "name": "Calle de Minerva",
+        "distance": -75,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.605554752396234,
+              40.39687349102438
+            ],
+            [
+              -3.606534743889631,
+              40.39600349627828
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13326,
+        "name": "Calle del Molino Viejo",
+        "distance": 53,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.606534743889631,
+              40.39600349627828
+            ],
+            [
+              -3.6078147441728783,
+              40.39684349399867
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13325,
+        "name": "Calle de la Marmolina",
+        "distance": 196,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6078147441728783,
+              40.39684349399867
+            ],
+            [
+              -3.606824753744127,
+              40.397743491270134
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13324,
+        "name": "Calle del Campo de la Torre",
+        "distance": 326,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.606824753744127,
+              40.397743491270134
+            ],
+            [
+              -3.605554752396234,
+              40.39687349102438
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6407,
+        "name": "Calle de Minerva",
+        "distance": 471,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.605554752396234,
+              40.39687349102438
+            ],
+            [
+              -3.604534762933198,
+              40.39777348690403
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6408,
+        "name": "Calle de Minerva",
+        "distance": 603,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.604534762933198,
+              40.39777348690403
+            ],
+            [
+              -3.603974766769042,
+              40.39826348539769
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6413,
+        "name": "Calle de Minerva",
+        "distance": 675,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.603974766769042,
+              40.39826348539769
+            ],
+            [
+              -3.603564770487475,
+              40.39861348459364
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6414,
+        "name": "Calle de Minerva",
+        "distance": 728,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.603564770487475,
+              40.39861348459364
+            ],
+            [
+              -3.603154774982936,
+              40.39896348177257
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26478,
+        "name": "Avenida de la Aurora Boreal",
+        "distance": 780,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.603154774982936,
+              40.39896348177257
+            ],
+            [
+              -3.603124773133146,
+              40.39890348234183
+            ],
+            [
+              -3.603044774824914,
+              40.39885348179409
+            ],
+            [
+              -3.6029047749062633,
+              40.39882348145865
+            ],
+            [
+              -3.602544774391272,
+              40.39875348208723
+            ],
+            [
+              -3.6016947773314842,
+              40.398623481166354
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26477,
+        "name": "Avenida de la Aurora Boreal",
+        "distance": 913,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6016947773314842,
+              40.398623481166354
+            ],
+            [
+              -3.601514777802034,
+              40.39857348112363
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26476,
+        "name": "Avenida de la Aurora Boreal",
+        "distance": 929,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.601514777802034,
+              40.39857348112363
+            ],
+            [
+              -3.60141477743857,
+              40.398543480923394
+            ],
+            [
+              -3.601324779582033,
+              40.39848348212872
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26471,
+        "name": " ",
+        "distance": 949,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.601324779582033,
+              40.39848348212872
+            ],
+            [
+              -3.6012947787120573,
+              40.39840348168372
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26475,
+        "name": " ",
+        "distance": 958,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6012947787120573,
+              40.39840348168372
+            ],
+            [
+              -3.601184777472068,
+              40.39829348156916
+            ],
+            [
+              -3.60111477852579,
+              40.398243481705585
+            ],
+            [
+              -3.6010247788953382,
+              40.39821348154472
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26472,
+        "name": " ",
+        "distance": 990,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6010247788953382,
+              40.39821348154472
+            ],
+            [
+              -3.60084477810273,
+              40.39820348315774
+            ],
+            [
+              -3.600724780173332,
+              40.39822348146512
+            ],
+            [
+              -3.600594779429405,
+              40.39829348192139
+            ],
+            [
+              -3.60052477996445,
+              40.3983734815414
+            ],
+            [
+              -3.60046478206404,
+              40.398483480413944
+            ],
+            [
+              -3.6004547819356483,
+              40.39855348098449
+            ],
+            [
+              -3.600454782920942,
+              40.39863347977711
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26473,
+        "name": "Avenida Gran Vía del Este",
+        "distance": 1070,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.600454782920942,
+              40.39863347977711
+            ],
+            [
+              -3.600424782845251,
+              40.39876347993022
+            ],
+            [
+              -3.60031478420989,
+              40.3988934803149
+            ],
+            [
+              -3.599924788528612,
+              40.3992434779783
+            ],
+            [
+              -3.598724797573425,
+              40.40025347397656
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26474,
+        "name": "Avenida Gran Vía del Este",
+        "distance": 1304,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.598724797573425,
+              40.40025347397656
+            ],
+            [
+              -3.598484799817241,
+              40.40045347189332
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23153,
+        "name": "Avenida Gran Vía del Este",
+        "distance": 1334,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.598484799817241,
+              40.40045347189332
+            ],
+            [
+              -3.597164810411369,
+              40.40154346662536
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23154,
+        "name": "Avenida Gran Vía del Este",
+        "distance": 1499,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.597164810411369,
+              40.40154346662536
+            ],
+            [
+              -3.5969048138797772,
+              40.40177346578439
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23155,
+        "name": "Avenida Gran Vía del Este",
+        "distance": 1533,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.5969048138797772,
+              40.40177346578439
+            ],
+            [
+              -3.5966948156533682,
+              40.4019534660863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6447,
+        "name": "Calle de San Cipriano",
+        "distance": 1559,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.5966948156533682,
+              40.4019534660863
+            ],
+            [
+              -3.596814814300617,
+              40.402023465746005
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6448,
+        "name": "Calle de San Cipriano",
+        "distance": 1572,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.596814814300617,
+              40.402023465746005
+            ],
+            [
+              -3.597074813990305,
+              40.402183465556156
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6517,
+        "name": "Calle de San Cipriano",
+        "distance": 1601,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.597074813990305,
+              40.402183465556156
+            ],
+            [
+              -3.5972448146681493,
+              40.40229346503399
+            ],
+            [
+              -3.5973548159688002,
+              40.40236346449409
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6450,
+        "name": "Calle de San Cipriano",
+        "distance": 1632,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.5973548159688002,
+              40.40236346449409
+            ],
+            [
+              -3.5974348142729733,
+              40.40241346564955
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6458,
+        "name": "Calle de San Cipriano",
+        "distance": 1640,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.5974348142729733,
+              40.40241346564955
+            ],
+            [
+              -3.597644815963625,
+              40.40253346565551
+            ],
+            [
+              -3.597834816311986,
+              40.40264346561977
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6520,
+        "name": "Calle de San Cipriano",
+        "distance": 1683,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.597834816311986,
+              40.40264346561977
+            ],
+            [
+              -3.5980548159024313,
+              40.402753465568004
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6521,
+        "name": "Calle de San Cipriano",
+        "distance": 1705,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.5980548159024313,
+              40.402753465568004
+            ],
+            [
+              -3.598284815500778,
+              40.40287346350249
+            ],
+            [
+              -3.598534813897981,
+              40.402993464393425
+            ],
+            [
+              -3.598564814101898,
+              40.40300346508611
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6449,
+        "name": "Calle de San Cipriano",
+        "distance": 1757,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.598564814101898,
+              40.40300346508611
+            ],
+            [
+              -3.598714815323141,
+              40.40307346399265
+            ],
+            [
+              -3.598854814553653,
+              40.40313346380521
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16120,
+        "name": "Calle de San Cipriano",
+        "distance": 1785,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.598854814553653,
+              40.40313346380521
+            ],
+            [
+              -3.598984815305679,
+              40.40318346509245
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16121,
+        "name": "Calle de San Cipriano",
+        "distance": 1797,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.598984815305679,
+              40.40318346509245
+            ],
+            [
+              -3.599254814571256,
+              40.40328346338173
+            ],
+            [
+              -3.599494812548886,
+              40.40336346501977
+            ],
+            [
+              -3.599724812194053,
+              40.40343346511712
+            ],
+            [
+              -3.599934811806636,
+              40.403493463808864
+            ],
+            [
+              -3.600124811274805,
+              40.403543465054625
+            ],
+            [
+              -3.6003348127360852,
+              40.40359346467825
+            ],
+            [
+              -3.6005248117277873,
+              40.403633464738185
+            ],
+            [
+              -3.60068481013101,
+              40.403663464904966
+            ],
+            [
+              -3.600804809832924,
+              40.403683464885205
+            ],
+            [
+              -3.600964808805055,
+              40.40370346468247
+            ],
+            [
+              -3.60107480882,
+              40.403713465656146
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8454,
+        "name": "Calle de San Cipriano",
+        "distance": 1985,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.60107480882,
+              40.403713465656146
+            ],
+            [
+              -3.6012348089432793,
+              40.40372346454533
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8542,
+        "name": "Calle de San Cipriano",
+        "distance": 1999,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6012348089432793,
+              40.40372346454533
+            ],
+            [
+              -3.60212480609407,
+              40.40377346552273
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8543,
+        "name": "Calle de San Cipriano",
+        "distance": 2074,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.60212480609407,
+              40.40377346552273
+            ],
+            [
+              -3.602284806517287,
+              40.40378346515582
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8397,
+        "name": "Calle de San Cipriano",
+        "distance": 2088,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.602284806517287,
+              40.40378346515582
+            ],
+            [
+              -3.6037148006279183,
+              40.40385346721949
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8398,
+        "name": "Calle de San Cipriano",
+        "distance": 2210,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6037148006279183,
+              40.40385346721949
+            ],
+            [
+              -3.604154799549181,
+              40.40387346831237
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8466,
+        "name": "Calle de San Cipriano",
+        "distance": 2247,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.604154799549181,
+              40.40387346831237
+            ],
+            [
+              -3.604294799418521,
+              40.403883468774005
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8467,
+        "name": "Calle de San Cipriano",
+        "distance": 2259,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.604294799418521,
+              40.403883468774005
+            ],
+            [
+              -3.604634797528456,
+              40.403903469128544
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8455,
+        "name": "Calle de San Cipriano",
+        "distance": 2288,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.604634797528456,
+              40.403903469128544
+            ],
+            [
+              -3.605134795298409,
+              40.40392346914596
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8456,
+        "name": "Calle de San Cipriano",
+        "distance": 2330,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.605134795298409,
+              40.40392346914596
+            ],
+            [
+              -3.605294796502378,
+              40.403933467906214
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8457,
+        "name": "Calle de San Cipriano",
+        "distance": 2344,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.605294796502378,
+              40.403933467906214
+            ],
+            [
+              -3.605494794951205,
+              40.40394346867875
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8458,
+        "name": "Calle de San Cipriano",
+        "distance": 2361,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.605494794951205,
+              40.40394346867875
+            ],
+            [
+              -3.6057747935798132,
+              40.403953468964346
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8490,
+        "name": "Calle de San Cipriano",
+        "distance": 2385,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6057747935798132,
+              40.403953468964346
+            ],
+            [
+              -3.606264791130029,
+              40.40397346961307
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8491,
+        "name": "Calle de San Cipriano",
+        "distance": 2427,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.606264791130029,
+              40.40397346961307
+            ],
+            [
+              -3.6064547917941923,
+              40.40398347042508
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8349,
+        "name": "Calle de San Cipriano",
+        "distance": 2443,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6064547917941923,
+              40.40398347042508
+            ],
+            [
+              -3.6072047905796603,
+              40.40401347073927
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8348,
+        "name": "Calle de San Cipriano",
+        "distance": 2506,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6072047905796603,
+              40.40401347073927
+            ],
+            [
+              -3.60745478768562,
+              40.404023471241736
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8463,
+        "name": "Calle de San Cipriano",
+        "distance": 2528,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.60745478768562,
+              40.404023471241736
+            ],
+            [
+              -3.6076547867052673,
+              40.40403347157218
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8464,
+        "name": "Calle de San Cipriano",
+        "distance": 2545,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6076547867052673,
+              40.40403347157218
+            ],
+            [
+              -3.608044787584136,
+              40.40405347194745
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8461,
+        "name": "Calle de San Cipriano",
+        "distance": 2578,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.608044787584136,
+              40.40405347194745
+            ],
+            [
+              -3.6082047866508833,
+              40.40406347218806
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8462,
+        "name": "Calle de San Cipriano",
+        "distance": 2591,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6082047866508833,
+              40.40406347218806
+            ],
+            [
+              -3.608404786603696,
+              40.404073471215554
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8566,
+        "name": "Calle de San Cipriano",
+        "distance": 2608,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.608404786603696,
+              40.404073471215554
+            ],
+            [
+              -3.608594785700538,
+              40.40408347236613
+            ],
+            [
+              -3.6087247856079623,
+              40.40408347269886
+            ],
+            [
+              -3.608844784563112,
+              40.404083470977845
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8565,
+        "name": "Calle de San Cipriano",
+        "distance": 2646,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.608844784563112,
+              40.404083470977845
+            ],
+            [
+              -3.608984782394133,
+              40.40407347241758
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8460,
+        "name": "Calle de San Cipriano",
+        "distance": 2658,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.608984782394133,
+              40.40407347241758
+            ],
+            [
+              -3.6092047825846842,
+              40.40406347336129
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8459,
+        "name": "Calle de San Cipriano",
+        "distance": 2676,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6092047825846842,
+              40.40406347336129
+            ],
+            [
+              -3.609514782417448,
+              40.40405347247299
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8430,
+        "name": "Calle de San Cipriano",
+        "distance": 2703,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.609514782417448,
+              40.40405347247299
+            ],
+            [
+              -3.609774779945995,
+              40.404053472585204
+            ],
+            [
+              -3.609894779864105,
+              40.40406347359237
+            ],
+            [
+              -3.609964779462841,
+              40.40407347310517
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8498,
+        "name": "Avenida de Daroca",
+        "distance": 2741,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.609964779462841,
+              40.40407347310517
+            ],
+            [
+              -3.610044778464999,
+              40.404103473785824
+            ],
+            [
+              -3.610124778557484,
+              40.404143473278836
+            ],
+            [
+              -3.610214780350835,
+              40.40420347389892
+            ],
+            [
+              -3.610284780762949,
+              40.40425347365623
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8499,
+        "name": "Avenida de Daroca",
+        "distance": 2775,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.610284780762949,
+              40.40425347365623
+            ],
+            [
+              -3.611374781047759,
+              40.40505347151396
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8392,
+        "name": "Avenida de Daroca",
+        "distance": 2903,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.611374781047759,
+              40.40505347151396
+            ],
+            [
+              -3.612134782063385,
+              40.40560346965147
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8478,
+        "name": "Avenida de Daroca",
+        "distance": 2992,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.612134782063385,
+              40.40560346965147
+            ],
+            [
+              -3.612844781430249,
+              40.40610346879631
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8479,
+        "name": "Avenida de Daroca",
+        "distance": 3074,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.612844781430249,
+              40.40610346879631
+            ],
+            [
+              -3.613124781526182,
+              40.40631346986237
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8476,
+        "name": "Avenida de Daroca",
+        "distance": 3107,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.613124781526182,
+              40.40631346986237
+            ],
+            [
+              -3.613264781828168,
+              40.40641346905105
+            ],
+            [
+              -3.613414781772171,
+              40.40652346900457
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8477,
+        "name": "Avenida de Daroca",
+        "distance": 3141,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.613414781772171,
+              40.40652346900457
+            ],
+            [
+              -3.6135047840292223,
+              40.40659346918665
+            ],
+            [
+              -3.613574783010157,
+              40.40665346854239
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16106,
+        "name": "Avenida de Daroca",
+        "distance": 3161,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.613574783010157,
+              40.40665346854239
+            ],
+            [
+              -3.614834783824465,
+              40.4075334671659
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16105,
+        "name": "Avenida de Daroca",
+        "distance": 3306,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.614834783824465,
+              40.4075334671659
+            ],
+            [
+              -3.615024783874544,
+              40.4076434656121
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16114,
+        "name": " ",
+        "distance": 3326,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.615024783874544,
+              40.4076434656121
+            ],
+            [
+              -3.614984784027191,
+              40.40767346549193
+            ],
+            [
+              -3.614954783781566,
+              40.40771346670868
+            ],
+            [
+              -3.614944784681096,
+              40.40774346576657
+            ],
+            [
+              -3.6149447863440543,
+              40.40777346620362
+            ],
+            [
+              -3.614954785481625,
+              40.40781346580302
+            ],
+            [
+              -3.614974785092992,
+              40.40784346626532
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16117,
+        "name": " ",
+        "distance": 3351,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.614974785092992,
+              40.40784346626532
+            ],
+            [
+              -3.61500478548911,
+              40.4078734658992
+            ],
+            [
+              -3.6150647846495283,
+              40.40790346525669
+            ],
+            [
+              -3.615114784578548,
+              40.40791346657927
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16116,
+        "name": " ",
+        "distance": 3366,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.615114784578548,
+              40.40791346657927
+            ],
+            [
+              -3.615164784880565,
+              40.40791346626367
+            ],
+            [
+              -3.615224785610256,
+              40.407903466219324
+            ],
+            [
+              -3.615274783736504,
+              40.4078834653879
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26455,
+        "name": "Avenida de Daroca",
+        "distance": 3380,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.615274783736504,
+              40.4078834653879
+            ],
+            [
+              -3.6154647855710422,
+              40.40801346521887
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26459,
+        "name": "Avenida de Daroca",
+        "distance": 3402,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6154647855710422,
+              40.40801346521887
+            ],
+            [
+              -3.61615478593798,
+              40.408483465306354
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26460,
+        "name": "Avenida de Daroca",
+        "distance": 3480,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.61615478593798,
+              40.408483465306354
+            ],
+            [
+              -3.616324785291621,
+              40.40860346559051
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26458,
+        "name": "Avenida de Daroca",
+        "distance": 3500,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.616324785291621,
+              40.40860346559051
+            ],
+            [
+              -3.617034787203038,
+              40.40909346388574
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26454,
+        "name": "Avenida de Daroca",
+        "distance": 3581,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.617034787203038,
+              40.40909346388574
+            ],
+            [
+              -3.617374787652794,
+              40.40934346262103
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30550,
+        "name": " ",
+        "distance": 3621,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.617374787652794,
+              40.40934346262103
+            ],
+            [
+              -3.6174847866797553,
+              40.40948346173902
+            ],
+            [
+              -3.617554787191365,
+              40.409553462438744
+            ],
+            [
+              -3.617624786389547,
+              40.40964346192402
+            ],
+            [
+              -3.617674788718615,
+              40.40972346239484
+            ],
+            [
+              -3.617864787915566,
+              40.41000346148105
+            ],
+            [
+              -3.617894790597711,
+              40.41004346029549
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30551,
+        "name": " ",
+        "distance": 3710,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.617894790597711,
+              40.41004346029549
+            ],
+            [
+              -3.618234790542743,
+              40.410553459233086
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30552,
+        "name": " ",
+        "distance": 3774,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.618234790542743,
+              40.410553459233086
+            ],
+            [
+              -3.618454792826605,
+              40.41087345985392
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30548,
+        "name": " ",
+        "distance": 3814,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.618454792826605,
+              40.41087345985392
+            ],
+            [
+              -3.618574793531875,
+              40.41106345929454
+            ],
+            [
+              -3.6187447936431463,
+              40.4113134581317
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30549,
+        "name": " ",
+        "distance": 3869,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6187447936431463,
+              40.4113134581317
+            ],
+            [
+              -3.618804794619601,
+              40.411423457916385
+            ],
+            [
+              -3.618874796028364,
+              40.41155345642237
+            ],
+            [
+              -3.618914794914342,
+              40.411633456397745
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30553,
+        "name": " ",
+        "distance": 3907,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.618914794914342,
+              40.411633456397745
+            ],
+            [
+              -3.6189447968748363,
+              40.41171345695549
+            ],
+            [
+              -3.618964797533192,
+              40.411793455377314
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30554,
+        "name": " ",
+        "distance": 3925,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.618964797533192,
+              40.411793455377314
+            ],
+            [
+              -3.6190047986184033,
+              40.41193345559454
+            ],
+            [
+              -3.619014797843898,
+              40.412073456017374
+            ],
+            [
+              -3.619024799267623,
+              40.41221345587429
+            ],
+            [
+              -3.619024800110191,
+              40.41232345538412
+            ],
+            [
+              -3.619014801442579,
+              40.41242345335445
+            ],
+            [
+              -3.6190048024628862,
+              40.41254345398411
+            ],
+            [
+              -3.6189848030855023,
+              40.412683454040945
+            ],
+            [
+              -3.618964803341737,
+              40.41295345295584
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26469,
+        "name": " ",
+        "distance": 4055,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.618964803341737,
+              40.41295345295584
+            ],
+            [
+              -3.6189648044160543,
+              40.4130434519917
+            ],
+            [
+              -3.61898480501663,
+              40.4131334525448
+            ],
+            [
+              -3.619024804479007,
+              40.41322345185853
+            ],
+            [
+              -3.619094806565696,
+              40.41334345022698
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26470,
+        "name": " ",
+        "distance": 4100,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.619094806565696,
+              40.41334345022698
+            ],
+            [
+              -3.619194806526646,
+              40.413493450917485
+            ],
+            [
+              -3.619314806799442,
+              40.41362345031719
+            ],
+            [
+              -3.61940480773936,
+              40.413703449585434
+            ],
+            [
+              -3.619514808604638,
+              40.41378344965609
+            ],
+            [
+              -3.619634806779793,
+              40.413853450108014
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26467,
+        "name": " ",
+        "distance": 4174,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.619634806779793,
+              40.413853450108014
+            ],
+            [
+              -3.619854807193242,
+              40.41391345072937
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26466,
+        "name": " ",
+        "distance": 4193,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.619854807193242,
+              40.41391345072937
+            ],
+            [
+              -3.619994808238279,
+              40.41395345009322
+            ],
+            [
+              -3.620144807158582,
+              40.41398344972773
+            ],
+            [
+              -3.620314805585978,
+              40.414003449952716
+            ],
+            [
+              -3.620504805913586,
+              40.414003451264925
+            ],
+            [
+              -3.620634806465039,
+              40.41399345029255
+            ],
+            [
+              -3.620814805078899,
+              40.413963450358835
+            ],
+            [
+              -3.621024803222533,
+              40.41391345116335
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26465,
+        "name": " ",
+        "distance": 4295,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.621024803222533,
+              40.41391345116335
+            ],
+            [
+              -3.621424800447411,
+              40.41380345223209
+            ],
+            [
+              -3.6220847981631983,
+              40.41364345250804
+            ],
+            [
+              -3.622304798136898,
+              40.41359345284348
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26464,
+        "name": " ",
+        "distance": 4410,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.622304798136898,
+              40.41359345284348
+            ],
+            [
+              -3.622584795236146,
+              40.41354345326578
+            ],
+            [
+              -3.622874795086268,
+              40.413513453595925
+            ],
+            [
+              -3.623194795283836,
+              40.4134934540567
+            ],
+            [
+              -3.623544792505616,
+              40.41349345436845
+            ],
+            [
+              -3.623864790873828,
+              40.413503455039915
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26463,
+        "name": " ",
+        "distance": 4543,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.623864790873828,
+              40.413503455039915
+            ],
+            [
+              -3.624254790340525,
+              40.41353345602649
+            ],
+            [
+              -3.624494791076851,
+              40.41356345570576
+            ],
+            [
+              -3.624684789679564,
+              40.41359345551345
+            ],
+            [
+              -3.624874788087078,
+              40.4136334549602
+            ],
+            [
+              -3.6251247890720752,
+              40.413703454752905
+            ],
+            [
+              -3.625384789499486,
+              40.413793454935174
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26150,
+        "name": "M-23",
+        "distance": 4677,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.625384789499486,
+              40.413793454935174
+            ],
+            [
+              -3.626034788492438,
+              40.414003455653635
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26195,
+        "name": "M-23",
+        "distance": 4737,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.626034788492438,
+              40.414003455653635
+            ],
+            [
+              -3.626824788581894,
+              40.41425345422271
+            ],
+            [
+              -3.6269247876255073,
+              40.41428345591658
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26167,
+        "name": "M-23",
+        "distance": 4818,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6269247876255073,
+              40.41428345591658
+            ],
+            [
+              -3.627394786816228,
+              40.414463454849475
+            ],
+            [
+              -3.62754478734535,
+              40.414513455752775
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26168,
+        "name": "M-23",
+        "distance": 4877,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.62754478734535,
+              40.414513455752775
+            ],
+            [
+              -3.6280147857712612,
+              40.41465345511054
+            ],
+            [
+              -3.6284847868691013,
+              40.41479345473359
+            ],
+            [
+              -3.628994784917638,
+              40.414903454380635
+            ],
+            [
+              -3.62932478468262,
+              40.41498345397117
+            ],
+            [
+              -3.630234781806385,
+              40.41512345382555
+            ],
+            [
+              -3.630764782340194,
+              40.41520345285234
+            ],
+            [
+              -3.631454780821008,
+              40.415253452976344
+            ],
+            [
+              -3.631814781375668,
+              40.41528345240401
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12188,
+        "name": "M-23",
+        "distance": 5251,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.631814781375668,
+              40.41528345240401
+            ],
+            [
+              -3.632254779716248,
+              40.4152934519287
+            ],
+            [
+              -3.632774778270485,
+              40.41527345232979
+            ],
+            [
+              -3.633074775791071,
+              40.415263452470974
+            ],
+            [
+              -3.633494775224213,
+              40.41522345181964
+            ],
+            [
+              -3.63413477316606,
+              40.41515345214172
+            ],
+            [
+              -3.634874771858847,
+              40.41504345265689
+            ],
+            [
+              -3.636044766556242,
+              40.41483345275314
+            ],
+            [
+              -3.636964763596023,
+              40.41463345383421
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12212,
+        "name": "M-23",
+        "distance": 5696,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.636964763596023,
+              40.41463345383421
+            ],
+            [
+              -3.638094758822102,
+              40.41452345407605
+            ],
+            [
+              -3.638254758016686,
+              40.41450345364308
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12213,
+        "name": "M-23",
+        "distance": 5806,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.638254758016686,
+              40.41450345364308
+            ],
+            [
+              -3.638414758046609,
+              40.414493452927715
+            ],
+            [
+              -3.63896475695746,
+              40.41446345433022
+            ],
+            [
+              -3.639574753731034,
+              40.41442345350612
+            ],
+            [
+              -3.6401347520128042,
+              40.41441345395862
+            ],
+            [
+              -3.640744752012615,
+              40.41441345276549
+            ],
+            [
+              -3.641024750260935,
+              40.41441345322294
+            ],
+            [
+              -3.641314750862048,
+              40.414423453657044
+            ],
+            [
+              -3.641594749825535,
+              40.414433453221854
+            ],
+            [
+              -3.642194749107667,
+              40.41445345291138
+            ],
+            [
+              -3.643054746664637,
+              40.41451345184348
+            ],
+            [
+              -3.643924745541706,
+              40.41460345183579
+            ],
+            [
+              -3.644664745243555,
+              40.41470345062158
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12191,
+        "name": "M-23",
+        "distance": 6352,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.644664745243555,
+              40.41470345062158
+            ],
+            [
+              -3.6449447443675993,
+              40.41474345068457
+            ],
+            [
+              -3.645414743499402,
+              40.41482344986918
+            ],
+            [
+              -3.645914742505314,
+              40.414913449163016
+            ],
+            [
+              -3.646124742229766,
+              40.41495344954736
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12232,
+        "name": "M-23",
+        "distance": 6479,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.646124742229766,
+              40.41495344954736
+            ],
+            [
+              -3.646574742051684,
+              40.41504344936877
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12233,
+        "name": "M-23",
+        "distance": 6519,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.646574742051684,
+              40.41504344936877
+            ],
+            [
+              -3.647024741026479,
+              40.415153448964595
+            ],
+            [
+              -3.647094742381234,
+              40.415173449328364
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12192,
+        "name": "M-23",
+        "distance": 6565,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.647094742381234,
+              40.415173449328364
+            ],
+            [
+              -3.647264742037258,
+              40.41521344728
+            ],
+            [
+              -3.64802474254784,
+              40.41541344629634
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12185,
+        "name": "M-23",
+        "distance": 6649,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.64802474254784,
+              40.41541344629634
+            ],
+            [
+              -3.6484747414279513,
+              40.41555344663624
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12184,
+        "name": "M-23",
+        "distance": 6690,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6484747414279513,
+              40.41555344663624
+            ],
+            [
+              -3.649014740865212,
+              40.41574344490588
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12186,
+        "name": "M-23",
+        "distance": 6740,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.649014740865212,
+              40.41574344490588
+            ],
+            [
+              -3.64931474086525,
+              40.41584344563087
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12189,
+        "name": "M-23",
+        "distance": 6768,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.64931474086525,
+              40.41584344563087
+            ],
+            [
+              -3.6500747427306233,
+              40.41609344397428
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12251,
+        "name": "M-23",
+        "distance": 6838,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6500747427306233,
+              40.41609344397428
+            ],
+            [
+              -3.650194742423306,
+              40.41613344270349
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12252,
+        "name": "M-23",
+        "distance": 6849,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.650194742423306,
+              40.41613344270349
+            ],
+            [
+              -3.651244742258558,
+              40.41650344245305
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12175,
+        "name": "M-23",
+        "distance": 6947,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.651244742258558,
+              40.41650344245305
+            ],
+            [
+              -3.6519247437412923,
+              40.4167534406123
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12253,
+        "name": "M-23",
+        "distance": 7011,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6519247437412923,
+              40.4167534406123
+            ],
+            [
+              -3.6528147426947832,
+              40.41705343937137
+            ],
+            [
+              -3.65331474484461,
+              40.41721343739229
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12254,
+        "name": "M-23",
+        "distance": 7140,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.65331474484461,
+              40.41721343739229
+            ],
+            [
+              -3.653644743654142,
+              40.417323437903875
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12204,
+        "name": "M-23",
+        "distance": 7170,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.653644743654142,
+              40.417323437903875
+            ],
+            [
+              -3.653764743360825,
+              40.417363438404166
+            ],
+            [
+              -3.653934743900236,
+              40.41742343790774
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12205,
+        "name": "M-23",
+        "distance": 7197,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.653934743900236,
+              40.41742343790774
+            ],
+            [
+              -3.654164745477868,
+              40.417483436491715
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12257,
+        "name": "M-23",
+        "distance": 7218,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.654164745477868,
+              40.417483436491715
+            ],
+            [
+              -3.654674743752962,
+              40.417623435519154
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12258,
+        "name": "M-23",
+        "distance": 7264,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.654674743752962,
+              40.417623435519154
+            ],
+            [
+              -3.654994744257698,
+              40.41771343601684
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12194,
+        "name": "M-23",
+        "distance": 7293,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.654994744257698,
+              40.41771343601684
+            ],
+            [
+              -3.655364744291592,
+              40.417813435858235
+            ],
+            [
+              -3.655614744178735,
+              40.41788343434802
+            ],
+            [
+              -3.656224744248326,
+              40.41807343306295
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12195,
+        "name": "M-23",
+        "distance": 7405,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.656224744248326,
+              40.41807343306295
+            ],
+            [
+              -3.656624744093022,
+              40.41817343374978
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12193,
+        "name": "M-23",
+        "distance": 7440,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.656624744093022,
+              40.41817343374978
+            ],
+            [
+              -3.656694744233033,
+              40.41819343322722
+            ],
+            [
+              -3.656844745485833,
+              40.41823343362869
+            ],
+            [
+              -3.6572347457578043,
+              40.4183434327418
+            ],
+            [
+              -3.658024744213331,
+              40.4185234315314
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12183,
+        "name": "M-23",
+        "distance": 7566,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.658024744213331,
+              40.4185234315314
+            ],
+            [
+              -3.658384743441474,
+              40.41859343140768
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12197,
+        "name": "M-23",
+        "distance": 7597,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.658384743441474,
+              40.41859343140768
+            ],
+            [
+              -3.658614744713854,
+              40.41864343052345
+            ],
+            [
+              -3.658854743299503,
+              40.41870342997822
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12198,
+        "name": "M-23",
+        "distance": 7639,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.658854743299503,
+              40.41870342997822
+            ],
+            [
+              -3.65898474545445,
+              40.41873342924656
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12196,
+        "name": "M-23",
+        "distance": 7650,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.65898474545445,
+              40.41873342924656
+            ],
+            [
+              -3.659064744924533,
+              40.41875343032998
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12173,
+        "name": "Calle de O Donnell",
+        "distance": 7657,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.659064744924533,
+              40.41875343032998
+            ],
+            [
+              -3.659314744500851,
+              40.418813429657256
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12201,
+        "name": "Calle de O Donnell",
+        "distance": 7680,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.659314744500851,
+              40.418813429657256
+            ],
+            [
+              -3.660404745581812,
+              40.419073428450666
+            ],
+            [
+              -3.660554743788898,
+              40.4191134278855
+            ],
+            [
+              -3.661494744327271,
+              40.41934342676402
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12202,
+        "name": "Calle de O Donnell",
+        "distance": 7874,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.661494744327271,
+              40.41934342676402
+            ],
+            [
+              -3.66230474434666,
+              40.41953342596143
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12182,
+        "name": "Calle de O Donnell",
+        "distance": 7946,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.66230474434666,
+              40.41953342596143
+            ],
+            [
+              -3.66274474395379,
+              40.41964342513168
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12214,
+        "name": "Calle de O Donnell",
+        "distance": 7985,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.66274474395379,
+              40.41964342513168
+            ],
+            [
+              -3.663634743505063,
+              40.419863422717114
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12215,
+        "name": "Calle de O Donnell",
+        "distance": 8064,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.663634743505063,
+              40.419863422717114
+            ],
+            [
+              -3.664574744136825,
+              40.420093421748795
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12206,
+        "name": "Calle de O Donnell",
+        "distance": 8148,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.664574744136825,
+              40.420093421748795
+            ],
+            [
+              -3.6648747460600593,
+              40.4201634211518
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12187,
+        "name": "Calle de O Donnell",
+        "distance": 8175,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6648747460600593,
+              40.4201634211518
+            ],
+            [
+              -3.665004744356513,
+              40.4201934207959
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12208,
+        "name": "Calle de O Donnell",
+        "distance": 8186,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.665004744356513,
+              40.4201934207959
+            ],
+            [
+              -3.665044745850659,
+              40.42020342199271
+            ],
+            [
+              -3.665464744172342,
+              40.42030342121318
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12209,
+        "name": "Calle de O Donnell",
+        "distance": 8227,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.665464744172342,
+              40.42030342121318
+            ],
+            [
+              -3.665834746606269,
+              40.42039341936387
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12207,
+        "name": "Calle de O Donnell",
+        "distance": 8260,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.665834746606269,
+              40.42039341936387
+            ],
+            [
+              -3.66666474659535,
+              40.420593419111526
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3739,
+        "name": "Calle de O Donnell",
+        "distance": 8334,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.66666474659535,
+              40.420593419111526
+            ],
+            [
+              -3.667444745670696,
+              40.42080341830432
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3750,
+        "name": "Calle de O Donnell",
+        "distance": 8404,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.667444745670696,
+              40.42080341830432
+            ],
+            [
+              -3.667894746205159,
+              40.420923417615775
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3789,
+        "name": "Calle de O Donnell",
+        "distance": 8444,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.667894746205159,
+              40.420923417615775
+            ],
+            [
+              -3.668224745647238,
+              40.421003415586824
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3790,
+        "name": "Calle de O Donnell",
+        "distance": 8474,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.668224745647238,
+              40.421003415586824
+            ],
+            [
+              -3.668644746886103,
+              40.4211134157576
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3734,
+        "name": "Calle de O Donnell",
+        "distance": 8511,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.668644746886103,
+              40.4211134157576
+            ],
+            [
+              -3.668814746413533,
+              40.421123416229555
+            ],
+            [
+              -3.6689747449760413,
+              40.421123414910866
+            ],
+            [
+              -3.6691847448079082,
+              40.421093416173406
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3661,
+        "name": "Calle de O Donnell",
+        "distance": 8558,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6691847448079082,
+              40.421093416173406
+            ],
+            [
+              -3.6694447461061173,
+              40.42111341468801
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30555,
+        "name": "Tunel de O Donnell",
+        "distance": 8580,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6694447461061173,
+              40.42111341468801
+            ],
+            [
+              -3.6704247425367993,
+              40.421163415084564
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3659,
+        "name": "Calle de O Donnell",
+        "distance": 8663,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6704247425367993,
+              40.421163415084564
+            ],
+            [
+              -3.671064741637787,
+              40.42119341523554
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3660,
+        "name": "Calle de O Donnell",
+        "distance": 8717,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.671064741637787,
+              40.42119341523554
+            ],
+            [
+              -3.6712047422101373,
+              40.42120341498623
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30545,
+        "name": "Tunel de O Donnell",
+        "distance": 8729,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6712047422101373,
+              40.42120341498623
+            ],
+            [
+              -3.6717647418767383,
+              40.42123341349076
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3623,
+        "name": "Calle de O Donnell",
+        "distance": 8777,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6717647418767383,
+              40.42123341349076
+            ],
+            [
+              -3.672064742204549,
+              40.421243413938186
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30546,
+        "name": "Tunel de O Donnell",
+        "distance": 8802,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.672064742204549,
+              40.421243413938186
+            ],
+            [
+              -3.672524739585099,
+              40.42126341389689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3628,
+        "name": "Calle de O Donnell",
+        "distance": 8842,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.672524739585099,
+              40.42126341389689
+            ],
+            [
+              -3.672694740028588,
+              40.4212734125035
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3629,
+        "name": "Calle de O Donnell",
+        "distance": 8856,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.672694740028588,
+              40.4212734125035
+            ],
+            [
+              -3.672834741015762,
+              40.42128341357551
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3657,
+        "name": "Calle de O Donnell",
+        "distance": 8868,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.672834741015762,
+              40.42128341357551
+            ],
+            [
+              -3.673004739407759,
+              40.42129341338747
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3658,
+        "name": "Calle de O Donnell",
+        "distance": 8882,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.673004739407759,
+              40.42129341338747
+            ],
+            [
+              -3.6744347382808833,
+              40.421363411006524
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30544,
+        "name": "Tunel de O Donnell",
+        "distance": 9004,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6744347382808833,
+              40.421363411006524
+            ],
+            [
+              -3.675404736288422,
+              40.421413411433775
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3690,
+        "name": "Calle de O Donnell",
+        "distance": 9086,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675404736288422,
+              40.421413411433775
+            ],
+            [
+              -3.675774734118088,
+              40.42143341186049
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30556,
+        "name": "Tunel de O Donnell",
+        "distance": 9118,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675774734118088,
+              40.42143341186049
+            ],
+            [
+              -3.676004735370863,
+              40.42144341016689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2145,
+        "name": "Calle de Narváez",
+        "distance": 9137,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.676004735370863,
+              40.42144341016689
+            ],
+            [
+              -3.675984736585201,
+              40.42160341059069
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2169,
+        "name": "Calle de Narváez",
+        "distance": 9155,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675984736585201,
+              40.42160341059069
+            ],
+            [
+              -3.675944739859907,
+              40.422003407967665
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2170,
+        "name": "Calle de Narváez",
+        "distance": 9200,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675944739859907,
+              40.422003407967665
+            ],
+            [
+              -3.675914744050707,
+              40.42238340650222
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2093,
+        "name": "Calle de Narváez",
+        "distance": 9242,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675914744050707,
+              40.42238340650222
+            ],
+            [
+              -3.6758347546200523,
+              40.423263403081194
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2146,
+        "name": "Calle de Narváez",
+        "distance": 9340,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6758347546200523,
+              40.423263403081194
+            ],
+            [
+              -3.675824756001933,
+              40.42347340126745
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2147,
+        "name": "Calle de Narváez",
+        "distance": 9363,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675824756001933,
+              40.42347340126745
+            ],
+            [
+              -3.675804760569199,
+              40.42383340034368
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2201,
+        "name": "Calle de Narváez",
+        "distance": 9403,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675804760569199,
+              40.42383340034368
+            ],
+            [
+              -3.675794761453989,
+              40.42394339996164
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2202,
+        "name": "Calle de Narváez",
+        "distance": 9416,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675794761453989,
+              40.42394339996164
+            ],
+            [
+              -3.675784763056114,
+              40.42406339893238
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2177,
+        "name": "Avenida Felipe II",
+        "distance": 9429,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.675784763056114,
+              40.42406339893238
+            ],
+            [
+              -3.67620476228551,
+              40.42406339832996
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2178,
+        "name": "Avenida Felipe II",
+        "distance": 9465,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.67620476228551,
+              40.42406339832996
+            ],
+            [
+              -3.676324762594998,
+              40.42407339864807
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2176,
+        "name": "Avenida Felipe II",
+        "distance": 9475,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.676324762594998,
+              40.42407339864807
+            ],
+            [
+              -3.676404761766094,
+              40.424073397757496
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2175,
+        "name": "Avenida Felipe II",
+        "distance": 9482,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.676404761766094,
+              40.424073397757496
+            ],
+            [
+              -3.676544761921303,
+              40.424083398165216
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2174,
+        "name": "Avenida Felipe II",
+        "distance": 9494,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.676544761921303,
+              40.424083398165216
+            ],
+            [
+              -3.6766447612366493,
+              40.42410339831919
+            ],
+            [
+              -3.676684762455965,
+              40.4241133987695
+            ],
+            [
+              -3.6768147614255873,
+              40.42418339790058
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3852,
+        "name": "Calle de Alcalá",
+        "distance": 9519,
+        "stroke-width": 5,
+        "stroke": "#755d6d"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6768147614255873,
+              40.42418339790058
+            ],
+            [
+              -3.676104766295221,
+              40.42451339625751
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

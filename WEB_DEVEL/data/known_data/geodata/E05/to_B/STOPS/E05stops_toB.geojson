@@ -1,0 +1,170 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3761,
+        "stopName": "Manuel Becerra",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.669506416761315,
+          40.42887097616371
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1427,
+        "stopName": "Manuel Becerra",
+        "distance": 293
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.669031857413694,
+          40.42737821730856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 150,
+        "stopName": "O'Donnell",
+        "distance": 956
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.669189067269313,
+          40.421827735177175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1064,
+        "stopName": "Avenida de Daroca-Casalarreina",
+        "distance": 6130
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.614844936828288,
+          40.40732697884312
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4546,
+        "stopName": "Metro Vicálvaro",
+        "distance": 6813
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.608474010041763,
+          40.4039461478909
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4552,
+        "stopName": "San Cipriano",
+        "distance": 7141
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.604559889016548,
+          40.403768427397
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5321,
+        "stopName": "San Cipriano-Minerva",
+        "distance": 7603
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.59926574944416,
+          40.40316077485818
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5109,
+        "stopName": "Puerta Arganda",
+        "distance": 7911
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.596213807603315,
+          40.402230555030755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4801,
+        "stopName": "Miguel Delibes-Alto del Esparragal",
+        "distance": 11787
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.563510265711813,
+          40.406538304287665
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 51003,
+        "stopName": "Miguel Delibes-Mario Moreno Cantinflas",
+        "distance": 12108
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.560391764633474,
+          40.40491375357239
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5049,
+        "stopName": "Blas de Lezo-Ilusión",
+        "distance": 13308
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.552954201700978,
+          40.40543594135496
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3409,
+        "stopName": "Las Rosas-Metro Las Musas",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.607762808975509,
+          40.43232849126913
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4416,
+        "stopName": "Suecia-Manchester",
+        "distance": 548
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.605147647720845,
+          40.42903134489863
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4412,
+        "stopName": "Metro Las Rosas",
+        "distance": 1120
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.604129859532348,
+          40.42401860188695
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4408,
+        "stopName": "Suecia-Rumanía",
+        "distance": 1622
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6091942114105593,
+          40.42195604218443
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4509,
+        "stopName": "Avenida de Guadalajara-Albericia",
+        "distance": 2128
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6129688102792032,
+          40.42218839465538
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4507,
+        "stopName": "Avenida Guadalajara-República Eslovaca",
+        "distance": 2504
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.616921644334858,
+          40.420676419259046
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4655,
+        "stopName": "Alsacia",
+        "distance": 3066
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.622902116843545,
+          40.41848675708809
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4762,
+        "stopName": "Fuente Carrantona-Avenida de Daroca",
+        "distance": 3495
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.626676990782812,
+          40.41618260583029
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5620,
+        "stopName": "Metro O Donnell",
+        "distance": 7271
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.668282164991778,
+          40.42108521989515
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5619,
+        "stopName": "O Donnell-Narváez",
+        "distance": 7896
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.675631208240942,
+          40.42150655033419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5034,
+        "stopName": "Felipe II",
+        "distance": 8281
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.676514045593877,
+          40.424141048196596
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 755,
+        "stopName": "Felipe II",
+        "distance": 8367
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.676133536295143,
+          40.42432795560701
+        ]
+      }
+    }
+  ]
+}

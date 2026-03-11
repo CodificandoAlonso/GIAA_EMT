@@ -1239,7 +1239,7 @@ species bus skills: [fipa] {
 	reflex handle_shifts when: (self.finished_shift = true){
 		
 		//it needs to write the last stop information.
-		save [world.name, self.id, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+		save [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
 		current_time, TimeSlot,0, 0,self.passengers,0,self.time_travelled]
     	to: '../logs/RESULTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
     	
@@ -1378,7 +1378,7 @@ species bus skills: [fipa] {
 	 * Write in the .log the result of the stop procedure. IN this log, it will be saved (Simulation ID, Bus realizing it, StopCode, Time
 	 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
 	 */
-	save [world.name, self.id, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+	save [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
 			current_time, TimeSlot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] 
     	to: '../logs/RESULTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
     	

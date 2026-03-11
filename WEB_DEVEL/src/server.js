@@ -171,6 +171,52 @@ app.get('/api/simulations/:id/stats', (req, res) => {
   }
 });
 
+// Get geodata (experiment IDs + geojson paths) for a simulation
+app.get('/api/simulations/:id/geodata', (req, res) => {
+  const { id } = req.params;
+  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
+    return res.status(400).json({ error: 'Invalid simulation ID' });
+  }
+
+  const simPath = path.join(DATA_DIR, id);
+  if (!fs.existsSync(simPath)) {
+    return res.status(404).json({ error: 'Simulation not found' });
+  }
+
+  // Detect experiment IDs from includes/ROUTE subdirs (e.g. E01, E02)
+  const routeIncludesPath = path.join(simPath, 'includes', 'ROUTE');
+  let expIds = [];
+  if (fs.existsSync(routeIncludesPath)) {
+    expIds = fs.readdirSync(routeIncludesPath, { withFileTypes: true })
+      .filter(e => e.isDirectory())
+      .map(e => e.name)
+      .sort();
+  }
+
+  const GEODATA_BASE = path.join(__dirname, '..', 'data', 'known_data', 'geodata');
+
+  const experiments = expIds.map(expId => {
+    const expGeoPath = path.join(GEODATA_BASE, expId);
+    if (!fs.existsSync(expGeoPath)) return null;
+
+    // Build URL paths (served via /data static route)
+    const base = `/data/known_data/geodata/${expId}`;
+    return {
+      expId,
+      toA: {
+        route: `${base}/to_A/ROUTE/${expId}route_toA.geojson`,
+        stops: `${base}/to_A/STOPS/${expId}stops_toA.geojson`,
+      },
+      toB: {
+        route: `${base}/to_B/ROUTE/${expId}route_toB.geojson`,
+        stops: `${base}/to_B/STOPS/${expId}stops_toB.geojson`,
+      },
+    };
+  }).filter(Boolean);
+
+  res.json({ experiments });
+});
+
 // Trigger new simulation (placeholder - adapt path to your script)
 app.post('/api/simulations/generate', (req, res) => {
   const scriptPath = path.join(__dirname, '..', '..', 'run_simulation.sh');

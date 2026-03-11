@@ -1,0 +1,185 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5727,
+        "stopName": "Cibeles",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6926494688664393,
+          40.41846003692546
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 81,
+        "stopName": "Prado-Atocha",
+        "distance": 1899
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.692626605414269,
+          40.40972589054884
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1167,
+        "stopName": "Museo Reina Sofía",
+        "distance": 2199
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.693517976889176,
+          40.40740071801389
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 2538,
+        "stopName": "Puente de los Capuchinos",
+        "distance": 4764
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.712538391845011,
+          40.38993819008631
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3929,
+        "stopName": "Intercambiador Plaza Elíptica",
+        "distance": 5554
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.718578832665937,
+          40.38475664598082
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3990,
+        "stopName": "Vía Lusitana-Faro",
+        "distance": 6277
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.725359048052634,
+          40.38084494127563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3994,
+        "stopName": "Consejería Empleo y Mujer",
+        "distance": 7110
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.732003252727531,
+          40.375321070471955
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5938,
+        "stopName": "Vía Lusitana-Halconero del Rey",
+        "distance": 7844
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.737722514981026,
+          40.37064506895635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4187,
+        "stopName": "Calderilla-Centro Comercial",
+        "distance": 9053
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.740335994484098,
+          40.36303820290993
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 2964,
+        "stopName": "La Peseta-Maravedí",
+        "distance": 9825
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.7484320393889643,
+          40.36278344156081
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 649,
+        "stopName": "La Peseta-Avenida Carabanchel Alto",
+        "distance": 10370
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.754659912545199,
+          40.36233760103158
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 2646,
+        "stopName": "La Peseta",
+        "distance": 10603
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.757401867909366,
+          40.362472849696495
+        ]
+      }
+    }
+  ]
+}

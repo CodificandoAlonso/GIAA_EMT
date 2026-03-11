@@ -1,0 +1,6023 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 31316,
+        "name": "Avenida de la Peseta",
+        "distance": -18,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.757194197163579,
+              40.36240342516439
+            ],
+            [
+              -3.757454198149355,
+              40.36241342561314
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4257,
+        "name": "Avenida de la Peseta",
+        "distance": 4,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.757454198149355,
+              40.36241342561314
+            ],
+            [
+              -3.757654195282838,
+              40.36242342503432
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4163,
+        "name": "Avenida de la Peseta",
+        "distance": 21,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.757654195282838,
+              40.36242342503432
+            ],
+            [
+              -3.757834194529282,
+              40.36243342525037
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4164,
+        "name": "Avenida de la Peseta",
+        "distance": 36,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.757834194529282,
+              40.36243342525037
+            ],
+            [
+              -3.757994196581905,
+              40.36244342470057
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9711,
+        "name": " ",
+        "distance": 50,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.757994196581905,
+              40.36244342470057
+            ],
+            [
+              -3.758024195763491,
+              40.36238342568512
+            ],
+            [
+              -3.7580541948741892,
+              40.362323425012065
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9710,
+        "name": " ",
+        "distance": 64,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7580541948741892,
+              40.362323425012065
+            ],
+            [
+              -3.758024194747624,
+              40.362253426249346
+            ],
+            [
+              -3.758004195466918,
+              40.36222342688019
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9690,
+        "name": "Avenida de la Peseta",
+        "distance": 76,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.758004195466918,
+              40.36222342688019
+            ],
+            [
+              -3.757844194633507,
+              40.36221342578677
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9689,
+        "name": "Avenida de la Peseta",
+        "distance": 90,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.757844194633507,
+              40.36221342578677
+            ],
+            [
+              -3.7576841960186402,
+              40.3622034261071
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9707,
+        "name": "Avenida de la Peseta",
+        "distance": 104,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7576841960186402,
+              40.3622034261071
+            ],
+            [
+              -3.757484196650365,
+              40.36219342620325
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9706,
+        "name": "Avenida de la Peseta",
+        "distance": 121,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.757484196650365,
+              40.36219342620325
+            ],
+            [
+              -3.757184197534062,
+              40.36217342624978
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9719,
+        "name": "Avenida de la Peseta",
+        "distance": 146,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.757184197534062,
+              40.36217342624978
+            ],
+            [
+              -3.756274199857048,
+              40.36213342821195
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9718,
+        "name": "Avenida de la Peseta",
+        "distance": 223,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.756274199857048,
+              40.36213342821195
+            ],
+            [
+              -3.756104200564683,
+              40.36212342844187
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9694,
+        "name": "Avenida de la Peseta",
+        "distance": 238,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.756104200564683,
+              40.36212342844187
+            ],
+            [
+              -3.755324201622065,
+              40.36207342941328
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9713,
+        "name": "Avenida de la Peseta",
+        "distance": 304,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.755324201622065,
+              40.36207342941328
+            ],
+            [
+              -3.754514204840643,
+              40.3620334298308
+            ],
+            [
+              -3.754334204966752,
+              40.36202342940164
+            ],
+            [
+              -3.754264204730069,
+              40.36201342965031
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9712,
+        "name": "Avenida de la Peseta",
+        "distance": 395,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.754264204730069,
+              40.36201342965031
+            ],
+            [
+              -3.754194204513419,
+              40.362003429856586
+            ],
+            [
+              -3.754044205225043,
+              40.36198342983378
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9685,
+        "name": " ",
+        "distance": 414,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.754044205225043,
+              40.36198342983378
+            ],
+            [
+              -3.7540242056274953,
+              40.36195343033005
+            ],
+            [
+              -3.753984206084883,
+              40.361923430761344
+            ],
+            [
+              -3.753954205343637,
+              40.361903431495044
+            ],
+            [
+              -3.753894206474719,
+              40.36188343072049
+            ],
+            [
+              -3.753834205336955,
+              40.36187343047858
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9686,
+        "name": " ",
+        "distance": 436,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.753834205336955,
+              40.36187343047858
+            ],
+            [
+              -3.753764205879255,
+              40.361873430418804
+            ],
+            [
+              -3.753684206457073,
+              40.36189343053259
+            ],
+            [
+              -3.753644206902473,
+              40.36191343029169
+            ],
+            [
+              -3.753604205717285,
+              40.361943431696055
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9705,
+        "name": "Avenida de la Peseta",
+        "distance": 458,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.753604205717285,
+              40.361943431696055
+            ],
+            [
+              -3.753464207162938,
+              40.361953431251834
+            ],
+            [
+              -3.753334207471621,
+              40.361963430458474
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9704,
+        "name": "Avenida de la Peseta",
+        "distance": 481,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.753334207471621,
+              40.361963430458474
+            ],
+            [
+              -3.7532142061929292,
+              40.36196343100346
+            ],
+            [
+              -3.7523542105770753,
+              40.361913431458845
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9721,
+        "name": "Avenida de la Peseta",
+        "distance": 565,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7523542105770753,
+              40.361913431458845
+            ],
+            [
+              -3.7517742116736983,
+              40.361883433205456
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9720,
+        "name": "Avenida de la Peseta",
+        "distance": 614,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7517742116736983,
+              40.361883433205456
+            ],
+            [
+              -3.751634212476715,
+              40.36187343220228
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9724,
+        "name": "Avenida de la Peseta",
+        "distance": 626,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.751634212476715,
+              40.36187343220228
+            ],
+            [
+              -3.751544213068353,
+              40.36187343252686
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9725,
+        "name": "Avenida de la Peseta",
+        "distance": 634,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.751544213068353,
+              40.36187343252686
+            ],
+            [
+              -3.751384211118998,
+              40.361863432951964
+            ],
+            [
+              -3.751214213557518,
+              40.361873433678625
+            ],
+            [
+              -3.7510742127758743,
+              40.36189343255282
+            ],
+            [
+              -3.750944213124991,
+              40.36192343291763
+            ],
+            [
+              -3.750804214448099,
+              40.36195343309863
+            ],
+            [
+              -3.74982421806302,
+              40.36216343404489
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9693,
+        "name": "Avenida de la Peseta",
+        "distance": 784,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.74982421806302,
+              40.36216343404489
+            ],
+            [
+              -3.748554223069692,
+              40.362443434739376
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9722,
+        "name": "Avenida de la Peseta",
+        "distance": 896,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.748554223069692,
+              40.362443434739376
+            ],
+            [
+              -3.7481942237974173,
+              40.36252343315511
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9723,
+        "name": "Avenida de la Peseta",
+        "distance": 928,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7481942237974173,
+              40.36252343315511
+            ],
+            [
+              -3.747984225064962,
+              40.36256343413769
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9687,
+        "name": "Avenida de la Peseta",
+        "distance": 947,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.747984225064962,
+              40.36256343413769
+            ],
+            [
+              -3.747804224518865,
+              40.36260343342733
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9688,
+        "name": "Avenida de la Peseta",
+        "distance": 963,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.747804224518865,
+              40.36260343342733
+            ],
+            [
+              -3.747634225664505,
+              40.36264343438105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9708,
+        "name": "Avenida de la Peseta",
+        "distance": 978,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.747634225664505,
+              40.36264343438105
+            ],
+            [
+              -3.747584225945496,
+              40.362653435035405
+            ],
+            [
+              -3.747504225914548,
+              40.36267343471917
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9709,
+        "name": "Avenida de la Peseta",
+        "distance": 989,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.747504225914548,
+              40.36267343471917
+            ],
+            [
+              -3.747104227641156,
+              40.36276343394701
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9692,
+        "name": "Avenida de la Peseta",
+        "distance": 1025,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.747104227641156,
+              40.36276343394701
+            ],
+            [
+              -3.745804231537658,
+              40.36304343411097
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9691,
+        "name": "Avenida de la Peseta",
+        "distance": 1139,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.745804231537658,
+              40.36304343411097
+            ],
+            [
+              -3.744564235945501,
+              40.36331343517096
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9714,
+        "name": "Avenida de la Peseta",
+        "distance": 1249,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.744564235945501,
+              40.36331343517096
+            ],
+            [
+              -3.744014239568098,
+              40.363443435326296
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9715,
+        "name": "Avenida de la Peseta",
+        "distance": 1298,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.744014239568098,
+              40.363443435326296
+            ],
+            [
+              -3.743824238069312,
+              40.36348343549105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9695,
+        "name": " ",
+        "distance": 1314,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.743824238069312,
+              40.36348343549105
+            ],
+            [
+              -3.7438042394611433,
+              40.363463435321705
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9698,
+        "name": " ",
+        "distance": 1317,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7438042394611433,
+              40.363463435321705
+            ],
+            [
+              -3.743754240281918,
+              40.36342343544386
+            ],
+            [
+              -3.743694238947841,
+              40.36339343490562
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9697,
+        "name": " ",
+        "distance": 1329,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.743694238947841,
+              40.36339343490562
+            ],
+            [
+              -3.7436142397136583,
+              40.36338343520463
+            ],
+            [
+              -3.743554239947677,
+              40.363383435115125
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9696,
+        "name": " ",
+        "distance": 1341,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.743554239947677,
+              40.363383435115125
+            ],
+            [
+              -3.743484240829053,
+              40.36339343596939
+            ],
+            [
+              -3.743434239199365,
+              40.36340343483819
+            ],
+            [
+              -3.743384241630157,
+              40.36342343530264
+            ],
+            [
+              -3.743334240156571,
+              40.36345343411444
+            ],
+            [
+              -3.743294240682558,
+              40.36348343577284
+            ],
+            [
+              -3.7432642411719352,
+              40.36353343423956
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4196,
+        "name": "Calle Real",
+        "distance": 1373,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7432642411719352,
+              40.36353343423956
+            ],
+            [
+              -3.743084241129551,
+              40.36347343557542
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4195,
+        "name": "Calle Real",
+        "distance": 1389,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.743084241129551,
+              40.36347343557542
+            ],
+            [
+              -3.7424442425804583,
+              40.36325343646077
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4194,
+        "name": "Calle Real",
+        "distance": 1449,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7424442425804583,
+              40.36325343646077
+            ],
+            [
+              -3.742224241580086,
+              40.363183437293266
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4193,
+        "name": "Calle Real",
+        "distance": 1469,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.742224241580086,
+              40.363183437293266
+            ],
+            [
+              -3.7414342455896112,
+              40.36293343848229
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9601,
+        "name": "Calle Real",
+        "distance": 1542,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7414342455896112,
+              40.36293343848229
+            ],
+            [
+              -3.740904244560074,
+              40.36278344002695
+            ],
+            [
+              -3.740784246065543,
+              40.362783438649366
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9703,
+        "name": " ",
+        "distance": 1600,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740784246065543,
+              40.362783438649366
+            ],
+            [
+              -3.740674245956766,
+              40.3626734403289
+            ],
+            [
+              -3.740554246007888,
+              40.3626234398505
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9702,
+        "name": " ",
+        "distance": 1627,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740554246007888,
+              40.3626234398505
+            ],
+            [
+              -3.740414246219995,
+              40.36263344010347
+            ],
+            [
+              -3.740274247848372,
+              40.36270344069284
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9701,
+        "name": " ",
+        "distance": 1653,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740274247848372,
+              40.36270344069284
+            ],
+            [
+              -3.740224248373778,
+              40.36281344085077
+            ],
+            [
+              -3.740244248592981,
+              40.36291344048005
+            ],
+            [
+              -3.740334248105983,
+              40.363023438985365
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9653,
+        "name": "Calle Calderilla",
+        "distance": 1692,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740334248105983,
+              40.363023438985365
+            ],
+            [
+              -3.740244247843989,
+              40.36311343925735
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9654,
+        "name": "Calle Calderilla",
+        "distance": 1704,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740244247843989,
+              40.36311343925735
+            ],
+            [
+              -3.738464257959114,
+              40.36495343765792
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9600,
+        "name": "Calle Calderilla",
+        "distance": 1958,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.738464257959114,
+              40.36495343765792
+            ],
+            [
+              -3.738144258001566,
+              40.36530343602525
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9699,
+        "name": " ",
+        "distance": 2006,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.738144258001566,
+              40.36530343602525
+            ],
+            [
+              -3.7380042595750242,
+              40.365273436211545
+            ],
+            [
+              -3.737904258381964,
+              40.365283438035284
+            ],
+            [
+              -3.737774259144953,
+              40.36534343681348
+            ],
+            [
+              -3.737704261083353,
+              40.36543343688252
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9700,
+        "name": " ",
+        "distance": 2051,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.737704261083353,
+              40.36543343688252
+            ],
+            [
+              -3.737714261164896,
+              40.3655334374039
+            ],
+            [
+              -3.7378242612329773,
+              40.36563343680065
+            ],
+            [
+              -3.737944259556006,
+              40.36567343619413
+            ],
+            [
+              -3.738074259429688,
+              40.36565343608498
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9604,
+        "name": "Calle de Thaler",
+        "distance": 2099,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.738074259429688,
+              40.36565343608498
+            ],
+            [
+              -3.738194260149848,
+              40.36576343458661
+            ],
+            [
+              -3.738624261354727,
+              40.36601343368058
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9605,
+        "name": "Calle de Thaler",
+        "distance": 2161,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.738624261354727,
+              40.36601343368058
+            ],
+            [
+              -3.739594259551161,
+              40.36654342862236
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9598,
+        "name": "Calle de Thaler",
+        "distance": 2262,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.739594259551161,
+              40.36654342862236
+            ],
+            [
+              -3.740264261354676,
+              40.366953424632875
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9607,
+        "name": "Calle de Thaler",
+        "distance": 2335,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740264261354676,
+              40.366953424632875
+            ],
+            [
+              -3.740564259935667,
+              40.36716342425843
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9608,
+        "name": "Calle de Thaler",
+        "distance": 2370,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740564259935667,
+              40.36716342425843
+            ],
+            [
+              -3.740764260501282,
+              40.3673034235644
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8781,
+        "name": " ",
+        "distance": 2393,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740764260501282,
+              40.3673034235644
+            ],
+            [
+              -3.7406742598786993,
+              40.36744342292945
+            ],
+            [
+              -3.74065426229894,
+              40.36750342376029
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8858,
+        "name": " ",
+        "distance": 2417,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.74065426229894,
+              40.36750342376029
+            ],
+            [
+              -3.740664263174476,
+              40.36756342348098
+            ],
+            [
+              -3.740684262446461,
+              40.367633422455256
+            ],
+            [
+              -3.740754262729637,
+              40.36770342209085
+            ],
+            [
+              -3.740824261529462,
+              40.367753421721744
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30663,
+        "name": "Calle Vía Lusitana",
+        "distance": 2449,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740824261529462,
+              40.367753421721744
+            ],
+            [
+              -3.740734261568155,
+              40.36785342227565
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30664,
+        "name": "Calle Vía Lusitana",
+        "distance": 2463,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740734261568155,
+              40.36785342227565
+            ],
+            [
+              -3.740624262511632,
+              40.36796342091182
+            ],
+            [
+              -3.740524265029482,
+              40.36806342036794
+            ],
+            [
+              -3.740394265000392,
+              40.36819342075918
+            ],
+            [
+              -3.740264264459995,
+              40.36831342101921
+            ],
+            [
+              -3.74014426596727,
+              40.36842341994534
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30661,
+        "name": "Calle Vía Lusitana",
+        "distance": 2544,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.74014426596727,
+              40.36842341994534
+            ],
+            [
+              -3.740004266966526,
+              40.36855341961341
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30662,
+        "name": "Calle Vía Lusitana",
+        "distance": 2562,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.740004266966526,
+              40.36855341961341
+            ],
+            [
+              -3.739874268175852,
+              40.36866341901141
+            ],
+            [
+              -3.7397442689919203,
+              40.368773421015355
+            ],
+            [
+              -3.73956426768495,
+              40.368923419507674
+            ],
+            [
+              -3.73926427071516,
+              40.369173419639246
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30659,
+        "name": "Calle Vía Lusitana",
+        "distance": 2655,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.73926427071516,
+              40.369173419639246
+            ],
+            [
+              -3.738414274215771,
+              40.36987342042019
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30660,
+        "name": "Calle Vía Lusitana",
+        "distance": 2761,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.738414274215771,
+              40.36987342042019
+            ],
+            [
+              -3.737554276076926,
+              40.37058341983773
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30658,
+        "name": "Calle Vía Lusitana",
+        "distance": 2869,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.737554276076926,
+              40.37058341983773
+            ],
+            [
+              -3.7374242766212,
+              40.37069342033869
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30652,
+        "name": "Calle Vía Lusitana",
+        "distance": 2885,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7374242766212,
+              40.37069342033869
+            ],
+            [
+              -3.73712427731526,
+              40.370933420457824
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30656,
+        "name": "Calle Vía Lusitana",
+        "distance": 2922,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.73712427731526,
+              40.370933420457824
+            ],
+            [
+              -3.736894279041313,
+              40.37112342022487
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30657,
+        "name": "Calle Vía Lusitana",
+        "distance": 2951,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.736894279041313,
+              40.37112342022487
+            ],
+            [
+              -3.735904282814206,
+              40.37193341980709
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30655,
+        "name": "Calle Vía Lusitana",
+        "distance": 3074,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.735904282814206,
+              40.37193341980709
+            ],
+            [
+              -3.735484283987498,
+              40.37228342059692
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30654,
+        "name": "Calle Vía Lusitana",
+        "distance": 3127,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.735484283987498,
+              40.37228342059692
+            ],
+            [
+              -3.734854285900949,
+              40.37280342058349
+            ],
+            [
+              -3.734654287634547,
+              40.372973420134066
+            ],
+            [
+              -3.734544286763306,
+              40.373063420280246
+            ],
+            [
+              -3.734444288374275,
+              40.37315342119128
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30653,
+        "name": "Calle Vía Lusitana",
+        "distance": 3258,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.734444288374275,
+              40.37315342119128
+            ],
+            [
+              -3.734384287544148,
+              40.37321342070655
+            ],
+            [
+              -3.734334289406957,
+              40.37327342161788
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30665,
+        "name": " ",
+        "distance": 3274,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.734334289406957,
+              40.37327342161788
+            ],
+            [
+              -3.734284288130127,
+              40.373243421051626
+            ],
+            [
+              -3.734244287941803,
+              40.3732334207705
+            ],
+            [
+              -3.7341742880754483,
+              40.373223421602624
+            ],
+            [
+              -3.734104288778988,
+              40.37322342236949
+            ],
+            [
+              -3.734024288665458,
+              40.37323342160982
+            ],
+            [
+              -3.733944287826441,
+              40.373243422449086
+            ],
+            [
+              -3.733874288089054,
+              40.37326342194207
+            ],
+            [
+              -3.7337642884583753,
+              40.37329342200552
+            ],
+            [
+              -3.733664288414653,
+              40.37333342235109
+            ],
+            [
+              -3.733604289624242,
+              40.37336342260785
+            ],
+            [
+              -3.733554290704833,
+              40.37339342269663
+            ],
+            [
+              -3.7335042893266612,
+              40.373433422760435
+            ],
+            [
+              -3.733454290505975,
+              40.37348342331744
+            ],
+            [
+              -3.733424290321957,
+              40.373523422528024
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16593,
+        "name": " ",
+        "distance": 3364,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.733424290321957,
+              40.373523422528024
+            ],
+            [
+              -3.733404291224342,
+              40.37357342212972
+            ],
+            [
+              -3.733394290184937,
+              40.373613422734685
+            ],
+            [
+              -3.733384291448258,
+              40.373673422185746
+            ],
+            [
+              -3.733384290525063,
+              40.373733422625534
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16625,
+        "name": "Calle Vía Lusitana",
+        "distance": 3388,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.733384290525063,
+              40.373733422625534
+            ],
+            [
+              -3.733324292293444,
+              40.37385342200911
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16626,
+        "name": "Calle Vía Lusitana",
+        "distance": 3402,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.733324292293444,
+              40.37385342200911
+            ],
+            [
+              -3.733284291735238,
+              40.373923422343935
+            ],
+            [
+              -3.733224292908177,
+              40.3740034212064
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16613,
+        "name": "Calle Vía Lusitana",
+        "distance": 3421,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.733224292908177,
+              40.3740034212064
+            ],
+            [
+              -3.733124291779509,
+              40.37410342152566
+            ],
+            [
+              -3.733034293202513,
+              40.37418342113852
+            ],
+            [
+              -3.732934293305079,
+              40.37427342130544
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16614,
+        "name": "Calle Vía Lusitana",
+        "distance": 3460,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.732934293305079,
+              40.37427342130544
+            ],
+            [
+              -3.732014295809347,
+              40.375033422873784
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16615,
+        "name": "Calle Vía Lusitana",
+        "distance": 3575,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.732014295809347,
+              40.375033422873784
+            ],
+            [
+              -3.730734300825471,
+              40.37609342321044
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16609,
+        "name": "Calle Vía Lusitana",
+        "distance": 3735,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.730734300825471,
+              40.37609342321044
+            ],
+            [
+              -3.730614301605994,
+              40.37619342333819
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16610,
+        "name": "Calle Vía Lusitana",
+        "distance": 3750,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.730614301605994,
+              40.37619342333819
+            ],
+            [
+              -3.730184302590128,
+              40.37654342349137
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16616,
+        "name": "Calle Vía Lusitana",
+        "distance": 3803,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.730184302590128,
+              40.37654342349137
+            ],
+            [
+              -3.729824302635598,
+              40.37684342345568
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16617,
+        "name": "Calle Vía Lusitana",
+        "distance": 3848,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.729824302635598,
+              40.37684342345568
+            ],
+            [
+              -3.729244305380922,
+              40.377323424700265
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16618,
+        "name": "Calle Vía Lusitana",
+        "distance": 3921,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.729244305380922,
+              40.377323424700265
+            ],
+            [
+              -3.7290543065172113,
+              40.37747342530634
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16619,
+        "name": "Calle Vía Lusitana",
+        "distance": 3944,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7290543065172113,
+              40.37747342530634
+            ],
+            [
+              -3.728714305441689,
+              40.37775342511468
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16603,
+        "name": "Calle Vía Lusitana",
+        "distance": 3987,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.728714305441689,
+              40.37775342511468
+            ],
+            [
+              -3.727934309557407,
+              40.37840342469315
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16601,
+        "name": "Calle Vía Lusitana",
+        "distance": 4084,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.727934309557407,
+              40.37840342469315
+            ],
+            [
+              -3.7277843100997132,
+              40.37852342520718
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16602,
+        "name": "Calle Vía Lusitana",
+        "distance": 4103,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7277843100997132,
+              40.37852342520718
+            ],
+            [
+              -3.726954312839772,
+              40.37921342730337
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16623,
+        "name": "Calle Vía Lusitana",
+        "distance": 4207,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.726954312839772,
+              40.37921342730337
+            ],
+            [
+              -3.72683431257917,
+              40.37931342681964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16624,
+        "name": "Calle Vía Lusitana",
+        "distance": 4222,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.72683431257917,
+              40.37931342681964
+            ],
+            [
+              -3.726774312324384,
+              40.37936342735669
+            ],
+            [
+              -3.725884314410458,
+              40.38009342781438
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16607,
+        "name": "Calle Vía Lusitana",
+        "distance": 4340,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.725884314410458,
+              40.38009342781438
+            ],
+            [
+              -3.725474315631902,
+              40.38043342913603
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16608,
+        "name": "Calle Vía Lusitana",
+        "distance": 4392,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.725474315631902,
+              40.38043342913603
+            ],
+            [
+              -3.725294317946803,
+              40.38058342907038
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16611,
+        "name": "Calle Vía Lusitana",
+        "distance": 4414,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.725294317946803,
+              40.38058342907038
+            ],
+            [
+              -3.725134316514231,
+              40.3807234293934
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16621,
+        "name": "Calle Vía Lusitana",
+        "distance": 4435,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.725134316514231,
+              40.3807234293934
+            ],
+            [
+              -3.724334318922458,
+              40.381373429406025
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16622,
+        "name": "Calle Vía Lusitana",
+        "distance": 4534,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.724334318922458,
+              40.381373429406025
+            ],
+            [
+              -3.7240043197024213,
+              40.38164343034799
+            ],
+            [
+              -3.723804320153543,
+              40.381803430437344
+            ],
+            [
+              -3.723564322221283,
+              40.381983430549994
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16605,
+        "name": "Calle Vía Lusitana",
+        "distance": 4628,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.723564322221283,
+              40.381983430549994
+            ],
+            [
+              -3.723334322305011,
+              40.38213343209463
+            ],
+            [
+              -3.7231643215430053,
+              40.38224343232906
+            ],
+            [
+              -3.723004323262581,
+              40.38234343089289
+            ],
+            [
+              -3.722864322804796,
+              40.38242343251134
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16606,
+        "name": "Calle Vía Lusitana",
+        "distance": 4705,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.722864322804796,
+              40.38242343251134
+            ],
+            [
+              -3.722704323355476,
+              40.382513432894356
+            ],
+            [
+              -3.722534322910382,
+              40.382603433905516
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16620,
+        "name": "Calle Vía Lusitana",
+        "distance": 4740,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.722534322910382,
+              40.382603433905516
+            ],
+            [
+              -3.722274323454084,
+              40.38273343262166
+            ],
+            [
+              -3.721984324996198,
+              40.38287343476077
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16627,
+        "name": "Calle Vía Lusitana",
+        "distance": 4795,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.721984324996198,
+              40.38287343476077
+            ],
+            [
+              -3.721124325281471,
+              40.38330343666261
+            ],
+            [
+              -3.720664326036884,
+              40.38353343750362
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16628,
+        "name": "Calle Vía Lusitana",
+        "distance": 4929,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.720664326036884,
+              40.38353343750362
+            ],
+            [
+              -3.720534326797194,
+              40.3836034367489
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12086,
+        "name": "Calle Vía Lusitana",
+        "distance": 4942,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.720534326797194,
+              40.3836034367489
+            ],
+            [
+              -3.720244327455857,
+              40.383743437846526
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12087,
+        "name": "Calle Vía Lusitana",
+        "distance": 4971,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.720244327455857,
+              40.383743437846526
+            ],
+            [
+              -3.7195943271336103,
+              40.384053439194474
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12082,
+        "name": "Calle Vía Lusitana",
+        "distance": 5036,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7195943271336103,
+              40.384053439194474
+            ],
+            [
+              -3.7193243278651953,
+              40.38418343958963
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12083,
+        "name": "Calle Vía Lusitana",
+        "distance": 5064,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7193243278651953,
+              40.38418343958963
+            ],
+            [
+              -3.71822432943237,
+              40.38470344409114
+            ],
+            [
+              -3.7181643295196243,
+              40.384733444072644
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12080,
+        "name": "Calle Vía Lusitana",
+        "distance": 5179,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7181643295196243,
+              40.384733444072644
+            ],
+            [
+              -3.717894329811449,
+              40.38486344444416
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5909,
+        "name": "Plaza Elíptica",
+        "distance": 5207,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.717894329811449,
+              40.38486344444416
+            ],
+            [
+              -3.717844329634739,
+              40.384843444499914
+            ],
+            [
+              -3.717804329987326,
+              40.38483344407025
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5908,
+        "name": "Plaza Elíptica",
+        "distance": 5215,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.717804329987326,
+              40.38483344407025
+            ],
+            [
+              -3.717754330185443,
+              40.38482344570807
+            ],
+            [
+              -3.717664329923803,
+              40.38482344514914
+            ],
+            [
+              -3.717574329949036,
+              40.384833445042325
+            ],
+            [
+              -3.71750432988476,
+              40.38485344512404
+            ],
+            [
+              -3.7174543294480813,
+              40.38487344490855
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5915,
+        "name": "Plaza Elíptica",
+        "distance": 5246,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7174543294480813,
+              40.38487344490855
+            ],
+            [
+              -3.717404329250308,
+              40.38490344574376
+            ],
+            [
+              -3.717334331240132,
+              40.384953445632384
+            ],
+            [
+              -3.7172843311630412,
+              40.38499344583938
+            ],
+            [
+              -3.717244330037656,
+              40.38504344561911
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16604,
+        "name": "Plaza Elíptica",
+        "distance": 5272,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.717244330037656,
+              40.38504344561911
+            ],
+            [
+              -3.717214331971148,
+              40.38509344663206
+            ],
+            [
+              -3.717184331192064,
+              40.38515344597817
+            ],
+            [
+              -3.717174331139806,
+              40.385193446804266
+            ],
+            [
+              -3.717164330567463,
+              40.385243446506436
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7009,
+        "name": "Plaza Elíptica",
+        "distance": 5295,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.717164330567463,
+              40.385243446506436
+            ],
+            [
+              -3.717174331932867,
+              40.38529344598585
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20220,
+        "name": " ",
+        "distance": 5301,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.717174331932867,
+              40.38529344598585
+            ],
+            [
+              -3.71706433290875,
+              40.385373445503554
+            ],
+            [
+              -3.716994331487924,
+              40.38543344573072
+            ],
+            [
+              -3.71691433219303,
+              40.3855134467576
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20221,
+        "name": " ",
+        "distance": 5334,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.71691433219303,
+              40.3855134467576
+            ],
+            [
+              -3.716794333055512,
+              40.38564344734373
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20222,
+        "name": " ",
+        "distance": 5352,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.716794333055512,
+              40.38564344734373
+            ],
+            [
+              -3.716614332324094,
+              40.385833446914816
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26433,
+        "name": " ",
+        "distance": 5378,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.716614332324094,
+              40.385833446914816
+            ],
+            [
+              -3.7164243322620343,
+              40.38601344654448
+            ],
+            [
+              -3.716284334135655,
+              40.38614344777446
+            ],
+            [
+              -3.716084334207461,
+              40.38634344764335
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26436,
+        "name": " ",
+        "distance": 5450,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.716084334207461,
+              40.38634344764335
+            ],
+            [
+              -3.715854334711444,
+              40.38656344791388
+            ],
+            [
+              -3.715634335640809,
+              40.386773448053404
+            ],
+            [
+              -3.71523433504211,
+              40.38716344907435
+            ],
+            [
+              -3.715144336113168,
+              40.38724344963621
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26437,
+        "name": " ",
+        "distance": 5578,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.715144336113168,
+              40.38724344963621
+            ],
+            [
+              -3.715024335648982,
+              40.38736345006699
+            ],
+            [
+              -3.714924337559068,
+              40.38746344894185
+            ],
+            [
+              -3.7148643361598532,
+              40.38753344931215
+            ],
+            [
+              -3.714844335847654,
+              40.38758345063458
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26429,
+        "name": "A-42",
+        "distance": 5624,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.714844335847654,
+              40.38758345063458
+            ],
+            [
+              -3.714804337490821,
+              40.38762344958152
+            ],
+            [
+              -3.714534339635508,
+              40.387873450619516
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26430,
+        "name": "A-42",
+        "distance": 5665,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.714534339635508,
+              40.387873450619516
+            ],
+            [
+              -3.714334341507519,
+              40.388063449695906
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26439,
+        "name": " ",
+        "distance": 5692,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.714334341507519,
+              40.388063449695906
+            ],
+            [
+              -3.714164342471443,
+              40.38817345103441
+            ],
+            [
+              -3.714014343404773,
+              40.38829345022675
+            ],
+            [
+              -3.713734345379501,
+              40.3885234517275
+            ],
+            [
+              -3.713644346896963,
+              40.38858345062499
+            ],
+            [
+              -3.713544347517722,
+              40.3886434511754
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6089,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 5785,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.713544347517722,
+              40.3886434511754
+            ],
+            [
+              -3.713324348083562,
+              40.38882345084518
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6090,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 5813,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.713324348083562,
+              40.38882345084518
+            ],
+            [
+              -3.7131343514629083,
+              40.388973452265375
+            ],
+            [
+              -3.712964352210703,
+              40.38909345178939
+            ],
+            [
+              -3.7127943534018732,
+              40.389203451637236
+            ],
+            [
+              -3.712634355250799,
+              40.3893034523691
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6088,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 5892,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.712634355250799,
+              40.3893034523691
+            ],
+            [
+              -3.712474354837231,
+              40.38939345292131
+            ],
+            [
+              -3.712274357264453,
+              40.38949345249257
+            ],
+            [
+              -3.712084358993727,
+              40.38958345290872
+            ],
+            [
+              -3.71179435862894,
+              40.38971345431053
+            ],
+            [
+              -3.711494359604146,
+              40.38983345544462
+            ],
+            [
+              -3.711284360864016,
+              40.389913454902356
+            ],
+            [
+              -3.711024362173048,
+              40.3900134553745
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26438,
+        "name": " ",
+        "distance": 6050,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.711024362173048,
+              40.3900134553745
+            ],
+            [
+              -3.710854362956398,
+              40.390123455648116
+            ],
+            [
+              -3.710724364621932,
+              40.39019345650155
+            ],
+            [
+              -3.71060436549979,
+              40.390253457431115
+            ],
+            [
+              -3.710064368575073,
+              40.390533457285756
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26427,
+        "name": "A-42",
+        "distance": 6150,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.710064368575073,
+              40.390533457285756
+            ],
+            [
+              -3.7098143689236562,
+              40.39063345855928
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26428,
+        "name": "A-42",
+        "distance": 6174,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7098143689236562,
+              40.39063345855928
+            ],
+            [
+              -3.709404371756997,
+              40.390793460043355
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26423,
+        "name": "A-42",
+        "distance": 6213,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.709404371756997,
+              40.390793460043355
+            ],
+            [
+              -3.709284371940519,
+              40.390843459081694
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26434,
+        "name": "A-42",
+        "distance": 6225,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.709284371940519,
+              40.390843459081694
+            ],
+            [
+              -3.709004372869204,
+              40.39096346091924
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26435,
+        "name": "A-42",
+        "distance": 6252,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.709004372869204,
+              40.39096346091924
+            ],
+            [
+              -3.708694374992973,
+              40.39109346153283
+            ],
+            [
+              -3.708324376439871,
+              40.39127346160823
+            ],
+            [
+              -3.708024377649913,
+              40.39145346118234
+            ],
+            [
+              -3.707834378453473,
+              40.39158346268668
+            ],
+            [
+              -3.70759438071727,
+              40.391763463117414
+            ],
+            [
+              -3.707364383978774,
+              40.39195346181909
+            ],
+            [
+              -3.707114387445754,
+              40.39218346223524
+            ],
+            [
+              -3.7067843906803213,
+              40.39252346309132
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26422,
+        "name": "A-42",
+        "distance": 6511,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7067843906803213,
+              40.39252346309132
+            ],
+            [
+              -3.706294396141157,
+              40.39305346331643
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6049,
+        "name": "A-42",
+        "distance": 6583,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.706294396141157,
+              40.39305346331643
+            ],
+            [
+              -3.706194396243442,
+              40.3931834621376
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6050,
+        "name": "A-42",
+        "distance": 6599,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.706194396243442,
+              40.3931834621376
+            ],
+            [
+              -3.706024399307541,
+              40.39335346268821
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6048,
+        "name": "A-42",
+        "distance": 6623,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.706024399307541,
+              40.39335346268821
+            ],
+            [
+              -3.705794400495142,
+              40.39359346242328
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6056,
+        "name": "A-42",
+        "distance": 6656,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.705794400495142,
+              40.39359346242328
+            ],
+            [
+              -3.7053444061118213,
+              40.39409346267888
+            ],
+            [
+              -3.705144409354633,
+              40.39430346146399
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6057,
+        "name": "A-42",
+        "distance": 6752,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.705144409354633,
+              40.39430346146399
+            ],
+            [
+              -3.704984411477208,
+              40.394483461620815
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6058,
+        "name": "A-42",
+        "distance": 6776,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.704984411477208,
+              40.394483461620815
+            ],
+            [
+              -3.704884412157574,
+              40.394583462138534
+            ],
+            [
+              -3.7048444133448832,
+              40.394623461435486
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6059,
+        "name": "A-42",
+        "distance": 6796,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7048444133448832,
+              40.394623461435486
+            ],
+            [
+              -3.704774414367513,
+              40.39470346123673
+            ],
+            [
+              -3.704734413219001,
+              40.394753462117826
+            ],
+            [
+              -3.704704413728236,
+              40.39479346151355
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6060,
+        "name": "A-42",
+        "distance": 6818,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.704704413728236,
+              40.39479346151355
+            ],
+            [
+              -3.704464416465302,
+              40.395053461592006
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6061,
+        "name": "A-42",
+        "distance": 6854,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.704464416465302,
+              40.395053461592006
+            ],
+            [
+              -3.704364418310913,
+              40.395163462149775
+            ],
+            [
+              -3.70430441935784,
+              40.39523346242547
+            ],
+            [
+              -3.70428442054865,
+              40.39526346192754
+            ],
+            [
+              -3.704244420846075,
+              40.39531346042532
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6052,
+        "name": "A-42",
+        "distance": 6888,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.704244420846075,
+              40.39531346042532
+            ],
+            [
+              -3.704204419669426,
+              40.39536346111713
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6053,
+        "name": "Puente de Praga",
+        "distance": 6895,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.704204419669426,
+              40.39536346111713
+            ],
+            [
+              -3.7041644205914412,
+              40.395413461781814
+            ],
+            [
+              -3.703904424288142,
+              40.39570346014198
+            ],
+            [
+              -3.703224432143473,
+              40.396443459952366
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6042,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7040,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.703224432143473,
+              40.396443459952366
+            ],
+            [
+              -3.703124434273963,
+              40.39655346105453
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6072,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7055,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.703124434273963,
+              40.39655346105453
+            ],
+            [
+              -3.703014434837225,
+              40.39666346013418
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6073,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7071,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.703014434837225,
+              40.39666346013418
+            ],
+            [
+              -3.702924435696008,
+              40.396763459754546
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6062,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7084,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.702924435696008,
+              40.396763459754546
+            ],
+            [
+              -3.70287443744181,
+              40.39689345984526
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5926,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7099,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.70287443744181,
+              40.39689345984526
+            ],
+            [
+              -3.702724439918529,
+              40.39704346051807
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6076,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7120,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.702724439918529,
+              40.39704346051807
+            ],
+            [
+              -3.702524441560192,
+              40.39725346015367
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6077,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7149,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.702524441560192,
+              40.39725346015367
+            ],
+            [
+              -3.702344444735921,
+              40.39744345857252
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6074,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7175,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.702344444735921,
+              40.39744345857252
+            ],
+            [
+              -3.702244443682591,
+              40.3975434595063
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6075,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7189,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.702244443682591,
+              40.3975434595063
+            ],
+            [
+              -3.7021644447709563,
+              40.397633458922286
+            ],
+            [
+              -3.7021044457102903,
+              40.397703459671675
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6080,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7210,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7021044457102903,
+              40.397703459671675
+            ],
+            [
+              -3.7019944478786813,
+              40.397843459255874
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6081,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7229,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7019944478786813,
+              40.397843459255874
+            ],
+            [
+              -3.701854448707682,
+              40.39800345966608
+            ],
+            [
+              -3.701704451237958,
+              40.39817345888715
+            ],
+            [
+              -3.7015544535580482,
+              40.398333459606135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6055,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7295,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.7015544535580482,
+              40.398333459606135
+            ],
+            [
+              -3.701184458230962,
+              40.39874345796498
+            ],
+            [
+              -3.701124459476178,
+              40.39882345814015
+            ],
+            [
+              -3.701084460940567,
+              40.39891345805776
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5925,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7371,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.701084460940567,
+              40.39891345805776
+            ],
+            [
+              -3.701024460360748,
+              40.398983458237986
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5919,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7380,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.701024460360748,
+              40.398983458237986
+            ],
+            [
+              -3.700514466406092,
+              40.399533456979654
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5918,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7455,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.700514466406092,
+              40.399533456979654
+            ],
+            [
+              -3.700424467027292,
+              40.39963345844651
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5920,
+        "name": "Paseo de Santa María de la Cabeza",
+        "distance": 7468,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.700424467027292,
+              40.39963345844651
+            ],
+            [
+              -3.699424480551106,
+              40.40071345663496
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 941,
+        "name": "Glorieta de Santa María de la Cabeza",
+        "distance": 7615,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.699424480551106,
+              40.40071345663496
+            ],
+            [
+              -3.6994044795233463,
+              40.4006734567357
+            ],
+            [
+              -3.69936447776779,
+              40.400633456167974
+            ],
+            [
+              -3.699294478313666,
+              40.40061345747281
+            ],
+            [
+              -3.699214478959694,
+              40.40061345800851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1122,
+        "name": "Glorieta de Santa María de la Cabeza",
+        "distance": 7639,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.699214478959694,
+              40.40061345800851
+            ],
+            [
+              -3.699144478217883,
+              40.40063345737416
+            ],
+            [
+              -3.6990644796208962,
+              40.400673458144574
+            ],
+            [
+              -3.698994480407927,
+              40.40072345780425
+            ],
+            [
+              -3.6989544815605573,
+              40.40077345826055
+            ],
+            [
+              -3.698934482002242,
+              40.40082345725437
+            ],
+            [
+              -3.6989244828295083,
+              40.40087345689086
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1144,
+        "name": "Calle del Ferrocarril",
+        "distance": 7679,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6989244828295083,
+              40.40087345689086
+            ],
+            [
+              -3.698714481756261,
+              40.40089345838074
+            ],
+            [
+              -3.6986344832757663,
+              40.40090345845723
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1143,
+        "name": "Calle del Ferrocarril",
+        "distance": 7704,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6986344832757663,
+              40.40090345845723
+            ],
+            [
+              -3.698544482928548,
+              40.40091345945834
+            ],
+            [
+              -3.69840448216409,
+              40.400913459187066
+            ],
+            [
+              -3.698184481990652,
+              40.40090346027121
+            ],
+            [
+              -3.696134482355698,
+              40.400793466522494
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1066,
+        "name": "Calle del Ferrocarril",
+        "distance": 7917,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.696134482355698,
+              40.400793466522494
+            ],
+            [
+              -3.694804483313578,
+              40.40072347231276
+            ],
+            [
+              -3.694594483925043,
+              40.40071347306477
+            ],
+            [
+              -3.694404482478171,
+              40.400703472778844
+            ],
+            [
+              -3.6942644828520033,
+              40.40070347298668
+            ],
+            [
+              -3.694084482423045,
+              40.40070347481686
+            ],
+            [
+              -3.693994482549824,
+              40.4007034739752
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1137,
+        "name": "Paseo de las Delicias",
+        "distance": 8099,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693994482549824,
+              40.4007034739752
+            ],
+            [
+              -3.693974484783009,
+              40.40084347437028
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1138,
+        "name": "Paseo de las Delicias",
+        "distance": 8114,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693974484783009,
+              40.40084347437028
+            ],
+            [
+              -3.693924488981974,
+              40.40131347139302
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1065,
+        "name": "Paseo de las Delicias",
+        "distance": 8167,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693924488981974,
+              40.40131347139302
+            ],
+            [
+              -3.693864495613622,
+              40.40178347110399
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1064,
+        "name": "Paseo de las Delicias",
+        "distance": 8219,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693864495613622,
+              40.40178347110399
+            ],
+            [
+              -3.693804499492165,
+              40.40224346806742
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1063,
+        "name": "Paseo de las Delicias",
+        "distance": 8270,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693804499492165,
+              40.40224346806742
+            ],
+            [
+              -3.693714507937239,
+              40.40291346485639
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1141,
+        "name": "Paseo de las Delicias",
+        "distance": 8345,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693714507937239,
+              40.40291346485639
+            ],
+            [
+              -3.693704507307231,
+              40.40300346600008
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1142,
+        "name": "Paseo de las Delicias",
+        "distance": 8355,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693704507307231,
+              40.40300346600008
+            ],
+            [
+              -3.693654512572328,
+              40.40341346416568
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1062,
+        "name": "Paseo de las Delicias",
+        "distance": 8401,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693654512572328,
+              40.40341346416568
+            ],
+            [
+              -3.69358451852138,
+              40.40402346108975
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1061,
+        "name": "Paseo de las Delicias",
+        "distance": 8469,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.69358451852138,
+              40.40402346108975
+            ],
+            [
+              -3.693524523683025,
+              40.40454345901246
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1060,
+        "name": "Paseo de las Delicias",
+        "distance": 8527,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693524523683025,
+              40.40454345901246
+            ],
+            [
+              -3.693454531120389,
+              40.40512345700865
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1059,
+        "name": "Paseo de las Delicias",
+        "distance": 8591,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693454531120389,
+              40.40512345700865
+            ],
+            [
+              -3.693334541994341,
+              40.406083452932904
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1058,
+        "name": "Paseo de las Delicias",
+        "distance": 8698,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693334541994341,
+              40.406083452932904
+            ],
+            [
+              -3.693244548999342,
+              40.40678345092096
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1113,
+        "name": "Plaza del Emperador Carlos V",
+        "distance": 8776,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693244548999342,
+              40.40678345092096
+            ],
+            [
+              -3.693224550205059,
+              40.40692344939276
+            ],
+            [
+              -3.693214551706763,
+              40.40702345035416
+            ],
+            [
+              -3.6931945542938163,
+              40.40711345022565
+            ],
+            [
+              -3.693164553843551,
+              40.40723344877101
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1112,
+        "name": "Plaza del Emperador Carlos V",
+        "distance": 8827,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693164553843551,
+              40.40723344877101
+            ],
+            [
+              -3.693124554614582,
+              40.407313449153946
+            ],
+            [
+              -3.693084555916518,
+              40.40737344909751
+            ],
+            [
+              -3.6930445564175383,
+              40.40743344793148
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1124,
+        "name": "Plaza del Emperador Carlos V",
+        "distance": 8851,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6930445564175383,
+              40.40743344793148
+            ],
+            [
+              -3.692954557284184,
+              40.40755344879017
+            ],
+            [
+              -3.692884558081742,
+              40.407643448267535
+            ],
+            [
+              -3.6928045601421062,
+              40.40773344706471
+            ],
+            [
+              -3.692724560930689,
+              40.40781344697733
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1125,
+        "name": "Plaza del Emperador Carlos V",
+        "distance": 8902,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692724560930689,
+              40.40781344697733
+            ],
+            [
+              -3.692634561907801,
+              40.4078834473536
+            ],
+            [
+              -3.692514561849617,
+              40.40797344722485
+            ],
+            [
+              -3.692404564497898,
+              40.40804344774898
+            ],
+            [
+              -3.692284563988296,
+              40.40811344696249
+            ],
+            [
+              -3.69214456529424,
+              40.40818344686813
+            ],
+            [
+              -3.692034566252388,
+              40.40824344766273
+            ],
+            [
+              -3.691924567485053,
+              40.40832344821803
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1081,
+        "name": "Plaza del Emperador Carlos V",
+        "distance": 8990,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.691924567485053,
+              40.40832344821803
+            ],
+            [
+              -3.691844566402501,
+              40.408333446886466
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1085,
+        "name": "Plaza del Emperador Carlos V",
+        "distance": 8997,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.691844566402501,
+              40.408333446886466
+            ],
+            [
+              -3.691784566398915,
+              40.408353447413525
+            ],
+            [
+              -3.691724568209474,
+              40.408393447765945
+            ],
+            [
+              -3.6916745673545273,
+              40.40844344766414
+            ],
+            [
+              -3.6916345688694823,
+              40.408503447090666
+            ],
+            [
+              -3.691624570792614,
+              40.408533447798334
+            ],
+            [
+              -3.69161457061848,
+              40.40864344688433
+            ],
+            [
+              -3.691634570772643,
+              40.40871344677893
+            ],
+            [
+              -3.69167457176105,
+              40.4087734459876
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1121,
+        "name": "Plaza del Emperador Carlos V",
+        "distance": 9055,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.69167457176105,
+              40.4087734459876
+            ],
+            [
+              -3.691714573866077,
+              40.40881344695896
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1120,
+        "name": "Paseo del Prado",
+        "distance": 9061,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.691714573866077,
+              40.40881344695896
+            ],
+            [
+              -3.691744572168774,
+              40.40888344646717
+            ],
+            [
+              -3.691784575010934,
+              40.40895344555802
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3445,
+        "name": "Paseo del Prado",
+        "distance": 9077,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.691784575010934,
+              40.40895344555802
+            ],
+            [
+              -3.691864575718858,
+              40.409053443995425
+            ],
+            [
+              -3.691964575631981,
+              40.4091834430341
+            ],
+            [
+              -3.692084578132348,
+              40.40935344198237
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3473,
+        "name": "Paseo del Prado",
+        "distance": 9128,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692084578132348,
+              40.40935344198237
+            ],
+            [
+              -3.6921345785329422,
+              40.409433442684886
+            ],
+            [
+              -3.692204581206878,
+              40.409573441557306
+            ],
+            [
+              -3.6922545805997773,
+              40.40968344035653
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3474,
+        "name": "Paseo del Prado",
+        "distance": 9168,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6922545805997773,
+              40.40968344035653
+            ],
+            [
+              -3.692304582909263,
+              40.40981343952739
+            ],
+            [
+              -3.692344584688799,
+              40.40995343903914
+            ],
+            [
+              -3.692384584680568,
+              40.410123438337266
+            ],
+            [
+              -3.6924245876687323,
+              40.410313438009815
+            ],
+            [
+              -3.692514593118456,
+              40.410753435883535
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3438,
+        "name": "Paseo del Prado",
+        "distance": 9289,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692514593118456,
+              40.410753435883535
+            ],
+            [
+              -3.692554594640904,
+              40.410963433709554
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3437,
+        "name": "Paseo del Prado",
+        "distance": 9312,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692554594640904,
+              40.410963433709554
+            ],
+            [
+              -3.6926545999038103,
+              40.411373432293104
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3411,
+        "name": "Paseo del Prado",
+        "distance": 9359,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6926545999038103,
+              40.411373432293104
+            ],
+            [
+              -3.692894609746551,
+              40.41240342734018
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3436,
+        "name": "Paseo del Prado",
+        "distance": 9475,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692894609746551,
+              40.41240342734018
+            ],
+            [
+              -3.69292461078178,
+              40.41254342707377
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3435,
+        "name": "Paseo del Prado",
+        "distance": 9491,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.69292461078178,
+              40.41254342707377
+            ],
+            [
+              -3.692974615132902,
+              40.41276342632116
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3475,
+        "name": "Paseo del Prado",
+        "distance": 9515,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692974615132902,
+              40.41276342632116
+            ],
+            [
+              -3.692994615175073,
+              40.412853425787326
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3476,
+        "name": "Paseo del Prado",
+        "distance": 9525,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692994615175073,
+              40.412853425787326
+            ],
+            [
+              -3.69303461654072,
+              40.413043423523874
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3434,
+        "name": "Paseo del Prado",
+        "distance": 9547,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.69303461654072,
+              40.413043423523874
+            ],
+            [
+              -3.693244627161047,
+              40.41404341869981
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3484,
+        "name": "Paseo del Prado",
+        "distance": 9659,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693244627161047,
+              40.41404341869981
+            ],
+            [
+              -3.6933146298158572,
+              40.41437341700122
+            ],
+            [
+              -3.6933846350836053,
+              40.41471341569978
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3433,
+        "name": "Paseo del Prado",
+        "distance": 9735,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6933846350836053,
+              40.41471341569978
+            ],
+            [
+              -3.693414635344041,
+              40.414853415257745
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3431,
+        "name": "Paseo del Prado",
+        "distance": 9750,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693414635344041,
+              40.414853415257745
+            ],
+            [
+              -3.693434637823568,
+              40.414953415075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3430,
+        "name": "Paseo del Prado",
+        "distance": 9762,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693434637823568,
+              40.414953415075
+            ],
+            [
+              -3.693454637969617,
+              40.41503341450603
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3483,
+        "name": "Plaza de Cánovas del Castillo",
+        "distance": 9771,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693454637969617,
+              40.41503341450603
+            ],
+            [
+              -3.6935146388998152,
+              40.415203412763276
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3439,
+        "name": "Plaza de Cánovas del Castillo",
+        "distance": 9790,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6935146388998152,
+              40.415203412763276
+            ],
+            [
+              -3.693544641081802,
+              40.4153134135982
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3440,
+        "name": "Plaza de Cánovas del Castillo",
+        "distance": 9803,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693544641081802,
+              40.4153134135982
+            ],
+            [
+              -3.693644645221468,
+              40.41563341064697
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3441,
+        "name": "Paseo del Prado",
+        "distance": 9839,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693644645221468,
+              40.41563341064697
+            ],
+            [
+              -3.69365464581672,
+              40.41569341073032
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3442,
+        "name": "Paseo del Prado",
+        "distance": 9846,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.69365464581672,
+              40.41569341073032
+            ],
+            [
+              -3.6936646447798283,
+              40.41576341074337
+            ],
+            [
+              -3.693664647202621,
+              40.415853411120445
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3477,
+        "name": "Paseo del Prado",
+        "distance": 9864,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693664647202621,
+              40.415853411120445
+            ],
+            [
+              -3.693654648500225,
+              40.41597341015963
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3478,
+        "name": "Paseo del Prado",
+        "distance": 9877,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693654648500225,
+              40.41597341015963
+            ],
+            [
+              -3.693624649840553,
+              40.416143408781096
+            ],
+            [
+              -3.6935646534544713,
+              40.41642340810814
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3479,
+        "name": "Paseo del Prado",
+        "distance": 9927,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.6935646534544713,
+              40.41642340810814
+            ],
+            [
+              -3.693544654394777,
+              40.41652340727219
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3410,
+        "name": "Paseo del Prado",
+        "distance": 9939,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693544654394777,
+              40.41652340727219
+            ],
+            [
+              -3.693474656051447,
+              40.41683340683634
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13331,
+        "name": "Plaza de la Lealtad",
+        "distance": 9974,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693474656051447,
+              40.41683340683634
+            ],
+            [
+              -3.693224656940614,
+              40.416823407167456
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13330,
+        "name": "Plaza de la Lealtad",
+        "distance": 9995,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693224656940614,
+              40.416823407167456
+            ],
+            [
+              -3.693054657705781,
+              40.416813406910705
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12868,
+        "name": "Paseo del Prado",
+        "distance": 10009,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.693054657705781,
+              40.416813406910705
+            ],
+            [
+              -3.692964659189438,
+              40.41698340771123
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12869,
+        "name": "Paseo del Prado",
+        "distance": 10030,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692964659189438,
+              40.41698340771123
+            ],
+            [
+              -3.692934661035988,
+              40.41718340642498
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12809,
+        "name": "Paseo del Prado",
+        "distance": 10052,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692934661035988,
+              40.41718340642498
+            ],
+            [
+              -3.692804670894371,
+              40.41807340359131
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12806,
+        "name": "Paseo del Prado",
+        "distance": 10151,
+        "stroke-width": 5,
+        "stroke": "#6c8da5"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -3.692804670894371,
+              40.41807340359131
+            ],
+            [
+              -3.692754676404216,
+              40.41851340058501
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

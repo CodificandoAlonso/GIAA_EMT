@@ -170,14 +170,21 @@ log_info "Extracting results, events, and inputs..."
 mv "$BASE_DIR/TEST_MOBILITY/logs/RESULTS" "$BASE_DIR/RESULTS"
 mv "$BASE_DIR/TEST_MOBILITY/logs/EVENTS"  "$BASE_DIR/EVENTS"
 
+mkdir -p "$BASE_DIR/PLOTS"
+mkdir -p "$BASE_DIR/PLOTS/to_A"
+mkdir -p "$BASE_DIR/PLOTS/to_A/stops"
+mkdir -p "$BASE_DIR/PLOTS/to_B"
+mkdir -p "$BASE_DIR/PLOTS/to_B/stops"
+mkdir -p "$BASE_DIR/PLOTS/general"
+mkdir -p "$BASE_DIR/PLOTS/buses"
+
 # Keep the inputs that drove this simulation
 mv "$BASE_DIR/TEST_MOBILITY/includes"     "$BASE_DIR/includes"
 
-# Remove the entire copied GAMA project (models, .settings, docs, etc.)
+
 log_info "Removing copied GAMA project files..."
 rm -rf "$BASE_DIR/TEST_MOBILITY"
 
-# Remove GAMA workspaces
 log_info "Removing GAMA workspace directories..."
 rm -rf ./.workspace*
 
@@ -200,7 +207,7 @@ log_info "Final simulation directory structure:"
 log_info "  $BASE_DIR/"
 log_info "  ├── RESULTS/          (simulation output CSVs)"
 log_info "  ├── EVENTS/           (event logs)"
-log_info "  ├── includes/         (frozen input parameters)"
+log_info "  ├── includes/         (Simulation Parameters"
 log_info "  └── log_result_*.log  (pipeline log)"
 
 # ========================= RESUMEN DE EJECUCIÓN ==========================

@@ -33,6 +33,7 @@ BASE_DIR="../data/logs/SIMULATION_${TIMESTAMP}"
 
 mkdir -p "../data/logs"
 mkdir -p "$BASE_DIR"
+touch "$BASE_DIR/description.txt"
 
 LOG_FILE="${BASE_DIR}/log_result_${TIMESTAMP}.log"
 

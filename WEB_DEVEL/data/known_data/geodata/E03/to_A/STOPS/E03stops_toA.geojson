@@ -1,0 +1,200 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5116,
+        "stopName": "Valderrivas",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.606321257828856,
+          40.39648887459425
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5118,
+        "stopName": "Marmolina",
+        "distance": 294
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.606966263391766,
+          40.39745848379606
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5115,
+        "stopName": "Minerva-Caliza",
+        "distance": 633
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.60414187104142,
+          40.39786963871316
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4575,
+        "stopName": "Aurora Boreal-Minerva",
+        "distance": 798
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6030384387136563,
+          40.398798818363076
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4585,
+        "stopName": "Puerta de Arganda",
+        "distance": 1491
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.597121454646626,
+          40.40142407231478
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5322,
+        "stopName": "San Cipriano-Minerva",
+        "distance": 1819
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.599169639184219,
+          40.40332794019285
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1069,
+        "stopName": "San Cipriano",
+        "distance": 2292
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.604668282292514,
+          40.404029126125465
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1074,
+        "stopName": "Metro Vicálvaro",
+        "distance": 2618
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.608500010196471,
+          40.4042162845518
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1065,
+        "stopName": "Avenida de Daroca-Casalarreina",
+        "distance": 3302
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.614659083195966,
+          40.40762526475671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5620,
+        "stopName": "Metro O Donnell",
+        "distance": 8481
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.668282164991778,
+          40.42108521989515
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5619,
+        "stopName": "O Donnell-Narváez",
+        "distance": 9106
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.675631208240942,
+          40.42150655033419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5034,
+        "stopName": "Felipe II",
+        "distance": 9492
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.676514045593877,
+          40.424141048196596
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 755,
+        "stopName": "Felipe II",
+        "distance": 9577
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.676133536295143,
+          40.42432795560701
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 2646,
+        "stopName": "La Peseta",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.757401867909366,
+          40.362472849696495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 562,
+        "stopName": "Carabanchel Alto",
+        "distance": 391
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.754322077215142,
+          40.36194340120647
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4090,
+        "stopName": "La Peseta-Maravedí",
+        "distance": 978
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.747664860977661,
+          40.36256767514366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4188,
+        "stopName": "Calderilla-Centro Comercial",
+        "distance": 1693
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.740314182826419,
+          40.363029333267015
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5939,
+        "stopName": "Vía Lusitana-Halconero del Rey",
+        "distance": 2866
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.7374779745213482,
+          40.3704979768468
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3995,
+        "stopName": "Consejería Empleo y Mujer",
+        "distance": 3596
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.731688755545679,
+          40.37507080389234
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3991,
+        "stopName": "Vía Lusitana-Faro",
+        "distance": 4435
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.725101419733929,
+          40.38067988711135
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3903,
+        "stopName": "Intercambiador Plaza Elíptica",
+        "distance": 5118
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.718747761624102,
+          40.384404241964205
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 2539,
+        "stopName": "Puente de los Capuchinos",
+        "distance": 5961
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.711886333641734,
+          40.38955481144792
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 2535,
+        "stopName": "Santa María de la Cabeza-Puente Praga",
+        "distance": 7164
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.702338650677262,
+          40.397311415262294
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1929,
+        "stopName": "Santa María de la Cabeza",
+        "distance": 7668
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.698758506668144,
+          40.400715996225614
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4032,
+        "stopName": "Metro Palos de la Frontera",
+        "distance": 8281
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.693646746489296,
+          40.402327837744856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5360,
+        "stopName": "Delicias-Atocha",
+        "distance": 8764
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.693161605563203,
+          40.40665960446354
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 82,
+        "stopName": "Prado-Atocha",
+        "distance": 9186
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.692177168538695,
+          40.409859210598064
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5727,
+        "stopName": "Cibeles",
+        "distance": 10195
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6926494688664393,
+          40.41846003692546
+        ]
+      }
+    }
+  ]
+}

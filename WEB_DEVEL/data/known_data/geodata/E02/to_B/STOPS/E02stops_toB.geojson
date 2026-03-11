@@ -1,0 +1,200 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 755,
+        "stopName": "Felipe II",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.676133536295143,
+          40.42432795560701
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5618,
+        "stopName": "O Donnell-Narváez",
+        "distance": 442
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.675615003800801,
+          40.42128592311496
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 153,
+        "stopName": "Metro O Donnell",
+        "distance": 960
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.669510804322173,
+          40.42098803389248
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4763,
+        "stopName": "Fuente Carrantona-Avenida de Daroca",
+        "distance": 4949
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.626215740121024,
+          40.41601392646577
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4635,
+        "stopName": "Alsacia",
+        "distance": 5234
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.623324897994591,
+          40.416799786413314
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4636,
+        "stopName": "Aquitania-Capri",
+        "distance": 5543
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.619991769258069,
+          40.41784469973783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4637,
+        "stopName": "Aquitania-República Eslovaca",
+        "distance": 5939
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6157559178652092,
+          40.41935828415435
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4210,
+        "stopName": "Aquitania-Toscana",
+        "distance": 6247
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.612487326991446,
+          40.42056029730545
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4407,
+        "stopName": "Suecia-Rumanía",
+        "distance": 6573
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.609012787445573,
+          40.4218128504094
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4411,
+        "stopName": "Metro Las Rosas",
+        "distance": 7065
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6039209279255893,
+          40.42392959999105
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4415,
+        "stopName": "Suecia-Manchester",
+        "distance": 7634
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.604910897499317,
+          40.42900555363953
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4417,
+        "stopName": "Suecia-Catania",
+        "distance": 7979
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.605644562102198,
+          40.43206480404372
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3409,
+        "stopName": "Las Rosas-Metro Las Musas",
+        "distance": 8353
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.607762808975509,
+          40.43232849126913
+        ]
+      }
+    }
+  ]
+}

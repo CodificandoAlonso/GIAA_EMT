@@ -1,0 +1,155 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 255,
+        "stopName": "Felipe II",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6744497140904633,
+          40.424517954110804
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 150,
+        "stopName": "O'Donnell",
+        "distance": 773
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.669189067269313,
+          40.421827735177175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5362,
+        "stopName": "Fuente Carrantona-José Bergamín",
+        "distance": 4927
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.629911526220679,
+          40.410309165275244
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1059,
+        "stopName": "Fuente Carrantona-García Tapia",
+        "distance": 5303
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.631796977221826,
+          40.40724481700298
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1057,
+        "stopName": "Fuente Carrantona-Luis de Hoyos",
+        "distance": 5822
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.634805872858001,
+          40.403201304237776
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4371,
+        "stopName": "Pavones",
+        "distance": 6233
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.635348657428115,
+          40.40053163588147
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4373,
+        "stopName": "Centro de Salud Pavones",
+        "distance": 6800
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.629203859834452,
+          40.398934522600946
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 3495,
+        "stopName": "José Prat-Ladera de los Almendros",
+        "distance": 7128
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.625740612527022,
+          40.39779109578266
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1048,
+        "stopName": "José Prat-Indalecio Prieto",
+        "distance": 7342
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.62331834414787,
+          40.39727260911875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4586,
+        "stopName": "Cordel de Pavones",
+        "distance": 7814
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.620084916824803,
+          40.39607372103844
+        ]
+      }
+    }
+  ]
+}

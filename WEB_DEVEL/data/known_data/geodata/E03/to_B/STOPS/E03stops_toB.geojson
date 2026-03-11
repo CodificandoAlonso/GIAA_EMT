@@ -1,0 +1,170 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 755,
+        "stopName": "Felipe II",
+        "distance": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.676133536295143,
+          40.42432795560701
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5618,
+        "stopName": "O Donnell-Narváez",
+        "distance": 442
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.675615003800801,
+          40.42128592311496
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 153,
+        "stopName": "Metro O Donnell",
+        "distance": 960
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.669510804322173,
+          40.42098803389248
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 1064,
+        "stopName": "Avenida de Daroca-Casalarreina",
+        "distance": 6088
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.614844936828288,
+          40.40732697884312
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4546,
+        "stopName": "Metro Vicálvaro",
+        "distance": 6770
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.608474010041763,
+          40.4039461478909
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 4552,
+        "stopName": "San Cipriano",
+        "distance": 7098
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.604559889016548,
+          40.403768427397
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5321,
+        "stopName": "San Cipriano-Minerva",
+        "distance": 7561
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.59926574944416,
+          40.40316077485818
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5833,
+        "stopName": "Puerta de Arganda",
+        "distance": 7866
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.59716229708108,
+          40.401712153545795
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5112,
+        "stopName": "Minerva-Omega",
+        "distance": 8517
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.602320629012409,
+          40.39978003911435
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5114,
+        "stopName": "Minerva-Caliza",
+        "distance": 8831
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.604930373614935,
+          40.397757417345964
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stopNum": 5116,
+        "stopName": "Valderrivas",
+        "distance": 9015
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.606321257828856,
+          40.39648887459425
+        ]
+      }
+    }
+  ]
+}
