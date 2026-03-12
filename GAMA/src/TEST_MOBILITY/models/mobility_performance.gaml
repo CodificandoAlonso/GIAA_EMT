@@ -740,7 +740,7 @@ global
 	
 	
 	//Initialize minutes
-	int minutes <- 0;
+	int minutes <- 5;
 
 	
 	//Initialize sim TimeSlot
@@ -1038,8 +1038,6 @@ global
 		}
 		
 
-    	
-
     }//END INIT
     
 }// END GLOBAL
@@ -1270,7 +1268,7 @@ species bus skills: [fipa] {
 			//If it enters here, it means a delay is produced,so there will be a writing inside a EVENTS.log
 			//The order of the variables will be world.name, id of the bus, StopCode, EVENTCODE, Current Time, Departure Time
 			//And Current time - departure time
-			save [world.name, self.id, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+			save [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
 				"DELAY", current_time, self.departure_time, world.time_to_minutes(current_time) -world.time_to_minutes(self.departure_time)] 
     			to: '../logs/EVENTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
 		}
