@@ -252,6 +252,98 @@ app.post('/api/simulations/:id/generate-charts', (req, res) => {
   });
 });
 
+// Get all plots info for a simulation (general stats, stop plots, bus plots, schedule)
+app.get('/api/simulations/:id/plots-info', (req, res) => {
+  const { id } = req.params;
+  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
+    return res.status(400).json({ error: 'Invalid simulation ID' });
+  }
+
+  const simPath = path.join(DATA_DIR, id);
+  if (!fs.existsSync(simPath)) {
+    return res.status(404).json({ error: 'Simulation not found' });
+  }
+
+  const plotsPath = path.join(simPath, 'PLOTS');
+  const urlBase = `/data/logs/${id}/PLOTS`;
+
+  // General occupation stats
+  let generalStats = null;
+  try {
+    generalStats = JSON.parse(
+      fs.readFileSync(path.join(plotsPath, 'json_output_general_info.json'), 'utf8')
+    );
+  } catch (_) {}
+
+  // Per-bus metrics (NaN is invalid JSON — replace before parsing)
+  let busMetrics = null;
+  try {
+    const raw = fs.readFileSync(path.join(plotsPath, 'buses', 'general_info.json'), 'utf8');
+    busMetrics = JSON.parse(raw.replace(/\bNaN\b/g, 'null'));
+  } catch (_) {}
+
+  // Bus schedule (departure timetable)
+  let busSchedule = null;
+  try {
+    busSchedule = JSON.parse(
+      fs.readFileSync(path.join(simPath, 'includes', 'INPUTS', 'input_data_buses.json'), 'utf8')
+    );
+  } catch (_) {}
+
+  // Stop plots: { toA: { stopId: url }, toB: { stopId: url } }
+  const stopPlots = { toA: {}, toB: {} };
+  const stopPattern = /^occupation_per_timeslot_(\d+)\.png$/;
+
+  const toAStopsPath = path.join(plotsPath, 'to_A', 'stops');
+  if (fs.existsSync(toAStopsPath)) {
+    fs.readdirSync(toAStopsPath).forEach(f => {
+      const m = f.match(stopPattern);
+      if (m) stopPlots.toA[m[1]] = `${urlBase}/to_A/stops/${f}`;
+    });
+  }
+
+  const toBStopsPath = path.join(plotsPath, 'to_B', 'stops');
+  if (fs.existsSync(toBStopsPath)) {
+    fs.readdirSync(toBStopsPath).forEach(f => {
+      const m = f.match(stopPattern);
+      if (m) stopPlots.toB[m[1]] = `${urlBase}/to_B/stops/${f}`;
+    });
+  }
+
+  // Bus plots: { busId: { toA: [url_trip0, url_trip1, ...], toB: [...] } }
+  // PNG names: mean_occupation_per_stop_(toA|toB)_BUSID_TRIPIDX.png
+  const busPlots = {};
+  const busesPlotPath = path.join(plotsPath, 'buses');
+  const busPlotPattern = /^mean_occupation_per_stop_(toA|toB)_(\d+)_(\d+)\.png$/;
+
+  if (fs.existsSync(busesPlotPath)) {
+    fs.readdirSync(busesPlotPath).forEach(f => {
+      const m = f.match(busPlotPattern);
+      if (!m) return;
+      const [, dir, busId, idx] = m;
+      if (!busPlots[busId]) busPlots[busId] = { toA: [], toB: [] };
+      busPlots[busId][dir][parseInt(idx)] = `${urlBase}/buses/${f}`;
+    });
+    // Remove sparse array holes
+    Object.values(busPlots).forEach(b => {
+      b.toA = b.toA.filter(Boolean);
+      b.toB = b.toB.filter(Boolean);
+    });
+  }
+
+  // Aggregate direction/general plots
+  const generalPlots = {};
+  const gpBase = urlBase;
+  if (fs.existsSync(path.join(plotsPath, 'general', 'occupation_per_timeslot_general.png')))
+    generalPlots.general = `${gpBase}/general/occupation_per_timeslot_general.png`;
+  if (fs.existsSync(path.join(plotsPath, 'to_A', 'occupation_per_timeslot_toA.png')))
+    generalPlots.toA = `${gpBase}/to_A/occupation_per_timeslot_toA.png`;
+  if (fs.existsSync(path.join(plotsPath, 'to_B', 'occupation_per_timeslot_toB.png')))
+    generalPlots.toB = `${gpBase}/to_B/occupation_per_timeslot_toB.png`;
+
+  res.json({ generalStats, busSchedule, busMetrics, stopPlots, busPlots, generalPlots });
+});
+
 app.listen(PORT, () => {
   console.log(`EMT GAMA Dashboard running at http://localhost:${PORT}`);
 });

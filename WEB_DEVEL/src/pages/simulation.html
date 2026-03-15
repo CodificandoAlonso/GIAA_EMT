@@ -128,36 +128,60 @@
           </div>
         </div>
 
-        <!-- Route map -->
-        <div class="section-card full-width">
+        <!-- Occupation stats from PLOTS/json_output_general_info.json -->
+        <div class="section-card full-width" id="occ-plots-card" style="display:none;">
           <div class="section-card-header">
-            <span class="section-icon">&#128506;</span>
-            Índice de Ruta
-            <div id="exp-tabs" style="margin-left:auto;display:flex;gap:0.5rem;align-items:center;"></div>
+            <span class="section-icon">&#128200;</span>
+            Ocupación media de la simulación
           </div>
-          <div id="map-container" style="padding:0;">
-            <div class="loading-state" style="padding:3rem;">
-              <div class="loading-spinner"></div>
-              <p>Cargando mapa...</p>
+          <div class="section-card-body">
+            <div class="stats-bar" style="margin-bottom:0;">
+              <div class="stat-card">
+                <div class="stat-label">Ocupación general</div>
+                <div class="stat-value" id="occ-general">—</div>
+                <div class="stat-sub">% de capacidad media</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">&#8594; Dirección A</div>
+                <div class="stat-value" id="occ-toA">—</div>
+                <div class="stat-sub">% de capacidad media</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">&#8592; Dirección B</div>
+                <div class="stat-value" id="occ-toB">—</div>
+                <div class="stat-sub">% de capacidad media</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Charts -->
+        <!-- Analysis: route view + bus view -->
         <div class="section-card full-width">
           <div class="section-card-header">
             <span class="section-icon">&#128202;</span>
-            Gráficas generadas
-            <span id="charts-count" style="margin-left:auto;font-size:0.78rem;color:var(--emt-gray-600);"></span>
-          </div>
-          <div class="section-card-body">
-            <div id="charts-area">
-              <div class="empty-state">
-                <div class="empty-icon">&#128202;</div>
-                <p>No hay gráficas generadas aún.</p>
-                <p style="margin-top:0.5rem;font-size:0.85rem;">Pulsa <strong>"Generar gráficas"</strong> para ejecutar el script Python.</p>
+            Análisis de la simulación
+            <div style="margin-left:auto;display:flex;gap:0.75rem;align-items:center;">
+              <div id="exp-tabs" style="display:flex;gap:0.5rem;align-items:center;"></div>
+              <div style="display:flex;gap:0.25rem;">
+                <button class="btn btn-sm btn-primary" id="view-route-btn">&#128506; Por ruta</button>
+                <button class="btn btn-sm btn-outline" id="view-bus-btn">&#128652; Por autobuses</button>
               </div>
             </div>
+          </div>
+
+          <!-- Route View -->
+          <div id="view-route-section">
+            <div id="map-container" style="padding:0;">
+              <div class="loading-state" style="padding:3rem;">
+                <div class="loading-spinner"></div>
+                <p>Cargando mapa...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bus View -->
+          <div id="view-bus-section" style="display:none;">
+            <div id="bus-view-container"></div>
           </div>
         </div>
 
