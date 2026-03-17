@@ -27,6 +27,27 @@ app.get('/simulation/:id', (req, res) => {
 
 
 
+// Parse description.txt: "title ...\ndescription ..."
+function parseDescription(simPath) {
+  const descPath = path.join(simPath, 'description.txt');
+  if (!fs.existsSync(descPath)) return { title: null, description: null };
+  try {
+    const lines = fs.readFileSync(descPath, 'utf8').split('\n');
+    let title = null, description = null;
+    for (const line of lines) {
+      const sp = line.indexOf(' ');
+      if (sp === -1) continue;
+      const key = line.slice(0, sp).trim();
+      const val = line.slice(sp + 1).trim();
+      if (key === 'title') title = val;
+      else if (key === 'description') description = val;
+    }
+    return { title, description };
+  } catch (_) {
+    return { title: null, description: null };
+  }
+}
+
 // List all simulations
 app.get('/api/simulations', (req, res) => {
   try {
@@ -56,7 +77,8 @@ app.get('/api/simulations', (req, res) => {
           datetime = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)} ${t.slice(0, 2)}:${t.slice(2, 4)}:${t.slice(4, 6)}`;
         }
 
-        return { id, datetime, runCount, hasCharts };
+        const { title, description } = parseDescription(simPath);
+        return { id, datetime, runCount, hasCharts, title, description };
       })
       .sort((a, b) => b.id.localeCompare(a.id));
 
@@ -114,7 +136,8 @@ app.get('/api/simulations/:id', (req, res) => {
     datetime = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)} ${t.slice(0, 2)}:${t.slice(2, 4)}:${t.slice(4, 6)}`;
   }
 
-  res.json({ id, datetime, runCount, charts, logContent });
+  const { title, description } = parseDescription(simPath);
+  res.json({ id, datetime, runCount, charts, logContent, title, description });
 });
 
 // Get aggregated CSV stats for a simulation

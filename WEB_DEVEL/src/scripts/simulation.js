@@ -20,92 +20,6 @@ function getSimId() {
   return parts[parts.length - 1];
 }
 
-// ---- Render charts ----
-
-function renderCharts(charts) {
-  const area = document.getElementById('charts-area');
-  const countEl = document.getElementById('charts-count');
-  if (!area) return;
-
-  if (!charts || charts.length === 0) {
-    area.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">&#128202;</div>
-        <p>No hay gráficas generadas aún.</p>
-        <p style="margin-top:0.5rem;font-size:0.85rem;">
-          Pulsa <strong>"Generar gráficas"</strong> para ejecutar el script Python de análisis.
-        </p>
-      </div>`;
-    countEl.textContent = '';
-    return;
-  }
-
-  countEl.textContent = `${charts.length} imagen${charts.length !== 1 ? 'es' : ''}`;
-  const grid = document.createElement('div');
-  grid.className = 'charts-grid';
-
-  charts.forEach(src => {
-    const name = src.split('/').pop().replace(/\.[^/.]+$/, '').replace(/_/g, ' ');
-    const wrap = document.createElement('div');
-    wrap.className = 'chart-img-wrap';
-    wrap.innerHTML = `
-      <img src="${src}" alt="${name}" loading="lazy" />
-      <div class="chart-name">${name}</div>
-    `;
-    grid.appendChild(wrap);
-  });
-
-  area.innerHTML = '';
-  area.appendChild(grid);
-}
-
-// ---- Render time slot table ----
-
-function renderTimeSlots(byTimeSlot) {
-  const container = document.getElementById('timeslot-table');
-  const slots = Object.entries(byTimeSlot).sort((a, b) => Number(a[0]) - Number(b[0]));
-
-  if (slots.length === 0) {
-    container.innerHTML = '<p style="color:var(--emt-gray-600);font-size:0.85rem;">Sin datos de franjas horarias.</p>';
-    return;
-  }
-
-  const maxBoards = Math.max(...slots.map(([, v]) => v.boards), 1);
-
-  const table = document.createElement('table');
-  table.style.cssText = 'width:100%;border-collapse:collapse;';
-
-  table.innerHTML = `
-    <thead>
-      <tr style="text-align:left;border-bottom:2px solid var(--emt-red);">
-        <th style="padding:0.4rem 0.5rem;font-size:0.75rem;color:var(--emt-gray-600);">Franja</th>
-        <th style="padding:0.4rem 0.5rem;font-size:0.75rem;color:var(--emt-gray-600);">Boards</th>
-        <th style="padding:0.4rem 0.5rem;font-size:0.75rem;color:var(--emt-gray-600);">Dropoffs</th>
-        <th style="padding:0.4rem 0.5rem;font-size:0.75rem;color:var(--emt-gray-600);min-width:80px;">Actividad</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${slots.map(([slot, v]) => {
-        const pct = Math.round((v.boards / maxBoards) * 100);
-        return `
-          <tr style="border-bottom:1px solid var(--emt-gray-200);">
-            <td style="padding:0.4rem 0.5rem;font-weight:600;">${slot}</td>
-            <td style="padding:0.4rem 0.5rem;">${formatNum(Math.round(v.boards))}</td>
-            <td style="padding:0.4rem 0.5rem;">${formatNum(Math.round(v.dropoffs))}</td>
-            <td style="padding:0.4rem 0.5rem;">
-              <div style="background:var(--emt-gray-200);border-radius:3px;height:8px;overflow:hidden;">
-                <div style="background:var(--emt-red);height:100%;width:${pct}%;border-radius:3px;"></div>
-              </div>
-            </td>
-          </tr>`;
-      }).join('')}
-    </tbody>
-  `;
-
-  container.innerHTML = '';
-  container.appendChild(table);
-}
-
 // ---- Colorize log output ----
 
 function colorizeLog(text) {
@@ -140,10 +54,11 @@ async function loadDetail(simId) {
 
     // Hero
     document.getElementById('hero-id').textContent = detail.id;
-    document.getElementById('hero-date').textContent = detail.datetime || detail.id;
-    document.getElementById('hero-subtitle').textContent =
-      `${formatNum(detail.runCount)} réplicas · ${detail.charts?.length || 0} gráficas`;
-    document.title = `${detail.id} — EMT Dashboard`;
+    document.getElementById('hero-date').textContent = detail.title || detail.datetime || detail.id;
+    document.getElementById('hero-subtitle').textContent = detail.description
+      ? `${detail.description} · ${formatNum(detail.runCount)} réplicas`
+      : `${detail.datetime || ''} · ${formatNum(detail.runCount)} réplicas`;
+    document.title = `${detail.title || detail.id} — EMT Dashboard`;
 
     // Stats bar
     document.getElementById('ds-runs').textContent = formatNum(detail.runCount);
@@ -152,14 +67,6 @@ async function loadDetail(simId) {
       document.getElementById('ds-dropoffs').textContent = formatNum(Math.round(stats.totalDropoffs));
       document.getElementById('ds-occ').textContent = formatNum(stats.avgPassengers);
 
-      // Direction
-      document.getElementById('dir-a-boards').textContent = formatNum(Math.round(stats.byDirection?.toA?.boards || 0));
-      document.getElementById('dir-b-boards').textContent = formatNum(Math.round(stats.byDirection?.toB?.boards || 0));
-      document.getElementById('dir-a-dropoffs').textContent = formatNum(Math.round(stats.byDirection?.toA?.dropoffs || 0));
-      document.getElementById('dir-b-dropoffs').textContent = formatNum(Math.round(stats.byDirection?.toB?.dropoffs || 0));
-
-      // Time slots
-      renderTimeSlots(stats.byTimeSlot || {});
     }
 
     // Route map
@@ -167,9 +74,6 @@ async function loadDetail(simId) {
 
     // Plots info (occupation stats, stop/bus plots) — non-blocking
     loadPlotsInfo(simId);
-
-    // Charts
-    renderCharts(detail.charts || []);
 
     // Log
     const logEl = document.getElementById('log-viewer');
@@ -191,32 +95,6 @@ async function loadDetail(simId) {
       <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; Volver al dashboard</a>
     `;
     toast('Error al cargar la simulación: ' + err.message, 'error');
-  }
-}
-
-// ---- Generate charts ----
-
-async function generateCharts(simId) {
-  const btn = document.getElementById('btn-gen-charts');
-  btn.disabled = true;
-  btn.textContent = '⏳ Generando...';
-  toast('Generando gráficas con Python...', 'info');
-
-  try {
-    const res = await fetch(`/api/simulations/${simId}/generate-charts`, { method: 'POST' });
-    const data = await res.json();
-    toast(data.message || 'Gráficas generadas', res.ok ? 'success' : 'error');
-    if (res.ok) {
-      // Reload detail to show new charts
-      const detailRes = await fetch(`/api/simulations/${simId}`);
-      const detail = await detailRes.json();
-      renderCharts(detail.charts || []);
-    }
-  } catch (err) {
-    toast('Error al generar gráficas: ' + err.message, 'error');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '&#128202; Generar gráficas';
   }
 }
 
@@ -875,8 +753,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadDetail(simId);
   initViewToggle();
-
-  document.getElementById('btn-gen-charts').addEventListener('click', () => generateCharts(simId));
 
   document.getElementById('btn-download-log').addEventListener('click', () => {
     window.open(`/data/logs/${simId}/log_result_${simId.replace('SIMULATION_', '')}.log`, '_blank');

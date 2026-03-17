@@ -233,6 +233,20 @@ main {
   justify-content: space-between;
 }
 
+.sim-card-header .sim-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--emt-white);
+  margin-bottom: 0.15rem;
+}
+
+.sim-card-body .sim-description {
+  font-size: 0.82rem;
+  color: var(--emt-gray-600);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
 .sim-card-header .sim-id {
   font-size: 0.7rem;
   opacity: 0.8;

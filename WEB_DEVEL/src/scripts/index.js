@@ -27,16 +27,24 @@ function renderCard(sim) {
     ? '<span class="charts-badge ready">&#10003; Gráficas listas</span>'
     : '<span class="charts-badge pending">&#9711; Sin gráficas</span>';
 
+  const titleHtml = sim.title
+    ? `<div class="sim-title">${sim.title}</div>`
+    : '';
+  const descHtml = sim.description
+    ? `<div class="sim-description">${sim.description}</div>`
+    : '';
+
   card.innerHTML = `
     <div class="sim-card-header">
       <div>
+        ${titleHtml}
         <div class="sim-id">${sim.id}</div>
-        <div class="sim-date">${datePart || '—'}</div>
-        <div class="sim-time">${timePart || ''}</div>
+        <div class="sim-date">${datePart || '—'} ${timePart || ''}</div>
       </div>
       <span class="sim-card-badge">GAMA</span>
     </div>
     <div class="sim-card-body">
+      ${descHtml}
       <div class="sim-meta-row">
         <span class="meta-label">Réplicas</span>
         <span class="meta-value">${formatNum(sim.runCount)} runs</span>

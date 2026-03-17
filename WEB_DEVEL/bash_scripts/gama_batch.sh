@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # ==========================================================================
 # Pipeline de ejecución batch de simulaciones GAMA para el modelo de
 # movilidad de la ruta 401. Este script gestiona la limpieza de logs

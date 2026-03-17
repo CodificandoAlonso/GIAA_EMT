@@ -47,9 +47,6 @@
           <div class="detail-subtitle" id="hero-subtitle"></div>
         </div>
         <div class="detail-hero-actions">
-          <button class="btn btn-white btn-sm" id="btn-gen-charts">
-            &#128202; Generar gráficas
-          </button>
           <button class="btn btn-white btn-sm" id="btn-download-log">
             &#8595; Descargar log
           </button>
@@ -82,51 +79,6 @@
 
       <!-- Main detail grid -->
       <div class="detail-grid">
-
-        <!-- Direction breakdown -->
-        <div class="section-card">
-          <div class="section-card-header">
-            <span class="section-icon">&#8644;</span>
-            Desglose por dirección
-          </div>
-          <div class="section-card-body">
-            <div class="direction-row">
-              <div class="direction-box">
-                <h4>&#8594; Dirección A</h4>
-                <div class="dir-val" id="dir-a-boards">—</div>
-                <div class="dir-sub">boards</div>
-              </div>
-              <div class="direction-box">
-                <h4>&#8592; Dirección B</h4>
-                <div class="dir-val" id="dir-b-boards">—</div>
-                <div class="dir-sub">boards</div>
-              </div>
-            </div>
-            <div class="direction-row">
-              <div class="direction-box" style="border-left-color:#555;">
-                <h4>&#8595; Dropoffs A</h4>
-                <div class="dir-val" id="dir-a-dropoffs" style="color:var(--emt-gray-900);">—</div>
-                <div class="dir-sub">bajadas</div>
-              </div>
-              <div class="direction-box" style="border-left-color:#555;">
-                <h4>&#8595; Dropoffs B</h4>
-                <div class="dir-val" id="dir-b-dropoffs" style="color:var(--emt-gray-900);">—</div>
-                <div class="dir-sub">bajadas</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Time slot heatmap -->
-        <div class="section-card">
-          <div class="section-card-header">
-            <span class="section-icon">&#128336;</span>
-            Actividad por franja horaria
-          </div>
-          <div class="section-card-body">
-            <div id="timeslot-table" style="font-size:0.85rem;"></div>
-          </div>
-        </div>
 
         <!-- Occupation stats from PLOTS/json_output_general_info.json -->
         <div class="section-card full-width" id="occ-plots-card" style="display:none;">
