@@ -17,6 +17,7 @@ model mobility_model
 
 
 
+
 //--------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------GLOBAL_STATEMENT-----------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -33,8 +34,7 @@ global
 //--------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
 
-	//FOR THE LOG
-	int sim_id <- 0;
+
 	
 
 	//CREATE GLOBAL VARIABLES TO SAVE GLOBAL SCOPE OF THE AGENTS CREATED
@@ -192,8 +192,6 @@ global
     		 * Now, obtain from the input_as_matrix, all the rows referencing that stop code
     		 * From this, it will order the daata as specified in the loop definition above
     		 */
-    		 
-    		     		
     			list<list> elements_from_stop <- [];
     			
     			
@@ -766,12 +764,27 @@ global
 	}//End reflex update_time
 
 
+
+	
+	//Value to know how many time per passenger the bus must wait in the stop
+	float elapsed_time_per_passenger <- 3.0;
+
+
+
 	//Map the TimeSlot + minutes into a string, to compare with the input
 	string current_time -> string(TimeSlot) + ":" + (minutes < 10 ? "0" + string(minutes) : string(minutes));	
 	
 	
 	
+//------------------------------------------------------------------
+//----------------------DISTRIBUTION VARIABLES----------------------
+//------------------------------------------------------------------
+	
+	
+	//Variable to hold the info about each stop and its distribution values
 	map<int, list<float>> stops_distribution_values;
+	
+	
 	
 	
 	/*
@@ -910,6 +923,30 @@ global
         do die;  //CHAO CHAO CHAO CHAO
 	}
 
+	
+	
+//--------------------------------------------
+//-------------GLOBAL FUNCTIONS---------------
+//--------------------------------------------
+	
+
+	/*
+	 * Global function to transform the number of Boards and Dropoffs given a stop data and return the number of cycles
+	 * of waiting the bus must take based on that number and the step value of the sim.
+	 */
+	 int await_time_per_bus(int boards, int dropoffs){
+	 	
+	 	//Taking max of boards anddropoffs because in real time te bus parallelizes the board/dropoff one per door.
+	 	float time_to_wait <- max(boards, dropoffs) * elapsed_time_per_passenger;
+		
+		//Once known the val, convert it to cycle sims
+		int cycles_to_wait <- int(time_to_wait/step);
+	 	
+	 	//The system must return the max between 0 or the number calc - 2, as 2 are the cycles that the bus is already
+	 	//taking for processing the passengers. This is extra time only of wait
+	 	return max(0, (cycles_to_wait-2));
+	 }
+	
 	
     
     /*
