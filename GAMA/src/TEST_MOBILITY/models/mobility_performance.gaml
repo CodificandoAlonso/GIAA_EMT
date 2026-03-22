@@ -1169,12 +1169,12 @@ species bus skills: [fipa] {
     //To handle the comms in the next iteration, not in the same
     int comms_cycle;
     
+    //Bool variable to handle the extra time await at the stop
+    bool extra_waiting_time <- false;
     
-    //Deprecated, The EMT did not like this as KPI
-    /* 
-    //Seatable capacity
-    int seatable_capacity <- 28;
-    */
+    //Variable to hold the number of cycles left of waiting
+    int cycles_to_wait;
+    
     
     //To wait for the acceptance of the proposals
     bool waiting <- false;
@@ -1359,17 +1359,18 @@ species bus skills: [fipa] {
     
     
     /*
-     * Reflex function to handle the board/Dropoff of passengers. It reads the content */
-    reflex handle_stop_answer when: (self.processing_passengers = true and cycle > self.comms_cycle and self.waiting = false and !empty(agrees))
+     * Reflex function to handle the board/Dropoff of passengers. It reads the content of the querry answer holding the info about the stop
+     * Then proceeds to save for the statics the number of dropoffs and update its occupation value with that and the boards
+     * Also holds the number if exists of passengers who were unable to board. 
+     */
+    reflex handle_stop_answer when: (self.processing_passengers = true and cycle > self.comms_cycle and self.waiting = false and !empty(agrees)
+    								and not self.extra_waiting_time)
 	{
 
 		message agree_query <- agrees at 0;
 		
 		list content_agree <- agree_query.contents;
 
-		if (content_agree != ["Here is the passenger list"]){
-			write "RARUNO";
-		}
 		
 		message inform_data_stop <- informs at 0;
 		
@@ -1422,8 +1423,26 @@ species bus skills: [fipa] {
     
     
     /*
+     * Reflex function to handle the extra time in stop boarding or discharging passengers.
+     */
+    reflex spend_extra_time_in_stop when: self.extra_waiting_time {
+    	
+    	self.cycles_to_wait <- self.cycles_to_wait -1;
+    	
+    	if (self.cycles_to_wait = 0){
+    		self.extra_waiting_time <- false;
+    	}
+    	
+    }//End reflex spend_extra_time_in_stop
+    
+    
+    
+    
+    
+    
+    /*
      * Reflex function to verify that the stop updated its value of passengers based on the new boards */
-    reflex verify_stop_and_restart_way when: (self.waiting = true and cycle > self.comms_cycle){
+    reflex verify_stop_and_restart_way when: (self.waiting = true and cycle > self.comms_cycle and not self.extra_waiting_time){
     	
     	message agree_resp <- agrees at 0;
 		message inform_resp <- informs at 0;
