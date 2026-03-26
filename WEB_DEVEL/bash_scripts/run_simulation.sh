@@ -26,7 +26,7 @@ GAMA_SRC="/opt/gama-platform/headless/"
 MODEL_NAME="mobility_performance.gaml"
 BATCH_NAME="batch_1000"
 SIM_MODEL_PATH="${BASE_DIR}/TEST_MOBILITY/models/${MODEL_NAME}"
-HPC_CORES=10
+HPC_CORES=12
 
 
 LOG_FILE="${BASE_DIR}/log_result_${BASE_DIR: -15}.log"
@@ -102,7 +102,7 @@ TOTAL_SIMS="${BATCH_NAME##*_}"
 # Results land inside the copied project via GAMA's relative paths
 RESULTS_DIR="$BASE_DIR/TEST_MOBILITY/logs/RESULTS"
 
-"${GAMA_SRC}gama-headless.sh" -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" >> "$LOG_FILE" 2>&1 &
+"${GAMA_SRC}gama-headless.sh" -m 8192m -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" >> "$LOG_FILE" 2>&1 &
 GAMA_PID=$!
 
 echo ""
@@ -169,7 +169,7 @@ log_info "Extracting results, events, and inputs..."
 # Move results and events out of the copied project
 mv "$BASE_DIR/TEST_MOBILITY/logs/RESULTS" "$BASE_DIR/RESULTS"
 mv "$BASE_DIR/TEST_MOBILITY/logs/EVENTS"  "$BASE_DIR/EVENTS"
-
+mv "$BASE_DIR/TEST_MOBILITY/logs/PASSENGERS" "$BASE_DIR/PASSENGERS"
 mkdir -p "$BASE_DIR/PLOTS"
 mkdir -p "$BASE_DIR/PLOTS/to_A"
 mkdir -p "$BASE_DIR/PLOTS/to_A/stops"

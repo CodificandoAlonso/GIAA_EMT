@@ -731,7 +731,7 @@ global
 	
 	
 	//#DEFINE. CHANGE THIS IN CASE THE SIMULATION HAS TO RUN ON LOWER/HIGHER ITERATIONS
-	float step <- 10 #seconds;
+	float step <- 5 #seconds;
 	
 
 	float time <- cycle * step;
@@ -907,7 +907,12 @@ global
 			
 			if (passengers_generated_new > 0){
 				stop_iter.passengers_to_be_generated <- stop_iter.passengers_to_be_generated - passengers_generated_new;
-				stop_iter.passengers_generated <- stop_iter.passengers_generated + passengers_generated_new;
+				
+				
+				loop new_pass from: 1 to: passengers_generated_new {
+					stop_iter.passengers_with_time << [(new_pass + stop_iter.passengers_generated), 0.0];
+				}
+				stop_iter.passengers_generated <- stop_iter.passengers_generated + passengers_generated_new;		
 			}
 		}//End loop
 
@@ -919,7 +924,6 @@ global
 	 * Reflex to handle the END of the sim once no bus is kept alive
 	 */ 
 	reflex end_real_simulation when: empty(bus){
-		write "Ending execution " + world.name;
         do die;  //CHAO CHAO CHAO CHAO
 	}
 
@@ -1142,6 +1146,14 @@ species bus skills: [fipa] {
     int passengers <- 0;
     
     
+    //Variables to hold the species scope of the boards, dropoffs and residual_boards in order to have them in other reflexes
+    int boards;
+    int dropoffs;
+    int residual_boards;
+    
+    
+    
+    
     //List container of the departure times for the bus
     list<string> departure_times;
     
@@ -1181,6 +1193,12 @@ species bus skills: [fipa] {
     
     //Bool variable to know wether the bus has finished a shift(Arrive to its destintation, or not). It will trigger a reflextu change the direction or die.
     bool finished_shift <- false;
+    
+    
+    //List container to act as a buffer for the disk writings(logs) at its end of execution
+    list<list> buffer_results;
+    
+    list<list> buffer_events;
     
         
     //DEFAULT ASPECT FOR THE GUI EXPERIMENT
@@ -1274,15 +1292,24 @@ species bus skills: [fipa] {
 	reflex handle_shifts when: (self.finished_shift = true){
 		
 		//it needs to write the last stop information.
-		save [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-		current_time, TimeSlot,0, 0,self.passengers,0,self.time_travelled]
-    	to: '../logs/RESULTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
+		buffer_results << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+		current_time, TimeSlot,0, 0,self.passengers,0,self.time_travelled];
+    	
     	
     	
 		self.finished_shift <- false;
 		
 		
 		if (departure_times[travels_completed] = last(departure_times)){
+			//Save all the rows accumulated in the buffer in its files
+			loop row over: buffer_results {
+				save row to: '../logs/RESULTS/log_' + world.name + '.csv' format: 'csv' rewrite: false;
+			}
+			
+			loop row over: buffer_events {
+				save row to: '../logs/EVENTS/log_' + world.name + '.csv' format: 'csv' rewrite: false;
+			}
+		
 			do die;
 		}
 		
@@ -1305,10 +1332,8 @@ species bus skills: [fipa] {
 			//If it enters here, it means a delay is produced,so there will be a writing inside a EVENTS.log
 			//The order of the variables will be world.name, id of the bus, StopCode, EVENTCODE, Current Time, Departure Time
 			//And Current time - departure time
-			save [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-				"DELAY", current_time, self.departure_time, world.time_to_minutes(current_time) -world.time_to_minutes(self.departure_time)] 
-    			to: '../logs/EVENTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
-		}
+			buffer_events << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+				"DELAY", current_time, self.departure_time, world.time_to_minutes(current_time) -world.time_to_minutes(self.departure_time)] ;		}
 		else{
 			allowed_to_leave <- false;
 		}//End case if the bus is arriving late to its next departure
@@ -1375,50 +1400,61 @@ species bus skills: [fipa] {
 		message inform_data_stop <- informs at 0;
 		
 		//First, handle dropoffs
-		int dropoffs <- int(list(inform_data_stop.contents)[1]);
+		self.dropoffs <- int(list(inform_data_stop.contents)[1]);
 		
-		if (dropoffs > self.passengers){
-			dropoffs <- self.passengers;
+		if (self.dropoffs > self.passengers){
+			self.dropoffs <- self.passengers;
 			self.passengers <- 0;
 		}
 		else{
-			self.passengers <- self.passengers - dropoffs;
+			self.passengers <- self.passengers - self.dropoffs;
 		}
 		
 		//handle boards
-		int boards <- int(list(inform_data_stop.contents)[0]);
+		self.boards <- int(list(inform_data_stop.contents)[0]);
 		
 		//to handle excess of boards
-		int residual_boards <- 0;
+		self.residual_boards <- 0;
 		
 		
-		if (boards + self.passengers > self.max_passengers){
+		if (self.boards + self.passengers > self.max_passengers){
 			//How many cannot board
-			residual_boards <- (boards + self.passengers) -self.max_passengers;
+			self.residual_boards <- (self.boards + self.passengers) -self.max_passengers;
 			self.passengers <- self.max_passengers;
 		}
 		else {
-			self.passengers <- self.passengers + boards;
+			self.passengers <- self.passengers + self.boards;
 		}
 	
-	
-	self.waiting <- true;
-	self.comms_cycle <- cycle;
-	
-	do start_conversation to: [stops_list[self.direction][self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
-								contents: ['Update passengers. I boarded',(boards-residual_boards)];
+
 		
 		
+		//Estimate the time needed for boarding and discharging the passengers.
 		
-	/*
-	 * Write in the .log the result of the stop procedure. IN this log, it will be saved (Simulation ID, Bus realizing it, StopCode, Time
-	 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
-	 */
-	save [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-			current_time, TimeSlot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] 
-    	to: '../logs/RESULTS/log_' + world.name + '.csv' format: "csv" rewrite: false;
-    	
-	
+		self.cycles_to_wait <- world.await_time_per_bus(self.boards, self.dropoffs);
+		
+		
+		if (self.cycles_to_wait > 0){
+			self.extra_waiting_time <- true;
+		}
+		else {
+			
+			//Copy the configuration from the spend_extra_time_in_stop where the bus comms with the stop to request it to update its vales
+			self.waiting <- true;
+			self.comms_cycle <- cycle;
+			
+			do start_conversation to: [stops_list[self.direction][self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
+							contents: ['Update passengers. I boarded',(self.boards-self.residual_boards)];
+		
+		
+			/*
+			 * Write in the .log the result of the stop procedure. IN this log, it will be saved (Simulation ID, Bus realizing it, StopCode, Time
+			 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
+			 */
+			buffer_results << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+					current_time, TimeSlot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] ;
+		}
+		
 	}//end reflex handle stop answer
     
     
@@ -1427,10 +1463,27 @@ species bus skills: [fipa] {
      */
     reflex spend_extra_time_in_stop when: self.extra_waiting_time {
     	
+    	
     	self.cycles_to_wait <- self.cycles_to_wait -1;
     	
     	if (self.cycles_to_wait = 0){
+    		
+    		
     		self.extra_waiting_time <- false;
+    		
+			do start_conversation to: [stops_list[self.direction][self.stops_reached]] protocol: 'fipa-request' performative: 'request' 
+							contents: ['Update passengers. I boarded',(self.boards-self.residual_boards)];
+		
+		
+			/*
+			 * Write in the .log the result of the stop procedure. IN this log, it will be saved (Simulation ID, Bus realizing it, StopCode, Time
+			 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
+			 */
+			buffer_results << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
+					current_time, TimeSlot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] ;    		
+    		
+			self.waiting <- true;
+			self.comms_cycle <- cycle;
     	}
     	
     }//End reflex spend_extra_time_in_stop
@@ -1444,6 +1497,7 @@ species bus skills: [fipa] {
      * Reflex function to verify that the stop updated its value of passengers based on the new boards */
     reflex verify_stop_and_restart_way when: (self.waiting = true and cycle > self.comms_cycle and not self.extra_waiting_time){
     	
+    	    	
     	message agree_resp <- agrees at 0;
 		message inform_resp <- informs at 0;
 		
@@ -1497,7 +1551,6 @@ species stop skills: [fipa]  {
     int distance;
     
     
-    
     //MAP CONTAINING THE DISTRIBUTIONS FOR THE DAY
     map<int, map<string,list>> stop_distributions;
     
@@ -1520,6 +1573,11 @@ species stop skills: [fipa]  {
     //Variable to wait for the answer back from the bus when its processing passengers
     bool waiting_for_bus_answer<- false;
     
+    
+    
+    //variable to save the time in stop for each passenger
+    list<list> passengers_with_time;
+    
 
     aspect default {
     	
@@ -1531,6 +1589,29 @@ species stop skills: [fipa]  {
     aspect simple {
         draw shape color: #red;
     }
+    
+    
+    /*
+     * Reflex function to update the time in stop status per passenger generated. It will loop over the number of passengers created, and
+     * in the list passengers_with_time, as each element is a pair<int, float> in which the int is the passenger num and the float is the time
+     * in the stop, this will add the value of step for every iteration the passenger is in the stop
+     */
+    reflex count_time_in_stop {
+    	
+    	if (length(self.passengers_with_time) > 0){    	
+    		
+    		loop i from: 0 to: (length(self.passengers_with_time) - 1)
+    		{
+    			self.passengers_with_time[i][1] <- float(self.passengers_with_time[i][1]) + step;
+			}
+    	}
+    	
+    }//End reflex count time in stop
+    
+    
+    
+    
+    
     
     /*
      * Reflex function to handle the comms between this agent and the requesting agents
@@ -1599,6 +1680,22 @@ species stop skills: [fipa]  {
 		
 		do agree message: inform_from_bus contents: ['Ok'];
 		
+		list<float> time_from_passengers;
+		
+		if(number_of_boards > 0){
+			
+			//Extract the values from the number of passengers who actually board.
+			loop iter from: 0 to: (number_of_boards - 1){
+				time_from_passengers << float(first(self.passengers_with_time[0][1]));	
+				self.passengers_with_time >> first(self.passengers_with_time);
+			}
+		
+		string attr_bus_id <- bus(inform_from_bus.sender).id;
+		int attr_bus_travels_completed <-  bus(inform_from_bus.sender).travels_completed;
+		
+		save [world.name,attr_bus_id, attr_bus_travels_completed, self.stopNum, TimeSlot, current_time, string(list(time_from_passengers))] 
+				to: '../logs/PASSENGERS/log_' + world.name + '.csv' format: "csv" rewrite: false;
+		}
 
 		self.passengers_generated <- self.passengers_generated - number_of_boards;
 
@@ -1676,6 +1773,6 @@ experiment test type: gui {
 
 
 
-experiment batch_1000 type: batch repeat: 1000 parallel: 10 until: empty(bus) {
+experiment batch_1000 type: batch repeat: 1000 parallel: 12 until: empty(bus) {
 }
 

@@ -102,6 +102,7 @@ log_info "--- Phase 1: Pre-cleanup ---"
 log_info "Removing previous symlinks from original project..."
 rm -rf "$GAMA_PROJECT/logs/RESULTS"
 rm -rf "$GAMA_PROJECT/logs/EVENTS"
+rm -rf "$GAMA_PROJECT/logs/PASSENGERS"
 
 # Remove GAMA workspace directories
 log_info "Removing previous GAMA workspace directories..."
@@ -125,7 +126,7 @@ cp -r "$GAMA_PROJECT" "$BASE_DIR/TEST_MOBILITY"
 # Create output directories inside the copied project
 mkdir -p "$BASE_DIR/TEST_MOBILITY/logs/RESULTS"
 mkdir -p "$BASE_DIR/TEST_MOBILITY/logs/EVENTS"
-
+mkdir -p "$BASE_DIR/TEST_MOBILITY/lgos/PASSENGERS"
 # Model path now points to the copied project
 SIM_MODEL_PATH="$BASE_DIR/TEST_MOBILITY/models/$MODEL_NAME"
 
