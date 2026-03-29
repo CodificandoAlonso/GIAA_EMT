@@ -240,7 +240,7 @@ app.get('/api/simulations/:id/geodata', (req, res) => {
   res.json({ experiments });
 });
 
-// Trigger new simulation (placeholder - adapt path to your script)
+// Trigger new simulation
 app.post('/api/simulations/generate', (req, res) => {
   const scriptPath = path.join(__dirname, '..', '..', 'run_simulation.sh');
   if (!fs.existsSync(scriptPath)) {

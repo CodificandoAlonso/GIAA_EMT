@@ -24,7 +24,7 @@ GAMA_SRC="/opt/gama-platform/headless/"
 GAMA_PROJECT="../../GAMA/src/TEST_MOBILITY"
 MODEL_NAME="mobility_performance.gaml"
 BATCH_NAME="batch_1000"
-HPC_CORES=10
+HPC_CORES=16
 
 # ----------------------------- Directories --------------------------------
 
@@ -37,7 +37,7 @@ touch "$BASE_DIR/description.txt"
 
 LOG_FILE="${BASE_DIR}/log_result_${TIMESTAMP}.log"
 
-# ----------------------------- FUNCIONES ----------------------------------
+# ----------------------------- Functions ----------------------------------
 
 format_time() {
     local total_seconds=$1
@@ -126,7 +126,7 @@ cp -r "$GAMA_PROJECT" "$BASE_DIR/TEST_MOBILITY"
 # Create output directories inside the copied project
 mkdir -p "$BASE_DIR/TEST_MOBILITY/logs/RESULTS"
 mkdir -p "$BASE_DIR/TEST_MOBILITY/logs/EVENTS"
-mkdir -p "$BASE_DIR/TEST_MOBILITY/lgos/PASSENGERS"
+mkdir -p "$BASE_DIR/TEST_MOBILITY/logs/PASSENGERS"
 # Model path now points to the copied project
 SIM_MODEL_PATH="$BASE_DIR/TEST_MOBILITY/models/$MODEL_NAME"
 

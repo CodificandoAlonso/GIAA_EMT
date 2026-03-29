@@ -46,8 +46,8 @@ function renderCard(sim) {
     <div class="sim-card-body">
       ${descHtml}
       <div class="sim-meta-row">
-        <span class="meta-label">Réplicas</span>
-        <span class="meta-value">${formatNum(sim.runCount)} runs</span>
+        <span class="meta-label">Numero de Repeticiones por experimento</span>
+        <span class="meta-value">${formatNum(sim.runCount)}</span>
       </div>
       <div class="sim-meta-row">
         <span class="meta-label">Estado</span>
@@ -83,7 +83,6 @@ async function loadSimulations() {
     document.getElementById('stat-total').textContent = formatNum(sims.length);
     document.getElementById('stat-charts').textContent = formatNum(sims.filter(s => s.hasCharts).length);
     document.getElementById('stat-latest').textContent = sims[0]?.datetime?.split(' ')[0] ?? '—';
-    document.getElementById('stat-runs').textContent = formatNum(sims.reduce((acc, s) => acc + (s.runCount || 0), 0));
     document.getElementById('sim-count-badge').textContent = `${sims.length} simulación${sims.length !== 1 ? 'es' : ''} encontrada${sims.length !== 1 ? 's' : ''}`;
 
     // Render cards

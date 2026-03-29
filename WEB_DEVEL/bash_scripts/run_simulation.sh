@@ -26,7 +26,8 @@ GAMA_SRC="/opt/gama-platform/headless/"
 MODEL_NAME="mobility_performance.gaml"
 BATCH_NAME="batch_1000"
 SIM_MODEL_PATH="${BASE_DIR}/TEST_MOBILITY/models/${MODEL_NAME}"
-HPC_CORES=12
+
+HPC_CORES=16
 
 
 LOG_FILE="${BASE_DIR}/log_result_${BASE_DIR: -15}.log"
@@ -99,10 +100,13 @@ log_info "Starting GAMA headless batch execution against copied project..."
 # Extract total simulations from batch name (batch_1000 → 1000)
 TOTAL_SIMS="${BATCH_NAME##*_}"
 
-# Results land inside the copied project via GAMA's relative paths
+# Results land inside the copied project
 RESULTS_DIR="$BASE_DIR/TEST_MOBILITY/logs/RESULTS"
 
-sudo ionice -c1 -n0 nice -n -15 taskset -c 0-11 \
+#debug flags disable to enable boost performance
+export JAVA_TOOL_OPTIONS="-Denable_debug=false -Denable_logging=false -XX:+UseG1GC"
+
+#-m 16gb of available RAM heap and HPC_CORES "threads" which parallelyzes the simulations
 "${GAMA_SRC}gama-headless.sh" -m 16384m -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" \
 >> "$LOG_FILE" 2>&1 &
 

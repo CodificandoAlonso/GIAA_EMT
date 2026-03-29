@@ -14,6 +14,18 @@ function formatNum(n) {
   return Number(n).toLocaleString('es-ES');
 }
 
+function formatDuration(secs) {
+  if (secs == null || isNaN(secs)) return '—';
+  const s = Math.round(secs);
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  if (h > 0) {
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+  }
+  return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+}
+
 function getSimId() {
   // URL is /simulation/SIMULATION_YYYYMMDD_HHMMSS
   const parts = window.location.pathname.split('/');
@@ -100,6 +112,28 @@ async function loadDetail(simId) {
 
 // ---- Route map (SVG renderer) ----
 
+// ---- Direction names (loaded from general_info JSON) ----
+let _dirNames = { toA: 'A', toB: 'B' };
+
+async function loadDirNames(expId) {
+  try {
+    const res = await fetch(`/data/known_data/general_info/${expId}.json`);
+    if (!res.ok) return;
+    const data = await res.json();
+    const parseName = arr => {
+      const s = arr?.[0] || '';
+      const m = s.match(/\d+\s+(.+)/);
+      return m ? m[1] : s;
+    };
+    _dirNames.toA = parseName(data.toA);
+    _dirNames.toB = parseName(data.toB);
+    const lA = document.getElementById('occ-toA-label');
+    const lB = document.getElementById('occ-toB-label');
+    if (lA) lA.innerHTML = `&#8594; Sentido ${_dirNames.toA}`;
+    if (lB) lB.innerHTML = `&#8592; Sentido ${_dirNames.toB}`;
+  } catch (_) {}
+}
+
 // ---- Plots info cache ----
 let _plotsInfo = null;
 
@@ -163,7 +197,7 @@ function renderBusView() {
     return;
   }
 
-  const { busSchedule, busMetrics, busPlots } = _plotsInfo;
+  const { busSchedule, busMetrics } = _plotsInfo;
   const busIds = Object.keys(busSchedule).sort((a, b) => Number(a) - Number(b));
 
   const pillsHtml = busIds.map(id =>
@@ -182,7 +216,7 @@ function renderBusView() {
     btn.addEventListener('click', () => {
       container.querySelectorAll('.bus-pill').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderBusDetail(btn.dataset.bus, busSchedule, busMetrics, busPlots);
+      renderBusDetail(btn.dataset.bus, busSchedule, busMetrics);
     });
   });
 }
@@ -192,13 +226,12 @@ function normalizeDir(dir) {
   return (dir === 'to_A' || dir === 'toA') ? 'toA' : 'toB';
 }
 
-function renderBusDetail(busId, busSchedule, busMetrics, busPlots) {
+function renderBusDetail(busId, busSchedule, busMetrics) {
   const panel  = document.getElementById('bus-detail-panel');
   panel.style.display = '';
 
   const schedule = busSchedule[busId] || [];
   const metrics  = busMetrics?.[busId]  || {};
-  const plots    = busPlots?.[busId]    || { toA: [], toB: [] };
 
   // Build trip objects, tracking per-direction index for PNG matching
   const dirCount = { toA: 0, toB: 0 };
@@ -211,10 +244,10 @@ function renderBusDetail(busId, busSchedule, busMetrics, busPlots) {
 
   const rows = trips.map((t, i) => {
     const m        = t.metrics;
-    const dirLabel = t.direction === 'toA' ? '&#8594; Dir A' : '&#8592; Dir B';
+    const dirLabel = t.direction === 'toA' ? `&#8594; ${_dirNames.toA}` : `&#8592; ${_dirNames.toB}`;
     const dirClass = t.direction === 'toA' ? 'dir-badge-a' : 'dir-badge-b';
     const occ      = m?.Mean_Occupation_Percentage != null ? m.Mean_Occupation_Percentage.toFixed(1) + '%' : '—';
-    const tTime    = m?.Mean_time_of_trip != null ? m.Mean_time_of_trip.toFixed(1) + ' min' : '—';
+    const tTime    = formatDuration(m?.Mean_time_of_trip);
     return `
       <tr class="trip-row" data-idx="${i}">
         <td class="trip-num">${i}</td>
@@ -234,7 +267,7 @@ function renderBusDetail(busId, busSchedule, busMetrics, busPlots) {
           <thead>
             <tr>
               <th>#</th><th>Parada inicio</th><th>Hora</th>
-              <th>Dirección</th><th>Ocupación media</th><th>T. viaje</th>
+              <th>Sentido</th><th>Ocupación media</th><th>T. viaje</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -253,20 +286,18 @@ function renderBusDetail(busId, busSchedule, busMetrics, busPlots) {
     row.addEventListener('click', () => {
       panel.querySelectorAll('.trip-row').forEach(r => r.classList.remove('selected'));
       row.classList.add('selected');
-      renderTripDetail(trips[Number(row.dataset.idx)], plots);
+      renderTripDetail(trips[Number(row.dataset.idx)]);
     });
   });
 }
 
-function renderTripDetail(trip, plots) {
+function renderTripDetail(trip) {
   const panel = document.getElementById('trip-detail-panel');
   const m     = trip.metrics;
   const fmt   = (v, suf = '') => (v != null && !isNaN(v)) ? Number(v).toFixed(2) + suf : '—';
 
-  const dirLabel = trip.direction === 'toA' ? '&#8594; Dirección A' : '&#8592; Dirección B';
+  const dirLabel = trip.direction === 'toA' ? `&#8594; Sentido ${_dirNames.toA}` : `&#8592; Sentido ${_dirNames.toB}`;
   const dirClass = trip.direction === 'toA' ? 'dir-badge-a' : 'dir-badge-b';
-
-  const imgUrl = (plots[trip.direction] || [])[trip.dirIndex] || null;
 
   panel.innerHTML = `
     <div class="trip-detail-header">
@@ -280,7 +311,7 @@ function renderTripDetail(trip, plots) {
       </div>
       <div class="trip-metric-card">
         <div class="trip-metric-label">Tiempo de viaje</div>
-        <div class="trip-metric-value">${fmt(m?.Mean_time_of_trip, ' min')}</div>
+        <div class="trip-metric-value">${formatDuration(m?.Mean_time_of_trip)}</div>
       </div>
       <div class="trip-metric-card">
         <div class="trip-metric-label">% simulaciones con retraso</div>
@@ -288,16 +319,9 @@ function renderTripDetail(trip, plots) {
       </div>
       <div class="trip-metric-card">
         <div class="trip-metric-label">Retraso medio</div>
-        <div class="trip-metric-value">${fmt(m?.Mean_Minutes_departure_delay, ' min')}</div>
+        <div class="trip-metric-value">${formatDuration(m?.Mean_Minutes_departure_delay)}</div>
       </div>
     </div>
-    ${imgUrl
-      ? `<div class="trip-plot-wrap">
-           <div class="trip-plot-label">Ocupación media por parada</div>
-           <img src="${imgUrl}" alt="Ocupación por parada" class="trip-plot-img" loading="lazy" />
-         </div>`
-      : `<div class="route-info-hint" style="padding:0.5rem 0;">Sin gráfica disponible para este viaje.</div>`
-    }
   `;
 }
 
@@ -338,31 +362,23 @@ function hideTooltip() {
 async function loadGeodata(simId) {
   const container = document.getElementById('map-container');
   try {
-    const res = await fetch(`/api/simulations/${simId}/geodata`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
+    // Load direction names and geodata in parallel
+    const [, data] = await Promise.all([
+      loadDirNames('E01'),
+      fetch(`/api/simulations/${simId}/geodata`).then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      }),
+    ]);
 
     if (!data.experiments || data.experiments.length === 0) {
       container.innerHTML = '<p style="padding:1.5rem;color:var(--emt-gray-600);">No se encontraron datos geoespaciales para esta simulación.</p>';
       return;
     }
 
-    const expTabsEl = document.getElementById('exp-tabs');
-    if (data.experiments.length > 1) {
-      data.experiments.forEach((exp, i) => {
-        const btn = document.createElement('button');
-        btn.className = `btn btn-sm ${i === 0 ? 'btn-primary' : 'btn-outline'}`;
-        btn.textContent = exp.expId;
-        btn.addEventListener('click', () => {
-          expTabsEl.querySelectorAll('button').forEach(b => b.className = 'btn btn-sm btn-outline');
-          btn.className = 'btn btn-sm btn-primary';
-          renderDirectionMaps(exp);
-        });
-        expTabsEl.appendChild(btn);
-      });
-    }
-
-    renderDirectionMaps(data.experiments[0]);
+    // Always render E01 only — no experiment tabs
+    const e01 = data.experiments.find(e => e.expId === 'E01') ?? data.experiments[0];
+    renderDirectionMaps(e01);
 
   } catch (err) {
     container.innerHTML = `<p style="padding:1.5rem;color:var(--emt-red);">Error al cargar geodata: ${escHtml(err.message)}</p>`;
@@ -374,11 +390,11 @@ function renderDirectionMaps(exp) {
   container.innerHTML = `
     <div class="direction-maps">
       <div class="direction-map-panel">
-        <div class="direction-map-label dir-label-a">&#8594; Dirección A</div>
+        <div class="direction-map-label dir-label-a">&#8594; Sentido ${_dirNames.toA}</div>
         <svg id="svg-toA" class="route-svg"></svg>
       </div>
       <div class="direction-map-panel">
-        <div class="direction-map-label dir-label-b">&#8592; Dirección B</div>
+        <div class="direction-map-label dir-label-b">&#8592; Sentido ${_dirNames.toB}</div>
         <svg id="svg-toB" class="route-svg"></svg>
       </div>
     </div>
@@ -690,14 +706,14 @@ function showStopInfo(p) {
   const plotHtml = (toAUrl || toBUrl) ? `
     <div class="stop-plots-wrap">
       ${toAUrl ? `<div class="stop-plot-item">
-        <div class="stop-plot-dir-label dir-label-a">&#8594; Dirección A</div>
-        <img src="${toAUrl}" alt="Ocupación Dir. A" loading="lazy" />
+        <div class="stop-plot-dir-label dir-label-a">&#8594; Sentido ${_dirNames.toA}</div>
+        <img src="${toAUrl}" alt="Ocupación sentido A" loading="lazy" />
       </div>` : ''}
       ${toBUrl ? `<div class="stop-plot-item">
-        <div class="stop-plot-dir-label dir-label-b">&#8592; Dirección B</div>
-        <img src="${toBUrl}" alt="Ocupación Dir. B" loading="lazy" />
+        <div class="stop-plot-dir-label dir-label-b">&#8592; Sentido ${_dirNames.toB}</div>
+        <img src="${toBUrl}" alt="Ocupación sentido B" loading="lazy" />
       </div>` : ''}
-    </div>` : `<div class="route-info-hint" style="padding:0.6rem 1rem;">Sin gráfica disponible para esta parada.</div>`;
+    </div>` : '';
 
   panel.innerHTML = `
     <div class="route-info-header">
@@ -707,7 +723,6 @@ function showStopInfo(p) {
     <div class="route-info-body">
       <div class="route-info-row"><span>Nombre</span><strong>${escHtml(p.stopName)}</strong></div>
       <div class="route-info-row"><span>N&#250;m. parada</span><strong>${p.stopNum}</strong></div>
-      <div class="route-info-row"><span>Distancia desde origen</span><strong>${p.distance ?? '—'} m</strong></div>
     </div>
     ${plotHtml}
   `;
@@ -731,7 +746,6 @@ function showSectionInfo(sec) {
     <div class="route-info-body">
       <div class="route-info-row"><span>Parada origen</span><strong>${sec.from.props.stopNum} &middot; ${escHtml(sec.from.props.stopName)}</strong></div>
       <div class="route-info-row"><span>Parada destino</span><strong>${sec.to.props.stopNum} &middot; ${escHtml(sec.to.props.stopName)}</strong></div>
-      <div class="route-info-row"><span>Distancia del tramo</span><strong>${dist} m</strong></div>
       <div class="route-info-hint">Tiempo de tr&#225;nsito entre paradas — pr&#243;ximamente</div>
     </div>
   `;

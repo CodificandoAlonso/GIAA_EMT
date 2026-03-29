@@ -738,12 +738,13 @@ global
 	
 	
 	//Initialize minutes
-	int minutes <- 5;
+	int minutes <- 0;
 
 	
 	//Initialize sim TimeSlot
-	int TimeSlot;
+	int TimeSlot <- 5;
 	
+	int seconds;
 
 	/*
 	 * Global reflex to handle each iteration the time that has passed. It will save
@@ -753,6 +754,7 @@ global
         // Convert total simulated time to minutes
         int total_minutes <- int(time / 60);  // time is in seconds
         
+        int total_seconds <- int(time);
         
         // Calculate hours and minutes from simulation start (5:00)
         TimeSlot <- 5 + int(total_minutes / 60);
@@ -760,6 +762,8 @@ global
         //Calculate minutes passed in the hour by dividing by 60
         minutes <- mod(total_minutes, 60);
 		
+		// Seconds within the minute
+    	seconds <- int(mod(total_seconds, 60));
     
 	}//End reflex update_time
 
@@ -772,7 +776,10 @@ global
 
 
 	//Map the TimeSlot + minutes into a string, to compare with the input
-	string current_time -> string(TimeSlot) + ":" + (minutes < 10 ? "0" + string(minutes) : string(minutes));	
+	string current_time -> 
+    string(TimeSlot) + ":" +
+    (minutes < 10 ? "0" + string(minutes) : string(minutes)) + ":" +
+    (seconds < 10 ? "0" + string(seconds) : string(seconds));
 	
 	
 	
@@ -906,11 +913,13 @@ global
 			int passengers_generated_new <- int(stop_iter.passengers_to_be_generated);
 			
 			if (passengers_generated_new > 0){
+
+				float time_now <- time_to_seconds(current_time);
 				stop_iter.passengers_to_be_generated <- stop_iter.passengers_to_be_generated - passengers_generated_new;
 				
 				
 				loop new_pass from: 1 to: passengers_generated_new {
-					stop_iter.passengers_with_time << [(new_pass + stop_iter.passengers_generated), 0.0];
+					stop_iter.passengers_with_time << [(new_pass + stop_iter.passengers_generated), time_now];
 				}
 				stop_iter.passengers_generated <- stop_iter.passengers_generated + passengers_generated_new;		
 			}
@@ -963,7 +972,18 @@ global
 	    return int(parts[0]) * 60 + int(parts[1]);
 	}
 
+	
+	
+	float time_to_seconds(string t) {
 
+		list<string> parts <- t split_with ":";
+
+		float func_hours <- float(parts[0]);
+		float func_minutes <- float(parts[1]);
+		float func_seconds <- float(parts[2]);
+
+		return func_hours * 3600.0 + func_minutes * 60.0 + func_seconds;
+	}
 
 
 	/*
@@ -1333,10 +1353,12 @@ species bus skills: [fipa] {
 			//The order of the variables will be world.name, id of the bus, StopCode, EVENTCODE, Current Time, Departure Time
 			//And Current time - departure time
 			buffer_events << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-				"DELAY", current_time, self.departure_time, world.time_to_minutes(current_time) -world.time_to_minutes(self.departure_time)] ;		}
+				TimeSlot, "DELAY", current_time, self.departure_time, world.time_to_minutes(current_time) -world.time_to_minutes(self.departure_time)] ;		
+		}
 		else{
 			allowed_to_leave <- false;
 		}//End case if the bus is arriving late to its next departure
+		
 		
 		//reset the variables
 		stops_reached <- 0;
@@ -1590,12 +1612,14 @@ species stop skills: [fipa]  {
         draw shape color: #red;
     }
     
-    
+ 
     /*
      * Reflex function to update the time in stop status per passenger generated. It will loop over the number of passengers created, and
      * in the list passengers_with_time, as each element is a pair<int, float> in which the int is the passenger num and the float is the time
      * in the stop, this will add the value of step for every iteration the passenger is in the stop
      */
+     
+     /* 
     reflex count_time_in_stop {
     	
     	if (length(self.passengers_with_time) > 0){    	
@@ -1608,7 +1632,7 @@ species stop skills: [fipa]  {
     	
     }//End reflex count time in stop
     
-    
+*/
     
     
     
@@ -1635,24 +1659,26 @@ species stop skills: [fipa]  {
 		//Infer the number of passengers that are gonna drop off 
 		int dropoff_passengers;
 		
-		if (global_distribution_values[stopNum][TimeSlot]["DropOffs"][0] = "NORMAL"){
+		int ts <- min(TimeSlot, 23);
+		
+		if (global_distribution_values[stopNum][ts]["DropOffs"][0] = "NORMAL"){
 			
-			dropoff_passengers <- max(floor(gauss(float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][1]),
-												float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][2]))), 0);
+			dropoff_passengers <- max(floor(gauss(float(global_distribution_values[stopNum][ts]["DropOffs"][1]),
+												float(global_distribution_values[stopNum][ts]["DropOffs"][2]))), 0);
 		}
-		if (global_distribution_values[stopNum][TimeSlot]["DropOffs"][0] = "NEGATIVE BINOMIAL"){
+		if (global_distribution_values[stopNum][ts]["DropOffs"][0] = "NEGATIVE BINOMIAL"){
 			
-			dropoff_passengers <- max(floor(world.sample_negative_binomial(float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][1]),
-												float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][2]))), 0);
+			dropoff_passengers <- max(floor(world.sample_negative_binomial(float(global_distribution_values[stopNum][ts]["DropOffs"][1]),
+												float(global_distribution_values[stopNum][ts]["DropOffs"][2]))), 0);
 			
 		}
-		if (global_distribution_values[stopNum][TimeSlot]["DropOffs"][0] = "GEOMETRICAL"){
+		if (global_distribution_values[stopNum][ts]["DropOffs"][0] = "GEOMETRICAL"){
 			
-			dropoff_passengers <- max(floor(world.sample_geometric(float(global_distribution_values[stopNum][TimeSlot]["DropOffs"][1]))), 0);
+			dropoff_passengers <- max(floor(world.sample_geometric(float(global_distribution_values[stopNum][ts]["DropOffs"][1]))), 0);
 			
 		}
 		
-		if (global_distribution_values[stopNum][TimeSlot]["DropOffs"][0] = "NO DATA"){
+		if (global_distribution_values[stopNum][ts]["DropOffs"][0] = "NO DATA"){
 			
 			dropoff_passengers <- 0;
 		}
@@ -1686,7 +1712,8 @@ species stop skills: [fipa]  {
 			
 			//Extract the values from the number of passengers who actually board.
 			loop iter from: 0 to: (number_of_boards - 1){
-				time_from_passengers << float(first(self.passengers_with_time[0][1]));	
+				float actual_time <- world.time_to_seconds(current_time);
+				time_from_passengers << actual_time - float(first(self.passengers_with_time[0][1]));
 				self.passengers_with_time >> first(self.passengers_with_time);
 			}
 		
@@ -1694,8 +1721,8 @@ species stop skills: [fipa]  {
 		int attr_bus_travels_completed <-  bus(inform_from_bus.sender).travels_completed;
 		
 				
-		save [world.name,attr_bus_id, attr_bus_travels_completed, self.stopNum, TimeSlot, current_time,  "\"" + string(time_from_passengers) + "\""] 
-				to: '../logs/PASSENGERS/log_' + world.name + '.csv' format: "csv" rewrite: false;
+		save [world.name,attr_bus_id, attr_bus_travels_completed, self.stopNum, TimeSlot, current_time, "\"" + replace(string(time_from_passengers), ",", ";") + "\""] 
+				to: '../logs/PASSENGERS/log_' + world.name + '.csv' format: 'csv' rewrite: false;
 		}
 
 		self.passengers_generated <- self.passengers_generated - number_of_boards;
@@ -1721,7 +1748,7 @@ species stop skills: [fipa]  {
 species route {
 	
 	
-	//ATTRIBUTE ROUTENAME(E.G like a street name or an intersection
+	//ATTRIBUTE ROUTENAME(E.G like a street name or an intersection)
     string routename;
     
     //DISTANCE IN METERS FROM THE ORIGIN
@@ -1774,6 +1801,6 @@ experiment test type: gui {
 
 
 
-experiment batch_1000 type: batch repeat: 1000 parallel: 12 until: empty(bus) {
+experiment batch_1000 type: batch repeat: 1000 parallel: 16 until: empty(bus) {
 }
 
