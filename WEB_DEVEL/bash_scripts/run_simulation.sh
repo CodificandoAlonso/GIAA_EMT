@@ -102,7 +102,10 @@ TOTAL_SIMS="${BATCH_NAME##*_}"
 # Results land inside the copied project via GAMA's relative paths
 RESULTS_DIR="$BASE_DIR/TEST_MOBILITY/logs/RESULTS"
 
-"${GAMA_SRC}gama-headless.sh" -m 8192m -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" >> "$LOG_FILE" 2>&1 &
+sudo ionice -c1 -n0 nice -n -15 taskset -c 0-11 \
+"${GAMA_SRC}gama-headless.sh" -m 16384m -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" \
+>> "$LOG_FILE" 2>&1 &
+
 GAMA_PID=$!
 
 echo ""

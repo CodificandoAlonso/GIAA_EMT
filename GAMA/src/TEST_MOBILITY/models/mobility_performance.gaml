@@ -1693,7 +1693,8 @@ species stop skills: [fipa]  {
 		string attr_bus_id <- bus(inform_from_bus.sender).id;
 		int attr_bus_travels_completed <-  bus(inform_from_bus.sender).travels_completed;
 		
-		save [world.name,attr_bus_id, attr_bus_travels_completed, self.stopNum, TimeSlot, current_time, string(list(time_from_passengers))] 
+				
+		save [world.name,attr_bus_id, attr_bus_travels_completed, self.stopNum, TimeSlot, current_time,  "\"" + string(time_from_passengers) + "\""] 
 				to: '../logs/PASSENGERS/log_' + world.name + '.csv' format: "csv" rewrite: false;
 		}
 
