@@ -123,7 +123,7 @@ app.get('/api/simulations/:id', (req, res) => {
     const logFiles = fs.readdirSync(simPath).filter(f => f.endsWith('.log'));
     if (logFiles.length > 0) {
       const raw = fs.readFileSync(path.join(simPath, logFiles[0]), 'utf8');
-      logContent = raw.split('\n').slice(0, 50).join('\n');
+      logContent = raw.split('\n').join('\n');
     }
   } catch (_) {}
 

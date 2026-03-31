@@ -55,30 +55,28 @@ function escHtml(str) {
 
 async function loadDetail(simId) {
   try {
-    const [detailRes, statsRes] = await Promise.all([
-      fetch(`/api/simulations/${simId}`),
-      fetch(`/api/simulations/${simId}/stats`)
-    ]);
+    const detailRes = await fetch(`/api/simulations/${simId}`);
 
     if (!detailRes.ok) throw new Error(`Simulación no encontrada (HTTP ${detailRes.status})`);
     const detail = await detailRes.json();
-    const stats = statsRes.ok ? await statsRes.json() : null;
 
     // Hero
     document.getElementById('hero-id').textContent = detail.id;
     document.getElementById('hero-date').textContent = detail.title || detail.datetime || detail.id;
     document.getElementById('hero-subtitle').textContent = detail.description
-      ? `${detail.description} · ${formatNum(detail.runCount)} réplicas`
-      : `${detail.datetime || ''} · ${formatNum(detail.runCount)} réplicas`;
+      ? detail.description
+      : (detail.datetime || '');
     document.title = `${detail.title || detail.id} — EMT Dashboard`;
 
     // Stats bar
     document.getElementById('ds-runs').textContent = formatNum(detail.runCount);
-    if (stats) {
-      document.getElementById('ds-boards').textContent = formatNum(Math.round(stats.totalBoards));
-      document.getElementById('ds-dropoffs').textContent = formatNum(Math.round(stats.totalDropoffs));
-      document.getElementById('ds-occ').textContent = formatNum(stats.avgPassengers);
 
+    // Extract total pipeline time from log
+    if (detail.logContent) {
+      const match = detail.logContent.match(/TOTAL PIPELINE TIME:\s*(.+)/);
+      if (match) {
+        document.getElementById('ds-total-time').textContent = match[1].trim();
+      }
     }
 
     // Route map
@@ -129,8 +127,8 @@ async function loadDirNames(expId) {
     _dirNames.toB = parseName(data.toB);
     const lA = document.getElementById('occ-toA-label');
     const lB = document.getElementById('occ-toB-label');
-    if (lA) lA.innerHTML = `&#8594; Sentido ${_dirNames.toA}`;
-    if (lB) lB.innerHTML = `&#8592; Sentido ${_dirNames.toB}`;
+    if (lA) lA.innerHTML = `&#8594; Ocupacion media Sentido ${_dirNames.toA}`;
+    if (lB) lB.innerHTML = `&#8592; Ocupación media Sentido ${_dirNames.toB}`;
   } catch (_) {}
 }
 
@@ -314,7 +312,7 @@ function renderTripDetail(trip) {
         <div class="trip-metric-value">${formatDuration(m?.Mean_time_of_trip)}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">% simulaciones con retraso</div>
+        <div class="trip-metric-label">% Simulaciones donde el bus sale con retraso</div>
         <div class="trip-metric-value">${fmt(m?.Percentage_sims_delay_departure, '%')}</div>
       </div>
       <div class="trip-metric-card">

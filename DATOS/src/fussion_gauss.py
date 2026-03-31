@@ -21,10 +21,6 @@ def bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2):
     return (sqrt(2*(std_1*std_2/(std_1**2 + std_2**2))))*exp(-(((mean_1 -mean_2)**2)/(4*(std_1**2 + std_2**2))))
 
 
-
-
-
-
 import numpy as np
 
 

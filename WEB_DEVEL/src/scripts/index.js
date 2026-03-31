@@ -38,7 +38,6 @@ function renderCard(sim) {
     <div class="sim-card-header">
       <div>
         ${titleHtml}
-        <div class="sim-id">${sim.id}</div>
         <div class="sim-date">${datePart || '—'} ${timePart || ''}</div>
       </div>
       <span class="sim-card-badge">GAMA</span>

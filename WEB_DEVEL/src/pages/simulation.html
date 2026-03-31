@@ -54,26 +54,23 @@
       </div>
 
       <!-- Key stats -->
-      <div class="stats-bar" style="margin-bottom:1.5rem;" id="detail-stats-bar">
-        <div class="stat-card">
-          <div class="stat-label">Réplicas</div>
-          <div class="stat-value" id="ds-runs">—</div>
-          <div class="stat-sub">archivos CSV</div>
+
+      <div class="section-card full-width" id="sim-stats-card" style="margin-bottom:1.5rem;">
+        <div class="section-card-header">
+          <span class="section-icon">&#128200;</span>
+          Información sobre la Simulación realizada
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Boards</div>
-          <div class="stat-value" id="ds-boards">—</div>
-          <div class="stat-sub">pasajeros subidos (muestra)</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Dropoffs</div>
-          <div class="stat-value" id="ds-dropoffs">—</div>
-          <div class="stat-sub">pasajeros bajados (muestra)</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Ocupación Media</div>
-          <div class="stat-value" id="ds-occ">—</div>
-          <div class="stat-sub">pasajeros por registro</div>
+        <div class="section-card-body">
+          <div class="stats-bar" style="margin-bottom:0;" id="detail-stats-bar">
+            <div class="stat-card">
+              <div class="stat-label">Número de repeticiones por experimento</div>
+              <div class="stat-value" id="ds-runs">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Tiempo total de simulación</div>
+              <div class="stat-value" id="ds-total-time">—</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -84,7 +81,7 @@
         <div class="section-card full-width" id="occ-plots-card" style="display:none;">
           <div class="section-card-header">
             <span class="section-icon">&#128200;</span>
-            Ocupación media de la simulación
+            Estadísticas generales obtenidas
           </div>
           <div class="section-card-body">
             <div class="stats-bar" style="margin-bottom:0;">
@@ -142,7 +139,7 @@
           <div class="section-card-header">
             <span class="section-icon">&#128196;</span>
             Log de ejecución
-            <span style="margin-left:auto;font-size:0.78rem;color:var(--emt-gray-600);">Primeras 50 líneas</span>
+            <span style="margin-left:auto;font-size:0.78rem;color:var(--emt-gray-600);"> Log Completo</span>
           </div>
           <div class="section-card-body" style="padding:0;">
             <div class="log-viewer" id="log-viewer">Cargando log...</div>
