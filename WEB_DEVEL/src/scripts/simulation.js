@@ -26,8 +26,45 @@ function formatDuration(secs) {
   return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
 }
 
+// Parse scheduled time like "6:25" or "14:30" into total minutes from midnight
+function parseScheduledMinutes(timeStr) {
+  if (!timeStr) return null;
+  const [h, m] = timeStr.split(':').map(Number);
+  if (isNaN(h) || isNaN(m)) return null;
+  return h * 60 + m;
+}
+
+// Format total minutes (possibly past 1440 = 24:00) as HH:MM
+// Past midnight shows as 00:MM, 01:MM, etc.
+function formatClockTime(totalMinutes) {
+  if (totalMinutes == null || isNaN(totalMinutes)) return '—';
+  const wrapped = ((totalMinutes % 1440) + 1440) % 1440;
+  const h = Math.floor(wrapped / 60);
+  const m = Math.floor(wrapped % 60);
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+}
+
+// Compute mean real departure time given scheduled time string, pct delay, mean delay seconds
+// Returns formatted string like "06:25" or "01:03 (+1d)"
+function computeMeanDeparture(scheduledTimeStr, pctDelay, meanDelaySeconds) {
+  const scheduledMins = parseScheduledMinutes(scheduledTimeStr);
+  if (scheduledMins === null) return '—';
+  if (!pctDelay || pctDelay === 0) return formatClockTime(scheduledMins);
+
+  // pctDelay is 0-100
+  const fracDelay = pctDelay / 100;
+  const delayMins = meanDelaySeconds != null ? meanDelaySeconds / 60 : 0;
+  // Mean departure = (1 - fracDelay) * scheduled + fracDelay * (scheduled + delayMins)
+  //                = scheduled + fracDelay * delayMins
+  const meanMins = scheduledMins + fracDelay * delayMins;
+  const formatted = formatClockTime(meanMins);
+
+  // If it crossed midnight
+  const crossed = meanMins >= 1440 ? ' (+1d)' : '';
+  return formatted + crossed;
+}
+
 function getSimId() {
-  // URL is /simulation/SIMULATION_YYYYMMDD_HHMMSS
   const parts = window.location.pathname.split('/');
   return parts[parts.length - 1];
 }
@@ -56,11 +93,9 @@ function escHtml(str) {
 async function loadDetail(simId) {
   try {
     const detailRes = await fetch(`/api/simulations/${simId}`);
-
     if (!detailRes.ok) throw new Error(`Simulación no encontrada (HTTP ${detailRes.status})`);
     const detail = await detailRes.json();
 
-    // Hero
     document.getElementById('hero-id').textContent = detail.id;
     document.getElementById('hero-date').textContent = detail.title || detail.datetime || detail.id;
     document.getElementById('hero-subtitle').textContent = detail.description
@@ -68,10 +103,8 @@ async function loadDetail(simId) {
       : (detail.datetime || '');
     document.title = `${detail.title || detail.id} — EMT Dashboard`;
 
-    // Stats bar
     document.getElementById('ds-runs').textContent = formatNum(detail.runCount);
 
-    // Extract total pipeline time from log
     if (detail.logContent) {
       const match = detail.logContent.match(/TOTAL PIPELINE TIME:\s*(.+)/);
       if (match) {
@@ -79,13 +112,9 @@ async function loadDetail(simId) {
       }
     }
 
-    // Route map
     loadGeodata(simId);
-
-    // Plots info (occupation stats, stop/bus plots) — non-blocking
     loadPlotsInfo(simId);
 
-    // Log
     const logEl = document.getElementById('log-viewer');
     if (detail.logContent) {
       logEl.innerHTML = colorizeLog(detail.logContent);
@@ -93,7 +122,6 @@ async function loadDetail(simId) {
       logEl.textContent = 'No se encontró archivo de log.';
     }
 
-    // Show content
     document.getElementById('loading-state').style.display = 'none';
     document.getElementById('sim-content').style.display = 'block';
 
@@ -110,7 +138,6 @@ async function loadDetail(simId) {
 
 // ---- Route map (SVG renderer) ----
 
-// ---- Direction names (loaded from general_info JSON) ----
 let _dirNames = { toA: 'A', toB: 'B' };
 
 async function loadDirNames(expId) {
@@ -148,12 +175,18 @@ function renderOccupationStats(s) {
   const card = document.getElementById('occ-plots-card');
   if (card) card.style.display = '';
   const fmt = v => (v != null && !isNaN(v)) ? v.toFixed(1) + '%' : '—';
-  document.getElementById('occ-general').textContent = fmt(s.Occupation);
-  document.getElementById('occ-toA').textContent     = fmt(s.Occupation_toA);
-  document.getElementById('occ-toB').textContent     = fmt(s.Occupation_toB);
+  document.getElementById('occ-general').textContent        = fmt(s.Occupation);
+  document.getElementById('occ-toA').textContent            = fmt(s.Occupation_toA);
+  document.getElementById('occ-toB').textContent            = fmt(s.Occupation_toB);
+  document.getElementById('occ-logical-buses').textContent  = s.Logical_Buses != null ? String(s.Logical_Buses) : '—';
+  document.getElementById('occ-total-trips').textContent    = s.Total_Trips   != null ? String(s.Total_Trips)   : '—';
+  document.getElementById('occ-mean-await').textContent     = s.Mean_await_passengers != null ? formatDuration(s.Mean_await_passengers) : '—';
 }
 
 // ---- View toggle (Route / Bus) ----
+
+// Route filter state: 'general' | 'timeslot'
+let _routeFilter = 'general';
 
 function initViewToggle() {
   const routeBtn  = document.getElementById('view-route-btn');
@@ -182,6 +215,8 @@ function initViewToggle() {
 
 // ---- Bus view ----
 
+// Bus filter state: 'bus' | 'timeslot'
+let _busFilter = 'bus';
 let _busViewRendered = false;
 
 function renderBusView() {
@@ -195,6 +230,33 @@ function renderBusView() {
     return;
   }
 
+  container.innerHTML = `
+    <div class="bus-filter-bar">
+      <span class="analysis-filter-label">Ver por:</span>
+      <button class="filter-btn active" id="bus-filter-bus-btn">&#128652; Autobús lógico</button>
+      <button class="filter-btn" id="bus-filter-ts-btn">&#128336; Franja horaria</button>
+    </div>
+    <div id="bus-filter-content"></div>
+  `;
+
+  document.getElementById('bus-filter-bus-btn').addEventListener('click', () => {
+    _busFilter = 'bus';
+    document.getElementById('bus-filter-bus-btn').classList.add('active');
+    document.getElementById('bus-filter-ts-btn').classList.remove('active');
+    renderBusByBusView();
+  });
+  document.getElementById('bus-filter-ts-btn').addEventListener('click', () => {
+    _busFilter = 'timeslot';
+    document.getElementById('bus-filter-ts-btn').classList.add('active');
+    document.getElementById('bus-filter-bus-btn').classList.remove('active');
+    renderBusByTimeslotView();
+  });
+
+  renderBusByBusView();
+}
+
+function renderBusByBusView() {
+  const content = document.getElementById('bus-filter-content');
   const { busSchedule, busMetrics } = _plotsInfo;
   const busIds = Object.keys(busSchedule).sort((a, b) => Number(a) - Number(b));
 
@@ -202,19 +264,127 @@ function renderBusView() {
     `<button class="bus-pill" data-bus="${id}">${id}</button>`
   ).join('');
 
-  container.innerHTML = `
+  content.innerHTML = `
     <div class="bus-selector-section">
-      <div class="bus-selector-label">Selecciona un autobús:</div>
+      <div class="bus-selector-label">Selecciona un autobús lógico:</div>
       <div class="bus-pills" id="bus-pills">${pillsHtml}</div>
     </div>
     <div id="bus-detail-panel" style="display:none;"></div>
   `;
 
-  container.querySelectorAll('.bus-pill').forEach(btn => {
+  content.querySelectorAll('.bus-pill').forEach(btn => {
     btn.addEventListener('click', () => {
-      container.querySelectorAll('.bus-pill').forEach(b => b.classList.remove('active'));
+      content.querySelectorAll('.bus-pill').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderBusDetail(btn.dataset.bus, busSchedule, busMetrics);
+      renderBusDetail(btn.dataset.bus, busSchedule, busMetrics, /* showBusId */ false);
+    });
+  });
+}
+
+function renderBusByTimeslotView() {
+  const content = document.getElementById('bus-filter-content');
+  const { busSchedule, busMetrics } = _plotsInfo;
+
+  // Group all trips by timeslot (hour of departure)
+  // trip hour = parseInt(time.split(':')[0])
+  const byTimeslot = {}; // { hour: [ { busId, stopId, time, metrics, direction, dirIndex } ] }
+  const dirCount = {}; // { busId: { toA: N, toB: N } }
+
+  for (const busId of Object.keys(busSchedule)) {
+    dirCount[busId] = { toA: 0, toB: 0 };
+  }
+
+  for (const busId of Object.keys(busSchedule)) {
+    const schedule = busSchedule[busId] || [];
+    const metrics  = busMetrics?.[busId] || {};
+    const localDirCount = { toA: 0, toB: 0 };
+
+    schedule.forEach(([stopId, time]) => {
+      const hour = parseInt(time.split(':')[0]);
+      const key  = `${stopId}-${time}`;
+      const m    = metrics[key];
+      const dir  = normalizeDir(m?.Direction);
+      const di   = localDirCount[dir]++;
+      if (!byTimeslot[hour]) byTimeslot[hour] = [];
+      byTimeslot[hour].push({ busId, stopId, time, metrics: m, direction: dir, dirIndex: di });
+    });
+  }
+
+  const hours = Object.keys(byTimeslot).map(Number).sort((a, b) => a - b);
+
+  const pillsHtml = hours.map(h =>
+    `<button class="bus-ts-pill" data-hour="${h}">${h}:00</button>`
+  ).join('');
+
+  content.innerHTML = `
+    <div class="bus-ts-header">
+      <span class="analysis-filter-label">Franja horaria:</span>
+      ${pillsHtml}
+    </div>
+    <div id="bus-ts-detail-panel"></div>
+  `;
+
+  content.querySelectorAll('.bus-ts-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      content.querySelectorAll('.bus-ts-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderBusTimeslotDetail(byTimeslot[Number(btn.dataset.hour)]);
+    });
+  });
+}
+
+function renderBusTimeslotDetail(trips) {
+  const panel = document.getElementById('bus-ts-detail-panel');
+  if (!panel) return;
+
+  const rows = trips.map((t, i) => {
+    const m        = t.metrics;
+    const dirLabel = t.direction === 'toA' ? `&#8594; ${_dirNames.toA}` : `&#8592; ${_dirNames.toB}`;
+    const dirClass = t.direction === 'toA' ? 'dir-badge-a' : 'dir-badge-b';
+    const occ      = m?.Mean_Occupation_Percentage != null ? m.Mean_Occupation_Percentage.toFixed(1) + '%' : '—';
+    const tTime    = formatDuration(m?.Mean_time_of_trip);
+    const meanDep  = computeMeanDeparture(t.time, m?.Percentage_sims_delay_departure, m?.Mean_Minutes_departure_delay);
+    return `
+      <tr class="trip-row" data-idx="${i}">
+        <td class="trip-num">${i}</td>
+        <td><span class="trip-stop">${t.stopId}</span></td>
+        <td class="trip-time-val">${t.time}</td>
+        <td><span class="dir-badge ${dirClass}">${dirLabel}</span> <span class="bus-id-badge">${t.busId}</span></td>
+        <td class="trip-occ">${occ}</td>
+        <td>${tTime}</td>
+        <td style="font-family:monospace;">${meanDep}</td>
+      </tr>`;
+  }).join('');
+
+  panel.innerHTML = `
+    <div class="bus-detail-grid">
+      <div class="bus-trips-section">
+        <div class="bus-section-title">Viajes en esta franja &mdash; ${trips.length} viaje${trips.length !== 1 ? 's' : ''}</div>
+        <table class="trip-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Parada</th><th>Prog.</th>
+              <th>Sentido / Bus</th><th>Ocup.</th><th>T. viaje</th><th>Salida</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+      <div id="bus-ts-trip-detail" class="trip-detail-panel">
+        <div class="empty-state" style="padding:2.5rem;">
+          <div class="empty-icon" style="font-size:2rem;">&#128652;</div>
+          <p style="font-size:0.85rem;">Selecciona un viaje para ver detalles</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  panel.querySelectorAll('.trip-row').forEach(row => {
+    row.addEventListener('click', () => {
+      panel.querySelectorAll('.trip-row').forEach(r => r.classList.remove('selected'));
+      row.classList.add('selected');
+      const t = trips[Number(row.dataset.idx)];
+      renderTripDetail(t, document.getElementById('bus-ts-trip-detail'));
     });
   });
 }
@@ -224,20 +394,19 @@ function normalizeDir(dir) {
   return (dir === 'to_A' || dir === 'toA') ? 'toA' : 'toB';
 }
 
-function renderBusDetail(busId, busSchedule, busMetrics) {
-  const panel  = document.getElementById('bus-detail-panel');
+function renderBusDetail(busId, busSchedule, busMetrics, showBusId = false) {
+  const panel = document.getElementById('bus-detail-panel');
   panel.style.display = '';
 
   const schedule = busSchedule[busId] || [];
   const metrics  = busMetrics?.[busId]  || {};
 
-  // Build trip objects, tracking per-direction index for PNG matching
   const dirCount = { toA: 0, toB: 0 };
   const trips = schedule.map(([stopId, time], globalIdx) => {
     const key = `${stopId}-${time}`;
     const m   = metrics[key];
     const dir = normalizeDir(m?.Direction);
-    return { stopId, time, key, metrics: m, direction: dir, dirIndex: dirCount[dir]++, globalIdx };
+    return { busId, stopId, time, key, metrics: m, direction: dir, dirIndex: dirCount[dir]++, globalIdx };
   });
 
   const rows = trips.map((t, i) => {
@@ -246,14 +415,17 @@ function renderBusDetail(busId, busSchedule, busMetrics) {
     const dirClass = t.direction === 'toA' ? 'dir-badge-a' : 'dir-badge-b';
     const occ      = m?.Mean_Occupation_Percentage != null ? m.Mean_Occupation_Percentage.toFixed(1) + '%' : '—';
     const tTime    = formatDuration(m?.Mean_time_of_trip);
+    const meanDep  = computeMeanDeparture(t.time, m?.Percentage_sims_delay_departure, m?.Mean_Minutes_departure_delay);
+    const busCell  = showBusId ? `<span class="bus-id-badge">${t.busId}</span>` : '';
     return `
       <tr class="trip-row" data-idx="${i}">
         <td class="trip-num">${i}</td>
         <td><span class="trip-stop">${t.stopId}</span></td>
         <td class="trip-time-val">${t.time}</td>
-        <td><span class="dir-badge ${dirClass}">${dirLabel}</span></td>
+        <td><span class="dir-badge ${dirClass}">${dirLabel}</span>${busCell}</td>
         <td class="trip-occ">${occ}</td>
         <td>${tTime}</td>
+        <td style="font-family:monospace;">${meanDep}</td>
       </tr>`;
   }).join('');
 
@@ -264,8 +436,8 @@ function renderBusDetail(busId, busSchedule, busMetrics) {
         <table class="trip-table">
           <thead>
             <tr>
-              <th>#</th><th>Parada inicio</th><th>Hora</th>
-              <th>Sentido</th><th>Ocupación media</th><th>T. viaje</th>
+              <th>#</th><th>Parada</th><th>Prog.</th>
+              <th>Sentido</th><th>Ocup.</th><th>T. viaje</th><th>Salida</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -284,23 +456,36 @@ function renderBusDetail(busId, busSchedule, busMetrics) {
     row.addEventListener('click', () => {
       panel.querySelectorAll('.trip-row').forEach(r => r.classList.remove('selected'));
       row.classList.add('selected');
-      renderTripDetail(trips[Number(row.dataset.idx)]);
+      renderTripDetail(trips[Number(row.dataset.idx)], document.getElementById('trip-detail-panel'));
     });
   });
 }
 
-function renderTripDetail(trip) {
-  const panel = document.getElementById('trip-detail-panel');
+function renderTripDetail(trip, panel) {
+  if (!panel) return;
   const m     = trip.metrics;
   const fmt   = (v, suf = '') => (v != null && !isNaN(v)) ? Number(v).toFixed(2) + suf : '—';
 
   const dirLabel = trip.direction === 'toA' ? `&#8594; Sentido ${_dirNames.toA}` : `&#8592; Sentido ${_dirNames.toB}`;
   const dirClass = trip.direction === 'toA' ? 'dir-badge-a' : 'dir-badge-b';
+  const meanDep  = computeMeanDeparture(trip.time, m?.Percentage_sims_delay_departure, m?.Mean_Minutes_departure_delay);
+
+  // Bus plots for this trip
+  const busPlotUrls = _plotsInfo?.busPlots?.[trip.busId]?.[trip.direction] || [];
+  const plotUrl = busPlotUrls[trip.dirIndex];
+  const plotHtml = plotUrl ? `
+    <div class="trip-plots-wrap">
+      <div class="trip-plot-label">Ocupación media por parada</div>
+      <div class="trip-plot-item plot-expandable" onclick="openImgModal('${plotUrl}')">
+        <img class="trip-plot-img" src="${plotUrl}" alt="Gráfica de ocupación" loading="lazy" />
+        <div class="plot-expand-hint">&#128269; Clic para ampliar</div>
+      </div>
+    </div>` : '';
 
   panel.innerHTML = `
     <div class="trip-detail-header">
       <span class="dir-badge ${dirClass}">${dirLabel}</span>
-      <span class="trip-detail-id">Viaje ${trip.globalIdx} &middot; ${trip.stopId} · ${trip.time}</span>
+      <span class="trip-detail-id">Bus ${trip.busId} &middot; Viaje ${trip.globalIdx ?? trip.dirIndex} &middot; ${trip.stopId} · ${trip.time}</span>
     </div>
     <div class="trip-metrics-grid">
       <div class="trip-metric-card">
@@ -312,18 +497,32 @@ function renderTripDetail(trip) {
         <div class="trip-metric-value">${formatDuration(m?.Mean_time_of_trip)}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">% Simulaciones donde el bus sale con retraso</div>
+        <div class="trip-metric-label">% Simulaciones con retraso</div>
         <div class="trip-metric-value">${fmt(m?.Percentage_sims_delay_departure, '%')}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">Retraso medio</div>
+        <div class="trip-metric-label">Retraso medio de salida</div>
         <div class="trip-metric-value">${formatDuration(m?.Mean_Minutes_departure_delay)}</div>
       </div>
+      <div class="trip-metric-card">
+        <div class="trip-metric-label">Hora programada</div>
+        <div class="trip-metric-value" style="font-size:1rem;">${trip.time}</div>
+      </div>
+      <div class="trip-metric-card">
+        <div class="trip-metric-label">Salida media real</div>
+        <div class="trip-metric-value" style="font-size:1rem;">${meanDep}</div>
+      </div>
     </div>
+    ${plotHtml}
   `;
 }
 
-// Reference to the active map's clearSelection — set whenever a selection is made
+// ---- Route info panel: filter state ----
+// 'general' | 'timeslot'
+let _routeInfoFilter = 'general';
+let _routeInfoSelectedTs = 5;  // default timeslot
+
+// Reference to the active map's clearSelection
 let _activeClearSelection = null;
 
 function closeInfoPanel() {
@@ -350,7 +549,7 @@ function showTooltip(e, html) {
 
 function positionTooltip(e) {
   _svgTooltip.style.left = (e.clientX + 14) + 'px';
-  _svgTooltip.style.top = (e.clientY - 10) + 'px';
+  _svgTooltip.style.top  = (e.clientY - 10) + 'px';
 }
 
 function hideTooltip() {
@@ -360,7 +559,6 @@ function hideTooltip() {
 async function loadGeodata(simId) {
   const container = document.getElementById('map-container');
   try {
-    // Load direction names and geodata in parallel
     const [, data] = await Promise.all([
       loadDirNames('E01'),
       fetch(`/api/simulations/${simId}/geodata`).then(r => {
@@ -374,7 +572,6 @@ async function loadGeodata(simId) {
       return;
     }
 
-    // Always render E01 only — no experiment tabs
     const e01 = data.experiments.find(e => e.expId === 'E01') ?? data.experiments[0];
     renderDirectionMaps(e01);
 
@@ -386,6 +583,11 @@ async function loadGeodata(simId) {
 function renderDirectionMaps(exp) {
   const container = document.getElementById('map-container');
   container.innerHTML = `
+    <div class="analysis-filter-bar">
+      <span class="analysis-filter-label">Mostrar info por:</span>
+      <button class="filter-btn active" id="route-filter-general-btn">&#128202; General</button>
+      <button class="filter-btn" id="route-filter-ts-btn">&#128336; Franja horaria</button>
+    </div>
     <div class="direction-maps">
       <div class="direction-map-panel">
         <div class="direction-map-label dir-label-a">&#8594; Sentido ${_dirNames.toA}</div>
@@ -398,11 +600,39 @@ function renderDirectionMaps(exp) {
     </div>
     <div id="route-info-panel" class="route-info-panel" style="display:none;"></div>
   `;
-  buildSvgMap(document.getElementById('svg-toA'), exp.toA);
-  buildSvgMap(document.getElementById('svg-toB'), exp.toB);
+
+  document.getElementById('route-filter-general-btn').addEventListener('click', () => {
+    _routeInfoFilter = 'general';
+    document.getElementById('route-filter-general-btn').classList.add('active');
+    document.getElementById('route-filter-ts-btn').classList.remove('active');
+    // Refresh panel if something is selected
+    refreshInfoPanel();
+  });
+
+  document.getElementById('route-filter-ts-btn').addEventListener('click', () => {
+    _routeInfoFilter = 'timeslot';
+    document.getElementById('route-filter-ts-btn').classList.add('active');
+    document.getElementById('route-filter-general-btn').classList.remove('active');
+    refreshInfoPanel();
+  });
+
+  buildSvgMap(document.getElementById('svg-toA'), exp.toA, 'toA');
+  buildSvgMap(document.getElementById('svg-toB'), exp.toB, 'toB');
 }
 
-async function buildSvgMap(svgEl, dirData) {
+// Track what is currently selected in the info panel
+let _currentInfoSelection = null; // { type: 'stop'|'section', data, dirKey }
+
+function refreshInfoPanel() {
+  if (!_currentInfoSelection) return;
+  if (_currentInfoSelection.type === 'stop') {
+    showStopInfo(_currentInfoSelection.data, _currentInfoSelection.dirKey);
+  } else {
+    showSectionInfo(_currentInfoSelection.data, _currentInfoSelection.dirKey);
+  }
+}
+
+async function buildSvgMap(svgEl, dirData, dirKey) {
   const ns = 'http://www.w3.org/2000/svg';
 
   const loading = document.createElementNS(ns, 'text');
@@ -424,14 +654,11 @@ async function buildSvgMap(svgEl, dirData) {
 
     svgEl.innerHTML = '';
 
-    // Sort stops by cumulative distance
     const sortedStops = stopsGeo.features
       .filter(f => f.geometry.type === 'Point')
       .map(f => ({ props: f.properties, coords: f.geometry.coordinates }))
       .sort((a, b) => a.props.distance - b.props.distance);
 
-    // Build one section per consecutive stop pair
-    // Each section: { from, to, visPaths[], hitPaths[], fromCircle, toCircle }
     const sections = sortedStops.slice(0, -1).map((from, i) => ({
       from,
       to: sortedStops[i + 1],
@@ -441,8 +668,6 @@ async function buildSvgMap(svgEl, dirData) {
       toCircle: null,
     }));
 
-    // Assign a route feature to the section whose [from.distance, to.distance) it falls into.
-    // Features before the first stop go to section 0; after the last stop go to the last section.
     function assignSection(dist) {
       for (let i = 0; i < sections.length; i++) {
         if (dist < sections[i].to.props.distance) return i;
@@ -450,7 +675,6 @@ async function buildSvgMap(svgEl, dirData) {
       return sections.length - 1;
     }
 
-    // Collect all coords for bounding box
     const allCoords = [];
     for (const f of routeGeo.features) {
       const rings = f.geometry.type === 'MultiLineString'
@@ -478,12 +702,12 @@ async function buildSvgMap(svgEl, dirData) {
     const rangeY = maxLat - minLat || 0.001;
     const scaleX = (W - 2 * PAD) / rangeX;
     const scaleY = (H - 2 * PAD) / rangeY;
-    const scale = Math.min(scaleX, scaleY);
+    const scale  = Math.min(scaleX, scaleY);
 
     const drawW = rangeX * scale;
     const drawH = rangeY * scale;
-    const offX = PAD + (W - 2 * PAD - drawW) / 2;
-    const offY = PAD + (H - 2 * PAD - drawH) / 2;
+    const offX  = PAD + (W - 2 * PAD - drawW) / 2;
+    const offY  = PAD + (H - 2 * PAD - drawH) / 2;
 
     const project = ([lng, lat]) => [
       offX + (lng - minLng) * scale,
@@ -496,11 +720,10 @@ async function buildSvgMap(svgEl, dirData) {
     const C_STOP_DEF = '#ffffff';
     const C_STOP_SEL = '#f59e0b';
 
-    let selectedIdx     = -1;  // selected section index (-1 = none)
-    let selectedStopIdx = -1;  // selected stop index (-1 = none)
-    const stopCircles   = [];  // indexed parallel to sortedStops
+    let selectedIdx     = -1;
+    let selectedStopIdx = -1;
+    const stopCircles   = [];
 
-    // Helpers to style all paths/circles in a section
     function styleSection(idx, color, weight) {
       sections[idx].visPaths.forEach(p => {
         p.setAttribute('stroke', color);
@@ -540,7 +763,7 @@ async function buildSvgMap(svgEl, dirData) {
       }
     }
 
-    // --- Draw route paths grouped by section ---
+    // Draw route paths grouped by section
     for (const f of routeGeo.features) {
       const sIdx = assignSection(f.properties.distance);
       const rings = f.geometry.type === 'MultiLineString'
@@ -548,7 +771,7 @@ async function buildSvgMap(svgEl, dirData) {
 
       for (const ring of rings) {
         const pts = ring.map(project);
-        const d = 'M ' + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' L ');
+        const d   = 'M ' + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' L ');
 
         const vis = document.createElementNS(ns, 'path');
         vis.setAttribute('d', d);
@@ -573,7 +796,6 @@ async function buildSvgMap(svgEl, dirData) {
       }
     }
 
-    // Attach shared hover + click to all hit paths in each section
     sections.forEach((sec, sIdx) => {
       const tooltipHtml = () =>
         `<strong>${sec.from.props.stopNum}</strong> ${escHtml(sec.from.props.stopName)}`
@@ -582,21 +804,16 @@ async function buildSvgMap(svgEl, dirData) {
 
       sec.hitPaths.forEach(hit => {
         hit.addEventListener('mouseenter', e => {
-          if (selectedIdx !== sIdx) {
-            styleSection(sIdx, C_HOVER, '5');
-          }
+          if (selectedIdx !== sIdx) styleSection(sIdx, C_HOVER, '5');
           showTooltip(e, tooltipHtml());
         });
         hit.addEventListener('mousemove', positionTooltip);
         hit.addEventListener('mouseleave', () => {
-          if (selectedIdx !== sIdx) {
-            styleSection(sIdx, C_DEFAULT, '3');
-          }
+          if (selectedIdx !== sIdx) styleSection(sIdx, C_DEFAULT, '3');
           hideTooltip();
         });
         hit.addEventListener('click', () => {
           const wasSelected = selectedIdx === sIdx;
-          // Clear selection from the other map if it's active
           if (_activeClearSelection && _activeClearSelection !== clearSelection) {
             _activeClearSelection();
             _activeClearSelection = null;
@@ -607,9 +824,11 @@ async function buildSvgMap(svgEl, dirData) {
             styleStops(sIdx, C_STOP_SEL, C_SELECTED);
             selectedIdx = sIdx;
             _activeClearSelection = clearSelection;
-            showSectionInfo(sec);
+            _currentInfoSelection = { type: 'section', data: sec, dirKey };
+            showSectionInfo(sec, dirKey);
           } else {
             _activeClearSelection = null;
+            _currentInfoSelection = null;
             const panel = document.getElementById('route-info-panel');
             if (panel) panel.style.display = 'none';
           }
@@ -618,7 +837,7 @@ async function buildSvgMap(svgEl, dirData) {
       });
     });
 
-    // --- Draw stops on top (so they sit above route lines) ---
+    // Draw stops on top
     sortedStops.forEach((stop, i) => {
       const [x, y] = project(stop.coords);
       const p = stop.props;
@@ -634,7 +853,6 @@ async function buildSvgMap(svgEl, dirData) {
 
       stopCircles.push(circle);
 
-      // Register circle as boundary of adjacent sections
       if (i < sections.length) sections[i].fromCircle = circle;
       if (i > 0)               sections[i - 1].toCircle = circle;
 
@@ -657,7 +875,6 @@ async function buildSvgMap(svgEl, dirData) {
       });
       circle.addEventListener('click', () => {
         const wasSelected = selectedStopIdx === i;
-        // Clear selection from the other map if it's active
         if (_activeClearSelection && _activeClearSelection !== clearSelection) {
           _activeClearSelection();
           _activeClearSelection = null;
@@ -667,9 +884,11 @@ async function buildSvgMap(svgEl, dirData) {
           styleStopCircle(i, C_STOP_SEL, C_SELECTED, '8');
           selectedStopIdx = i;
           _activeClearSelection = clearSelection;
-          showStopInfo(p);
+          _currentInfoSelection = { type: 'stop', data: p, dirKey };
+          showStopInfo(p, dirKey);
         } else {
           _activeClearSelection = null;
+          _currentInfoSelection = null;
           const panel = document.getElementById('route-info-panel');
           if (panel) panel.style.display = 'none';
         }
@@ -693,63 +912,286 @@ async function buildSvgMap(svgEl, dirData) {
   }
 }
 
-function showStopInfo(p) {
-  const panel = document.getElementById('route-info-panel');
-  panel.style.display = 'block';
+// ---- Build timeslot selector HTML (hours 5-23) ----
+function buildTimeslotSelector(availableHours, selectedHour, onSelect) {
+  const hours = Array.from({ length: 19 }, (_, i) => i + 5); // 5..23
+  const btns = hours.map(h => {
+    const avail = availableHours.includes(h);
+    const active = h === selectedHour ? 'active' : '';
+    const disabled = avail ? '' : 'disabled style="opacity:0.35;cursor:not-allowed;"';
+    return `<button class="ts-btn ${active}" data-hour="${h}" ${disabled}>${h}</button>`;
+  }).join('');
 
-  const stopId = String(p.stopNum);
-  const toAUrl = _plotsInfo?.stopPlots?.toA?.[stopId];
-  const toBUrl = _plotsInfo?.stopPlots?.toB?.[stopId];
+  const wrap = document.createElement('div');
+  wrap.className = 'timeslot-selector-wrap';
+  wrap.innerHTML = `<span class="timeslot-selector-label">Franja horaria:</span>${btns}`;
 
-  const plotHtml = (toAUrl || toBUrl) ? `
-    <div class="stop-plots-wrap">
-      ${toAUrl ? `<div class="stop-plot-item">
-        <div class="stop-plot-dir-label dir-label-a">&#8594; Sentido ${_dirNames.toA}</div>
-        <img src="${toAUrl}" alt="Ocupación sentido A" loading="lazy" />
-      </div>` : ''}
-      ${toBUrl ? `<div class="stop-plot-item">
-        <div class="stop-plot-dir-label dir-label-b">&#8592; Sentido ${_dirNames.toB}</div>
-        <img src="${toBUrl}" alt="Ocupación sentido B" loading="lazy" />
-      </div>` : ''}
-    </div>` : '';
-
-  panel.innerHTML = `
-    <div class="route-info-header">
-      <span>&#9679; Parada ${p.stopNum} &middot; ${escHtml(p.stopName)}</span>
-      <button class="route-info-close" onclick="closeInfoPanel()">&#10005;</button>
-    </div>
-    <div class="route-info-body">
-      <div class="route-info-row"><span>Nombre</span><strong>${escHtml(p.stopName)}</strong></div>
-      <div class="route-info-row"><span>N&#250;m. parada</span><strong>${p.stopNum}</strong></div>
-    </div>
-    ${plotHtml}
-  `;
+  wrap.querySelectorAll('.ts-btn:not([disabled])').forEach(btn => {
+    btn.addEventListener('click', () => {
+      wrap.querySelectorAll('.ts-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      onSelect(Number(btn.dataset.hour));
+    });
+  });
+  return wrap;
 }
 
-function showSectionInfo(sec) {
+// ---- Show stop info panel ----
+function showStopInfo(p, dirKey) {
   const panel = document.getElementById('route-info-panel');
   panel.style.display = 'block';
-  const dist = (sec.to.props.distance - sec.from.props.distance).toFixed(0);
-  panel.innerHTML = `
-    <div class="route-info-header section-header">
-      <span>
-        <span class="section-stop-badge">${sec.from.props.stopNum}</span>
-        ${escHtml(sec.from.props.stopName)}
-        &nbsp;&#8594;&nbsp;
-        <span class="section-stop-badge">${sec.to.props.stopNum}</span>
-        ${escHtml(sec.to.props.stopName)}
-      </span>
-      <button class="route-info-close" onclick="closeInfoPanel()">&#10005;</button>
-    </div>
-    <div class="route-info-body">
-      <div class="route-info-row"><span>Parada origen</span><strong>${sec.from.props.stopNum} &middot; ${escHtml(sec.from.props.stopName)}</strong></div>
-      <div class="route-info-row"><span>Parada destino</span><strong>${sec.to.props.stopNum} &middot; ${escHtml(sec.to.props.stopName)}</strong></div>
-      <div class="route-info-hint">Tiempo de tr&#225;nsito entre paradas — pr&#243;ximamente</div>
-    </div>
-  `;
+
+  const stopId   = String(p.stopNum);
+  const stopInfo = _plotsInfo?.stopGeneralInfo?.[dirKey]?.[stopId];
+  const stopPlotsByHour = _plotsInfo?.stopPlots?.[dirKey]?.[stopId] || {};
+
+  // Build stats box content (will be re-rendered by filter changes)
+  function renderStopPanel(filter, selectedTs) {
+    let statsHtml = '';
+    let plotsHtml = '';
+
+    if (stopInfo) {
+      if (filter === 'general') {
+        const occPct = stopInfo.Occupation_percentage != null
+          ? stopInfo.Occupation_percentage.toFixed(2) + '%' : '—';
+        const awaitTime = stopInfo.Mean_await_time_general != null
+          ? formatDuration(stopInfo.Mean_await_time_general) : '—';
+        statsHtml = `
+          <div class="stop-stats-box">
+            <div class="ss-item">
+              <span class="ss-label">Ocupación media general</span>
+              <span class="ss-value">${occPct}</span>
+            </div>
+            <div class="ss-item">
+              <span class="ss-label">Espera media general</span>
+              <span class="ss-value">${awaitTime}</span>
+            </div>
+          </div>`;
+
+        // General filter: show single occupation_per_timeslot_STOPID.png
+        const generalPlotUrl = _plotsInfo?.stopPlotsGeneral?.[dirKey]?.[stopId];
+        if (generalPlotUrl) {
+          plotsHtml = `
+            <div class="stop-plots-wrap">
+              <div class="stop-plot-dir-label ${dirKey === 'toA' ? 'dir-label-a' : 'dir-label-b'}">
+                Ocupación por franja horaria (${dirKey === 'toA' ? '&#8594; ' + _dirNames.toA : '&#8592; ' + _dirNames.toB})
+              </div>
+              <div class="stop-plot-item plot-expandable" onclick="openImgModal('${generalPlotUrl}')">
+                <img src="${generalPlotUrl}" alt="Ocupación por franja" loading="lazy" />
+                <div class="plot-expand-hint">&#128269; Clic para ampliar</div>
+              </div>
+            </div>`;
+        }
+
+      } else {
+        // Timeslot filter
+        const ts = selectedTs;
+        const occPct = stopInfo.Occupation_percentage_per_timeslot?.[ts] != null
+          ? stopInfo.Occupation_percentage_per_timeslot[ts].toFixed(2) + '%' : '—';
+        const awaitTime = stopInfo.Mean_await_time_per_timeslot?.[ts] != null
+          ? formatDuration(stopInfo.Mean_await_time_per_timeslot[ts]) : '—';
+
+        statsHtml = `
+          <div class="stop-stats-box">
+            <div class="ss-item">
+              <span class="ss-label">Ocupación franja ${ts}:00</span>
+              <span class="ss-value">${occPct}</span>
+            </div>
+            <div class="ss-item">
+              <span class="ss-label">Espera media franja ${ts}:00</span>
+              <span class="ss-value">${awaitTime}</span>
+            </div>
+          </div>`;
+
+        // Show comparison plot for selected timeslot
+        const plotUrl = stopPlotsByHour[String(ts)];
+        if (plotUrl) {
+          plotsHtml = `
+            <div class="stop-plots-wrap">
+              <div class="stop-plot-dir-label ${dirKey === 'toA' ? 'dir-label-a' : 'dir-label-b'}">
+                Comparativa ocupación franja ${ts}:00 (${dirKey === 'toA' ? '&#8594; ' + _dirNames.toA : '&#8592; ' + _dirNames.toB})
+              </div>
+              <div class="stop-plot-item plot-expandable" onclick="openImgModal('${plotUrl}')">
+                <img src="${plotUrl}" alt="Ocupación franja ${ts}" loading="lazy" />
+                <div class="plot-expand-hint">&#128269; Clic para ampliar</div>
+              </div>
+            </div>`;
+        }
+      }
+    }
+
+    const infoBody = panel.querySelector('.stop-info-body');
+    if (infoBody) {
+      infoBody.innerHTML = statsHtml;
+      // Re-attach timeslot selector
+      const tsWrap = panel.querySelector('.ts-selector-slot');
+      if (tsWrap) tsWrap.innerHTML = '';
+    }
+
+    // Full re-render approach (simpler, avoids DOM patching)
+    panel.innerHTML = `
+      <div class="route-info-header">
+        <span>&#9679; Parada ${p.stopNum} &middot; ${escHtml(p.stopName)}</span>
+        <button class="route-info-close" onclick="closeInfoPanel()">&#10005;</button>
+      </div>
+      <div class="route-info-body">
+        <div class="route-info-row"><span>Nombre</span><strong>${escHtml(p.stopName)}</strong></div>
+        <div class="route-info-row"><span>N&#250;m. parada</span><strong>${p.stopNum}</strong></div>
+      </div>
+      ${statsHtml}
+      ${filter === 'timeslot' ? '<!-- ts-selector -->' : ''}
+      ${plotsHtml}
+    `;
+
+    // Inject timeslot selector after stats box for timeslot mode
+    if (filter === 'timeslot' && stopInfo) {
+      const availHours = Object.keys(stopInfo.Occupation_percentage_per_timeslot || {}).map(Number);
+      const selector = buildTimeslotSelector(availHours, selectedTs, (newTs) => {
+        _routeInfoSelectedTs = newTs;
+        renderStopPanel('timeslot', newTs);
+      });
+      // Insert after the statsBox (before plots)
+      const statsBox = panel.querySelector('.stop-stats-box');
+      if (statsBox) {
+        statsBox.after(selector);
+      } else {
+        // Insert before plots
+        panel.appendChild(selector);
+      }
+    }
+  }
+
+  renderStopPanel(_routeInfoFilter, _routeInfoSelectedTs);
+}
+
+// ---- Show section info panel ----
+function showSectionInfo(sec, dirKey) {
+  const panel = document.getElementById('route-info-panel');
+  panel.style.display = 'block';
+
+  const fromId = String(sec.from.props.stopNum);
+  const toId   = String(sec.to.props.stopNum);
+  const sectionKey = `${fromId}-${toId}`;
+
+  const timesStops = _plotsInfo?.stopGeneralInfo?.[dirKey]?.times_stops || {};
+  const sectionData = timesStops[sectionKey];
+
+  const timesByHour = _plotsInfo?.timesPlots?.[dirKey]?.[sectionKey] || {};
+
+  function renderSectionPanel(filter, selectedTs) {
+    let statsHtml = '';
+    let plotsHtml = '';
+
+    if (sectionData) {
+      if (filter === 'general') {
+        const genTime = sectionData.general_time != null
+          ? formatDuration(sectionData.general_time) : '—';
+        statsHtml = `
+          <div class="stop-stats-box">
+            <div class="ss-item">
+              <span class="ss-label">Tiempo de tránsito general</span>
+              <span class="ss-value">${genTime}</span>
+            </div>
+          </div>`;
+        // No comparison plot in general mode for sections
+
+      } else {
+        const ts = selectedTs;
+        const tsTime = sectionData.time_per_timeslot?.[ts] != null
+          ? formatDuration(sectionData.time_per_timeslot[ts]) : '—';
+        statsHtml = `
+          <div class="stop-stats-box">
+            <div class="ss-item">
+              <span class="ss-label">Tiempo de tránsito franja ${ts}:00</span>
+              <span class="ss-value">${tsTime}</span>
+            </div>
+          </div>`;
+
+        // Show comparison plot for selected timeslot
+        const plotUrl = timesByHour[String(ts)];
+        if (plotUrl) {
+          plotsHtml = `
+            <div class="stop-plots-wrap">
+              <div class="stop-plot-dir-label ${dirKey === 'toA' ? 'dir-label-a' : 'dir-label-b'}">
+                Comparativa tiempo de tránsito franja ${ts}:00
+              </div>
+              <div class="stop-plot-item plot-expandable" onclick="openImgModal('${plotUrl}')">
+                <img src="${plotUrl}" alt="Tiempo tránsito franja ${ts}" loading="lazy" />
+                <div class="plot-expand-hint">&#128269; Clic para ampliar</div>
+              </div>
+            </div>`;
+        }
+      }
+    }
+
+    panel.innerHTML = `
+      <div class="route-info-header section-header">
+        <span>
+          <span class="section-stop-badge">${sec.from.props.stopNum}</span>
+          ${escHtml(sec.from.props.stopName)}
+          &nbsp;&#8594;&nbsp;
+          <span class="section-stop-badge">${sec.to.props.stopNum}</span>
+          ${escHtml(sec.to.props.stopName)}
+        </span>
+        <button class="route-info-close" onclick="closeInfoPanel()">&#10005;</button>
+      </div>
+      <div class="route-info-body">
+        <div class="route-info-row"><span>Parada origen</span><strong>${sec.from.props.stopNum} &middot; ${escHtml(sec.from.props.stopName)}</strong></div>
+        <div class="route-info-row"><span>Parada destino</span><strong>${sec.to.props.stopNum} &middot; ${escHtml(sec.to.props.stopName)}</strong></div>
+      </div>
+      ${sectionData ? statsHtml : '<div class="route-info-hint" style="padding:0.75rem 1rem;">Sin datos de tránsito para este tramo.</div>'}
+      ${plotsHtml}
+    `;
+
+    if (filter === 'timeslot' && sectionData) {
+      const availHours = Object.keys(sectionData.time_per_timeslot || {}).map(Number);
+      const selector = buildTimeslotSelector(availHours, selectedTs, (newTs) => {
+        _routeInfoSelectedTs = newTs;
+        renderSectionPanel('timeslot', newTs);
+      });
+      const statsBox = panel.querySelector('.stop-stats-box');
+      if (statsBox) statsBox.after(selector);
+      else panel.appendChild(selector);
+    }
+  }
+
+  renderSectionPanel(_routeInfoFilter, _routeInfoSelectedTs);
 }
 
 // ---- Init ----
+
+// ---- Image modal ----
+
+function openImgModal(url) {
+  let overlay = document.getElementById('img-modal-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'img-modal-overlay';
+    overlay.className = 'img-modal-overlay';
+    overlay.innerHTML = `
+      <div class="img-modal-box">
+        <button class="img-modal-close" onclick="closeImgModal()">&#10005;</button>
+        <img id="img-modal-img" src="" alt="Gráfica ampliada" />
+      </div>`;
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeImgModal();
+    });
+    document.body.appendChild(overlay);
+  }
+  document.getElementById('img-modal-img').src = url;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeImgModal() {
+  const overlay = document.getElementById('img-modal-overlay');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeImgModal();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   const simId = getSimId();

@@ -744,7 +744,7 @@ global
 	//Initialize sim TimeSlot
 	int TimeSlot <- 5;
 	
-	int seconds;
+	int seconds <- 0;
 
 	/*
 	 * Global reflex to handle each iteration the time that has passed. It will save
@@ -1037,7 +1037,7 @@ global
 		
 		float mean <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2];
 		float std <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2 + 1];
-		return max(gauss(mean, std), step);	
+		return max(gauss(mean, std), step);
 
 	}//end function stimate times betwween stops
 	
@@ -1353,7 +1353,7 @@ species bus skills: [fipa] {
 			//The order of the variables will be world.name, id of the bus, StopCode, EVENTCODE, Current Time, Departure Time
 			//And Current time - departure time
 			buffer_events << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-				TimeSlot, "DELAY", current_time, self.departure_time, world.time_to_minutes(current_time) -world.time_to_minutes(self.departure_time)] ;		
+				TimeSlot, "DELAY", current_time, self.departure_time, world.time_to_minutes(current_time) - world.time_to_minutes(self.departure_time)] ;		
 		}
 		else{
 			allowed_to_leave <- false;
@@ -1485,7 +1485,6 @@ species bus skills: [fipa] {
      */
     reflex spend_extra_time_in_stop when: self.extra_waiting_time {
     	
-    	
     	self.cycles_to_wait <- self.cycles_to_wait -1;
     	
     	if (self.cycles_to_wait = 0){
@@ -1535,7 +1534,7 @@ species bus skills: [fipa] {
     	self.waiting <- false;
     	self.stops_reached <- self.stops_reached + 1;
     	self.stopped <- false;
-		time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
+		time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached - 1].stopNum, direction);
 		
     }//End reflex verify stop and restart way
     

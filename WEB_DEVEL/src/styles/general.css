@@ -701,7 +701,7 @@ footer strong { color: var(--emt-red); }
 /* ---- Bus detail grid ---- */
 .bus-detail-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
 }
 
 @media (max-width: 900px) { .bus-detail-grid { grid-template-columns: 1fr; } }
@@ -710,6 +710,7 @@ footer strong { color: var(--emt-red); }
   padding: 1.25rem;
   border-right: 1px solid var(--emt-gray-200);
   overflow-x: auto;
+  min-width: 0;
 }
 
 .bus-section-title {
@@ -723,7 +724,8 @@ footer strong { color: var(--emt-red); }
 .trip-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
+  table-layout: fixed;
 }
 
 .trip-table th {
@@ -826,10 +828,264 @@ footer strong { color: var(--emt-red); }
 
 .stop-plot-item img { width: 100%; height: auto; display: block; }
 
+/* ---- Analysis filter bar (Ruta / Bus views) ---- */
+.analysis-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--emt-gray-100);
+  border-bottom: 1px solid var(--emt-gray-200);
+  flex-wrap: wrap;
+}
+
+.analysis-filter-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--emt-gray-600);
+  margin-right: 0.25rem;
+}
+
+.filter-btn {
+  background: var(--emt-white);
+  border: 2px solid var(--emt-gray-200);
+  border-radius: 20px;
+  padding: 0.25rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--emt-gray-900);
+  transition: all var(--transition);
+}
+.filter-btn:hover { border-color: var(--emt-red); color: var(--emt-red); }
+.filter-btn.active { background: var(--emt-red); border-color: var(--emt-red); color: #fff; }
+
+/* ---- Stop stats info box ---- */
+.stop-stats-box {
+  background: var(--emt-gray-100);
+  border-left: 4px solid var(--emt-red);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1.5rem;
+}
+
+.stop-stats-box .ss-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.stop-stats-box .ss-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--emt-gray-600);
+}
+
+.stop-stats-box .ss-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--emt-red);
+}
+
+/* ---- Timeslot selector ---- */
+.timeslot-selector-wrap {
+  padding: 0.75rem 1rem 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.timeslot-selector-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--emt-gray-600);
+  margin-right: 0.25rem;
+  white-space: nowrap;
+}
+
+.ts-btn {
+  background: var(--emt-white);
+  border: 2px solid var(--emt-gray-200);
+  border-radius: 6px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: monospace;
+  cursor: pointer;
+  color: var(--emt-gray-900);
+  transition: all var(--transition);
+  min-width: 2.2rem;
+  text-align: center;
+}
+.ts-btn:hover { border-color: var(--emt-red); color: var(--emt-red); }
+.ts-btn.active { background: var(--emt-red); border-color: var(--emt-red); color: #fff; }
+
+/* ---- Bus view filter bar (by logical bus / by timeslot) ---- */
+.bus-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--emt-gray-100);
+  border-bottom: 1px solid var(--emt-gray-200);
+  flex-wrap: wrap;
+}
+
+/* ---- Bus timeslot view ---- */
+.bus-ts-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--emt-gray-200);
+}
+
+.bus-ts-pill {
+  background: var(--emt-gray-100);
+  border: 2px solid var(--emt-gray-200);
+  border-radius: 20px;
+  padding: 0.22rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: monospace;
+  cursor: pointer;
+  color: var(--emt-gray-900);
+  transition: all var(--transition);
+}
+.bus-ts-pill:hover { border-color: var(--emt-red); color: var(--emt-red); }
+.bus-ts-pill.active { background: var(--emt-red); border-color: var(--emt-red); color: #fff; }
+
+/* Bus ID badge inside trip rows when in timeslot mode */
+.bus-id-badge {
+  display: inline-block;
+  background: var(--emt-gray-200);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--emt-gray-900);
+  margin-left: 0.3rem;
+}
+
+/* ---- Trip plot images inside detail panel ---- */
+.trip-plots-wrap {
+  border-top: 1px solid var(--emt-gray-200);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.trip-plot-item {}
+
+/* ---- Expandable plot item ---- */
+.plot-expandable {
+  position: relative;
+  cursor: zoom-in;
+}
+
+.plot-expandable:hover .plot-expand-hint {
+  opacity: 1;
+}
+
+.plot-expand-hint {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(8, 101, 214, 0.75);
+  color: #fff;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+/* ---- Image modal ---- */
+.img-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.img-modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.img-modal-box {
+  position: relative;
+  max-width: 92vw;
+  max-height: 90vh;
+  background: var(--emt-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+}
+
+.img-modal-overlay.open .img-modal-box {
+  transform: scale(1);
+}
+
+.img-modal-box img {
+  display: block;
+  max-width: 92vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+}
+
+.img-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.55);
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: background var(--transition);
+}
+.img-modal-close:hover { background: rgba(0, 0, 0, 0.8); }
+
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
   header { padding: 0 1rem; }
   main { padding: 1rem; }
   .page-header { flex-direction: column; align-items: flex-start; }
   .detail-hero { flex-direction: column; }
+  .stop-stats-box { grid-template-columns: 1fr; }
+  .trip-metrics-grid { grid-template-columns: 1fr; }
 }

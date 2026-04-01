@@ -313,23 +313,80 @@ app.get('/api/simulations/:id/plots-info', (req, res) => {
     );
   } catch (_) {}
 
-  // Stop plots: { toA: { stopId: url }, toB: { stopId: url } }
+  // Stop plots (general): { toA: { stopId: url }, toB: { stopId: url } }
+  // PNG names: occupation_per_timeslot_STOPID.png
+  const stopPlotsGeneral = { toA: {}, toB: {} };
+  const stopGeneralPattern = /^occupation_per_timeslot_(\d+)\.png$/;
+
+  // Stop plots (per-timeslot comparison): { toA: { stopId: { hour: url } }, toB: ... }
+  // PNG names: occupation_comparaison_STOPID_per_timeslot_HOUR.png
   const stopPlots = { toA: {}, toB: {} };
-  const stopPattern = /^occupation_per_timeslot_(\d+)\.png$/;
+  const stopPattern = /^occupation_comparaison_(\d+)_per_timeslot_(\d+)\.png$/;
 
   const toAStopsPath = path.join(plotsPath, 'to_A', 'stops');
   if (fs.existsSync(toAStopsPath)) {
     fs.readdirSync(toAStopsPath).forEach(f => {
+      const mg = f.match(stopGeneralPattern);
+      if (mg) { stopPlotsGeneral.toA[mg[1]] = `${urlBase}/to_A/stops/${f}`; return; }
       const m = f.match(stopPattern);
-      if (m) stopPlots.toA[m[1]] = `${urlBase}/to_A/stops/${f}`;
+      if (!m) return;
+      const [, stopId, hour] = m;
+      if (!stopPlots.toA[stopId]) stopPlots.toA[stopId] = {};
+      stopPlots.toA[stopId][hour] = `${urlBase}/to_A/stops/${f}`;
     });
   }
 
   const toBStopsPath = path.join(plotsPath, 'to_B', 'stops');
   if (fs.existsSync(toBStopsPath)) {
     fs.readdirSync(toBStopsPath).forEach(f => {
+      const mg = f.match(stopGeneralPattern);
+      if (mg) { stopPlotsGeneral.toB[mg[1]] = `${urlBase}/to_B/stops/${f}`; return; }
       const m = f.match(stopPattern);
-      if (m) stopPlots.toB[m[1]] = `${urlBase}/to_B/stops/${f}`;
+      if (!m) return;
+      const [, stopId, hour] = m;
+      if (!stopPlots.toB[stopId]) stopPlots.toB[stopId] = {};
+      stopPlots.toB[stopId][hour] = `${urlBase}/to_B/stops/${f}`;
+    });
+  }
+
+  // Per-stop and times-between-stops general info
+  // { toA: { stopId: { Occupation_percentage, Mean_await_time_general, ... }, times_stops: { 'from-to': {...} } }, toB: {...} }
+  const stopGeneralInfo = { toA: null, toB: null };
+  try {
+    stopGeneralInfo.toA = JSON.parse(
+      fs.readFileSync(path.join(plotsPath, 'to_A', 'general_info_toA.json'), 'utf8')
+    );
+  } catch (_) {}
+  try {
+    stopGeneralInfo.toB = JSON.parse(
+      fs.readFileSync(path.join(plotsPath, 'to_B', 'general_info_toB.json'), 'utf8')
+    );
+  } catch (_) {}
+
+  // Times-between-stops plots: { toA: { 'fromStop-toStop': { hour: url } }, toB: {...} }
+  // PNG names: time_between_stops_comparaison_FROM-TO_per_timeslot_HOUR.png
+  const timesPlots = { toA: {}, toB: {} };
+  const timesPattern = /^time_between_stops_comparaison_(\d+-\d+)_per_timeslot_(\d+)\.png$/;
+
+  const toATimesPath = path.join(plotsPath, 'to_A', 'times');
+  if (fs.existsSync(toATimesPath)) {
+    fs.readdirSync(toATimesPath).forEach(f => {
+      const m = f.match(timesPattern);
+      if (!m) return;
+      const [, sectionKey, hour] = m;
+      if (!timesPlots.toA[sectionKey]) timesPlots.toA[sectionKey] = {};
+      timesPlots.toA[sectionKey][hour] = `${urlBase}/to_A/times/${f}`;
+    });
+  }
+
+  const toBTimesPath = path.join(plotsPath, 'to_B', 'times');
+  if (fs.existsSync(toBTimesPath)) {
+    fs.readdirSync(toBTimesPath).forEach(f => {
+      const m = f.match(timesPattern);
+      if (!m) return;
+      const [, sectionKey, hour] = m;
+      if (!timesPlots.toB[sectionKey]) timesPlots.toB[sectionKey] = {};
+      timesPlots.toB[sectionKey][hour] = `${urlBase}/to_B/times/${f}`;
     });
   }
 
@@ -364,7 +421,7 @@ app.get('/api/simulations/:id/plots-info', (req, res) => {
   if (fs.existsSync(path.join(plotsPath, 'to_B', 'occupation_per_timeslot_toB.png')))
     generalPlots.toB = `${gpBase}/to_B/occupation_per_timeslot_toB.png`;
 
-  res.json({ generalStats, busSchedule, busMetrics, stopPlots, busPlots, generalPlots });
+  res.json({ generalStats, busSchedule, busMetrics, stopPlots, stopPlotsGeneral, busPlots, generalPlots, stopGeneralInfo, timesPlots });
 });
 
 app.listen(PORT, () => {
