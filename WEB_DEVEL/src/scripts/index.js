@@ -124,14 +124,20 @@ function closeModal() {
 
 async function triggerGenerate() {
   closeModal();
-  toast('Lanzando simulación...', 'info');
+  toast('Preparando directorio de simulación...', 'info');
   try {
-    const res = await fetch('/api/simulations/generate', { method: 'POST' });
+    const res = await fetch('/api/simulations/prepare', { method: 'POST' });
     const data = await res.json();
-    toast(data.message || 'Simulación iniciada', res.ok ? 'success' : 'error');
-    if (res.ok) setTimeout(loadSimulations, 3000);
+    if (!res.ok) {
+      toast(data.error || 'Error al preparar la simulación', 'error');
+      return;
+    }
+    toast('Directorio creado. Abriendo configuración...', 'success');
+    setTimeout(() => {
+      window.location.href = `/config/${data.simId}`;
+    }, 800);
   } catch (err) {
-    toast('Error al lanzar la simulación: ' + err.message, 'error');
+    toast('Error al preparar la simulación: ' + err.message, 'error');
   }
 }
 

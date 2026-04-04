@@ -956,6 +956,15 @@ function showStopInfo(p, dirKey) {
           ? stopInfo.Occupation_percentage.toFixed(2) + '%' : '—';
         const awaitTime = stopInfo.Mean_await_time_general != null
           ? formatDuration(stopInfo.Mean_await_time_general) : '—';
+        const boards_mean = stopInfo.mean_boards != null
+          ? Number(stopInfo.mean_boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          : '—';
+        const unable_boards_mean = stopInfo.unable_boards != null
+          ? Number(stopInfo.unable_boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          : '—';
+        const dropoffs_mean = stopInfo.dropoffs != null
+          ? Number(stopInfo.dropoffs).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          : '—';
         statsHtml = `
           <div class="stop-stats-box">
             <div class="ss-item">
@@ -965,6 +974,18 @@ function showStopInfo(p, dirKey) {
             <div class="ss-item">
               <span class="ss-label">Espera media general</span>
               <span class="ss-value">${awaitTime}</span>
+            </div>
+            <div class="ss-item">
+              <span class="ss-label">Media de subida de pasajeros </span>
+              <span class="ss-value">${boards_mean}</span>
+            </div>
+            <div class="ss-item">
+              <span class="ss-label">Media de pasajeros que no pudieron subir </span>
+              <span class="ss-value">${unable_boards_mean}</span>
+            </div>
+            <div class="ss-item">
+              <span class="ss-label">Media de bajada de pasajeros </span>
+              <span class="ss-value">${dropoffs_mean}</span>
             </div>
           </div>`;
 
@@ -990,7 +1011,15 @@ function showStopInfo(p, dirKey) {
           ? stopInfo.Occupation_percentage_per_timeslot[ts].toFixed(2) + '%' : '—';
         const awaitTime = stopInfo.Mean_await_time_per_timeslot?.[ts] != null
           ? formatDuration(stopInfo.Mean_await_time_per_timeslot[ts]) : '—';
-
+        const boards_mean = stopInfo.Board_dropoff_per_timeslot?.[ts]?.boards != null
+          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          : '—';
+        const unable_boards_mean = stopInfo.Board_dropoff_per_timeslot?.[ts]?.unable_boards != null
+          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].unable_boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          : '—';
+        const dropoffs_mean = stopInfo.Board_dropoff_per_timeslot?.[ts]?.dropoffs != null
+          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].dropoffs).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          : '—';
         statsHtml = `
           <div class="stop-stats-box">
             <div class="ss-item">
@@ -1001,6 +1030,18 @@ function showStopInfo(p, dirKey) {
               <span class="ss-label">Espera media franja ${ts}:00</span>
               <span class="ss-value">${awaitTime}</span>
             </div>
+            <div class="ss-item">
+                <span class="ss-label">Media de subida de pasajeros </span>
+                <span class="ss-value">${boards_mean}</span>
+              </div>
+              <div class="ss-item">
+                <span class="ss-label">Media de pasajeros que no pudieron subir </span>
+                <span class="ss-value">${unable_boards_mean}</span>
+              </div>
+              <div class="ss-item">
+                <span class="ss-label">Media de bajada de pasajeros </span>
+                <span class="ss-value">${dropoffs_mean}</span>
+              </div>
           </div>`;
 
         // Show comparison plot for selected timeslot

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { execFile } = require('child_process');
+const { execFile, spawn } = require('child_process');
 
 const app = express();
 const PORT = 3000;
@@ -9,7 +9,8 @@ const PORT = 3000;
 const DATA_DIR = path.join(__dirname, '..', 'data', 'logs');
 const PAGES_DIR = path.join(__dirname, 'pages');
 
-app.use(express.json());
+
+app.use(express.json({ limit: '100mb' }));
 app.use('/styles', express.static(path.join(__dirname, 'styles')));
 app.use('/scripts', express.static(path.join(__dirname, 'scripts')));
 app.use('/data', express.static(path.join(__dirname, '..', 'data')));
@@ -24,27 +25,42 @@ app.get('/simulation/:id', (req, res) => {
   res.sendFile(path.join(PAGES_DIR, 'simulation.html'));
 });
 
+app.get('/config/:id', (req, res) => {
+  res.sendFile(path.join(PAGES_DIR, 'config.html'));
+});
 
 
 
-// Parse description.txt: "title ...\ndescription ..."
+
+// Resolve the INPUTS directory for a simulation (supports both old and new layouts)
+function resolveInputsPath(simPath) {
+  const newLayout = path.join(simPath, 'TEST_MOBILITY', 'includes', 'INPUTS');
+  if (fs.existsSync(newLayout)) return newLayout;
+  const oldLayout = path.join(simPath, 'includes', 'INPUTS');
+  if (fs.existsSync(oldLayout)) return oldLayout;
+  return null;
+}
+
+// Parse description.txt: `title "..."`, `description "..."`, `line "..."`
 function parseDescription(simPath) {
   const descPath = path.join(simPath, 'description.txt');
-  if (!fs.existsSync(descPath)) return { title: null, description: null };
+  if (!fs.existsSync(descPath)) return { title: null, description: null, line: null };
   try {
     const lines = fs.readFileSync(descPath, 'utf8').split('\n');
-    let title = null, description = null;
-    for (const line of lines) {
-      const sp = line.indexOf(' ');
+    let title = null, description = null, line = null;
+    for (const rawLine of lines) {
+      const sp = rawLine.indexOf(' ');
       if (sp === -1) continue;
-      const key = line.slice(0, sp).trim();
-      const val = line.slice(sp + 1).trim();
+      const key = rawLine.slice(0, sp).trim();
+      let val = rawLine.slice(sp + 1).trim();
+      val = val.replace(/^"(.*)"$/, '$1'); // strip surrounding quotes
       if (key === 'title') title = val;
       else if (key === 'description') description = val;
+      else if (key === 'line') line = val;
     }
-    return { title, description };
+    return { title, description, line };
   } catch (_) {
-    return { title: null, description: null };
+    return { title: null, description: null, line: null };
   }
 }
 
@@ -240,6 +256,149 @@ app.get('/api/simulations/:id/geodata', (req, res) => {
   res.json({ experiments });
 });
 
+// Prepare new simulation: run prepare_simulation.sh and return the new simId
+app.post('/api/simulations/prepare', (req, res) => {
+  const bashScriptsDir = path.join(__dirname, '..', 'bash_scripts');
+  const scriptPath = path.join(bashScriptsDir, 'prepare_simulation.sh');
+  const lastSimFile = path.join(bashScriptsDir, '.last_simulation');
+
+  if (!fs.existsSync(scriptPath)) {
+    return res.status(404).json({ error: 'prepare_simulation.sh not found' });
+  }
+
+  execFile('bash', [scriptPath], { cwd: bashScriptsDir, timeout: 120000 }, (err, stdout, stderr) => {
+    if (err) return res.status(500).json({ error: err.message, stderr });
+    try {
+      const baseDirLine = fs.readFileSync(lastSimFile, 'utf8').trim();
+      const simId = path.basename(baseDirLine);
+      if (!simId.match(/^SIMULATION_\d{8}_\d{6}$/)) {
+        return res.status(500).json({ error: 'Invalid simulation ID returned by prepare script: ' + simId });
+      }
+      res.json({ simId });
+    } catch (readErr) {
+      res.status(500).json({ error: 'Could not read simulation ID: ' + readErr.message });
+    }
+  });
+});
+
+// Get simulation input files (buses JSON + CSV params)
+app.get('/api/simulations/:id/inputs', (req, res) => {
+  const { id } = req.params;
+  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
+    return res.status(400).json({ error: 'Invalid simulation ID' });
+  }
+
+  const simPath = path.join(DATA_DIR, id);
+  const inputsPath = resolveInputsPath(simPath);
+
+  if (!inputsPath) {
+    return res.status(404).json({ error: 'Inputs directory not found. Has the simulation been prepared?' });
+  }
+
+  try {
+    const buses = JSON.parse(fs.readFileSync(path.join(inputsPath, 'input_data_buses.json'), 'utf8'));
+
+    const parseCSVRows = (filepath) => {
+      const content = fs.readFileSync(filepath, 'utf8');
+      const lines = content.trim().split('\n');
+      if (lines.length === 0) return [];
+      const headers = lines[0].split(',').map(h => h.trim());
+      return lines.slice(1).filter(l => l.trim()).map(line => {
+        const values = line.split(',');
+        const row = {};
+        headers.forEach((h, i) => { row[h] = values[i]?.trim() ?? ''; });
+        return row;
+      });
+    };
+
+    const stopsToA      = parseCSVRows(path.join(inputsPath, 'input_data_E01_toA.csv'));
+    const stopsToB      = parseCSVRows(path.join(inputsPath, 'input_data_E01_toB.csv'));
+    const timesStopsToA = parseCSVRows(path.join(inputsPath, 'input_times_stops_toA.csv'));
+    const timesStopsToB = parseCSVRows(path.join(inputsPath, 'input_times_stops_toB.csv'));
+    const description   = parseDescription(simPath);
+
+    res.json({ buses, stopsToA, stopsToB, timesStopsToA, timesStopsToB, description });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Save simulation input files + description.txt
+app.post('/api/simulations/:id/inputs', (req, res) => {
+  const { id } = req.params;
+  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
+    return res.status(400).json({ error: 'Invalid simulation ID' });
+  }
+
+  const simPath = path.join(DATA_DIR, id);
+  const inputsPath = resolveInputsPath(simPath);
+
+  if (!inputsPath) {
+    return res.status(404).json({ error: 'Inputs directory not found' });
+  }
+
+  try {
+    const { description, buses, stopsToA, stopsToB, timesStopsToA, timesStopsToB } = req.body;
+
+    // Write description.txt
+    const descLines = [];
+    if (description?.title)       descLines.push(`title "${description.title}"`);
+    if (description?.description) descLines.push(`description "${description.description}"`);
+    descLines.push(`line "${description?.line || '401'}"`);
+    fs.writeFileSync(path.join(simPath, 'description.txt'), descLines.join('\n') + '\n');
+
+    // Write buses JSON
+    if (buses) {
+      fs.writeFileSync(path.join(inputsPath, 'input_data_buses.json'), JSON.stringify(buses, null, 2));
+    }
+
+    const writeCSV = (filepath, rows) => {
+      if (!rows || rows.length === 0) return;
+      const headers = Object.keys(rows[0]);
+      const lines = [headers.join(',')];
+      for (const row of rows) lines.push(headers.map(h => row[h] ?? '').join(','));
+      fs.writeFileSync(filepath, lines.join('\n') + '\n');
+    };
+
+    if (stopsToA)      writeCSV(path.join(inputsPath, 'input_data_E01_toA.csv'),      stopsToA);
+    if (stopsToB)      writeCSV(path.join(inputsPath, 'input_data_E01_toB.csv'),      stopsToB);
+    if (timesStopsToA) writeCSV(path.join(inputsPath, 'input_times_stops_toA.csv'), timesStopsToA);
+    if (timesStopsToB) writeCSV(path.join(inputsPath, 'input_times_stops_toB.csv'), timesStopsToB);
+
+    res.json({ message: 'Configuración guardada correctamente' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Launch batch simulation (gama_batch.sh) for a prepared simulation
+app.post('/api/simulations/:id/run', (req, res) => {
+  const { id } = req.params;
+  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
+    return res.status(400).json({ error: 'Invalid simulation ID' });
+  }
+
+  const bashScriptsDir = path.join(__dirname, '..', 'bash_scripts');
+  const scriptPath = path.join(bashScriptsDir, 'run_simulation.sh');
+
+  if (!fs.existsSync(scriptPath)) {
+    return res.status(404).json({ error: 'gama_batch.sh not found' });
+  }
+
+  // Point .last_simulation at this simulation so gama_batch.sh picks it up
+  const lastSimFile = path.join(bashScriptsDir, '.last_simulation');
+  fs.writeFileSync(lastSimFile, `../data/logs/${id}\n`);
+
+  const proc = spawn('bash', [scriptPath], {
+    cwd: bashScriptsDir,
+    detached: true,
+    stdio: 'ignore',
+  });
+  proc.unref();
+
+  res.json({ message: 'Simulación lanzada', simId: id });
+});
+
 // Trigger new simulation
 app.post('/api/simulations/generate', (req, res) => {
   const scriptPath = path.join(__dirname, '..', '..', 'run_simulation.sh');
@@ -423,6 +582,7 @@ app.get('/api/simulations/:id/plots-info', (req, res) => {
 
   res.json({ generalStats, busSchedule, busMetrics, stopPlots, stopPlotsGeneral, busPlots, generalPlots, stopGeneralInfo, timesPlots });
 });
+
 
 app.listen(PORT, () => {
   console.log(`EMT GAMA Dashboard running at http://localhost:${PORT}`);

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configurar Simulación — EMT Madrid</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../img/EMTLogo.png">
+  <link rel="stylesheet" href="/styles/general.css" />
+</head>
+<body class="config-page">
+
+  <!-- Header -->
+  <header>
+    <a class="header-brand" href="/">
+      <span class="logo-badge">EMT</span>
+      <div>
+        <h1>Configurar Simulación</h1>
+        <span id="config-sim-id-label">Cargando...</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <button class="btn btn-white" id="btn-save">&#10003; Guardar</button>
+      <button class="btn btn-primary" id="btn-run">&#9654; Guardar y Lanzar</button>
+    </nav>
+  </header>
+
+  <!-- Meta bar: title, description, route -->
+  <div class="config-meta-bar">
+    <div class="config-field">
+      <label for="input-title">Título</label>
+      <input type="text" id="input-title" placeholder="Nombre de la simulación" />
+    </div>
+    <div class="config-field config-field-grow">
+      <label for="input-description">Descripción</label>
+      <input type="text" id="input-description" placeholder="Descripción breve..." />
+    </div>
+    <div class="config-field">
+      <label for="input-line">Línea</label>
+      <select id="input-line">
+        <option value="401">Express 01 (401)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="config-loading" id="config-loading">
+    <div class="loading-spinner"></div>
+    <p>Cargando parámetros de simulación...</p>
+  </div>
+
+  <!-- Config body -->
+  <div class="config-body" id="config-body" style="display:none;">
+
+    <!-- Left sidebar -->
+    <aside class="config-sidebar">
+      <button class="config-nav-btn active" id="nav-buses" data-view="buses">
+        <span class="config-nav-icon">&#128652;</span>
+        <span>Autobuses</span>
+      </button>
+      <button class="config-nav-btn" id="nav-route" data-view="route">
+        <span class="config-nav-icon">&#128506;</span>
+        <span>Ruta</span>
+      </button>
+    </aside>
+
+    <!-- Main content area -->
+    <div class="config-content" id="config-content">
+      <!-- Rendered by config.js -->
+    </div>
+
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Image modal (reused) -->
+  <div class="img-modal-overlay" id="img-modal" style="display:none;">
+    <button class="img-modal-close" id="img-modal-close">&#10005;</button>
+    <img class="img-modal-img" id="img-modal-img" src="" alt="" />
+  </div>
+
+  <script src="/scripts/config.js"></script>
+</body>
+</html>
