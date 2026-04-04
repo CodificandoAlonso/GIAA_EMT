@@ -50,7 +50,7 @@ function renderCard(sim) {
       </div>
       <div class="sim-meta-row">
         <span class="meta-label">Estado</span>
-        <span class="meta-value">Completada</span>
+        <span class="meta-value">${sim.status}</span>
       </div>
     </div>
     <div class="sim-card-footer">

@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const { execFile, spawn } = require('child_process');
+const { websocketServer } = require('socket.io');
 
 const app = express();
 const PORT = 3000;
@@ -74,15 +75,15 @@ app.get('/api/simulations', (req, res) => {
         const id = e.name;
         const simPath = path.join(DATA_DIR, id);
         const resultsPath = path.join(simPath, 'RESULTS');
-        const chartsPath = path.join(simPath, 'charts');
-
+        const chartsPath = path.join(simPath, 'PLOTS');
+        let status = 'En progreso';
         let runCount = 0;
         try {
           runCount = fs.readdirSync(resultsPath).filter(f => f.endsWith('.csv')).length;
         } catch (_) {}
 
         const hasCharts = fs.existsSync(chartsPath) &&
-          fs.readdirSync(chartsPath).some(f => f.endsWith('.png') || f.endsWith('.jpg'));
+          fs.readdirSync(chartsPath).some(f => f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.json'));
 
         // Parse datetime from folder name: SIMULATION_YYYYMMDD_HHMMSS
         const match = id.match(/SIMULATION_(\d{8})_(\d{6})/);
@@ -92,9 +93,14 @@ app.get('/api/simulations', (req, res) => {
           const t = match[2];
           datetime = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)} ${t.slice(0, 2)}:${t.slice(2, 4)}:${t.slice(4, 6)}`;
         }
-
+        if (runCount === 1000){
+          status = 'Completada';
+        }
+        else{ 
+          status = 'En progreso';
+        }
         const { title, description } = parseDescription(simPath);
-        return { id, datetime, runCount, hasCharts, title, description };
+        return { id, datetime, runCount, hasCharts, title, description, status };
       })
       .sort((a, b) => b.id.localeCompare(a.id));
 
@@ -117,7 +123,7 @@ app.get('/api/simulations/:id', (req, res) => {
   }
 
   const resultsPath = path.join(simPath, 'RESULTS');
-  const chartsPath = path.join(simPath, 'charts');
+  const chartsPath = path.join(simPath, 'PLOTS');
 
   // Count runs
   let runCount = 0;
@@ -344,7 +350,7 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
     const descLines = [];
     if (description?.title)       descLines.push(`title "${description.title}"`);
     if (description?.description) descLines.push(`description "${description.description}"`);
-    descLines.push(`line "${description?.line || '401'}"`);
+    descLines.push(`line "${description?.line || 401}"`);
     fs.writeFileSync(path.join(simPath, 'description.txt'), descLines.join('\n') + '\n');
 
     // Write buses JSON
@@ -371,7 +377,7 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
   }
 });
 
-// Launch batch simulation (gama_batch.sh) for a prepared simulation
+// Launch batch simulation (run_simulation.sh) for a prepared simulation
 app.post('/api/simulations/:id/run', (req, res) => {
   const { id } = req.params;
   if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
@@ -382,10 +388,10 @@ app.post('/api/simulations/:id/run', (req, res) => {
   const scriptPath = path.join(bashScriptsDir, 'run_simulation.sh');
 
   if (!fs.existsSync(scriptPath)) {
-    return res.status(404).json({ error: 'gama_batch.sh not found' });
+    return res.status(404).json({ error: 'run_simulation.sh not found' });
   }
 
-  // Point .last_simulation at this simulation so gama_batch.sh picks it up
+  // Point .last_simulation at this simulation so run_simulation.sh picks it up
   const lastSimFile = path.join(bashScriptsDir, '.last_simulation');
   fs.writeFileSync(lastSimFile, `../data/logs/${id}\n`);
 
@@ -395,6 +401,8 @@ app.post('/api/simulations/:id/run', (req, res) => {
     stdio: 'ignore',
   });
   proc.unref();
+
+  
 
   res.json({ message: 'Simulación lanzada', simId: id });
 });

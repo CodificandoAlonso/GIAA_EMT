@@ -747,14 +747,14 @@ const DISTRIBUTIONS = {
     csvValue: 'NEGATIVE BINOMIAL',
     p1: { name: 'p — prob. de éxito', hint: 'Probabilidad de éxito por ensayo (0 < p ≤ 1)' },
     p2: { name: 'r — nº de éxitos', hint: 'Número de éxitos objetivo (r > 0). Controla la dispersión.' },
-    cheatsheet: 'Modela conteos con sobredispersión (varianza > media). Muy usada en demanda de transporte.',
+    cheatsheet: 'Modela conteos con sobredispersión (varianza > media).',
   },
   'GEOMETRICAL': {
     label: 'Distribución Geométrica',
     csvValue: 'GEOMETRICAL',
     p1: { name: 'p — prob. de éxito', hint: 'Probabilidad de éxito por ensayo (0 < p ≤ 1)' },
     p2: { name: '— (no utilizado)', hint: 'Este parámetro no aplica a la distribución geométrica' },
-    cheatsheet: 'Caso especial de la Binomial Negativa con r = 1. Modela el tiempo hasta el primer evento.',
+    cheatsheet: 'Caso especial de la Binomial Negativa con r = 1',
   },
 };
 
@@ -1156,28 +1156,48 @@ function buildSectionTimeslotView(row, ts) {
 // Scale Param1+Param2 for ALL dataTypes of a stop (used by general slider)
 function applyStopChange(stopId, dirKey, pct, timeslot) {
   const rows = dirKey === 'toA' ? inputData.stopsToA : inputData.stopsToB;
-  const factor = 1 + pct / 100;
+  const factor = Math.max(1 + pct / 100, 1e-6); // Avoid negative or zero scaling
+
   for (const row of rows) {
     if (String(row.Stop) !== String(stopId)) continue;
     if (timeslot !== null && Number(row.Timeslot) !== timeslot) continue;
+
+    if (row.DistributionType === 'NORMAL') {
     row.Param1 = String(parseFloat(row.Param1) * factor);
-    row.Param2 = String(parseFloat(row.Param2) * factor);
+    }
+    else if (row.DistributionType === 'NEGATIVE BINOMIAL') {
+    row.Param1 = String(1 / (1 + factor * (1 - row.Param1) /row.Param1)); // p' = 1 / (1 + k*(1-p)/p) 
+  }
+    else if (row.DistributionType === 'GEOMETRICAL') {
+    row.Param1 = String(row.Param1 / factor);    
+  }
   }
 }
 
+
+
+//todo: REVIEW FORMULA FOR REFACTORING
 // Scale Param1+Param2 for a specific dataType ('Board' | 'DropOff') of a stop
 function applyStopChangeByType(stopId, dirKey, dataType, pct, timeslot) {
   const rows = dirKey === 'toA' ? inputData.stopsToA : inputData.stopsToB;
-  const factor = 1 + pct / 100;
+  const factor = Math.max(1 + pct / 100, 1e-6); // Avoid negative or zero scaling
   for (const row of rows) {
     if (String(row.Stop) !== String(stopId)) continue;
     if (row.DataType !== dataType) continue;
     if (timeslot !== null && Number(row.Timeslot) !== timeslot) continue;
+
+    if (row.DistributionType === 'NORMAL') {
     row.Param1 = String(parseFloat(row.Param1) * factor);
-    row.Param2 = String(parseFloat(row.Param2) * factor);
+    }
+    else if (row.DistributionType === 'NEGATIVE BINOMIAL') {
+    row.Param1 = String(1 / (1 + factor * (1 - parseFloat(row.Param1)) /parseFloat(row.Param1))); // p' = 1 / (1 + k*(1-p)/p) 
+  }
+    else if (row.DistributionType === 'GEOMETRICAL') {
+    row.Param1 = String(parseFloat(row.Param1) / factor);    
+  }
+
   }
 }
-
 // Set exact distribution type + params for a specific dataType + timeslot
 function setStopParams(stopId, dirKey, dataType, timeslot, distType, p1, p2) {
   const rows = dirKey === 'toA' ? inputData.stopsToA : inputData.stopsToB;
@@ -1205,18 +1225,16 @@ function setStopParams(stopId, dirKey, dataType, timeslot, distType, p1, p2) {
 
 function applySectionChange(sectionKey, dirKey, pct, timeslot) {
   const rows = dirKey === 'toA' ? inputData.timesStopsToA : inputData.timesStopsToB;
-  const factor = 1 + pct / 100;
+  const factor = Math.max(1 + pct / 100, 1e-6); // Avoid negative or zero scaling
   for (const row of rows) {
     if (row.StopsCodes !== sectionKey) continue;
     if (timeslot !== null) {
-      const mk = `Mean_${timeslot}`; const sk = `Std_${timeslot}`;
+      const mk = `Mean_${timeslot}`
       if (row[mk] !== undefined) row[mk] = String(parseFloat(row[mk]) * factor);
-      if (row[sk] !== undefined) row[sk] = String(parseFloat(row[sk]) * factor);
     } else {
       for (let h = 5; h <= 23; h++) {
-        const mk = `Mean_${h}`; const sk = `Std_${h}`;
+        const mk = `Mean_${h}`; 
         if (row[mk] !== undefined) row[mk] = String(parseFloat(row[mk]) * factor);
-        if (row[sk] !== undefined) row[sk] = String(parseFloat(row[sk]) * factor);
       }
     }
     break;
