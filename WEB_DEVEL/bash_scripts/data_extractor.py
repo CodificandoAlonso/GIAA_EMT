@@ -1,3 +1,5 @@
+#/usr/bin/python
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,12 +8,14 @@ import json
 import ast
 from scipy.stats import norm
 
+with open(f"{os.getcwd()}/.last_simulation", "r") as f:
+    sim_dir = f.read()
 
-BASE_SIM_DIR = "20260406_110502"
+
 
 DESCRIPTION = {}
 
-with open(f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/description.txt", "r") as f:
+with open(f"{os.getcwd()}/{sim_dir}/description.txt", "r") as f:
     for line in f:
         parts = line.strip().split(" ", 1)  # split only on first space
         if len(parts) == 2:
@@ -34,7 +38,7 @@ joint_dataframe_results = pd.DataFrame(columns=columns)
 
 dataframes_to_join_results = []
 for iteration in range(0,N_SIMS):
-    new_dataframe = pd.read_csv(f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/RESULTS/log_Simulation {iteration}.csv", skiprows = 1,
+    new_dataframe = pd.read_csv(f"{os.getcwd()}/{sim_dir}/RESULTS/log_Simulation {iteration}.csv", skiprows = 1,
             names = columns, encoding="utf-8")
     dataframes_to_join_results.append(new_dataframe)
 
@@ -54,7 +58,7 @@ joint_dataframe_events = pd.DataFrame(columns=columns)
 dataframes_to_join_events = []
 for iteration in range(0,N_SIMS):
     try:
-        new_dataframe = pd.read_csv(f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/EVENTS/log_Simulation {iteration}.csv",skiprows = 1,
+        new_dataframe = pd.read_csv(f"{os.getcwd()}/{sim_dir}//EVENTS/log_Simulation {iteration}.csv",skiprows = 1,
                              names = columns, encoding="utf-8")
         dataframes_to_join_events.append(new_dataframe)
     except:
@@ -70,7 +74,7 @@ joint_dataframe_passengers = pd.DataFrame(columns=columns)
 
 dataframes_to_join_passengers = []
 for iteration in range(0,N_SIMS):
-    new_dataframe = pd.read_csv(f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PASSENGERS/log_Simulation {iteration}.csv", skiprows = 1,
+    new_dataframe = pd.read_csv(f"{os.getcwd()}/{sim_dir}//PASSENGERS/log_Simulation {iteration}.csv", skiprows = 1,
                 names=columns, encoding="utf-8")
     dataframes_to_join_passengers.append(new_dataframe)
 
@@ -84,10 +88,10 @@ joint_dataframe_passengers["list_passengers_time"] = (
     joint_dataframe_passengers["list_passengers_time"]
     .apply(ast.literal_eval)
 )
-known_occupation_values_toA = pd.read_csv(f"{os.getcwd()}/known_data/NORMAL_OCCUPATION_toA.csv")
-known_occupation_values_toB = pd.read_csv(f"{os.getcwd()}/known_data/NORMAL_OCCUPATION_toB.csv")
-known_times_stops_toA = pd.read_csv(f"{os.getcwd()}/known_data/NORMAL_times_stops_toA.csv")
-known_times_stops_toB = pd.read_csv(f"{os.getcwd()}/known_data/NORMAL_times_stops_toB.csv")
+known_occupation_values_toA = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_OCCUPATION_toA.csv")
+known_occupation_values_toB = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_OCCUPATION_toB.csv")
+known_times_stops_toA = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_times_stops_toA.csv")
+known_times_stops_toB = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_times_stops_toB.csv")
 
 
 # la idea de esto es generar gráficas a mansalva. La idea detrás ed esto es poder tener tantas gráficas como se guste y en la interfaz de usuario poder agrupar esas gráficas para que se den varios puntos de vista.
@@ -300,7 +304,7 @@ def compute_and_save_distribution_comparasion(mean_1,std_1, mean_2, std_2, direc
     )
     plt.tight_layout()
     plt.savefig(
-        f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/{direction}/stops/"
+        f"{os.getcwd()}/{sim_dir}/PLOTS/{direction}/stops/"
         f"occupation_comparaison_{stopcode}_per_timeslot_{timeslot}.png",
         dpi=300
     )
@@ -351,7 +355,7 @@ def compute_and_save_distribution_comparasion_times(mean_1,std_1, mean_2, std_2,
     )
     plt.tight_layout()
     plt.savefig(
-        f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/{direction}/times/"
+        f"{os.getcwd()}/{sim_dir}/PLOTS/{direction}/times/"
         f"time_between_stops_comparaison_{stopcode[0]}-{stopcode[1]}_per_timeslot_{timeslot}.png",
         dpi=300
     )
@@ -359,12 +363,12 @@ def compute_and_save_distribution_comparasion_times(mean_1,std_1, mean_2, std_2,
 
 
 
-save_barcode(timeslots, list_occupation_values_toA , "TimeSlots", "% de Ocupación",  f"Sentido {to_A}", "Ocupación del bus por franja horaria", f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/to_A/occupation_per_timeslot_toA.png")
+save_barcode(timeslots, list_occupation_values_toA , "TimeSlots", "% de Ocupación",  f"Sentido {to_A}", "Ocupación del bus por franja horaria", f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/occupation_per_timeslot_toA.png")
 
-save_barcode(timeslots, list_occupation_values_toB , "TimeSlots", "% de Ocupación",  f"Sentido {to_B}", "Ocupación del bus por franja horaria", f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/to_B/occupation_per_timeslot_toB.png")
+save_barcode(timeslots, list_occupation_values_toB , "TimeSlots", "% de Ocupación",  f"Sentido {to_B}", "Ocupación del bus por franja horaria", f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/occupation_per_timeslot_toB.png")
 
 save_barcode(timeslots, list_occupation , "TimeSlots", "% de Ocupación",  "Datos Generales", "Ocupación del bus por franja horaria",
-             f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/general/occupation_per_timeslot_general.png")
+             f"{os.getcwd()}/{sim_dir}/PLOTS/general/occupation_per_timeslot_general.png")
 
 
 
@@ -400,7 +404,7 @@ for stopcode in stops_list_toA:
 
 
 
-        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/to_A/stops/occupation_per_timeslot_{stopcode}.png")
+        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/stops/occupation_per_timeslot_{stopcode}.png")
 
     else:
 
@@ -414,7 +418,7 @@ for stopcode in stops_list_toA:
             json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["unable_boards"] = data_per_ts_per_stop["residual_boards"].mean()
             json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["dropoffs"] = data_per_ts_per_stop["dropoffs"].mean()
 
-        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/to_A/stops/occupation_per_timeslot_{stopcode}.png")
+        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/stops/occupation_per_timeslot_{stopcode}.png")
 
     json_stops_info_toA[f"{stopcode}"]["Occupation_percentage"] = np.nanmean([data[0] for data in list_per_ts_per_stop])
     json_stops_info_toA[f"{stopcode}"]["mean_boards"] = np.nanmean([data[2] for data in list_per_ts_per_stop])
@@ -474,7 +478,7 @@ for stopcode in stops_list_toB:
             list_per_ts_per_stop.append((actual_percentage, data_per_ts_per_stop["dropoffs"]))
             json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"][timeslot] = actual_percentage
 
-        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/to_B/stops/occupation_per_timeslot_{stopcode}.png")
+        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/stops/occupation_per_timeslot_{stopcode}.png")
     else:
         for timeslot in timeslots:
             data_per_ts_per_stop = data_stopcode[data_stopcode["timeslot"] == timeslot]
@@ -482,7 +486,7 @@ for stopcode in stops_list_toB:
             list_per_ts_per_stop.append((actual_percentage, data_per_ts_per_stop["occupation"]))
             json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"][timeslot] = actual_percentage
 
-        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/to_B/stops/occupation_per_timeslot_{stopcode}.png")
+        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/stops/occupation_per_timeslot_{stopcode}.png")
 
     json_stops_info_toB[f"{stopcode}"]["Occupation_percentage"] = np.nanmean([data[0] for data in list_per_ts_per_stop])
 
@@ -526,7 +530,7 @@ for stopcode in stops_list_toB:
 unique_bus = joint_dataframe_results["bus_code"].unique()
 
 
-input_json_route = f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/includes/INPUTS/input_data_buses.json"
+input_json_route = f"{os.getcwd()}/{sim_dir}/includes/INPUTS/input_data_buses.json"
 
 with open(input_json_route, "r") as f:
     input_json = json.load(f)
@@ -588,7 +592,7 @@ for bus in unique_bus:
                     list_mean_values.append( (data_per_trip_per_stop["dropoffs"].mean()/MAX_CAPACITY)*100)
 
 
-            save_barcode(stops_list_toA, list_mean_values , f"Paradas en sentido {to_A}", "% de Ocupación",  f"Ocupación del viaje nº: {trip}", f"Ocupación del autobús por parada para el bus: {bus} con salida estimada {data_inputs[1]}", f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/buses/mean_occupation_per_stop_toA_{bus}_{trip}.png")
+            save_barcode(stops_list_toA, list_mean_values , f"Paradas en sentido {to_A}", "% de Ocupación",  f"Ocupación del viaje nº: {trip}", f"Ocupación del autobús por parada para el bus: {bus} con salida estimada {data_inputs[1]}", f"{os.getcwd()}/{sim_dir}/PLOTS/buses/mean_occupation_per_stop_toA_{bus}_{trip}.png")
 
 
 
@@ -612,7 +616,7 @@ for bus in unique_bus:
                 else:
                     list_mean_values.append( (data_per_trip_per_stop["dropoffs"].mean()/MAX_CAPACITY)*100)
 
-            save_barcode(stops_list_toB, list_mean_values , f"Paradas en sentido {to_B}", "% de ocupación",  f"Ocupación del viaje nº: {trip}", f"Ocupación del autobús por parada para el bus: {bus} con salida estimada {data_inputs[1]}", f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/buses/mean_occupation_per_stop_toB_{bus}_{trip}.png")
+            save_barcode(stops_list_toB, list_mean_values , f"Paradas en sentido {to_B}", "% de ocupación",  f"Ocupación del viaje nº: {trip}", f"Ocupación del autobús por parada para el bus: {bus} con salida estimada {data_inputs[1]}", f"{os.getcwd()}/{sim_dir}/PLOTS/buses/mean_occupation_per_stop_toB_{bus}_{trip}.png")
 
 
         #Now data_inputs will act as the key for the data for that specific trip. The data will be. Mean % of occupation. (Mean % of occupation per stop(indicating direction)) Mean %of delays and Mean minutes of delay in case it exists.
@@ -703,14 +707,14 @@ def sanitize_for_json(obj):
     return obj
 
 
-with open(f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/buses/general_info.json", "w") as f:
+with open(f"{os.getcwd()}/{sim_dir}/PLOTS/buses/general_info.json", "w") as f:
     json.dump(sanitize_for_json(new_bus_json_data), f,indent=4)
 
-with open(f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/json_output_general_info.json", "w") as f:
+with open(f"{os.getcwd()}/{sim_dir}/PLOTS/json_output_general_info.json", "w") as f:
     json.dump(sanitize_for_json(json_output_general_info), f,indent=4)
 
-with open(f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/to_A/general_info_toA.json", "w") as f:
+with open(f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/general_info_toA.json", "w") as f:
     json.dump(sanitize_for_json(json_stops_info_toA), f,indent=4)
 
-with open(f"{os.getcwd()}/logs/SIMULATION_{BASE_SIM_DIR}/PLOTS/to_B/general_info_toB.json", "w") as f:
+with open(f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/general_info_toB.json", "w") as f:
     json.dump(sanitize_for_json(json_stops_info_toB), f,indent=4)

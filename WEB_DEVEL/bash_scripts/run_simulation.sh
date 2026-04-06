@@ -207,16 +207,86 @@ log_success "Extract & cleanup completed in $(format_time $POST_CLEANUP_TIME)"
 log_info "--- Phase 5: Results Validation ---"
 
 RESULT_FILES=$(find "$BASE_DIR/RESULTS" -name "*.csv" 2>/dev/null | wc -l)
+EVENT_FILES=$(find "$BASE_DIR/EVENTS" -name "*.csv" 2>/dev/null | wc -l)
+PASSENGER_FILES=$(find "$BASE_DIR/PASSENGERS" -name "*.csv" 2>/dev/null | wc -l)
 TOTAL_SIZE=$(du -sh "$BASE_DIR/RESULTS" 2>/dev/null | cut -f1)
 
 log_info "Result CSV files generated: $RESULT_FILES"
+log_info "Event CSV files generated: $EVENT_FILES"
+log_info "Passenger CSV files generated: $PASSENGER_FILES"
 log_info "Total results size: $TOTAL_SIZE"
+
+# ------------------- FASE 6: DATA EXTRACTION & ANALYSIS -------------------
+
+EXTRACTION_START=$(date +%s)
+
+log_info "--- Phase 6: Data Extraction & Analysis ---"
+
+# data_extractor.py uses os.getcwd() to resolve .last_simulation and all
+# relative paths, so it must be invoked from the bash_scripts directory
+# where it lives (same directory as this shell script).
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# --- Dependency check ---
+REQUIRED_PACKAGES=("pandas" "numpy" "matplotlib" "scipy")
+MISSING_PACKAGES=()
+PLOT_COUNT=0
+JSON_COUNT=0
+
+for pkg in "${REQUIRED_PACKAGES[@]}"; do
+    if ! python3 -c "import ${pkg}" 2>/dev/null; then
+        MISSING_PACKAGES+=("$pkg")
+    fi
+done
+
+if [ ${#MISSING_PACKAGES[@]} -gt 0 ]; then
+    log_warning "Missing Python packages: ${MISSING_PACKAGES[*]}"
+    log_info "Installing missing dependencies..."
+    pip3 install --break-system-packages "${MISSING_PACKAGES[@]}" >> "$LOG_FILE" 2>&1
+    if [ $? -ne 0 ]; then
+        log_error "Failed to install Python dependencies. Aborting data extraction."
+        PYTHON_EXIT_CODE=1
+        EXTRACTION_END=$(date +%s)
+        EXTRACTION_TIME=$((EXTRACTION_END - EXTRACTION_START))
+    fi
+else
+    log_info "All Python dependencies satisfied"
+fi
+
+if [ "${PYTHON_EXIT_CODE:-0}" -eq 0 ]; then
+    log_info "Running data_extractor.py (${TOTAL_SIMS} simulations, plots + JSON output)..."
+
+    python3 "${SCRIPT_DIR}/data_extractor.py" >> "$LOG_FILE" 2>&1
+    PYTHON_EXIT_CODE=$?
+
+    EXTRACTION_END=$(date +%s)
+    EXTRACTION_TIME=$((EXTRACTION_END - EXTRACTION_START))
+fi
+
+if [ $PYTHON_EXIT_CODE -eq 0 ]; then
+    PLOT_COUNT=$(find "$BASE_DIR/PLOTS" -name "*.png" 2>/dev/null | wc -l)
+    JSON_COUNT=$(find "$BASE_DIR/PLOTS" -name "*.json" 2>/dev/null | wc -l)
+    log_success "Data extraction completed in $(format_time $EXTRACTION_TIME)"
+    log_info "Generated $PLOT_COUNT plots and $JSON_COUNT JSON files"
+else
+    log_error "Data extraction FAILED with exit code $PYTHON_EXIT_CODE after $(format_time $EXTRACTION_TIME)"
+    log_error "Check $LOG_FILE for Python traceback"
+fi
+
+# ------------------- FINAL STRUCTURE LOG ----------------------------------
 
 log_info "Final simulation directory structure:"
 log_info "  $BASE_DIR/"
 log_info "  ├── RESULTS/          (simulation output CSVs)"
 log_info "  ├── EVENTS/           (event logs)"
-log_info "  ├── includes/         (Simulation Parameters"
+log_info "  ├── PASSENGERS/       (passenger wait-time logs)"
+log_info "  ├── PLOTS/"
+log_info "  │   ├── to_A/         (occupation & time distribution plots)"
+log_info "  │   ├── to_B/         (occupation & time distribution plots)"
+log_info "  │   ├── general/      (aggregate occupation plots)"
+log_info "  │   ├── buses/        (per-bus per-trip plots + general_info.json)"
+log_info "  │   └── json_output_general_info.json"
+log_info "  ├── includes/         (frozen simulation parameters)"
 log_info "  └── log_result_*.log  (pipeline log)"
 
 # ========================= RESUMEN DE EJECUCIÓN ==========================
@@ -239,6 +309,11 @@ printf "%-35s %s\n" "   - Result files:" "$RESULT_FILES" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - Total size:" "$TOTAL_SIZE" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "4. Extract & cleanup:" "$(format_time $POST_CLEANUP_TIME)" | tee -a "$LOG_FILE"
+echo "" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "5. Data extraction & analysis:" "$(format_time $EXTRACTION_TIME)" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "   - Exit code:" "$PYTHON_EXIT_CODE" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "   - Plots generated:" "$PLOT_COUNT" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "   - JSON files generated:" "$JSON_COUNT" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
 echo "------------------------------------------" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "TOTAL PIPELINE TIME:" "$(format_time $TOTAL_TIME)" | tee -a "$LOG_FILE"

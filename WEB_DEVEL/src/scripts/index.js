@@ -21,6 +21,7 @@ function renderCard(sim) {
   card.className = 'sim-card';
   card.setAttribute('role', 'button');
   card.setAttribute('tabindex', '0');
+  card.setAttribute('data-sim-id', sim.id);
 
   const [datePart, timePart] = (sim.datetime || '—  —').split(' ');
   const chartsHtml = sim.hasCharts
@@ -58,6 +59,14 @@ function renderCard(sim) {
       <button class="btn btn-primary btn-sm">Ver detalle &#8594;</button>
     </div>
   `;
+
+  // Render initial progress bar for in-progress simulations
+  if (sim.status !== 'Completada') {
+    const bar = document.createElement('div');
+    bar.className = 'sim-progress-bar';
+    bar.style.width = `${Math.min(100, Math.round(sim.runCount / 10))}%`;
+    card.insertBefore(bar, card.firstChild);
+  }
 
   card.addEventListener('click', () => {
     window.location.href = `/simulation/${sim.id}`;
@@ -141,6 +150,68 @@ async function triggerGenerate() {
   }
 }
 
+// ---- Simulation completion banner ----
+
+function showCompletionBanner(id, title) {
+  const label = title || id;
+  const banner = document.createElement('div');
+  banner.className = 'sim-complete-banner';
+  banner.innerHTML = `
+    <div class="sim-complete-banner-inner">
+      <span class="sim-complete-icon">&#10003;</span>
+      <div>
+        <strong>Simulaci&oacute;n completada</strong>
+        <div class="sim-complete-label">${label}</div>
+      </div>
+      <button class="sim-complete-dismiss" aria-label="Cerrar">&times;</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  // Trigger slide-down animation on next frame
+  requestAnimationFrame(() => banner.classList.add('visible'));
+
+  const dismiss = () => {
+    banner.classList.add('hiding');
+    setTimeout(() => banner.remove(), 400);
+  };
+
+  banner.querySelector('.sim-complete-dismiss').addEventListener('click', dismiss);
+  setTimeout(dismiss, 8000);
+}
+
+// ---- WebSocket: live simulation progress ----
+
+function applySimProgress(sims) {
+  sims.forEach(({ id, runCount, percentage, status }) => {
+    const card = document.querySelector(`[data-sim-id="${id}"]`);
+    if (!card) return;
+
+    // Create or update the progress bar element
+    let bar = card.querySelector('.sim-progress-bar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'sim-progress-bar';
+      card.insertBefore(bar, card.firstChild);
+    }
+    bar.style.width = `${percentage}%`;
+
+    // Update run count and status text in the meta rows
+    const metaValues = card.querySelectorAll('.meta-value');
+    if (metaValues[0]) metaValues[0].textContent = formatNum(runCount);
+    if (metaValues[1]) metaValues[1].textContent = status;
+
+    // When a sim reaches 100%, fade the bar out after a moment
+    if (runCount >= 1000) {
+      bar.style.width = '100%';
+      setTimeout(() => {
+        bar.style.opacity = '0';
+        setTimeout(() => bar.remove(), 500);
+      }, 1500);
+    }
+  });
+}
+
 // ---- Init ----
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -153,5 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close modal on overlay click
   document.getElementById('modal-generate').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeModal();
+  });
+
+  // Subscribe to live simulation progress updates and completion events
+  const socket = io();
+  socket.on('sim_progress', applySimProgress);
+  socket.on('sim_completed', ({ id, title }) => {
+    showCompletionBanner(id, title);
+    toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
   });
 });

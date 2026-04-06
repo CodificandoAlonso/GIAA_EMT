@@ -1,10 +1,13 @@
+const http = require('http');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const { execFile, spawn } = require('child_process');
-const { websocketServer } = require('socket.io');
+const { Server } = require('socket.io');
 
 const app = express();
+const httpServer = http.createServer(app);
+const io = new Server(httpServer);
 const PORT = 3000;
 
 const DATA_DIR = path.join(__dirname, '..', 'data', 'logs');
@@ -592,6 +595,77 @@ app.get('/api/simulations/:id/plots-info', (req, res) => {
 });
 
 
-app.listen(PORT, () => {
+// ---- WebSocket: simulation progress publisher ----
+
+// Returns progress info for every simulation that is not yet complete.
+// During the GAMA batch run, CSVs land in TEST_MOBILITY/logs/RESULTS/;
+// after the cleanup phase they are moved to RESULTS/ at the sim root.
+function getInProgressSimulations() {
+  try {
+    const entries = fs.readdirSync(DATA_DIR, { withFileTypes: true });
+    return entries
+      .filter(e => e.isDirectory() && /^SIMULATION_\d{8}_\d{6}$/.test(e.name))
+      .map(e => {
+        const id = e.name;
+        const simPath = path.join(DATA_DIR, id);
+
+        // Try active-run path first, fall back to post-cleanup path
+        const activePath    = path.join(simPath, 'TEST_MOBILITY', 'logs', 'RESULTS');
+        const completedPath = path.join(simPath, 'RESULTS');
+        const resultsPath   = fs.existsSync(activePath) ? activePath : completedPath;
+
+        let runCount = 0;
+        try {
+          runCount = fs.readdirSync(resultsPath).filter(f => f.endsWith('.csv')).length;
+        } catch (_) {}
+
+        const percentage = Math.min(100, Math.round(runCount / 10)); // 1000 total
+        const status = runCount >= 1000 ? 'Completada' : 'En progreso';
+        return { id, runCount, percentage, status };
+      })
+      .filter(s => s.status !== 'Completada');
+  } catch (_) {
+    return [];
+  }
+}
+
+io.on('connection', (socket) => {
+  // Send current snapshot immediately so the subscriber is up-to-date on connect
+  socket.emit('sim_progress', getInProgressSimulations());
+});
+
+// Tracks sim IDs that were in-progress on the previous tick, used to detect
+// the transition to "stage 1 complete" (1000 CSVs generated).
+// When stage 2 (chart generation) is integrated into the pipeline, update TODO
+// getInProgressSimulations() to also require hasCharts === true before removing
+// a sim from the in-progress set, and change the condition below accordingly.
+const _trackedInProgress = new Set();
+
+// Broadcast in-progress sim states to all connected clients every second.
+// Also fires sim_completed when a sim transitions out of the in-progress list.
+setInterval(() => {
+  const inProgress = getInProgressSimulations();
+  const currentIds = new Set(inProgress.map(s => s.id));
+
+  // Detect completions: was tracked last tick, now gone from in-progress list
+  for (const id of _trackedInProgress) {
+    if (!currentIds.has(id)) {
+      const { title } = parseDescription(path.join(DATA_DIR, id));
+      io.emit('sim_completed', { id, title });
+    }
+  }
+
+  // Sync tracker to current state
+  _trackedInProgress.clear();
+  currentIds.forEach(id => _trackedInProgress.add(id));
+
+  if (io.engine.clientsCount > 0) {
+    io.emit('sim_progress', inProgress);
+  }
+}, 1000);
+
+// ---- Start server ----
+
+httpServer.listen(PORT, () => {
   console.log(`EMT GAMA Dashboard running at http://localhost:${PORT}`);
 });
