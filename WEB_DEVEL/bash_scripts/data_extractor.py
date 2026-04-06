@@ -9,7 +9,7 @@ import ast
 from scipy.stats import norm
 
 with open(f"{os.getcwd()}/.last_simulation", "r") as f:
-    sim_dir = f.read()
+    sim_dir = f.read().strip()
 
 
 
