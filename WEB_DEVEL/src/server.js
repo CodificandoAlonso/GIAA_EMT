@@ -12,13 +12,14 @@ const PORT = 3000;
 
 const DATA_DIR = path.join(__dirname, '..', 'data', 'logs');
 const PAGES_DIR = path.join(__dirname, 'pages');
+const IMGS_DIR = path.join(__dirname,'..', 'img');
 
 
 app.use(express.json({ limit: '100mb' }));
 app.use('/styles', express.static(path.join(__dirname, 'styles')));
 app.use('/scripts', express.static(path.join(__dirname, 'scripts')));
 app.use('/data', express.static(path.join(__dirname, '..', 'data')));
-
+app.use('/img', express.static(IMGS_DIR));
 // ---- Pages ----
 
 app.get('/', (req, res) => {
@@ -31,6 +32,10 @@ app.get('/simulation/:id', (req, res) => {
 
 app.get('/config/:id', (req, res) => {
   res.sendFile(path.join(PAGES_DIR, 'config.html'));
+});
+
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(IMGS_DIR, 'EMTLogo_32.png'));
 });
 
 
@@ -139,7 +144,7 @@ app.get('/api/simulations/:id', (req, res) => {
   if (fs.existsSync(chartsPath)) {
     charts = fs.readdirSync(chartsPath)
       .filter(f => f.match(/\.(png|jpg|jpeg|svg)$/i))
-      .map(f => `/data/logs/${id}/charts/${f}`);
+      .map(f => `/data/logs/${id}/PLOTS/${f}`);
   }
 
   // Read log file
@@ -353,7 +358,7 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
     const descLines = [];
     if (description?.title)       descLines.push(`title "${description.title}"`);
     if (description?.description) descLines.push(`description "${description.description}"`);
-    descLines.push(`line "${description?.line || 401}"`);
+    descLines.push(`line ${description?.line || 401}`); //HARDCODDED
     fs.writeFileSync(path.join(simPath, 'description.txt'), descLines.join('\n') + '\n');
 
     // Write buses JSON
@@ -478,9 +483,12 @@ app.get('/api/simulations/:id/plots-info', (req, res) => {
   // Bus schedule (departure timetable)
   let busSchedule = null;
   try {
-    busSchedule = JSON.parse(
-      fs.readFileSync(path.join(simPath, 'includes', 'INPUTS', 'input_data_buses.json'), 'utf8')
-    );
+    const inputsPath = resolveInputsPath(simPath);
+    if (inputsPath) {
+      busSchedule = JSON.parse(
+        fs.readFileSync(path.join(inputsPath, 'input_data_buses.json'), 'utf8')
+      );
+    }
   } catch (_) {}
 
   // Stop plots (general): { toA: { stopId: url }, toB: { stopId: url } }

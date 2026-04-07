@@ -962,8 +962,8 @@ function showStopInfo(p, dirKey) {
         const unable_boards_mean = stopInfo.unable_boards != null
           ? Number(stopInfo.unable_boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
           : '—';
-        const dropoffs_mean = stopInfo.dropoffs != null
-          ? Number(stopInfo.dropoffs).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+        const dropoffs_mean = stopInfo.mean_dropoffs != null
+          ? Number(stopInfo.mean_dropoffs).toLocaleString('es-ES', { maximumFractionDigits: 2 })
           : '—';
         statsHtml = `
           <div class="stop-stats-box">
@@ -1252,4 +1252,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-download-log').addEventListener('click', () => {
     window.open(`/data/logs/${simId}/log_result_${simId.replace('SIMULATION_', '')}.log`, '_blank');
   });
+
+  const socket = io();
+  socket.on('sim_completed', ({ id, title }) => {
+    toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
+  });
+
 });

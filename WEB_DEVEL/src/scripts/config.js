@@ -189,8 +189,8 @@ function renderBusesView(container) {
   header.className = 'buses-editor-header';
   header.innerHTML = `
     <div>
-      <h3>Autobuses lógicos</h3>
-      <p class="buses-editor-subtitle">Cada autobús lógico tiene una lista de salidas desde los terminales de la línea.</p>
+      <h3>Autobuses Físicos</h3>
+      <p class="buses-editor-subtitle">Cada autobús físico tiene una lista de salidas desde los terminales de la línea.</p>
     </div>
     <button class="btn btn-primary btn-sm" id="btn-add-bus">+ Nuevo autobús</button>
   `;
@@ -208,7 +208,7 @@ function renderBusesView(container) {
       <button class="btn btn-primary btn-sm" id="btn-confirm-add-bus">Crear</button>
       <button class="btn btn-outline btn-sm" id="btn-cancel-add-bus">Cancelar</button>
     </div>
-    <p class="add-bus-form-hint">El ID es el identificador del autobús lógico (matrícula/número de unidad).</p>
+    <p class="add-bus-form-hint">El ID es el identificador del autobús físico (matrícula/número de unidad).</p>
   `;
   wrap.appendChild(addBusForm);
 
@@ -1286,4 +1286,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('btn-save').addEventListener('click', handleSave);
   document.getElementById('btn-run').addEventListener('click', handleRun);
+
+  const socket = io();
+  socket.on('sim_completed', ({ id, title }) => {
+    toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
+  });
 });

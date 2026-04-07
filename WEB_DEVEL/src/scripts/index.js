@@ -212,6 +212,27 @@ function applySimProgress(sims) {
   });
 }
 
+function endsimprocess(id) {
+  const card = document.querySelector(`[data-sim-id="${id}"]`);
+  if (!card) return;
+
+  let bar = card.querySelector('.sim-progress-bar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.className = 'sim-progress-bar';
+    card.insertBefore(bar, card.firstChild);
+  }
+  bar.style.width = `100%`;
+  const metaValues = card.querySelectorAll('.meta-value');
+  if (metaValues[0]) metaValues[0].textContent = formatNum(1000);
+  if (metaValues[1]) metaValues[1].textContent = "Esperando gráficas";
+
+  setTimeout(() => {
+      bar.style.opacity = '0';
+      setTimeout(() => bar.remove(), 500);
+    }, 1500);
+
+}
 // ---- Init ----
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -230,7 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const socket = io();
   socket.on('sim_progress', applySimProgress);
   socket.on('sim_completed', ({ id, title }) => {
+
     showCompletionBanner(id, title);
+    endsimprocess(id);
     toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
   });
 });

@@ -470,25 +470,43 @@ for stopcode in stops_list_toB:
 
     json_stops_info_toB[f"{stopcode}"] = {}
     json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"] = {}
+
+
+    json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"] = {}
+
     data_stopcode = data_toB[data_toB["stop_num"] == stopcode]
     if stopcode == stops_list_toB[-1]:
         for timeslot in timeslots:
             data_per_ts_per_stop = data_stopcode[data_stopcode["timeslot"] == timeslot]
             actual_percentage = (data_per_ts_per_stop["dropoffs"].mean()/MAX_CAPACITY)*100
-            list_per_ts_per_stop.append((actual_percentage, data_per_ts_per_stop["dropoffs"]))
+            list_per_ts_per_stop.append((actual_percentage, data_per_ts_per_stop["dropoffs"],0, 0,data_per_ts_per_stop["dropoffs"].mean()))
             json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"][timeslot] = actual_percentage
+            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot] = {}
+            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["boards"] = 0
+            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["unable_boards"] = 0
+            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["dropoffs"] = data_per_ts_per_stop["dropoffs"].mean()
 
         save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/stops/occupation_per_timeslot_{stopcode}.png")
     else:
         for timeslot in timeslots:
             data_per_ts_per_stop = data_stopcode[data_stopcode["timeslot"] == timeslot]
             actual_percentage = (data_per_ts_per_stop["occupation"].mean()/MAX_CAPACITY)*100
-            list_per_ts_per_stop.append((actual_percentage, data_per_ts_per_stop["occupation"]))
+            list_per_ts_per_stop.append((actual_percentage, data_per_ts_per_stop["occupation"], data_per_ts_per_stop["boards"].mean(), data_per_ts_per_stop["residual_boards"].mean(), data_per_ts_per_stop["dropoffs"].mean()))
             json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"][timeslot] = actual_percentage
+            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot] = {}
+            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["boards"] = data_per_ts_per_stop["boards"].mean()
+            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["unable_boards"] = data_per_ts_per_stop["residual_boards"].mean()
+            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["dropoffs"] = data_per_ts_per_stop["dropoffs"].mean()
 
         save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/stops/occupation_per_timeslot_{stopcode}.png")
 
+
     json_stops_info_toB[f"{stopcode}"]["Occupation_percentage"] = np.nanmean([data[0] for data in list_per_ts_per_stop])
+    json_stops_info_toB[f"{stopcode}"]["Occupation_percentage"] = np.nanmean([data[0] for data in list_per_ts_per_stop])
+    json_stops_info_toB[f"{stopcode}"]["mean_boards"] = np.nanmean([data[2] for data in list_per_ts_per_stop])
+    json_stops_info_toB[f"{stopcode}"]["unable_boards"] = np.nanmean([data[3] for data in list_per_ts_per_stop])
+    json_stops_info_toB[f"{stopcode}"]["mean_dropoffs"] = np.nanmean([data[4] for data in list_per_ts_per_stop])
+
 
 
     #Important KPI. Theoretical vs Real Distribution of Occupation per Timeslot per Stop
