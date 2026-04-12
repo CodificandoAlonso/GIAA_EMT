@@ -233,7 +233,7 @@ function renderBusView() {
   container.innerHTML = `
     <div class="bus-filter-bar">
       <span class="analysis-filter-label">Ver por:</span>
-      <button class="filter-btn active" id="bus-filter-bus-btn">&#128652; Autobús lógico</button>
+      <button class="filter-btn active" id="bus-filter-bus-btn">&#128652; Autobús Físico</button>
       <button class="filter-btn" id="bus-filter-ts-btn">&#128336; Franja horaria</button>
     </div>
     <div id="bus-filter-content"></div>
@@ -266,7 +266,7 @@ function renderBusByBusView() {
 
   content.innerHTML = `
     <div class="bus-selector-section">
-      <div class="bus-selector-label">Selecciona un autobús lógico:</div>
+      <div class="bus-selector-label">Selecciona un autobús físico:</div>
       <div class="bus-pills" id="bus-pills">${pillsHtml}</div>
     </div>
     <div id="bus-detail-panel" style="display:none;"></div>
