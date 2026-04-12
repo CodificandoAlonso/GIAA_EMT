@@ -32,7 +32,8 @@ if DESCRIPTION.get("line") == "401":
 #HARDCODDED NUMBER OF SIMS
 N_SIMS = 1000
 
-columns = ["simulation_id", "bus_code", "travels_completed","stop_num", "direction", "current_time","timeslot","boards","residual_boards","dropoffs", "occupation", "time_between_stops"]
+columns = ["simulation_id", "bus_code", "travels_completed","stop_num", "direction", "current_time","timeslot", "departure_timeslot",
+           "boards","residual_boards","dropoffs", "occupation", "time_between_stops"]
 
 joint_dataframe_results = pd.DataFrame(columns=columns)
 
@@ -51,7 +52,8 @@ joint_dataframe_results = pd.concat(data for data in dataframes_to_join_results)
 N_SIMS = 1000
 
 
-columns = ["simulation_id", "bus_code","travels_completed", "stop_num", "direction","timeslot", "event_code", "time_event","param_event_1", "param_event_2"]
+columns = ["simulation_id", "bus_code","travels_completed", "stop_num", "direction","timeslot", "event_code", 
+           "time_event","param_event_1", "param_event_2"]
 
 joint_dataframe_events = pd.DataFrame(columns=columns)
 
@@ -97,7 +99,6 @@ known_times_stops_toB = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_ti
 # la idea de esto es generar gráficas a mansalva. La idea detrás ed esto es poder tener tantas gráficas como se guste y en la interfaz de usuario poder agrupar esas gráficas para que se den varios puntos de vista.
 
 
-#idea 1. A parte de hacer gráficas para todos los timeslots, agrupar por hardcodded timestamps (Mañana[5], Hora punta[6,9], Valle de Mañana[10,13], Hora tarde[14,19], noche[20,23]
 timeslots = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 
 #-------------------------------------------------------------------------
@@ -161,6 +162,7 @@ def is_normal_simplified(variables:list):
 
 
     n = len(variables)
+
     se_skew = math.sqrt(6.0 / n)
     se_kurt = math.sqrt(24.0 / n)
 
@@ -285,6 +287,7 @@ def compute_and_save_distribution_comparasion(mean_1,std_1, mean_2, std_2, direc
         verdict = "Fusionables ('Equivalentes')"
     else:
         verdict = "No fusionables (Distintas)"
+
 
     plt.figure(figsize=(12, 5))
     plt.plot(x, y1, color="blue", linewidth=2,

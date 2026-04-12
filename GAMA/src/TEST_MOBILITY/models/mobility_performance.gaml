@@ -1214,6 +1214,10 @@ species bus skills: [fipa] {
     //Bool variable to know wether the bus has finished a shift(Arrive to its destintation, or not). It will trigger a reflextu change the direction or die.
     bool finished_shift <- false;
     
+    //variable to hold the timeslot in which the bus left a header stop. useful to save the scope of when the bus left for each trip in order to match 
+    //with the analysis scope
+    int departure_timeslot <- 5;
+    
     
     //List container to act as a buffer for the disk writings(logs) at its end of execution
     list<list> buffer_results;
@@ -1254,6 +1258,8 @@ species bus skills: [fipa] {
     	if (world.time_to_minutes(world.current_time) >= world.time_to_minutes(departure_time))
     	{
     		allowed_to_leave <- true;
+    		
+    		self.departure_timeslot <- TimeSlot;
     		
     		//as it is the first stop, no need to trigger the time between stops. Just starts the comms with the bus
     		//time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
@@ -1313,7 +1319,7 @@ species bus skills: [fipa] {
 		
 		//it needs to write the last stop information.
 		buffer_results << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-		current_time, TimeSlot,0, 0,self.passengers,0,self.time_travelled];
+		current_time, TimeSlot, self.departure_timeslot, 0, 0,self.passengers,0,self.time_travelled];
     	
     	
     	
@@ -1345,6 +1351,7 @@ species bus skills: [fipa] {
 			//Delayed, but allowed to leave
 			allowed_to_leave <- true;
 			stops_reached <- 0;
+			self.departure_timeslot <- TimeSlot;
 			//No need to  ths, as in the first sop no need of travelling. The bus is already there
 			self.stopped <- true;
 			//time_between_stops <- world.estimate_time_between_stops(stops_list[direction][stops_reached].stopNum, direction);
@@ -1358,7 +1365,6 @@ species bus skills: [fipa] {
 		else{
 			allowed_to_leave <- false;
 		}//End case if the bus is arriving late to its next departure
-		
 		
 		//reset the variables
 		stops_reached <- 0;
@@ -1474,7 +1480,7 @@ species bus skills: [fipa] {
 			 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
 			 */
 			buffer_results << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-					current_time, TimeSlot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] ;
+					current_time, TimeSlot, self.departure_timeslot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] ;
 		}
 		
 	}//end reflex handle stop answer
@@ -1501,7 +1507,7 @@ species bus skills: [fipa] {
 			 * Board, total boards expected(or residual_boards) and dropoffs. Also the ocupation valueç
 			 */
 			buffer_results << [world.name, self.id, self.travels_completed, stops_list[self.direction][self.stops_reached].stopNum, self.direction,
-					current_time, TimeSlot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] ;    		
+					current_time, TimeSlot,self.departure_timeslot, (boards - residual_boards), residual_boards,dropoffs,self.passengers,self.time_travelled] ;    		
     		
 			self.waiting <- true;
 			self.comms_cycle <- cycle;
