@@ -1253,6 +1253,23 @@ document.addEventListener('DOMContentLoaded', () => {
     window.open(`/data/logs/${simId}/log_result_${simId.replace('SIMULATION_', '')}.log`, '_blank');
   });
 
+  document.getElementById('btn-delete-sim').addEventListener('click', async () => {
+    const label = document.getElementById('hero-date').textContent || simId;
+    const confirmed = confirm(
+      `ATENCIÓN: ACCIÓN IRREVERSIBLE\n\nVas a eliminar la simulación:\n"${label}"\n\nEsto borrará permanentemente TODOS los datos, resultados y logs.\n\n¿Estás seguro de que quieres continuar?`
+    );
+    if (!confirmed) return;
+    try {
+      const res = await fetch(`/api/simulations/${simId}`, { method: 'DELETE' });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) { toast(data.error || 'Error al eliminar la simulación', 'error'); return; }
+      toast('Simulación eliminada. Redirigiendo...', 'info');
+      setTimeout(() => { window.location.href = '/'; }, 1800);
+    } catch (err) {
+      toast('Error: ' + err.message, 'error');
+    }
+  });
+
   const socket = io();
   socket.on('sim_completed', ({ id, title }) => {
     toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');

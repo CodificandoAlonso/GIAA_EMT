@@ -36,6 +36,10 @@ let _selectedTs  = 8;           // selected timeslot hour
 let _currentInfoSel  = null;    // { type:'stop'|'section', stopId, sectionKey, dirKey, stopProps }
 let _activeClearSel  = null;    // function to clear current SVG selection
 
+// Bus view state
+let _busViewFilter = 'physical'; // 'physical' | 'timeslot'
+let _busViewTs     = 8;          // selected bus timeslot hour
+
 // Geodata URLs (E01 experiment from known_data)
 const GEODATA_E01 = {
   toA: {
@@ -184,6 +188,79 @@ function renderBusesView(container) {
   const wrap = document.createElement('div');
   wrap.className = 'buses-editor';
 
+  // Filter bar
+  const filterBar = document.createElement('div');
+  filterBar.className = 'buses-editor-filter-bar';
+  filterBar.innerHTML = `
+    <span class="analysis-filter-label">Ver por:</span>
+    <button class="filter-btn ${_busViewFilter === 'physical' ? 'active' : ''}" id="bus-filter-physical">&#128652; Autobús físico</button>
+    <button class="filter-btn ${_busViewFilter === 'timeslot' ? 'active' : ''}" id="bus-filter-ts">&#128336; Franja horaria</button>
+    <div id="bus-ts-selector" style="display:${_busViewFilter === 'timeslot' ? 'flex' : 'none'};align-items:center;gap:0.35rem;flex-wrap:wrap;margin-left:0.75rem;"></div>
+  `;
+  wrap.appendChild(filterBar);
+
+  // Content area
+  const contentArea = document.createElement('div');
+  contentArea.id = 'buses-view-content';
+  wrap.appendChild(contentArea);
+
+  container.appendChild(wrap);
+
+  if (_busViewFilter === 'timeslot') {
+    renderBusTsSelector(document.getElementById('bus-ts-selector'));
+  }
+  renderBusViewContent();
+
+  document.getElementById('bus-filter-physical').addEventListener('click', () => {
+    _busViewFilter = 'physical';
+    document.getElementById('bus-filter-physical').classList.add('active');
+    document.getElementById('bus-filter-ts').classList.remove('active');
+    document.getElementById('bus-ts-selector').style.display = 'none';
+    renderBusViewContent();
+  });
+  document.getElementById('bus-filter-ts').addEventListener('click', () => {
+    _busViewFilter = 'timeslot';
+    document.getElementById('bus-filter-ts').classList.add('active');
+    document.getElementById('bus-filter-physical').classList.remove('active');
+    const sel = document.getElementById('bus-ts-selector');
+    sel.style.display = 'flex';
+    renderBusTsSelector(sel);
+    renderBusViewContent();
+  });
+}
+
+function renderBusTsSelector(container) {
+  container.innerHTML = '';
+  const label = document.createElement('span');
+  label.className = 'timeslot-selector-label';
+  label.textContent = 'Hora:';
+  container.appendChild(label);
+  for (let h = 5; h <= 23; h++) {
+    const btn = document.createElement('button');
+    btn.className = 'ts-btn' + (h === _busViewTs ? ' active' : '');
+    btn.dataset.hour = h;
+    btn.textContent = h;
+    btn.addEventListener('click', () => {
+      _busViewTs = h;
+      container.querySelectorAll('.ts-btn').forEach(b => b.classList.toggle('active', Number(b.dataset.hour) === h));
+      renderBusViewContent();
+    });
+    container.appendChild(btn);
+  }
+}
+
+function renderBusViewContent() {
+  const content = document.getElementById('buses-view-content');
+  if (!content) return;
+  content.innerHTML = '';
+  if (_busViewFilter === 'physical') {
+    renderPhysicalBusView(content);
+  } else {
+    renderTimeslotBusView(content, _busViewTs);
+  }
+}
+
+function renderPhysicalBusView(container) {
   // Header row
   const header = document.createElement('div');
   header.className = 'buses-editor-header';
@@ -194,7 +271,7 @@ function renderBusesView(container) {
     </div>
     <button class="btn btn-primary btn-sm" id="btn-add-bus">+ Nuevo autobús</button>
   `;
-  wrap.appendChild(header);
+  container.appendChild(header);
 
   // Add-bus form (hidden by default)
   const addBusForm = document.createElement('div');
@@ -210,15 +287,13 @@ function renderBusesView(container) {
     </div>
     <p class="add-bus-form-hint">El ID es el identificador del autobús físico (matrícula/número de unidad).</p>
   `;
-  wrap.appendChild(addBusForm);
+  container.appendChild(addBusForm);
 
   // Bus list
   const list = document.createElement('div');
   list.className = 'bus-list';
   list.id = 'bus-list';
-  wrap.appendChild(list);
-
-  container.appendChild(wrap);
+  container.appendChild(list);
 
   renderBusList();
 
@@ -240,6 +315,83 @@ function renderBusesView(container) {
     renderBusList();
     toast(`Autobús ${newId} creado`, 'success');
   });
+}
+
+function renderTimeslotBusView(container, ts) {
+  // Collect all departures in this hour
+  const departures = [];
+  for (const [busId, trips] of Object.entries(inputData.buses)) {
+    trips.forEach(([stopId, time]) => {
+      const hour = parseInt(time.split(':')[0], 10);
+      if (hour === ts) departures.push({ busId, stopId, time });
+    });
+  }
+  departures.sort((a, b) => a.time.localeCompare(b.time));
+
+  const header = document.createElement('div');
+  header.className = 'buses-editor-header';
+  header.innerHTML = `
+    <div>
+      <h3>Franja ${ts}:00 – ${ts + 1}:00</h3>
+      <p class="buses-editor-subtitle">${departures.length} salida${departures.length !== 1 ? 's' : ''} programada${departures.length !== 1 ? 's' : ''} en esta franja.</p>
+    </div>
+  `;
+  container.appendChild(header);
+
+  if (departures.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'empty-state';
+    empty.style.padding = '2rem';
+    empty.innerHTML = `<p>No hay salidas programadas en la franja ${ts}:00 – ${ts + 1}:00.</p>`;
+    container.appendChild(empty);
+    return;
+  }
+
+  const tableWrap = document.createElement('div');
+  tableWrap.style.padding = '0 0 1rem';
+  const table = document.createElement('table');
+  table.className = 'trips-table';
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Autobús</th>
+        <th>Dirección</th>
+        <th>Hora de salida</th>
+        <th></th>
+      </tr>
+    </thead>
+  `;
+  const tbody = document.createElement('tbody');
+
+  departures.forEach(dep => {
+    const isToA = dep.stopId === STOP_TOA;
+    const dir = isToA
+      ? `<span class="dir-badge dir-badge-a">&#8594; ${DIR_LABEL.toA}</span>`
+      : `<span class="dir-badge dir-badge-b">&#8592; ${DIR_LABEL.toB}</span>`;
+    const tr = document.createElement('tr');
+    tr.className = 'trip-row';
+    tr.innerHTML = `
+      <td class="trip-idx"><span class="bus-id-badge">${escHtml(dep.busId)}</span></td>
+      <td>${dir}</td>
+      <td style="font-family:monospace;">${escHtml(dep.time)}</td>
+      <td><button class="btn btn-sm btn-danger-soft" title="Eliminar salida">&#10005;</button></td>
+    `;
+    tr.querySelector('button').addEventListener('click', () => {
+      const trips = inputData.buses[dep.busId];
+      if (!trips) return;
+      const idx = trips.findIndex(([sid, t]) => sid === dep.stopId && t === dep.time);
+      if (idx !== -1) {
+        trips.splice(idx, 1);
+        renderBusViewContent();
+        toast('Salida eliminada', 'info');
+      }
+    });
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  tableWrap.appendChild(table);
+  container.appendChild(tableWrap);
 }
 
 function renderBusList() {
@@ -766,6 +918,45 @@ function distLabel(csvVal) {
   return DISTRIBUTIONS[csvVal]?.label ?? csvVal;
 }
 
+// Compute the theoretical mean of a distribution from its stored parameters.
+// NORMAL:            mean = μ = Param1
+// NEGATIVE BINOMIAL: mean = r*(1-p)/p
+// GEOMETRICAL:       mean = 1/p
+function computeDistMean(distType, p1, p2) {
+  const n1 = parseFloat(p1), n2 = parseFloat(p2);
+   const dt = distType.trim();
+  if (distType === 'NORMAL') return isNaN(n1) ? 0 : n1;
+  if (distType === 'NEGATIVE BINOMIAL') {
+    return (isNaN(n1) || isNaN(n2) || n2 <= 0) ? 0 : n1 * (1 - n2) / n2;
+  }
+  if (distType === 'GEOMETRICAL') {
+    return (isNaN(n1) || n1 <= 0) ? 0 : (1 - n1) / n1;
+  }
+  return 0;
+}
+
+// Convert seconds (float) → "MM:SS" string
+function secondsToMMSS(secs) {
+  const total = Math.round(Math.max(0, secs));
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+// Parse "MM:SS" (or plain seconds) → seconds (number). Returns NaN on bad input.
+function mmssToSeconds(str) {
+  if (!str) return NaN;
+  const t = str.trim();
+  if (t.includes(':')) {
+    const [mStr, sStr] = t.split(':');
+    const m = parseInt(mStr, 10), s = parseInt(sStr, 10);
+    if (isNaN(m) || isNaN(s) || s >= 60) return NaN;
+    return m * 60 + s;
+  }
+  const n = parseFloat(t);
+  return isNaN(n) ? NaN : n;
+}
+
 // ---- Stop info panel ----
 
 function getStopRows(stopId, dirKey) {
@@ -804,154 +995,131 @@ function showConfigStopInfo(stopId, stopProps, dirKey) {
   panel.innerHTML = content;
   panel.querySelector('#rcfg-panel-close')?.addEventListener('click', closeConfigInfoPanel);
 
-  // Cheatsheet toggle (timeslot view only)
-  panel.querySelector('#rcfg-cheatsheet-toggle')?.addEventListener('click', (e) => {
-    const cs = panel.querySelector('#rcfg-cheatsheet');
-    const open = cs.style.display !== 'none';
-    cs.style.display = open ? 'none' : 'block';
-    e.currentTarget.textContent = open
-      ? '📖 Ver guía rápida de distribuciones'
-      : '📖 Ocultar guía rápida';
-  });
-
   if (_routeFilter === 'general') {
-    const slider = wireSlider(panel, 'rcfg-global-slider', 'rcfg-global-pct-display');
-    panel.querySelector('#rcfg-apply-global')?.addEventListener('click', () => {
-      const pct = parseFloat(slider.value);
-      applyStopChange(stopId, dirKey, pct, null);
-      toast(`Parada ${stopId}: parámetros escalados ${pct > 0 ? '+' : ''}${pct}%`, 'success');
+    panel.querySelector('#rcfg-apply-general-means')?.addEventListener('click', () => {
+      const origBoard = parseFloat(panel.querySelector('#rcfg-board-mean-original').value);
+      const origDrop  = parseFloat(panel.querySelector('#rcfg-drop-mean-original').value);
+      const newBoard  = parseFloat(panel.querySelector('#rcfg-board-mean-input').value);
+      const newDrop   = parseFloat(panel.querySelector('#rcfg-drop-mean-input').value);
+
+      if (!isNaN(newBoard) && origBoard > 0) {
+        const pct = (newBoard / origBoard - 1) * 100;
+        applyStopChangeByType(stopId, dirKey, 'Board', pct, null);
+      }
+      if (!isNaN(newDrop) && origDrop > 0) {
+        const pct = (newDrop / origDrop - 1) * 100;
+        applyStopChangeByType(stopId, dirKey, 'DropOff', pct, null);
+      }
+      toast(`Parada ${stopId}: valores actualizados en todas las franjas`, 'success');
       showConfigStopInfo(stopId, stopProps, dirKey);
     });
   } else {
-    // Timeslot: per-datatype edit handlers
-    ['board', 'drop'].forEach(tag => {
-      const dataType = tag === 'board' ? 'Board' : 'DropOff';
+    panel.querySelector('#rcfg-apply-ts-means')?.addEventListener('click', () => {
+      const origBoard = parseFloat(panel.querySelector('#rcfg-ts-board-original').value);
+      const origDrop  = parseFloat(panel.querySelector('#rcfg-ts-drop-original').value);
+      const newBoard  = parseFloat(panel.querySelector('#rcfg-ts-board-input').value);
+      const newDrop   = parseFloat(panel.querySelector('#rcfg-ts-drop-input').value);
 
-      // Distribution type change → swap param labels
-      const distSel = panel.querySelector(`#rcfg-dist-${tag}`);
-      distSel?.addEventListener('change', () => {
-        const d = DISTRIBUTIONS[distSel.value];
-        if (!d) return;
-        panel.querySelector(`#rcfg-p1-label-${tag}`).textContent = d.p1.name;
-        panel.querySelector(`#rcfg-p1-hint-${tag}`).textContent  = d.p1.hint;
-        panel.querySelector(`#rcfg-p2-label-${tag}`).textContent = d.p2.name;
-        panel.querySelector(`#rcfg-p2-hint-${tag}`).textContent  = d.p2.hint;
-      });
-
-      const sliderTs  = wireSlider(panel, `rcfg-slider-ts-${tag}`,  `rcfg-disp-ts-${tag}`);
-      const sliderAll = wireSlider(panel, `rcfg-slider-all-${tag}`, `rcfg-disp-all-${tag}`);
-
-      // Scale by % for this timeslot
-      panel.querySelector(`#rcfg-scale-ts-${tag}`)?.addEventListener('click', () => {
-        const pct = parseFloat(sliderTs?.value ?? 0);
-        applyStopChangeByType(stopId, dirKey, dataType, pct, _selectedTs);
-        toast(`Parada ${stopId} ${dataType} franja ${_selectedTs}h: escalado ${pct > 0 ? '+' : ''}${pct}%`, 'success');
-        showConfigStopInfo(stopId, stopProps, dirKey);
-      });
-
-      // Scale by % for ALL timeslots
-      panel.querySelector(`#rcfg-scale-all-${tag}`)?.addEventListener('click', () => {
-        const pct = parseFloat(sliderAll?.value ?? 0);
-        applyStopChangeByType(stopId, dirKey, dataType, pct, null);
-        toast(`Parada ${stopId} ${dataType}: todas las franjas escaladas ${pct > 0 ? '+' : ''}${pct}%`, 'success');
-        showConfigStopInfo(stopId, stopProps, dirKey);
-      });
-
-      // Save distribution + exact params for this timeslot
-      panel.querySelector(`#rcfg-save-ts-${tag}`)?.addEventListener('click', () => {
-        const newDist = panel.querySelector(`#rcfg-dist-${tag}`).value;
-        const p1 = parseFloat(panel.querySelector(`#rcfg-p1-${tag}`).value);
-        const p2 = parseFloat(panel.querySelector(`#rcfg-p2-${tag}`).value);
-        if (isNaN(p1) || isNaN(p2)) { toast('Los parámetros deben ser numéricos', 'error'); return; }
-        setStopParams(stopId, dirKey, dataType, _selectedTs, newDist, p1, p2);
-        toast(`Parada ${stopId} ${dataType} franja ${_selectedTs}h guardada`, 'success');
-        showConfigStopInfo(stopId, stopProps, dirKey);
-      });
+      if (!isNaN(newBoard) && origBoard > 0) {
+        const pct = (newBoard / origBoard - 1) * 100;
+        applyStopChangeByType(stopId, dirKey, 'Board', pct, _selectedTs);
+      }
+      if (!isNaN(newDrop) && origDrop > 0) {
+        const pct = (newDrop / origDrop - 1) * 100;
+        applyStopChangeByType(stopId, dirKey, 'DropOff', pct, _selectedTs);
+      }
+      toast(`Parada ${stopId} franja ${_selectedTs}h: valores actualizados`, 'success');
+      showConfigStopInfo(stopId, stopProps, dirKey);
     });
   }
 }
 
-// ---- General view: slider potentiometer ----
+// ---- General view: mean passenger inputs ----
 
 function buildStopGeneralView(rows) {
   const timeslots = [...new Set(rows.map(r => Number(r.Timeslot)))].sort((a, b) => a - b);
   const boardRows = rows.filter(r => r.DataType === 'Board');
   const dropRows  = rows.filter(r => r.DataType === 'DropOff');
 
-  const avgP1 = (arr) => arr.length
-    ? (arr.reduce((s, r) => s + parseFloat(r.Param1 || 0), 0) / arr.length).toFixed(3) : '—';
+  // Average theoretical mean across all timeslots
+  const avgMean = (arr) => {
+    if (!arr.length) return 0;
+    return arr.reduce((s, r) => s + computeDistMean(r.DistributionType, r.Param1, r.Param2), 0) / arr.length;
+  };
 
-  const distBoard = boardRows[0]?.DistributionType ?? '—';
-  const distDrop  = dropRows[0]?.DistributionType  ?? '—';
+  const boardMean = avgMean(boardRows);
+  const dropMean  = avgMean(dropRows);
 
   return `
     <div class="rcfg-panel-section">
-      <h4>Resumen de la parada</h4>
+      <h4>Pasajeros en esta parada</h4>
+      <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
+        Media de pasajeros por hora de servicio. Cambia el valor y pulsa <strong>Aplicar</strong>
+        para escalar <em>todas las franjas horarias</em> proporcionalmente.
+      </p>
       <div class="rcfg-stats-grid">
-        <div class="rcfg-stat">
-          <span class="rcfg-stat-label">&#8679; Subidas (Param1 medio)</span>
-          <span class="rcfg-stat-value">${avgP1(boardRows)}</span>
-          <span class="rcfg-stat-dist">${distLabel(distBoard)}</span>
+        <div class="rcfg-stat rcfg-stat-editable">
+          <span class="rcfg-stat-label">&#8679; Media de pasajeros que llegan a la parada por hora</span>
+          <input type="text" inputmode="decimal" class="rcfg-mean-input" id="rcfg-board-mean-input"
+                 value="${boardMean.toFixed(2)}" />
         </div>
-        <div class="rcfg-stat">
-          <span class="rcfg-stat-label">&#8681; Bajadas (Param1 medio)</span>
-          <span class="rcfg-stat-value">${avgP1(dropRows)}</span>
-          <span class="rcfg-stat-dist">${distLabel(distDrop)}</span>
+        <div class="rcfg-stat rcfg-stat-editable">
+          <span class="rcfg-stat-label">&#8681; Número medio de pasajeros que se bajan en la parada por cada bus</span>
+          <input type="text" inputmode="decimal" class="rcfg-mean-input" id="rcfg-drop-mean-input"
+                 value="${dropMean.toFixed(2)}" />
         </div>
         <div class="rcfg-stat">
           <span class="rcfg-stat-label">Franjas con datos</span>
           <span class="rcfg-stat-value">${timeslots.length}</span>
-          <span class="rcfg-stat-dist">${timeslots[0]}h – ${timeslots[timeslots.length-1]}h</span>
+          <span class="rcfg-stat-dist">${timeslots[0] ?? '—'}h – ${timeslots[timeslots.length - 1] ?? '—'}h</span>
         </div>
       </div>
-    </div>
-    <div class="rcfg-panel-section">
-      <h4>Escalar todos los parámetros</h4>
-      <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
-        Multiplica Param1 y Param2 de <strong>subidas y bajadas</strong> en <strong>todas las franjas horarias</strong>.
-      </p>
-      <div class="rcfg-slider-wrap">
-        <div class="rcfg-slider-labels">
-          <span>−100%</span><span>0%</span><span>+200%</span>
-        </div>
-        <input type="range" id="rcfg-global-slider" class="rcfg-slider"
-               min="-100" max="200" value="0" step="1" />
-        <div class="rcfg-slider-value-row">
-          <span class="rcfg-slider-value-label">Ajuste:</span>
-          <span id="rcfg-global-pct-display" class="rcfg-slider-display">0%</span>
-          <button class="btn btn-primary btn-sm" id="rcfg-apply-global">Aplicar</button>
-        </div>
+      <div class="rcfg-apply-row">
+        <button class="btn btn-primary btn-sm" id="rcfg-apply-general-means">Aplicar a todas las franjas</button>
       </div>
     </div>
+    <input type="hidden" id="rcfg-board-mean-original" value="${boardMean}" />
+    <input type="hidden" id="rcfg-drop-mean-original"  value="${dropMean}" />
   `;
 }
 
-// ---- Timeslot view: full edit per data type ----
+// ---- Timeslot view: mean passenger inputs for selected hour ----
 
 function buildStopTimeslotView(rows, ts) {
   const boardRow = rows.find(r => r.DataType === 'Board'   && Number(r.Timeslot) === ts);
   const dropRow  = rows.find(r => r.DataType === 'DropOff' && Number(r.Timeslot) === ts);
 
+  const boardMean = Math.max(boardRow ? computeDistMean(boardRow.DistributionType, boardRow.Param1, boardRow.Param2) : 0, 0);
+  const dropMean  = Math.max(dropRow  ? computeDistMean(dropRow.DistributionType,  dropRow.Param1,  dropRow.Param2)  : 0, 0);
+
   return `
     <div class="rcfg-panel-section">
       <h4>Franja horaria: ${ts}:00 – ${ts + 1}:00</h4>
-      ${buildDistTypeEditor('board', '&#8679; Subidas', boardRow)}
-      ${buildDistTypeEditor('drop',  '&#8681; Bajadas', dropRow)}
-    </div>
-    <div class="rcfg-panel-section rcfg-cheatsheet-section">
-      <button class="rcfg-cheatsheet-toggle" id="rcfg-cheatsheet-toggle">
-        &#128218; Ver guía rápida de distribuciones
-      </button>
-      <div class="rcfg-cheatsheet" id="rcfg-cheatsheet" style="display:none;">
-        ${Object.values(DISTRIBUTIONS).map(d => `
-          <div class="rcfg-cs-item">
-            <strong>${d.label}</strong>
-            <span class="rcfg-cs-params">${d.p1.name} · ${d.p2.name !== '— (no utilizado)' ? d.p2.name : 'sin Param2'}</span>
-            <span class="rcfg-cs-note">${d.cheatsheet}</span>
-          </div>
-        `).join('')}
+      <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
+        Cambia el valor y pulsa <strong>Aplicar</strong> para modificar <em>solo esta franja</em>.
+      </p>
+      <div class="rcfg-stats-grid">
+        <div class="rcfg-stat rcfg-stat-editable">
+          <span class="rcfg-stat-label">&#8679; Número de pasajeros que llegan a la parada en esta franja</span>
+          <input type="text" inputmode="decimal" class="rcfg-mean-input" id="rcfg-ts-board-input"
+                 value="${boardMean.toFixed(2)}"
+                 ${!boardRow ? 'disabled' : ''} />
+          ${!boardRow ? '<span class="rcfg-modify-hint">Sin datos para esta franja</span>' : ''}
+        </div>
+        <div class="rcfg-stat rcfg-stat-editable">
+          <span class="rcfg-stat-label">&#8681; Número de pasajeros que se bajan en la parada por autobús</span>
+          <input type="text" inputmode="decimal" class="rcfg-mean-input" id="rcfg-ts-drop-input"
+                 value="${dropMean.toFixed(2)}"
+                 ${!dropRow ? 'disabled' : ''} />
+          ${!dropRow ? '<span class="rcfg-modify-hint">Sin datos para esta franja</span>' : ''}
+        </div>
+      </div>
+      <div class="rcfg-apply-row">
+        <button class="btn btn-primary btn-sm" id="rcfg-apply-ts-means">Aplicar a esta franja</button>
       </div>
     </div>
+    <input type="hidden" id="rcfg-ts-board-original" value="${boardMean}" />
+    <input type="hidden" id="rcfg-ts-drop-original"  value="${dropMean}" />
   `;
 }
 
@@ -1066,88 +1234,94 @@ function showConfigSectionInfo(sectionKey, dirKey) {
   panel.innerHTML = content;
   panel.querySelector('#rcfg-panel-close')?.addEventListener('click', closeConfigInfoPanel);
 
-  const sliderGlobal = wireSlider(panel, 'rcfg-sec-slider-global', 'rcfg-sec-disp-global');
-  const sliderTs     = wireSlider(panel, 'rcfg-sec-slider-ts',     'rcfg-sec-disp-ts');
-  const sliderTsAll  = wireSlider(panel, 'rcfg-sec-slider-ts-all', 'rcfg-sec-disp-ts-all');
-
-  panel.querySelector('#rcfg-sec-apply-global')?.addEventListener('click', () => {
-    const pct = parseFloat(sliderGlobal?.value ?? 0);
-    applySectionChange(sectionKey, dirKey, pct, null);
-    toast(`Tramo ${sectionKey}: tiempos ajustados ${pct > 0 ? '+' : ''}${pct}%`, 'success');
-    showConfigSectionInfo(sectionKey, dirKey);
-  });
-
-  panel.querySelector('#rcfg-sec-apply-ts')?.addEventListener('click', () => {
-    const pct = parseFloat(sliderTs?.value ?? 0);
-    applySectionChange(sectionKey, dirKey, pct, _selectedTs);
-    toast(`Tramo ${sectionKey} franja ${_selectedTs}h: ajustado ${pct > 0 ? '+' : ''}${pct}%`, 'success');
-    showConfigSectionInfo(sectionKey, dirKey);
-  });
-
-  panel.querySelector('#rcfg-sec-apply-ts-all')?.addEventListener('click', () => {
-    const pct = parseFloat(sliderTsAll?.value ?? 0);
-    applySectionChange(sectionKey, dirKey, pct, null);
-    toast(`Tramo ${sectionKey}: todos los tiempos ajustados ${pct > 0 ? '+' : ''}${pct}%`, 'success');
-    showConfigSectionInfo(sectionKey, dirKey);
-  });
+  if (_routeFilter === 'general') {
+    panel.querySelector('#rcfg-sec-apply-general')?.addEventListener('click', () => {
+      const origSecs = parseFloat(panel.querySelector('#rcfg-sec-mean-original').value);
+      const newSecs  = mmssToSeconds(panel.querySelector('#rcfg-sec-mean-input').value);
+      if (isNaN(newSecs) || newSecs < 0) { toast('Formato inválido — usa MM:SS (ej: 02:35)', 'error'); return; }
+      if (origSecs > 0) {
+        const pct = (newSecs / origSecs - 1) * 100;
+        applySectionChange(sectionKey, dirKey, pct, null);
+      }
+      toast(`Tramo ${sectionKey}: tiempos actualizados en todas las franjas`, 'success');
+      showConfigSectionInfo(sectionKey, dirKey);
+    });
+  } else {
+    panel.querySelector('#rcfg-sec-apply-ts')?.addEventListener('click', () => {
+      const origSecs = parseFloat(panel.querySelector('#rcfg-sec-ts-original').value);
+      const newSecs  = mmssToSeconds(panel.querySelector('#rcfg-sec-ts-input').value);
+      if (isNaN(newSecs) || newSecs < 0) { toast('Formato inválido — usa MM:SS (ej: 02:35)', 'error'); return; }
+      if (origSecs > 0) {
+        const pct = (newSecs / origSecs - 1) * 100;
+        applySectionChange(sectionKey, dirKey, pct, _selectedTs);
+      }
+      toast(`Tramo ${sectionKey} franja ${_selectedTs}h: tiempo actualizado`, 'success');
+      showConfigSectionInfo(sectionKey, dirKey);
+    });
+  }
 }
 
 function buildSectionGeneralView(row) {
-  // Compute average mean across all timeslots
   let sum = 0; let count = 0;
   for (let h = 5; h <= 23; h++) {
     const v = parseFloat(row[`Mean_${h}`]);
     if (!isNaN(v)) { sum += v; count++; }
   }
-  const avgMean = count ? (sum / count).toFixed(1) : '—';
+  const avgMeanSecs = count ? sum / count : 0;
 
   return `
     <div class="rcfg-panel-section">
-      <h4>Tiempos de tránsito (general)</h4>
+      <h4>Tiempo de tránsito (general)</h4>
+      <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
+        Tiempo medio de tránsito en este tramo. Cambia el valor y pulsa <strong>Aplicar</strong>
+        para escalar <em>todas las franjas horarias</em> proporcionalmente.
+      </p>
       <div class="rcfg-stats-grid">
-        <div class="rcfg-stat"><span class="rcfg-stat-label">Tiempo medio (todas las franjas)</span><span class="rcfg-stat-value">${avgMean} s</span></div>
-        <div class="rcfg-stat"><span class="rcfg-stat-label">Tramo</span><span class="rcfg-stat-value">${escHtml(row.StopsCodes)}</span></div>
+        <div class="rcfg-stat rcfg-stat-editable">
+          <span class="rcfg-stat-label">&#128337; Tiempo medio (todas las franjas)</span>
+          <input type="text" class="rcfg-mean-input" id="rcfg-sec-mean-input"
+                 value="${secondsToMMSS(avgMeanSecs)}" placeholder="MM:SS" />
+          <span class="rcfg-modify-hint">formato MM:SS</span>
+        </div>
+        <div class="rcfg-stat">
+          <span class="rcfg-stat-label">Tramo</span>
+          <span class="rcfg-stat-value" style="font-size:0.85rem;">${escHtml(row.StopsCodes)}</span>
+        </div>
       </div>
-      <div class="rcfg-times-table-wrap">
-        <table class="rcfg-times-table">
-          <thead><tr><th>Hora</th><th>Media (s)</th><th>Desv. típ. (s)</th></tr></thead>
-          <tbody>
-            ${Array.from({length: 19}, (_, i) => i + 5).map(h => {
-              const mean = row[`Mean_${h}`] ? Number(row[`Mean_${h}`]).toFixed(1) : '—';
-              const std  = row[`Std_${h}`]  ? Number(row[`Std_${h}`]).toFixed(1)  : '—';
-              return `<tr><td>${h}:00</td><td>${mean}</td><td>${std}</td></tr>`;
-            }).join('')}
-          </tbody>
-        </table>
+      <div class="rcfg-apply-row">
+        <button class="btn btn-primary btn-sm" id="rcfg-sec-apply-general">Aplicar a todas las franjas</button>
       </div>
     </div>
-    <div class="rcfg-panel-section">
-      <h4>Modificar todos los tiempos</h4>
-      <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">Multiplica Media y Desviación en todas las franjas horarias.</p>
-      ${sliderHtml('rcfg-sec-slider-global', 'rcfg-sec-disp-global', 'rcfg-sec-apply-global', 'Aplicar a todas las franjas')}
-    </div>
+    <input type="hidden" id="rcfg-sec-mean-original" value="${avgMeanSecs}" />
   `;
 }
 
 function buildSectionTimeslotView(row, ts) {
-  const mean = row[`Mean_${ts}`] ? Number(row[`Mean_${ts}`]).toFixed(2) : '—';
-  const std  = row[`Std_${ts}`]  ? Number(row[`Std_${ts}`]).toFixed(2)  : '—';
+  const meanSecs = row[`Mean_${ts}`] ? parseFloat(row[`Mean_${ts}`]) : 0;
+  const hasData  = !!row[`Mean_${ts}`];
 
   return `
     <div class="rcfg-panel-section">
       <h4>Franja horaria: ${ts}:00 – ${ts + 1}:00</h4>
+      <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
+        Cambia el valor y pulsa <strong>Aplicar</strong> para modificar <em>solo esta franja</em>.
+      </p>
       <div class="rcfg-stats-grid">
-        <div class="rcfg-stat"><span class="rcfg-stat-label">Tiempo medio</span><span class="rcfg-stat-value">${mean} s</span></div>
-        <div class="rcfg-stat"><span class="rcfg-stat-label">Desviación típica</span><span class="rcfg-stat-value">${std} s</span></div>
+        <div class="rcfg-stat rcfg-stat-editable">
+          <span class="rcfg-stat-label">&#128337; Tiempo medio en esta franja</span>
+          <input type="text" class="rcfg-mean-input" id="rcfg-sec-ts-input"
+                 value="${secondsToMMSS(meanSecs)}" placeholder="MM:SS"
+                 ${!hasData ? 'disabled' : ''} />
+          <span class="rcfg-modify-hint">${hasData ? 'formato MM:SS' : 'Sin datos para esta franja'}</span>
+        </div>
+      </div>
+      <div class="rcfg-apply-row">
+        <span class="rcfg-modify-hint">Solo afecta a la franja <strong>${ts}:00 – ${ts + 1}:00</strong>.</span>
+        <button class="btn btn-primary btn-sm" id="rcfg-sec-apply-ts"
+                ${!hasData ? 'disabled' : ''}>Aplicar a esta franja</button>
       </div>
     </div>
-    <div class="rcfg-panel-section">
-      <h4>Modificar esta franja (${ts}h)</h4>
-      <span class="rcfg-modify-label" style="display:block;margin-bottom:0.4rem;">Sólo franja ${ts}h</span>
-      ${sliderHtml('rcfg-sec-slider-ts', 'rcfg-sec-disp-ts', 'rcfg-sec-apply-ts', 'Aplicar a esta franja')}
-      <span class="rcfg-modify-label" style="display:block;margin:0.75rem 0 0.4rem;">Todas las franjas</span>
-      ${sliderHtml('rcfg-sec-slider-ts-all', 'rcfg-sec-disp-ts-all', 'rcfg-sec-apply-ts-all', 'Aplicar a todas las franjas')}
-    </div>
+    <input type="hidden" id="rcfg-sec-ts-original" value="${meanSecs}" />
   `;
 }
 
@@ -1165,10 +1339,10 @@ function applyStopChange(stopId, dirKey, pct, timeslot) {
     if (row.DistributionType === 'NORMAL') {
     row.Param1 = String(parseFloat(row.Param1) * factor);
     }
-    else if (row.DistributionType === 'NEGATIVE BINOMIAL') {
+    else if (row.DistributionType.trim() === 'NEGATIVE BINOMIAL') {
     row.Param1 = String(1 / (1 + factor * (1 - row.Param1) /row.Param1)); // p' = 1 / (1 + k*(1-p)/p) 
   }
-    else if (row.DistributionType === 'GEOMETRICAL') {
+    else if (row.DistributionType.trim() === 'GEOMETRICAL') {
     row.Param1 = String(row.Param1 / factor);    
   }
   }

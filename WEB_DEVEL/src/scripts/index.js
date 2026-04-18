@@ -56,7 +56,10 @@ function renderCard(sim) {
     </div>
     <div class="sim-card-footer">
       ${chartsHtml}
-      <button class="btn btn-primary btn-sm">Ver detalle &#8594;</button>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <button class="btn btn-sm btn-danger" data-delete-sim="${sim.id}" title="Eliminar simulación">&#128465;</button>
+        <button class="btn btn-primary btn-sm">Ver detalle &#8594;</button>
+      </div>
     </div>
   `;
 
@@ -68,6 +71,11 @@ function renderCard(sim) {
     card.insertBefore(bar, card.firstChild);
   }
 
+  card.querySelector(`[data-delete-sim]`)?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    handleDeleteSim(sim.id, sim.title || sim.id);
+  });
+
   card.addEventListener('click', () => {
     window.location.href = `/simulation/${sim.id}`;
   });
@@ -76,6 +84,24 @@ function renderCard(sim) {
   });
 
   return card;
+}
+
+// ---- Delete simulation ----
+
+async function handleDeleteSim(simId, label) {
+  const confirmed = confirm(
+    `ATENCIÓN: ACCIÓN IRREVERSIBLE\n\nVas a eliminar la simulación:\n"${label}"\n\nEsto borrará permanentemente TODOS los datos, resultados y logs.\n\n¿Estás seguro de que quieres continuar?`
+  );
+  if (!confirmed) return;
+  try {
+    const res = await fetch(`/api/simulations/${simId}`, { method: 'DELETE' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) { toast(data.error || 'Error al eliminar la simulación', 'error'); return; }
+    toast(`Simulación "${label}" eliminada`, 'info');
+    loadSimulations();
+  } catch (err) {
+    toast('Error: ' + err.message, 'error');
+  }
 }
 
 // ---- Load simulations ----

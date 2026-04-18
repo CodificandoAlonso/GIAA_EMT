@@ -1893,6 +1893,72 @@ body.config-page {
   align-self: flex-start;
 }
 
+/* ---- Mean-value input (Build for Idiots stop config) ---- */
+.rcfg-stat-editable {
+  background: var(--emt-gray-100);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.rcfg-mean-input {
+  border: 2px solid var(--emt-gray-200);
+  border-radius: var(--radius);
+  padding: 0.38rem 0.65rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--emt-gray-900);
+  background: #fff;
+  width: 140px;
+  transition: border-color var(--transition);
+}
+
+.rcfg-mean-input:focus {
+  outline: none;
+  border-color: var(--emt-red);
+  background: #fff;
+}
+
+.rcfg-mean-input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: var(--emt-gray-200);
+}
+
+/* Hide native number-input spinners everywhere on the page */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] { -moz-appearance: textfield; }
+
+.rcfg-apply-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--emt-gray-200);
+}
+
+/* ---- Buses editor filter bar ---- */
+.buses-editor-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  background: var(--emt-white);
+  border-radius: var(--radius);
+  padding: 0.65rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
 /* ---- Cheatsheet ---- */
 .rcfg-cheatsheet-section { background: #f0f9ff; border-top: 1px solid #bae6fd; }
 

@@ -427,6 +427,24 @@ app.post('/api/simulations/generate', (req, res) => {
   });
 });
 
+// Delete a simulation (irreversible — removes the entire data/logs/:id directory)
+app.delete('/api/simulations/:id', (req, res) => {
+  const { id } = req.params;
+  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
+    return res.status(400).json({ error: 'Invalid simulation ID' });
+  }
+  const simPath = path.join(DATA_DIR, id);
+  if (!fs.existsSync(simPath)) {
+    return res.status(404).json({ error: 'Simulation not found' });
+  }
+  try {
+    fs.rmSync(simPath, { recursive: true, force: true });
+    res.json({ message: 'Simulation deleted' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Trigger chart generation via Python
 app.post('/api/simulations/:id/generate-charts', (req, res) => {
   const { id } = req.params;
