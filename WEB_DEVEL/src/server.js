@@ -118,6 +118,7 @@ app.get('/api/simulations', (req, res) => {
   }
 });
 
+
 // Get simulation detail
 app.get('/api/simulations/:id', (req, res) => {
   const { id } = req.params;
@@ -170,59 +171,6 @@ app.get('/api/simulations/:id', (req, res) => {
   res.json({ id, datetime, runCount, charts, logContent, title, description });
 });
 
-// Get aggregated CSV stats for a simulation
-app.get('/api/simulations/:id/stats', (req, res) => {
-  const { id } = req.params;
-  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
-  }
-
-  const resultsPath = path.join(DATA_DIR, id, 'RESULTS');
-  if (!fs.existsSync(resultsPath)) {
-    return res.status(404).json({ error: 'No results found' });
-  }
-
-  try {
-    const files = fs.readdirSync(resultsPath).filter(f => f.endsWith('.csv'));
-    let totalBoards = 0, totalDropoffs = 0, totalPassengers = 0, rows = 0;
-    const byDirection = { toA: { boards: 0, dropoffs: 0 }, toB: { boards: 0, dropoffs: 0 } };
-    const byTimeSlot = {};
-
-    for (const file of files.slice(0, 50)) { // sample first 50 for performance
-      const content = fs.readFileSync(path.join(resultsPath, file), 'utf8');
-      const lines = content.split('\n').slice(1); // skip header
-      for (const line of lines) {
-        if (!line.trim()) continue;
-        const cols = line.split(',');
-        if (cols.length < 11) continue;
-        const direction = cols[3]?.trim();
-        const timeSlot = cols[6]?.trim();
-        const boards = parseFloat(cols[7]) || 0;
-        const dropoffs = parseFloat(cols[9]) || 0;
-        const passengers = parseFloat(cols[10]) || 0;
-
-        totalBoards += boards;
-        totalDropoffs += dropoffs;
-        totalPassengers += passengers;
-        rows++;
-
-        if (direction === 'toA') { byDirection.toA.boards += boards; byDirection.toA.dropoffs += dropoffs; }
-        else if (direction === 'toB') { byDirection.toB.boards += boards; byDirection.toB.dropoffs += dropoffs; }
-
-        if (timeSlot) {
-          if (!byTimeSlot[timeSlot]) byTimeSlot[timeSlot] = { boards: 0, dropoffs: 0 };
-          byTimeSlot[timeSlot].boards += boards;
-          byTimeSlot[timeSlot].dropoffs += dropoffs;
-        }
-      }
-    }
-
-    const avgPassengers = rows > 0 ? (totalPassengers / rows).toFixed(2) : 0;
-    res.json({ totalBoards, totalDropoffs, avgPassengers, byDirection, byTimeSlot, sampledRuns: Math.min(files.length, 50), totalRuns: files.length });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
 // Get geodata (experiment IDs + geojson paths) for a simulation
 app.get('/api/simulations/:id/geodata', (req, res) => {
@@ -385,6 +333,7 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
   }
 });
 
+
 // Launch batch simulation (run_simulation.sh) for a prepared simulation
 app.post('/api/simulations/:id/run', (req, res) => {
   const { id } = req.params;
@@ -410,22 +359,12 @@ app.post('/api/simulations/:id/run', (req, res) => {
   });
   proc.unref();
 
-  
+  //Emit an alert via websockets to call for every index instance to rebuil.d the page in order to show the new sim info bar
+  io.emit('new_sim_launched', { id, title: req.body?.title || id });
 
   res.json({ message: 'Simulación lanzada', simId: id });
 });
 
-// Trigger new simulation
-app.post('/api/simulations/generate', (req, res) => {
-  const scriptPath = path.join(__dirname, '..', '..', 'run_simulation.sh');
-  if (!fs.existsSync(scriptPath)) {
-    return res.status(202).json({ message: 'Simulation trigger not configured. Place run_simulation.sh in the project root.' });
-  }
-  execFile('bash', [scriptPath], { timeout: 5000 }, (err) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({ message: 'Simulation started' });
-  });
-});
 
 // Delete a simulation (irreversible — removes the entire data/logs/:id directory)
 app.delete('/api/simulations/:id', (req, res) => {
@@ -445,28 +384,6 @@ app.delete('/api/simulations/:id', (req, res) => {
   }
 });
 
-// Trigger chart generation via Python
-app.post('/api/simulations/:id/generate-charts', (req, res) => {
-  const { id } = req.params;
-  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
-  }
-
-  const simPath = path.join(DATA_DIR, id);
-  if (!fs.existsSync(simPath)) {
-    return res.status(404).json({ error: 'Simulation not found' });
-  }
-
-  const pythonScript = path.join(__dirname, '..', '..', 'generate_charts.py');
-  if (!fs.existsSync(pythonScript)) {
-    return res.status(202).json({ message: 'Chart generation not configured. Place generate_charts.py in the project root.' });
-  }
-
-  execFile('python3', [pythonScript, simPath], { timeout: 60000 }, (err) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({ message: 'Charts generated' });
-  });
-});
 
 // Get all plots info for a simulation (general stats, stop plots, bus plots, schedule)
 app.get('/api/simulations/:id/plots-info', (req, res) => {
@@ -639,6 +556,7 @@ function getInProgressSimulations() {
         const activePath    = path.join(simPath, 'TEST_MOBILITY', 'logs', 'RESULTS');
         const completedPath = path.join(simPath, 'RESULTS');
         const resultsPath   = fs.existsSync(activePath) ? activePath : completedPath;
+        const chartsPath    = path.join(simPath, 'PLOTS');
 
         let runCount = 0;
         try {
@@ -646,7 +564,19 @@ function getInProgressSimulations() {
         } catch (_) {}
 
         const percentage = Math.min(100, Math.round(runCount / 10)); // 1000 total
-        const status = runCount >= 1000 ? 'Completada' : 'En progreso';
+        let status = '';
+        if (runCount >= 1000){
+          const hasCharts = fs.existsSync(chartsPath) && fs.readdirSync(chartsPath).some(f => f.endsWith('.json'));
+          if (hasCharts){
+            status = 'Completada';
+          }
+          else{
+            status = 'Esperando Gr\u00e1ficas';
+          }
+        }
+        else{
+          status = 'En progreso';
+        }
         return { id, runCount, percentage, status };
       })
       .filter(s => s.status !== 'Completada');
@@ -660,11 +590,7 @@ io.on('connection', (socket) => {
   socket.emit('sim_progress', getInProgressSimulations());
 });
 
-// Tracks sim IDs that were in-progress on the previous tick, used to detect
-// the transition to "stage 1 complete" (1000 CSVs generated).
-// When stage 2 (chart generation) is integrated into the pipeline, update TODO
-// getInProgressSimulations() to also require hasCharts === true before removing
-// a sim from the in-progress set, and change the condition below accordingly.
+// Tracks sim IDs that were in-progress on the previous tick
 const _trackedInProgress = new Set();
 
 // Broadcast in-progress sim states to all connected clients every second.
@@ -677,6 +603,8 @@ setInterval(() => {
   for (const id of _trackedInProgress) {
     if (!currentIds.has(id)) {
       const { title } = parseDescription(path.join(DATA_DIR, id));
+      const simPath = path.join(DATA_DIR, id);
+      if (!fs.existsSync(simPath)) continue;  // deleted, not completed
       io.emit('sim_completed', { id, title });
     }
   }
@@ -691,7 +619,6 @@ setInterval(() => {
 }, 1000);
 
 // ---- Start server ----
-
 httpServer.listen(PORT, () => {
   console.log(`EMT GAMA Dashboard running at http://localhost:${PORT}`);
 });

@@ -771,7 +771,7 @@ global
 
 	
 	//Value to know how many time per passenger the bus must wait in the stop
-	float elapsed_time_per_passenger <- 3.0;
+	float elapsed_time_per_passenger <- 5.0;
 
 
 

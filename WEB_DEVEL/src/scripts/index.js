@@ -148,7 +148,6 @@ async function loadSimulations() {
 }
 
 // ---- Generate simulation modal ----
-
 function openModal() {
   document.getElementById('modal-generate').classList.add('open');
 }
@@ -220,15 +219,20 @@ function applySimProgress(sims) {
       bar.className = 'sim-progress-bar';
       card.insertBefore(bar, card.firstChild);
     }
-    bar.style.width = `${percentage}%`;
+    
 
     // Update run count and status text in the meta rows
     const metaValues = card.querySelectorAll('.meta-value');
     if (metaValues[0]) metaValues[0].textContent = formatNum(runCount);
     if (metaValues[1]) metaValues[1].textContent = status;
 
+
+    if (metaValues[1].textContent != 'Esperando Gr\u00e1ficas'){
+    bar.style.width = `${percentage}%`;
+    }
+
     // When a sim reaches 100%, fade the bar out after a moment
-    if (runCount >= 1000) {
+    if (runCount >= 1000 && metaValues[1].textContent != 'Esperando Gr\u00e1ficas') {
       bar.style.width = '100%';
       setTimeout(() => {
         bar.style.opacity = '0';
@@ -251,7 +255,7 @@ function endsimprocess(id) {
   bar.style.width = `100%`;
   const metaValues = card.querySelectorAll('.meta-value');
   if (metaValues[0]) metaValues[0].textContent = formatNum(1000);
-  if (metaValues[1]) metaValues[1].textContent = "Esperando gráficas";
+  if (metaValues[1]) metaValues[1].textContent = "Completada";
 
   setTimeout(() => {
       bar.style.opacity = '0';
@@ -282,4 +286,10 @@ document.addEventListener('DOMContentLoaded', () => {
     endsimprocess(id);
     toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
   });
+
+  socket.on('new_sim_launched', ({ id, title }) => {
+    toast(`Nueva simulación creada: ${title || id}`, 'info');
+    loadSimulations();
+  });
+
 });

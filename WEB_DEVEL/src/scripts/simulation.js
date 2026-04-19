@@ -1275,4 +1275,8 @@ document.addEventListener('DOMContentLoaded', () => {
     toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
   });
 
+  socket.on('new_sim_launched', ({ id, title }) => {
+    toast(`Nueva simulación creada: ${title || id}`, 'info');
+  });
+
 });
