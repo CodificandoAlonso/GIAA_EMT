@@ -90,8 +90,7 @@ app.get('/api/simulations', (req, res) => {
           runCount = fs.readdirSync(resultsPath).filter(f => f.endsWith('.csv')).length;
         } catch (_) {}
 
-        const hasCharts = fs.existsSync(chartsPath) &&
-          fs.readdirSync(chartsPath).some(f => f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.json'));
+        const hasCharts = fs.existsSync(chartsPath) && fs.readdirSync(chartsPath).some(f => f.endsWith('.json'));
 
         // Parse datetime from folder name: SIMULATION_YYYYMMDD_HHMMSS
         const match = id.match(/SIMULATION_(\d{8})_(\d{6})/);

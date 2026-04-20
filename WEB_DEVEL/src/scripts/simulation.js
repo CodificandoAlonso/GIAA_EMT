@@ -51,7 +51,6 @@ function computeMeanDeparture(scheduledTimeStr, pctDelay, meanDelaySeconds) {
   if (scheduledMins === null) return '—';
   if (!pctDelay || pctDelay === 0) return formatClockTime(scheduledMins);
 
-  // pctDelay is 0-100
   const fracDelay = pctDelay / 100;
   const delayMins = meanDelaySeconds != null ? meanDelaySeconds / 60 : 0;
   // Mean departure = (1 - fracDelay) * scheduled + fracDelay * (scheduled + delayMins)
@@ -181,6 +180,7 @@ function renderOccupationStats(s) {
   document.getElementById('occ-logical-buses').textContent  = s.Logical_Buses != null ? String(s.Logical_Buses) : '—';
   document.getElementById('occ-total-trips').textContent    = s.Total_Trips   != null ? String(s.Total_Trips)   : '—';
   document.getElementById('occ-mean-await').textContent     = s.Mean_await_passengers != null ? formatDuration(s.Mean_await_passengers) : '—';
+  document.getElementById('occ-reg-value').textContent      = +s.Regularity_value.toFixed(2);
 }
 
 // ---- View toggle (Route / Bus) ----

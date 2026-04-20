@@ -96,10 +96,39 @@ known_times_stops_toA = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_ti
 known_times_stops_toB = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_times_stops_toB.csv")
 
 
+timeslots = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
+regularity_toA = {}
+regularity_toB = {}
+
+
+#trim the first and the last instances of known_times_toA and toB, then for each timeslot, navigate trough the columns and compute the man of the times. The full goal
+# is to known the standard time between the 2 and the n-1 stops in a direction to then later on do the regularity value
+
+known_times_stops_toA_regularity = known_times_stops_toA.iloc[1:-1]
+known_times_stops_toB_regularity = known_times_stops_toB.iloc[1:-1]
+
+
+
+for timeslot in timeslots:
+    col_name = f"Mean_{timeslot}"
+    theoretical_time_toA = known_times_stops_toA_regularity[col_name].sum()
+    regularity_toA[timeslot] = theoretical_time_toA
+    #special case for toB, incase timeslot 5 is selected.
+    if timeslot == 5:
+        col_name = f"Mean_6"
+        theoretical_time_toB = known_times_stops_toB_regularity[col_name].sum()
+        regularity_toB[timeslot] = theoretical_time_toB
+    else:
+        theoretical_time_toB = known_times_stops_toB_regularity[col_name].sum()
+        regularity_toB[timeslot] = theoretical_time_toB
+
+
+
 # la idea de esto es generar gráficas a mansalva. La idea detrás ed esto es poder tener tantas gráficas como se guste y en la interfaz de usuario poder agrupar esas gráficas para que se den varios puntos de vista.
 
 
-timeslots = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
 
 #-------------------------------------------------------------------------
 #-----------------------Imported from fussion gauss-----------------------
@@ -191,6 +220,44 @@ def time_to_seconds(time_str, include_seconds: bool):
     return h * 3600 + m * 60 + s
 
 
+def time_to_minutes(time_str, include_seconds: bool):
+    if include_seconds:
+        h, m, s = map(int, time_str.split(":"))
+    else:
+        h,m = map(int, time_str.split(":"))
+        s = 0
+    return h * 60 + m + s/60
+
+
+def regularity_calc(theoretical_interval, real_interval, in_time_format: bool) -> float:
+    if not in_time_format:
+        It = time_to_minutes(theoretical_interval, False)
+        Ir = time_to_minutes(real_interval, False)
+    else:
+        It = theoretical_interval / 60
+        Ir = real_interval / 60
+
+    if Ir > 2 * It:
+        return 0.0
+
+    if It <= 10:
+        if Ir - It <= 2:
+            return 100.0
+        else:
+            return 100 * (1 - ((Ir - (It + 2)) / (It - 2)))
+
+    elif It <= 25:
+        if Ir <= 1.2 * It:
+            return 100.0
+        else:
+            return 100 * (1 - ((Ir - 1.2 * It) / (0.8 * It)))
+
+    else:
+        if Ir - It <= 5:
+            return 100.0
+        else:
+            return 100 * (1 - ((Ir - (It + 5)) / (It - 5)))
+
 #La easy.
 percentage_occupation_per_stop = 0
 
@@ -228,7 +295,8 @@ mean_time_awaital_passenger = np.nanmean(
 
 json_output_general_info["Mean_await_passengers"] = mean_time_awaital_passenger
 
-
+json_output_general_info["Regularity_value"] = 0
+regularity_global = []
 
 
 #Empiezan las graficassss
@@ -575,6 +643,13 @@ for bus in unique_bus:
 
     new_bus_json_data[f"{bus}"] = {}
 
+
+
+
+
+
+
+
     #Loop over each trip
     for trip in unique_trips:
 
@@ -609,6 +684,21 @@ for bus in unique_bus:
             time_per_first_stop = [time_to_seconds(data, True) for data in time_per_first_stop]
             mean_time_of_trip = sum(time_per_last_stop)/len(time_per_last_stop) - sum(time_per_first_stop)/len(time_per_first_stop)
 
+
+            data_top_regularity_interval = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toA[-2]]
+            time_top_regularity_interval = data_top_regularity_interval["current_time"]
+            time_top_regularity_interval = [time_to_seconds(data, True) for data in time_top_regularity_interval]
+            data_bottom_regularity_interval = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toA[1]]
+            time_bottom_regularity_interval = data_bottom_regularity_interval["current_time"]
+            time_bottom_regularity_interval = [time_to_seconds(data, True) for data in time_bottom_regularity_interval]
+
+            regularity_interval = np.nanmean(time_top_regularity_interval) - np.nanmean(time_bottom_regularity_interval)
+            timeslot_trip = data_per_trip_last_stop["timeslot"].iloc[0]
+            if timeslot_trip > 23:
+                timeslot_trip = 23
+            regularity_value = regularity_calc(regularity_toA[timeslot_trip],regularity_interval, True)
+            regularity_global.append(regularity_value)
+
             for stop in stops_list_toA:
                 data_per_trip_per_stop = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stop]
                 if stop != stops_list_toA[-1]:
@@ -634,6 +724,24 @@ for bus in unique_bus:
             mean_time_of_trip = sum(time_per_last_stop)/len(time_per_last_stop) - sum(time_per_first_stop)/len(time_per_first_stop)
 
 
+            data_top_regularity_interval = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toB[-2]]
+            time_top_regularity_interval = data_top_regularity_interval["current_time"]
+            time_top_regularity_interval = [time_to_seconds(data, True) for data in time_top_regularity_interval]
+            data_bottom_regularity_interval = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toB[1]]
+            time_bottom_regularity_interval = data_bottom_regularity_interval["current_time"]
+            time_bottom_regularity_interval = [time_to_seconds(data, True) for data in time_bottom_regularity_interval]
+
+            regularity_interval = np.nanmean(time_top_regularity_interval) - np.nanmean(time_bottom_regularity_interval)
+            timeslot_trip = data_per_trip_last_stop["timeslot"].iloc[0]
+            if timeslot_trip > 23:
+                timeslot_trip = 23
+            regularity_value = regularity_calc(regularity_toB[timeslot_trip],regularity_interval, True)
+            regularity_global.append(regularity_value)
+
+
+
+
+
             for stop in stops_list_toB:
                 data_per_trip_per_stop = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stop]
                 if stop != stops_list_toB[-1]:
@@ -645,7 +753,7 @@ for bus in unique_bus:
 
 
         #Now data_inputs will act as the key for the data for that specific trip. The data will be. Mean % of occupation. (Mean % of occupation per stop(indicating direction)) Mean %of delays and Mean minutes of delay in case it exists.
-        new_bus_json_data[f"{bus}"][f"{data_inputs[0]}-{data_inputs[1]}"] = {"Mean_Occupation_Percentage": trip_occupation_percentage, "Direction": direction, "Mean_time_of_trip": mean_time_of_trip, "Percentage_sims_delay_departure": total_percentage_of_delays_per_trip, "Mean_Minutes_departure_delay" : mean_delay_in_minutes_per_trip}
+        new_bus_json_data[f"{bus}"][f"{data_inputs[0]}-{data_inputs[1]}"] = {"Mean_Occupation_Percentage": trip_occupation_percentage, "Direction": direction, "Mean_time_of_trip": mean_time_of_trip, "Percentage_sims_delay_departure": total_percentage_of_delays_per_trip, "Mean_Minutes_departure_delay" : mean_delay_in_minutes_per_trip, "Regularity_value": regularity_value}
 
 
 
@@ -716,6 +824,11 @@ for stop in stops_list_toB[1:]:
 
         compute_and_save_distribution_comparasion_times(mean_sim, std_sim, mean_known, std_known, "to_B", [stops_list_toB[counter],stop], timeslot)
     counter += 1
+
+
+
+json_output_general_info["Regularity_value"] = np.nanmean(regularity_global)
+
 
 
 def sanitize_for_json(obj):

@@ -285,6 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showCompletionBanner(id, title);
     endsimprocess(id);
     toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
+    loadSimulations();
   });
 
   socket.on('new_sim_launched', ({ id, title }) => {
