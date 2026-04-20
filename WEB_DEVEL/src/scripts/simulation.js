@@ -68,6 +68,105 @@ function getSimId() {
   return parts[parts.length - 1];
 }
 
+// ---- Alert scoring for bus view ----
+
+// Anomaly thresholds
+const ALERT_THRESHOLDS = {
+  regularity_min:  80,   // Regularity_value < 80
+  delay_pct_max:   20,   // Percentage_sims_delay_departure > 20%
+  delay_secs_max: 300,   // Mean_Minutes_departure_delay > 300s (5 min)
+  occupation_max:  60,   // Mean_Occupation_Percentage > 60%
+};
+
+// Returns 0..1: fraction of anomaly flags triggered for one trip's metrics
+function computeAlertScore(m) {
+  if (!m) return 0;
+  let flags = 0;
+  if (m.Regularity_value != null && m.Regularity_value < ALERT_THRESHOLDS.regularity_min) flags++;
+  if (m.Percentage_sims_delay_departure != null && m.Percentage_sims_delay_departure > ALERT_THRESHOLDS.delay_pct_max) flags++;
+  if (m.Mean_Minutes_departure_delay != null && m.Mean_Minutes_departure_delay > ALERT_THRESHOLDS.delay_secs_max) flags++;
+  if (m.Mean_Occupation_Percentage != null && m.Mean_Occupation_Percentage > ALERT_THRESHOLDS.occupation_max) flags++;
+  return flags / 4;
+}
+
+// Mean alert score across an array of metrics objects
+function meanAlertScore(metricsArr) {
+  const valid = (metricsArr || []).filter(m => m != null);
+  if (!valid.length) return 0;
+  return valid.reduce((s, m) => s + computeAlertScore(m), 0) / valid.length;
+}
+
+// Maps score 0..1 → {bg, text, label}
+// Interpolates: green (#16a34a) → amber (#ca8a04) → red (#dc2626)
+function scoreToColor(score) {
+  const s = Math.max(0, Math.min(1, score));
+  let r, g, b;
+  if (s < 0.5) {
+    const t = s * 2;
+    r = Math.round(22  + t * (202 - 22));
+    g = Math.round(163 + t * (138 - 163));
+    b = Math.round(74  + t * (4   - 74));
+  } else {
+    const t = (s - 0.5) * 2;
+    r = Math.round(202 + t * (220 - 202));
+    g = Math.round(138 + t * (38  - 138));
+    b = Math.round(4   + t * (38  - 4));
+  }
+  const bg = `rgb(${r},${g},${b})`;
+  const label = s === 0 ? 'Normal' : s < 0.26 ? 'Leve' : s < 0.51 ? 'Moderado' : s < 0.76 ? 'Alto' : 'Crítico';
+  return { bg, text: '#fff', label };
+}
+
+// Small colored dot HTML for table rows
+function alertDotHtml(score) {
+  const c = scoreToColor(score);
+  return `<span class="alert-dot" style="background:${c.bg};" title="${c.label}"></span>`;
+}
+
+// Legend strip showing the 5-level color scale
+function alertLegendHtml() {
+  const items = [
+    { score: 0,    label: 'Normal'   },
+    { score: 0.25, label: 'Leve'     },
+    { score: 0.5,  label: 'Moderado' },
+    { score: 0.75, label: 'Alto'     },
+    { score: 1,    label: 'Crítico'  },
+  ];
+  const dots = items.map(({ score, label }) => {
+    const c = scoreToColor(score);
+    return `<span class="alert-legend-item"><span class="alert-legend-dot" style="background:${c.bg};"></span>${label}</span>`;
+  }).join('');
+  return `<div class="alert-legend"><span class="alert-legend-label">Nivel de alerta:</span>${dots}</div>`;
+}
+
+// Apply alert colors (inline styles) to a list of pill buttons
+function applyAlertColors(pills, scoreGetter) {
+  pills.forEach(btn => {
+    const score = scoreGetter(btn);
+    const c = scoreToColor(score);
+    btn.dataset.alertScore = score;
+    btn.classList.add('alert-colored');
+    btn.style.background  = c.bg;
+    btn.style.borderColor = c.bg;
+    btn.style.color       = c.text;
+    btn.style.opacity     = '0.82';
+  });
+}
+
+// Visual selection: ring on the chosen pill, dim the rest
+function selectAlertPill(btn, allPills) {
+  allPills.forEach(b => {
+    b.classList.remove('pill-selected');
+    b.style.boxShadow = '';
+    b.style.transform = '';
+    b.style.opacity   = '0.82';
+  });
+  btn.classList.add('pill-selected');
+  btn.style.boxShadow = '0 0 0 3px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.16)';
+  btn.style.transform = 'scale(1.07)';
+  btn.style.opacity   = '1';
+}
+
 // ---- Colorize log output ----
 
 function colorizeLog(text) {
@@ -269,13 +368,16 @@ function renderBusByBusView() {
       <div class="bus-selector-label">Selecciona un autobús físico:</div>
       <div class="bus-pills" id="bus-pills">${pillsHtml}</div>
     </div>
+    ${alertLegendHtml()}
     <div id="bus-detail-panel" style="display:none;"></div>
   `;
 
-  content.querySelectorAll('.bus-pill').forEach(btn => {
+  const allPills = [...content.querySelectorAll('.bus-pill')];
+  applyAlertColors(allPills, btn => meanAlertScore(Object.values(busMetrics?.[btn.dataset.bus] || {})));
+
+  allPills.forEach(btn => {
     btn.addEventListener('click', () => {
-      content.querySelectorAll('.bus-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      selectAlertPill(btn, allPills);
       renderBusDetail(btn.dataset.bus, busSchedule, busMetrics, /* showBusId */ false);
     });
   });
@@ -321,13 +423,16 @@ function renderBusByTimeslotView() {
       <span class="analysis-filter-label">Franja horaria:</span>
       ${pillsHtml}
     </div>
+    ${alertLegendHtml()}
     <div id="bus-ts-detail-panel"></div>
   `;
 
-  content.querySelectorAll('.bus-ts-pill').forEach(btn => {
+  const allTsPills = [...content.querySelectorAll('.bus-ts-pill')];
+  applyAlertColors(allTsPills, btn => meanAlertScore((byTimeslot[Number(btn.dataset.hour)] || []).map(t => t.metrics)));
+
+  allTsPills.forEach(btn => {
     btn.addEventListener('click', () => {
-      content.querySelectorAll('.bus-ts-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      selectAlertPill(btn, allTsPills);
       renderBusTimeslotDetail(byTimeslot[Number(btn.dataset.hour)]);
     });
   });
@@ -344,6 +449,7 @@ function renderBusTimeslotDetail(trips) {
     const occ      = m?.Mean_Occupation_Percentage != null ? m.Mean_Occupation_Percentage.toFixed(1) + '%' : '—';
     const tTime    = formatDuration(m?.Mean_time_of_trip);
     const meanDep  = computeMeanDeparture(t.time, m?.Percentage_sims_delay_departure, m?.Mean_Minutes_departure_delay);
+    const regularity = +m.Regularity_value.toFixed(2);
     return `
       <tr class="trip-row" data-idx="${i}">
         <td class="trip-num">${i}</td>
@@ -351,8 +457,10 @@ function renderBusTimeslotDetail(trips) {
         <td class="trip-time-val">${t.time}</td>
         <td><span class="dir-badge ${dirClass}">${dirLabel}</span> <span class="bus-id-badge">${t.busId}</span></td>
         <td class="trip-occ">${occ}</td>
-        <td>${tTime}</td>
         <td style="font-family:monospace;">${meanDep}</td>
+        <td>${tTime}</td>
+        <td style="font-family:monospace;">${regularity}</td>
+        <td class="trip-alert-col">${alertDotHtml(computeAlertScore(m))}</td>
       </tr>`;
   }).join('');
 
@@ -364,7 +472,7 @@ function renderBusTimeslotDetail(trips) {
           <thead>
             <tr>
               <th>#</th><th>Parada</th><th>Prog.</th>
-              <th>Sentido / Bus</th><th>Ocup.</th><th>T. viaje</th><th>Salida</th>
+              <th>Sentido / Bus</th><th>Ocup.</th><th>Salida</th><th>T. viaje</th><th>Regularidad</th><th class="trip-alert-col">&#9679;</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -416,6 +524,7 @@ function renderBusDetail(busId, busSchedule, busMetrics, showBusId = false) {
     const occ      = m?.Mean_Occupation_Percentage != null ? m.Mean_Occupation_Percentage.toFixed(1) + '%' : '—';
     const tTime    = formatDuration(m?.Mean_time_of_trip);
     const meanDep  = computeMeanDeparture(t.time, m?.Percentage_sims_delay_departure, m?.Mean_Minutes_departure_delay);
+    const regularity = +m.Regularity_value.toFixed(2);
     const busCell  = showBusId ? `<span class="bus-id-badge">${t.busId}</span>` : '';
     return `
       <tr class="trip-row" data-idx="${i}">
@@ -424,8 +533,10 @@ function renderBusDetail(busId, busSchedule, busMetrics, showBusId = false) {
         <td class="trip-time-val">${t.time}</td>
         <td><span class="dir-badge ${dirClass}">${dirLabel}</span>${busCell}</td>
         <td class="trip-occ">${occ}</td>
-        <td>${tTime}</td>
         <td style="font-family:monospace;">${meanDep}</td>
+        <td>${tTime}</td>
+        <td style="font-family:monospace;">${regularity}</td>
+        <td class="trip-alert-col">${alertDotHtml(computeAlertScore(m))}</td>
       </tr>`;
   }).join('');
 
@@ -437,7 +548,7 @@ function renderBusDetail(busId, busSchedule, busMetrics, showBusId = false) {
           <thead>
             <tr>
               <th>#</th><th>Parada</th><th>Prog.</th>
-              <th>Sentido</th><th>Ocup.</th><th>T. viaje</th><th>Salida</th>
+              <th>Sentido</th><th>Ocup.</th><th>Salida</th><th>T. viaje</th><th>Regularidad</th><th class="trip-alert-col">&#9679;</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -469,7 +580,7 @@ function renderTripDetail(trip, panel) {
   const dirLabel = trip.direction === 'toA' ? `&#8594; Sentido ${_dirNames.toA}` : `&#8592; Sentido ${_dirNames.toB}`;
   const dirClass = trip.direction === 'toA' ? 'dir-badge-a' : 'dir-badge-b';
   const meanDep  = computeMeanDeparture(trip.time, m?.Percentage_sims_delay_departure, m?.Mean_Minutes_departure_delay);
-
+  const regularity = +m.Regularity_value.toFixed(2);
   // Bus plots for this trip
   const busPlotUrls = _plotsInfo?.busPlots?.[trip.busId]?.[trip.direction] || [];
   const plotUrl = busPlotUrls[trip.dirIndex];
@@ -511,6 +622,10 @@ function renderTripDetail(trip, panel) {
       <div class="trip-metric-card">
         <div class="trip-metric-label">Salida media real</div>
         <div class="trip-metric-value" style="font-size:1rem;">${meanDep}</div>
+      </div>
+      <div class="trip-metric-card">
+        <div class="trip-metric-label">Valor de Regularidad</div>
+        <div class="trip-metric-value" style="font-size:1rem;">${regularity}</div>
       </div>
     </div>
     ${plotHtml}

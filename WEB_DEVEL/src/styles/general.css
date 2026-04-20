@@ -796,7 +796,7 @@ footer strong { color: var(--emt-red); }
 /* ---- Bus detail grid ---- */
 .bus-detail-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 2.15fr 1fr;
 }
 
 @media (max-width: 900px) { .bus-detail-grid { grid-template-columns: 1fr; } }
@@ -1061,6 +1061,71 @@ footer strong { color: var(--emt-red); }
 }
 .bus-ts-pill:hover { border-color: var(--emt-red); color: var(--emt-red); }
 .bus-ts-pill.active { background: var(--emt-red); border-color: var(--emt-red); color: #fff; }
+
+/* ---- Alert-colored pills: suppress default hover/active color overrides ---- */
+.bus-pill.alert-colored:hover,
+.bus-ts-pill.alert-colored:hover {
+  /* inline styles handle bg/color; just add a lift effect */
+  transform: scale(1.05);
+  border-color: inherit;
+}
+.bus-pill.alert-colored.active,
+.bus-ts-pill.alert-colored.active {
+  /* active class is present but inline styles take precedence for bg/color */
+}
+.bus-pill.pill-selected,
+.bus-ts-pill.pill-selected {
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.16);
+  transform: scale(1.07);
+  opacity: 1 !important;
+}
+
+/* ---- Alert dot (in trip table rows) ---- */
+.alert-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.trip-alert-col {
+  text-align: center;
+  width: 28px;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+
+/* ---- Alert legend strip ---- */
+.alert-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 1.25rem 0.55rem;
+  font-size: 0.71rem;
+  color: var(--emt-gray-600);
+  flex-wrap: wrap;
+}
+
+.alert-legend-label {
+  font-weight: 600;
+  margin-right: 0.15rem;
+}
+
+.alert-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.alert-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
 
 /* Bus ID badge inside trip rows when in timeslot mode */
 .bus-id-badge {
