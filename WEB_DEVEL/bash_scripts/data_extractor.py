@@ -772,10 +772,14 @@ for stop in stops_list_toA[1:]:
     #the general value would be the mean of that column
     json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["general_time"] = data_stop["time_between_stops"].mean()
 
+
+
     json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["time_per_timeslot"] = {}
+    json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["expected_time_per_timeslot"] = {}
 
     times_known = known_times_stops_toA[known_times_stops_toA["StopsCodes"] == f"{stops_list_toA[counter]}-{stop}"]
 
+    expected_times = []
 
     #now iterate for every timeslot to obtain its val
     for timeslot in timeslots:
@@ -787,9 +791,14 @@ for stop in stops_list_toA[1:]:
         mean_known = times_known[f"Mean_{timeslot}"].iloc[0]
         std_known = times_known[f"Std_{timeslot}"].iloc[0]
 
+        expected_times.append(mean_known)
+        json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["expected_time_per_timeslot"][timeslot] = mean_known
+
         compute_and_save_distribution_comparasion_times(mean_sim, std_sim, mean_known, std_known, "to_A", [stops_list_toA[counter],stop], timeslot)
 
 
+
+    json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["expected_time"] = np.mean(expected_times)
 
     counter += 1
 
@@ -808,9 +817,13 @@ for stop in stops_list_toB[1:]:
     json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["general_time"] = data_stop["time_between_stops"].mean()
 
     json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["time_per_timeslot"] = {}
+    json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["expected_time_per_timeslot"] = {}
+
+
 
     times_known = known_times_stops_toB[known_times_stops_toB["StopsCodes"] == f"{stops_list_toB[counter]}-{stop}"]
 
+    expected_times = []
 
     #now iterate for every timeslot to obtain its val
     for timeslot in timeslots:
@@ -821,8 +834,13 @@ for stop in stops_list_toB[1:]:
 
         mean_known = times_known[f"Mean_{timeslot}"].iloc[0]
         std_known = times_known[f"Std_{timeslot}"].iloc[0]
+        expected_times.append(mean_known)        
+        json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["expected_time_per_timeslot"][timeslot] = mean_known
 
         compute_and_save_distribution_comparasion_times(mean_sim, std_sim, mean_known, std_known, "to_B", [stops_list_toB[counter],stop], timeslot)
+
+    json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["expected_time"] = np.mean(expected_times)
+
     counter += 1
 
 

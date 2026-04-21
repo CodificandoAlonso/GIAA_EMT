@@ -89,11 +89,11 @@ function computeAlertScore(m) {
   return flags / 4;
 }
 
-// Mean alert score across an array of metrics objects
+// Aggregate alert score: max across all items so any critical entry forces the pill to that level
 function meanAlertScore(metricsArr) {
   const valid = (metricsArr || []).filter(m => m != null);
   if (!valid.length) return 0;
-  return valid.reduce((s, m) => s + computeAlertScore(m), 0) / valid.length;
+  return Math.max(...valid.map(m => computeAlertScore(m)));
 }
 
 // Maps score 0..1 → {bg, text, label}
@@ -280,6 +280,9 @@ function renderOccupationStats(s) {
   document.getElementById('occ-total-trips').textContent    = s.Total_Trips   != null ? String(s.Total_Trips)   : '—';
   document.getElementById('occ-mean-await').textContent     = s.Mean_await_passengers != null ? formatDuration(s.Mean_await_passengers) : '—';
   document.getElementById('occ-reg-value').textContent      = +s.Regularity_value.toFixed(2);
+  // Now that plotsInfo is ready, recolor maps and refresh the timeslot bar if visible
+  recolorAllMaps();
+  if (_routeInfoFilter === 'timeslot') renderRouteTimeslotBar();
 }
 
 // ---- View toggle (Route / Bus) ----
@@ -640,6 +643,128 @@ let _routeInfoSelectedTs = 5;  // default timeslot
 // Reference to the active map's clearSelection
 let _activeClearSelection = null;
 
+// Registry of per-direction recolor functions, populated by buildSvgMap
+const _mapRecolorFns = {};
+
+function recolorAllMaps() {
+  _mapRecolorFns.toA?.(_routeInfoFilter, _routeInfoSelectedTs);
+  _mapRecolorFns.toB?.(_routeInfoFilter, _routeInfoSelectedTs);
+}
+
+// Max alert score across all stops AND sections (both directions) for a given timeslot
+function computeRouteTimeslotScore(ts) {
+  const infoA = _plotsInfo?.stopGeneralInfo?.toA || {};
+  const infoB = _plotsInfo?.stopGeneralInfo?.toB || {};
+  const scores = [];
+  for (const [k, si] of Object.entries(infoA)) {
+    if (k === 'times_stops') continue;
+    scores.push(computeStopAlertScoreTs(si, ts));
+  }
+  for (const [k, si] of Object.entries(infoB)) {
+    if (k === 'times_stops') continue;
+    scores.push(computeStopAlertScoreTs(si, ts));
+  }
+  // Include section transit-time comparisons using expected_time_per_timeslot
+  for (const sd of Object.values(infoA.times_stops || {})) {
+    scores.push(computeSectionAlertScoreTs(sd, ts));
+  }
+  for (const sd of Object.values(infoB.times_stops || {})) {
+    scores.push(computeSectionAlertScoreTs(sd, ts));
+  }
+  if (!scores.length) return 0;
+  return Math.max(...scores);
+}
+
+// Build/rebuild the global timeslot pill bar above the maps
+function renderRouteTimeslotBar() {
+  const bar = document.getElementById('route-ts-bar');
+  if (!bar) return;
+  const hours = Array.from({ length: 19 }, (_, i) => i + 5); // 5..23
+  const btns  = hours.map(h => `<button class="bus-ts-pill" data-hour="${h}">${h}:00</button>`).join('');
+  bar.innerHTML = `
+    <div class="bus-ts-header" style="border-bottom:none;padding-bottom:0;">
+      <span class="analysis-filter-label">Franja horaria:</span>
+      ${btns}
+    </div>
+    ${alertLegendHtml()}
+  `;
+  const allPills = [...bar.querySelectorAll('.bus-ts-pill')];
+  applyAlertColors(allPills, btn => computeRouteTimeslotScore(Number(btn.dataset.hour)));
+  // Restore current selection
+  const active = allPills.find(b => Number(b.dataset.hour) === _routeInfoSelectedTs);
+  if (active) selectAlertPill(active, allPills);
+  allPills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      _routeInfoSelectedTs = Number(btn.dataset.hour);
+      selectAlertPill(btn, allPills);
+      recolorAllMaps();
+      refreshInfoPanel();
+    });
+  });
+}
+
+// ---- Stop alert scoring (route view) ----
+// Thresholds: await > 3× global mean, occupation > 75%, unable_boards > 4
+
+function computeStopAlertScoreGen(stopInfo) {
+  if (!stopInfo) return 0;
+  const globalMeanAwait = _plotsInfo?.generalStats?.Mean_await_passengers;
+  let flags = 0;
+  if (stopInfo.Occupation_percentage != null && stopInfo.Occupation_percentage > 75) flags++;
+  if (globalMeanAwait && stopInfo.Mean_await_time_general != null && stopInfo.Mean_await_time_general > 3 * globalMeanAwait) flags++;
+  if (stopInfo.unable_boards != null && stopInfo.unable_boards > 4) flags++;
+  const baseScore = flags / 3;
+  // Also consider the worst individual timeslot so the general view shows the maximum risk
+  const tsScores = Object.keys(stopInfo.Occupation_percentage_per_timeslot || {})
+    .map(ts => computeStopAlertScoreTs(stopInfo, Number(ts)));
+  return Math.max(baseScore, ...tsScores);
+}
+
+function computeStopAlertScoreTs(stopInfo, ts) {
+  if (!stopInfo) return 0;
+  const globalMeanAwait = _plotsInfo?.generalStats?.Mean_await_passengers;
+  let flags = 0;
+  const oc = stopInfo.Occupation_percentage_per_timeslot?.[ts];
+  const aw = stopInfo.Mean_await_time_per_timeslot?.[ts];
+  const ub = stopInfo.Board_dropoff_per_timeslot?.[ts]?.unable_boards;
+  if (oc != null && oc > 75) flags++;
+  if (globalMeanAwait && aw != null && aw > 3 * globalMeanAwait) flags++;
+  if (ub != null && ub > 4) flags++;
+  return flags / 3;
+}
+
+// Section: max of the general comparison AND the worst individual timeslot
+function computeSectionAlertScoreGen(sectionData) {
+  if (!sectionData) return 0;
+  let baseScore = 0;
+  if (sectionData.expected_time != null && sectionData.general_time != null) {
+    baseScore = sectionData.general_time > 2 * sectionData.expected_time ? 1 : 0;
+  }
+  const tsScores = Object.keys(sectionData.expected_time_per_timeslot || {})
+    .map(ts => computeSectionAlertScoreTs(sectionData, Number(ts)));
+  return Math.max(baseScore, ...tsScores);
+}
+
+// Returns the expected time for a timeslot, walking forward if the value is 0 or missing
+// (e.g. toB at ts=5 has no service data, so falls back to ts=6)
+function resolveExpectedTimeTs(sectionData, ts) {
+  const etpt = sectionData?.expected_time_per_timeslot;
+  if (!etpt) return null;
+  for (let t = ts; t <= Math.min(ts + 3, 23); t++) {
+    const v = etpt[t];
+    if (v != null && v > 0) return v;
+  }
+  return null;
+}
+
+function computeSectionAlertScoreTs(sectionData, ts) {
+  if (!sectionData) return 0;
+  const expected = resolveExpectedTimeTs(sectionData, ts);
+  const actual   = sectionData.time_per_timeslot?.[ts];
+  if (expected == null || actual == null) return 0;
+  return actual > 2 * expected ? 1 : 0;
+}
+
 function closeInfoPanel() {
   if (_activeClearSelection) {
     _activeClearSelection();
@@ -703,6 +828,7 @@ function renderDirectionMaps(exp) {
       <button class="filter-btn active" id="route-filter-general-btn">&#128202; General</button>
       <button class="filter-btn" id="route-filter-ts-btn">&#128336; Franja horaria</button>
     </div>
+    <div id="route-ts-bar" style="display:none;border-bottom:1px solid var(--emt-gray-200);"></div>
     <div class="direction-maps">
       <div class="direction-map-panel">
         <div class="direction-map-label dir-label-a">&#8594; Sentido ${_dirNames.toA}</div>
@@ -720,15 +846,20 @@ function renderDirectionMaps(exp) {
     _routeInfoFilter = 'general';
     document.getElementById('route-filter-general-btn').classList.add('active');
     document.getElementById('route-filter-ts-btn').classList.remove('active');
-    // Refresh panel if something is selected
+    document.getElementById('route-ts-bar').style.display = 'none';
     refreshInfoPanel();
+    recolorAllMaps();
   });
 
   document.getElementById('route-filter-ts-btn').addEventListener('click', () => {
     _routeInfoFilter = 'timeslot';
     document.getElementById('route-filter-ts-btn').classList.add('active');
     document.getElementById('route-filter-general-btn').classList.remove('active');
+    const bar = document.getElementById('route-ts-bar');
+    bar.style.display = '';
+    renderRouteTimeslotBar();
     refreshInfoPanel();
+    recolorAllMaps();
   });
 
   buildSvgMap(document.getElementById('svg-toA'), exp.toA, 'toA');
@@ -837,7 +968,9 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
 
     let selectedIdx     = -1;
     let selectedStopIdx = -1;
-    const stopCircles   = [];
+    const stopCircles      = [];
+    const stopAlertColors  = []; // { bg, text, label } per stop index
+    const sectionAlertColors = []; // { bg } per section index
 
     function styleSection(idx, color, weight) {
       sections[idx].visPaths.forEach(p => {
@@ -868,14 +1001,61 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
 
     function clearSelection() {
       if (selectedIdx >= 0) {
-        styleSection(selectedIdx, C_DEFAULT, '3');
-        styleStops(selectedIdx, C_STOP_DEF, C_DEFAULT);
+        styleSection(selectedIdx, sectionAlertColors[selectedIdx]?.bg ?? C_DEFAULT, '3');
+        // Restore boundary stops to their individual alert colors
+        const fc = stopAlertColors[selectedIdx];
+        const tc = stopAlertColors[selectedIdx + 1];
+        if (sections[selectedIdx].fromCircle && fc) {
+          styleStopCircle(selectedIdx,     fc.bg, '#fff', '6');
+        }
+        if (sections[selectedIdx].toCircle && tc) {
+          styleStopCircle(selectedIdx + 1, tc.bg, '#fff', '6');
+        }
         selectedIdx = -1;
       }
       if (selectedStopIdx >= 0) {
-        styleStopCircle(selectedStopIdx, C_STOP_DEF, C_DEFAULT, '6');
+        const c = stopAlertColors[selectedStopIdx];
+        styleStopCircle(selectedStopIdx, c?.bg ?? C_STOP_DEF, '#fff', '6');
         selectedStopIdx = -1;
       }
+    }
+
+    // Recompute and apply alert colors for all non-selected elements
+    function recolor(filter, ts) {
+      const timesStops = _plotsInfo?.stopGeneralInfo?.[dirKey]?.times_stops || {};
+
+      sortedStops.forEach((stop, i) => {
+        const sid   = String(stop.props.stopNum);
+        const si    = _plotsInfo?.stopGeneralInfo?.[dirKey]?.[sid];
+        const score = filter === 'timeslot'
+          ? computeStopAlertScoreTs(si, ts)
+          : computeStopAlertScoreGen(si);
+        stopAlertColors[i] = scoreToColor(score);
+      });
+
+      sections.forEach((sec, i) => {
+        const fromId = String(sec.from.props.stopNum);
+        const toId   = String(sec.to.props.stopNum);
+        const sd     = timesStops[`${fromId}-${toId}`];
+        const score  = filter === 'timeslot'
+          ? computeSectionAlertScoreTs(sd, ts)
+          : computeSectionAlertScoreGen(sd);
+        sectionAlertColors[i] = scoreToColor(score);
+      });
+
+      // Apply to non-selected elements only
+      sections.forEach((_, i) => {
+        if (selectedIdx !== i) styleSection(i, sectionAlertColors[i].bg, '3');
+      });
+
+      sortedStops.forEach((_, i) => {
+        const isBoundary = (i < sections.length && selectedIdx === i) || (i > 0 && selectedIdx === i - 1);
+        if (selectedStopIdx !== i && !isBoundary) {
+          const c = stopAlertColors[i];
+          stopCircles[i].setAttribute('fill', c.bg);
+          stopCircles[i].setAttribute('stroke', '#fff');
+        }
+      });
     }
 
     // Draw route paths grouped by section
@@ -919,12 +1099,12 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
 
       sec.hitPaths.forEach(hit => {
         hit.addEventListener('mouseenter', e => {
-          if (selectedIdx !== sIdx) styleSection(sIdx, C_HOVER, '5');
+          if (selectedIdx !== sIdx) styleSection(sIdx, sectionAlertColors[sIdx]?.bg ?? C_HOVER, '5');
           showTooltip(e, tooltipHtml());
         });
         hit.addEventListener('mousemove', positionTooltip);
         hit.addEventListener('mouseleave', () => {
-          if (selectedIdx !== sIdx) styleSection(sIdx, C_DEFAULT, '3');
+          if (selectedIdx !== sIdx) styleSection(sIdx, sectionAlertColors[sIdx]?.bg ?? C_DEFAULT, '3');
           hideTooltip();
         });
         hit.addEventListener('click', () => {
@@ -973,7 +1153,6 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
 
       circle.addEventListener('mouseenter', e => {
         circle.setAttribute('r', '9');
-        circle.setAttribute('fill', C_DEFAULT);
         showTooltip(e, `<strong>${p.stopNum}</strong> &middot; ${escHtml(p.stopName)}`);
       });
       circle.addEventListener('mousemove', positionTooltip);
@@ -984,8 +1163,14 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
         const isStopSelected = selectedStopIdx === i;
         const isAnySelected  = isSectionBoundary || isStopSelected;
         circle.setAttribute('r', isAnySelected ? '8' : '6');
-        circle.setAttribute('fill', isAnySelected ? C_STOP_SEL : C_STOP_DEF);
-        circle.setAttribute('stroke', isAnySelected ? C_SELECTED : C_DEFAULT);
+        if (isAnySelected) {
+          circle.setAttribute('fill', C_STOP_SEL);
+          circle.setAttribute('stroke', C_SELECTED);
+        } else {
+          const ac = stopAlertColors[i];
+          circle.setAttribute('fill', ac?.bg ?? C_STOP_DEF);
+          circle.setAttribute('stroke', '#fff');
+        }
         hideTooltip();
       });
       circle.addEventListener('click', () => {
@@ -1013,6 +1198,10 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
       svgEl.appendChild(circle);
     });
 
+    // Register and apply initial alert colors (uses _plotsInfo if already loaded)
+    _mapRecolorFns[dirKey] = recolor;
+    recolor(_routeInfoFilter, _routeInfoSelectedTs);
+
   } catch (err) {
     svgEl.innerHTML = '';
     const errText = document.createElementNS(ns, 'text');
@@ -1027,29 +1216,6 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
   }
 }
 
-// ---- Build timeslot selector HTML (hours 5-23) ----
-function buildTimeslotSelector(availableHours, selectedHour, onSelect) {
-  const hours = Array.from({ length: 19 }, (_, i) => i + 5); // 5..23
-  const btns = hours.map(h => {
-    const avail = availableHours.includes(h);
-    const active = h === selectedHour ? 'active' : '';
-    const disabled = avail ? '' : 'disabled style="opacity:0.35;cursor:not-allowed;"';
-    return `<button class="ts-btn ${active}" data-hour="${h}" ${disabled}>${h}</button>`;
-  }).join('');
-
-  const wrap = document.createElement('div');
-  wrap.className = 'timeslot-selector-wrap';
-  wrap.innerHTML = `<span class="timeslot-selector-label">Franja horaria:</span>${btns}`;
-
-  wrap.querySelectorAll('.ts-btn:not([disabled])').forEach(btn => {
-    btn.addEventListener('click', () => {
-      wrap.querySelectorAll('.ts-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      onSelect(Number(btn.dataset.hour));
-    });
-  });
-  return wrap;
-}
 
 // ---- Show stop info panel ----
 function showStopInfo(p, dirKey) {
@@ -1176,15 +1342,6 @@ function showStopInfo(p, dirKey) {
       }
     }
 
-    const infoBody = panel.querySelector('.stop-info-body');
-    if (infoBody) {
-      infoBody.innerHTML = statsHtml;
-      // Re-attach timeslot selector
-      const tsWrap = panel.querySelector('.ts-selector-slot');
-      if (tsWrap) tsWrap.innerHTML = '';
-    }
-
-    // Full re-render approach (simpler, avoids DOM patching)
     panel.innerHTML = `
       <div class="route-info-header">
         <span>&#9679; Parada ${p.stopNum} &middot; ${escHtml(p.stopName)}</span>
@@ -1195,26 +1352,8 @@ function showStopInfo(p, dirKey) {
         <div class="route-info-row"><span>N&#250;m. parada</span><strong>${p.stopNum}</strong></div>
       </div>
       ${statsHtml}
-      ${filter === 'timeslot' ? '<!-- ts-selector -->' : ''}
       ${plotsHtml}
     `;
-
-    // Inject timeslot selector after stats box for timeslot mode
-    if (filter === 'timeslot' && stopInfo) {
-      const availHours = Object.keys(stopInfo.Occupation_percentage_per_timeslot || {}).map(Number);
-      const selector = buildTimeslotSelector(availHours, selectedTs, (newTs) => {
-        _routeInfoSelectedTs = newTs;
-        renderStopPanel('timeslot', newTs);
-      });
-      // Insert after the statsBox (before plots)
-      const statsBox = panel.querySelector('.stop-stats-box');
-      if (statsBox) {
-        statsBox.after(selector);
-      } else {
-        // Insert before plots
-        panel.appendChild(selector);
-      }
-    }
   }
 
   renderStopPanel(_routeInfoFilter, _routeInfoSelectedTs);
@@ -1242,24 +1381,38 @@ function showSectionInfo(sec, dirKey) {
       if (filter === 'general') {
         const genTime = sectionData.general_time != null
           ? formatDuration(sectionData.general_time) : '—';
+        const expTime = sectionData.expected_time != null
+          ? formatDuration(sectionData.expected_time) : '—';
         statsHtml = `
           <div class="stop-stats-box">
             <div class="ss-item">
               <span class="ss-label">Tiempo de tránsito general</span>
               <span class="ss-value">${genTime}</span>
             </div>
+            <div class="ss-item">
+              <span class="ss-label">Tiempo esperado</span>
+              <span class="ss-value">${expTime}</span>
+            </div>
           </div>`;
-        // No comparison plot in general mode for sections
 
       } else {
         const ts = selectedTs;
         const tsTime = sectionData.time_per_timeslot?.[ts] != null
           ? formatDuration(sectionData.time_per_timeslot[ts]) : '—';
+        const rawExpected = sectionData.expected_time_per_timeslot?.[ts];
+        const resolvedExp = resolveExpectedTimeTs(sectionData, ts);
+        const expTsTime   = resolvedExp != null
+          ? formatDuration(resolvedExp) + ((!rawExpected || rawExpected === 0) ? ` (franja ${ts + 1})` : '')
+          : '—';
         statsHtml = `
           <div class="stop-stats-box">
             <div class="ss-item">
               <span class="ss-label">Tiempo de tránsito franja ${ts}:00</span>
               <span class="ss-value">${tsTime}</span>
+            </div>
+            <div class="ss-item">
+              <span class="ss-label">Tiempo esperado franja ${ts}:00</span>
+              <span class="ss-value">${expTsTime}</span>
             </div>
           </div>`;
 
@@ -1299,16 +1452,6 @@ function showSectionInfo(sec, dirKey) {
       ${plotsHtml}
     `;
 
-    if (filter === 'timeslot' && sectionData) {
-      const availHours = Object.keys(sectionData.time_per_timeslot || {}).map(Number);
-      const selector = buildTimeslotSelector(availHours, selectedTs, (newTs) => {
-        _routeInfoSelectedTs = newTs;
-        renderSectionPanel('timeslot', newTs);
-      });
-      const statsBox = panel.querySelector('.stop-stats-box');
-      if (statsBox) statsBox.after(selector);
-      else panel.appendChild(selector);
-    }
   }
 
   renderSectionPanel(_routeInfoFilter, _routeInfoSelectedTs);
