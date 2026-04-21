@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  emt-app:
+    build: .
+    container_name: emt-app
+    restart: unless-stopped
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - ./data:/app/data
+      - ./img:/app/img
+      - ./bash_scripts:/app/bash_scripts
+
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.emt.rule=Host(`emt.hectoralvarezmarcos.com`)"
+      - "traefik.http.routers.emt.entrypoints=websecure"
+      - "traefik.http.routers.emt.tls=true"
+      - "traefik.http.routers.emt.tls.certresolver=myresolver"
+
+      - "traefik.http.routers.emt.middlewares=auth@file"
+
+      - "traefik.http.services.emt.loadbalancer.server.port=3000"
