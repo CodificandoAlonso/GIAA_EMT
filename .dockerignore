@@ -1,0 +1,21 @@
+# Python artefacts
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/.venv/
+**/venv/
+**/*.egg-info/
+
+WEB_DEVEL/node_modules/
+
+
+
+.idea/
+**/.DS_Store
+**/*.swp
+
+# Git history
+.git/
+
+# Docs
+docs/

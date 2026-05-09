@@ -1,0 +1,59 @@
+# =============================================================================
+# docker-compose.yaml  —  GIAA_EMT EMT Madrid ABM Simulation
+#
+# One long-running service: the web server (server.js) stays up and spawns
+# prepare_simulation.sh / run_simulation.sh / data_extractor.py on demand
+# when the user interacts with the web UI.
+#
+# All bash scripts run as child processes of node inside the same container.
+#
+# VOLUME STRATEGY — bind mounts only (no named volumes):
+#
+#   WEB_DEVEL/data/logs/   →  /workspace/logs        rw
+#     SIMULATION_<ts>/ directories are created here by prepare_simulation.sh
+#     and GAMA headless writes its output here (path passed via -outputPath).
+#     Both appear directly on the host filesystem — no docker cp needed.
+#
+#   GAMA/TEST_MOBILITY/    →  /workspace/gama_source  ro
+#     prepare_simulation.sh copies this into each new SIMULATION_<ts>/ dir.
+#     Read-only: the source template is never modified at runtime.
+#
+#   WEB_DEVEL/data/known_data/  →  /workspace/known_data  ro
+#     Reference statistical data consumed by data_extractor.py.
+#
+#   <host GAMA install>/   →  /opt/gama               ro
+#     GAMA Platform headless binary. Adjust the source path below to match
+#     your actual GAMA installation directory.
+#
+# .last_simulation:
+#   Written by prepare_simulation.sh to $LOGS_DIR/.last_simulation
+#   (i.e. WEB_DEVEL/data/logs/.last_simulation on the host).
+#   Survives container restarts because it is inside the bind-mounted dir.
+# =============================================================================
+
+services:
+
+  app:
+    build:
+      dockerfile: Dockerfile
+    image: giaa_emt/app:latest
+    container_name: emt_app
+
+    ports:
+      - 3000:3000
+
+    volumes:
+
+      - ./WEB_DEVEL/data/logs:/workspace/WEB_DEVEL/data/logs
+
+      - ./WEB_DEVEL/data/known_data:/workspace/WEB_DEVEL/data/known_data:ro
+
+
+    restart: unless-stopped
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: 12
+          memory: "14G"

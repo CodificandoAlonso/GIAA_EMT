@@ -1,0 +1,1035 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{pelletier2011smart}{article}{}
+      \name{author}{3}{}{%
+        {{hash=8cadd8aa2f5f05c3b6b003fa4b5d9679}{%
+           family={Pelletier},
+           familyi={P\bibinitperiod},
+           given={Marie-Pier},
+           giveni={M\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=b49c5b6adab7498f864677c87c6fbb9d}{%
+           family={Trépanier},
+           familyi={T\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4dbcb8bedf4afd701631d93446b857f7}{%
+           family={Morency},
+           familyi={M\bibinitperiod},
+           given={Catherine},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{6ffcc1161816e0cdaabb1e4889daab1f}
+      \strng{fullhash}{6ffcc1161816e0cdaabb1e4889daab1f}
+      \strng{bibnamehash}{6ffcc1161816e0cdaabb1e4889daab1f}
+      \strng{authorbibnamehash}{6ffcc1161816e0cdaabb1e4889daab1f}
+      \strng{authornamehash}{6ffcc1161816e0cdaabb1e4889daab1f}
+      \strng{authorfullhash}{6ffcc1161816e0cdaabb1e4889daab1f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Research Part C: Emerging Technologies}
+      \field{number}{4}
+      \field{title}{Smart card data use in public transit: A literature review}
+      \field{volume}{19}
+      \field{year}{2011}
+      \field{pages}{557\bibrangedash 568}
+      \range{pages}{12}
+    \endentry
+    \entry{nesmachnow2023bigdata}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ab30b2b5cdc81bb5afe59e5723f06daa}{%
+           family={Nesmachnow},
+           familyi={N\bibinitperiod},
+           given={Sergio},
+           giveni={S\bibinitperiod}}}%
+        {{hash=20e47fffa836dedf42c440ef9951505f}{%
+           family={Hernández},
+           familyi={H\bibinitperiod},
+           given={Diego},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{f9daca5a573f695155685484e12115a6}
+      \strng{fullhash}{f9daca5a573f695155685484e12115a6}
+      \strng{bibnamehash}{f9daca5a573f695155685484e12115a6}
+      \strng{authorbibnamehash}{f9daca5a573f695155685484e12115a6}
+      \strng{authornamehash}{f9daca5a573f695155685484e12115a6}
+      \strng{authorfullhash}{f9daca5a573f695155685484e12115a6}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sustainability}
+      \field{number}{19}
+      \field{title}{Big Data Analysis for Travel Time Characterization in Public Transportation Systems}
+      \field{volume}{15}
+      \field{year}{2023}
+      \field{pages}{14561}
+      \range{pages}{1}
+    \endentry
+    \entry{maes1993modeling}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2f8f33c85296fc648721ff66ab814d0a}{%
+           family={Maes},
+           familyi={M\bibinitperiod},
+           given={Pattie},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{2f8f33c85296fc648721ff66ab814d0a}
+      \strng{fullhash}{2f8f33c85296fc648721ff66ab814d0a}
+      \strng{bibnamehash}{2f8f33c85296fc648721ff66ab814d0a}
+      \strng{authorbibnamehash}{2f8f33c85296fc648721ff66ab814d0a}
+      \strng{authornamehash}{2f8f33c85296fc648721ff66ab814d0a}
+      \strng{authorfullhash}{2f8f33c85296fc648721ff66ab814d0a}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Life}
+      \field{number}{1--2}
+      \field{title}{Modeling Adaptive Autonomous Agents}
+      \field{volume}{1}
+      \field{year}{1993}
+      \field{pages}{135\bibrangedash 162}
+      \range{pages}{28}
+    \endentry
+    \entry{jennings1998applications}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=1fb1b859fa7fe89eeae563907c07b4e4}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={Nicholas\bibnamedelima R.},
+           giveni={N\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=ea0f2db42141b96e5751d533bd719db5}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=1fb1b859fa7fe89eeae563907c07b4e4}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={Nicholas\bibnamedelima R.},
+           giveni={N\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=ea0f2db42141b96e5751d533bd719db5}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \strng{fullhash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \strng{bibnamehash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \strng{authorbibnamehash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \strng{authornamehash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \strng{authorfullhash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \strng{editorbibnamehash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \strng{editornamehash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \strng{editorfullhash}{8a8e3c2b98fb36c84a8c230aae0178a9}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Agent Technology: Foundations, Applications, and Markets}
+      \field{title}{Applications of Intelligent Agents}
+      \field{year}{1998}
+      \field{pages}{3\bibrangedash 28}
+      \range{pages}{26}
+    \endentry
+    \entry{nwana1996software}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9c8632ab1d5057bd5c6dbd6f4dba4f05}{%
+           family={Nwana},
+           familyi={N\bibinitperiod},
+           given={Hyacinth\bibnamedelima S.},
+           giveni={H\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{9c8632ab1d5057bd5c6dbd6f4dba4f05}
+      \strng{fullhash}{9c8632ab1d5057bd5c6dbd6f4dba4f05}
+      \strng{bibnamehash}{9c8632ab1d5057bd5c6dbd6f4dba4f05}
+      \strng{authorbibnamehash}{9c8632ab1d5057bd5c6dbd6f4dba4f05}
+      \strng{authornamehash}{9c8632ab1d5057bd5c6dbd6f4dba4f05}
+      \strng{authorfullhash}{9c8632ab1d5057bd5c6dbd6f4dba4f05}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Knowledge Engineering Review}
+      \field{number}{3}
+      \field{title}{Software Agents: An Overview}
+      \field{volume}{11}
+      \field{year}{1996}
+      \field{pages}{205\bibrangedash 244}
+      \range{pages}{40}
+    \endentry
+    \entry{Wooldridge1995}{article}{}
+      \name{author}{2}{}{%
+        {{hash=1dbead6bb535576afc14adfe5a5c42bb}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1fb1b859fa7fe89eeae563907c07b4e4}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={Nicholas\bibnamedelima R.},
+           giveni={N\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{fullhash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{bibnamehash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{authorbibnamehash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{authornamehash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{authorfullhash}{0f977bb6eef94504949d95c01854cc2f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Knowledge Engineering Review}
+      \field{number}{2}
+      \field{title}{Intelligent Agents: Theory and Practice}
+      \field{volume}{10}
+      \field{year}{1995}
+      \field{pages}{115\bibrangedash 152}
+      \range{pages}{38}
+    \endentry
+    \entry{castelfranchi1995guarantees}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=a24812b383b49717becceb68cf16ea7c}{%
+           family={Castelfranchi},
+           familyi={C\bibinitperiod},
+           given={Cristiano},
+           giveni={C\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=1dbead6bb535576afc14adfe5a5c42bb}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1fb1b859fa7fe89eeae563907c07b4e4}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={Nicholas\bibnamedelima R.},
+           giveni={N\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{a24812b383b49717becceb68cf16ea7c}
+      \strng{fullhash}{a24812b383b49717becceb68cf16ea7c}
+      \strng{bibnamehash}{a24812b383b49717becceb68cf16ea7c}
+      \strng{authorbibnamehash}{a24812b383b49717becceb68cf16ea7c}
+      \strng{authornamehash}{a24812b383b49717becceb68cf16ea7c}
+      \strng{authorfullhash}{a24812b383b49717becceb68cf16ea7c}
+      \strng{editorbibnamehash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{editornamehash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{editorfullhash}{0f977bb6eef94504949d95c01854cc2f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Intelligent Agents: Theories, Architectures, and Languages ({LNAI} Volume 890)}
+      \field{title}{Guarantees for Autonomy in Cognitive Agent Architecture}
+      \field{year}{1995}
+      \field{pages}{56\bibrangedash 70}
+      \range{pages}{15}
+    \endentry
+    \entry{brooks1986robust}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c5572a6f2e05a08f36cab3bae8fdb643}{%
+           family={Brooks},
+           familyi={B\bibinitperiod},
+           given={Rodney\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{fullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{bibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorbibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authornamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorfullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal on Robotics and Automation}
+      \field{number}{1}
+      \field{title}{A Robust Layered Control System for a Mobile Robot}
+      \field{volume}{2}
+      \field{year}{1986}
+      \field{pages}{14\bibrangedash 23}
+      \range{pages}{10}
+    \endentry
+    \entry{franklin1996agent}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=e3905352d4e0f537e5b25f72df123db7}{%
+           family={Franklin},
+           familyi={F\bibinitperiod},
+           given={Stan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b4944fc1d00b7d94d79efc3c44cdd979}{%
+           family={Graesser},
+           familyi={G\bibinitperiod},
+           given={Art},
+           giveni={A\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=3e55a9b501b5709e60e30f42bf32d546}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Jörg\bibnamedelima P.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=ea0f2db42141b96e5751d533bd719db5}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=1fb1b859fa7fe89eeae563907c07b4e4}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={Nicholas\bibnamedelima R.},
+           giveni={N\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{f0155098c53eede3f0583f29f099e39d}
+      \strng{fullhash}{f0155098c53eede3f0583f29f099e39d}
+      \strng{bibnamehash}{f0155098c53eede3f0583f29f099e39d}
+      \strng{authorbibnamehash}{f0155098c53eede3f0583f29f099e39d}
+      \strng{authornamehash}{f0155098c53eede3f0583f29f099e39d}
+      \strng{authorfullhash}{f0155098c53eede3f0583f29f099e39d}
+      \strng{editorbibnamehash}{8b92a16afd02c2749fb5de196aeba9ec}
+      \strng{editornamehash}{8b92a16afd02c2749fb5de196aeba9ec}
+      \strng{editorfullhash}{8b92a16afd02c2749fb5de196aeba9ec}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Intelligent Agents {III} ({LNAI} Volume 1193)}
+      \field{title}{Is It an Agent, or Just a Program? {A} Taxonomy for Autonomous Agents}
+      \field{year}{1997}
+      \field{pages}{21\bibrangedash 35}
+      \range{pages}{15}
+    \endentry
+    \entry{bratman1987intention}{book}{}
+      \name{author}{1}{}{%
+        {{hash=660977077fa2ab5521b302519128423c}{%
+           family={Bratman},
+           familyi={B\bibinitperiod},
+           given={Michael\bibnamedelima E.},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA}%
+      }
+      \list{publisher}{1}{%
+        {Harvard University Press}%
+      }
+      \strng{namehash}{660977077fa2ab5521b302519128423c}
+      \strng{fullhash}{660977077fa2ab5521b302519128423c}
+      \strng{bibnamehash}{660977077fa2ab5521b302519128423c}
+      \strng{authorbibnamehash}{660977077fa2ab5521b302519128423c}
+      \strng{authornamehash}{660977077fa2ab5521b302519128423c}
+      \strng{authorfullhash}{660977077fa2ab5521b302519128423c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Intention, Plans, and Practical Reason}
+      \field{year}{1987}
+    \endentry
+    \entry{brooks1990elephants}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=c5572a6f2e05a08f36cab3bae8fdb643}{%
+           family={Brooks},
+           familyi={B\bibinitperiod},
+           given={Rodney\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=2f8f33c85296fc648721ff66ab814d0a}{%
+           family={Maes},
+           familyi={M\bibinitperiod},
+           given={Pattie},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{fullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{bibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorbibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authornamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorfullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{editorbibnamehash}{2f8f33c85296fc648721ff66ab814d0a}
+      \strng{editornamehash}{2f8f33c85296fc648721ff66ab814d0a}
+      \strng{editorfullhash}{2f8f33c85296fc648721ff66ab814d0a}
+      \field{extraname}{2}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Designing Autonomous Agents}
+      \field{title}{Elephants Don't Play Chess}
+      \field{year}{1990}
+      \field{pages}{3\bibrangedash 15}
+      \range{pages}{13}
+    \endentry
+    \entry{brooks1991intelligence}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=c5572a6f2e05a08f36cab3bae8fdb643}{%
+           family={Brooks},
+           familyi={B\bibinitperiod},
+           given={Rodney\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Sydney, Australia}%
+      }
+      \strng{namehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{fullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{bibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorbibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authornamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorfullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \field{extraname}{3}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Twelfth International Joint Conference on Artificial Intelligence (IJCAI-91)}
+      \field{title}{Intelligence Without Reason}
+      \field{year}{1991}
+      \field{pages}{569\bibrangedash 595}
+      \range{pages}{27}
+    \endentry
+    \entry{brooks1991representation}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c5572a6f2e05a08f36cab3bae8fdb643}{%
+           family={Brooks},
+           familyi={B\bibinitperiod},
+           given={Rodney\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{fullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{bibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorbibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authornamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorfullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \field{extraname}{4}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Intelligence}
+      \field{title}{Intelligence Without Representation}
+      \field{volume}{47}
+      \field{year}{1991}
+      \field{pages}{139\bibrangedash 159}
+      \range{pages}{21}
+    \endentry
+    \entry{ferguson1992touringmachines}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=c69c9edb31463a624f47b0cc98444389}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={Innes\bibnamedelima A.},
+           giveni={I\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of Cambridge}%
+      }
+      \strng{namehash}{c69c9edb31463a624f47b0cc98444389}
+      \strng{fullhash}{c69c9edb31463a624f47b0cc98444389}
+      \strng{bibnamehash}{c69c9edb31463a624f47b0cc98444389}
+      \strng{authorbibnamehash}{c69c9edb31463a624f47b0cc98444389}
+      \strng{authornamehash}{c69c9edb31463a624f47b0cc98444389}
+      \strng{authorfullhash}{c69c9edb31463a624f47b0cc98444389}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{TouringMachines: An Architecture for Dynamic, Rational, Mobile Agents}
+      \field{type}{phdthesis}
+      \field{year}{1992}
+    \endentry
+    \entry{muller1995modelling}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=3e55a9b501b5709e60e30f42bf32d546}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Jörg\bibnamedelima P.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=ce4da05daab07204313a3cc3683c3e78}{%
+           family={Pischel},
+           familyi={P\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e7183ddbaca2f7e56be7d33f3e90ab1a}{%
+           family={Thiel},
+           familyi={T\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=1dbead6bb535576afc14adfe5a5c42bb}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1fb1b859fa7fe89eeae563907c07b4e4}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={Nicholas\bibnamedelima R.},
+           giveni={N\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{82ab0ec7a0b841f0f65fec6d357ecd3f}
+      \strng{fullhash}{82ab0ec7a0b841f0f65fec6d357ecd3f}
+      \strng{bibnamehash}{82ab0ec7a0b841f0f65fec6d357ecd3f}
+      \strng{authorbibnamehash}{82ab0ec7a0b841f0f65fec6d357ecd3f}
+      \strng{authornamehash}{82ab0ec7a0b841f0f65fec6d357ecd3f}
+      \strng{authorfullhash}{82ab0ec7a0b841f0f65fec6d357ecd3f}
+      \strng{editorbibnamehash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{editornamehash}{0f977bb6eef94504949d95c01854cc2f}
+      \strng{editorfullhash}{0f977bb6eef94504949d95c01854cc2f}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Intelligent Agents ({LNAI} Volume 890)}
+      \field{title}{Modeling Reactive Behaviour in Vertically Layered Agent Architectures}
+      \field{year}{1995}
+      \field{pages}{261\bibrangedash 276}
+      \range{pages}{16}
+    \endentry
+    \entry{werner1996logical}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=913bd9452002794ee006a6863f2e6958}{%
+           family={Werner},
+           familyi={W\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=18d8f787c09dc02a2aa110c7b254aa49}{%
+           family={Weiss},
+           familyi={W\bibinitperiod},
+           given={Gerhard},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons}%
+      }
+      \strng{namehash}{913bd9452002794ee006a6863f2e6958}
+      \strng{fullhash}{913bd9452002794ee006a6863f2e6958}
+      \strng{bibnamehash}{913bd9452002794ee006a6863f2e6958}
+      \strng{authorbibnamehash}{913bd9452002794ee006a6863f2e6958}
+      \strng{authornamehash}{913bd9452002794ee006a6863f2e6958}
+      \strng{authorfullhash}{913bd9452002794ee006a6863f2e6958}
+      \strng{editorbibnamehash}{18d8f787c09dc02a2aa110c7b254aa49}
+      \strng{editornamehash}{18d8f787c09dc02a2aa110c7b254aa49}
+      \strng{editorfullhash}{18d8f787c09dc02a2aa110c7b254aa49}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Foundations of Distributed Artificial Intelligence}
+      \field{title}{Logical Foundations of Distributed Artificial Intelligence}
+      \field{year}{1996}
+      \field{pages}{57\bibrangedash 99}
+      \range{pages}{43}
+    \endentry
+    \entry{parunak1996applications}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=31cd92c4a8ed4df87e80db57ba92b92d}{%
+           family={Parunak},
+           familyi={P\bibinitperiod},
+           given={H.\bibnamedelimi Van\bibnamedelima Dyke},
+           giveni={H\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=0c60437d3dde2911f26a21833681a684}{%
+           family={O'Hare},
+           familyi={O\bibinitperiod},
+           given={Gregory\bibnamedelimb M.\bibnamedelimi P.},
+           giveni={G\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=1fb1b859fa7fe89eeae563907c07b4e4}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={Nicholas\bibnamedelima R.},
+           giveni={N\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Inter-Science}%
+      }
+      \strng{namehash}{31cd92c4a8ed4df87e80db57ba92b92d}
+      \strng{fullhash}{31cd92c4a8ed4df87e80db57ba92b92d}
+      \strng{bibnamehash}{31cd92c4a8ed4df87e80db57ba92b92d}
+      \strng{authorbibnamehash}{31cd92c4a8ed4df87e80db57ba92b92d}
+      \strng{authornamehash}{31cd92c4a8ed4df87e80db57ba92b92d}
+      \strng{authorfullhash}{31cd92c4a8ed4df87e80db57ba92b92d}
+      \strng{editorbibnamehash}{2aa3290cacd72b05a2c5834a76eb15df}
+      \strng{editornamehash}{2aa3290cacd72b05a2c5834a76eb15df}
+      \strng{editorfullhash}{2aa3290cacd72b05a2c5834a76eb15df}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Foundations of Distributed Artificial Intelligence}
+      \field{title}{Applications of Distributed Artificial Intelligence in Industry}
+      \field{year}{1996}
+      \field{pages}{139\bibrangedash 164}
+      \range{pages}{26}
+    \endentry
+    \entry{wooldridge2009introduction}{book}{}
+      \name{author}{1}{}{%
+        {{hash=1dbead6bb535576afc14adfe5a5c42bb}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Chichester, UK}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons}%
+      }
+      \strng{namehash}{1dbead6bb535576afc14adfe5a5c42bb}
+      \strng{fullhash}{1dbead6bb535576afc14adfe5a5c42bb}
+      \strng{bibnamehash}{1dbead6bb535576afc14adfe5a5c42bb}
+      \strng{authorbibnamehash}{1dbead6bb535576afc14adfe5a5c42bb}
+      \strng{authornamehash}{1dbead6bb535576afc14adfe5a5c42bb}
+      \strng{authorfullhash}{1dbead6bb535576afc14adfe5a5c42bb}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{An Introduction to MultiAgent Systems}
+      \field{year}{2009}
+    \endentry
+    \entry{botti2025agentic}{article}{}
+      \name{author}{1}{}{%
+        {{hash=767c546572a257b7cb04a0daea104c99}{%
+           family={Botti},
+           familyi={B\bibinitperiod},
+           given={Vicent},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{767c546572a257b7cb04a0daea104c99}
+      \strng{fullhash}{767c546572a257b7cb04a0daea104c99}
+      \strng{bibnamehash}{767c546572a257b7cb04a0daea104c99}
+      \strng{authorbibnamehash}{767c546572a257b7cb04a0daea104c99}
+      \strng{authornamehash}{767c546572a257b7cb04a0daea104c99}
+      \strng{authorfullhash}{767c546572a257b7cb04a0daea104c99}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2506.01463}
+      \field{title}{Agentic {AI} and Multiagentic: Are We Reinventing the Wheel?}
+      \field{year}{2025}
+    \endentry
+    \entry{fipa2002acl}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=9ea78c8bdcb65ac951c55622c18b20ec}{%
+           family={{Foundation for Intelligent Physical Agents}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{fullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{bibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \field{extraname}{1}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{FIPA Specification SC00061G}
+      \field{title}{{FIPA ACL} Message Structure Specification}
+      \field{year}{2002}
+      \verb{urlraw}
+      \verb http://www.fipa.org/specs/fipa00061/
+      \endverb
+      \verb{url}
+      \verb http://www.fipa.org/specs/fipa00061/
+      \endverb
+    \endentry
+    \entry{finin1994kqml}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=f72951f82953c1fa5d859938ba2882f5}{%
+           family={Finin},
+           familyi={F\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod}}}%
+        {{hash=09752883d554d0f725fdee713ac31261}{%
+           family={Fritzson},
+           familyi={F\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=25e9d758defaf5b7963024880a16c814}{%
+           family={McKay},
+           familyi={M\bibinitperiod},
+           given={Don},
+           giveni={D\bibinitperiod}}}%
+        {{hash=41da588713efd8414c15f455ae98de34}{%
+           family={McEntire},
+           familyi={M\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{b698674e9f226c87c808eec26edb6014}
+      \strng{fullhash}{6431ebfdf913969b032ac5484a0928b7}
+      \strng{bibnamehash}{6431ebfdf913969b032ac5484a0928b7}
+      \strng{authorbibnamehash}{6431ebfdf913969b032ac5484a0928b7}
+      \strng{authornamehash}{b698674e9f226c87c808eec26edb6014}
+      \strng{authorfullhash}{6431ebfdf913969b032ac5484a0928b7}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Third International Conference on Information and Knowledge Management (CIKM-94)}
+      \field{title}{{KQML} as an Agent Communication Language}
+      \field{year}{1994}
+      \field{pages}{456\bibrangedash 463}
+      \range{pages}{8}
+    \endentry
+    \entry{fipa2002cal}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=9ea78c8bdcb65ac951c55622c18b20ec}{%
+           family={{Foundation for Intelligent Physical Agents}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{fullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{bibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \field{extraname}{2}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{FIPA Specification SC00037J}
+      \field{title}{{FIPA} Communicative Act Library Specification}
+      \field{year}{2002}
+      \verb{urlraw}
+      \verb http://www.fipa.org/specs/fipa00037/
+      \endverb
+      \verb{url}
+      \verb http://www.fipa.org/specs/fipa00037/
+      \endverb
+    \endentry
+    \entry{bellifemine2007jade}{book}{}
+      \name{author}{3}{}{%
+        {{hash=2c27c4fb5c5619ffe27c1014fb65f568}{%
+           family={Bellifemine},
+           familyi={B\bibinitperiod},
+           given={Fabio\bibnamedelima Luigi},
+           giveni={F\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=ae5f0a651466e20ba2517337dd883628}{%
+           family={Caire},
+           familyi={C\bibinitperiod},
+           given={Giovanni},
+           giveni={G\bibinitperiod}}}%
+        {{hash=d11d0d7c53437071765a2167d062c07f}{%
+           family={Greenwood},
+           familyi={G\bibinitperiod},
+           given={Dominic},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Chichester, UK}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons}%
+      }
+      \strng{namehash}{c72a6c39dcc0bdfd37cc67c08717daec}
+      \strng{fullhash}{c72a6c39dcc0bdfd37cc67c08717daec}
+      \strng{bibnamehash}{c72a6c39dcc0bdfd37cc67c08717daec}
+      \strng{authorbibnamehash}{c72a6c39dcc0bdfd37cc67c08717daec}
+      \strng{authornamehash}{c72a6c39dcc0bdfd37cc67c08717daec}
+      \strng{authorfullhash}{c72a6c39dcc0bdfd37cc67c08717daec}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Developing Multi-Agent Systems with {JADE}}
+      \field{year}{2007}
+    \endentry
+    \entry{wilensky1999netlogo}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=6e6a87861053c8b4aef54732eeb71b1e}{%
+           family={Wilensky},
+           familyi={W\bibinitperiod},
+           given={Uri},
+           giveni={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{6e6a87861053c8b4aef54732eeb71b1e}
+      \strng{fullhash}{6e6a87861053c8b4aef54732eeb71b1e}
+      \strng{bibnamehash}{6e6a87861053c8b4aef54732eeb71b1e}
+      \strng{authorbibnamehash}{6e6a87861053c8b4aef54732eeb71b1e}
+      \strng{authornamehash}{6e6a87861053c8b4aef54732eeb71b1e}
+      \strng{authorfullhash}{6e6a87861053c8b4aef54732eeb71b1e}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Center for Connected Learning and Computer-Based Modeling, Northwestern University}
+      \field{title}{{NetLogo}}
+      \field{year}{1999}
+      \verb{urlraw}
+      \verb http://ccl.northwestern.edu/netlogo/
+      \endverb
+      \verb{url}
+      \verb http://ccl.northwestern.edu/netlogo/
+      \endverb
+    \endentry
+    \entry{luke2005mason}{article}{}
+      \name{author}{5}{}{%
+        {{hash=fc0da695d3774401949060e332fa8677}{%
+           family={Luke},
+           familyi={L\bibinitperiod},
+           given={Sean},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7c21e45f72483189a9a452862c8378bc}{%
+           family={Cioffi-Revilla},
+           familyi={C\bibinithyphendelim R\bibinitperiod},
+           given={Claudio},
+           giveni={C\bibinitperiod}}}%
+        {{hash=260f0debd711f664fa547f9317daf0f2}{%
+           family={Panait},
+           familyi={P\bibinitperiod},
+           given={Liviu},
+           giveni={L\bibinitperiod}}}%
+        {{hash=8f221241dd21cbdebe242c4c8d263c04}{%
+           family={Sullivan},
+           familyi={S\bibinitperiod},
+           given={Keith},
+           giveni={K\bibinitperiod}}}%
+        {{hash=a76f5da5f417818f21b753e61527d11b}{%
+           family={Balan},
+           familyi={B\bibinitperiod},
+           given={Gabriel},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{94b485a6a05dd301b9c3a8fb19019ab2}
+      \strng{fullhash}{12d5f3eb84f5b0e58600b11f687d1085}
+      \strng{bibnamehash}{12d5f3eb84f5b0e58600b11f687d1085}
+      \strng{authorbibnamehash}{12d5f3eb84f5b0e58600b11f687d1085}
+      \strng{authornamehash}{94b485a6a05dd301b9c3a8fb19019ab2}
+      \strng{authorfullhash}{12d5f3eb84f5b0e58600b11f687d1085}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Simulation}
+      \field{number}{7}
+      \field{title}{{MASON}: A Multiagent Simulation Environment}
+      \field{volume}{81}
+      \field{year}{2005}
+      \field{pages}{517\bibrangedash 527}
+      \range{pages}{11}
+    \endentry
+    \entry{bordini2007jason}{book}{}
+      \name{author}{3}{}{%
+        {{hash=90020a67bac615126ff712521c158d3e}{%
+           family={Bordini},
+           familyi={B\bibinitperiod},
+           given={Rafael\bibnamedelima H.},
+           giveni={R\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=7f0ef53b7c6e1ab00ce6ade215a93a5e}{%
+           family={Hübner},
+           familyi={H\bibinitperiod},
+           given={Jomi\bibnamedelima Fred},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=1dbead6bb535576afc14adfe5a5c42bb}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons}%
+      }
+      \strng{namehash}{a4a20978e20ffff5db674bb79bf72d7d}
+      \strng{fullhash}{a4a20978e20ffff5db674bb79bf72d7d}
+      \strng{bibnamehash}{a4a20978e20ffff5db674bb79bf72d7d}
+      \strng{authorbibnamehash}{a4a20978e20ffff5db674bb79bf72d7d}
+      \strng{authornamehash}{a4a20978e20ffff5db674bb79bf72d7d}
+      \strng{authorfullhash}{a4a20978e20ffff5db674bb79bf72d7d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Programming Multi-Agent Systems in {AgentSpeak} Using {Jason}}
+      \field{year}{2007}
+    \endentry
+    \entry{taillandier2019gama}{article}{}
+      \name{author}{8}{}{%
+        {{hash=982eb2bf1dbf3d41d58471ce19ee8e70}{%
+           family={Taillandier},
+           familyi={T\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+        {{hash=620ec6ac9aa0e693261d0d7834833b23}{%
+           family={Gaudou},
+           familyi={G\bibinitperiod},
+           given={Benoit},
+           giveni={B\bibinitperiod}}}%
+        {{hash=4a855929e929afc2352ef714c3c08274}{%
+           family={Grignard},
+           familyi={G\bibinitperiod},
+           given={Arnaud},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d094d2c2fcba2bba9bdf04d5fbc0452f}{%
+           family={Huynh},
+           familyi={H\bibinitperiod},
+           given={Quang-Nghi},
+           giveni={Q\bibinithyphendelim N\bibinitperiod}}}%
+        {{hash=dc4b262c849013bbef32cd8ec7a96d2d}{%
+           family={Marilleau},
+           familyi={M\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=c5c219ae675507e0f2030850156fa735}{%
+           family={Caillou},
+           familyi={C\bibinitperiod},
+           given={Philippe},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9faf63a0a12f5d0c3778d96b0c921d18}{%
+           family={Philippon},
+           familyi={P\bibinitperiod},
+           given={Damien},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2ecb0b5be564c75f17f41ca4a7f15b31}{%
+           family={Drogoul},
+           familyi={D\bibinitperiod},
+           given={Alexis},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{a178e48578677e2833e0402e6715b97d}
+      \strng{fullhash}{cc717a6ea91633568502e5523b300d46}
+      \strng{bibnamehash}{75decb3d48516684b8a92be814646850}
+      \strng{authorbibnamehash}{75decb3d48516684b8a92be814646850}
+      \strng{authornamehash}{a178e48578677e2833e0402e6715b97d}
+      \strng{authorfullhash}{cc717a6ea91633568502e5523b300d46}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{GeoInformatica}
+      \field{number}{2}
+      \field{title}{Building, composing and experimenting macroscopic models with the {GAMA} platform}
+      \field{volume}{23}
+      \field{year}{2019}
+      \field{pages}{299\bibrangedash 322}
+      \range{pages}{24}
+      \verb{urlraw}
+      \verb https://gama-platform.org
+      \endverb
+      \verb{url}
+      \verb https://gama-platform.org
+      \endverb
+    \endentry
+    \entry{saidallah2016comparative}{article}{}
+      \name{author}{3}{}{%
+        {{hash=c86770f936c52efbeb289e7f351fd3b2}{%
+           family={Saidallah},
+           familyi={S\bibinitperiod},
+           given={Mostafa},
+           giveni={M\bibinitperiod}}}%
+        {{hash=878377724cc26e79e102bb88ebe2d08e}{%
+           family={El\bibnamedelima Fergougui},
+           familyi={E\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={Abdeslam},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4cbae210dd5a4ee1c41710257d065bb8}{%
+           family={Elalaoui},
+           familyi={E\bibinitperiod},
+           given={Abdelbaki\bibnamedelima E.},
+           giveni={A\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {EDP Sciences}%
+      }
+      \strng{namehash}{b792f1a56867138a46c4cf56876dd66d}
+      \strng{fullhash}{b792f1a56867138a46c4cf56876dd66d}
+      \strng{bibnamehash}{b792f1a56867138a46c4cf56876dd66d}
+      \strng{authorbibnamehash}{b792f1a56867138a46c4cf56876dd66d}
+      \strng{authornamehash}{b792f1a56867138a46c4cf56876dd66d}
+      \strng{authorfullhash}{b792f1a56867138a46c4cf56876dd66d}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{MATEC Web of Conferences}
+      \field{title}{A Comparative Study of Urban Road Traffic Simulators}
+      \field{volume}{81}
+      \field{year}{2016}
+      \field{pages}{05002}
+      \range{pages}{1}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

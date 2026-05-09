@@ -1,0 +1,52 @@
+En este capítulo se expande la parte del trabajo correspondiente al estudio de los datos una vez recibidos.
+Esta fase se puede dividir en X etapas. En cada una de ellas, detallada en su correspondiente sección, se exponen
+las distintas cuestiones relativas a las características más importantes de estas
+
+
+\section{Limpieza y preparación}
+
+
+
+
+\subsection{Datos geoespaciales}
+
+
+
+Hablar de su obtencion del gtfs publico de la openapi o como se llame de la EMT. Que estaban mal formateados como geojson, que habia que tirar un converter, y que posteriormente, por facilidad, se convirtieron a shapefile para manejabilidad en GAMA
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/qgis_capture_e01_converted.png}
+\caption{Visualización en qgis de mapa geoespacial convertido a shapefile}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}
+\label{caption:qgis_converted}
+\end{figure}
+
+
+
+
+
+
+
+\subsection{Datos de Operación}
+
+Hablar de como se trabajaron los datos. Como se obtenian las tablas con  las consultas preparadas por stopcode, como se tuvo que limpiar valores negativos o anómalos, y explicar posibles discrepancias en primera y ultimas paradas debido(palabras de la emt quizas no se deba poner, que a veces los datos de inicio/fin estan falseados debido a que los conductores registran mal inicio/fin de viaje.
+
+
+
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/image_tables_diagram.png}
+\caption{Modelo Master:Transaccional de la base de datos}
+\par\vspace{4pt}{\footnotesize Fuente: Documento facilitado por la EMT.}
+\label{caption:qgis_converted}
+\end{figure}
+
+\begin{lstlisting}[language=SQL, caption={Datos totales de una parada}]
+SELECT mbot.*, tbso.*
+FROM UCIII.Transport.MASTER_BUS_OCUPATION_TRIPS mbot
+JOIN UCIII.Transport.TRANSAC_BUS_STOP_OCCUPATION tbso
+    ON tbso.TripId = mbot.TripId
+\end{lstlisting}
+\par\vspace{4pt}{\footnotesize Fuente: Documento Facilitado por la EMT.}
