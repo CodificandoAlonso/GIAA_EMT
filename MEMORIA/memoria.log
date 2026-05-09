@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  9 MAY 2026 20:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  9 MAY 2026 20:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1388,37 +1388,42 @@ Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 56.
 <imagenes/image_tables_diagram.png, id=506, 331.2375pt x 785.93625pt>
 File: imagenes/image_tables_diagram.png Graphic file (type png)
 <use imagenes/image_tables_diagram.png>
-Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 84.
+Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 85.
 (pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
- [19] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [19] [20 <./imagenes/image_tables_diagram.png (PNG copy)>]
+Overfull \hbox (32.46152pt too wide) in paragraph at lines 132--134
+[]\T1/txr/bx/n/12 Transaccional::TimeSlot\T1/txr/m/n/12 : Fran-ja ho-ra-ria re-la-ti-va al pa-rá-me-tro Tran-sac-cio-nal::EventTime.
+ []
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 90.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 147.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 91.
-) [20 <./imagenes/image_tables_diagram.png (PNG copy)>]
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 148.
+ [21]) [22]
 Cap\'{\i }tulo 5.
-(./chapter/section_design/Simulation_design.tex) [21
+(./chapter/section_design/Simulation_design.tex) [23
 
 ]
 Cap\'{\i }tulo 6.
-[22
+[24
 
 ]
 Cap\'{\i }tulo 7.
-[23
-
-]
-Cap\'{\i }tulo 8.
-(./chapter/section_budget/budget.tex) [24
-
-]
-Cap\'{\i }tulo 9.
 [25
 
 ]
+Cap\'{\i }tulo 8.
+(./chapter/section_budget/budget.tex) [26
+
+]
+Cap\'{\i }tulo 9.
+[27
+
+]
 Cap\'{\i }tulo 10.
-[26
+[28
 
 ]
 Package csquotes Info: Disabling multilingual quotes on input line 455.
@@ -1437,10 +1442,10 @@ Overfull \hbox (1.42937pt too wide) in paragraph at lines 457--457
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
-[27
+[29
 
 
-] [28] (./memoria.aux
+] [30] (./memoria.aux
 LaTeX Info: Redefining \sptext on input line 12.
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
@@ -1456,17 +1461,17 @@ Package logreq Info: Writing requests to 'memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42804 strings out of 474222
- 804278 string characters out of 5748734
- 1957975 words of memory out of 5000000
+ 42806 strings out of 474222
+ 804292 string characters out of 5748734
+ 1955975 words of memory out of 5000000
  64197 multiletter control sequences out of 15000+600000
  644913 words of font info for 171 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,12n,121p,1926b,3212s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (40 pages, 3190146 bytes).
+ 117i,12n,121p,1926b,3966s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on memoria.pdf (42 pages, 3196341 bytes).
 PDF statistics:
- 647 PDF objects out of 1000 (max. 8388607)
- 129 named destinations out of 1000 (max. 500000)
+ 660 PDF objects out of 1000 (max. 8388607)
+ 131 named destinations out of 1000 (max. 500000)
  279 words of extra memory for PDF output out of 10000 (max. 10000000)
 

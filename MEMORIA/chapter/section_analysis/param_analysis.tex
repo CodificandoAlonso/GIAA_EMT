@@ -67,16 +67,17 @@ entorno de trabajo de la plataforma de agentes GAMA.
 Hablar de como se trabajaron los datos. Como se obtenian las tablas con  las consultas preparadas por stopcode, como se tuvo que limpiar valores negativos o anómalos, y explicar posibles discrepancias en primera y ultimas paradas debido(palabras de la emt quizas no se deba poner, que a veces los datos de inicio/fin estan falseados debido a que los conductores registran mal inicio/fin de viaje.
 
 Los datos de operación representan la base empírica sobre la que se asienta el simulador.
-Su tratamiento supuso el inicio formal de la fase dos del proyecto \textbf{Analisis y Parametrización},
-debido a que la necesidad de la EMT  de preparar la base de datos en un servidor dedicado incluyendo el pipeline 
+Su tratamiento supuso el inicio formal de la fase dos del proyecto \enquote{\textbf{Analisis y Parametrización}},
+debido a la necesidad de la EMT  de preparar la base de datos en un servidor dedicado incluyendo el pipeline 
 que alimenta diariamente los datos. Los geoespaciales por su parte, al ser de acceso público, se pueden tratar
-sin la necesidad de preparación por parte de la empresa.
+sin la necesidad de preparación por parte de la empresa, por lo que empezaron a ser tratados 
+dentro de la fase previa.
 
-En la figura \ref{caption:relational_model} se puede ver el esquema relacional de la base de datos. Es un
-modelo sencillo compuesto por dos tablas, Master y Transaccional, relacionadas por TripId,
+Sobre la base de datos, en la figura~\ref{caption:relational_model} se puede ver el esquema relacional. Es un
+modelo sencillo compuesto por dos tablas, Master y Transaccional, relacionadas por \textit{TripId},
 identificador único de cada viaje. De esta forma, cada salida de cabecera representa una instancia de 
 la tabla Master, mientras que cada llegada al resto de paradas de la ruta supone una entrada
-de la tabla transaccional, identificada por el mismo TripId y el código de parada.
+de la tabla transaccional, identificada por el mismo \textit{TripId} y el código de parada.
 
 
 \begin{figure}[H]
@@ -86,6 +87,62 @@ de la tabla transaccional, identificada por el mismo TripId y el código de para
 \par\vspace{4pt}{\footnotesize Fuente: Documento facilitado por la EMT.}
 \label{caption:relational_model}
 \end{figure}
+
+El resto de parámetros se especifican a continuación.
+
+\begin{itemize}
+
+    \item \textbf{Master::IdExternal}:
+    Identificador interno de la EMT, se especificó no usarlo.
+    \item \textbf{Master::EventDate}:
+    Fecha en formato YYYY:MM:DD referente al día del viaje.
+    \item \textbf{Master::EventTime}:
+    Hora en formato HH:MM:SS.f representativa del momento de inicio del viaje.
+    \item \textbf{Master::TimeSlot}:
+    Franja horaria relativa a Master::EventTime.
+    \item \textbf{Master::Line}:
+    Línea del viaje
+    \item \textbf{Master::Direction}:
+    Sentido del viaje. De forma interna el valor \textit{1} representaba un sentido y \textit{2} el opuesto.
+    \item \textbf{Master::LogicVehicle}:
+    Identificador interno del coche encargado del viaje.
+    \item \textbf{Master::Weekday}:
+    Acrónimo referente al día de la semana específico. Puede ser \enquote{L,M,X,J,V,S,D} según el día.
+    \item \textbf{Master::DayType}:
+    Tipo de día. Existen múltiples valores posibles, principalmente se usa para diferenciar días laborables
+    de fines de semana y festivos.
+    \item \textbf{Master::Season}:
+    Época del año relativa al día de recolección del dato.
+    \item \textbf{Master::FreeDay}:
+    Especifica si el día presenta \textit{gratuidad} (toma valor \enquote{1}) o no (valor \enquote{0}). 
+    El término se refiere a aquellos días específicos en los que el servicio del autobús se presenta
+    gratuito.
+
+
+
+
+    \item \textbf{Transaccional::idExternal}:
+    Mismo caso que en el parámetro de la tabla Master, se ignora.
+    \item \textbf{Transaccional::EventDate}:
+    Mismo parámetro que en la tabla Master, salvo que debido a retrasos provoque la llegada al día siguiente
+    en casos extremos al final de la jornada.
+    \item \textbf{Transaccional::EventTime}:
+    Hora en igual formato que Master::EventTime. Almacena el momento exacto en el que el bus llega a
+    la parada específica.
+    \item \textbf{Transaccional::TimeSlot}:
+    Franja horaria relativa al parámetro Transaccional::EventTime. Puede diferir del campo Master::TimeSlot
+    \item \textbf{Transaccional::TemperatureMax}:
+    \item \textbf{Transaccional::TemperatureMin}:
+    \item \textbf{Transaccional::RainProbMax}:
+    \item \textbf{Transaccional::RainProbMin}:
+    \item \textbf{Transaccional::Board}:
+    \item \textbf{Transaccional::DropOff}:
+    \item \textbf{Transaccional::Occupation}:
+
+\end{itemize}
+
+
+
 
 \begin{lstlisting}[language=SQL, caption={Datos totales de una parada}]
 SELECT mbot.*, tbso.*

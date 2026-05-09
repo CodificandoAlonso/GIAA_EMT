@@ -738,6 +738,7 @@ INPUT ./memoria.out
 INPUT memoria.run.xml
 OUTPUT memoria.run.xml
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb
