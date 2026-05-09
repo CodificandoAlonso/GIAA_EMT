@@ -14,18 +14,22 @@ El proyecto se puede separar en cuatro partes características. A continuación,
 \begin{itemize}
 
 \item \textbf{Investigación y Planteamiento}: Duración [6 semanas]
+
 Supone la fase inicial del trabajo. Al no disponer de los datos, expandidos en el capítulo \ref{chapter:param_analisys}, y debido a la naturaleza investigadora del trabajo, en una primera etapa, se realizó un análisis del estado de la cuestión, expuesto en la sección \ref{chapter:state_of_art}, junto con un estudio de la plataforma GAMA~\cite{taillandier2019gama}, con el fin de realizar un acercamiento a los conceptos, estándares y herramientas que se usan a lo largo del desarrollo. Durante esta fase, a lo largo de las reuniones bisemanales, se acota el rango de aplicación del simulador, reduciéndose de las cinco líneas express inicialmente deseadas, a la línea E01, con el fin de no sobrecargar el análisis de la fase posterior.
 
 \item \textbf{Análisis y Parametrización de Datos}: Duración [12 semanas]
+
 En esta etapa se realiza un estudio exhaustivo sobre los datos facilitados, tanto los datos geoespaciales de la ruta, como los datos de operación de los autobuses. A lo largo de estas doce semanas, se procesa esta información para analizar la viabilidad de la solución planteada durante la fase uno, basándose en criterios estrictos de modelado de distribuciones para los distintos parámetros que sirven de entrada al simulador.
 
 \item \textbf{Diseño e Implementación en GAMA}: Duración [14 semanas]
+
 Una vez estudiada la viabilidad de usar los datos de operación de autobuses y preparados los parámetros de entrada al simulador, en esta etapa se construye la arquitectura del sistema multiagente y su desarrollo en el lenguaje propio de GAMA \enquote{GAML} \cite{taillandier2019gama}. A lo largo de esta fase, expandida posteriormente, 
 se construyen dos modelos distintos: uno en el que los pasajeros se representan como agentes individuales con 
 comportamiento propio, y otro en el que las subidas y bajadas se modelan de forma agregada por parada, priorizando el 
 rendimiento computacional de la simulación.
 
 \item  \textbf{Extracción de indicadores y visualización}: Duración [5 semanas]
+
 En esta última fase, se parte del simulador prácticamente completado, y se construye una herramienta de visualización y de lanzamiento en local de los distintos escenarios que plantee el usuario. Por otra parte, se completa el simulador con el feedback de formato de datos que requiere el extractor de KPIs.
 
 
@@ -75,11 +79,11 @@ Lenguaje de programación usado para la extracción de métricas de rendimiento 
 
 Sobre las herramientas físicas utilizadas, se ha dispuesto de un portátil MSI Modern 15 C13M-273XES, 
 modelo con 16 núcleos lógicos, 32GB RAM DDR4 y almacenamiento NVMe. Esta información, junto a detalles sobre presupuesto, 
-se expanden en la sección \ref{chapter:budget}, pero cabe ser destacada por su relación a las herramientas usadas 
-y su interés en la interpretación a nivel de tiempo en la fase de diseño
-e implementación, así como en la relativa a Extracción de indicadores y visualización.
+se expanden en el capítulo \ref{chapter:budget}, pero cabe ser destacada por su relación a las herramientas usadas 
+y su interés en la interpretación a nivel de tiempo en la fase de \textbf{Diseño
+e implementación}, así como en la relativa a \textbf{Extracción de indicadores y visualización}.
 
 Todo el desarrollo del trabajo se ha realizado sobre el sistema operativo Ubuntu 24.04 LTS, distribución 
 de Linux basada en Debian. Esta elección de Sistema Operativo, sumado al conjunto de herramientas utilizadas,
- constituye un sistema de código abierto en su totalidad. Esto permite un sistema transparente y reproducible, 
+ constituye un sistema de \textbf{código abierto} en su totalidad. Esto permite un sistema transparente y reproducible, 
  sin dependencia de licencias comerciales.

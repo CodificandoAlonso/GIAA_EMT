@@ -2167,7 +2167,6 @@ species stop skills: [fipa]  {
     aspect default {
     	
         draw circle(50) color: #purple border: #black;
-        draw stopName + " " + length(passengers_at_stop) color: #blue size: 1 at: location + {0, -80};
        	
     }
 
@@ -2304,7 +2303,7 @@ experiment test type: gui {
         	//LOAD THE BACKGROUNDS GUI INFORMATION
             species route aspect: default;
             species stop aspect: default;
-            species bus aspect: default;
+            //species bus aspect: default;
             species passenger aspect: default;
 
 

@@ -679,7 +679,7 @@ function computeRouteTimeslotScore(ts) {
 function renderRouteTimeslotBar() {
   const bar = document.getElementById('route-ts-bar');
   if (!bar) return;
-  const hours = Array.from({ length: 19 }, (_, i) => i + 5); // 5..23
+  const hours = Array.from({ length: 19 }, (_, i) => i + 5);
   const btns  = hours.map(h => `<button class="bus-ts-pill" data-hour="${h}">${h}:00</button>`).join('');
   bar.innerHTML = `
     <div class="bus-ts-header" style="border-bottom:none;padding-bottom:0;">
@@ -705,7 +705,6 @@ function renderRouteTimeslotBar() {
 
 // ---- Stop alert scoring (route view) ----
 // Thresholds: await > 3× global mean, occupation > 75%, unable_boards > 4
-
 function computeStopAlertScoreGen(stopInfo) {
   if (!stopInfo) return 0;
   const globalMeanAwait = _plotsInfo?.generalStats?.Mean_await_passengers;

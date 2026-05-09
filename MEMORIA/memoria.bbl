@@ -1029,6 +1029,42 @@
       \field{pages}{05002}
       \range{pages}{1}
     \endentry
+    \entry{balaguer2018}{article}{}
+      \name{author}{3}{}{%
+        {{hash=158b8bf5c151be83bae8f2f926391405}{%
+           family={Balaguer},
+           familyi={B\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ae167a01d9c8785a3acc43e37579d8eb}{%
+           family={Fernández},
+           familyi={F\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e85d5c7fdb4a79037f96d89e8f0a498b}{%
+           family={Martín},
+           familyi={M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{ff54cf773a25798aba9d46076a42090d}
+      \strng{fullhash}{ff54cf773a25798aba9d46076a42090d}
+      \strng{bibnamehash}{ff54cf773a25798aba9d46076a42090d}
+      \strng{authorbibnamehash}{ff54cf773a25798aba9d46076a42090d}
+      \strng{authornamehash}{ff54cf773a25798aba9d46076a42090d}
+      \strng{authorfullhash}{ff54cf773a25798aba9d46076a42090d}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Collection of Open Conferences in Research Transport}
+      \field{title}{{Data as an asset: EMT open platform for transport data in Madrid}}
+      \field{volume}{2018}
+      \field{year}{2018}
+      \verb{doi}
+      \verb 10.5281/zenodo.1441026
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  9 MAY 2026 17:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  9 MAY 2026 20:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1111,10 +1111,6 @@ Package csquotes Info: ... found 'babel' package.
  (./memoria.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
-
-
-LaTeX Warning: Label `caption:qgis_converted' multiply defined.
-
 )
 \openout1 = `memoria.aux'.
 
@@ -1363,10 +1359,10 @@ Cap\'{\i }tulo 3.
 (./chapter/section_metodology/metodology.tex [12
 
 ] [13]
-<imagenes/gantt_chart.png, id=453, 1001.6622pt x 351.9549pt>
+<imagenes/gantt_chart.png, id=455, 1001.6622pt x 351.9549pt>
 File: imagenes/gantt_chart.png Graphic file (type png)
 <use imagenes/gantt_chart.png>
-Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 40.
+Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 44.
 (pdftex.def)             Requested size: 632.5178pt x 213.39253pt.
  [14
 
@@ -1375,47 +1371,54 @@ Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 40.
 ]) [16]
 Cap\'{\i }tulo 4.
 (./chapter/section_analysis/param_analysis.tex
-<imagenes/qgis_capture_e01_converted.png, id=484, 1861.95625pt x 1051.93pt>
+<imagenes/qgis_capture_e01_converted.png, id=491, 1861.95625pt x 1051.93pt>
 File: imagenes/qgis_capture_e01_converted.png Graphic file (type png)
 <use imagenes/qgis_capture_e01_converted.png>
-Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 19.
+Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 47.
 (pdftex.def)             Requested size: 426.79135pt x 241.1202pt.
-<imagenes/image_tables_diagram.png, id=485, 331.2375pt x 785.93625pt>
-File: imagenes/image_tables_diagram.png Graphic file (type png)
-<use imagenes/image_tables_diagram.png>
-Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 40.
-(pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
  [17
 
- <./imagenes/qgis_capture_e01_converted.png>] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+]
+<imagenes/gama_shapefiles.png, id=498, 1862.96pt x 1054.94125pt>
+File: imagenes/gama_shapefiles.png Graphic file (type png)
+<use imagenes/gama_shapefiles.png>
+Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 56.
+(pdftex.def)             Requested size: 426.79135pt x 241.68166pt.
+ [18 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
+<imagenes/image_tables_diagram.png, id=506, 331.2375pt x 785.93625pt>
+File: imagenes/image_tables_diagram.png Graphic file (type png)
+<use imagenes/image_tables_diagram.png>
+Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 84.
+(pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
+ [19] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 46.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 90.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 47.
-) [18 <./imagenes/image_tables_diagram.png (PNG copy)>] [19]
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 91.
+) [20 <./imagenes/image_tables_diagram.png (PNG copy)>]
 Cap\'{\i }tulo 5.
-(./chapter/section_design/Simulation_design.tex) [20
+(./chapter/section_design/Simulation_design.tex) [21
 
 ]
 Cap\'{\i }tulo 6.
-[21
-
-]
-Cap\'{\i }tulo 7.
 [22
 
 ]
+Cap\'{\i }tulo 7.
+[23
+
+]
 Cap\'{\i }tulo 8.
-(./chapter/section_budget/budget.tex) [23
+(./chapter/section_budget/budget.tex) [24
 
 ]
 Cap\'{\i }tulo 9.
-[24
+[25
 
 ]
 Cap\'{\i }tulo 10.
-[25
+[26
 
 ]
 Package csquotes Info: Disabling multilingual quotes on input line 455.
@@ -1434,10 +1437,10 @@ Overfull \hbox (1.42937pt too wide) in paragraph at lines 457--457
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
-[26
+[27
 
 
-] [27] (./memoria.aux
+] [28] (./memoria.aux
 LaTeX Info: Redefining \sptext on input line 12.
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
@@ -1446,10 +1449,6 @@ LaTeX Info: Redefining \% on input line 12.
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `memoria.out' has not changed.
 (rerunfilecheck)             Checksum: CE130EBEDE2007F353FA00B55C157859;2041.
 Package logreq Info: Writing requests to 'memoria.run.xml'.
@@ -1457,17 +1456,17 @@ Package logreq Info: Writing requests to 'memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42782 strings out of 474222
- 803714 string characters out of 5748734
+ 42804 strings out of 474222
+ 804278 string characters out of 5748734
  1957975 words of memory out of 5000000
- 64179 multiletter control sequences out of 15000+600000
+ 64197 multiletter control sequences out of 15000+600000
  644913 words of font info for 171 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,12n,121p,1926b,3212s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (39 pages, 3130157 bytes).
+Output written on memoria.pdf (40 pages, 3190146 bytes).
 PDF statistics:
- 629 PDF objects out of 1000 (max. 8388607)
- 125 named destinations out of 1000 (max. 500000)
- 274 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 647 PDF objects out of 1000 (max. 8388607)
+ 129 named destinations out of 1000 (max. 500000)
+ 279 words of extra memory for PDF output out of 10000 (max. 10000000)
 
