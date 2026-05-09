@@ -13,4 +13,3 @@ Based on the internal skeleton template.
 ## Elements
 
 [See structure](routes_loader_structure.md)
-

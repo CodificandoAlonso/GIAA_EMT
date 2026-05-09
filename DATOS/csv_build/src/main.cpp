@@ -5,8 +5,6 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
-
-
     if( argc != 3) {
         cerr << "INCORRECT INPUT FORMAT. SHOULD BE ./EXECUTABLE INPUT OUTPUT\n";
         return -1;
@@ -17,7 +15,6 @@ int main(int argc, char **argv) {
 
     auto counter_input = static_cast<int>(strlen(argv[1]));
     auto counter_output = static_cast<int>(strlen(argv[2]));
-
 
     input = static_cast<char *>(malloc(sizeof(char) * counter_input));
     output = static_cast< char *>(malloc(sizeof(char) * counter_output));
