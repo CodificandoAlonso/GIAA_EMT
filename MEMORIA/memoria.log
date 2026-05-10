@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  10 MAY 2026 12:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  10 MAY 2026 13:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1358,82 +1358,82 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Cap\'{\i }tulo 3.
 (./chapter/section_metodology/metodology.tex [12
 
-] [13]
-<imagenes/gantt_chart.png, id=471, 1001.6622pt x 351.9549pt>
+] [13] [14]
+<imagenes/gantt_chart.png, id=477, 1001.6622pt x 351.9549pt>
 File: imagenes/gantt_chart.png Graphic file (type png)
 <use imagenes/gantt_chart.png>
-Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 44.
+Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 97.
 (pdftex.def)             Requested size: 632.5178pt x 213.39253pt.
- [14
+ [15
 
- <./imagenes/gantt_chart.png>] [15
+ <./imagenes/gantt_chart.png>] [16
 
-]) [16]
+]) [17]
 Cap\'{\i }tulo 4.
 (./chapter/section_analysis/param_analysis.tex
-<imagenes/qgis_capture_e01_converted.png, id=507, 1861.95625pt x 1051.93pt>
+<imagenes/qgis_capture_e01_converted.png, id=513, 1861.95625pt x 1051.93pt>
 File: imagenes/qgis_capture_e01_converted.png Graphic file (type png)
 <use imagenes/qgis_capture_e01_converted.png>
-Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 46.
+Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 47.
 (pdftex.def)             Requested size: 426.79135pt x 241.1202pt.
- [17
+ [18
 
 ]
-<imagenes/gama_shapefiles.png, id=514, 1862.96pt x 1054.94125pt>
+<imagenes/gama_shapefiles.png, id=521, 1862.96pt x 1054.94125pt>
 File: imagenes/gama_shapefiles.png Graphic file (type png)
 <use imagenes/gama_shapefiles.png>
-Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 55.
+Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 56.
 (pdftex.def)             Requested size: 426.79135pt x 241.68166pt.
- [18 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
-<imagenes/image_tables_diagram.png, id=524, 331.2375pt x 785.93625pt>
+ [19 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
+<imagenes/image_tables_diagram.png, id=530, 331.2375pt x 785.93625pt>
 File: imagenes/image_tables_diagram.png Graphic file (type png)
 <use imagenes/image_tables_diagram.png>
-Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 82.
+Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 83.
 (pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
- [19] [20 <./imagenes/image_tables_diagram.png (PNG copy)>]
-Overfull \hbox (32.46152pt too wide) in paragraph at lines 129--131
+ [20] [21 <./imagenes/image_tables_diagram.png (PNG copy)>]
+Overfull \hbox (32.46152pt too wide) in paragraph at lines 130--132
 []\T1/txr/bx/n/12 Transaccional::TimeSlot\T1/txr/m/n/12 : Fran-ja ho-ra-ria re-la-ti-va al pa-rá-me-tro Tran-sac-cio-nal::EventTime.
  []
 
 
-Overfull \hbox (11.49753pt too wide) in paragraph at lines 133--135
+Overfull \hbox (11.49753pt too wide) in paragraph at lines 134--136
 []\T1/txr/bx/n/12 Transaccional::TemperatureMin\T1/txr/m/n/12 : Mis-mo ca-so que Tran-sac-cio-nal::TemperatureMax
  []
 
 
-Overfull \hbox (0.88986pt too wide) in paragraph at lines 143--146
-\OML/txmi/m/it/12 Transaccional \OT1/txr/m/n/12 :: \OML/txmi/m/it/12 Occupation[]$ \T1/txr/m/n/12 + Tran-sac-cio-nal::Board - Tran-sac-cio-nal::DropOff. 
+Overfull \hbox (9.20593pt too wide) in paragraph at lines 144--148
+[] \OT1/txr/m/n/12 = [][] + [] \OMS/txsy/m/n/12 ^^@
  []
 
-[21] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[22] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 154.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 156.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 155.
-) [22]
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 157.
+) [23] [24]
 Cap\'{\i }tulo 5.
-(./chapter/section_design/Simulation_design.tex) [23
+(./chapter/section_design/Simulation_design.tex) [25
 
 ]
 Cap\'{\i }tulo 6.
-[24
+[26
 
 ]
 Cap\'{\i }tulo 7.
-[25
-
-]
-Cap\'{\i }tulo 8.
-(./chapter/section_budget/budget.tex) [26
-
-]
-Cap\'{\i }tulo 9.
 [27
 
 ]
+Cap\'{\i }tulo 8.
+(./chapter/section_budget/budget.tex) [28
+
+]
+Cap\'{\i }tulo 9.
+[29
+
+]
 Cap\'{\i }tulo 10.
-[28
+[30
 
 ]
 Package csquotes Info: Disabling multilingual quotes on input line 456.
@@ -1452,10 +1452,10 @@ Overfull \hbox (1.42937pt too wide) in paragraph at lines 458--458
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
-[29
+[31
 
 
-] [30] (./memoria.aux
+] [32] (./memoria.aux
 LaTeX Info: Redefining \sptext on input line 12.
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
@@ -1471,17 +1471,17 @@ Package logreq Info: Writing requests to 'memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42820 strings out of 474222
- 804456 string characters out of 5748734
- 1969975 words of memory out of 5000000
- 64204 multiletter control sequences out of 15000+600000
- 646529 words of font info for 174 fonts, out of 8000000 for 9000
+ 42823 strings out of 474222
+ 804521 string characters out of 5748734
+ 1970975 words of memory out of 5000000
+ 64208 multiletter control sequences out of 15000+600000
+ 648343 words of font info for 173 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,12n,121p,1830b,3948s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (43 pages, 3202218 bytes).
+ 117i,12n,121p,1718b,3948s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on memoria.pdf (45 pages, 3207045 bytes).
 PDF statistics:
- 681 PDF objects out of 1000 (max. 8388607)
- 135 named destinations out of 1000 (max. 500000)
+ 696 PDF objects out of 1000 (max. 8388607)
+ 137 named destinations out of 1000 (max. 500000)
  295 words of extra memory for PDF output out of 10000 (max. 10000000)
 

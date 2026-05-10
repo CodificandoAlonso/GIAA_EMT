@@ -1,10 +1,11 @@
-En este capítulo se describe el proceso de análisis y procesado de los datos otorgados por la EMT.
-Se ha dividido en tres etapas: \textbf{Limpieza y Preparación}, \textbf{Estudio y Gaussianidad} y \textbf{Preparación para Simulador}.
+En este capítulo se describe el proceso de análisis y procesado de los datos proporcionados por la EMT.
+Se ha dividido en tres etapas: \textbf{Limpieza y Preparación}, \textbf{Estudio y Gaussianidad} y 
+\textbf{Preparación para Simulador}.
 
 
 \section{Limpieza y preparación}
 Esta sección detalla los distintos procedimientos seguidos en una primera fase iniciada tras la recepción
-de los datos provenientes de la EMT. Podemos distinguir dos tipos de datos principalmente:
+de los datos provenientes de la EMT. Se distinguen dos tipos de datos principalmente:
 Datos Geoespaciales y Datos de Operación.
 
 
@@ -12,7 +13,7 @@ Datos Geoespaciales y Datos de Operación.
 \subsection{Datos geoespaciales}
 Estos datos se corresponden con elementos públicos obtenidos del \textbf{EMT Open Data Portal}\footnote{
 \url{https://datos.emtmadrid.es/} (accedido: 9 de mayo de 2026)}, una iniciativa
-de la entidad que busca reforzar su compromiso con la transparencia y la colaboración para la mejoría
+de la entidad que busca reforzar su compromiso con la transparencia y la colaboración para la mejora
 en la gestión~\cite{balaguer2018}. Si bien el simulador no necesita la exacta localización de las 
 paradas o de la ruta en cuestión, estos datos permiten una mejor visualización de cara a la construcción
 del modelo. Además, guardan información del orden y código numérico de las paradas, por lo que
@@ -26,8 +27,8 @@ mal formateados, presentando comillas simples \enquote{' '} en vez de comillas d
 
 Para subsanar esto, se recurre a un script de \textit{Python} encargado de modificar las celdas 
 correspondientes a los datos geo, separando en dos ficheros distintos según sentido y cambiando las 
-occurrencias de comillas simples por dobles. Por facilidad, además, se ramificaron según si se 
-correspondian con referencias a la trayectoria de la línea, o a instancias de paradas. 
+occurrencias de comillas simples por dobles. Por facilidad, además, se ramifican según si se 
+corresponden con referencias a la trayectoria de la línea, o a instancias de paradas. 
 De esta forma, se obtienen de cada ruta cuatro archivos, dos por cada sentido, donde uno
 contiene información de la topología de las uniones inter-parada, y el otro de los puntos referencia a 
 las mismas.
@@ -64,13 +65,13 @@ en el capítulo \ref{chapter:simulation_design}.
 
 \subsection{Datos de Operación}
 Los datos de operación representan la base empírica sobre la que se asienta el simulador.
-Su tratamiento supuso el inicio formal de la fase dos del proyecto \enquote{\textbf{Analisis y Parametrización}},
+Su tratamiento supuso el inicio formal de la fase dos del proyecto \enquote{\textbf{Análisis y Parametrización}},
 comenzada una vez la EMT termina de preparar la base de datos en un servidor dedicado, incluyendo el pipeline 
 que alimenta diariamente los datos. Los geoespaciales por su parte, al ser de acceso público, se pueden tratar
 sin la necesidad de preparación por parte de la empresa, por lo que se empiezan a tratar
 dentro de la fase previa a la mencionada.
 
-Sobre la base de datos, en la figura~\ref{caption:relational_model} se puede ver el esquema relacional. Es un
+Sobre la base de datos, en la figura~\ref{fig:relational_model} se puede ver el esquema relacional. Es un
 modelo sencillo compuesto por dos tablas, Master y Transaccional, relacionadas por \textit{TripId},
 identificador único de cada viaje. De esta forma, cada salida de cabecera representa una instancia de 
 la tabla Master, mientras que cada llegada al resto de paradas de la ruta supone una entrada
@@ -82,7 +83,7 @@ de la tabla transaccional, identificada por el mismo \textit{TripId} y el códig
     \includegraphics[width=0.5\textwidth]{imagenes/image_tables_diagram.png}
 \caption{Modelo Master:Transaccional de la base de datos}
 \par\vspace{4pt}{\footnotesize Fuente: Documento facilitado por la EMT.}
-\label{caption:relational_model}
+\label{fig:relational_model}
 \end{figure}
 
 El resto de parámetros se especifican a continuación.
@@ -98,7 +99,7 @@ El resto de parámetros se especifican a continuación.
     \item \textbf{Master::TimeSlot}:
     Franja horaria relativa a Master::EventTime.
     \item \textbf{Master::Line}:
-    Línea del viaje
+    Línea del viaje.
     \item \textbf{Master::Direction}:
     Sentido del viaje. De forma interna el valor \textit{1} representaba un sentido y \textit{2} el opuesto.
     \item \textbf{Master::LogicVehicle}:
@@ -131,7 +132,7 @@ El resto de parámetros se especifican a continuación.
     \item \textbf{Transaccional::TemperatureMax}:
     Previsión máxima de temperatura en la parada en el momento de la recolección del dato.
     \item \textbf{Transaccional::TemperatureMin}:
-    Mismo caso que Transaccional::TemperatureMax pero para la previsión mínima
+    Mismo caso que Transaccional::TemperatureMax pero para la previsión mínima.
     \item \textbf{Transaccional::RainProbMax}:
     Valor máximo de probabilidad de precipitación registrado en el instante que se guarda la instancia.
     \item \textbf{Transaccional::RainProbMin}:
@@ -141,8 +142,9 @@ El resto de parámetros se especifican a continuación.
     \item \textbf{Transaccional::DropOff}:
     Número de pasajeros que abandonan el autobús.
     \item \textbf{Transaccional::Occupation}:
-    Valor de la carga de pasajeros derivada del cálculo $Transaccional::Occupation_{prev}$ + 
-    Transaccional::Board - Transaccional::DropOff.
+    Valor de la carga de pasajeros derivada del cálculo $\text{Transaccional::\textit{Occupation}} 
+    = \text{Transaccional::\textit{Occupation}}_{\text{prev}} + \text{Transaccional::\textit{Board}} - 
+    \text{Transaccional::\textit{DropOff}}$.
 \end{itemize}
 
 
@@ -159,7 +161,7 @@ JOIN UCIII.Transport.TRANSAC_BUS_STOP_OCCUPATION tbso
     WHERE tbso.Stop = 'STOPCODE';
 
 \end{lstlisting}
-\par\vspace{4pt}{\footnotesize Fuente: Documento Facilitado por la EMT.}
+\par\vspace{4pt}{\footnotesize Fuente: Documento facilitado por la EMT.}
 
 El resultante \enquote{CSV} presentaba derivado  del \textit{JOIN} un problema, y era la duplicidad
 de nomenclatura en campos de  ambas tablas, en concreto ---\textit{IdExternal}, \textit{EventDate}, 
@@ -168,22 +170,25 @@ de nomenclatura en campos de  ambas tablas, en concreto ---\textit{IdExternal}, 
 Como se ha mencionado, el análisis de los datos de operación se ha realizado con la herramienta
 \textbf{Jupyter Notebook}, usando kernel de \textit{Python}. Bajo este framework, para el 
 manejo de los volúmenes de datos se ha usado la librería \textit{pandas}, que ante duplicidad 
-en los nombres de los campos, a la segunda ocurrencia añade un \enquote{.1} al cuerpo de la columna.
+en los nombres de los campos, al encontrar una segunda ocurrencia añade un \enquote{.1} al cuerpo de la columna.
 De esta forma, todos aquellos campos contenedores de un \enquote{.1} se corresponden con las referentes
 a la tabla Transaccional. De aquí en adelante, no obstante, para diferenciar ambos parámetros, aparecerá
 el prefijo \textit{Transaccional::} o \textit{Master::} para no generar ambigüedades.
 
-En lo relativo a la limpieza de los datos, se trata de una fase clave, porque
+En lo relativo a la limpieza de los datos, constituye una fase clave, dado que
 la no identificación de posibles anomalías en ciertos campos puede alterar la precisión del análisis
 posterior. En el caso particular, se redujo la limpieza a la eliminación de valores anómalos dentro
 de los campos \textit{Transaccional::Occupation}, \textit{Transaccional::Board} y 
 \textit{Transaccional::DropOff}, debido a la identificación de inconsistencias relativas a valores
 negativos en estos campos, o a valores extremos derivados de errores en la recolección.
-Como se comenta de forma exhaustiva en la siguiente sección, estos campos se presentan como los 
-más importantes del análisis, motivo por el que se tratan de forma exhaustiva para evitar problemas.
+La EMT especificó que para los modelos de autobús utilizados de forma regular, un valor de 
+\textit{Ocupación} superior a 80 pasajeros nunca se iba a dar, por lo que se decidió, de cara a todo
+el trabajo, considerar ese valor como límite de la capacidad de carga.
+Como se comenta de forma exhaustiva en la siguiente sección, estos campos limpiados se presentan como los 
+más importantes del análisis, motivo por el que se tratan con especial rigor para evitar problemas.
 
 \section{Estudio y Gaussianidad}
-
+\label{section:gauss_and_study}
 
 
 \section{Preparación para Simulador}
