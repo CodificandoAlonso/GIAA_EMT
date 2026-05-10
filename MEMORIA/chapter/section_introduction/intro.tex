@@ -1,8 +1,39 @@
 El estudio, gestión y análisis de movilidad urbana en grandes ciudades es uno de los mayores desafíos para las empresas públicas y privadas dentro del sector de transportes. Gracias a la evolución tecnológica en los últimos años, estas empresas se han visto obligadas a adaptarse a los nuevos entornos digitales, buscando nuevos métodos de análisis y cómputo que les permitan  mantener una posición  más competitiva y obtener resultados mucho más fiables y accesibles en tiempos más cortos. Ejemplos como \textcite{pelletier2011smart} muestran cómo los datos de las tarjetas inteligentes son usados para el estudio de la movilidad a tres niveles: estratégico, táctico y operacional. Otro ejemplo es el realizado por \textcite{nesmachnow2023bigdata}, el cual presenta un estudio hecho en Uruguay sobre implementación de Big Data para analizar el sistema de transporte público de Montevideo. Estos estudios ilustran cómo la adopción de nuevas tecnologías es un hecho creciente en el ámbito del transporte.
 
-En el contexto del problema se sitúa la Empresa Municipal de Transportes de Madrid (EMT)\footnote{\url{https://www.emtmadrid.es}(accedido: 6 de mayo de 2026)}, operador del servicio de autobuses urbanos de la capital española. En los últimos años, ha impulsado múltiples iniciativas de innovación tecnológica, destacando \enquote{Madrid Green Urban Mobility Lab} o la inclusión del sistema \enquote{Galileo}. La primera es una iniciativa sin ánimo de lucro que busca promover la movilidad urbana sostenible\footnote{EMT Madrid, \enquote{\textit{Madrid Green Urban Mobility Lab} convertirá a la capital en un referente internacional en innovación y tecnología de la movilidad}, 26 de septiembre de 2022. Disponible en: \url{https://www.emtmadrid.es/Noticias/\%E2\%80\%98Madrid-Green-Urban-Mobility-Lab\%E2\%80\%99-convertira-a-la.aspx}(accedido: 6 de mayo de 2026).}. \enquote{Galileo}, por su parte, es un sistema europeo de navegación por satélite, incorporado en la totalidad de la flota con el fin de mejorar la precisión del posicionamiento de los buses\footnote{EU Agency for the Space Programme (EUSPA), \enquote{EMT Madrid announces readiness to Galileo in all the metropolitan bus fleet}, 19 de abril de 2019. Disponible en: \url{https://www.euspa.europa.eu/newsroom-events/news-archive/emt-madrid-announces-readiness-galileo-all-metropolitan-bus-fleet}(accedido: 6 de mayo de 2026).}. En el contexto de este trabajo, se busca mejorar el análisis del servicio prestado para sus líneas de autobús. Para ello, la Empresa Municipal plantea validar la viabilidad de construir una herramienta que permita extraer la información relevante sobre el desempeño de la flota de autobuses a lo largo de una línea específica.
+En el contexto del problema se sitúa la Empresa Municipal de Transportes de Madrid 
+(EMT)\footnote{\url{https://www.emtmadrid.es}(accedido: 6 de mayo de 2026)}, operador del servicio de 
+autobuses urbanos de la capital española. En los últimos años, ha impulsado múltiples iniciativas de 
+innovación tecnológica, destacando \enquote{Madrid Green Urban Mobility Lab} o la inclusión del sistema
+ \enquote{Galileo}. La primera es una iniciativa sin ánimo de lucro que busca promover la movilidad 
+ urbana sostenible\footnote{EMT Madrid, \enquote{\textit{Madrid Green Urban Mobility Lab} convertirá a 
+ la capital en un referente internacional en innovación y tecnología de la movilidad}, 26 de septiembre 
+ de 2022. Disponible en: \url{https://www.emtmadrid.es/Noticias/\%E2\%80\%98Madrid-Green-Urban-Mobility-Lab\%E2\%80\%99-convertira-a-la.aspx}(accedido: 6 de mayo de 2026).}. \enquote{Galileo}, 
+ por su parte, es un sistema europeo de navegación por satélite, incorporado en la totalidad de la 
+ flota con el fin de mejorar la precisión del posicionamiento de los buses\footnote{EU Agency for the 
+ Space Programme (EUSPA), \enquote{EMT Madrid announces readiness to Galileo in all the metropolitan 
+ bus fleet}, 19 de abril de 2019. 
+ Disponible en: \url{https://www.euspa.europa.eu/newsroom-events/news-archive/emt-madrid-announces-readiness-galileo-all-metropolitan-bus-fleet}(accedido: 6 de mayo de 2026).}. 
+ En el contexto de este trabajo, se busca mejorar el análisis del servicio prestado 
+ para sus líneas de autobús. Para ello, la Empresa Municipal plantea validar la viabilidad 
+ de construir una herramienta que permita extraer la información relevante sobre el desempeño 
+ de la flota de autobuses a lo largo de una línea específica.
 
-En este trabajo se propone una implementación de software basada en agentes inteligentes que permite simular el comportamiento de los de autobuses para una línea concreta. Este sistema permite extraer distintas métricas de rendimiento (KPI, del inglés \textit{Key Performance Indicators}). El simulador recibe distintos parámetros de entrada derivados de un estudio realizado sobre datos reales de operación de una línea a lo largo de diez meses de servicio. Esta base permite al usuario final del sistema evaluar estos escenarios a partir de evidencias empíricas, con el objetivo último de otorgar una herramienta que pueda servir para mejorar la eficiencia en la planificación diaria de autobuses. Para facilitar la usabilidad del sistema, se ha levantado el simulador sobre una interfaz web, que permite tanto la personalización de las simulaciones, como la visualización de las distintas estadísticas resultantes.
+En este trabajo se propone una implementación de software basada en agentes inteligentes que 
+permite simular el comportamiento de los de autobuses para una línea concreta. Este sistema permite 
+extraer distintas métricas de rendimiento (KPI, del inglés \textit{Key Performance Indicators}). 
+El simulador recibe distintos parámetros de entrada derivados de un estudio realizado sobre datos 
+reales de operación de una línea a lo largo de diez meses de servicio. Esta base permite al usuario 
+final del sistema evaluar estos escenarios a partir de evidencias empíricas, con el objetivo último 
+de otorgar una herramienta que pueda servir para mejorar la eficiencia en la planificación diaria 
+de autobuses. Para facilitar la usabilidad del sistema, se ha levantado el simulador sobre una interfaz 
+web, que permite tanto la personalización de las simulaciones, como la visualización de las distintas 
+estadísticas resultantes.
 
 
-A lo largo de este documento, se presentan, discuten y valoran las distintas decisiones de diseño, así como los retos enfrentados, y las conclusiones obtenidas del trabajo. En el capítulo segundo del documento, se discute acerca del estado de la cuestión, en el que se analizan diversas soluciones existentes en la literatura acerca del problema y cómo han ido evolucionando los distintos conceptos clave a lo largo del tiempo. Seguidamente, el capítulo tercero trata la metodología de trabajo escogida, junto a la explicación detallada sobre cada uno de los pasos. COMPLETARË A LA QUE SIGA AÑADIENDO COSAS A LA MEMORIA
+A lo largo de este documento, se presentan, discuten y valoran las distintas decisiones 
+de diseño, así como los retos enfrentados, y las conclusiones obtenidas del trabajo. En el 
+capítulo segundo del documento, se discute acerca del estado de la cuestión, en el que se analizan 
+diversas soluciones existentes en la literatura acerca del problema y cómo han ido evolucionando los 
+distintos conceptos clave a lo largo del tiempo. Seguidamente, el capítulo tercero trata la metodología
+ de trabajo escogida, junto a la explicación detallada sobre cada uno de los pasos. COMPLETARË A 
+ LA QUE SIGA AÑADIENDO COSAS A LA MEMORIA

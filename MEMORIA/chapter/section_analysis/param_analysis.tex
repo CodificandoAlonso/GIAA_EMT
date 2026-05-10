@@ -33,13 +33,12 @@ contiene información de la topología de las uniones inter-parada, y el otro de
 las mismas.
 
 
-Como se especifica con anterioridad, aparte de obtención y limpieza de los datos, por facilidad en La
+Como se especifica con anterioridad, aparte de la obtención y limpieza de los datos, para facilidad en la
 implementación, estos pasaron por un proceso de transformación a formato \textit{ESRI shapefile}.
 Para ello se usa la herramienta de código abierto \textbf{QGIS}. En la figura \ref{fig:qgis_converted}
 se muestra como se visualizan los cuatro GeoJSON procesados y transformados a shapefile. Posteriormente,
 en la figura \ref{fig:shapefile_gama} se muestran esos archivos shapefile ya dentro del
 entorno de trabajo de la plataforma de agentes GAMA.
-
 
 
 \begin{figure}[H]
@@ -60,18 +59,16 @@ entorno de trabajo de la plataforma de agentes GAMA.
 \end{figure}
 
 
-
+Estos datos no se usan en las siguientes fases, al no requerir mayor estudio sobre ellos. Se vuelven a abordar
+en el capítulo \ref{chapter:simulation_design}.
 
 \subsection{Datos de Operación}
-
-Hablar de como se trabajaron los datos. Como se obtenian las tablas con  las consultas preparadas por stopcode, como se tuvo que limpiar valores negativos o anómalos, y explicar posibles discrepancias en primera y ultimas paradas debido(palabras de la emt quizas no se deba poner, que a veces los datos de inicio/fin estan falseados debido a que los conductores registran mal inicio/fin de viaje.
-
 Los datos de operación representan la base empírica sobre la que se asienta el simulador.
 Su tratamiento supuso el inicio formal de la fase dos del proyecto \enquote{\textbf{Analisis y Parametrización}},
-debido a la necesidad de la EMT  de preparar la base de datos en un servidor dedicado incluyendo el pipeline 
+comenzada una vez la EMT termina de preparar la base de datos en un servidor dedicado, incluyendo el pipeline 
 que alimenta diariamente los datos. Los geoespaciales por su parte, al ser de acceso público, se pueden tratar
-sin la necesidad de preparación por parte de la empresa, por lo que empezaron a ser tratados 
-dentro de la fase previa.
+sin la necesidad de preparación por parte de la empresa, por lo que se empiezan a tratar
+dentro de la fase previa a la mencionada.
 
 Sobre la base de datos, en la figura~\ref{caption:relational_model} se puede ver el esquema relacional. Es un
 modelo sencillo compuesto por dos tablas, Master y Transaccional, relacionadas por \textit{TripId},
@@ -132,22 +129,61 @@ El resto de parámetros se especifican a continuación.
     \item \textbf{Transaccional::TimeSlot}:
     Franja horaria relativa al parámetro Transaccional::EventTime. Puede diferir del campo Master::TimeSlot.
     \item \textbf{Transaccional::TemperatureMax}:
+    Previsión máxima de temperatura en la parada en el momento de la recolección del dato.
     \item \textbf{Transaccional::TemperatureMin}:
+    Mismo caso que Transaccional::TemperatureMax pero para la previsión mínima
     \item \textbf{Transaccional::RainProbMax}:
+    Valor máximo de probabilidad de precipitación registrado en el instante que se guarda la instancia.
     \item \textbf{Transaccional::RainProbMin}:
+    Valor mínimo de probabilidad de precipitación en el mismo instante.
     \item \textbf{Transaccional::Board}:
+    Número de pasajeros que carga el autobús en el valor de la bitupla TripId-Stop.
     \item \textbf{Transaccional::DropOff}:
+    Número de pasajeros que abandonan el autobús.
     \item \textbf{Transaccional::Occupation}:
-
+    Valor de la carga de pasajeros derivada del cálculo $Transaccional::Occupation_{prev}$ + 
+    Transaccional::Board - Transaccional::DropOff.
 \end{itemize}
 
 
+El estudio ha derivado de distintas consultas sobre estas tablas, que encapsulaban en un único fichero 
+\enquote{CSV} toda la información referente a una parada. En el código \ref{code:sql_query} se 
+muestra el código \textit{SQL} utilizado para las consultas sobre la base de datos.
 
 
-\begin{lstlisting}[language=SQL, caption={Datos totales de una parada}]
+\begin{lstlisting}[language=SQL, caption={Datos totales de una parada}, label={code:sql_query}]
 SELECT mbot.*, tbso.*
 FROM UCIII.Transport.MASTER_BUS_OCUPATION_TRIPS mbot
 JOIN UCIII.Transport.TRANSAC_BUS_STOP_OCCUPATION tbso
     ON tbso.TripId = mbot.TripId
+    WHERE tbso.Stop = 'STOPCODE';
+
 \end{lstlisting}
 \par\vspace{4pt}{\footnotesize Fuente: Documento Facilitado por la EMT.}
+
+El resultante \enquote{CSV} presentaba derivado  del \textit{JOIN} un problema, y era la duplicidad
+de nomenclatura en campos de  ambas tablas, en concreto ---\textit{IdExternal}, \textit{EventDate}, 
+\textit{EventTime} y \textit{TimeSlot}---.
+
+Como se ha mencionado, el análisis de los datos de operación se ha realizado con la herramienta
+\textbf{Jupyter Notebook}, usando kernel de \textit{Python}. Bajo este framework, para el 
+manejo de los volúmenes de datos se ha usado la librería \textit{pandas}, que ante duplicidad 
+en los nombres de los campos, a la segunda ocurrencia añade un \enquote{.1} al cuerpo de la columna.
+De esta forma, todos aquellos campos contenedores de un \enquote{.1} se corresponden con las referentes
+a la tabla Transaccional. De aquí en adelante, no obstante, para diferenciar ambos parámetros, aparecerá
+el prefijo \textit{Transaccional::} o \textit{Master::} para no generar ambigüedades.
+
+En lo relativo a la limpieza de los datos, se trata de una fase clave, porque
+la no identificación de posibles anomalías en ciertos campos puede alterar la precisión del análisis
+posterior. En el caso particular, se redujo la limpieza a la eliminación de valores anómalos dentro
+de los campos \textit{Transaccional::Occupation}, \textit{Transaccional::Board} y 
+\textit{Transaccional::DropOff}, debido a la identificación de inconsistencias relativas a valores
+negativos en estos campos, o a valores extremos derivados de errores en la recolección.
+Como se comenta de forma exhaustiva en la siguiente sección, estos campos se presentan como los 
+más importantes del análisis, motivo por el que se tratan de forma exhaustiva para evitar problemas.
+
+\section{Estudio y Gaussianidad}
+
+
+
+\section{Preparación para Simulador}
