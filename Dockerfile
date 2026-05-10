@@ -46,23 +46,8 @@ RUN wget https://github.com/gama-platform/gama/releases/download/2025.06.4/GAMA_
     && unzip GAMA_2025.06.4_Linux.zip \
     && rm GAMA_2025.06.4_Linux.zip
 
-
-
 RUN chmod +x /app/WEB_DEVEL/bash_scripts/*.sh && chmod +x /opt/headless/gama-headless.sh
 
-# ---------------------------------------------------------------------------
-# Runtime path environment variables
-#
-# These replace hardcoded host paths inside the bash scripts.
-# Every path that the scripts resolve at runtime must use one of these vars.
-#
-# GAMA_SOURCE_DIR   : where TEST_MOBILITY lives (mounted ro from GAMA/)
-# LOGS_DIR          : where SIMULATION_<ts>/ dirs are created (mounted rw)
-# KNOWN_DATA_DIR    : reference statistical data (mounted ro)
-# GAMA_HEADLESS     : full path to gama-headless.sh inside the GAMA install
-# SCRIPTS_DIR       : location of the bash scripts inside the container
-# STATE_DIR         : writable dir for .last_simulation (inside LOGS_DIR mount)
-# ---------------------------------------------------------------------------
 
 WORKDIR /app
 
@@ -75,7 +60,4 @@ ENV GAMA_SOURCE_DIR=/workspace/GAMA/src/TEST_MOBILITY/models \
 
 EXPOSE 3000
 
-
-
-# Replace the ENTRYPOINT + CMD with just:
 ENTRYPOINT ["node", "/app/WEB_DEVEL/src/server.js"]

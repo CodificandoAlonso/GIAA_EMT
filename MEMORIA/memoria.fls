@@ -317,6 +317,10 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def
@@ -335,8 +339,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/titlesec/titletoc.sty
@@ -716,12 +718,12 @@ INPUT ./imagenes/image_tables_diagram.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xi.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/txr.vf
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xtt.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xbtt.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/txr.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/t1xr.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxptmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxr.tfm

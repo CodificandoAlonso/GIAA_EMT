@@ -88,64 +88,164 @@ de la tabla transaccional, identificada por el mismo \textit{TripId} y el códig
 
 El resto de parámetros se especifican a continuación.
 
-\begin{itemize}
+\begin{table}[H]
+	\ttabbox[\FBwidth]
+	{\caption{Parámetros de la tabla Master}
+	\label{tab:params_master}}
+	{\begin{tabular}{|P{4cm}|P{2cm}|P{2.5cm}|P{6cm}|}
+		\hline
+		\textbf{Nombre} & \textbf{Tipo de dato} & \textbf{Formato específico} & \textbf{Descripción} \\
+		\hline
+		
+		\textbf{Master::IdExternal} 
+		& UUID 
+		& NO 
+		& Identificador interno de la EMT. Se especificó no utilizarlo. \\
+        \hline
+		\textbf{Master::EventDate}
+        & FECHA
+        & YYYY-MM-DD
+        & Referente al día del viaje. \\
+		\hline
+        \textbf{Master::EventTime}
+        & FECHA
+        & HH:MM:SS.f
+        & Representativa del momento de inicio del viaje. \\
+        \hline
+        \textbf{Master::TimeSlot}
+        & INT 
+        & NO 
+        & Franja horaria relativa a Master::EventTime. \\
+        \hline
+        \textbf{Master::Line}
+        & STRING 
+        & NO 
+        & Código numérico identificador de la línea. \\
+        \hline
+        \textbf{Master::Direction}
+        & INT
+        & NO 
+        & Sentido del viaje. De forma interna el valor 
+        \textit{1} representaba un sentido y \textit{2} el opuesto. \\
+        \hline
+        \textbf{Master::LogicVehicle}
+        & INT
+        & NO 
+        & Identificador interno del coche encargado del viaje. \\
+        \hline
+        \textbf{Master::Weekday}
+        & STRING
+        & Inicial del día
+        & Acrónimo referente al día de la semana específico. \\
+        \hline
+        \textbf{Master::DayType}
+        & STRING
+        & SI (Código
+        Interno EMT)
+        & Tipo de día. Existen múltiples valores posibles, 
+        principalmente se usa para diferenciar días laborables
+        de fines de semana y festivos. \\
+        \hline
+        \textbf{Master::Season}
+        & STRING
+        & SI (Código
+        Interno EMT)
+        & Época del año relativa al día de recolección del dato. \\
+        \hline
+        \textbf{Master::FreeDay}
+        & INT (BOOL)
+        & 1 -> true
+         0 -> false 
+        & Especifica si el día presenta \textit{gratuidad}. El término se refiere a 
+        aquellos días específicos en los que el servicio del autobús se presenta
+        gratuito. \\
+        \hline
+		\multicolumn{4}{l}{Fuente: Elaboración propia a partir de figura \ref{fig:relational_model}}
+	\end{tabular}}
+\end{table}
 
-    \item \textbf{Master::IdExternal}:
-    Identificador interno de la EMT, se especificó no usarlo.
-    \item \textbf{Master::EventDate}:
-    Fecha en formato YYYY:MM:DD referente al día del viaje.
-    \item \textbf{Master::EventTime}:
-    Hora en formato HH:MM:SS.f representativa del momento de inicio del viaje.
-    \item \textbf{Master::TimeSlot}:
-    Franja horaria relativa a Master::EventTime.
-    \item \textbf{Master::Line}:
-    Línea del viaje.
-    \item \textbf{Master::Direction}:
-    Sentido del viaje. De forma interna el valor \textit{1} representaba un sentido y \textit{2} el opuesto.
-    \item \textbf{Master::LogicVehicle}:
-    Identificador interno del coche encargado del viaje.
-    \item \textbf{Master::Weekday}:
-    Acrónimo referente al día de la semana específico. Puede ser \enquote{L,M,X,J,V,S,D} según el día.
-    \item \textbf{Master::DayType}:
-    Tipo de día. Existen múltiples valores posibles, principalmente se usa para diferenciar días laborables
-    de fines de semana y festivos.
-    \item \textbf{Master::Season}:
-    Época del año relativa al día de recolección del dato.
-    \item \textbf{Master::FreeDay}:
-    Especifica si el día presenta \textit{gratuidad} (toma valor \enquote{1}) o no (valor \enquote{0}). 
-    El término se refiere a aquellos días específicos en los que el servicio del autobús se presenta
-    gratuito.
+\begin{table}[H]
+	\ttabbox[\FBwidth]
+	{\caption{Parámetros de la tabla Transaccional}
+	\label{tab:params_transac}}
+	{\begin{tabular}{|P{4cm}|P{2cm}|P{2.5cm}|P{6cm}|}
+		\hline
+		\textbf{Nombre} & \textbf{Tipo de dato} & \textbf{Formato específico} & \textbf{Descripción} \\
+		\hline
+		\textbf{Transac::IdExternal} 
+		& UUID 
+		& NO 
+        & Mismo caso que en el parámetro de la tabla Master, se ignora. \\
+        \hline
+		\textbf{Transac::EventDate}
+        & FECHA
+        & YYYY-MM-DD
+        &  Mismo parámetro que en la tabla Master, salvo que debido a retrasos 
+        provoque la llegada al día siguiente en casos extremos al final de la jornada.\\
+		\hline
+        \textbf{Transac::EventTime}
+        & FECHA
+        & HH:MM:SS.f
+        & Almacena el momento exacto en el que el bus llega a
+        la parada específica. \\
+        \hline
+        \textbf{Transac::TimeSlot}
+        & INT 
+        & NO 
+        & Franja horaria relativa al parámetro Transac::EventTime. 
+        Puede diferir del campo Master::TimeSlot. \\
+        \hline
+        \textbf{Transac::
+        TemperatureMax}
+        & INT 
+        & NO 
+        & Previsión máxima de temperatura en la parada en 
+          el momento de la recolección del dato.\\
+        \hline
+        \textbf{Transac::
+        TemperatureMin}
+        & INT
+        & NO 
+        & Previsión mínima de temperatura en la parada en 
+          el momento de la recolección del dato. \\
+        \hline
+        \textbf{Transac::
+        RainProbMax}:
+        & INT
+        & NO 
+        & Valor máximo de probabilidad de precipitación registrado 
+        en el momento de llegada del autobús. \\
+        \hline
+        \textbf{Transac::
+        RainProbMin}:
+        & INT
+        & NO 
+        & Valor mínimo de probabilidad de precipitación registrado 
+        en el momento de llegada del autobús. \\
+        \hline
+        \textbf{Transac::Board}
+        & INT
+        & NO
+        & Número de pasajeros que carga el autobús en el 
+          valor de la bitupla TripId-Stop.\\
+        \hline
+        \textbf{Transac::DropOff}
+        & INT
+        & NO
+        & Número de pasajeros que abandonan el autobús. \\
+        \hline
+        \textbf{Transac::
+        Occupation}
+        & INT
+        & NO
+        & Valor de la carga de pasajeros derivada del cálculo $\text{Transac::\textit{Occupation}} 
+        = \text{Transac::\textit{Occupation}}_{\text{prev}} + \text{Transac::\textit{Board}} - 
+        \text{Transac::\textit{DropOff}}$. \\
+        \hline
+		\multicolumn{4}{l}{Fuente: Elaboración propia a partir de figura \ref{fig:relational_model}}
+	\end{tabular}}
+\end{table}
 
-
-
-
-    \item \textbf{Transaccional::idExternal}:
-    Mismo caso que en el parámetro de la tabla Master, se ignora.
-    \item \textbf{Transaccional::EventDate}:
-    Mismo parámetro que en la tabla Master, salvo que debido a retrasos provoque la llegada al día siguiente
-    en casos extremos al final de la jornada.
-    \item \textbf{Transaccional::EventTime}:
-    Hora en igual formato que Master::EventTime. Almacena el momento exacto en el que el bus llega a
-    la parada específica.
-    \item \textbf{Transaccional::TimeSlot}:
-    Franja horaria relativa al parámetro Transaccional::EventTime. Puede diferir del campo Master::TimeSlot.
-    \item \textbf{Transaccional::TemperatureMax}:
-    Previsión máxima de temperatura en la parada en el momento de la recolección del dato.
-    \item \textbf{Transaccional::TemperatureMin}:
-    Mismo caso que Transaccional::TemperatureMax pero para la previsión mínima.
-    \item \textbf{Transaccional::RainProbMax}:
-    Valor máximo de probabilidad de precipitación registrado en el instante que se guarda la instancia.
-    \item \textbf{Transaccional::RainProbMin}:
-    Valor mínimo de probabilidad de precipitación en el mismo instante.
-    \item \textbf{Transaccional::Board}:
-    Número de pasajeros que carga el autobús en el valor de la bitupla TripId-Stop.
-    \item \textbf{Transaccional::DropOff}:
-    Número de pasajeros que abandonan el autobús.
-    \item \textbf{Transaccional::Occupation}:
-    Valor de la carga de pasajeros derivada del cálculo $\text{Transaccional::\textit{Occupation}} 
-    = \text{Transaccional::\textit{Occupation}}_{\text{prev}} + \text{Transaccional::\textit{Board}} - 
-    \text{Transaccional::\textit{DropOff}}$.
-\end{itemize}
 
 
 El estudio ha derivado de distintas consultas sobre estas tablas, que encapsulaban en un único fichero 
@@ -189,6 +289,31 @@ más importantes del análisis, motivo por el que se tratan con especial rigor p
 
 \section{Estudio y Gaussianidad}
 \label{section:gauss_and_study}
+En esta sección se documentan las dos etapas que componen el análisis de los datos. Este análisis
+se centra sobre dos pilares fundamentales, estudiar la viabilidad de los datos operacionales, y preparar
+los parámetros específicos para su inyección al simulador.
+
+\subsection{Estudio de viabilidad de datos operacionales}
+El principal reto de esta fase es la de validar la normalidad de los datos sobre los cuales se va a construir
+el simulador. Como se especifica en la sección \ref{section:problem_def}, una de las cuestiones de mayor relevancia
+de este proyecto es la simulacion de los días \textbf{normales}. En el marco de este trabajo, se ha considerado
+día \enquote{normal} a aquel día laborable sin \textit{gratuidad}. De esta forma, se excluyen fines de semana,
+festivos y días gratuitos. El motivo de esta segregación viene derivado del momento temporal en el que se comenzó
+esta etapa. Al no disponer de datos relativos al funcionamiento de las líneas previos a julio de 2025, la falta 
+de datos festivos y de fines de semana relativos al número de datos laborables 
+puede incurrir en asunciones sesgadas al poco valor muestral de los datos.
+
+El proceso de análisis se centra sobre un valor centralizado que es el de \textit{Occupation}. Este valor es el
+más representativo como medida de estabilidad de los datos otorgados. Para validar su normalidad, se ha seguido 
+un proceso iterativo evolutivo. Dicho proceso inicia con la reducción del problema al mínimo posible, con el 
+objetivo de ir validando resultados a medida que se expande la población estudiada.
+
+La parada que se escoge para este estudio es la parada \enquote{5939:Vía Lusitana-Halconero del Rey}. Se escoge
+debido a su localización estratégica dentro de la ruta y a sus características propias. Es la quinta parada 
+de la línea en su sentido \textit{Cibeles}, por lo que posible ruido o variabilidad inducida por las 
+primeras paradas de la línea se mitiga. Con respecto a sus características, al no tener correspondencia con 
+otras rutas, mitiga las posibles variabilidades derivadas de este suceso.
+
 
 
 \section{Preparación para Simulador}

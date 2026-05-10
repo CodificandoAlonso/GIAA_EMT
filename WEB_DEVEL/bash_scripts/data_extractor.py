@@ -316,6 +316,7 @@ for timeslot in timeslots:
 
 plt.style.use('seaborn-v0_8-whitegrid')
 
+
 def save_barcode(horizontal_data, vertical_data, horizontal_label, vertical_label, leyend, label, filename):
     x = np.arange(len(horizontal_data))
     plt.figure(figsize=(12,5))
@@ -330,46 +331,73 @@ def save_barcode(horizontal_data, vertical_data, horizontal_label, vertical_labe
     plt.close()
 
 
-def compute_and_save_distribution_comparasion(mean_1,std_1, mean_2, std_2, direction, stopcode, timeslot):
 
-
-    # Guard against zero or near-zero std (no valid distribution to plot)
-    if std_1 <= 1e-9 or std_2 <= 1e-9:
+def compute_and_save_distribution_comparasion(
+    sim_data,
+    mean_2, std_2,
+    direction, stopcode, timeslot,
+    is_normal=True
+):
+    if std_2 <= 1e-9 or len(sim_data) < 2:
         return
 
-    # Bhattacharyya metrics
-    bhatt_dist = bhattacharyya_distance(mean_1, mean_2, std_1, std_2)
-    bhatt_coeff = bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2)
+    x_min_exp = mean_2 - 4 * std_2
+    x_max_exp = mean_2 + 4 * std_2
 
-    #cover both distributions
-    x_min = min(mean_1 - 4 * std_1, mean_2 - 4 * std_2)
-    x_max = max(mean_1 + 4 * std_1, mean_2 + 4 * std_2)
-    x = np.linspace(x_min, x_max, 500)
+    if is_normal:
+        #Bhattacharyya as normal
+        mean_1 = np.mean(sim_data)
+        std_1  = np.std(sim_data, ddof=1)
+        if std_1 <= 1e-9:
+            return
 
-    y1 = norm.pdf(x, mean_1, std_1)
-    y2 = norm.pdf(x, mean_2, std_2)
+        x_min = min(mean_1 - 4 * std_1, x_min_exp)
+        x_max = max(mean_1 + 4 * std_1, x_max_exp)
+        x = np.linspace(x_min, x_max, 500)
 
-    # Verdict based on threshold
-    if bhatt_coeff >= threshold:
-        verdict = "Fusionables ('Equivalentes')"
+        y1 = norm.pdf(x, mean_1, std_1)
+        y2 = norm.pdf(x, mean_2, std_2)
+
+        bhatt_dist  = bhattacharyya_distance(mean_1, mean_2, std_1, std_2)
+        bhatt_coeff = bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2)
+        sim_label = f"Simulación Normal (μ={mean_1:.2f}, σ={std_1:.2f})"
     else:
-        verdict = "No fusionables (Distintas)"
+        #KDE + Bhattacharyya
+        from scipy.stats import gaussian_kde
 
+        if np.std(sim_data, ddof=1) <= 1e-9:
+            return
+        kde = gaussian_kde(sim_data)
+        x_min = min(np.min(sim_data) - 1, x_min_exp)
+        x_max = max(np.max(sim_data) + 1, x_max_exp)
+        x = np.linspace(x_min, x_max, 500)
+
+        y1 = kde(x)
+        y2 = norm.pdf(x, mean_2, std_2)
+
+        # Bhattacharyya coefficient trapezoidal integration
+        bc_integrand = np.sqrt(y1 * y2)
+        bhatt_coeff  = np.trapezoid(bc_integrand, x)
+        bhatt_coeff  = min(bhatt_coeff, 1.0)
+        bhatt_dist   = -np.log(bhatt_coeff) if bhatt_coeff > 0 else np.inf
+        sim_label = f"Simulación KDE (n={len(sim_data)})"
+
+    veredict = ("Fusionables ('Equivalentes')" if bhatt_coeff >= threshold
+               else "No fusionables (Distintas)")
 
     plt.figure(figsize=(12, 5))
-    plt.plot(x, y1, color="blue", linewidth=2,
-             label=f"Simulación (μ={mean_1:.2f}, σ={std_1:.2f})")
+    plt.plot(x, y1, color="blue", linewidth=2, label=sim_label)
     plt.fill_between(x, y1, alpha=0.15, color="blue")
-
     plt.plot(x, y2, color="red", linewidth=2,
              label=f"Esperado (μ={mean_2:.2f}, σ={std_2:.2f})")
     plt.fill_between(x, y2, alpha=0.15, color="red")
 
-    plt.xlabel("Ocupación del Autobus al paso por parada")
+    plt.xlabel("Ocupación del Autobús al paso por parada")
     plt.ylabel("Densidad de probabilidad")
     plt.title(f"Comparativa de distribuciones – parada {stopcode}, Franja {timeslot}")
     plt.legend(
-        title=f"Distancia de Bhattacharyya ={bhatt_dist:.4f}  coeff={bhatt_coeff:.4f}\n→ {verdict}",
+        title=(f"Distancia de Bhattacharyya = {bhatt_dist:.4f}  "
+               f"coeff = {bhatt_coeff:.4f}\n→ {veredict}"),
         loc="upper right"
     )
     plt.tight_layout()
@@ -381,46 +409,70 @@ def compute_and_save_distribution_comparasion(mean_1,std_1, mean_2, std_2, direc
     plt.close()
 
 
-
-def compute_and_save_distribution_comparasion_times(mean_1,std_1, mean_2, std_2, direction, stopcode, timeslot):
-
-
-    # Guard against zero or near-zero std (no valid distribution to plot)
-    if std_1 <= 1e-9 or std_2 <= 1e-9:
+def compute_and_save_distribution_comparasion_times(
+    sim_data,
+    mean_2, std_2,
+    direction, stopcode, timeslot,
+    is_normal=True
+):
+    if std_2 <= 1e-9 or len(sim_data) < 2:
         return
 
-    # Bhattacharyya metrics
-    bhatt_dist = bhattacharyya_distance(mean_1, mean_2, std_1, std_2)
-    bhatt_coeff = bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2)
+    x_min_exp = mean_2 - 4 * std_2
+    x_max_exp = mean_2 + 4 * std_2
 
-    #cover both distributions
-    x_min = min(mean_1 - 4 * std_1, mean_2 - 4 * std_2)
-    x_max = max(mean_1 + 4 * std_1, mean_2 + 4 * std_2)
-    x = np.linspace(x_min, x_max, 500)
+    if is_normal:
+        mean_1 = np.mean(sim_data)
+        std_1  = np.std(sim_data, ddof=1)
+        if std_1 <= 1e-9:
+            return
 
-    y1 = norm.pdf(x, mean_1, std_1)
-    y2 = norm.pdf(x, mean_2, std_2)
+        x_min = min(mean_1 - 4 * std_1, x_min_exp)
+        x_max = max(mean_1 + 4 * std_1, x_max_exp)
+        x = np.linspace(x_min, x_max, 500)
 
-    # Verdict based on threshold
-    if bhatt_coeff >= threshold:
-        verdict = "Fusionables ('Equivalentes')"
+        y1 = norm.pdf(x, mean_1, std_1)
+        y2 = norm.pdf(x, mean_2, std_2)
+
+        bhatt_dist  = bhattacharyya_distance(mean_1, mean_2, std_1, std_2)
+        bhatt_coeff = bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2)
+        sim_label = f"Simulación Normal (μ={mean_1:.2f}, σ={std_1:.2f})"
     else:
-        verdict = "No fusionables (Distintas)"
+        from scipy.stats import gaussian_kde
+
+        if np.std(sim_data, ddof=1) <= 1e-9:
+            return
+        
+        kde = gaussian_kde(sim_data)
+        x_min = min(np.min(sim_data) - 1, x_min_exp)
+        x_max = max(np.max(sim_data) + 1, x_max_exp)
+        x = np.linspace(x_min, x_max, 500)
+
+        y1 = kde(x)
+        y2 = norm.pdf(x, mean_2, std_2)
+
+        bc_integrand = np.sqrt(y1 * y2)
+        bhatt_coeff  = np.trapezoid(bc_integrand, x)
+        bhatt_coeff  = min(bhatt_coeff, 1.0)
+        bhatt_dist   = -np.log(bhatt_coeff) if bhatt_coeff > 0 else np.inf
+        sim_label = f"Simulación KDE (n={len(sim_data)})"
+
+    verdict = ("Fusionables ('Equivalentes')" if bhatt_coeff >= threshold
+               else "No fusionables (Distintas)")
 
     plt.figure(figsize=(12, 5))
-    plt.plot(x, y1, color="blue", linewidth=2,
-             label=f"Simulación (μ={mean_1:.2f}, σ={std_1:.2f})")
+    plt.plot(x, y1, color="blue", linewidth=2, label=sim_label)
     plt.fill_between(x, y1, alpha=0.15, color="blue")
-
     plt.plot(x, y2, color="red", linewidth=2,
              label=f"Esperado (μ={mean_2:.2f}, σ={std_2:.2f})")
     plt.fill_between(x, y2, alpha=0.15, color="red")
 
-    plt.xlabel(f"Tiempo medio entre paradas {stopcode[0]}-{stopcode[1]} medido en segundos ")
+    plt.xlabel(f"Tiempo medio entre paradas {stopcode[0]}-{stopcode[1]} medido en segundos")
     plt.ylabel("Densidad de probabilidad")
     plt.title(f"Comparativa de distribuciones – paradas {stopcode[0]}-{stopcode[1]}, Franja {timeslot}")
     plt.legend(
-        title=f"Distancia de Bhattacharyya ={bhatt_dist:.4f}  coeff={bhatt_coeff:.4f}\n→ {verdict}",
+        title=(f"Distancia de Bhattacharyya = {bhatt_dist:.4f}  "
+               f"coeff = {bhatt_coeff:.4f}\n→ {verdict}"),
         loc="upper right"
     )
     plt.tight_layout()
@@ -430,7 +482,6 @@ def compute_and_save_distribution_comparasion_times(mean_1,std_1, mean_2, std_2,
         dpi=300
     )
     plt.close()
-
 
 
 save_barcode(timeslots, list_occupation_values_toA , "TimeSlots", "% de Ocupación",  f"Sentido {to_A}", "Ocupación del bus por franja horaria", f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/occupation_per_timeslot_toA.png")
@@ -513,7 +564,7 @@ for stopcode in stops_list_toA:
         mean_known = data_stop[f"Mean_{timeslot}"].iloc[0]
         std_known = data_stop[f"std_{timeslot}"].iloc[0]
 
-        compute_and_save_distribution_comparasion(mean_sim, std_sim, mean_known, std_known, "to_A", stopcode, timeslot)
+        compute_and_save_distribution_comparasion(vars_sim, mean_known, std_known, "to_A", stopcode, timeslot, normal_sim)
 
 
     #Per stop. Compute the mean time of awaital per passenger(Normal and per timeslot)
@@ -596,7 +647,7 @@ for stopcode in stops_list_toB:
         mean_known = data_stop[f"Mean_{timeslot}"].iloc[0]
         std_known = data_stop[f"std_{timeslot}"].iloc[0]
 
-        compute_and_save_distribution_comparasion(mean_sim, std_sim, mean_known, std_known, "to_B", stopcode, timeslot)
+        compute_and_save_distribution_comparasion(vars_sim, mean_known, std_known, "to_B", stopcode, timeslot, normal_sim)
 
 
 
@@ -794,7 +845,7 @@ for stop in stops_list_toA[1:]:
         expected_times.append(mean_known)
         json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["expected_time_per_timeslot"][timeslot] = mean_known
 
-        compute_and_save_distribution_comparasion_times(mean_sim, std_sim, mean_known, std_known, "to_A", [stops_list_toA[counter],stop], timeslot)
+        compute_and_save_distribution_comparasion_times(var_sim, mean_known, std_known, "to_A", [stops_list_toA[counter],stop], timeslot, normal_sim)
 
 
 
@@ -837,7 +888,7 @@ for stop in stops_list_toB[1:]:
         expected_times.append(mean_known)        
         json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["expected_time_per_timeslot"][timeslot] = mean_known
 
-        compute_and_save_distribution_comparasion_times(mean_sim, std_sim, mean_known, std_known, "to_B", [stops_list_toB[counter],stop], timeslot)
+        compute_and_save_distribution_comparasion_times(var_sim, mean_known, std_known, "to_B", [stops_list_toB[counter],stop], timeslot, normal_sim)
 
     json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["expected_time"] = np.mean(expected_times)
 
