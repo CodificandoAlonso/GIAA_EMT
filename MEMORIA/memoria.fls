@@ -727,6 +727,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xbtt.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/t1xr.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxptmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/txmi.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxmi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/txr.vf
 INPUT ./chapter/section_design/Simulation_design.tex
 INPUT ./chapter/section_design/Simulation_design.tex
 INPUT ./chapter/section_design/Simulation_design.tex
@@ -745,6 +748,7 @@ OUTPUT memoria.run.xml
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb

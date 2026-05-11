@@ -306,13 +306,26 @@ puede incurrir en asunciones sesgadas al poco valor muestral de los datos.
 El proceso de análisis se centra sobre un valor centralizado que es el de \textit{Occupation}. Este valor es el
 más representativo como medida de estabilidad de los datos otorgados. Para validar su normalidad, se ha seguido 
 un proceso iterativo evolutivo. Dicho proceso inicia con la reducción del problema al mínimo posible, con el 
-objetivo de ir validando resultados a medida que se expande la población estudiada.
+objetivo de ir validando resultados a medida que se expande la muestra estudiada.
 
-La parada que se escoge para este estudio es la parada \enquote{5939:Vía Lusitana-Halconero del Rey}. Se escoge
+La parada que se escoge para este estudio es la \enquote{5939:Vía Lusitana-Halconero del Rey}. Se elige
 debido a su localización estratégica dentro de la ruta y a sus características propias. Es la quinta parada 
-de la línea en su sentido \textit{Cibeles}, por lo que posible ruido o variabilidad inducida por las 
+de la línea en sentido \textit{Cibeles}, por lo que posible ruido o variabilidad inducida por las 
 primeras paradas de la línea se mitiga. Con respecto a sus características, al no tener correspondencia con 
-otras rutas, mitiga las posibles variabilidades derivadas de este suceso.
+otras rutas, mitiga las variabilidades derivadas de este hecho.
+
+El estudio en cuestión comienza aplicando un filtro específico y estudiando la normalidad de los datos
+obtenidos. El filtro fue escoger de todos los \textit{lunes laborables} el primer autobús que efectuara
+salida de cabecera en el \textit{timeslot} correspondiente a las nueve de la mañana. Este filtro
+generaba un número de observaciones a estudiar de unas 20 muestras. Este motivo, como se expone en el 
+estado del arte, lleva a la decisión de aplicar un \textbf{test de normalidad} basado en 
+\enquote{\textbf{skewness}} y \enquote{\textbf{kurtosis}}. El test evalúa la hipótesis nula $H_0$: la 
+distribución subyacente es normal, con un nivel de significación $\alpha = 0{,}05$. En aquellos casos en 
+los que el test no rechaza $H_0$, se asume que los datos son compatibles con una distribución normal a 
+un nivel de confianza del 95\%.
+
+CONTINUAR AL ACABAR SOTA DE ESTADISTICA
+
 
 
 
