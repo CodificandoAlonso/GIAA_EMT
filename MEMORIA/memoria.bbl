@@ -1029,6 +1029,181 @@
       \field{pages}{05002}
       \range{pages}{1}
     \endentry
+    \entry{demoivre1738doctrine}{book}{}
+      \name{author}{1}{}{%
+        {{hash=f0cc6c086b2011412793602bf571f9ba}{%
+           family={Moivre},
+           familyi={M\bibinitperiod},
+           given={Abraham},
+           giveni={A\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {London}%
+      }
+      \list{publisher}{1}{%
+        {H. Woodfall}%
+      }
+      \strng{namehash}{f0cc6c086b2011412793602bf571f9ba}
+      \strng{fullhash}{f0cc6c086b2011412793602bf571f9ba}
+      \strng{bibnamehash}{f0cc6c086b2011412793602bf571f9ba}
+      \strng{authorbibnamehash}{f0cc6c086b2011412793602bf571f9ba}
+      \strng{authornamehash}{f0cc6c086b2011412793602bf571f9ba}
+      \strng{authorfullhash}{f0cc6c086b2011412793602bf571f9ba}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{The Doctrine of Chances: or, A Method of Calculating the Probabilities of Events in Play}
+      \field{year}{1738}
+    \endentry
+    \entry{laplace1812theorie}{book}{}
+      \name{author}{1}{}{%
+        {{hash=14f71a442604b281a25e6e15a2757a5e}{%
+           family={Laplace},
+           familyi={L\bibinitperiod},
+           given={Pierre-Simon},
+           giveni={P\bibinithyphendelim S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \list{publisher}{1}{%
+        {Courcier}%
+      }
+      \strng{namehash}{14f71a442604b281a25e6e15a2757a5e}
+      \strng{fullhash}{14f71a442604b281a25e6e15a2757a5e}
+      \strng{bibnamehash}{14f71a442604b281a25e6e15a2757a5e}
+      \strng{authorbibnamehash}{14f71a442604b281a25e6e15a2757a5e}
+      \strng{authornamehash}{14f71a442604b281a25e6e15a2757a5e}
+      \strng{authorfullhash}{14f71a442604b281a25e6e15a2757a5e}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Théorie analytique des probabilités}
+      \field{year}{1812}
+    \endentry
+    \entry{gauss1809theoria}{book}{}
+      \name{author}{1}{}{%
+        {{hash=e9c7a9b2a294e91fb10e53e350556634}{%
+           family={Gauss},
+           familyi={G\bibinitperiod},
+           given={Carl\bibnamedelima Friedrich},
+           giveni={C\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Hamburg}%
+      }
+      \list{publisher}{1}{%
+        {F. Perthes et I.H. Besser}%
+      }
+      \strng{namehash}{e9c7a9b2a294e91fb10e53e350556634}
+      \strng{fullhash}{e9c7a9b2a294e91fb10e53e350556634}
+      \strng{bibnamehash}{e9c7a9b2a294e91fb10e53e350556634}
+      \strng{authorbibnamehash}{e9c7a9b2a294e91fb10e53e350556634}
+      \strng{authornamehash}{e9c7a9b2a294e91fb10e53e350556634}
+      \strng{authorfullhash}{e9c7a9b2a294e91fb10e53e350556634}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Theoria motus corporum coelestium in sectionibus conicis solem ambientium}
+      \field{year}{1809}
+    \endentry
+    \entry{yap2011comparisons}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f9844564c7ed93f482762cd96687a8e0}{%
+           family={Yap},
+           familyi={Y\bibinitperiod},
+           given={Bee\bibnamedelima Wah},
+           giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=755b6005837f832ad108973f747b46b9}{%
+           family={Sim},
+           familyi={S\bibinitperiod},
+           given={Chiaw\bibnamedelima Hock},
+           giveni={C\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{597e9893576c0a1ec9945f4c0110a19e}
+      \strng{fullhash}{597e9893576c0a1ec9945f4c0110a19e}
+      \strng{bibnamehash}{597e9893576c0a1ec9945f4c0110a19e}
+      \strng{authorbibnamehash}{597e9893576c0a1ec9945f4c0110a19e}
+      \strng{authornamehash}{597e9893576c0a1ec9945f4c0110a19e}
+      \strng{authorfullhash}{597e9893576c0a1ec9945f4c0110a19e}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Computation and Simulation}
+      \field{number}{12}
+      \field{title}{Comparisons of Various Types of Normality Tests}
+      \field{volume}{81}
+      \field{year}{2011}
+      \field{pages}{2141\bibrangedash 2155}
+      \range{pages}{15}
+    \endentry
+    \entry{kim2013normality}{article}{}
+      \name{author}{1}{}{%
+        {{hash=38c15942409019792b80d250f274b38b}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Hae-Young},
+           giveni={H\bibinithyphendelim Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{38c15942409019792b80d250f274b38b}
+      \strng{fullhash}{38c15942409019792b80d250f274b38b}
+      \strng{bibnamehash}{38c15942409019792b80d250f274b38b}
+      \strng{authorbibnamehash}{38c15942409019792b80d250f274b38b}
+      \strng{authornamehash}{38c15942409019792b80d250f274b38b}
+      \strng{authorfullhash}{38c15942409019792b80d250f274b38b}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Restorative Dentistry \& Endodontics}
+      \field{number}{1}
+      \field{title}{Statistical Notes for Clinical Researchers: Assessing Normal Distribution Using Skewness and Kurtosis}
+      \field{volume}{38}
+      \field{year}{2013}
+      \field{pages}{52\bibrangedash 54}
+      \range{pages}{3}
+    \endentry
+    \entry{dagostino1973tests}{article}{}
+      \name{author}{2}{}{%
+        {{hash=039780861d924a453fd40c832a678244}{%
+           family={D'Agostino},
+           familyi={D\bibinitperiod},
+           given={Ralph\bibnamedelima B.},
+           giveni={R\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=6be9207a4e10cd94bfdf5ab44acd774f}{%
+           family={Pearson},
+           familyi={P\bibinitperiod},
+           given={Egon\bibnamedelima S.},
+           giveni={E\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{8994d9ef841cf2f73216549b03856575}
+      \strng{fullhash}{8994d9ef841cf2f73216549b03856575}
+      \strng{bibnamehash}{8994d9ef841cf2f73216549b03856575}
+      \strng{authorbibnamehash}{8994d9ef841cf2f73216549b03856575}
+      \strng{authornamehash}{8994d9ef841cf2f73216549b03856575}
+      \strng{authorfullhash}{8994d9ef841cf2f73216549b03856575}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Biometrika}
+      \field{number}{3}
+      \field{title}{Tests for Departure from Normality. {Empirical} Results for the Distributions of $b_2$ and $\sqrt{b_1}$}
+      \field{volume}{60}
+      \field{year}{1973}
+      \field{pages}{613\bibrangedash 622}
+      \range{pages}{10}
+    \endentry
     \entry{balaguer2018}{article}{}
       \name{author}{3}{}{%
         {{hash=158b8bf5c151be83bae8f2f926391405}{%
@@ -1053,8 +1228,8 @@
       \strng{authorbibnamehash}{ff54cf773a25798aba9d46076a42090d}
       \strng{authornamehash}{ff54cf773a25798aba9d46076a42090d}
       \strng{authorfullhash}{ff54cf773a25798aba9d46076a42090d}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Collection of Open Conferences in Research Transport}
@@ -1066,6 +1241,7 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{CITACITACITA}
 \endrefsection
 \endinput
 

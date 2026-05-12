@@ -21,14 +21,149 @@ de las distribuciones de los datos estudiados. Para ello, se divide el contenido
 \enquote{\nameref{subsubsec:hyp_test}} y \enquote{\nameref{subsubsec:extreme_case}}. 
 
 
-
-
 \subsubsection{Test de Hipótesis}
 \label{subsubsec:hyp_test}
+Los test de hipótesis suponen el principal método de validación de distribuciones empíricas. Se han usado
+diferentes distribuciones conocidas a lo largo de este trabajo, como son la distrubición \textbf{Normal}
+o \textbf{Gaussiana}, la distribución \textbf{Binomial Negativa} y la distribución \textbf{Geométrica}.
+Esta subsección expone cómo son estas distribuciones y cuáles son los distintos test existentes para estas, 
+discutiendo sobre la viabilidad de sus aplicaciones.
+
+\hspace*{1cm}\textbf{Distribución Normal o Gaussiana}
+
+Posiblemente la más conocida, es una distribución característica por su simetría y su forma de \textit{campana}.
+En la figura \ref{fig:gaussian} se muestra la típica forma que deriva de esta distribución.
+
+
+\begin{figure}[h] 
+\centering 
+\begin{tikzpicture}
+    \begin{axis}
+        [ width=12cm,
+         height=7cm, 
+         domain=-4:4, 
+         samples=200, 
+         axis lines=middle,
+          xlabel={$x$}, 
+          ylabel={$f(x)$},
+           ymin=0,
+            enlargelimits,
+             no markers ] 
+\addplot[ thick ] 
+{1/sqrt(2*pi) * exp(-x^2/2)}; 
+\end{axis} 
+\end{tikzpicture} 
+\caption{Representación de Distribución Normal o de Gauss} 
+\par\vspace{2pt}{\footnotesize Fuente: elaboración propia} 
+\label{fig:gaussian} 
+\end{figure}
+
+
+
+
+
+La fórmula que sigue es la siguiente:
+{
+\[
+f(x)=\frac{1}{\sigma\sqrt{2\pi}}
+\mathrm{e}^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]
+}
+
+Donde $\mu$ resulta la media aritmética del conjunto de datos y $\sigma$ la distribución estandar.
+El origen de esta fórmula deriva de los estudios de \textcite{demoivre1738doctrine,
+ laplace1812theorie, gauss1809theoria}. 
+
+ Existen muchos test que permiten evaluar la normalidad de una muestra. En la literatura destacan el 
+ \textit{Shapiro-Wilk}, \textit{Kolmogorov-Smirnov}, \textit{D'Agostino-Pearson} y \textit{Jarque-Bera}.
+ Estudios comparativos como el de \textcite{yap2011comparisons}, que evalúa la potencia de ocho tests mediante 
+ simulación de Montecarlo, concluyen que ninguno de ellos es uniformemente superior para todos los tipos de 
+ distribución alternativa, y que la elección debe atender al tamaño muestral y a las características de los
+ datos. Debido a la naturaleza inicial de los datos estudiados, presentando tamaños muestrales estimados
+ de unas 20 muestras, se decidió optar por un enfoque de Test de hipótesis basado en la \textbf{skewness}
+ y la \textbf{kurtosis}. \textcite{kim2013normality} especifica que este test en cuestión permite
+ ser utilizado con rigor estadístico para estudio de normalidad en muestras pequeñas, por lo que se optó
+ por su implementación.
+
+ Skewness y kurtosis son coeficientes que se obtienen calculando y estandarizando los momentos centrales
+ de una distribución.
+
+ Estos coeficientes, (\textit{skewness}, $\gamma_1$) y(\textit{kurtosis},$\gamma_2$) 
+  caracterizan, respectivamente, la simetría y el peso de las colas de una distribución respecto a 
+  la distribución normal. Un valor de $\gamma_1 = 0$ indica simetría perfecta; valores 
+positivos señalan una cola derecha más pesada y valores negativos una cola izquierda más pesada. En cuanto a
+ la kurtosis en exceso ($\gamma_2$), un valor de cero corresponde a una distribución mesocúrtica (similar a
+  la normal), valores positivos indican una distribución leptocúrtica (colas más pesadas) y valores negativos una
+  distribución platicúrtica (colas más ligeras).
+
+El test de normalidad empleado evalúa si los valores observados de $\gamma_1$ y $\gamma_2$ son estadísticamente 
+compatibles con los esperados bajo una distribución normal, mediante la estandarización de ambos coeficientes 
+en puntuaciones $Z$ y su comparación con el nivel de significación $\alpha = 0{,}05$~\cite{kim2013normality}.
+
+La diferencia existente entre el test implementado y el \enquote{D'Agostino-Pearson}, que también utiliza
+coeficientes basados en \textit{skewness} y \textit{kurtosis}, radica en la combinación de ambos valores
+para la toma de la decisión de rechazo en el caso de D'Agostino-Pearson\cite{dagostino1973tests}, mientras que en el propuesto por
+\textcite{kim2013normality}, se consideran ambos coeficientes de manera independiente. De esta forma, no
+solo se obtiene información acerca de si la distribución testada se comporta como una normal, sino de 
+cuáles son las causas concretas que concretan el rechazo.
+
+\hspace*{1cm}\textbf{Distribución Binomial Negativa y Distribución Geométrica}
+
+Encapsuladas en un apartado debido a la particularidad de la distribución \textit{geométrica}, que resulta ser 
+un caso de aplicación concreto de la distribución \textit{Binomial Negativa}, y debido al uso conjunto que 
+se hace de estas dos distribuciones en el caso concreto de aplicación.
+
+La distribución binomial Negativa, representada en la figura \ref{fig:negbin}, consiste en un 
+tipo de distribución empírica basada en una prominente cola derecha (skewness positivo). Esta característica se
+encuentra presente también en la distribución \textit{geométrica} (véase \ref{fig:geom}).
+
+
+La distribución \textit{binomial negativa} normalmente se emplea para modelar el número de intentos necesarios
+para conseguir un determinado número de aciertos bajo condiciones probabilísticas. La \textit{geométrica}, como
+caso particular, modela el número de intentos hasta conseguir exactamente \textbf{un acierto}.
+Ambas distribuciones toman un valor $p = $\textit{Probabilidad de éxito}, y un valor $r = $ \textit{Número de 
+aciertos} (En geométrica, $r = 1$).
+
+Dentro del caso de aplicación que concierne a este trabajo, estas distribuciones se han utilizado para 
+modelar los distintos valores de subida y bajada de pasajeros en una parada concreta. Bajo este tipo de 
+escenarios, una distribución de \textit{Poisson} resulta más factible en un principio, dado que la 
+distribución de \textit{Poisson} modela el número de eventos que ocurren en un intervalo de tiempo
+concreto bajo la premisa de su independencia\cite{CITACITACITA}. No obstante, esta distribución 
+captura peor que la \textit{binomial negativa} aquellos casos donde la varianza es mayor que la media, coincidente
+con la casuística de los datos de operación de la EMT. Por este motivo concreto, aunque el contexto de
+qué implican las distribuciones \textit{binomial negativa} y \textit{geométrica} no se corresponda con 
+su definición formal, se aplican estas, al capturar mejor aquellos casos donde se presenta una cola derecha
+considerable.
+
+
+
+
+
+
+
+
+
+
+
 
 
 \subsubsection{Estudio de valores extremos}
 \label{subsubsec:extreme_case}
+En relación al estudio de los valores extremos (comúnmente comocidos como \textit{outliers}), se pueden distinguir
+dos casos concretos en los que se ha realizado este análisis.
+
+\hspace*{1cm}\textbf{Estudio de Normalidad}
+
+En el estudio de la normalidad de los datos, se busca validar mediante Test de hipótesis si los datos a estudiar
+se asemejan a una distribución gaussiana. En caso de que no se valide el test, entra en juego el análisis de los
+ posibles valores atípicos. 
 
 
+\hspace*{1cm}\textbf{Selección de distribuciones}
 
+En el caso de un proceso de selección de distribuciones, es decir, ver qué tipo de distribución se asemeja más
+al conjunto de datos a estudiar, es estadísticamente incorrecto aplicar el ESD, ya que este se encuentra
+diseñado para aplicarlo sobre conjuntos de datos \enquote{\textit{aproximadamente normales}}. Para el estudio
+de \textit{outliers} sobre conjuntos de datos que pueden ser o pueden no ser normales, resulta
+más adecuado un test como el \enquote{MAD}(Median Absolute Deviation). \textcite{} discute la comparativa
+de aplicar este criterio para detección de anomalías frente 
