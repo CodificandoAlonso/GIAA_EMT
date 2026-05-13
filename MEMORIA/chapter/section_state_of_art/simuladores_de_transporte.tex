@@ -10,10 +10,10 @@ iintroduccion de este apartado y las dos subsecciones}
 
 
 \subsection{Sistemas Multi-Agente como simuladores}
-
+\textbf{FALTA HACER}
 
 \subsection{Simulaciones de Montecarlo}
-
+\textbf{FALTA HACER}
 
 
 \subsection{Análisis estadístico de datos}
@@ -104,9 +104,9 @@ en puntuaciones $Z$ y su comparación con el nivel de significación $\alpha = 0
 
 La diferencia existente entre el test implementado y el \enquote{D'Agostino-Pearson}, que también utiliza
 coeficientes basados en \textit{skewness} y \textit{kurtosis}, radica en la combinación de ambos valores
-para la toma de la decisión de rechazo en el caso de D'Agostino-Pearson\cite{dagostino1973tests}, mientras que 
-en el propuesto por\textcite{kim2013normality}, se consideran ambos coeficientes de manera independiente. 
-De esta forma, nosolo se obtiene información acerca de si la distribución testada se comporta como una normal,
+para la toma de la decisión de rechazo en el caso de D'Agostino-Pearson~\cite{dagostino1973tests}, mientras que 
+en el propuesto por~\textcite{kim2013normality}, se consideran ambos coeficientes de manera independiente. 
+De esta forma, no solo se obtiene información acerca de si la distribución testada se comporta como una normal,
  sino de cuáles son las causas concretas que concretan el rechazo.
 
 \hspace*{1cm}\textbf{Distribución Binomial Negativa y Distribución Geométrica}
@@ -122,7 +122,7 @@ encuentra presente también en la distribución \textit{geométrica} (véase la 
 
 La distribución \textit{binomial negativa} normalmente se emplea para modelar el número de intentos necesarios
 para conseguir un determinado número de aciertos bajo condiciones probabilísticas. La \textit{geométrica}, como
-caso particular, modela el número de intentos hasta conseguir exactamente \textbf{un acierto}\cite{CITADENEGBINYGEMON}.
+caso particular, modela el número de intentos hasta conseguir exactamente \textbf{un acierto}.
 Ambas distribuciones toman un parámetro referente a la \textit{probabilidad de éxito} y otro referente al
 \textit{Número de aciertos}.
 
@@ -209,15 +209,23 @@ Dentro del caso de aplicación que concierne a este trabajo, estas distribucione
 modelar los distintos valores de subida y bajada de pasajeros en una parada concreta. Bajo este tipo de 
 escenarios, una distribución de \textit{Poisson} resulta más factible en un principio, dado que esta modela 
 el número de eventos que ocurren en un intervalo de tiempo
-concreto bajo la premisa de su independencia\cite{CITACITACITA}. No obstante, esta distribución 
-captura peor que la \textit{binomial negativa} aquellos casos donde la varianza es mayor que la media, coincidente
-con la casuística de los datos de operación de la EMT. Por este motivo concreto, aunque el contexto de
-qué implican las distribuciones \textit{binomial negativa} y \textit{geométrica} no se corresponda con 
-su definición formal, se aplican estas al capturar mejor aquellos casos donde se presenta una cola derecha
-considerable.
+concreto bajo la premisa de su independencia \cite{cameron2013regression}. No obstante, esta distribución 
+captura peor que la \textit{binomial negativa} aquellos casos donde la varianza es mayor que la media
+\cite{cameron2013regression}, coincidente con la casuística de los datos de operación de la EMT. 
+Por este motivo concreto, aunque el contexto de qué implican las distribuciones \textit{binomial negativa} 
+y \textit{geométrica} no se corresponda con su definición formal, se aplican estas al capturar mejor aquellos 
+casos donde se presenta una sobredispersión derecha considerable.
 
 
-
+Los test de hipótesis para el estudio de estas distribuciones se basan en un enfoque clásico de 
+\textbf{bondad de ajuste} mediante el estadístico $\chi^2$ de Pearson~\cite{pearson1900criterion}. 
+Para ello, se estiman previamente los parámetros de cada distribución a partir de la muestra observada, 
+calculando posteriormente las frecuencias esperadas y comparándolas con las frecuencias empíricas 
+obtenidas. Siguiendo las recomendaciones de \textcite{cochran1954methods}, aquellas categorías con 
+frecuencias esperadas reducidas se agrupan para mantener la validez estadística del contraste. En el 
+caso de la distribución binomial negativa, la estimación de parámetros se realiza mediante el método 
+de los momentos, mientras que para la distribución geométrica se emplea el estimador de máxima 
+verosimilitud sobre el parámetro de éxito.
 
 \subsubsection{Estudio de valores extremos}
 \label{subsubsec:extreme_case}
@@ -260,7 +268,7 @@ iteración $i$:
 R_i = \frac {\max_i{\left|x_i-\bar{x}\right|}}{s}
 \]
 Donde $\bar{x}$ denota la media y $s$ es la desviación estándar muestral, 
-que difiere de $m_2$(desviación estándar de la población) en que en su cálculose 
+que difiere de $m_2$(desviación estándar de la población) en que en su cálculo se 
 multiplica por $\frac {1} {n - 1}$ en vez de $\frac {1} {n}$
 En cada iteración se encuentra el valor que maximiza esa $R_i$, y se almacena. En la siguiente 
 iteración $i+1$ se recalcula esa $R_{i+1}$ sin tener en cuenta el valor anterior
@@ -285,7 +293,7 @@ el máximo valor $i$ que cumpla que $R_i > \lambda_i$~\cite{nist2012outlier, ros
 
 
 Una vez formalizado el algoritmo comprobador de \textit{outliers}, resulta necesario discutir el correcto
-uso o aplicación de este a la hora de verificar posibles anomalías. La defición del test, asume que se hace
+uso o aplicación de este a la hora de verificar posibles anomalías. La definición del test, asume que se hace
 sobre una distribución \textbf{aproximadamente normal}. En el caso de aplicación del problema, en una 
 fase de validación, se aplica este test para detectar posibles anomalías sobre distribuciones que no han
 superado el test de normalidad. Esto puede parecer contradictorio con la definición formal, pero el 
@@ -301,9 +309,10 @@ gráfico de los datos, en aquellos escenarios donde la posible normalidad repres
 En casos expandidos con múltiples validaciones, se ha utilizado de una forma acotada y considerada.
 Bajo tamaños muestrales que rondan las 400 muestras, se ha implementado este test bajo especificación de una cota
 no superior al \textbf{1\%} del total de los datos, lo que representativamente supone una medida de hasta 6
-outliers posibles en la distribución. Este valor permite representar un márgen lo suficientemente pequeño como 
+outliers posibles en la distribución. Este valor permite representar un margen lo suficientemente pequeño como 
 para poder ser utilizado como límite superior en la hipótesis alternativa del test sin dañar el comportamiento
 genuino de los datos~\cite{wilcox2012}.
+
 
 
 \hspace*{1cm}\textbf{Selección de distribuciones}
@@ -312,5 +321,12 @@ En el caso de un proceso de selección de distribuciones, es decir, ver qué tip
 al conjunto de datos a estudiar, es estadísticamente incorrecto aplicar el ESD, ya que este se encuentra
 diseñado para aplicarlo sobre conjuntos de datos \enquote{\textit{aproximadamente normales}}. Para el estudio
 de \textit{outliers} sobre conjuntos de datos que pueden ser o pueden no ser normales, resulta
-más adecuado un test como el \enquote{MAD}(Median Absolute Deviation). \textcite{} discute la comparativa
-de aplicar este criterio para detección de anomalías frente
+más adecuado un test con un enfoque general sobre la consideración de una anomalía en los datos.
+En la literatura existen diversos test que permiten analizar posibles valores atípicos dentro de un conjunto de
+datos. \textcite{leys2013detecting} discute sobre preferencia de realizar otros enfoques distintos al clásico de 
+considerar \textit{outliers} a aquellos datos más allá de dos o tres veces la \textit{desviación estandar}. Expone 
+que la media y la mediana son valores sensibles a esos \textit{outliers} y propone utilizar el \textbf{MAD} (Median Absolute
+Deviation) como un estimador más robusto, con la \textit{mediana} como tendencia central.
+
+En este trabajo, se utiliza el enfoque del \textbf{MAD} para el estudio de posibles valores anómalos en aquellos 
+momentos donde se intenta evaluar cuál es la distribución que mejor se adapta a un conjunto de datos.

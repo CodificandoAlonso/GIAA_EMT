@@ -1,9 +1,9 @@
-PWD /home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA
+PWD /home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex
+INPUT /home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex
 OUTPUT memoria.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -771,6 +771,11 @@ INPUT ./imagenes/gantt_chart.png
 INPUT ./imagenes/gantt_chart.png
 INPUT ./imagenes/gantt_chart.png
 INPUT ./imagenes/gantt_chart.png
+INPUT ./imagenes/regularidad.png
+INPUT ./imagenes/regularidad.png
+INPUT ./imagenes/regularidad.png
+INPUT ./imagenes/regularidad.png
+INPUT ./imagenes/regularidad.png
 INPUT ./chapter/section_analysis/param_analysis.tex
 INPUT ./chapter/section_analysis/param_analysis.tex
 INPUT ./chapter/section_analysis/param_analysis.tex

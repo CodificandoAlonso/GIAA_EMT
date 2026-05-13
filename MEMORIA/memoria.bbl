@@ -1204,6 +1204,88 @@
       \field{pages}{613\bibrangedash 622}
       \range{pages}{10}
     \endentry
+    \entry{cameron2013regression}{book}{}
+      \name{author}{2}{}{%
+        {{hash=dab37900e0b3d1bbd6b945d99fef4b06}{%
+           family={Cameron},
+           familyi={C\bibinitperiod},
+           given={A.\bibnamedelimi Colin},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=1828613c534b16d7b5a650c96a8c2595}{%
+           family={Trivedi},
+           familyi={T\bibinitperiod},
+           given={Pravin\bibnamedelima K.},
+           giveni={P\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{c9ed462534b8f45616884f53043295aa}
+      \strng{fullhash}{c9ed462534b8f45616884f53043295aa}
+      \strng{bibnamehash}{c9ed462534b8f45616884f53043295aa}
+      \strng{authorbibnamehash}{c9ed462534b8f45616884f53043295aa}
+      \strng{authornamehash}{c9ed462534b8f45616884f53043295aa}
+      \strng{authorfullhash}{c9ed462534b8f45616884f53043295aa}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{Regression Analysis of Count Data}
+      \field{year}{2013}
+    \endentry
+    \entry{pearson1900criterion}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b69135425e9c9d6adc927b94c33421d4}{%
+           family={Pearson},
+           familyi={P\bibinitperiod},
+           given={Karl},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{b69135425e9c9d6adc927b94c33421d4}
+      \strng{fullhash}{b69135425e9c9d6adc927b94c33421d4}
+      \strng{bibnamehash}{b69135425e9c9d6adc927b94c33421d4}
+      \strng{authorbibnamehash}{b69135425e9c9d6adc927b94c33421d4}
+      \strng{authornamehash}{b69135425e9c9d6adc927b94c33421d4}
+      \strng{authorfullhash}{b69135425e9c9d6adc927b94c33421d4}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science}
+      \field{number}{302}
+      \field{title}{On the Criterion that a Given System of Deviations from the Probable in the Case of a Correlated System of Variables is Such that it Can Be Reasonably Supposed to Have Arisen from Random Sampling}
+      \field{volume}{50}
+      \field{year}{1900}
+      \field{pages}{157\bibrangedash 175}
+      \range{pages}{19}
+    \endentry
+    \entry{cochran1954methods}{article}{}
+      \name{author}{1}{}{%
+        {{hash=dbe9ae6cc9e5e24a66a2b712affd05de}{%
+           family={Cochran},
+           familyi={C\bibinitperiod},
+           given={William\bibnamedelima G.},
+           giveni={W\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{dbe9ae6cc9e5e24a66a2b712affd05de}
+      \strng{fullhash}{dbe9ae6cc9e5e24a66a2b712affd05de}
+      \strng{bibnamehash}{dbe9ae6cc9e5e24a66a2b712affd05de}
+      \strng{authorbibnamehash}{dbe9ae6cc9e5e24a66a2b712affd05de}
+      \strng{authornamehash}{dbe9ae6cc9e5e24a66a2b712affd05de}
+      \strng{authorfullhash}{dbe9ae6cc9e5e24a66a2b712affd05de}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Biometrics}
+      \field{number}{4}
+      \field{title}{Some Methods for Strengthening the Common Chi-Squared Tests}
+      \field{volume}{10}
+      \field{year}{1954}
+      \field{pages}{417\bibrangedash 451}
+      \range{pages}{35}
+    \endentry
     \entry{nist2012outlier}{misc}{}
       \name{author}{1}{}{%
         {{hash=ef9cb61878e61d434507444346b29d1a}{%
@@ -1216,8 +1298,8 @@
       \strng{authorbibnamehash}{ef9cb61878e61d434507444346b29d1a}
       \strng{authornamehash}{ef9cb61878e61d434507444346b29d1a}
       \strng{authorfullhash}{ef9cb61878e61d434507444346b29d1a}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{NIST/SEMATECH e-Handbook of Statistical Methods}
@@ -1244,8 +1326,8 @@
       \strng{authorbibnamehash}{8c723a6746d052a9a51f090f576a5139}
       \strng{authornamehash}{8c723a6746d052a9a51f090f576a5139}
       \strng{authorfullhash}{8c723a6746d052a9a51f090f576a5139}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Technometrics}
@@ -1280,6 +1362,119 @@
       \field{edition}{3}
       \field{title}{Introduction to Robust Estimation and Hypothesis Testing}
       \field{year}{2012}
+    \endentry
+    \entry{leys2013detecting}{article}{}
+      \name{author}{5}{}{%
+        {{hash=c179a255a8aa224d056315488c85f0ce}{%
+           family={Leys},
+           familyi={L\bibinitperiod},
+           given={Christophe},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f15803860efce73df25c32aa1e1a015c}{%
+           family={Ley},
+           familyi={L\bibinitperiod},
+           given={Christophe},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f013d83e1f9bd10b5804dbb19201eae8}{%
+           family={Klein},
+           familyi={K\bibinitperiod},
+           given={Olivier},
+           giveni={O\bibinitperiod}}}%
+        {{hash=09513f4c6667447bcd4399d18e522856}{%
+           family={Bernard},
+           familyi={B\bibinitperiod},
+           given={Philippe},
+           giveni={P\bibinitperiod}}}%
+        {{hash=298bdd455c9e3403a4010b5cf0e6d24d}{%
+           family={Licata},
+           familyi={L\bibinitperiod},
+           given={Laurent},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{00f723f85afb3698fd320272638e26b9}
+      \strng{fullhash}{f0e8770037abaf6bd499320db2f54109}
+      \strng{bibnamehash}{f0e8770037abaf6bd499320db2f54109}
+      \strng{authorbibnamehash}{f0e8770037abaf6bd499320db2f54109}
+      \strng{authornamehash}{00f723f85afb3698fd320272638e26b9}
+      \strng{authorfullhash}{f0e8770037abaf6bd499320db2f54109}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Experimental Social Psychology}
+      \field{number}{4}
+      \field{title}{Detecting Outliers: Do Not Use Standard Deviation Around the Mean, Use Absolute Deviation Around the Median}
+      \field{volume}{49}
+      \field{year}{2013}
+      \field{pages}{764\bibrangedash 766}
+      \range{pages}{3}
+    \endentry
+    \entry{bhattacharyya1946divergence}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5849c9038498843b9de5403c4033f171}{%
+           family={Bhattacharyya},
+           familyi={B\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Indian Statistical Institute}%
+      }
+      \strng{namehash}{5849c9038498843b9de5403c4033f171}
+      \strng{fullhash}{5849c9038498843b9de5403c4033f171}
+      \strng{bibnamehash}{5849c9038498843b9de5403c4033f171}
+      \strng{authorbibnamehash}{5849c9038498843b9de5403c4033f171}
+      \strng{authornamehash}{5849c9038498843b9de5403c4033f171}
+      \strng{authorfullhash}{5849c9038498843b9de5403c4033f171}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sankhyā: The Indian Journal of Statistics (1933--1960)}
+      \field{number}{4}
+      \field{title}{On a Measure of Divergence between Two Multinomial Populations}
+      \field{volume}{7}
+      \field{year}{1946}
+      \field{pages}{401\bibrangedash 406}
+      \range{pages}{6}
+      \verb{urlraw}
+      \verb https://www.jstor.org/stable/25047882
+      \endverb
+      \verb{url}
+      \verb https://www.jstor.org/stable/25047882
+      \endverb
+    \endentry
+    \entry{silverman1986density}{book}{}
+      \name{author}{1}{}{%
+        {{hash=ba8bfb9a987a0a24a6602904cb89fe04}{%
+           family={Silverman},
+           familyi={S\bibinitperiod},
+           given={B.\bibnamedelimi W.},
+           giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {London}%
+      }
+      \list{publisher}{2}{%
+        {Chapman}%
+        {Hall}%
+      }
+      \strng{namehash}{ba8bfb9a987a0a24a6602904cb89fe04}
+      \strng{fullhash}{ba8bfb9a987a0a24a6602904cb89fe04}
+      \strng{bibnamehash}{ba8bfb9a987a0a24a6602904cb89fe04}
+      \strng{authorbibnamehash}{ba8bfb9a987a0a24a6602904cb89fe04}
+      \strng{authornamehash}{ba8bfb9a987a0a24a6602904cb89fe04}
+      \strng{authorfullhash}{ba8bfb9a987a0a24a6602904cb89fe04}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Monographs on Statistics and Applied Probability}
+      \field{title}{Density Estimation for Statistics and Data Analysis}
+      \field{year}{1986}
     \endentry
     \entry{balaguer2018}{article}{}
       \name{author}{3}{}{%
@@ -1318,8 +1513,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{CITACITACITA}
-  \missing{CITADENEGBINYGEMON}
 \endrefsection
 \endinput
 

@@ -2,7 +2,8 @@ En este capítulo se explican de forma precisa y justificada los distintos méto
 en este problema, así como la presentación de un esquema del desarrollo. Para ello, se expone 
 primeramente la contextualización avanzada del problema en cuestión a resolver, seguido de la 
 explicación de las distintas etapas que constituyen el trabajo. Posteriormente, se mencionan 
-las distintas herramientas que se usan en este proyecto.
+las distintas herramientas que se usan en este proyecto. De forma final se exponen las distintas
+métricas de rendimiento utilizadas para la fase de validación y de Extracción de resultados.
 
 \section{Definición del problema}
 \label{section:problem_def}
@@ -31,7 +32,7 @@ la validación de la viabilidad del simulador.
 
 Una de las decisiones más relevantes para la comprensión del alcance de este trabajo es la 
 de simular el comportamiento únicamente de los \textbf{días normales de operación}, excluyendo
-datos relativos a festividades, cambios de estacióno eventos de gratuidad promovidos por la compañía. 
+datos relativos a festividades, cambios de estación o eventos de gratuidad promovidos por la compañía. 
 Los distintos motivos detrás de esta decisión se enuncian en la sección \ref{section:gauss_and_study} 
 y posibles variaciones de este análisis se discuten en el capítulo \ref{chapter:future_works}.
 
@@ -144,3 +145,58 @@ Todo el desarrollo del trabajo se ha realizado sobre el sistema operativo Ubuntu
 de Linux basada en Debian. Esta elección de Sistema Operativo, sumado al conjunto de herramientas utilizadas,
  constituye un sistema de \textbf{código abierto} en su totalidad. Esto permite un sistema transparente y reproducible, 
  sin dependencia de licencias comerciales.
+
+ \section{Extracción de KPIs}
+ Una de las fases más importantes del trabajo se constituye en como se evalúan los distintos resultados obtenidos
+ por el simulador una vez se completa. Estas métricas surgen de la colaboración conjunta con la Empresa Municipal De
+ Transportes, las cuales reflejan a tres escalas los distintos apartados de interés tanto a nivel empresa, con el fin
+ de evaluar el grado de adecuación de una dotación de autobuses concreta a un escenario característico, como a nivel 
+ validación propia del sistema, donde se comparan los resultados obtenidos con los resultados esperados derivados del 
+ análisis de la normalidad de los datos inicial.
+
+\subsection{Métricas a nivel general} 
+Estos indicadores tratan de reflejar en un ámbito global, a modo de primera impresión, cuáles son los resultados
+de la simulación realizada. Se centran en condensar en porcentajes la media de los valores más relevantes que se pretende
+medir. Entre ellos destaca el \textbf{porcentaje medio de ocupación de los autobuses}, tanto global como fragmentado 
+por sentido. Este porcentaje se realiza sobre una cota máxima definida por la EMT y fijada como estándar.
+ el \textbf{tiempo medio de espera por pasajero}, agregado sobre el total de pasajeros a lo largo de las
+ distintas iteraciones de \textit{Montecarlo}, o el valor medio de \textbf{regularidad}, también calculado sobre el 
+ total de iteraciones.
+
+Esta regularidad representa un valor interno de la compañía municipal. Consiste en la medición y comparación
+de los tiempos realizados por los distintos autobuses en el tramo correspondido entre la segunda y la penúltima 
+parada de la ruta. En la figura \ref{fig:regularity} se observa la fórmula utilizada para generar este valor.
+
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/regularidad.png}
+\caption{Fórmula de regularidad para cada caso concreto de aplicación}
+\par\vspace{4pt}{\footnotesize Fuente: Documento interno otorgado por la EMT.}
+\label{fig:regularity}
+\end{figure}
+
+
+\subsection{Métricas a nivel de autobús}
+Se extraen parámetros a nivel de autobús correspondientes a cada viaje realizado por unidad física. La información
+contenida de cada expedición incluye \textbf{gráfico de evolución de ocupación a lo largo de la ruta}, \textbf{
+probabilidad del viaje de salir con retraso} y \textbf{tiempo medio en ese caso}, así como el valor de \textbf{
+    regularidad} concreto del viaje.
+
+\subsection{Métricas a nivel de ruta}
+A nivel de ruta, se expone información concreta sobre cada parada, indicando \textbf{subidas}, \textbf{bajadas}
+y \textbf{tiempo medio de espera de los pasajeros}, pero reducido al filtro concreto de esa parada.
+De forma paralela, se genera información sobre los tiempos entre paradas para los distintos tramos existentes en 
+la ruta. 
+Relativo al ámbito de validación del sistema, se muestran gráficas comparativas de valor de \textbf{ocupación}
+de los autobuses en esa parada, estudiando la \textit{concordancia} con la distribución esperada, analizada
+y modelada de forma previa a la construcción del simulador. Esta similitud se 
+estima mediante la extracción y comparación de medidas de distancia entre distribuciones, basada en los estudios
+y métricas de Bhattacharyya~\cite{bhattacharyya1946divergence}, que permiten, estableciendo un valor límite, o \textit{
+    threshold}, dirimir si dos distribuciones son similares.
+
+Este trabajo establece la similitud mediante el coeficiente de Bhattacharyya para dos distribuciones normales bajo
+la premisa de que se cumple la hipótesis de normalidad sobre los datos simulados. En caso contrario, se aproximan 
+las distribuciones mediante técnicas de Kernel Density Estimation (KDE)~\cite{silverman1986density}, 
+aproximando posteriormente el coeficiente de Bhattacharyya a través de integración numérica trapezoidal.
+
