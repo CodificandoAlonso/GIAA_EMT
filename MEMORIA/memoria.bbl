@@ -1204,6 +1204,83 @@
       \field{pages}{613\bibrangedash 622}
       \range{pages}{10}
     \endentry
+    \entry{nist2012outlier}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=ef9cb61878e61d434507444346b29d1a}{%
+           family={{National Institute of Standards and Technology}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{ef9cb61878e61d434507444346b29d1a}
+      \strng{fullhash}{ef9cb61878e61d434507444346b29d1a}
+      \strng{bibnamehash}{ef9cb61878e61d434507444346b29d1a}
+      \strng{authorbibnamehash}{ef9cb61878e61d434507444346b29d1a}
+      \strng{authornamehash}{ef9cb61878e61d434507444346b29d1a}
+      \strng{authorfullhash}{ef9cb61878e61d434507444346b29d1a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{NIST/SEMATECH e-Handbook of Statistical Methods}
+      \field{title}{Detection of Outliers}
+      \field{year}{2012}
+      \verb{urlraw}
+      \verb https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm#Normality
+      \endverb
+      \verb{url}
+      \verb https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm#Normality
+      \endverb
+    \endentry
+    \entry{rosner1983}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8c723a6746d052a9a51f090f576a5139}{%
+           family={Rosner},
+           familyi={R\bibinitperiod},
+           given={Bernard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{8c723a6746d052a9a51f090f576a5139}
+      \strng{fullhash}{8c723a6746d052a9a51f090f576a5139}
+      \strng{bibnamehash}{8c723a6746d052a9a51f090f576a5139}
+      \strng{authorbibnamehash}{8c723a6746d052a9a51f090f576a5139}
+      \strng{authornamehash}{8c723a6746d052a9a51f090f576a5139}
+      \strng{authorfullhash}{8c723a6746d052a9a51f090f576a5139}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Technometrics}
+      \field{number}{2}
+      \field{title}{Percentage Points for a Generalized ESD Many-Outlier Procedure}
+      \field{volume}{25}
+      \field{year}{1983}
+      \field{pages}{165\bibrangedash 172}
+      \range{pages}{8}
+    \endentry
+    \entry{wilcox2012}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c60f0f1d9f63f3fe3c0acca3eb3d148e}{%
+           family={Wilcox},
+           familyi={W\bibinitperiod},
+           given={Rand\bibnamedelima R.},
+           giveni={R\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{c60f0f1d9f63f3fe3c0acca3eb3d148e}
+      \strng{fullhash}{c60f0f1d9f63f3fe3c0acca3eb3d148e}
+      \strng{bibnamehash}{c60f0f1d9f63f3fe3c0acca3eb3d148e}
+      \strng{authorbibnamehash}{c60f0f1d9f63f3fe3c0acca3eb3d148e}
+      \strng{authornamehash}{c60f0f1d9f63f3fe3c0acca3eb3d148e}
+      \strng{authorfullhash}{c60f0f1d9f63f3fe3c0acca3eb3d148e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{Introduction to Robust Estimation and Hypothesis Testing}
+      \field{year}{2012}
+    \endentry
     \entry{balaguer2018}{article}{}
       \name{author}{3}{}{%
         {{hash=158b8bf5c151be83bae8f2f926391405}{%
@@ -1242,6 +1319,7 @@
     \endentry
   \enddatalist
   \missing{CITACITACITA}
+  \missing{CITADENEGBINYGEMON}
 \endrefsection
 \endinput
 

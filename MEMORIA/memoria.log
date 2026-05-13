@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  12 MAY 2026 19:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  13 MAY 2026 20:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1287,6 +1287,13 @@ Package biblatex Warning: The following entry could not be found
 (biblatex)                Please verify the spelling and rerun
 (biblatex)                LaTeX afterwards.
 
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                CITADENEGBINYGEMON
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
 )
 Package biblatex Info: Reference section=0 on input line 242.
 Package biblatex Info: Reference segment=0 on input line 242.
@@ -1414,37 +1421,37 @@ LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10> not available
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [8] [9] [10]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [11]
-Package pgfplots info on input line 51: Overriding colorspace to rgb due to xcolor configuration.
+Package pgfplots info on input line 55: Overriding colorspace to rgb due to xcolor configuration.
  [12]
 
-LaTeX Warning: Reference `fig:negbin' on page 13 undefined on input line 116.
+LaTeX Warning: Citation 'CITADENEGBINYGEMON' on page 13 undefined on input line 125.
+
+Package pgfplots info on input line 158: Overriding colorspace to rgb due to xcolor configuration.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Package pgfplots info on input line 190: Overriding colorspace to rgb due to xcolor configuration.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Reference `fig:geom' on page 13 undefined on input line 118.
+LaTeX Warning: Citation 'CITACITACITA' on page 13 undefined on input line 212.
 
-
-LaTeX Warning: Citation 'CITACITACITA' on page 13 undefined on input line 131.
-
-
-Overfull \hbox (18.62466pt too wide) in paragraph at lines 127--137
-\T1/txr/m/n/12 rren en un in-ter-va-lo de tiem-po con-cre-to ba-jo la pre-mi-sa de su independencia[].
+[13] [14]
+Overfull \hbox (8.7134pt too wide) in paragraph at lines 261--267
+\T1/txr/m/n/12 Donde $\OML/txmi/m/it/12 x[][]$ \T1/txr/m/n/12 de-no-ta la me-dia y $\OML/txmi/m/it/12 s$ \T1/txr/m/n/12 es la des-via-ción es-tán-dar mues-tral, que di-fie-re de $\OML/txmi/m/it/12 m[]$\T1/txr/m/n/12 (desviación
  []
 
+[15]
 
-Overfull \hbox (2.92546pt too wide) in paragraph at lines 152--154
-[]\T1/txr/m/n/12 En re-la-ción al es-tu-dio de los va-lo-res ex-tre-mos (co-mún-men-te co-mo-ci-dos co-mo \T1/txr/m/it/12 outliers\T1/txr/m/n/12 ),
- []
+LaTeX Warning: Citation '' on page 16 undefined on input line 315.
 
-[13]
-
-LaTeX Warning: Citation '' on page 14 undefined on input line 168.
-
-) [14]
+) [16]
 Cap\'{\i }tulo 3.
-(./chapter/section_metodology/metodology.tex [15
+(./chapter/section_metodology/metodology.tex [17
 
-] [16] [17]
-<imagenes/gantt_chart.png, id=521, 1001.6622pt x 351.9549pt>
+] [18] [19]
+<imagenes/gantt_chart.png, id=549, 1001.6622pt x 351.9549pt>
 File: imagenes/gantt_chart.png Graphic file (type png)
 <use imagenes/gantt_chart.png>
 Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 98.
@@ -1457,72 +1464,72 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-4.35004pt}.
 
-[18
+[20
 
 
- <./imagenes/gantt_chart.png>] [19
+ <./imagenes/gantt_chart.png>] [21
 
-]) [20]
+]) [22]
 Cap\'{\i }tulo 4.
 (./chapter/section_analysis/param_analysis.tex
-<imagenes/qgis_capture_e01_converted.png, id=558, 1861.95625pt x 1051.93pt>
+<imagenes/qgis_capture_e01_converted.png, id=585, 1861.95625pt x 1051.93pt>
 File: imagenes/qgis_capture_e01_converted.png Graphic file (type png)
 <use imagenes/qgis_capture_e01_converted.png>
 Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 47.
 (pdftex.def)             Requested size: 426.79135pt x 241.1202pt.
- [21
+ [23
 
 ]
-<imagenes/gama_shapefiles.png, id=565, 1862.96pt x 1054.94125pt>
+<imagenes/gama_shapefiles.png, id=592, 1862.96pt x 1054.94125pt>
 File: imagenes/gama_shapefiles.png Graphic file (type png)
 <use imagenes/gama_shapefiles.png>
 Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 56.
 (pdftex.def)             Requested size: 426.79135pt x 241.68166pt.
- [22 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
-<imagenes/image_tables_diagram.png, id=574, 331.2375pt x 785.93625pt>
+ [24 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
+<imagenes/image_tables_diagram.png, id=602, 331.2375pt x 785.93625pt>
 File: imagenes/image_tables_diagram.png Graphic file (type png)
 <use imagenes/image_tables_diagram.png>
 Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 83.
 (pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
- [23]
+ [25]
 Overfull \hbox (38.77354pt too wide) detected at line 164
  [] 
  []
 
-[24 <./imagenes/image_tables_diagram.png (PNG copy)>]
+[26 <./imagenes/image_tables_diagram.png (PNG copy)>]
 Overfull \hbox (38.77354pt too wide) detected at line 246
  [] 
  []
 
-[25] [26] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[27] [28] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 256.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
 (Font)              Font shape `T1/txtt/bx/n' tried instead on input line 257.
- [27]) [28]
+ [29]) [30]
 Cap\'{\i }tulo 5.
-(./chapter/section_design/Simulation_design.tex) [29
+(./chapter/section_design/Simulation_design.tex) [31
 
 ]
 Cap\'{\i }tulo 6.
-[30
+[32
 
 ]
 Cap\'{\i }tulo 7.
-[31
-
-]
-Cap\'{\i }tulo 8.
-(./chapter/section_budget/budget.tex) [32
-
-]
-Cap\'{\i }tulo 9.
 [33
 
 ]
+Cap\'{\i }tulo 8.
+(./chapter/section_budget/budget.tex) [34
+
+]
+Cap\'{\i }tulo 9.
+[35
+
+]
 Cap\'{\i }tulo 10.
-[34
+[36
 
 ]
 Package csquotes Info: Disabling multilingual quotes on input line 475.
@@ -1541,10 +1548,10 @@ Overfull \hbox (1.42937pt too wide) in paragraph at lines 477--477
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
-[35
+[37
 
 
-] [36] [37] (./memoria.aux
+] [38] [39] (./memoria.aux
 LaTeX Info: Redefining \sptext on input line 12.
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
@@ -1553,10 +1560,6 @@ LaTeX Info: Redefining \% on input line 12.
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `memoria.out' has not changed.
 (rerunfilecheck)             Checksum: CE24B21DE4ECE98EF61B0008BAE02B6E;2311.
 Package logreq Info: Writing requests to 'memoria.run.xml'.
@@ -1564,17 +1567,17 @@ Package logreq Info: Writing requests to 'memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 53303 strings out of 474222
- 1157577 string characters out of 5748734
- 2045124 words of memory out of 5000000
- 74531 multiletter control sequences out of 15000+600000
- 649959 words of font info for 176 fonts, out of 8000000 for 9000
+ 53397 strings out of 474222
+ 1159553 string characters out of 5748734
+ 2045540 words of memory out of 5000000
+ 74613 multiletter control sequences out of 15000+600000
+ 652711 words of font info for 180 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,117p,1718b,3948s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (50 pages, 3237322 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on memoria.pdf (52 pages, 3257266 bytes).
 PDF statistics:
- 762 PDF objects out of 1000 (max. 8388607)
- 152 named destinations out of 1000 (max. 500000)
+ 796 PDF objects out of 1000 (max. 8388607)
+ 160 named destinations out of 1000 (max. 500000)
  303 words of extra memory for PDF output out of 10000 (max. 10000000)
 
