@@ -1,0 +1,60 @@
+% ----------------------------------------------------------
+%  Macro \requisito
+%  Las fichas NO aparecen en el \listoftables.
+%
+%  Uso:
+%    \requisito{ID}{Nombre}{Tipo}{Prioridad}{Fuente}
+%              {Descripcion}{Justificacion}{Dependencias}
+%              {Verificacion}
+%
+%  Tipo:      RF | RNF | RD
+%  Prioridad: Must | Should | Could   (MoSCoW)
+%  Metodo:    T=Test  I=Inspeccion  A=Analisis  D=Demostracion
+% ----------------------------------------------------------
+ 
+
+
+
+\newcommand{\requisito}[9]{%
+  \vspace{6pt}
+  \noindent\small\textbf{#1 \textemdash\ \MakeUppercase{#2}}
+  \vspace{2pt}
+ 
+  \noindent\small
+  \begin{tabular}{|p{3.5cm}|p{9.5cm}|}
+  \hline
+  \textbf{Identificador}      & #1 \\ \hline
+  \textbf{Nombre}             & #2 \\ \hline
+  \textbf{Tipo}               & #3 \\ \hline
+  \textbf{Prioridad}          & #4 \\ \hline
+  \textbf{Fuente}             & #5 \\ \hline
+  \textbf{Descripci\'{o}n}   & #6 \\ \hline
+  \textbf{Justificaci\'{o}n} & #7 \\ \hline
+  \textbf{Dependencias}       & #8 \\ \hline
+  \textbf{Verificaci\'{o}n}  & #9 \\ \hline
+  \end{tabular}
+  \vspace{8pt}
+}
+
+
+ 
+% -------------------------------------------------------
+\section*{A.1\quad Introducción}
+% -------------------------------------------------------
+ 
+[Texto introductorio aquí]
+ 
+% -------------------------------------------------------
+\section*{A.2\quad Requisitos Funcionales}
+% -------------------------------------------------------
+ 
+\requisito
+  {RF-01}
+  {[Nombre corto del requisito]}
+  {Funcional}
+  {Must}
+  {[Fuente: tutor, normativa EMT, IEEE\,29148, etc.]}
+  {[Descripción completa, precisa y verificable del comportamiento requerido.]}
+  {[Por qué este requisito es necesario.]}
+  {RF-XX, RNF-XX  o Ninguna}
+  {[Como se comprueba que el requisito se cumple \quad Metodo T/I/A/D ]}
