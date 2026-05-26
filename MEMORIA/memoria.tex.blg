@@ -1,0 +1,5 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'memoria.tex.blg'
+[41] biber:340> INFO - === Sun May 17, 2026, 17:03:17
+[141] Utils.pm:399> ERROR - Cannot find 'memoria.tex.bcf'!
+[141] Biber.pm:136> INFO - ERRORS: 1

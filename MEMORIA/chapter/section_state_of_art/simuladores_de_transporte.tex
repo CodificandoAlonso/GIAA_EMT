@@ -66,10 +66,10 @@ En la figura \ref{fig:gaussian} se muestra la típica forma que deriva de esta d
 
 
 La función de densidad de la distribución normal viene dada por:
-\[
+\begin{equation}
 f(x)=\frac{1}{\sigma\sqrt{2\pi}}
 \mathrm{e}^{-\frac{(x-\mu)^2}{2\sigma^2}}
-\]
+\end{equation}
 
 
 Donde $\mu$ resulta la media aritmética del conjunto de datos y $\sigma$ la desviación estandar.
@@ -83,7 +83,8 @@ El origen de esta fórmula deriva de los estudios de \textcite{demoivre1738doctr
  distribución alternativa, y que la elección debe atender al tamaño muestral y a las características de los
  datos. Debido a la naturaleza inicial de los datos estudiados, presentando tamaños muestrales estimados
  de unas 20 muestras, se decidió optar por un enfoque de Test de hipótesis basado en la \textbf{skewness}
- y la \textbf{kurtosis}. \textcite{kim2013normality} especifica que este test en cuestión permite
+ (\textit{asimetría}) y la \textbf{kurtosis} ( \textit{curtosis}).
+ \textcite{kim2013normality} especifica que este test en cuestión permite
  ser utilizado con rigor estadístico para estudio de normalidad en muestras pequeñas, por lo que se optó
  por su implementación.
 
@@ -128,16 +129,15 @@ Ambas distribuciones toman un parámetro referente a la \textit{probabilidad de 
 
 Matemáticamente, la función de masa de probabilidad de la distribución binomial 
 negativa viene dada por:
-\[
+\begin{equation}
 P(X=k) = \binom{k+r-1}{k}(1-p)^{k}p^{r}, 
 \quad k = 0, 1, 2, \ldots
-\]
+\end{equation}
 donde $r$ es el número de éxitos y $p$ la probabilidad de 
-éxito. La distribución geométrica constituye el caso particular 
-$r=1$:
-\[
+éxito. La distribución geométrica constituye el caso particular $r=1$:
+\begin{equation}
 P(X=k) = (1-p)^{k-1}p, \quad k = 1, 2, 3, \ldots
-\]
+\end{equation}
 
 
 \begin{figure}[h]
@@ -263,10 +263,9 @@ H_a &: \text{Hay hasta } r \text{ outliers}
 \]
 Posteriormente, se sigue un proceso iterativo, en el cual se computa la siguiente fórmula para cada 
 iteración $i$:
-
-\[
+\begin{equation}
 R_i = \frac {\max_i{\left|x_i-\bar{x}\right|}}{s}
-\]
+\end{equation}
 Donde $\bar{x}$ denota la media y $s$ es la desviación estándar muestral, 
 que difiere de $m_2$(desviación estándar de la población) en que en su cálculo se 
 multiplica por $\frac {1} {n - 1}$ en vez de $\frac {1} {n}$
@@ -277,15 +276,14 @@ Esto se repite hasta que se han computado los $r$ datos de la $H_a$
 
 Luego, con un nivel definido de significancia $\alpha$, para cada $R_i$ con $i \in 1,2,....,i$ 
 se calcula un valor $\lambda_i$
-
-\[
+\begin{equation}
 \lambda_i = \frac {\left ( n - i \right ) t_{p, n-i-1}} {\sqrt{\left ( n- i -1 + t_{p, n-i-1}^{2} \right ) \left ( n -i +1 \right )}}
-\]
+\end{equation}
 Donde $t_{p,v}$ se corresponde con el cuantil p de la distribución t con 
 v grados de libertad. En estas fórmulas, $v$ se corresponde con $n-i-1$ y p con
-\[
+\begin{equation}
 p = 1 - \frac {\alpha} {2 \left ( n - i + 1 \right )}
-\]
+\end{equation}
 
 
 De todo esto obtenemos que el número de outliers es determinado según 
