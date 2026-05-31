@@ -1,0 +1,14 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'memoria.blg'
+[35] biber:340> INFO - === Sun May 31, 2026, 18:25:59
+[42] Biber.pm:419> INFO - Reading 'memoria.bcf'
+[76] Biber.pm:979> INFO - Found 48 citekeys in bib section 0
+[83] Biber.pm:4419> INFO - Processing section 0
+[88] Biber.pm:4610> INFO - Looking for bibtex file 'referencias.bib' for section 0
+[89] bibtex.pm:1713> INFO - LaTeX decoding ...
+[110] bibtex.pm:1519> INFO - Found BibTeX data source 'referencias.bib'
+[255] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[255] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[255] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'es-ES'
+[268] bbl.pm:660> INFO - Writing 'memoria.bbl' with encoding 'UTF-8'
+[275] bbl.pm:763> INFO - Output to memoria.bbl

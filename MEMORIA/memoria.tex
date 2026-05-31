@@ -216,7 +216,7 @@ hmargin=3cm
 
 % CONFIGURACIÓN PARA LA BIBLIOGRAFÍA IEEE
 \usepackage[backend=biber, style=ieee, isbn=false,sortcites, maxbibnames=6, minbibnames=1,
-maxcitenames=1,mincitenames=1]{biblatex} % Configuración para el estilo de citas de IEEE, recomendado para el área de ingeniería. "maxbibnames" indica que a partir de 6 autores trunque la lista en el primero (minbibnames) y añada "et al." tal y como se utiliza en el estilo IEEE.
+maxcitenames=2,mincitenames=1]{biblatex} % Configuración para el estilo de citas de IEEE, recomendado para el área de ingeniería. "maxbibnames" indica que a partir de 6 autores trunque la lista en el primero (minbibnames) y añada "et al." tal y como se utiliza en el estilo IEEE.
 
 % Añadimos las siguientes indicaciones para mejorar la adaptación del estilos en español
 \DefineBibliographyStrings{spanish}{%
@@ -435,15 +435,13 @@ maxcitenames=1,mincitenames=1]{biblatex} % Configuración para el estilo de cita
 
 \chapter{Metodología}
 \input{chapter/section_metodology/metodology}
-%\chapter{Requisitos}
 
 \chapter{Análisis de los datos}
 \label{chapter:param_analisys}
 \input{chapter/section_analysis/param_analysis}
 
 
-\chapter{Diseño de la simulación}
-\label{chapter:simulation_design}
+\chapter{Diseño de la simulación}\label{chapter:simulation_design}
 \input{chapter/section_design/Simulation_design}
 
 
@@ -457,13 +455,11 @@ maxcitenames=1,mincitenames=1]{biblatex} % Configuración para el estilo de cita
 %%%%%%%%NO SE ME PUEDEN OLVIDAR :)
 \chapter{Marco Regulador}
 
-\chapter{Presupuesto y Costes}
-\label{chapter:budget}
+\chapter{Presupuesto y Costes}\label{chapter:budget}
 \input{chapter/section_budget/budget}
 
 
-\chapter{Trabajos futuros}
-\label{chapter:future_works}
+\chapter{Trabajos futuros}\label{chapter:future_works}
 \chapter{Conclusión}
 
 %----------

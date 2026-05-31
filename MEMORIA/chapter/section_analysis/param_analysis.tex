@@ -294,35 +294,62 @@ se centra sobre dos pilares fundamentales, estudiar la viabilidad de los datos o
 los parámetros específicos para su inyección al simulador.
 
 \subsection{Estudio de viabilidad de datos operacionales}
-El principal reto de esta fase es la de validar la normalidad de los datos sobre los cuales se va a construir
-el simulador. Como se especifica en la sección \ref{section:problem_def}, una de las cuestiones de mayor relevancia
+El principal reto de esta fase es la de evaluar la compatibilidad de los datos sobre los cuales se va a construir
+el simulador con los de una distribución normal. Como se especifica en la sección \ref{section:problem_def}, una de 
+las cuestiones de mayor relevancia
 de este proyecto es la simulación de los días \textbf{normales}. En el marco de este trabajo, se ha considerado
 día \enquote{normal} a aquel día laborable sin \textit{gratuidad}. De esta forma, se excluyen fines de semana,
 festivos y días gratuitos. El motivo de esta segregación viene derivado del momento temporal en el que se comenzó
-esta etapa. Al no disponer de datos relativos al funcionamiento de las líneas previos a julio de 2025, la falta 
+esta etapa. Al no disponer de datos referentes al funcionamiento de las líneas previos a julio de 2025, la falta 
 de datos festivos y de fines de semana relativos al número de datos laborables 
-puede incurrir en asunciones sesgadas al poco valor muestral de los datos.
+puede conducir a suposiciones sesgadas debido al reducido valor muestral de dichos datos.
 
-El proceso de análisis se centra sobre un valor centralizado que es el de \textit{Occupation}. Este valor es el
-más representativo como medida de estabilidad de los datos otorgados. Para validar su normalidad, se ha seguido 
-un proceso iterativo evolutivo. Dicho proceso inicia con la reducción del problema al mínimo posible, con el 
+El proceso de análisis se centra sobre un valor principal que es el de \textit{Occupation}, perteneciente
+a la tabla \textbf{Transaccional} mencionada con anterioridad. Este valor es el
+más representativo como medida de estabilidad de los datos proporcionados por la EMT.\@
+Para evaluar su hipótesis de normalidad, se ha seguido 
+un proceso iterativo. Dicho proceso inicia con la reducción del problema al mínimo posible, con el 
 objetivo de ir validando resultados a medida que se expande la muestra estudiada.
 
 La parada que se escoge para este estudio es la \enquote{5939:Vía Lusitana-Halconero del Rey}. Se elige
 debido a su localización estratégica dentro de la ruta y a sus características propias. Es la quinta parada 
 de la línea en sentido \textit{Cibeles}, por lo que posible ruido o variabilidad inducida por las 
 primeras paradas de la línea se mitiga. Con respecto a sus características, al no tener correspondencia con 
-otras rutas, mitiga las variabilidades derivadas de este hecho.
+otras rutas, mitiga las variaciones derivadas de este hecho, como puede ser la absorción de demanda
+por otros autobuses.
 
 El estudio en cuestión comienza aplicando un filtrado y estudiando la normalidad de los datos
-obtenidos. El filtro resulta de escoger de todos los \textit{lunes laborables} el primer autobús que efectuara
+obtenidos. El filtro resulta de escoger de todos los \textit{lunes laborables} el primer autobús que efectúa
 salida de cabecera en el \textit{timeslot} correspondiente a las nueve de la mañana. Este filtro
-generaba un número de observaciones a estudiar de unas 20 muestras. Este motivo, como se expone en el 
+genera un número de observaciones a estudiar de unas 20 muestras. Este motivo, como se expone en el 
 estado del arte, lleva a la decisión de aplicar un \textbf{test de normalidad} basado en 
 \enquote{\textbf{skewness}} y \enquote{\textbf{kurtosis}}. El test evalúa la hipótesis nula $H_0$: la 
 distribución subyacente es normal, con un nivel de significación $\alpha = 0{,}05$. En aquellos casos en 
 los que el test no rechaza $H_0$, se asume que los datos son compatibles con una distribución normal a 
-un nivel de confianza del 95\%.
+un nivel de confianza del 95\%~\cite{kim2013normality}. Este experimento documenta
+para cada llamada la hipótesis resultante, así como explicabilidad relativa a las causas de su aceptación o 
+rechazo, basándose en estos valores de \textit{skewness} y \textit{kurtosis}. Como se discute en su
+respectiva sección del estado del arte, el test se junta con un estudio y selección de valores anómalos.
+Esta unión permite validar tanto las suposiciones de la normalidad del conjunto de datos a estudiar como,
+ tanto si se cumple la hipótesis como en caso contrario, verificar y analizar aquellas instancias que según
+ criterios estadísticos formales suponen un \textit{outlier}.
+
+El resultado de este filtro resulta en una aceptación de la hipótesis de normalidad para la primera salida 
+de cabecera de los buses en la franja de las nueve de la mañana. No obstante, al aplicar \textit{ESD}~\cite{rosner1983} para
+la detección de anomalias, se detectan casos extremos que resulta necesario analizar. Ampliando este filtro
+temporal al resto de días laborables, los resultados son congruentes con lo observado en primera instancia:
+\textit{Las observaciones realizadas sobre la primera salida de cabecera a las nueve de la mañana
+para todos los días laborables presentan una hipótesis válida de \textbf{normalidad}.} Relativo a las anomalías detectadas, 
+se observa de ellas
+un patrón claro, presentando todas valores de \textit{Occupation} elevado con respecto a la muestra estudiada,
+y en todos los casos esos días se caracterizan por tener \textbf{gratuidad}. Esta observación lleva a la decisión de, en 
+la fase de limpieza, ignorar aquellos casos que aun siendo días laborables, presentan este valor, ya que sus valores
+de \textit{Occupation} tienden a inducir variación o ruido en el estudio.
+
+
+
+
+
 
 
 
@@ -347,6 +374,7 @@ de datos, como a la plantilla necesaria para que puedan ser ingestados en el sim
 
 
 \subsection{Estudio y análisis de carga, descarga y tiempo entre paradas}
+
 
 \subsection{Adaptación de formato de parámetros de entrada}
 

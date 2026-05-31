@@ -1,13 +1,59 @@
 \section{Simuladores de Transporte}
 La simulación aborda un problema fundamental dentro de cualquier ámbito, ser capaz de recrear un escenario 
-concreto con el fin de extraer o detectar posibles anomalías de una forma temprana. En el contexto del 
+concreto con el fin bien de extraer o detectar posibles anomalías de una forma temprana, o de analizar resultados
+clave sobre un conjunto determinado. En el contexto del 
 transporte urbano, validar las capacidades de absorción de la congestión en horas puntas resulta clave,
-al presentarse este como un problema crucial~\cite{saidallah2016comparative}. \textbf{Falta completar
-iintroduccion de este apartado y las dos subsecciones}
+al presentarse este como uno de los principales problemas para las entidades gestoras 
+del transporte~\cite{saidallah2016comparative}. Esta sección cubre la evolución y las distintas 
+técnicas existentes en la literatura usados para realizar estos experimentos, junto con un análisis exhaustivo
+de distintas soluciones relativas al problema concreto que aborda este documento. 
+
+\textbf{Vale, aqui vamos a pseudocodear que vamos a hacer. De primeras, mencionar que antes de la aplicacion 
+de los paradigmas de ia como puede ser agentes, genéticos o metaheuristicas, existian métodos matematicos 
+y estadisticos, como las macro y microsimulaciones, como sistemas basados en Simulaciones de Eventos 
+Discretos. Una vez se muestroe todo eso, comentar la viabilidad de las simulaciones basadas en MAS, junto a
+ejemplos como el de nabil morri y estas hueas. Mencionar tambien posibles alternativas a simulaciones
+de montecarlo, y todo eso. Explicar tmb las sims de montecarlo, no se si con algun tipo de comparativa,
+o como relacionarlo con tema de evolucion de las simulaciones}
+
+\subsection{Técnicas de simulación}
+Las aproximaciones a la simulación del transporte pueden agruparse según su paradigma de modelado y su 
+mecanismo de resolución. A continuación se presentan las principales familias de técnicas identificadas 
+en la literatura, junto con sus aportaciones y limitaciones en el ámbito del transporte público.
+\begin{enumerate}
+    \item \textbf{Técnicas matemáticas analíticas}
+
+    Basadas en la resolución algebraica de problemas formalizados mediante ecuaciones construidas a partir de 
+    relaciones entre variables. En el ámbito del transporte, \textcite{Newell1964Maintaining}
+    implementa un sistema matemático para análisis de estabilidad de rutas basado en ecuaciones diferenciales.
+    Otros paradigmas, como puede ser la \textit{teoría de colas}, o técnicas de \textit{programación lineal}
+    se presentan dentro de los escenarios de transporte.
+    Ejemplos como \textcite{Wang2021Modeling} o \textcite{Wang2018BusCapacity} implementan sistemas basados en 
+    teoría de colas dentro del caso de aplicación de modelado de rutas de autobús en China, mientras que 
+    \textcite{Liu2023Optimizing} aplica técnicas de programación lineal para la optimización de transferencias
+    dentro del transporte. Estos métodos de resolucion se presentan óptimos
+    \item \textbf{Modelos microscópicos}
+    
+    Estos modelos 
+    \item \textbf{Simulaciones de eventos discretos}
+    
+    Este tipo de simulaciones recrean y modelan aquellos momentos concretos de cambios de estado dentro de
+    \item \textbf{Algoritmos evolutivos y metaheuristicas}
+    
+    Basados en paradigmas de Inteligencia Artificial de inspiración biológica, se centran en la realización de 
+    procesos iterativos que van reduciendo el conjunto de soluciones en función de aquellos caminos
+    que mediante evaluaciones de coste (heurísticas) se presenten como óptimos.
+    \item \textbf{Sistemas multi-agente}
+    
+    \item \textbf{Aprendizaje por refuerzo y \enquote{Deep learning}}
+    
 
 
+\end{enumerate}
 
-
+Este conjunto de técnicas se presentan como opciones realistas para realizar simulaciones dentro del transporte
+urbano. No obstante, la elección de los sistemas multi-agente se basa en características formales del problema,
+como puede ser
 
 \subsection{Sistemas Multi-Agente como simuladores}
 \textbf{FALTA HACER}
@@ -22,8 +68,7 @@ de las distribuciones de los datos estudiados. Para ello, se divide el contenido
 \enquote{\nameref{subsubsec:hyp_test}} y \enquote{\nameref{subsubsec:extreme_case}}. 
 
 
-\subsubsection{Test de Hipótesis}
-\label{subsubsec:hyp_test}
+\subsubsection{Test de Hipótesis}\label{subsubsec:hyp_test}
 Los test de hipótesis suponen el principal método de validación de distribuciones empíricas. Se han usado
 diferentes distribuciones conocidas a lo largo de este trabajo, como son la distribución \textbf{Normal}
 o \textbf{Gaussiana}, la distribución \textbf{Binomial Negativa} y la distribución \textbf{Geométrica}.
@@ -33,7 +78,7 @@ discutiendo sobre la viabilidad de sus aplicaciones.
 \hspace*{1cm}\textbf{Distribución Normal o Gaussiana}
 
 Posiblemente la más conocida, es una distribución característica por su simetría y su forma de \textit{campana}.
-En la figura \ref{fig:gaussian} se muestra la típica forma que deriva de esta distribución.
+En la figura~\ref{fig:gaussian} se muestra la típica forma que deriva de esta distribución.
 
 \begin{figure}[h]
 \centering
@@ -59,8 +104,7 @@ En la figura \ref{fig:gaussian} se muestra la típica forma que deriva de esta d
 \end{tikzpicture}
 \caption{Representación de la distribución normal o de Gauss 
 ($\mu=0$, $\sigma=1$)}
-\par\vspace{2pt}{\footnotesize Fuente: elaboración propia.}
-\label{fig:gaussian}
+\par\vspace{2pt}{\footnotesize Fuente: elaboración propia.}\label{fig:gaussian}
 \end{figure}
 
 
@@ -82,8 +126,8 @@ El origen de esta fórmula deriva de los estudios de \textcite{demoivre1738doctr
  simulación de Montecarlo, concluyen que ninguno de ellos es uniformemente superior para todos los tipos de 
  distribución alternativa, y que la elección debe atender al tamaño muestral y a las características de los
  datos. Debido a la naturaleza inicial de los datos estudiados, presentando tamaños muestrales estimados
- de unas 20 muestras, se decidió optar por un enfoque de Test de hipótesis basado en la \textbf{skewness}
- (\textit{asimetría}) y la \textbf{kurtosis} ( \textit{curtosis}).
+ de unas 20 muestras, se opta por un enfoque de Test de hipótesis basado en la \textbf{skewness}
+ (\textit{asimetría}) y la \textbf{kurtosis} (\textit{curtosis}).
  \textcite{kim2013normality} especifica que este test en cuestión permite
  ser utilizado con rigor estadístico para estudio de normalidad en muestras pequeñas, por lo que se optó
  por su implementación.
@@ -116,9 +160,9 @@ Encapsuladas en un apartado debido a la particularidad de la distribución \text
 un caso de aplicación concreto de la distribución \textit{Binomial Negativa}, y debido al uso conjunto que 
 se hace de estas dos distribuciones en el caso concreto de aplicación.
 
-La distribución binomial Negativa, representada en la figura \ref{fig:negbin}, consiste en un 
+La distribución binomial Negativa, representada en la figura~\ref{fig:negbin}, consiste en un 
 tipo de distribución discreta basada en una prominente cola derecha (skewness positivo). Esta característica se
-encuentra presente también en la distribución \textit{geométrica} (véase la figura \ref{fig:geometric}).
+encuentra presente también en la distribución \textit{geométrica} (véase la figura~\ref{fig:geometric}).
 
 
 La distribución \textit{binomial negativa} normalmente se emplea para modelar el número de intentos necesarios
@@ -167,8 +211,7 @@ P(X=k) = (1-p)^{k-1}p, \quad k = 1, 2, 3, \ldots
 \end{tikzpicture}
 \caption{Representación de la distribución binomial negativa 
 ($r=5$, $p=0{,}4$)}
-\par\vspace{2pt}{\footnotesize Fuente: elaboración propia.}
-\label{fig:negbin}
+\par\vspace{2pt}{\footnotesize Fuente: elaboración propia.}\label{fig:negbin}
 \end{figure}
 
 
@@ -197,8 +240,7 @@ P(X=k) = (1-p)^{k-1}p, \quad k = 1, 2, 3, \ldots
 \end{tikzpicture}
 \caption{Representación de la distribución geométrica 
 ($p=0{,}3$)}
-\par\vspace{2pt}{\footnotesize Fuente: elaboración propia.}
-\label{fig:geometric}
+\par\vspace{2pt}{\footnotesize Fuente: elaboración propia.}\label{fig:geometric}
 \end{figure}
 
 
@@ -209,9 +251,9 @@ Dentro del caso de aplicación que concierne a este trabajo, estas distribucione
 modelar los distintos valores de subida y bajada de pasajeros en una parada concreta. Bajo este tipo de 
 escenarios, una distribución de \textit{Poisson} resulta más factible en un principio, dado que esta modela 
 el número de eventos que ocurren en un intervalo de tiempo
-concreto bajo la premisa de su independencia \cite{cameron2013regression}. No obstante, esta distribución 
-captura peor que la \textit{binomial negativa} aquellos casos donde la varianza es mayor que la media
-\cite{cameron2013regression}, coincidente con la casuística de los datos de operación de la EMT. 
+concreto bajo la premisa de su independencia~\cite{cameron2013regression}. No obstante, esta distribución 
+captura peor que la \textit{binomial negativa} aquellos casos donde la varianza es mayor que la 
+media~\cite{cameron2013regression}, coincidente con la casuística de los datos de operación de la EMT.\@
 Por este motivo concreto, aunque el contexto de qué implican las distribuciones \textit{binomial negativa} 
 y \textit{geométrica} no se corresponda con su definición formal, se aplican estas al capturar mejor aquellos 
 casos donde se presenta una sobredispersión derecha considerable.
@@ -227,8 +269,7 @@ caso de la distribución binomial negativa, la estimación de parámetros se rea
 de los momentos, mientras que para la distribución geométrica se emplea el estimador de máxima 
 verosimilitud sobre el parámetro de éxito.
 
-\subsubsection{Estudio de valores extremos}
-\label{subsubsec:extreme_case}
+\subsubsection{Estudio de valores extremos}\label{subsubsec:extreme_case}
 En relación al estudio de los valores extremos (comúnmente conocidos como \textit{outliers}), se pueden distinguir
 dos casos concretos en los que se ha realizado este análisis.   
 
@@ -240,18 +281,18 @@ entra en juego el análisis de los posibles valores atípicos. Dentro del análi
 existen en la literatura distintos tests. El \enquote{NIST} (National Institute of Standards and Technology)
 \footnote{\url{https://www.nist.gov/} (accedido: 13 de mayo de 2026).} define tres preguntas clave para la 
 elección del mejor estimador. Estas preguntas son: ¿Qué distribución siguen los datos?, ¿Test diseñado para
-encontrar uno o varios \textit{outliers}? y ,si está diseñado para más de uno, ¿Es necesario especificar
+encontrar uno o varios \textit{outliers}? y, si está diseñado para más de uno, ¿Es necesario especificar
 cuántos existen o solo una barrera superior?\cite{nist2012outlier}.
 
 Según la respuesta a estas preguntas se puede reducir el número de modelos que sirvan para el caso 
 concreto. Dentro del problema en cuestión, se busca encontrar qué \textit{outliers} pueden existir en 
 distribuciones \textit{Normales}. En este caso, se definen tres posibilidades, el \enquote{Test de Grubbs},
-el \enquote{Test de Tietjen-Moore} y el \enquote{Generalized Extreme Studentized Deviate Test} ( o ESD). ESD
-supone el único test de los tres que no necesita la especificación concreta de cuántos outliers existen 
-en un conjunto de datos ( Grubbs establece \textbf{un único outlier}, mientras que Tiejten-Moore 
+el \enquote{Test de Tietjen-Moore} y el \enquote{Generalized Extreme Studentized Deviate Test} (o ESD). ESD
+se presenta como el único de los tres que no necesita la especificación concreta de cuántos outliers existen 
+en un conjunto de datos (Grubbs establece \textbf{un único outlier}, mientras que Tiejten-Moore 
 necesita el \textbf{número exacto}). Al buscar la utilización de test detectores de valores anómalos en 
 una fase de estudio de los datos, los dos primeros test se presentan incompatibles.
-El ESD es un test propuesto por Rosner en 1983 \cite{rosner1983}, derivado de la generalización del Test de Grubbs para 
+El ESD es un test propuesto por Rosner en 1983~\cite{rosner1983}, derivado de la generalización del Test de Grubbs para 
 detección de múltiples outliers, y que opera sobre una distribución \textbf{aproximadamente normal}.
 Recibe como único parámetro $r$, un límite superior utilizado para el planteamiento de la
 hipótesis alternativa. Las hipótesis \(H_0\) y \(H_a\) son:
@@ -274,7 +315,7 @@ iteración $i+1$ se recalcula esa $R_{i+1}$ sin tener en cuenta el valor anterio
 
 Esto se repite hasta que se han computado los $r$ datos de la $H_a$
 
-Luego, con un nivel definido de significancia $\alpha$, para cada $R_i$ con $i \in 1,2,....,i$ 
+Luego, con un nivel definido de significancia $\alpha$, para cada $R_i$ con $i \in 1,2,\ldots, i$ 
 se calcula un valor $\lambda_i$
 \begin{equation}
 \lambda_i = \frac {\left ( n - i \right ) t_{p, n-i-1}} {\sqrt{\left ( n- i -1 + t_{p, n-i-1}^{2} \right ) \left ( n -i +1 \right )}}
@@ -321,7 +362,7 @@ diseñado para aplicarlo sobre conjuntos de datos \enquote{\textit{aproximadamen
 de \textit{outliers} sobre conjuntos de datos que pueden ser o pueden no ser normales, resulta
 más adecuado un test con un enfoque general sobre la consideración de una anomalía en los datos.
 En la literatura existen diversos test que permiten analizar posibles valores atípicos dentro de un conjunto de
-datos. \textcite{leys2013detecting} discute sobre preferencia de realizar otros enfoques distintos al clásico de 
+datos.~\textcite{leys2013detecting} discute sobre preferencia de realizar otros enfoques distintos al clásico de 
 considerar \textit{outliers} a aquellos datos más allá de dos o tres veces la \textit{desviación estandar}. Expone 
 que la media y la mediana son valores sensibles a esos \textit{outliers} y propone utilizar el \textbf{MAD} (Median Absolute
 Deviation) como un estimador más robusto, con la \textit{mediana} como tendencia central.
