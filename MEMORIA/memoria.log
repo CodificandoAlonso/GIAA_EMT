@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  31 MAY 2026 18:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  1 JUN 2026 18:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1405,26 +1405,33 @@ LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10> not available
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8] [9] [10]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [11] [12]
-Package pgfplots info on input line 100: Overriding colorspace to rgb due to xcolor configuration.
- [13] [14]
-Package pgfplots info on input line 202: Overriding colorspace to rgb due to xcolor configuration.
-Package pgfplots info on input line 233: Overriding colorspace to rgb due to xcolor configuration.
+[8] [9] [10]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [11] [12] [13]
+Package pgfplots info on input line 166: Overriding colorspace to rgb due to xcolor configuration.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[15] [16]
-Overfull \hbox (8.7134pt too wide) in paragraph at lines 309--315
+[14] [15]
+Package pgfplots info on input line 268: Overriding colorspace to rgb due to xcolor configuration.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Package pgfplots info on input line 299: Overriding colorspace to rgb due to xcolor configuration.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[16] [17]
+Overfull \hbox (8.7134pt too wide) in paragraph at lines 375--381
 \T1/txr/m/n/12 Donde $\OML/txmi/m/it/12 x[][]$ \T1/txr/m/n/12 de-no-ta la me-dia y $\OML/txmi/m/it/12 s$ \T1/txr/m/n/12 es la des-via-ción es-tán-dar mues-tral, que di-fie-re de $\OML/txmi/m/it/12 m[]$\T1/txr/m/n/12 (desviación
  []
 
-[17]) [18]
+[18] [19]) [20]
 Cap\'{\i }tulo 3.
-(./chapter/section_metodology/metodology.tex [19
+(./chapter/section_metodology/metodology.tex [21
 
-] [20] [21]
-<imagenes/gantt_chart.png, id=628, 1001.6622pt x 351.9549pt>
+] [22] [23]
+<imagenes/gantt_chart.png, id=666, 1001.6622pt x 351.9549pt>
 File: imagenes/gantt_chart.png Graphic file (type png)
 <use imagenes/gantt_chart.png>
 Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 97.
@@ -1437,81 +1444,81 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-4.35004pt}.
 
-[22
+[24
 
 
- <./imagenes/gantt_chart.png>] [23
+ <./imagenes/gantt_chart.png>] [25
 
 ]
-<imagenes/regularidad.png, id=659, 435.87843pt x 445.665pt>
+<imagenes/regularidad.png, id=698, 435.87843pt x 445.665pt>
 File: imagenes/regularidad.png Graphic file (type png)
 <use imagenes/regularidad.png>
 Package pdftex.def Info: imagenes/regularidad.png  used on input line 170.
 (pdftex.def)             Requested size: 426.79135pt x 436.37471pt.
- [24] [25 <./imagenes/regularidad.png>]) [26]
+ [26] [27 <./imagenes/regularidad.png>]) [28]
 Cap\'{\i }tulo 4.
 (./chapter/section_analysis/param_analysis.tex
-<imagenes/qgis_capture_e01_converted.png, id=683, 1861.95625pt x 1051.93pt>
+<imagenes/qgis_capture_e01_converted.png, id=721, 1861.95625pt x 1051.93pt>
 File: imagenes/qgis_capture_e01_converted.png Graphic file (type png)
 <use imagenes/qgis_capture_e01_converted.png>
 Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 47.
 (pdftex.def)             Requested size: 426.79135pt x 241.1202pt.
- [27
+ [29
 
 ]
-<imagenes/gama_shapefiles.png, id=690, 1862.96pt x 1054.94125pt>
+<imagenes/gama_shapefiles.png, id=728, 1862.96pt x 1054.94125pt>
 File: imagenes/gama_shapefiles.png Graphic file (type png)
 <use imagenes/gama_shapefiles.png>
 Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 56.
 (pdftex.def)             Requested size: 426.79135pt x 241.68166pt.
- [28 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
-<imagenes/image_tables_diagram.png, id=699, 331.2375pt x 785.93625pt>
+ [30 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
+<imagenes/image_tables_diagram.png, id=738, 331.2375pt x 785.93625pt>
 File: imagenes/image_tables_diagram.png Graphic file (type png)
 <use imagenes/image_tables_diagram.png>
 Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 83.
 (pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
- [29]
+ [31]
 Overfull \hbox (38.77354pt too wide) detected at line 164
  [] 
  []
 
-[30 <./imagenes/image_tables_diagram.png (PNG copy)>]
+[32 <./imagenes/image_tables_diagram.png (PNG copy)>]
 Overfull \hbox (38.77354pt too wide) detected at line 246
  [] 
  []
 
-[31] [32] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[33] [34] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 256.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
 (Font)              Font shape `T1/txtt/bx/n' tried instead on input line 257.
- [33]
+ [35]
 LaTeX Font Info:    Font shape `T1/txr/b/it' in size <12> not available
 (Font)              Font shape `T1/txr/bx/it' tried instead on input line 342.
- [34]) [35] [36]
+ [36]) [37] [38]
 Cap\'{\i }tulo 5.
-(./chapter/section_design/Simulation_design.tex) [37
+(./chapter/section_design/Simulation_design.tex) [39
 
 ]
 Cap\'{\i }tulo 6.
-[38
+[40
 
 ]
 Cap\'{\i }tulo 7.
-[39
-
-]
-Cap\'{\i }tulo 8.
-(./chapter/section_budget/budget.tex) [40
-
-]
-Cap\'{\i }tulo 9.
 [41
 
 ]
+Cap\'{\i }tulo 8.
+(./chapter/section_budget/budget.tex) [42
+
+]
+Cap\'{\i }tulo 9.
+[43
+
+]
 Cap\'{\i }tulo 10.
-[42
+[44
 
 ]
 Package csquotes Info: Disabling multilingual quotes on input line 473.
@@ -1530,15 +1537,35 @@ Overfull \hbox (1.42937pt too wide) in paragraph at lines 475--475
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
-[43
+[45
 
 
-] [44]
+] [46]
+Overfull \hbox (5.85698pt too wide) in paragraph at lines 475--475
+\T1/txr/m/n/12 tro Li-ne 7,^^Q \T1/txr/m/it/12 Mo-de-lling\T1/txr/m/n/12 , vol. 7, n.[] 2, p. 58, 2026. \T1/txr/m/sc/12 doi\T1/txr/m/n/12 : [][]$\T1/txtt/m/n/12 10 . 3390 / modelling7020058$[][]\T1/txr/m/n/12 . 
+ []
+
+
+Overfull \hbox (11.55956pt too wide) in paragraph at lines 475--475
+\T1/txr/m/it/12 Workshops\T1/txr/m/n/12 , O. Ger-va-si et al., eds., ép. Lec-tu-re No-tes in Com-pu-ter Scien-ce, vol. 15898,
+ []
+
+[47]
+Overfull \hbox (2.62831pt too wide) in paragraph at lines 475--475
+\T1/txr/m/n/12 lling,^^Q en \T1/txr/m/it/12 AIP Con-fe-ren-ce Pro-cee-dings\T1/txr/m/n/12 , vol. 2423, AIP Pu-blishing, 2021, p. 020 035.
+ []
+
+
+Overfull \hbox (4.97697pt too wide) in paragraph at lines 475--475
+\T1/txr/m/n/12 Con-trol Ac-tions to Im-pro-ve Bus-Service Re-gu-la-rity,^^Q en \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce. ECAI
+ []
+
+[48]
 Overfull \hbox (4.26741pt too wide) in paragraph at lines 475--475
 []\T1/txr/m/n/12 W. G. Co-chran, ^^P  So-me Methods for Strengthe-ning the Com-mon Chi-Squared Tests,^^Q
  []
 
-[45] [46] (./anex/anex_requirements/requirements.tex) [1
+[49] (./anex/anex_requirements/requirements.tex) [1
 
 ] (./memoria.aux
 LaTeX Info: Redefining \sptext on input line 12.
@@ -1556,17 +1583,17 @@ Package logreq Info: Writing requests to 'memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 53504 strings out of 474222
- 1162649 string characters out of 5748734
- 2046362 words of memory out of 5000000
- 74673 multiletter control sequences out of 15000+600000
+ 53556 strings out of 474222
+ 1164814 string characters out of 5748734
+ 2051299 words of memory out of 5000000
+ 74710 multiletter control sequences out of 15000+600000
  655726 words of font info for 183 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,117p,1718b,3948s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (60 pages, 3403231 bytes).
+Output written on memoria.pdf (63 pages, 3420925 bytes).
 PDF statistics:
- 933 PDF objects out of 1000 (max. 8388607)
- 200 named destinations out of 1000 (max. 500000)
+ 993 PDF objects out of 1000 (max. 8388607)
+ 215 named destinations out of 1000 (max. 500000)
  364 words of extra memory for PDF output out of 10000 (max. 10000000)
 

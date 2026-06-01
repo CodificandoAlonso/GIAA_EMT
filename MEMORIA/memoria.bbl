@@ -991,43 +991,46 @@
       \verb https://gama-platform.org
       \endverb
     \endentry
-    \entry{saidallah2016comparative}{article}{}
+    \entry{saidallah2016comparative}{inproceedings}{}
       \name{author}{3}{}{%
-        {{hash=c86770f936c52efbeb289e7f351fd3b2}{%
+        {{hash=e6005050984004b8e5dc54275665c79a}{%
            family={Saidallah},
            familyi={S\bibinitperiod},
-           given={Mostafa},
+           given={Mustapha},
            giveni={M\bibinitperiod}}}%
         {{hash=878377724cc26e79e102bb88ebe2d08e}{%
            family={El\bibnamedelima Fergougui},
            familyi={E\bibinitperiod\bibinitdelim F\bibinitperiod},
            given={Abdeslam},
            giveni={A\bibinitperiod}}}%
-        {{hash=4cbae210dd5a4ee1c41710257d065bb8}{%
-           family={Elalaoui},
-           familyi={E\bibinitperiod},
-           given={Abdelbaki\bibnamedelima E.},
-           giveni={A\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=d4aeb28ca554c4c6c76aacf678b4f10c}{%
+           family={Elbelrhiti\bibnamedelima Elalaoui},
+           familyi={E\bibinitperiod\bibinitdelim E\bibinitperiod},
+           given={Abdelbaki},
+           giveni={A\bibinitperiod}}}%
       }
       \list{publisher}{1}{%
         {EDP Sciences}%
       }
-      \strng{namehash}{6d41ab11d395c8ffe43c50f366ce66db}
-      \strng{fullhash}{b792f1a56867138a46c4cf56876dd66d}
-      \strng{bibnamehash}{b792f1a56867138a46c4cf56876dd66d}
-      \strng{authorbibnamehash}{b792f1a56867138a46c4cf56876dd66d}
-      \strng{authornamehash}{6d41ab11d395c8ffe43c50f366ce66db}
-      \strng{authorfullhash}{b792f1a56867138a46c4cf56876dd66d}
+      \strng{namehash}{5d2cd64a85f84b2ce01d551611473060}
+      \strng{fullhash}{b68191c9b67a66d68e93d454f4551162}
+      \strng{bibnamehash}{b68191c9b67a66d68e93d454f4551162}
+      \strng{authorbibnamehash}{b68191c9b67a66d68e93d454f4551162}
+      \strng{authornamehash}{5d2cd64a85f84b2ce01d551611473060}
+      \strng{authorfullhash}{b68191c9b67a66d68e93d454f4551162}
       \field{sortinit}{8}
       \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{MATEC Web of Conferences}
+      \field{booktitle}{MATEC Web of Conferences}
       \field{title}{A Comparative Study of Urban Road Traffic Simulators}
       \field{volume}{81}
       \field{year}{2016}
       \field{pages}{05002}
       \range{pages}{1}
+      \verb{doi}
+      \verb 10.1051/matecconf/20168105002
+      \endverb
     \endentry
     \entry{Newell1964Maintaining}{inproceedings}{}
       \name{author}{2}{}{%
@@ -1213,6 +1216,643 @@
       \verb 10.1016/j.cie.2023.109577
       \endverb
     \endentry
+    \entry{Li2013BRT}{article}{}
+      \name{author}{5}{}{%
+        {{hash=122748fbd1766f07a1685dde181113ca}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Meng},
+           giveni={M\bibinitperiod}}}%
+        {{hash=76a7ec1c01f4b1051b61e6bda9c7ed14}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Yafeng},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=2f02c000c902dc2d64b7035146de7a54}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Wei-Bin},
+           giveni={W\bibinithyphendelim B\bibinitperiod}}}%
+        {{hash=09d5d500b34786c94a128e6f131300c6}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Kun},
+           giveni={K\bibinitperiod}}}%
+        {{hash=a39c46353635a312b565c2673fa99b8c}{%
+           family={Nakamura},
+           familyi={N\bibinitperiod},
+           given={Hideki},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Hindawi}%
+      }
+      \strng{namehash}{fcd45aa93b07a06122d442ee22d03cd0}
+      \strng{fullhash}{862414c686b64cd5af28e466f60f6092}
+      \strng{bibnamehash}{862414c686b64cd5af28e466f60f6092}
+      \strng{authorbibnamehash}{862414c686b64cd5af28e466f60f6092}
+      \strng{authornamehash}{fcd45aa93b07a06122d442ee22d03cd0}
+      \strng{authorfullhash}{862414c686b64cd5af28e466f60f6092}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Discrete Dynamics in Nature and Society}
+      \field{title}{Performance of the Priority Control Strategies for {Bus Rapid Transit}: Comparative Study from Scenario Microsimulation Using {VISSIM}}
+      \field{volume}{2013}
+      \field{year}{2013}
+      \field{pages}{398938}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1155/2013/398938
+      \endverb
+    \endentry
+    \entry{Zannat2024BRT}{article}{}
+      \name{author}{4}{}{%
+        {{hash=9199ea60a059424f9bffa38e767710a3}{%
+           family={Zannat},
+           familyi={Z\bibinitperiod},
+           given={Khatun\bibnamedelima E.},
+           giveni={K\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=e8649a8ad15a150b32464a6bc06e1706}{%
+           family={Laudan},
+           familyi={L\bibinitperiod},
+           given={Janek},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a0c621511c46f86c0532ab15b134d867}{%
+           family={Choudhury},
+           familyi={C\bibinitperiod},
+           given={Charisma\bibnamedelima F.},
+           giveni={C\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=1a5bb0b378e2daa726e8df8c291da7c8}{%
+           family={Hess},
+           familyi={H\bibinitperiod},
+           given={Stephane},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{ef9c870f940a0765708b42a1aa1c544b}
+      \strng{fullhash}{f8470cff6ed88619062f8cb348abd863}
+      \strng{bibnamehash}{f8470cff6ed88619062f8cb348abd863}
+      \strng{authorbibnamehash}{f8470cff6ed88619062f8cb348abd863}
+      \strng{authornamehash}{ef9c870f940a0765708b42a1aa1c544b}
+      \strng{authorfullhash}{f8470cff6ed88619062f8cb348abd863}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transport Policy}
+      \field{title}{Developing an Agent-Based Microsimulation for Predicting the {Bus Rapid Transit (BRT)} Demand in Developing Countries: A Case Study of {Dhaka, Bangladesh}}
+      \field{volume}{148}
+      \field{year}{2024}
+      \field{pages}{92\bibrangedash 106}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1016/j.tranpol.2023.12.014
+      \endverb
+    \endentry
+    \entry{Tirachini2023DiscreteEvent}{article}{}
+      \name{author}{3}{}{%
+        {{hash=66eb5a15670674ff4bdd8f89970a6966}{%
+           family={Tirachini},
+           familyi={T\bibinitperiod},
+           given={Alejandro},
+           giveni={A\bibinitperiod}}}%
+        {{hash=211a8c51e22825e65c505610c26892f2}{%
+           family={Medina},
+           familyi={M\bibinitperiod},
+           given={Sebastián},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ab30e2a5784d2d0820c8fa0c73f13d92}{%
+           family={Moya},
+           familyi={M\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{8ab6404919ed9f4eadedaf8ecc550c11}
+      \strng{fullhash}{87a8980886bb32310dba800c5828ddf3}
+      \strng{bibnamehash}{87a8980886bb32310dba800c5828ddf3}
+      \strng{authorbibnamehash}{87a8980886bb32310dba800c5828ddf3}
+      \strng{authornamehash}{8ab6404919ed9f4eadedaf8ecc550c11}
+      \strng{authorfullhash}{87a8980886bb32310dba800c5828ddf3}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Case Studies on Transport Policy}
+      \field{title}{A Discrete-Event Public Transportation Simulation Model to Evaluate Travel Demand Management Impacts on Waiting Times and Crowding Conditions}
+      \field{volume}{14}
+      \field{year}{2023}
+      \field{pages}{101077}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.cstp.2023.101077
+      \endverb
+    \endentry
+    \entry{AriasNava2026DataDriven}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{2}{}{%
+        {{hash=36d4c07b09dd06814e7c4940711de25e}{%
+           family={Arias\bibnamedelima Nava},
+           familyi={A\bibinitperiod\bibinitdelim N\bibinitperiod},
+           given={Elias\bibnamedelima Heriberto},
+           giveni={E\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=1e67fe73c0f30582bfbcb3bfc143feae}{%
+           family={Moncayo-Martínez},
+           familyi={M\bibinithyphendelim M\bibinitperiod},
+           given={Luis\bibnamedelima A.},
+           giveni={L\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{a956274326fc8205c9f8dcdcbd89f37a}
+      \strng{fullhash}{a956274326fc8205c9f8dcdcbd89f37a}
+      \strng{bibnamehash}{a956274326fc8205c9f8dcdcbd89f37a}
+      \strng{authorbibnamehash}{a956274326fc8205c9f8dcdcbd89f37a}
+      \strng{authornamehash}{a956274326fc8205c9f8dcdcbd89f37a}
+      \strng{authorfullhash}{a956274326fc8205c9f8dcdcbd89f37a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Modelling}
+      \field{number}{2}
+      \field{title}{A Data-Driven Discrete-Event Simulation for Assessing Passenger Dynamics and Bottlenecks in {Mexico City Metro Line 7}}
+      \field{volume}{7}
+      \field{year}{2026}
+      \field{pages}{58}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/modelling7020058
+      \endverb
+    \endentry
+    \entry{Owais2018Hierarchical}{article}{}
+      \name{author}{2}{}{%
+        {{hash=48a1e38ed63a73d782e8e3f42cec0591}{%
+           family={Owais},
+           familyi={O\bibinitperiod},
+           given={Mahmoud},
+           giveni={M\bibinitperiod}}}%
+        {{hash=efd67819dc7899c27de46262c44a5251}{%
+           family={Osman},
+           familyi={O\bibinitperiod},
+           given={Mostafa\bibnamedelima K.},
+           giveni={M\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{cb183b2ab103f10528d7a31af12530b8}
+      \strng{fullhash}{cb183b2ab103f10528d7a31af12530b8}
+      \strng{bibnamehash}{cb183b2ab103f10528d7a31af12530b8}
+      \strng{authorbibnamehash}{cb183b2ab103f10528d7a31af12530b8}
+      \strng{authornamehash}{cb183b2ab103f10528d7a31af12530b8}
+      \strng{authorfullhash}{cb183b2ab103f10528d7a31af12530b8}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Expert Systems with Applications}
+      \field{title}{Complete Hierarchical Multi-Objective Genetic Algorithm for Transit Network Design Problem}
+      \field{volume}{114}
+      \field{year}{2018}
+      \field{pages}{143\bibrangedash 154}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.eswa.2018.07.065
+      \endverb
+    \endentry
+    \entry{Jha2019MultiObjective}{article}{}
+      \name{author}{3}{}{%
+        {{hash=dbe190c80b21adac963d8d2e0bc79e48}{%
+           family={Jha},
+           familyi={J\bibinitperiod},
+           given={Shashi\bibnamedelima Bhushan},
+           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=0b67a4cfa212acf6f14721c8cb1e672c}{%
+           family={Jha},
+           familyi={J\bibinitperiod},
+           given={J.K.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=66806ee0d9321666400e345b68a71dc1}{%
+           family={Tiwari},
+           familyi={T\bibinitperiod},
+           given={Manoj\bibnamedelima Kumar},
+           giveni={M\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{0f9fb58f3caf6cf923cf3787e49e4912}
+      \strng{fullhash}{92fa2d828d4bdf374396f83402f5559e}
+      \strng{bibnamehash}{92fa2d828d4bdf374396f83402f5559e}
+      \strng{authorbibnamehash}{92fa2d828d4bdf374396f83402f5559e}
+      \strng{authornamehash}{0f9fb58f3caf6cf923cf3787e49e4912}
+      \strng{authorfullhash}{92fa2d828d4bdf374396f83402f5559e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computers \& Industrial Engineering}
+      \field{title}{A Multi-Objective Meta-Heuristic Approach for Transit Network Design and Frequency Setting Problem in a Bus Transit System}
+      \field{volume}{130}
+      \field{year}{2019}
+      \field{pages}{166\bibrangedash 186}
+      \range{pages}{21}
+      \verb{doi}
+      \verb 10.1016/j.cie.2019.02.025
+      \endverb
+    \endentry
+    \entry{Fanfani2025FastAgent}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=ec5fd09a0c56796359e7c630097b5a90}{%
+           family={Fanfani},
+           familyi={F\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4253d376c56fc2104e3e0f21acceea55}{%
+           family={Giovannoni},
+           familyi={G\bibinitperiod},
+           given={Alberto},
+           giveni={A\bibinitperiod}}}%
+        {{hash=5c449f3c2626e8609e247624d7cc28c9}{%
+           family={Ipsaro\bibnamedelima Palesi},
+           familyi={I\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Luciano\bibnamedelima Alessandro},
+           giveni={L\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=e1b29e22e7835991b27bd49dbeae6870}{%
+           family={Irum},
+           familyi={I\bibinitperiod},
+           given={Ammarah},
+           giveni={A\bibinitperiod}}}%
+        {{hash=aa65c6a63c4b2482f436c325b43ba2a4}{%
+           family={Nesi},
+           familyi={N\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+      }
+      \name{editor}{7}{}{%
+        {{hash=c0b2879a05b1d5990e854b776232493e}{%
+           family={Gervasi},
+           familyi={G\bibinitperiod},
+           given={Osvaldo},
+           giveni={O\bibinitperiod}}}%
+        {{hash=ea429cee589c47dfef2b9e204530e99e}{%
+           family={Murgante},
+           familyi={M\bibinitperiod},
+           given={Beniamino},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e9a35354a416d11e115d10443a27bdf6}{%
+           family={Garau},
+           familyi={G\bibinitperiod},
+           given={Chiara},
+           giveni={C\bibinitperiod}}}%
+        {{hash=542e257c10c986529446d463087ec899}{%
+           family={Karaca},
+           familyi={K\bibinitperiod},
+           given={Yeliz},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=7abfc2e4b7d24292bc52c3bd0e8ca505}{%
+           family={Faginas\bibnamedelima Lago},
+           familyi={F\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Maria\bibnamedelima Noelia},
+           giveni={M\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=4b6623cafaa2d04608299ae41ff007ec}{%
+           family={Scorza},
+           familyi={S\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=267f95d40937977e79b9645b48e0206f}{%
+           family={Braga},
+           familyi={B\bibinitperiod},
+           given={Ana\bibnamedelima Cristina},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{0e8087f73ec6e65d5871d431f573c943}
+      \strng{fullhash}{79265a5dc5f1567b224e76ee10989ff4}
+      \strng{bibnamehash}{79265a5dc5f1567b224e76ee10989ff4}
+      \strng{authorbibnamehash}{79265a5dc5f1567b224e76ee10989ff4}
+      \strng{authornamehash}{0e8087f73ec6e65d5871d431f573c943}
+      \strng{authorfullhash}{79265a5dc5f1567b224e76ee10989ff4}
+      \strng{editorbibnamehash}{d270fa36620f839db90237e1bdbb258f}
+      \strng{editornamehash}{d270fa36620f839db90237e1bdbb258f}
+      \strng{editorfullhash}{766bdbe81f7459fb05534913819b85a4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Computational Science and Its Applications -- {ICCSA} 2025 Workshops}
+      \field{isbn}{978-3-031-97657-5}
+      \field{series}{Lecture Notes in Computer Science}
+      \field{title}{Fast Agent-Based Solution to Evaluate the Matching of Public Transport Offer vs Citizen Mobility Demand}
+      \field{volume}{15898}
+      \field{year}{2025}
+      \field{pages}{255\bibrangedash 272}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1007/978-3-031-97657-5_16
+      \endverb
+    \endentry
+    \entry{Shaharuddin2021Traffic}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=4f713ba704cd9737d56c2d03c65c7286}{%
+           family={Shaharuddin},
+           familyi={S\bibinitperiod},
+           given={Raihanah\bibnamedelima Adawiyah},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=f22c01e484672a3d36f8d0125dfbde16}{%
+           family={Misro},
+           familyi={M\bibinitperiod},
+           given={Md\bibnamedelima Yushalify},
+           giveni={M\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {AIP Publishing}%
+      }
+      \strng{namehash}{0993ba7b3ea709372f1cb1b1170a7b27}
+      \strng{fullhash}{0993ba7b3ea709372f1cb1b1170a7b27}
+      \strng{bibnamehash}{0993ba7b3ea709372f1cb1b1170a7b27}
+      \strng{authorbibnamehash}{0993ba7b3ea709372f1cb1b1170a7b27}
+      \strng{authornamehash}{0993ba7b3ea709372f1cb1b1170a7b27}
+      \strng{authorfullhash}{0993ba7b3ea709372f1cb1b1170a7b27}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AIP Conference Proceedings}
+      \field{title}{Traffic Simulation Using Agent Based Modelling}
+      \field{volume}{2423}
+      \field{year}{2021}
+      \field{pages}{020035}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1063/5.0075719
+      \endverb
+    \endentry
+    \entry{Bajada2024DeepRL}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=6e25e87f5de8aa07385a8794c70cab7d}{%
+           family={Bajada},
+           familyi={B\bibinitperiod},
+           given={Josef},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b00be4b1636f1e8df6ec2421c23b1701}{%
+           family={Grech},
+           familyi={G\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod}}}%
+        {{hash=deb69524ff72f36694338292a9d6d47e}{%
+           family={Bajada},
+           familyi={B\bibinitperiod},
+           given={Therese},
+           giveni={T\bibinitperiod}}}%
+      }
+      \true{moreeditor}
+      \name{editor}{1}{}{%
+        {{hash=081aaccc172caa93f9beb17793c3884f}{%
+           family={Nowaczyk},
+           familyi={N\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{ee85e71aa50f3d23596af06fc8e68a11}
+      \strng{fullhash}{3e292b29ebc0b6548c0bcb2675d3d00a}
+      \strng{bibnamehash}{3e292b29ebc0b6548c0bcb2675d3d00a}
+      \strng{authorbibnamehash}{3e292b29ebc0b6548c0bcb2675d3d00a}
+      \strng{authornamehash}{ee85e71aa50f3d23596af06fc8e68a11}
+      \strng{authorfullhash}{3e292b29ebc0b6548c0bcb2675d3d00a}
+      \strng{editorbibnamehash}{aa994bb291d05407108e915a07b0cf60}
+      \strng{editornamehash}{aa994bb291d05407108e915a07b0cf60}
+      \strng{editorfullhash}{aa994bb291d05407108e915a07b0cf60}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Artificial Intelligence. {ECAI} 2023 International Workshops}
+      \field{series}{Communications in Computer and Information Science}
+      \field{title}{Deep Reinforcement Learning of Autonomous Control Actions to Improve Bus-Service Regularity}
+      \field{volume}{1947}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.1007/978-3-031-50396-2_8
+      \endverb
+    \endentry
+    \entry{Tang2024Robust}{article}{}
+      \name{author}{9}{}{%
+        {{hash=5738fc69fd55241893e6c9f4f58915ee}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Yuhan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=474676fa3db416ad94f20d40659ac9a9}{%
+           family={Qu},
+           familyi={Q\bibinitperiod},
+           given={Ao},
+           giveni={A\bibinitperiod}}}%
+        {{hash=50f9626ab143d3c2fe1a3c0e7a24554a}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Xuan},
+           giveni={X\bibinitperiod}}}%
+        {{hash=cb3f9e288663ee3405663ac0dcc5fc43}{%
+           family={Mo},
+           familyi={M\bibinitperiod},
+           given={Baichuan},
+           giveni={B\bibinitperiod}}}%
+        {{hash=991b41efbc94b8fdc7f04b93ec8af514}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={Shangqing},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2cbd06351869d92b5ef1adc40a15e4e7}{%
+           family={Rodriguez},
+           familyi={R\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e789cc3882f98f5571f1de75bdd6a694}{%
+           family={Koutsopoulos},
+           familyi={K\bibinitperiod},
+           given={Haris\bibnamedelima N.},
+           giveni={H\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=744cd1c6a6cf7db4213803fc5230e62a}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Cathy},
+           giveni={C\bibinitperiod}}}%
+        {{hash=44d56adad58330553f99bb61b2afa0d2}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Jinhua},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{80ed2fcc76cb87b499a2d75c08a2dce9}
+      \strng{fullhash}{2a82d0192b4053a231de5d393b073ff9}
+      \strng{bibnamehash}{80ed2fcc76cb87b499a2d75c08a2dce9}
+      \strng{authorbibnamehash}{80ed2fcc76cb87b499a2d75c08a2dce9}
+      \strng{authornamehash}{80ed2fcc76cb87b499a2d75c08a2dce9}
+      \strng{authorfullhash}{2a82d0192b4053a231de5d393b073ff9}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Smart Cities}
+      \field{number}{6}
+      \field{title}{Robust Reinforcement Learning Strategies with Evolving Curriculum for Efficient Bus Operations in Smart Cities}
+      \field{volume}{7}
+      \field{year}{2024}
+      \field{pages}{3658\bibrangedash 3677}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.3390/smartcities7060141
+      \endverb
+    \endentry
+    \entry{lopez2018sumo}{inproceedings}{}
+      \name{author}{10}{}{%
+        {{hash=77192624a638ac561e630e0bd3446411}{%
+           family={Alvarez\bibnamedelima Lopez},
+           familyi={A\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Pablo},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1c9ff405f088e3a55884b1330deced62}{%
+           family={Behrisch},
+           familyi={B\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ef961de56b33c4867884e4df11451adb}{%
+           family={Bieker-Walz},
+           familyi={B\bibinithyphendelim W\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=41bf4800dcf028820a93322a7128a622}{%
+           family={Erdmann},
+           familyi={E\bibinitperiod},
+           given={Jakob},
+           giveni={J\bibinitperiod}}}%
+        {{hash=33428e0f9c1bfbd497416bebb3d95369}{%
+           family={Flötteröd},
+           familyi={F\bibinitperiod},
+           given={Yun-Pang},
+           giveni={Y\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=0941dbe8973d8d859e0ae333eab155b8}{%
+           family={Hilbrich},
+           familyi={H\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=8082a101444779c1160b1131e73025c0}{%
+           family={Lücken},
+           familyi={L\bibinitperiod},
+           given={Leonhard},
+           giveni={L\bibinitperiod}}}%
+        {{hash=e2dd5e9a6e4c37c79f4fd9a8ceaea7d9}{%
+           family={Rummel},
+           familyi={R\bibinitperiod},
+           given={Johannes},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cc8222ab15219e58fd9f35fa138574ef}{%
+           family={Wagner},
+           familyi={W\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ae7d21b3c2b1db4c7ec17116e7345128}{%
+           family={Wie{ß}ner},
+           familyi={W\bibinitperiod},
+           given={Evamarie},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{c8a10520986f6d25055a2740ad1dc436}
+      \strng{fullhash}{dd0c853b7189c3c9c5e10cc1c070a82c}
+      \strng{bibnamehash}{c8a10520986f6d25055a2740ad1dc436}
+      \strng{authorbibnamehash}{c8a10520986f6d25055a2740ad1dc436}
+      \strng{authornamehash}{c8a10520986f6d25055a2740ad1dc436}
+      \strng{authorfullhash}{dd0c853b7189c3c9c5e10cc1c070a82c}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 21st International Conference on Intelligent Transportation Systems (ITSC)}
+      \field{title}{Microscopic Traffic Simulation using {SUMO}}
+      \field{year}{2018}
+      \field{pages}{2575\bibrangedash 2582}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ITSC.2018.8569938
+      \endverb
+    \endentry
+    \entry{fellendorf2010vissim}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=45ab7c3572614419493f6c134b47fc57}{%
+           family={Fellendorf},
+           familyi={F\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=25b166b1b0ab0554685404c8d30bf255}{%
+           family={Vortisch},
+           familyi={V\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=8eead4dc37ddd23925a7c3d8460bf936}{%
+           family={Barceló},
+           familyi={B\bibinitperiod},
+           given={Jaume},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{06a14b888f0bd141dd1341eb1d91937b}
+      \strng{fullhash}{06a14b888f0bd141dd1341eb1d91937b}
+      \strng{bibnamehash}{06a14b888f0bd141dd1341eb1d91937b}
+      \strng{authorbibnamehash}{06a14b888f0bd141dd1341eb1d91937b}
+      \strng{authornamehash}{06a14b888f0bd141dd1341eb1d91937b}
+      \strng{authorfullhash}{06a14b888f0bd141dd1341eb1d91937b}
+      \strng{editorbibnamehash}{8eead4dc37ddd23925a7c3d8460bf936}
+      \strng{editornamehash}{8eead4dc37ddd23925a7c3d8460bf936}
+      \strng{editorfullhash}{8eead4dc37ddd23925a7c3d8460bf936}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Fundamentals of Traffic Simulation}
+      \field{series}{International Series in Operations Research \& Management Science}
+      \field{title}{Microscopic Traffic Flow Simulator {VISSIM}}
+      \field{volume}{145}
+      \field{year}{2010}
+      \field{pages}{63\bibrangedash 93}
+      \range{pages}{31}
+      \verb{doi}
+      \verb 10.1007/978-1-4419-6142-6_2
+      \endverb
+    \endentry
     \entry{demoivre1738doctrine}{book}{}
       \name{author}{1}{}{%
         {{hash=f0cc6c086b2011412793602bf571f9ba}{%
@@ -1235,8 +1875,8 @@
       \strng{authorbibnamehash}{f0cc6c086b2011412793602bf571f9ba}
       \strng{authornamehash}{f0cc6c086b2011412793602bf571f9ba}
       \strng{authorfullhash}{f0cc6c086b2011412793602bf571f9ba}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{2}
@@ -1263,8 +1903,8 @@
       \strng{authorbibnamehash}{14f71a442604b281a25e6e15a2757a5e}
       \strng{authornamehash}{14f71a442604b281a25e6e15a2757a5e}
       \strng{authorfullhash}{14f71a442604b281a25e6e15a2757a5e}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Théorie analytique des probabilités}
@@ -1290,8 +1930,8 @@
       \strng{authorbibnamehash}{e9c7a9b2a294e91fb10e53e350556634}
       \strng{authornamehash}{e9c7a9b2a294e91fb10e53e350556634}
       \strng{authorfullhash}{e9c7a9b2a294e91fb10e53e350556634}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Theoria motus corporum coelestium in sectionibus conicis solem ambientium}
@@ -1319,8 +1959,8 @@
       \strng{authorbibnamehash}{597e9893576c0a1ec9945f4c0110a19e}
       \strng{authornamehash}{597e9893576c0a1ec9945f4c0110a19e}
       \strng{authorfullhash}{597e9893576c0a1ec9945f4c0110a19e}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Statistical Computation and Simulation}
@@ -1345,8 +1985,8 @@
       \strng{authorbibnamehash}{38c15942409019792b80d250f274b38b}
       \strng{authornamehash}{38c15942409019792b80d250f274b38b}
       \strng{authorfullhash}{38c15942409019792b80d250f274b38b}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Restorative Dentistry \& Endodontics}

@@ -5,16 +5,8 @@ clave sobre un conjunto determinado. En el contexto del
 transporte urbano, validar las capacidades de absorción de la congestión en horas puntas resulta clave,
 al presentarse este como uno de los principales problemas para las entidades gestoras 
 del transporte~\cite{saidallah2016comparative}. Esta sección cubre la evolución y las distintas 
-técnicas existentes en la literatura usados para realizar estos experimentos, junto con un análisis exhaustivo
+técnicas existentes en la literatura usadas para realizar estos experimentos, junto con un análisis
 de distintas soluciones relativas al problema concreto que aborda este documento. 
-
-\textbf{Vale, aqui vamos a pseudocodear que vamos a hacer. De primeras, mencionar que antes de la aplicacion 
-de los paradigmas de ia como puede ser agentes, genéticos o metaheuristicas, existian métodos matematicos 
-y estadisticos, como las macro y microsimulaciones, como sistemas basados en Simulaciones de Eventos 
-Discretos. Una vez se muestroe todo eso, comentar la viabilidad de las simulaciones basadas en MAS, junto a
-ejemplos como el de nabil morri y estas hueas. Mencionar tambien posibles alternativas a simulaciones
-de montecarlo, y todo eso. Explicar tmb las sims de montecarlo, no se si con algun tipo de comparativa,
-o como relacionarlo con tema de evolucion de las simulaciones}
 
 \subsection{Técnicas de simulación}
 Las aproximaciones a la simulación del transporte pueden agruparse según su paradigma de modelado y su 
@@ -31,35 +23,109 @@ en la literatura, junto con sus aportaciones y limitaciones en el ámbito del tr
     Ejemplos como \textcite{Wang2021Modeling} o \textcite{Wang2018BusCapacity} implementan sistemas basados en 
     teoría de colas dentro del caso de aplicación de modelado de rutas de autobús en China, mientras que 
     \textcite{Liu2023Optimizing} aplica técnicas de programación lineal para la optimización de transferencias
-    dentro del transporte. Estos métodos de resolucion se presentan óptimos
+    dentro del transporte. Estos métodos de resolución se presentan adecuados en entornos claramente deterministas,
+    donde la formalización matemática del problema puede realizarse bajo supuestos simples.
     \item \textbf{Modelos microscópicos}
     
-    Estos modelos 
+    Estas técnicas modelan a escala de individuo una serie de exhaustivas reglas sobre su comportamiento, resultando
+    en un modelo muy complejo, capaz de extraer resultados muy realistas, con la contrapartida de un elevado coste
+    computacional. Relativo a los casos de aplicación concretos,
+    \textcite{Li2013BRT} utiliza este tipo de modelos para analizar infraestructura de señales o de 
+    velocidad de tránsito para evaluar sus capacidades previa construcción, mientras que~\textcite{Zannat2024BRT}
+    simula decisiones individuales de viajeros para predecir su demanda en la ciudad de Dhaka.
     \item \textbf{Simulaciones de eventos discretos}
     
-    Este tipo de simulaciones recrean y modelan aquellos momentos concretos de cambios de estado dentro de
-    \item \textbf{Algoritmos evolutivos y metaheuristicas}
-    
-    Basados en paradigmas de Inteligencia Artificial de inspiración biológica, se centran en la realización de 
-    procesos iterativos que van reduciendo el conjunto de soluciones en función de aquellos caminos
-    que mediante evaluaciones de coste (heurísticas) se presenten como óptimos.
+    Este tipo de simulaciones recrean y modelan aquellos momentos concretos de cambios de estado dentro de la simulación,
+    ignorando el transcurso continuo del tiempo entre eventos relevantes. Dicha característica permite
+    acelerar las simulaciones, pero puede perder precisión en eventos no estrictamente deterministas.
+    En relación con su uso en las simulaciones de transporte,~\textcite{Tirachini2023DiscreteEvent} 
+    o~\textcite{AriasNava2026DataDriven} utilizan eventos discretos para evaluar la demanda y su impacto en
+    tiempos de espera.
+    \item \textbf{Algoritmos evolutivos y metaheurísticas}
+
+    Este tipo de técnicas basadas en paradigmas de Inteligencia Artificial de inspiración biológica, 
+    se centran en la realización de 
+    procesos iterativos que aplican operadores de selección, recombinación y perturbación de las soluciones
+    inspirados en fenómenos naturales, utilizando funciones de coste (heurísticas) para converger hacia soluciones
+    cercanas al óptimo. Resultan muy útiles en aquellos problemas donde la combinatoria de posibles resultados
+    válidos tiende a ser computacionalmente compleja. Casos como \textcite{Owais2018Hierarchical} o 
+    \textcite{Jha2019MultiObjective} estudian el diseño de redes de tránsito de transporte basados en estas técnicas.
     \item \textbf{Sistemas multi-agente}
-    
-    \item \textbf{Aprendizaje por refuerzo y \enquote{Deep learning}}
-    
 
-
+    Basados en los conceptos de \textit{agente inteligente} ya discutidos y expuestos en la sección~\ref{sec:agents},
+    resultan útiles en escenarios dinámicos y complejos, que requieran de interacción o colaboración entre
+    individuos. En la literatura se pueden encontrar trabajos como
+    \textcite{Fanfani2025FastAgent}, que utiliza un sistema multi-agente para estudio de
+    rendimiento de rutas, o \textcite{Shaharuddin2021Traffic}, usado para comparar los resultados derivados de
+    simular dos escenarios de tráfico.
+    \item \textbf{Aprendizaje profundo por refuerzo}
+    
+    Conjunto de técnicas basadas también en paradigmas de la Inteligencia Artificial. Consta de la mezcla del 
+    aprendizaje por refuerzo, sistema de aprendizaje iterativo que aprende en base a una política de actuación,
+    recibiendo recompensas que guían la optimización en el largo plazo, con técnicas de \enquote{deep learning}
+    (aprendizaje profundo), consistente en redes neuronales que permiten aprender estrategias de control adaptativas
+    en tiempo real. Se presenta útil en entornos cambiantes. En casos de transporte, \textcite{Bajada2024DeepRL}
+    o \textcite{Tang2024Robust} implementan esta mezcla con el objetivo de mejorar la toma de decisiones de los
+    autobuses en tiempo real.
 \end{enumerate}
 
-Este conjunto de técnicas se presentan como opciones realistas para realizar simulaciones dentro del transporte
-urbano. No obstante, la elección de los sistemas multi-agente se basa en características formales del problema,
-como puede ser
+Estas técnicas se presentan como opciones realistas para realizar simulaciones dentro del transporte
+urbano. No obstante, cada familia presenta características 
+que condicionan su adecuación al problema concreto de este trabajo: \textbf{la simulación 
+operacional de una línea de autobús urbano}, parametrizada con datos reales, en un 
+entorno dinámico donde múltiples entidades autónomas (autobuses, paradas, pasajeros) 
+interactúan de forma concurrente.
+
+Las técnicas matemáticas analíticas requieren una formalización algebraica del 
+problema bajo supuestos deterministas, lo que las hace inadecuadas para capturar 
+la variabilidad inherente a la demanda de pasajeros y a los tiempos 
+de recorrido. Los modelos microscópicos, si bien operan a escala de individuo, 
+están orientados predominantemente a la simulación de tráfico vehicular 
+(modelos de seguimiento de vehículos, cambio de carril), y su elevado coste 
+computacional no se justifica para la operación del servicio de transporte público. Las simulaciones 
+de eventos discretos permiten modelar cambios de estado puntuales con eficiencia 
+temporal, pero imponen una estructura de eventos determinista que limita la 
+autonomía de las entidades simuladas y dificulta la representación de 
+comportamientos emergentes derivados de la interacción. 
+Los algoritmos evolutivos y las metaheurísticas constituyen técnicas de 
+\textit{optimización}, no de \textit{simulación}: su objetivo es encontrar 
+configuraciones cercanas al óptimo, no recrear la operación real de un sistema 
+para extraer indicadores de rendimiento. Finalmente, el aprendizaje profundo por 
+refuerzo, aunque capaz de adaptarse a entornos cambiantes, requiere el diseño de 
+funciones de recompensa y una infraestructura de entrenamiento que excede el 
+alcance de este trabajo, y su orientación es la optimización de decisiones 
+futuras, no la reproducción de escenarios operacionales existentes.
+
+Frente a estas limitaciones, los sistemas multi-agente se presentan como la 
+técnica más adecuada para el problema planteado. Su capacidad de modelar 
+entidades autónomas que operan en un entorno altamente cambiante y dinámico se alinean con el dominio de 
+aplicación del problema.
 
 \subsection{Sistemas Multi-Agente como simuladores}
-\textbf{FALTA HACER}
+En esta sección se expande el estudio sobre los distintos trabajos realizados en el ámbito de las simulaciones
+de trasporte basadas en el paradigma de los \textit{agentes inteligentes } y los \textit{sistemas multi-agente}.
+
+Pese a la elección de la arquitectura de agentes, las simulaciones 
+microscópicas, dentro del ámbito del transporte, se mantienen como las más significativas.
+ Herramientas como SUMO~\cite{lopez2018sumo} o VISSIM~\cite{fellendorf2010vissim} se mantienen como referentes en el contexto 
+ de modelado a nivel vehicular~\cite{saidallah2016comparative}. Como se ha mencionado antes, estos casos, pese
+a que se incluyen dentro de la categoría de simulaciones de transportes, no son equiparables al problema que 
+se trata de resolver. Consecuentemente, la literatura muestra como el uso de agentes si que resulta viable en casos
+de demanda de operación de pasajeros. Casos ya mencionados como~\cite{Fanfani2025FastAgent,Shaharuddin2021Traffic}
+muestran como mediante agentes se puede s
+
+
+Realizar modelos basados en agentes para resolver simulaciones de transporte no es algo fuera de lo común. Ya se ha 
+expuesto, con~\cite{Fanfani2025FastAgent,Shaharuddin2021Traffic}, algún ejemplo de casos reales de implementación
+de estos sistemas. No obstante, cabe definir a mayor escala en qué casos se están aplicando y cuál es el aporte
+realizado en este trabajo.
+
+
+
 
 \subsection{Simulaciones de Montecarlo}
-\textbf{FALTA HACER}
+
+
 
 
 \subsection{Análisis estadístico de datos}

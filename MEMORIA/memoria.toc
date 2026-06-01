@@ -9,34 +9,34 @@
 \contentsline {subsection}{\numberline {2.1.5}Plataformas de Desarrollo}{10}{subsection.2.1.5}%
 \contentsline {subsection}{\numberline {2.1.6}Viabilidad de la solución utilizando Agentes Inteligentes}{10}{subsection.2.1.6}%
 \contentsline {section}{\numberline {2.2}Simuladores de Transporte}{11}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Técnicas de simulación}{12}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Sistemas Multi-Agente como simuladores}{12}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Simulaciones de Montecarlo}{13}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Análisis estadístico de datos}{13}{subsection.2.2.4}%
-\contentsline {subsubsection}{Test de Hipótesis}{13}{subsection.2.2.4}%
-\contentsline {subsubsection}{Estudio de valores extremos}{16}{figure.caption.11}%
-\contentsline {chapter}{\numberline {3}Metodología}{19}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Definición del problema}{19}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Estructura de trabajo}{20}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Herramientas Utilizadas}{23}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Extracción de KPIs}{24}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Métricas a nivel general}{24}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Métricas a nivel de autobús}{25}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Métricas a nivel de ruta}{25}{subsection.3.4.3}%
-\contentsline {chapter}{\numberline {4}Análisis de los datos}{27}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Limpieza y preparación}{27}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Datos geoespaciales}{27}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Datos de Operación}{29}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Estudio y Gaussianidad}{33}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Estudio de viabilidad de datos operacionales}{34}{subsection.4.2.1}%
-\contentsline {section}{\numberline {4.3}Preparación para Simulador}{35}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Estudio y análisis de carga, descarga y tiempo entre paradas}{35}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Adaptación de formato de parámetros de entrada}{35}{subsection.4.3.2}%
-\contentsline {chapter}{\numberline {5}Diseño de la simulación}{37}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Casos de Aplicación}{38}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Marco Regulador}{39}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Presupuesto y Costes}{40}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Trabajos futuros}{41}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Conclusión}{42}{chapter.10}%
-\contentsline {chapter}{Bibliografía}{43}{chapter.10}%
+\contentsline {subsection}{\numberline {2.2.1}Técnicas de simulación}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Sistemas Multi-Agente como simuladores}{14}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Simulaciones de Montecarlo}{14}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Análisis estadístico de datos}{14}{subsection.2.2.4}%
+\contentsline {subsubsection}{Test de Hipótesis}{14}{subsection.2.2.4}%
+\contentsline {subsubsection}{Estudio de valores extremos}{17}{figure.caption.11}%
+\contentsline {chapter}{\numberline {3}Metodología}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Definición del problema}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Estructura de trabajo}{22}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Herramientas Utilizadas}{25}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Extracción de KPIs}{26}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Métricas a nivel general}{26}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Métricas a nivel de autobús}{27}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Métricas a nivel de ruta}{27}{subsection.3.4.3}%
+\contentsline {chapter}{\numberline {4}Análisis de los datos}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Limpieza y preparación}{29}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Datos geoespaciales}{29}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Datos de Operación}{31}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Estudio y Gaussianidad}{35}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Estudio de viabilidad de datos operacionales}{36}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Preparación para Simulador}{37}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Estudio y análisis de carga, descarga y tiempo entre paradas}{37}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Adaptación de formato de parámetros de entrada}{37}{subsection.4.3.2}%
+\contentsline {chapter}{\numberline {5}Diseño de la simulación}{39}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Casos de Aplicación}{40}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Marco Regulador}{41}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Presupuesto y Costes}{42}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Trabajos futuros}{43}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Conclusión}{44}{chapter.10}%
+\contentsline {chapter}{Bibliografía}{45}{chapter.10}%
 \contentsfinish 
