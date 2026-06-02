@@ -1470,100 +1470,63 @@
       \verb 10.1016/j.cie.2019.02.025
       \endverb
     \endentry
-    \entry{Fanfani2025FastAgent}{inproceedings}{}
-      \name{author}{5}{}{%
-        {{hash=ec5fd09a0c56796359e7c630097b5a90}{%
-           family={Fanfani},
-           familyi={F\bibinitperiod},
-           given={Marco},
-           giveni={M\bibinitperiod}}}%
-        {{hash=4253d376c56fc2104e3e0f21acceea55}{%
-           family={Giovannoni},
-           familyi={G\bibinitperiod},
-           given={Alberto},
+    \entry{saval2023gama}{article}{}
+      \name{author}{7}{}{%
+        {{hash=9b53c7292b6b30fd33c9ddc06c5f3231}{%
+           family={Saval},
+           familyi={S\bibinitperiod},
+           given={Arnaud},
            giveni={A\bibinitperiod}}}%
-        {{hash=5c449f3c2626e8609e247624d7cc28c9}{%
-           family={Ipsaro\bibnamedelima Palesi},
-           familyi={I\bibinitperiod\bibinitdelim P\bibinitperiod},
-           given={Luciano\bibnamedelima Alessandro},
-           giveni={L\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-        {{hash=e1b29e22e7835991b27bd49dbeae6870}{%
-           family={Irum},
-           familyi={I\bibinitperiod},
-           given={Ammarah},
-           giveni={A\bibinitperiod}}}%
-        {{hash=aa65c6a63c4b2482f436c325b43ba2a4}{%
-           family={Nesi},
-           familyi={N\bibinitperiod},
-           given={Paolo},
+        {{hash=c7a0f591ba8b1d9776d8e566adb739bc}{%
+           family={Pham\bibnamedelima Minh},
+           familyi={P\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Duc},
+           giveni={D\bibinitperiod}}}%
+        {{hash=f77c56d29da1800ef4ce7cc58fb8c037}{%
+           family={Chapuis},
+           familyi={C\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3ffcf12db099c80bd565613479d8cb9a}{%
+           family={Tranouez},
+           familyi={T\bibinitperiod},
+           given={Pierrick},
+           giveni={P\bibinitperiod}}}%
+        {{hash=778e380ea92f1a79e5a23251a6cf218a}{%
+           family={Caron},
+           familyi={C\bibinitperiod},
+           given={Clément},
+           giveni={C\bibinitperiod}}}%
+        {{hash=0e5a849167e16c2f06d1ef63b8e3f246}{%
+           family={Daudé},
+           familyi={D\bibinitperiod},
+           given={Éric},
+           giveni={É\bibinitperiod}}}%
+        {{hash=982eb2bf1dbf3d41d58471ce19ee8e70}{%
+           family={Taillandier},
+           familyi={T\bibinitperiod},
+           given={Patrick},
            giveni={P\bibinitperiod}}}%
       }
-      \name{editor}{7}{}{%
-        {{hash=c0b2879a05b1d5990e854b776232493e}{%
-           family={Gervasi},
-           familyi={G\bibinitperiod},
-           given={Osvaldo},
-           giveni={O\bibinitperiod}}}%
-        {{hash=ea429cee589c47dfef2b9e204530e99e}{%
-           family={Murgante},
-           familyi={M\bibinitperiod},
-           given={Beniamino},
-           giveni={B\bibinitperiod}}}%
-        {{hash=e9a35354a416d11e115d10443a27bdf6}{%
-           family={Garau},
-           familyi={G\bibinitperiod},
-           given={Chiara},
-           giveni={C\bibinitperiod}}}%
-        {{hash=542e257c10c986529446d463087ec899}{%
-           family={Karaca},
-           familyi={K\bibinitperiod},
-           given={Yeliz},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=7abfc2e4b7d24292bc52c3bd0e8ca505}{%
-           family={Faginas\bibnamedelima Lago},
-           familyi={F\bibinitperiod\bibinitdelim L\bibinitperiod},
-           given={Maria\bibnamedelima Noelia},
-           giveni={M\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
-        {{hash=4b6623cafaa2d04608299ae41ff007ec}{%
-           family={Scorza},
-           familyi={S\bibinitperiod},
-           given={Francesco},
-           giveni={F\bibinitperiod}}}%
-        {{hash=267f95d40937977e79b9645b48e0206f}{%
-           family={Braga},
-           familyi={B\bibinitperiod},
-           given={Ana\bibnamedelima Cristina},
-           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
-      }
-      \list{location}{1}{%
-        {Cham}%
-      }
-      \list{publisher}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{0e8087f73ec6e65d5871d431f573c943}
-      \strng{fullhash}{79265a5dc5f1567b224e76ee10989ff4}
-      \strng{bibnamehash}{79265a5dc5f1567b224e76ee10989ff4}
-      \strng{authorbibnamehash}{79265a5dc5f1567b224e76ee10989ff4}
-      \strng{authornamehash}{0e8087f73ec6e65d5871d431f573c943}
-      \strng{authorfullhash}{79265a5dc5f1567b224e76ee10989ff4}
-      \strng{editorbibnamehash}{d270fa36620f839db90237e1bdbb258f}
-      \strng{editornamehash}{d270fa36620f839db90237e1bdbb258f}
-      \strng{editorfullhash}{766bdbe81f7459fb05534913819b85a4}
+      \strng{namehash}{945bf23610ef8c43e15cccd9fd26618d}
+      \strng{fullhash}{11324e2fd49536fb42c76ca8d13953a4}
+      \strng{bibnamehash}{945bf23610ef8c43e15cccd9fd26618d}
+      \strng{authorbibnamehash}{945bf23610ef8c43e15cccd9fd26618d}
+      \strng{authornamehash}{945bf23610ef8c43e15cccd9fd26618d}
+      \strng{authorfullhash}{11324e2fd49536fb42c76ca8d13953a4}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{Computational Science and Its Applications -- {ICCSA} 2025 Workshops}
-      \field{isbn}{978-3-031-97657-5}
-      \field{series}{Lecture Notes in Computer Science}
-      \field{title}{Fast Agent-Based Solution to Evaluate the Matching of Public Transport Offer vs Citizen Mobility Demand}
-      \field{volume}{15898}
-      \field{year}{2025}
-      \field{pages}{255\bibrangedash 272}
-      \range{pages}{18}
+      \field{journaltitle}{PLoS ONE}
+      \field{number}{3}
+      \field{title}{Dealing with Mixed and Non-Normative Traffic. An Agent-Based Simulation with the {GAMA} Platform}
+      \field{volume}{18}
+      \field{year}{2023}
+      \field{pages}{e0281658}
+      \range{pages}{-1}
       \verb{doi}
-      \verb 10.1007/978-3-031-97657-5_16
+      \verb 10.1371/journal.pone.0281658
       \endverb
     \endentry
     \entry{Shaharuddin2021Traffic}{inproceedings}{}
