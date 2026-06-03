@@ -22,6 +22,15 @@ def load_and_prepare_data(filepath):
     return dataframe
 
 
+def load_and_prepare_data_v2(dataframe):
+    # Convert outlier columns from string representation to actual lists
+    for t in TIMESLOTS:
+        col = f"outliers_{t}"
+        if col in dataframe.columns:
+            dataframe[col] = dataframe[col].apply(lambda x: literal_eval(x) if isinstance(x, str) else x)
+    return dataframe
+
+
 def count_outliers(outlier_list):
     """Count number of outliers in a list"""
     if isinstance(outlier_list, list):
@@ -399,6 +408,120 @@ def analyze_normality_results(filepath, output_dir="./"):
 
 
 
+def analyze_normality_results_v2(dataframe, output_dir="./"):
+    """
+    Main function to analyze normality results and generate all visualizations.
+    Parameters:
+    -----------
+    filepath : str
+        Path to the CSV file with normality results
+    output_dir : str
+        Directory to save the generated plots
+    """
+
+    # Load data
+    dataframe = load_and_prepare_data_v2(dataframe)
 
 
+    # Separate ALL vs individual days
+    dataframe_all = dataframe[dataframe['day'] == 'ALL']
+    dataframe_individual = dataframe[dataframe['day'] != 'ALL']
+
+
+
+    #ALL
+    norm_timeslot_all = calc_normality_pct_by_timeslot(dataframe_all)
+    outliers_timeslot_all = calc_avg_outliers_by_timeslot(dataframe_all)
+    norm_stop_all = calc_normality_pct_by_stop(dataframe_all)
+    outliers_stop_all = calc_avg_outliers_by_stop(dataframe_all)
+
+
+    # Generate plots for ALL
+    fig1 = plot_normality_by_timeslot(norm_timeslot_all, "(ALL)")
+    fig1.savefig(f"{output_dir}/normality_timeslot_ALL.png", dpi=150)
+
+    fig2 = plot_avg_outliers_by_timeslot(outliers_timeslot_all, "(ALL)")
+    fig2.savefig(f"{output_dir}/outliers_timeslot_ALL.png", dpi=150)
+
+    fig3 = plot_normality_by_stop(norm_stop_all, "(ALL)")
+    fig3.savefig(f"{output_dir}/normality_stop_ALL.png", dpi=150)
+
+    fig4 = plot_heatmap_normality(dataframe_all, "(ALL)")
+    fig4.savefig(f"{output_dir}/heatmap_normality_ALL.png", dpi=150)
+
+    fig5 = plot_heatmap_outliers(dataframe_all, "(ALL)")
+    fig5.savefig(f"{output_dir}/heatmap_outliers_ALL.png", dpi=150)
+
+    fig6 = plot_avg_outliers_by_stop(outliers_stop_all, "(ALL)")
+    fig6.savefig(f"{output_dir}/outliers_stop_ALL.png", dpi=150)
+
+    #SEPARATE DAYS
+    norm_timeslot_ind = calc_normality_pct_by_timeslot(dataframe_individual)
+    outliers_timeslot_ind = calc_avg_outliers_by_timeslot(dataframe_individual)
+    norm_stop_ind = calc_normality_pct_by_stop(dataframe_individual)
+    outliers_stop_ind = calc_avg_outliers_by_stop(dataframe_individual)
+
+
+    # Generate plots for individual
+    fig7 = plot_normality_by_timeslot(norm_timeslot_ind, "(L,M,X,J,V)")
+    fig7.savefig(f"{output_dir}/normality_timeslot_individual.png", dpi=150)
+
+    fig8 = plot_avg_outliers_by_timeslot(outliers_timeslot_ind, "(L,M,X,J,V)")
+    fig8.savefig(f"{output_dir}/outliers_timeslot_individual.png", dpi=150)
+
+    fig9 = plot_normality_by_stop(norm_stop_ind, "(L,M,X,J,V)")
+    fig9.savefig(f"{output_dir}/normality_stop_individual.png", dpi=150)
+
+    fig10 = plot_avg_outliers_by_stop(outliers_stop_ind, "(L,M,X,J,V)")
+    fig10.savefig(f"{output_dir}/outliers_stop_individual.png", dpi=150)
+
+    fig11 = plot_heatmap_normality(dataframe_individual, "(L,M,X,J,V)")
+    fig11.savefig(f"{output_dir}/heatmap_normality_individual.png", dpi=150)
+
+    fig12 = plot_heatmap_outliers(dataframe_individual, "(L,M,X,J,V)")
+    fig12.savefig(f"{output_dir}/heatmap_outliers_individual.png", dpi=150)
+
+    # Comparative plot: ALL vs Individual
+    fig13, axes = plt.subplots(1, 2, figsize=(16, 6))
+
+
+    # Normality comparison
+    x = np.arange(len(TIMESLOTS))
+    width = 0.35
+    axes[0].bar(x - width/2, norm_timeslot_all['True_pct'], width, label='ALL', color='#3498db')
+    axes[0].bar(x + width/2, norm_timeslot_ind['True_pct'], width, label='Individual', color='#e67e22')
+    axes[0].set_xlabel('Franja Horaria')
+    axes[0].set_ylabel('% Normal (True)')
+    axes[0].set_title('Comparación % Normalidad: ALL vs Individual')
+    axes[0].set_xticks(x)
+    axes[0].set_xticklabels([f"{t}:00" for t in TIMESLOTS], rotation=45)
+    axes[0].legend()
+    axes[0].set_ylim(0, 100)
+
+    # Outliers comparison
+    axes[1].bar(x - width/2, outliers_timeslot_all['Avg_outliers'], width, label='ALL', color='#3498db')
+    axes[1].bar(x + width/2, outliers_timeslot_ind['Avg_outliers'], width, label='Individual', color='#e67e22')
+    axes[1].set_xlabel('Franja Horaria')
+    axes[1].set_ylabel('Nº Medio Outliers')
+    axes[1].set_title('Comparación Outliers: ALL vs Individual')
+    axes[1].set_xticks(x)
+    axes[1].set_xticklabels([f"{t}:00" for t in TIMESLOTS], rotation=45)
+    axes[1].legend()
+
+    plt.tight_layout()
+    fig13.savefig(f"{output_dir}/comparison_ALL_vs_individual.png", dpi=150)
+
+    plt.close('all')
+
+
+
+    return {
+        'norm_timeslot_all': norm_timeslot_all,
+        'outliers_timeslot_all': outliers_timeslot_all,
+        'norm_stop_all': norm_stop_all,
+        'norm_timeslot_ind': norm_timeslot_ind,
+        'outliers_timeslot_ind': outliers_timeslot_ind,
+        'norm_stop_ind': norm_stop_ind,
+        'outliers_stop_ind': outliers_stop_ind
+    }
 
