@@ -103,7 +103,7 @@ aplicación del problema.
 
 \subsection{Sistemas Multi-Agente como simuladores}
 En esta sección se expande el estudio sobre los distintos trabajos realizados en el ámbito de las simulaciones
-de trasporte basadas en el paradigma de los \textit{agentes inteligentes } y los \textit{sistemas multi-agente}.
+de transporte basadas en el paradigma de los \textit{agentes inteligentes} y los \textit{sistemas multi-agente}.
 
 Pese a la elección como sistema para la solución de la arquitectura multi-agente, resulta necesario posicionar esta 
 dentro de las simulaciones de transporte. Los modelos microscópicos resultan los más empleados para la resolución de problemas,
@@ -114,16 +114,113 @@ a nivel vehicular, no a nivel de análisis operacional de transporte. A continua
 aplican sistemas multi-agente a la simulación de transporte, con especial atención a aquellos orientados a la operación de 
 líneas de autobús.
 
+Primeramente, a nivel general,~\textcite{divassonj2025abm} expone una revisión de las distintas aportaciones basadas
+en \textit{agentes}. Documenta un uso creciente de estas herramientas desde 2015, alineandose con la adopción de los países
+de objetivos climáticos o de la \textit{Agenda 2030}~\footnote{\enquote{La Asamblea General adopta la Agenda 2030 para el 
+Desarrollo Sostenible}, 25 de septiembre de 2015. Disponible en: \url{https://www.un.org/sustainabledevelopment/es/2015/09/la-asamblea-general-adopta-la-agenda-2030-para-el-desarrollo-sostenible/}
+(accedido: 3 de junio de 2026)}. En relación a la caracterización del problema, la simulación de análisis de demanda
+supone un \textbf{5,19\%} de las publicaciones, resultando mayoritario con un \textit{62,34\%} el estudio sobre estado
+de tráfico. Se expone por otra parte una comparativa entre las características de los datos utilizados.
+De forma relevante a este trabajo, que utiliza datos reales de operación de ruta de autobús, también resulta minoría sobre la
+literatura estudiada, destacando en este caso el uso de \textit{Datos abiertos} (33,12\%) o de \textit{datos sensoriales} (21,43\%)
+~\cite{divassonj2025abm}.
+
+Respecto a estudios relevantes para este trabajo,~\textcite{morri2021control} implementa un sistema multi-agente
+junto a KPIs sobre la ciudad de Abu Dhabi. A diferencia de este proyecto, el uso de los indicadores de rendimiento se 
+realiza de forma dinámica, usando estos como parámetro clave para la toma de decisiones de los agentes 
+mediante técnicas de programación lineal~\cite{morri2021control},
+de forma contrapuesta a lo usado en el presente trabajo, que busca usar KPIs como medida evaluadora del rendimiento una vez
+completada la simulación.
+
+~\textcite{chambers2024autonomous} por otro lado utiliza agentes para generar redes de tráfico en Suiza. Se basa en grafos
+de conocimiento y ontologías para generar estas redes. No obstante, no guarda relación con este trabajo debido a su propósito,
+pero permite trazar otras líneas de investigación sobre rutas de autobuses y el uso de sistemas \textit{multi-agente} existente
+en la literatura.
+
+Más cercano a la aplicación de este trabajo se ubica~\textcite{Fanfani2025FastAgent}, que implementa un sistema basado en 
+~\textit{agentes inteligentes} para simulación y análisis de líneas de autobús mediante KPIs. Diferencias relevantes radican
+en el origen de los datos, debido a que este usa datos sintéticos basados en GTFS (de sus siglas en inglés: General Transit 
+Feed Specification) y no en datos reales de operación como se aplica en el presente documento. Esto deriva no solo en 
+posibles pérdidas de información sobre carga y descarga, sino en falta de precisión en los tiempos, puesto que se usan las 
+salidas explícitas presentes en la especificación en lugar de tiempos de salida dinámicos basados en datos reales.
+
+Una vez estudiada la literatura subyacente acerca de los sistemas \textit{multi-agente} y las simulaciones en el ámbito
+del transporte, puede realizarse el posicionamiento de este dentro del estado del arte.
+La principal aportación existente de este trabajo resulta de la aplicación del sistema de agentes inteligentes utilizando
+datos \textbf{reales} sobre la operación de autobuses, a diferencia de~\textcite{Fanfani2025FastAgent}. Los resultados de
+esta se plasman mediante Key Performance Indicators y se visualizan con el fin de facilitar su visualización.
+
+Para el correcto funcionamiento de la simulación, resulta necesario remarcar dos cuestiones relevantes acerca de esta.
+La primera consta de la especificación de uso de distribuciones contínuas conocidas para el tratamiento de los distintos
+datos usados como entrada del simulador. Estas distintas distribuciones se expanden en la Sección~\ref{subsec:statistics}.
+La otra, expuesta en la siguiente sección, trata del motor utilizado para la realización de las simulaciones, correspondiente
+con el \textbf{algoritmo de Monte Carlo}.
+
+
+\subsection{Simulaciones de Monte Carlo}\label{subsec:montecarlo}
+Las simulaciones o experimentos de Monte Carlo datan de 1949, donde en Los Álamos durante el \textit{Proyecto Manhattan},
+~\textcite{metropolis1949montecarlo} formalizaron un método para el problema de la difusión de neutrones. Este sistema 
+permite predecir o estimar los resultados de un proceso aleatorio. Fue bautizado
+como \textit{Monte Carlo} debido a la comparativa entre la aleatoriedad inherente que predice el método y los populares
+juegos de azar presentes en el conocido casino del distrito monegasco homónimo al experimento.
+
+Formalmente, sea $\theta$ un parámetro de interés (KPI) dependiente de un conjunto de variables aleatorias $x_1, x_2,
+\ldots, x_k$ relativas a los parámetros estocásticos del sistema, donde cada $x_i$ tiene asociada una función de densidad
+de probabilidad $F_i$, cada iteración $j$ de Monte Carlo consta de, previa extracción de muestras independientes $x_1^{(j)}, 
+x_2^{(j)}, \ldots, x_k^{(j)}$, el cómputo del valor resultante expresado por:
+\begin{equation}
+\theta^{(j)} = g(x_1^{(j)}, x_2^{(j)}, \ldots, x_k^{(j)})
+\end{equation}
+donde $g$ representa el modelo simulado. Del cómputo de $N$ se obtiene:
+\begin{equation}
+    \hat{\theta_N} = \frac{1}{N}\sum_{j=1}^{N}{\theta^{(j)}}
+\end{equation}
+
+Donde $\hat{\theta_N}$ especifica cada uno de los parámetros usados como indicadores de rendimiento, las distribuciones $F_i$
+se obtienen de un estudio derivado de los datos de operación, y $g$ hace referencia al modelo realizado en GAMA.
+
+Este método, usado como motor estocástico de la simulación,requiere de un parámetro $N$ relativo al número de repeticiones
+a realizar. Para el caso concreto de aplicación, la elección de este valor se justifica en dos ángulos. El primero, presente
+en la figura~\ref{fig:montecarlo} muestra la evolución del valor $\hat{\theta_i}$ desde $i=1$ hasta $i=N$. Se observa cómo
+el inicio presenta mucha variabilidad, estabilizándose hacia las 400-500 iteraciones.
+
+El segundo ángulo, usado para la mejora de este valor, deriva de la ley de los grandes números~\cite{kolmogorov1933grundbegriffe}.
+Esta, formalmente
+especifica:
+\begin{equation}
+    \hat{\theta_N} \xrightarrow{\text{c.s.}} \mathbb{E}[\theta] \quad \text{cuando } N \to \infty
+\end{equation}
+
+y su error estándar puede formalizarse como:
+\begin{equation}
+    SE(\hat{\theta_N}) = \frac{\sigma_\theta}{\sqrt{N}}
+\end{equation}
+
+De esta forma, al aumentar el número $N$, se produce un decrecimiento no lineal del error estándar sobre los distintos 
+parámetros de interés.
+
+Juntando ambas ideas, se puede reducir en un \textbf{29,3\%} el error estándar derivado al elevar de 500 a 1000 el 
+valor de $N$ usado.
+Aumentar dicho parámetro por encima de esta cota resultaen mejoría del descenso de este error, pero incurre en coste 
+computacional que no es justificable para el valor de mejora que se obtiene.
+
+
+\begin{figure}[H]
+    \ffigbox[\FBwidth]{
+        \caption[Evolución de convergencia relativa a parámetro de Monte Carlo]
+        {Evolución de convergencia relativa a parámetro de Monte Carlo}\label{fig:montecarlo}
+    }{
+        \parbox{\linewidth}{
+            \centering
+            \includegraphics[scale=0.45]{montecarlo_convergence_occupation.png}
+            \par\vspace{2pt}{\footnotesize Fuente: elaboración propia.}
+        }
+    }
+\end{figure}
 
 
 
-
-\subsection{Simulaciones de Montecarlo}
-
-
-
-
-\subsection{Análisis estadístico de datos}
+\subsection{Análisis estadístico de datos}\label{subsec:statistics}
 En esta sección se exponen y discuten los distintos métodos estadísticos utilizados para la validación
 de las distribuciones de los datos estudiados. Para ello, se divide el contenido en las secciones
 \enquote{\nameref{subsubsec:hyp_test}} y \enquote{\nameref{subsubsec:extreme_case}}. 
@@ -135,6 +232,11 @@ diferentes distribuciones conocidas a lo largo de este trabajo, como son la dist
 o \textbf{Gaussiana}, la distribución \textbf{Binomial Negativa} y la distribución \textbf{Geométrica}.
 Esta subsección expone cómo son estas distribuciones y cuáles son los distintos test existentes para estas, 
 discutiendo sobre la viabilidad de sus aplicaciones.
+
+La viabilidad de sus aplicaciones, a parte de las características estadísticas de su validación o no como hipótesis
+deben cumplimentar el estudio relativo de la literatura que especifica un nivel de calibración superior al \textbf{85\%}
+para poder considerarse adecuado dentro del estudio de la simulación de transporte~\cite{fhwa2019toolbox}. 
+Este valor será utilizado para validar el modelo como distribuciones de los datos.
 
 \hspace*{1cm}\textbf{Distribución Normal o Gaussiana}
 
@@ -184,7 +286,7 @@ El origen de esta fórmula deriva de los estudios de \textcite{demoivre1738doctr
  Existen muchos test que permiten evaluar la normalidad de una muestra. En la literatura destacan el 
  \textit{Shapiro-Wilk}, \textit{Kolmogorov-Smirnov}, \textit{D'Agostino-Pearson} y \textit{Jarque-Bera}.
  Estudios comparativos como el de \textcite{yap2011comparisons}, que evalúa la potencia de ocho tests mediante 
- simulación de Montecarlo, concluyen que ninguno de ellos es uniformemente superior para todos los tipos de 
+ simulación de Monte Carlo, concluyen que ninguno de ellos es uniformemente superior para todos los tipos de 
  distribución alternativa, y que la elección debe atender al tamaño muestral y a las características de los
  datos. Debido a la naturaleza inicial de los datos estudiados, presentando tamaños muestrales estimados
  de unas 20 muestras, se opta por un enfoque de Test de hipótesis basado en la \textbf{skewness}

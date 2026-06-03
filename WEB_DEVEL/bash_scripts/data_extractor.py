@@ -47,6 +47,53 @@ for iteration in range(0,N_SIMS):
 
 joint_dataframe_results = pd.concat(data for data in dataframes_to_join_results)
 
+# # ── Monte Carlo convergence plot ──────────────────────────────────
+# CONVERGENCE_OUTPUT = os.path.expanduser("~/Desktop")
+
+# # Mean occupation per simulation run
+# occupation_per_sim = (
+#     joint_dataframe_results
+#     .groupby("simulation_id")["occupation"]
+#     .mean()
+#     .sort_index()
+#     .values
+# )
+
+# # Running cumulative mean
+# running_mean = np.cumsum(occupation_per_sim) / np.arange(1, len(occupation_per_sim) + 1)
+# final_mean = running_mean[-1]
+
+# # Running standard error
+# running_std = np.array([
+#     np.std(occupation_per_sim[:i+1], ddof=1) / np.sqrt(i+1)
+#     if i > 0 else 0.0
+#     for i in range(len(occupation_per_sim))
+# ])
+
+# fig, ax1 = plt.subplots(figsize=(12, 5))
+
+# ax1.plot(range(1, len(running_mean) + 1), running_mean, color="blue", linewidth=1.5,
+#          label="Media acumulada de ocupación")
+# ax1.axhline(y=final_mean, color="red", linestyle="--", linewidth=1,
+#             label=f"Media final: {final_mean:.4f}")
+# ax1.fill_between(
+#     range(1, len(running_mean) + 1),
+#     running_mean - 1.96 * running_std,
+#     running_mean + 1.96 * running_std,
+#     alpha=0.2, color="blue", label="IC 95%"
+# )
+# ax1.set_xlabel("Número de iteraciones")
+# ax1.set_ylabel("Media acumulada de ocupación (pasajeros)")
+# ax1.set_title("Convergencia Monte Carlo — Ocupación media por iteración")
+# ax1.legend(loc="upper right")
+# ax1.grid(True, alpha=0.3)
+
+# plt.tight_layout()
+# plt.savefig(f"{CONVERGENCE_OUTPUT}/montecarlo_convergence_occupation.png", dpi=300)
+# plt.close()
+
+# print(f"[✓] Convergence plot saved to {CONVERGENCE_OUTPUT}/montecarlo_convergence_occupation.png")
+# # ──────────────────────────────────────────────────────────────────
 
 
 N_SIMS = 1000

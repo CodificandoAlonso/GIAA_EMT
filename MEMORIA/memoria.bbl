@@ -1816,6 +1816,351 @@
       \verb 10.1007/978-1-4419-6142-6_2
       \endverb
     \endentry
+    \entry{divassonj2025abm}{article}{}
+      \name{author}{4}{}{%
+        {{hash=6bd67b49a01ee1dbeb8799d3c460202e}{%
+           family={Divasson-J.},
+           familyi={D\bibinithyphendelim J\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e8b5eb75df3babefd65631fed094c379}{%
+           family={Macarulla},
+           familyi={M\bibinitperiod},
+           given={Ana\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=bd8dc63cb0c6488bb831f2da48f8646c}{%
+           family={Garcia},
+           familyi={G\bibinitperiod},
+           given={J.\bibnamedelimi Ignacio},
+           giveni={J\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=14bcb7f9f9a167de415276c773cf5d1d}{%
+           family={Borges},
+           familyi={B\bibinitperiod},
+           given={Cruz\bibnamedelima E.},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{791e0d4e32b282936c88e57be2108dff}
+      \strng{fullhash}{fedd1bc71823c1f325e62822e1e812a4}
+      \strng{bibnamehash}{fedd1bc71823c1f325e62822e1e812a4}
+      \strng{authorbibnamehash}{fedd1bc71823c1f325e62822e1e812a4}
+      \strng{authornamehash}{791e0d4e32b282936c88e57be2108dff}
+      \strng{authorfullhash}{fedd1bc71823c1f325e62822e1e812a4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Cities}
+      \field{title}{Agent-based Modeling in Urban Human Mobility: A Systematic Review}
+      \field{volume}{158}
+      \field{year}{2025}
+      \field{pages}{105697}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.cities.2024.105697
+      \endverb
+    \endentry
+    \entry{morri2021control}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=1717cad6b3923e9838c73fc25d438379}{%
+           family={Morri},
+           familyi={M\bibinitperiod},
+           given={Nabil},
+           giveni={N\bibinitperiod}}}%
+        {{hash=ba98afc9b783bb95716b554dca875a86}{%
+           family={Hadouaj},
+           familyi={H\bibinitperiod},
+           given={Sameh},
+           giveni={S\bibinitperiod}}}%
+        {{hash=56adc38973a9ed31b9c5f603e6b4dcb8}{%
+           family={Ben\bibnamedelima Said},
+           familyi={B\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Lamjed},
+           giveni={L\bibinitperiod}}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=576b1037615b1143072efa54911e1c44}{%
+           family={Filipe},
+           familyi={F\bibinitperiod},
+           given={Joaquim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=bca12ac0365d254e7c871d6c623c0db6}{%
+           family={Śmia{ł}ek},
+           familyi={Ś\bibinitperiod},
+           given={Micha{ł}},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fc401c4d8350cdc534ad9bd3148a703d}{%
+           family={Brodsky},
+           familyi={B\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ba6f6f7a477426bd82b422f512a40dc1}{%
+           family={Hammoudi},
+           familyi={H\bibinitperiod},
+           given={Slimane},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{2f6d3418babb1822cd2857e785e4a1a5}
+      \strng{fullhash}{831a19494dca79ea4c6a5287a3e9294c}
+      \strng{bibnamehash}{831a19494dca79ea4c6a5287a3e9294c}
+      \strng{authorbibnamehash}{831a19494dca79ea4c6a5287a3e9294c}
+      \strng{authornamehash}{2f6d3418babb1822cd2857e785e4a1a5}
+      \strng{authorfullhash}{831a19494dca79ea4c6a5287a3e9294c}
+      \strng{editorbibnamehash}{87af4ea1a35e942252511d53d8de6123}
+      \strng{editornamehash}{2bc0529e25f419275432cba5f693460c}
+      \strng{editorfullhash}{87af4ea1a35e942252511d53d8de6123}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Enterprise Information Systems: ICEIS 2020}
+      \field{series}{Lecture Notes in Business Information Processing}
+      \field{title}{An Approach to Intelligent Control Public Transportation System Using a Multi-agent System}
+      \field{volume}{417}
+      \field{year}{2021}
+      \field{pages}{249\bibrangedash 272}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1007/978-3-030-75418-1_12
+      \endverb
+    \endentry
+    \entry{chambers2024autonomous}{article}{}
+      \name{author}{3}{}{%
+        {{hash=981b879d7ff3b7aa7ef8d79a9ca6d6d0}{%
+           family={Chambers},
+           familyi={C\bibinitperiod},
+           given={Flann},
+           giveni={F\bibinitperiod}}}%
+        {{hash=8f638d74859ec56fa4148562dbc4adb9}{%
+           family={Di\bibnamedelima Marzo\bibnamedelima Serugendo},
+           familyi={D\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Giovanna},
+           giveni={G\bibinitperiod}}}%
+        {{hash=93959c245ddd8c3430a3c49b836776cc}{%
+           family={Cruz},
+           familyi={C\bibinitperiod},
+           given={Christophe},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{fbd987cca010a35c3a8ae056b2261c4a}
+      \strng{fullhash}{83e964f17ba8d44d5d9b62820ffce08e}
+      \strng{bibnamehash}{83e964f17ba8d44d5d9b62820ffce08e}
+      \strng{authorbibnamehash}{83e964f17ba8d44d5d9b62820ffce08e}
+      \strng{authornamehash}{fbd987cca010a35c3a8ae056b2261c4a}
+      \strng{authorfullhash}{83e964f17ba8d44d5d9b62820ffce08e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sustainability}
+      \field{number}{20}
+      \field{title}{Autonomous Generation of a Public Transportation Network by an Agent-Based Model: Mutual Enrichment with Knowledge Graphs for Sustainable Urban Mobility}
+      \field{volume}{16}
+      \field{year}{2024}
+      \field{pages}{8907}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/su16208907
+      \endverb
+    \endentry
+    \entry{Fanfani2025FastAgent}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=ec5fd09a0c56796359e7c630097b5a90}{%
+           family={Fanfani},
+           familyi={F\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4253d376c56fc2104e3e0f21acceea55}{%
+           family={Giovannoni},
+           familyi={G\bibinitperiod},
+           given={Alberto},
+           giveni={A\bibinitperiod}}}%
+        {{hash=5c449f3c2626e8609e247624d7cc28c9}{%
+           family={Ipsaro\bibnamedelima Palesi},
+           familyi={I\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Luciano\bibnamedelima Alessandro},
+           giveni={L\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=e1b29e22e7835991b27bd49dbeae6870}{%
+           family={Irum},
+           familyi={I\bibinitperiod},
+           given={Ammarah},
+           giveni={A\bibinitperiod}}}%
+        {{hash=aa65c6a63c4b2482f436c325b43ba2a4}{%
+           family={Nesi},
+           familyi={N\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+      }
+      \name{editor}{7}{}{%
+        {{hash=c0b2879a05b1d5990e854b776232493e}{%
+           family={Gervasi},
+           familyi={G\bibinitperiod},
+           given={Osvaldo},
+           giveni={O\bibinitperiod}}}%
+        {{hash=ea429cee589c47dfef2b9e204530e99e}{%
+           family={Murgante},
+           familyi={M\bibinitperiod},
+           given={Beniamino},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e9a35354a416d11e115d10443a27bdf6}{%
+           family={Garau},
+           familyi={G\bibinitperiod},
+           given={Chiara},
+           giveni={C\bibinitperiod}}}%
+        {{hash=542e257c10c986529446d463087ec899}{%
+           family={Karaca},
+           familyi={K\bibinitperiod},
+           given={Yeliz},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=7abfc2e4b7d24292bc52c3bd0e8ca505}{%
+           family={Faginas\bibnamedelima Lago},
+           familyi={F\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Maria\bibnamedelima Noelia},
+           giveni={M\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=4b6623cafaa2d04608299ae41ff007ec}{%
+           family={Scorza},
+           familyi={S\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=267f95d40937977e79b9645b48e0206f}{%
+           family={Braga},
+           familyi={B\bibinitperiod},
+           given={Ana\bibnamedelima Cristina},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{0e8087f73ec6e65d5871d431f573c943}
+      \strng{fullhash}{79265a5dc5f1567b224e76ee10989ff4}
+      \strng{bibnamehash}{79265a5dc5f1567b224e76ee10989ff4}
+      \strng{authorbibnamehash}{79265a5dc5f1567b224e76ee10989ff4}
+      \strng{authornamehash}{0e8087f73ec6e65d5871d431f573c943}
+      \strng{authorfullhash}{79265a5dc5f1567b224e76ee10989ff4}
+      \strng{editorbibnamehash}{d270fa36620f839db90237e1bdbb258f}
+      \strng{editornamehash}{d270fa36620f839db90237e1bdbb258f}
+      \strng{editorfullhash}{766bdbe81f7459fb05534913819b85a4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Computational Science and Its Applications -- {ICCSA} 2025 Workshops}
+      \field{isbn}{978-3-031-97657-5}
+      \field{series}{Lecture Notes in Computer Science}
+      \field{title}{Fast Agent-Based Solution to Evaluate the Matching of Public Transport Offer vs Citizen Mobility Demand}
+      \field{volume}{15898}
+      \field{year}{2025}
+      \field{pages}{255\bibrangedash 272}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1007/978-3-031-97657-5_16
+      \endverb
+    \endentry
+    \entry{metropolis1949montecarlo}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2b73f47a1a84dd52f45fe57c381c3786}{%
+           family={Metropolis},
+           familyi={M\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=3b0d289e925175a0015e128797069d78}{%
+           family={Ulam},
+           familyi={U\bibinitperiod},
+           given={Stanislaw},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c6df3fb3fe23cfe76a11eb13d1beac7a}
+      \strng{fullhash}{c6df3fb3fe23cfe76a11eb13d1beac7a}
+      \strng{bibnamehash}{c6df3fb3fe23cfe76a11eb13d1beac7a}
+      \strng{authorbibnamehash}{c6df3fb3fe23cfe76a11eb13d1beac7a}
+      \strng{authornamehash}{c6df3fb3fe23cfe76a11eb13d1beac7a}
+      \strng{authorfullhash}{c6df3fb3fe23cfe76a11eb13d1beac7a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{247}
+      \field{title}{The {Monte Carlo} Method}
+      \field{volume}{44}
+      \field{year}{1949}
+      \field{pages}{335\bibrangedash 341}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1080/01621459.1949.10483310
+      \endverb
+    \endentry
+    \entry{kolmogorov1933grundbegriffe}{book}{}
+      \name{author}{1}{}{%
+        {{hash=d648de0d45e2b85c93d4c062e9d0650b}{%
+           family={Kolmogorov},
+           familyi={K\bibinitperiod},
+           given={Andrey\bibnamedelima N.},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Julius Springer}%
+      }
+      \strng{namehash}{d648de0d45e2b85c93d4c062e9d0650b}
+      \strng{fullhash}{d648de0d45e2b85c93d4c062e9d0650b}
+      \strng{bibnamehash}{d648de0d45e2b85c93d4c062e9d0650b}
+      \strng{authorbibnamehash}{d648de0d45e2b85c93d4c062e9d0650b}
+      \strng{authornamehash}{d648de0d45e2b85c93d4c062e9d0650b}
+      \strng{authorfullhash}{d648de0d45e2b85c93d4c062e9d0650b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{3}
+      \field{series}{Ergebnisse der Mathematik und ihrer Grenzgebiete}
+      \field{title}{Grundbegriffe der {Wahrscheinlichkeitsrechnung}}
+      \field{volume}{2}
+      \field{year}{1933}
+      \verb{doi}
+      \verb 10.1007/978-3-642-49888-6
+      \endverb
+    \endentry
+    \entry{fhwa2019toolbox}{report}{}
+      \name{author}{1}{}{%
+        {{hash=b3514fa8307aa3a8a763bab4787e7ac8}{%
+           family={{Federal Highway Administration}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {U.S. Department of Transportation}%
+      }
+      \strng{namehash}{b3514fa8307aa3a8a763bab4787e7ac8}
+      \strng{fullhash}{b3514fa8307aa3a8a763bab4787e7ac8}
+      \strng{bibnamehash}{b3514fa8307aa3a8a763bab4787e7ac8}
+      \strng{authorbibnamehash}{b3514fa8307aa3a8a763bab4787e7ac8}
+      \strng{authornamehash}{b3514fa8307aa3a8a763bab4787e7ac8}
+      \strng{authorfullhash}{b3514fa8307aa3a8a763bab4787e7ac8}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{FHWA-HOP-18-036}
+      \field{title}{Traffic Analysis Toolbox Volume {III}: Guidelines for Applying Traffic Microsimulation Modeling Software --- 2019 Update}
+      \field{type}{techreport}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://ops.fhwa.dot.gov/publications/fhwahop18036/
+      \endverb
+      \verb{url}
+      \verb https://ops.fhwa.dot.gov/publications/fhwahop18036/
+      \endverb
+    \endentry
     \entry{demoivre1738doctrine}{book}{}
       \name{author}{1}{}{%
         {{hash=f0cc6c086b2011412793602bf571f9ba}{%
