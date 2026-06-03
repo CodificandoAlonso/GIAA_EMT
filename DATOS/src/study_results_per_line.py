@@ -143,13 +143,15 @@ def plot_normality_by_timeslot(dataframe_kpi, title_suffix=""):
     ax.set_xticks(x)
     ax.set_xticklabels([f"{t}:00" for t in dataframe_kpi['Timeslot']], rotation=45)
     ax.legend()
-    ax.set_ylim(0, 100)
+    ax.set_ylim(0, 110)
 
-    # Add value labels on bars
     for bar in bars1:
         height = bar.get_height()
-        ax.annotate(f'{height:.1f}%', xy=(bar.get_x() + bar.get_width()/2, height),
-                    xytext=(0, 3), textcoords="offset points", ha='center', va='bottom', fontsize=8)
+        if height < 100:
+            ax.annotate(f'{height:.1f}%',
+                        xy=(bar.get_x() + bar.get_width()/2, height),
+                        xytext=(0, 3), textcoords="offset points",
+                        ha='center', va='bottom', fontsize=8)
 
     plt.tight_layout()
     return fig
