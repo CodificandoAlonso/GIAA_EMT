@@ -1,11 +1,11 @@
-En este capítulo se describe el proceso de análisis y procesado de los datos proporcionados por la EMT.
+En este capítulo se describe el proceso de análisis y procesado de los datos proporcionados por la EMT.\@
 Se ha dividido en tres etapas: \textbf{Limpieza y Preparación}, \textbf{Estudio y Gaussianidad} y 
 \textbf{Preparación para Simulador}.
 
 
 \section{Limpieza y preparación}
 Esta sección detalla los distintos procedimientos seguidos en una primera fase iniciada tras la recepción
-de los datos provenientes de la EMT. Se distinguen dos tipos de datos principalmente:
+de los datos provenientes de la EMT.\@ Se distinguen dos tipos de datos principalmente:
 Datos Geoespaciales y Datos de Operación.
 
 
@@ -38,16 +38,15 @@ Como se especifica con anterioridad, aparte de la obtención y limpieza de los d
 implementación, estos pasaron por un proceso de transformación a formato \textit{ESRI shapefile}.
 Para ello se usa la herramienta de código abierto \textbf{QGIS}. En la figura \ref{fig:qgis_converted}
 se muestra como se visualizan los cuatro GeoJSON procesados y transformados a shapefile. Posteriormente,
-en la figura \ref{fig:shapefile_gama} se muestran esos archivos shapefile ya dentro del
-entorno de trabajo de la plataforma de agentes GAMA.
+en la figura~\ref{fig:shapefile_gama} se muestran esos archivos shapefile ya dentro del
+entorno de trabajo de la plataforma de agentes GAMA.\@
 
 
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/qgis_capture_e01_converted.png}
 \caption{Visualización en QGIS del mapa geoespacial convertido a shapefile}
-\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}
-\label{fig:qgis_converted}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:qgis_converted}
 \end{figure}
 
 
@@ -242,14 +241,14 @@ El resto de parámetros se especifican a continuación.
         = \text{Transac::\textit{Occupation}}_{\text{prev}} + \text{Transac::\textit{Board}} - 
         \text{Transac::\textit{DropOff}}$. \\
         \hline
-		\multicolumn{4}{l}{Fuente: Elaboración propia a partir de figura \ref{fig:relational_model}}
+		\multicolumn{4}{l}{Fuente: Elaboración propia a partir de figura~\ref{fig:relational_model}}
 	\end{tabular}}
 \end{table}
 
 
 
 El estudio ha derivado de distintas consultas sobre estas tablas, que encapsulaban en un único fichero 
-\enquote{CSV} toda la información referente a una parada. En el código \ref{code:sql_query} se 
+\enquote{CSV} toda la información referente a una parada. En el código~\ref{code:sql_query} se 
 muestra el código \textit{SQL} utilizado para las consultas sobre la base de datos.
 
 
@@ -287,15 +286,14 @@ el trabajo, considerar ese valor como límite de la capacidad de carga.
 Como se comenta de forma exhaustiva en la siguiente sección, estos campos limpiados se presentan como los 
 más importantes del análisis, motivo por el que se tratan con especial rigor para evitar problemas.
 
-\section{Estudio y Gaussianidad}
-\label{section:gauss_and_study}
+\section{Estudio y Gaussianidad}\label{section:gauss_and_study}
 En esta sección se documentan las dos etapas que componen el análisis de los datos. Este análisis
 se centra sobre dos pilares fundamentales, estudiar la viabilidad de los datos operacionales, y preparar
 los parámetros específicos para su inyección al simulador.
 
 \subsection{Estudio de viabilidad de datos operacionales}
 El principal reto de esta fase es la de evaluar la compatibilidad de los datos sobre los cuales se va a construir
-el simulador con los de una distribución normal. Como se especifica en la sección \ref{section:problem_def}, una de 
+el simulador con los de una distribución normal. Como se especifica en la sección~\ref{section:problem_def}, una de 
 las cuestiones de mayor relevancia
 de este proyecto es la simulación de los días \textbf{normales}. En el marco de este trabajo, se ha considerado
 día \enquote{normal} a aquel día laborable sin \textit{gratuidad}. De esta forma, se excluyen fines de semana,
@@ -347,9 +345,126 @@ la fase de limpieza, ignorar aquellos casos que aun siendo días laborables, pre
 de \textit{Occupation} tienden a inducir variación o ruido en el estudio.
 
 Una vez realizado un primer estudio, útil para reducir el rango de aplicación, en una segunda fase se expande este análisis
-estudiado para todaslas paradas en todas las franjas horarias. Este nuevo enfoque se aplica a dos niveles, estudiando los 
-días laborables de forma independiente y de forma agregada.
+estudiado para todas las paradas en todas las franjas horarias. Este nuevo enfoque se aplica a dos niveles, estudiando los 
+días laborables de forma independiente y de forma agregada. Para el estudio comparativo se considera el tratamiento 
+de los días de forma conjunta como \textit{All}.
 
+Respecto a los resultados, a nivel general se observan varias cosas concretas que
+requieren ampliación y explicación. Primeramente, el resultado para la agregación \textit{All} resulta
+en un mayor número de hipótesis de normalidad no rechazadas, superando para ambos sentidos el umbral especificado 
+en la literatura del \textbf{85\%}~\cite{fhwa2019toolbox}. En las figuras~\ref{fig:comparison_toA},~\ref{fig:comparison_toB} 
+se observa la distinta comparativa de porcentaje de hipótesis no rechazadas para cada uno de los sentidos según su 
+tratamiento agregado (\textit{All}) o desagregado, ambas fragmentadas por franja horaria. 
+
+
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_A/comparison_ALL_vs_individual.png}
+\caption{Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido Cibeles
+fragmentados por franja horaria.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:comparison_toA}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_B/comparison_ALL_vs_individual.png}
+\caption{Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido La peseta
+fragmentados por franja horaria.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:comparison_toB}
+\end{figure}
+
+En ambos sentidos se observa cómo hacia el final de la jornada, especialmente la última franja horaria es la que peor se 
+comporta. La explicación en este caso es clara, coincide con la hora que menor oferta de autobuses posee, por lo que un 
+menor número muestral de datos recogidos deriva en que datos extremos aumenten su peso en las distribuciones y se pierda
+generalidad, derivando en mayores hipótesis de normalidad rechazadas.
+Relativo a los outliers, pese a que el tratamiento agregado de los días presenta mayores hipótesis de normalidad no 
+rechazadas, el número de valores anómalos detectados aumenta significativamente. No obstante, estos valores nunca
+superan el \textbf{1\%} relativo al valor muestral sobre el que se estudia, por lo que no se representan suficientemente
+significativos para considerarse una parte intrínseca de la muestra, sino valores anómalos que por la casuística aleatoria del 
+problema pueden aparecer.
+
+Relativo a la fragmentación por parada, en sentido~\textit{Cibeles} como se observa en las figuras~\ref{fig:normality_toA_all},
+~\ref{fig:normality_toA_deagregated}, la parada más interesante de analizar resulta la \textit{5727}, correspondiente con 
+\textit{Cibeles}, \textbf{final de trayecto}. Este hecho es más relevante de lo que parece, debido a dos cuestiones.
+La primera recae sobre la naturaleza del comportamiento de los autobuses, ya que esta parada, al igual que la
+~\textit{2646: La peseta} resulta la primera y la última parada de ambos sentidos al mismo tiempo, por lo que el solapamiento 
+de datos de llegada con los de salida puede resultar en incongruencias estadísticas.
+La segunda es relativa al cálculo del valor de \textit{occupation}, computado mediante la $occupation_{prev}$  $+$ \textit{boards} 
+ $-$ \textit{dropoffs}. Desde la EMT se transmite una hipótesis que resulta clave para entender el problema:~\textit{Un mal registro 
+ temporal de la transición entre viajes descuadra los datos}. Es decir, registrar que el viaje concluye al comenzar el siguiente
+ genera que la carga de pasajeros que inicia el siguiente viaje se compute como carga de la última parada del viaje
+ ya finalizado y viceversa. Debido a esto, el posible análisis relativo a los valores de ocupación de estas paradas se descarta,
+ tanto en sentido \textit{Cibeles} mostrado en las figuras referenciadas, como su análisis paralelo del sentido \textit{La peseta},
+ mostrado en las figuras~\ref{fig:normality_toB_all},~\ref{fig:normality_toB_deagregated}.
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_A/normality_stop_ALL.png}
+\caption{Porcentaje de aceptación de hipótesis de normalidad por parada en sentido Cibeles con datos agregados.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:normality_toA_all}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_A/normality_stop_individual.png}
+\caption{Porcentaje de aceptación de hipótesis de normalidad por parada en sentido Cibeles con datos desagregados.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:normality_toA_deagregated}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_B/normality_stop_ALL.png}
+\caption{Porcentaje de aceptación de hipótesis de normalidad por parada en sentido La peseta con datos agregados.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:normality_toB_all}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_B/normality_stop_individual.png}
+\caption{Porcentaje de aceptación de hipótesis de normalidad por parada en sentido La peseta con datos desagregados.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:normality_toB_deagregated}
+\end{figure}
+
+
+
+Al combinar este análisis, tanto en segmentar según franja horaria como según parada, se genera un~\enquote{heatmap} donde
+se muestran los valores del porcentaje de hipótesis de normalidad para cada parada en cada franja horaria. Nótese que en el caso
+del agregado~\textit{All}, resulta en un caso binario, o la combinación parada-franja no rechaza la hipótesis, o sí lo hace,
+por lo que la paleta de colores del~\enquote{heatmap} en este caso no muestra más de dos colores. Las figuras
+~\ref{fig:heatmap_toA_all},~\ref{fig:heatmap_toA_deagregated},~\ref{fig:heatmap_toB_all},~\ref{fig:heatmap_toB_deagregated}
+muestran estos mapas de calor.
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_A/heatmap_normality_ALL.png}
+\caption{Mapa de calor de combinaciones parada-franja en sentido Cibeles con datos agregados.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:heatmap_toA_all}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_A/heatmap_normality_individual.png}
+\caption{Mapa de calor de combinaciones parada-franja en sentido Cibeles con datos desagregados.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:heatmap_toA_deagregated}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_B/heatmap_normality_ALL.png}
+\caption{Mapa de calor de combinaciones parada-franja en sentido La peseta con datos agregados.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:heatmap_toB_all}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_B/heatmap_normality_individual.png}
+\caption{Mapa de calor de combinaciones parada-franja en sentido La peseta con datos desagregados.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:heatmap_toB_deagregated}
+\end{figure}
+
+
+Aquí se validan las distintas cuestiones vistas en las figuras anteriores
 
 
 \textbf{Vale, en pseudorutinas, como integro esta parte. Idea, comeptar un poco el análisis del primer filtro,
