@@ -173,27 +173,27 @@ x_2^{(j)}, \ldots, x_k^{(j)}$, el cómputo del valor resultante expresado por:
 \end{equation}
 donde $g$ representa el modelo simulado. Del cómputo de $N$ se obtiene:
 \begin{equation}
-    \hat{\theta_N} = \frac{1}{N}\sum_{j=1}^{N}{\theta^{(j)}}
+    \hat{\theta}_N = \frac{1}{N}\sum_{j=1}^{N}{\theta^{(j)}}
 \end{equation}
 
-Donde $\hat{\theta_N}$ especifica cada uno de los parámetros usados como indicadores de rendimiento, las distribuciones $F_i$
+Donde $\hat{\theta}_N$ especifica cada uno de los parámetros usados como indicadores de rendimiento, las distribuciones $F_i$
 se obtienen de un estudio derivado de los datos de operación, y $g$ hace referencia al modelo realizado en GAMA.
 
 Este método, usado como motor estocástico de la simulación,requiere de un parámetro $N$ relativo al número de repeticiones
 a realizar. Para el caso concreto de aplicación, la elección de este valor se justifica en dos ángulos. El primero, presente
-en la figura~\ref{fig:montecarlo} muestra la evolución del valor $\hat{\theta_i}$ desde $i=1$ hasta $i=N$. Se observa cómo
+en la figura~\ref{fig:montecarlo} muestra la evolución del valor $\hat{\theta}_i$ desde $i=1$ hasta $i=N$. Se observa cómo
 el inicio presenta mucha variabilidad, estabilizándose hacia las 400-500 iteraciones.
 
 El segundo ángulo, usado para la mejora de este valor, deriva de la ley de los grandes números~\cite{kolmogorov1933grundbegriffe}.
 Esta, formalmente
 especifica:
 \begin{equation}
-    \hat{\theta_N} \xrightarrow{\text{c.s.}} \mathbb{E}[\theta] \quad \text{cuando } N \to \infty
+    \hat{\theta}_N \xrightarrow{\text{c.s.}} \mathbb{E}[\theta] \quad \text{cuando } N \to \infty
 \end{equation}
 
 y su error estándar puede formalizarse como:
 \begin{equation}
-    SE(\hat{\theta_N}) = \frac{\sigma_\theta}{\sqrt{N}}
+    SE(\hat{\theta}_N) = \frac{\sigma_\theta}{\sqrt{N}}
 \end{equation}
 
 De esta forma, al aumentar el número $N$, se produce un decrecimiento no lineal del error estándar sobre los distintos 
@@ -207,8 +207,8 @@ computacional que no es justificable para el valor de mejora que se obtiene.
 
 \begin{figure}[H]
     \ffigbox[\FBwidth]{
-        \caption[Evolución de convergencia relativa a parámetro de Monte Carlo]
-        {Evolución de convergencia relativa a parámetro de Monte Carlo}\label{fig:montecarlo}
+        \caption[Convergencia del estimador de ocupación media]
+        {Convergencia del estimador $\hat{\theta}_N$ de ocupación media}\label{fig:montecarlo}
     }{
         \parbox{\linewidth}{
             \centering

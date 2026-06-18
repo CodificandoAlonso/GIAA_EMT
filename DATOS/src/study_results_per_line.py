@@ -9,6 +9,15 @@ import os
 plt.style.use('seaborn-v0_8-whitegrid')
 TIMESLOTS = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 
+DIRECTION_LABELS = {
+    "toA": "Sentido Cibeles",
+    "toB": "Sentido La Peseta"
+}
+
+
+def get_direction_label(direction):
+    return DIRECTION_LABELS.get(direction, direction)
+
 
 def load_and_prepare_data(filepath):
 
@@ -127,19 +136,20 @@ def calc_avg_outliers_by_stop(dataframe):
 
 
 
-def plot_normality_by_timeslot(dataframe_kpi, title_suffix=""):
+def plot_normality_by_timeslot(dataframe_kpi, direction, title_suffix=""):
     """Bar plot of normality % by timeslot"""
     fig, ax = plt.subplots(figsize=(14, 6))
+    dir_label = get_direction_label(direction)
 
     x = np.arange(len(dataframe_kpi))
     width = 0.35
 
-    bars1 = ax.bar(x - width/2, dataframe_kpi['True_pct'], width, label='Normal (True)', color='#2ecc71')
-    bars2 = ax.bar(x + width/2, dataframe_kpi['False_pct'], width, label='No Normal (False)', color='#e74c3c')
+    bars1 = ax.bar(x - width/2, dataframe_kpi['True_pct'], width, label='No rechazada (Normal)', color='#2ecc71')
+    bars2 = ax.bar(x + width/2, dataframe_kpi['False_pct'], width, label='Rechazada (No Normal)', color='#e74c3c')
 
     ax.set_xlabel('Franja Horaria', fontsize=12)
     ax.set_ylabel('Porcentaje (%)', fontsize=12)
-    ax.set_title(f'Porcentaje de Normalidad por Franja Horaria {title_suffix}', fontsize=14)
+    ax.set_title(f'Hipótesis de normalidad no rechazadas por franja horaria — {dir_label} {title_suffix}', fontsize=14)
     ax.set_xticks(x)
     ax.set_xticklabels([f"{t}:00" for t in dataframe_kpi['Timeslot']], rotation=45)
     ax.legend()
@@ -152,14 +162,21 @@ def plot_normality_by_timeslot(dataframe_kpi, title_suffix=""):
                         xy=(bar.get_x() + bar.get_width()/2, height),
                         xytext=(0, 3), textcoords="offset points",
                         ha='center', va='bottom', fontsize=8)
-
+    for bar in bars2:
+        height = bar.get_height()
+        if height > 0:
+            ax.annotate(f'{height:.1f}%',
+                        xy=(bar.get_x() + bar.get_width()/2, height),
+                        xytext=(0, 3), textcoords="offset points",
+                        ha='center', va='bottom', fontsize=8)
     plt.tight_layout()
     return fig
 
 
-def plot_avg_outliers_by_timeslot(dataframe_kpi, title_suffix=""):
+def plot_avg_outliers_by_timeslot(dataframe_kpi, direction, title_suffix=""):
     """Bar plot of average outliers by timeslot"""
     fig, ax = plt.subplots(figsize=(14, 6))
+    dir_label = get_direction_label(direction)
 
     colors = plt.cm.YlOrRd(dataframe_kpi['Avg_outliers'] / dataframe_kpi['Avg_outliers'].max())
 
@@ -171,33 +188,34 @@ def plot_avg_outliers_by_timeslot(dataframe_kpi, title_suffix=""):
 
     ax.set_xlabel('Franja Horaria', fontsize=12)
     ax.set_ylabel('Nº Medio de Outliers', fontsize=12)
-    ax.set_title(f'Número Medio de Outliers por Franja Horaria {title_suffix}', fontsize=14)
+    ax.set_title(f'Número medio de outliers por franja horaria — {dir_label} {title_suffix}', fontsize=14)
     ax.set_xticklabels([f"{t}:00" for t in dataframe_kpi['Timeslot']], rotation=45)
 
     for bar in bars:
         height = bar.get_height()
         ax.annotate(f'{height:.2f}', xy=(bar.get_x() + bar.get_width()/2, height),
                     xytext=(0, 3), textcoords="offset points", ha='center', va='bottom', fontsize=9)
-
+    
     plt.tight_layout()
     return fig
 
 
-def plot_normality_by_stop(dataframe_kpi, title_suffix=""):
+def plot_normality_by_stop(dataframe_kpi, direction, title_suffix=""):
     """Horizontal bar plot of normality % by stop"""
     fig, ax = plt.subplots(figsize=(10, max(8, len(dataframe_kpi) * 0.4)))
+    dir_label = get_direction_label(direction)
 
     dataframe_sorted = dataframe_kpi.sort_values('True_pct', ascending=True)
 
     y = np.arange(len(dataframe_sorted))
     height = 0.35
 
-    bars1 = ax.barh(y - height/2, dataframe_sorted['True_pct'], height, label='Normal (True)', color='#2ecc71')
-    bars2 = ax.barh(y + height/2, dataframe_sorted['False_pct'], height, label='No Normal (False)', color='#e74c3c')
+    bars1 = ax.barh(y - height/2, dataframe_sorted['True_pct'], height, label='No rechazada (Normal)', color='#2ecc71')
+    bars2 = ax.barh(y + height/2, dataframe_sorted['False_pct'], height, label='Rechazada (No Normal)', color='#e74c3c')
 
     ax.set_ylabel('Parada', fontsize=12)
     ax.set_xlabel('Porcentaje (%)', fontsize=12)
-    ax.set_title(f'Porcentaje de Normalidad por Parada {title_suffix}', fontsize=14)
+    ax.set_title(f'Hipótesis de normalidad no rechazadas por parada — {dir_label} {title_suffix}', fontsize=14)
     ax.set_yticks(y)
     ax.set_yticklabels(dataframe_sorted['Stop'])
     ax.legend(loc='lower right')
@@ -207,9 +225,10 @@ def plot_normality_by_stop(dataframe_kpi, title_suffix=""):
     return fig
 
 
-def plot_avg_outliers_by_stop(dataframe_kpi, title_suffix=""):
+def plot_avg_outliers_by_stop(dataframe_kpi, direction, title_suffix=""):
     """Horizontal bar plot of average outliers by stop"""
     fig, ax = plt.subplots(figsize=(10, max(8, len(dataframe_kpi) * 0.4)))
+    dir_label = get_direction_label(direction)
 
     dataframe_sorted = dataframe_kpi.sort_values('Avg_outliers', ascending=True)
 
@@ -219,15 +238,16 @@ def plot_avg_outliers_by_stop(dataframe_kpi, title_suffix=""):
 
     ax.set_ylabel('Parada', fontsize=12)
     ax.set_xlabel('Nº Medio de Outliers', fontsize=12)
-    ax.set_title(f'Número Medio de Outliers por Parada {title_suffix}', fontsize=14)
+    ax.set_title(f'Número medio de outliers por parada — {dir_label} {title_suffix}', fontsize=14)
 
     plt.tight_layout()
     return fig
 
 
-def plot_heatmap_normality(dataframe, title_suffix=""):
+def plot_heatmap_normality(dataframe, direction, title_suffix=""):
     """Heatmap of normality by stop and timeslot"""
     stops = dataframe['Stop'].unique()
+    dir_label = get_direction_label(direction)
 
     # Create matrix
     matrix = []
@@ -247,8 +267,8 @@ def plot_heatmap_normality(dataframe, title_suffix=""):
 
     fig, ax = plt.subplots(figsize=(16, max(8, len(stops) * 0.5)))
     sns.heatmap(matrix_dataframe, annot=True, fmt='.0f', cmap='RdYlGn', vmin=0, vmax=100,
-                ax=ax, cbar_kws={'label': '% Normal'})
-    ax.set_title(f'Heatmap de Normalidad por Parada y Franja Horaria {title_suffix}', fontsize=14)
+                ax=ax, cbar_kws={'label': '% No rechazada'})
+    ax.set_title(f'Mapa de calor de normalidad por parada y franja horaria — {dir_label} {title_suffix}', fontsize=14)
     ax.set_xlabel('Franja Horaria', fontsize=12)
     ax.set_ylabel('Parada', fontsize=12)
 
@@ -256,9 +276,10 @@ def plot_heatmap_normality(dataframe, title_suffix=""):
     return fig
 
 
-def plot_heatmap_outliers(dataframe, title_suffix=""):
+def plot_heatmap_outliers(dataframe, direction, title_suffix=""):
     """Heatmap of outliers by stop and timeslot"""
     stops = dataframe['Stop'].unique()
+    dir_label = get_direction_label(direction)
 
     matrix = []
     for stop in stops:
@@ -277,8 +298,8 @@ def plot_heatmap_outliers(dataframe, title_suffix=""):
 
     fig, ax = plt.subplots(figsize=(16, max(8, len(stops) * 0.5)))
     sns.heatmap(matrix_dataframe, annot=True, fmt='.1f', cmap='YlOrRd', ax=ax,
-                cbar_kws={'label': 'Avg Outliers'})
-    ax.set_title(f'Heatmap de Outliers Medios por Parada y Franja Horaria {title_suffix}', fontsize=14)
+                cbar_kws={'label': 'Media de outliers'})
+    ax.set_title(f'Mapa de calor de outliers medios por parada y franja horaria — {dir_label} {title_suffix}', fontsize=14)
     ax.set_xlabel('Franja Horaria', fontsize=12)
     ax.set_ylabel('Parada', fontsize=12)
 
@@ -290,13 +311,15 @@ def plot_heatmap_outliers(dataframe, title_suffix=""):
 # MAIN ANALYSIS FUNCTION
 # =============================================================================
 
-def analyze_normality_results(filepath, output_dir="./"):
+def analyze_normality_results(filepath, direction, output_dir="./"):
     """
     Main function to analyze normality results and generate all visualizations.
     Parameters:
     -----------
     filepath : str
         Path to the CSV file with normality results
+    direction : str
+        "toA" or "toB"
     output_dir : str
         Directory to save the generated plots
     """
@@ -319,22 +342,22 @@ def analyze_normality_results(filepath, output_dir="./"):
 
 
     # Generate plots for ALL
-    fig1 = plot_normality_by_timeslot(norm_timeslot_all, "(ALL)")
+    fig1 = plot_normality_by_timeslot(norm_timeslot_all, direction, "(ALL)")
     fig1.savefig(f"{output_dir}/normality_timeslot_ALL.png", dpi=150)
 
-    fig2 = plot_avg_outliers_by_timeslot(outliers_timeslot_all, "(ALL)")
+    fig2 = plot_avg_outliers_by_timeslot(outliers_timeslot_all, direction, "(ALL)")
     fig2.savefig(f"{output_dir}/outliers_timeslot_ALL.png", dpi=150)
 
-    fig3 = plot_normality_by_stop(norm_stop_all, "(ALL)")
+    fig3 = plot_normality_by_stop(norm_stop_all, direction, "(ALL)")
     fig3.savefig(f"{output_dir}/normality_stop_ALL.png", dpi=150)
 
-    fig4 = plot_heatmap_normality(dataframe_all, "(ALL)")
+    fig4 = plot_heatmap_normality(dataframe_all, direction, "(ALL)")
     fig4.savefig(f"{output_dir}/heatmap_normality_ALL.png", dpi=150)
 
-    fig5 = plot_heatmap_outliers(dataframe_all, "(ALL)")
+    fig5 = plot_heatmap_outliers(dataframe_all, direction, "(ALL)")
     fig5.savefig(f"{output_dir}/heatmap_outliers_ALL.png", dpi=150)
 
-    fig6 = plot_avg_outliers_by_stop(outliers_stop_all, "(ALL)")
+    fig6 = plot_avg_outliers_by_stop(outliers_stop_all, direction, "(ALL)")
     fig6.savefig(f"{output_dir}/outliers_stop_ALL.png", dpi=150)
 
     #SEPARATE DAYS
@@ -343,29 +366,30 @@ def analyze_normality_results(filepath, output_dir="./"):
     norm_stop_ind = calc_normality_pct_by_stop(dataframe_individual)
     outliers_stop_ind = calc_avg_outliers_by_stop(dataframe_individual)
 
+    dir_label = get_direction_label(direction)
 
     # Generate plots for individual
-    fig7 = plot_normality_by_timeslot(norm_timeslot_ind, "(L,M,X,J,V)")
+    fig7 = plot_normality_by_timeslot(norm_timeslot_ind, direction, "(L,M,X,J,V)")
     fig7.savefig(f"{output_dir}/normality_timeslot_individual.png", dpi=150)
 
-    fig8 = plot_avg_outliers_by_timeslot(outliers_timeslot_ind, "(L,M,X,J,V)")
+    fig8 = plot_avg_outliers_by_timeslot(outliers_timeslot_ind, direction, "(L,M,X,J,V)")
     fig8.savefig(f"{output_dir}/outliers_timeslot_individual.png", dpi=150)
 
-    fig9 = plot_normality_by_stop(norm_stop_ind, "(L,M,X,J,V)")
+    fig9 = plot_normality_by_stop(norm_stop_ind, direction, "(L,M,X,J,V)")
     fig9.savefig(f"{output_dir}/normality_stop_individual.png", dpi=150)
 
-    fig10 = plot_avg_outliers_by_stop(outliers_stop_ind, "(L,M,X,J,V)")
+    fig10 = plot_avg_outliers_by_stop(outliers_stop_ind, direction, "(L,M,X,J,V)")
     fig10.savefig(f"{output_dir}/outliers_stop_individual.png", dpi=150)
 
-    fig11 = plot_heatmap_normality(dataframe_individual, "(L,M,X,J,V)")
+    fig11 = plot_heatmap_normality(dataframe_individual, direction, "(L,M,X,J,V)")
     fig11.savefig(f"{output_dir}/heatmap_normality_individual.png", dpi=150)
 
-    fig12 = plot_heatmap_outliers(dataframe_individual, "(L,M,X,J,V)")
+    fig12 = plot_heatmap_outliers(dataframe_individual, direction, "(L,M,X,J,V)")
     fig12.savefig(f"{output_dir}/heatmap_outliers_individual.png", dpi=150)
 
     # Comparative plot: ALL vs Individual
     fig13, axes = plt.subplots(1, 2, figsize=(16, 6))
-
+    fig13.suptitle(f'{dir_label}', fontsize=15, fontweight='bold')
 
     # Normality comparison
     x = np.arange(len(TIMESLOTS))
@@ -373,8 +397,8 @@ def analyze_normality_results(filepath, output_dir="./"):
     axes[0].bar(x - width/2, norm_timeslot_all['True_pct'], width, label='ALL', color='#3498db')
     axes[0].bar(x + width/2, norm_timeslot_ind['True_pct'], width, label='Individual', color='#e67e22')
     axes[0].set_xlabel('Franja Horaria')
-    axes[0].set_ylabel('% Normal (True)')
-    axes[0].set_title('Comparación % Normalidad: ALL vs Individual')
+    axes[0].set_ylabel('% Hipótesis no rechazadas')
+    axes[0].set_title('Comparación hipótesis de normalidad: ALL vs Individual')
     axes[0].set_xticks(x)
     axes[0].set_xticklabels([f"{t}:00" for t in TIMESLOTS], rotation=45)
     axes[0].legend()
@@ -385,7 +409,7 @@ def analyze_normality_results(filepath, output_dir="./"):
     axes[1].bar(x + width/2, outliers_timeslot_ind['Avg_outliers'], width, label='Individual', color='#e67e22')
     axes[1].set_xlabel('Franja Horaria')
     axes[1].set_ylabel('Nº Medio Outliers')
-    axes[1].set_title('Comparación Outliers: ALL vs Individual')
+    axes[1].set_title('Comparación outliers medios: ALL vs Individual')
     axes[1].set_xticks(x)
     axes[1].set_xticklabels([f"{t}:00" for t in TIMESLOTS], rotation=45)
     axes[1].legend()
@@ -410,13 +434,15 @@ def analyze_normality_results(filepath, output_dir="./"):
 
 
 
-def analyze_normality_results_v2(dataframe, output_dir="./"):
+def analyze_normality_results_v2(dataframe, direction, output_dir="./"):
     """
     Main function to analyze normality results and generate all visualizations.
     Parameters:
     -----------
-    filepath : str
-        Path to the CSV file with normality results
+    dataframe : pd.DataFrame
+        DataFrame with normality results
+    direction : str
+        "toA" or "toB"
     output_dir : str
         Directory to save the generated plots
     """
@@ -439,22 +465,22 @@ def analyze_normality_results_v2(dataframe, output_dir="./"):
 
 
     # Generate plots for ALL
-    fig1 = plot_normality_by_timeslot(norm_timeslot_all, "(ALL)")
+    fig1 = plot_normality_by_timeslot(norm_timeslot_all, direction, "(ALL)")
     fig1.savefig(f"{output_dir}/normality_timeslot_ALL.png", dpi=150)
 
-    fig2 = plot_avg_outliers_by_timeslot(outliers_timeslot_all, "(ALL)")
+    fig2 = plot_avg_outliers_by_timeslot(outliers_timeslot_all, direction, "(ALL)")
     fig2.savefig(f"{output_dir}/outliers_timeslot_ALL.png", dpi=150)
 
-    fig3 = plot_normality_by_stop(norm_stop_all, "(ALL)")
+    fig3 = plot_normality_by_stop(norm_stop_all, direction, "(ALL)")
     fig3.savefig(f"{output_dir}/normality_stop_ALL.png", dpi=150)
 
-    fig4 = plot_heatmap_normality(dataframe_all, "(ALL)")
+    fig4 = plot_heatmap_normality(dataframe_all, direction, "(ALL)")
     fig4.savefig(f"{output_dir}/heatmap_normality_ALL.png", dpi=150)
 
-    fig5 = plot_heatmap_outliers(dataframe_all, "(ALL)")
+    fig5 = plot_heatmap_outliers(dataframe_all, direction, "(ALL)")
     fig5.savefig(f"{output_dir}/heatmap_outliers_ALL.png", dpi=150)
 
-    fig6 = plot_avg_outliers_by_stop(outliers_stop_all, "(ALL)")
+    fig6 = plot_avg_outliers_by_stop(outliers_stop_all, direction, "(ALL)")
     fig6.savefig(f"{output_dir}/outliers_stop_ALL.png", dpi=150)
 
     #SEPARATE DAYS
@@ -463,29 +489,30 @@ def analyze_normality_results_v2(dataframe, output_dir="./"):
     norm_stop_ind = calc_normality_pct_by_stop(dataframe_individual)
     outliers_stop_ind = calc_avg_outliers_by_stop(dataframe_individual)
 
+    dir_label = get_direction_label(direction)
 
     # Generate plots for individual
-    fig7 = plot_normality_by_timeslot(norm_timeslot_ind, "(L,M,X,J,V)")
+    fig7 = plot_normality_by_timeslot(norm_timeslot_ind, direction, "(L,M,X,J,V)")
     fig7.savefig(f"{output_dir}/normality_timeslot_individual.png", dpi=150)
 
-    fig8 = plot_avg_outliers_by_timeslot(outliers_timeslot_ind, "(L,M,X,J,V)")
+    fig8 = plot_avg_outliers_by_timeslot(outliers_timeslot_ind, direction, "(L,M,X,J,V)")
     fig8.savefig(f"{output_dir}/outliers_timeslot_individual.png", dpi=150)
 
-    fig9 = plot_normality_by_stop(norm_stop_ind, "(L,M,X,J,V)")
+    fig9 = plot_normality_by_stop(norm_stop_ind, direction, "(L,M,X,J,V)")
     fig9.savefig(f"{output_dir}/normality_stop_individual.png", dpi=150)
 
-    fig10 = plot_avg_outliers_by_stop(outliers_stop_ind, "(L,M,X,J,V)")
+    fig10 = plot_avg_outliers_by_stop(outliers_stop_ind, direction, "(L,M,X,J,V)")
     fig10.savefig(f"{output_dir}/outliers_stop_individual.png", dpi=150)
 
-    fig11 = plot_heatmap_normality(dataframe_individual, "(L,M,X,J,V)")
+    fig11 = plot_heatmap_normality(dataframe_individual, direction, "(L,M,X,J,V)")
     fig11.savefig(f"{output_dir}/heatmap_normality_individual.png", dpi=150)
 
-    fig12 = plot_heatmap_outliers(dataframe_individual, "(L,M,X,J,V)")
+    fig12 = plot_heatmap_outliers(dataframe_individual, direction, "(L,M,X,J,V)")
     fig12.savefig(f"{output_dir}/heatmap_outliers_individual.png", dpi=150)
 
     # Comparative plot: ALL vs Individual
     fig13, axes = plt.subplots(1, 2, figsize=(16, 6))
-
+    fig13.suptitle(f'{dir_label}', fontsize=15, fontweight='bold')
 
     # Normality comparison
     x = np.arange(len(TIMESLOTS))
@@ -493,8 +520,8 @@ def analyze_normality_results_v2(dataframe, output_dir="./"):
     axes[0].bar(x - width/2, norm_timeslot_all['True_pct'], width, label='ALL', color='#3498db')
     axes[0].bar(x + width/2, norm_timeslot_ind['True_pct'], width, label='Individual', color='#e67e22')
     axes[0].set_xlabel('Franja Horaria')
-    axes[0].set_ylabel('% Normal (True)')
-    axes[0].set_title('Comparación % Normalidad: ALL vs Individual')
+    axes[0].set_ylabel('% Hipótesis no rechazadas')
+    axes[0].set_title('Comparación hipótesis de normalidad: ALL vs Individual')
     axes[0].set_xticks(x)
     axes[0].set_xticklabels([f"{t}:00" for t in TIMESLOTS], rotation=45)
     axes[0].legend()
@@ -505,7 +532,7 @@ def analyze_normality_results_v2(dataframe, output_dir="./"):
     axes[1].bar(x + width/2, outliers_timeslot_ind['Avg_outliers'], width, label='Individual', color='#e67e22')
     axes[1].set_xlabel('Franja Horaria')
     axes[1].set_ylabel('Nº Medio Outliers')
-    axes[1].set_title('Comparación Outliers: ALL vs Individual')
+    axes[1].set_title('Comparación outliers medios: ALL vs Individual')
     axes[1].set_xticks(x)
     axes[1].set_xticklabels([f"{t}:00" for t in TIMESLOTS], rotation=45)
     axes[1].legend()
@@ -526,4 +553,3 @@ def analyze_normality_results_v2(dataframe, output_dir="./"):
         'norm_stop_ind': norm_stop_ind,
         'outliers_stop_ind': outliers_stop_ind
     }
-

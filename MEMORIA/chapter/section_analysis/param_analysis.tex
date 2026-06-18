@@ -36,7 +36,7 @@ las mismas.
 
 Como se especifica con anterioridad, aparte de la obtención y limpieza de los datos, para facilidad en la
 implementación, estos pasaron por un proceso de transformación a formato \textit{ESRI shapefile}.
-Para ello se usa la herramienta de código abierto \textbf{QGIS}. En la figura \ref{fig:qgis_converted}
+Para ello se usa la herramienta de código abierto \textbf{QGIS}. En la figura~\ref{fig:qgis_converted}
 se muestra como se visualizan los cuatro GeoJSON procesados y transformados a shapefile. Posteriormente,
 en la figura~\ref{fig:shapefile_gama} se muestran esos archivos shapefile ya dentro del
 entorno de trabajo de la plataforma de agentes GAMA.\@
@@ -60,7 +60,7 @@ entorno de trabajo de la plataforma de agentes GAMA.\@
 
 
 Estos datos no se usan en las siguientes fases, al no requerir mayor estudio sobre ellos. Se vuelven a abordar
-en el capítulo \ref{chapter:simulation_design}.
+en el capítulo~\ref{chapter:simulation_design}.
 
 \subsection{Datos de Operación}
 Los datos de operación representan la base empírica sobre la que se asienta el simulador.
@@ -281,17 +281,20 @@ de los campos \textit{Transaccional::Occupation}, \textit{Transaccional::Board} 
 \textit{Transaccional::DropOff}, debido a la identificación de inconsistencias relativas a valores
 negativos en estos campos, o a valores extremos derivados de errores en la recolección.
 La EMT especificó que para los modelos de autobús utilizados de forma regular, un valor de 
-\textit{Ocupación} superior a 80 pasajeros nunca se iba a dar, por lo que se decidió, de cara a todo
-el trabajo, considerar ese valor como límite de la capacidad de carga.
+\textit{Ocupación} superior a 80 pasajeros nunca se iba a dar, por lo que se decide, como criterio general para el resto
+del trabajo, considerar ese valor como límite de la capacidad de carga.
 Como se comenta de forma exhaustiva en la siguiente sección, estos campos limpiados se presentan como los 
 más importantes del análisis, motivo por el que se tratan con especial rigor para evitar problemas.
+Este proceso de eliminación de datos anómalos afectó de media a un \textbf{X\%} de los datos de cada parada, resultando
+en un porcentaje pequeño, pero que de no ser identificado, como ya se ha constatado, 
+resulta en inconsistencias en el análisis.
 
 \section{Estudio y Gaussianidad}\label{section:gauss_and_study}
-En esta sección se documentan las dos etapas que componen el análisis de los datos. Este análisis
-se centra sobre dos pilares fundamentales, estudiar la viabilidad de los datos operacionales, y preparar
+En esta sección se documentan las dos etapas que componen el análisis de los datos. Estas se pueden resumir en
+dos pilares fundamentales, estudiar la viabilidad de los datos operacionales, y preparar
 los parámetros específicos para su inyección al simulador.
 
-\subsection{Estudio de viabilidad de datos operacionales}
+\subsection{Estudio de viabilidad de datos operacionales}\label{section:operational}
 El principal reto de esta fase es la de evaluar la compatibilidad de los datos sobre los cuales se va a construir
 el simulador con los de una distribución normal. Como se especifica en la sección~\ref{section:problem_def}, una de 
 las cuestiones de mayor relevancia
@@ -337,22 +340,30 @@ de cabecera de los buses en la franja de las nueve de la mañana. No obstante, a
 la detección de anomalias, se detectan casos extremos que resulta necesario analizar. Ampliando este filtro
 temporal al resto de días laborables, los resultados son congruentes con lo observado en primera instancia:
 \textit{Las observaciones realizadas sobre la primera salida de cabecera a las nueve de la mañana
-para todos los días laborables presentan una hipótesis válida de \textbf{normalidad}.} Relativo a las anomalías detectadas, 
+para todos los días laborables no rechazan una hipótesis válida de \textbf{normalidad}.} Relativo a las anomalías detectadas, 
 se observa de ellas
 un patrón claro, presentando todas valores de \textit{Occupation} elevado con respecto a la muestra estudiada,
 y en todos los casos esos días se caracterizan por tener \textbf{gratuidad}. Esta observación lleva a la decisión de, en 
-la fase de limpieza, ignorar aquellos casos que aun siendo días laborables, presentan este valor, ya que sus valores
+la fase de limpieza, \textbf{ignorar} aquellos casos que aun siendo días laborables, presentan este valor, ya que sus valores
 de \textit{Occupation} tienden a inducir variación o ruido en el estudio.
 
 Una vez realizado un primer estudio, útil para reducir el rango de aplicación, en una segunda fase se expande este análisis
-estudiado para todas las paradas en todas las franjas horarias. Este nuevo enfoque se aplica a dos niveles, estudiando los 
+estudiado para todas las paradas en todas las franjas horarias. El escalado del análisis se realiza de forma progresiva, comenzando
+por la expansión a todas las franjas de un día, continuando por analizar el resto de días y posteeriormente escalarlo a todas las
+paradas.
+A lo largo de cada expansión, se verifica que los resultados se mantengan de forma consistente. Una vez se alcanza el total
+de los datos a tratar, se realiza un análisis comparativo a dos niveles. Este nuevo enfoque estudia las diferencias
+entre el tratamiento de los 
 días laborables de forma independiente y de forma agregada. Para el estudio comparativo se considera el tratamiento 
-de los días de forma conjunta como \textit{All}.
+de los días de forma conjunta como \textit{All}, mientras que de forma independiente se toman como datos los acrónimos
+para cada día laborable de la semana (\textbf{L}: lunes, \textbf{M}: martes, \textbf{X}: miércoles, \textbf{J}: jueves
+, \textbf{V}: viernes).
 
-Respecto a los resultados, a nivel general se observan varias cosas concretas que
+Respecto a los resultados, a nivel general se observan varias cuestiones concretas que
 requieren ampliación y explicación. Primeramente, el resultado para la agregación \textit{All} resulta
 en un mayor número de hipótesis de normalidad no rechazadas, superando para ambos sentidos el umbral especificado 
-en la literatura del \textbf{85\%}~\cite{fhwa2019toolbox}. En las figuras~\ref{fig:comparison_toA},~\ref{fig:comparison_toB} 
+en la literatura del \textbf{85\%}~\cite{fhwa2019toolbox}, necesario para la validación del modelado de distribuciones para
+la simulación. En las figuras~\ref{fig:comparison_toA},~\ref{fig:comparison_toB} 
 se observa la distinta comparativa de porcentaje de hipótesis no rechazadas para cada uno de los sentidos según su 
 tratamiento agregado (\textit{All}) o desagregado, ambas fragmentadas por franja horaria. 
 
@@ -369,7 +380,7 @@ fragmentados por franja horaria.}
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/to_B/comparison_ALL_vs_individual.png}
-\caption{Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido La peseta
+\caption{Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido La Peseta
 fragmentados por franja horaria.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:comparison_toB}
 \end{figure}
@@ -386,54 +397,26 @@ problema pueden aparecer.
 
 Relativo a la fragmentación por parada, en sentido~\textit{Cibeles} como se observa en las figuras~\ref{fig:normality_toA_all},
 ~\ref{fig:normality_toA_deagregated}, la parada más interesante de analizar resulta la \textit{5727}, correspondiente con 
-\textit{Cibeles}, \textbf{final de trayecto}. Este hecho es más relevante de lo que parece, debido a dos cuestiones.
+\textit{Cibeles}, \textbf{final de trayecto}. Este hecho resulta relevante debido a dos cuestiones.
 La primera recae sobre la naturaleza del comportamiento de los autobuses, ya que esta parada, al igual que la
-~\textit{2646: La peseta} resulta la primera y la última parada de ambos sentidos al mismo tiempo, por lo que el solapamiento 
+~\textit{2646: La Peseta} resulta la primera y la última parada de ambos sentidos al mismo tiempo, por lo que el solapamiento 
 de datos de llegada con los de salida puede resultar en incongruencias estadísticas.
-La segunda es relativa al cálculo del valor de \textit{occupation}, computado mediante la $occupation_{prev}$  $+$ \textit{boards} 
- $-$ \textit{dropoffs}. Desde la EMT se transmite una hipótesis que resulta clave para entender el problema:~\textit{Un mal registro 
+La segunda es relativa al cálculo del valor de $occupation$, computado mediante $\text{Occupation}_{\text{prev}}
+ + \text{Board} - \text{DropOff}$. Desde la EMT se transmite una hipótesis que resulta clave para entender el 
+ problema:~\textit{Un mal registro 
  temporal de la transición entre viajes descuadra los datos}. Es decir, registrar que el viaje concluye al comenzar el siguiente
  genera que la carga de pasajeros que inicia el siguiente viaje se compute como carga de la última parada del viaje
  ya finalizado y viceversa. Debido a esto, el posible análisis relativo a los valores de ocupación de estas paradas se descarta,
- tanto en sentido \textit{Cibeles} mostrado en las figuras referenciadas, como su análisis paralelo del sentido \textit{La peseta},
+ tanto en sentido \textit{Cibeles} mostrado en las figuras referenciadas, como su análisis paralelo del sentido \textit{La Peseta},
  mostrado en las figuras~\ref{fig:normality_toB_all},~\ref{fig:normality_toB_deagregated}.
-
-\begin{figure}[H]
- \centering
-    \includegraphics[width=\textwidth]{imagenes/to_A/normality_stop_ALL.png}
-\caption{Porcentaje de aceptación de hipótesis de normalidad por parada en sentido Cibeles con datos agregados.}
-\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:normality_toA_all}
-\end{figure}
-
-\begin{figure}[H]
- \centering
-    \includegraphics[width=\textwidth]{imagenes/to_A/normality_stop_individual.png}
-\caption{Porcentaje de aceptación de hipótesis de normalidad por parada en sentido Cibeles con datos desagregados.}
-\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:normality_toA_deagregated}
-\end{figure}
-
-\begin{figure}[H]
- \centering
-    \includegraphics[width=\textwidth]{imagenes/to_B/normality_stop_ALL.png}
-\caption{Porcentaje de aceptación de hipótesis de normalidad por parada en sentido La peseta con datos agregados.}
-\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:normality_toB_all}
-\end{figure}
-
-\begin{figure}[H]
- \centering
-    \includegraphics[width=\textwidth]{imagenes/to_B/normality_stop_individual.png}
-\caption{Porcentaje de aceptación de hipótesis de normalidad por parada en sentido La peseta con datos desagregados.}
-\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:normality_toB_deagregated}
-\end{figure}
-
 
 
 Al combinar este análisis, tanto en segmentar según franja horaria como según parada, se genera un~\enquote{heatmap} donde
 se muestran los valores del porcentaje de hipótesis de normalidad para cada parada en cada franja horaria. Nótese que en el caso
-del agregado~\textit{All}, resulta en un caso binario, o la combinación parada-franja no rechaza la hipótesis, o sí lo hace,
+del agregado~\textit{All}, resulta en un caso binario: o la combinación parada-franja no rechaza la hipótesis, o sí lo hace,
 por lo que la paleta de colores del~\enquote{heatmap} en este caso no muestra más de dos colores. Las figuras
 ~\ref{fig:heatmap_toA_all},~\ref{fig:heatmap_toA_deagregated},~\ref{fig:heatmap_toB_all},~\ref{fig:heatmap_toB_deagregated}
-muestran estos mapas de calor.
+muestran estos mapas de calor para ambos sentidos de la ruta.
 
 \begin{figure}[H]
  \centering
@@ -452,49 +435,100 @@ muestran estos mapas de calor.
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/to_B/heatmap_normality_ALL.png}
-\caption{Mapa de calor de combinaciones parada-franja en sentido La peseta con datos agregados.}
+\caption{Mapa de calor de combinaciones parada-franja en sentido La Peseta con datos agregados.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:heatmap_toB_all}
 \end{figure}
 
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/to_B/heatmap_normality_individual.png}
-\caption{Mapa de calor de combinaciones parada-franja en sentido La peseta con datos desagregados.}
+\caption{Mapa de calor de combinaciones parada-franja en sentido La Peseta con datos desagregados.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:heatmap_toB_deagregated}
 \end{figure}
 
 
-Aquí se validan las distintas cuestiones vistas en las figuras anteriores
+Los distintos mapas de calor reflejan de forma consistente las observaciones vistas en figuras anteriores, reflejando la mejoría que 
+supone el tratamiento de los datos laborables de forma agregada. De forma numérica, los resultados obtenidos de hipótesis no 
+rechazadas son los siguientes: Sentido Cibeles \textbf{94,39\%}, Sentido La Peseta \textbf{88,60\%}. Ambos superiores al umbral
+definido en literatura. Por este motivo, se toma la decisión de utilizar este enfoque
+para el resto del trabajo. Esto implica que tanto para la parametrización de la entrada como para la fase de resultados, 
+se elimina la distinción por día, al considerar todo estudio centrado en el concepto de \textit{día laborable} sin distinción.
 
+Finalmente, se encapsula la información necesaria para la construcción de distribuciones normales (\textit{media}
+y \textit{desviación estándar}) para cada combinación parada-franja. Estos datos, no obstante, \textbf{no} se utilizan como 
+parámetro dentro de la simulación. Los distintos datos referentes a la variable inicial \textit{Occupation} se utilizan 
+post simulación para la consecución de dos objetivos. El primero consta de validar estas distribuciones \textit{esperadas} 
+con los resultados obtenidos en la simulación. Es una forma adecuada de estudiar cómo se comporta el simulador, debido a que 
+este valor de \textit{Occupation} no se construye de forma directa, sino que resulta de la combinación de \textit{boards} y
+\textit{dropoffs} con una aleatoriedad dependiente también del número de autobuses que se utilizan para la simulación.
+El segundo objetivo resulta de la comparación directa de estos valores \textit{esperados} frente a anomalías programadas en casos
+concretos de estudio, otorgando una visión comparativa entre la \enquote{realidad} y la simulación.
 
-\textbf{Vale, en pseudorutinas, como integro esta parte. Idea, comeptar un poco el análisis del primer filtro,
-comentar que se observan parámetros de normalidad, que una vez validado se expande a todos los de las nueve.
-Una vez validados esos se vuelve a expandir a martes, miercoles, jueves y viernes.}
-
-\textbf{Despues de eso, ya se hace para todas las franjas para todas las paradas, y es cuando, mediante comparativas,
-se observa como debido a la baja poblacion muestral de algunos filtros, estos dan lugar a menos porcentaje de
-normalidad validada. Por esto, se decide evaluar el tratar a todos los días como iguales. El resultado es un
-mayor número de normalidad. Esto concluye el analisis de la viabilidad operacional, destacando que estos datos
-no se usan como inyeccion paramétrica al simulador, sino como contraste y evaluacion de los resultados de este.
-Expuesto en mayor profundidad en la fase de extraccion de resultados}
-
-
-
-
-\section{Preparación para Simulador}
+\subsection{Preparación para simulador}
 En esta sección se exponen en profundidad los procesos relativos a la construcción de los parámetros que sirven de 
 \textit{input} a las simulaciones. Se presenta tanto la fase referente al estudio y análisis de las distribuciones
-de datos, como a la plantilla necesaria para que puedan ser ingestados en el simulador.
+de datos, como a la plantilla necesaria para que puedan ser incorporados en el simulador.
 
 
-\subsection{Estudio y análisis de carga, descarga y tiempo entre paradas}
+\subsubsection{Estudio y análisis de carga, descarga y tiempo entre paradas}
+Una vez validado el tratamiento de hipótesis de normalidad de la variable~\textit{Occupation} para su uso de forma comparativa,
+es necesario estudiar las distintas variables que sirven de parámetros de entrada al simulador. Para ello, se consideran dos 
+tipos de datos: \textbf{Intra-parada}, para datos referentes a cada una de las paradas e \textbf{Inter-parada},
+que incluye aquellos relativos a los tramos entre paradas.
+
+\paragraph{Datos Intra-parada}
+
+Dentro de la parada se utilizan dos variables como entradas al simulador, la carga de pasajeros (\textit{boards}) y la 
+descarga de estos (\textit{dropoffs}). Ambos parámetros se desagregan de forma temporal fragmentando su análisis por franja horaria.
+Existe una distinción relativa a la desagregación realizada para los datos de \textit{Occupation}. Los datos intra-parada se
+categorizan según su campo \textit{Transac:TimeSlot}, que referencia a la franja horaria del momento en el que el autobús realiza
+el estacionamiento en la parada correspondiente. Esta categorización contrasta con la realizada para el estudio de viabilidad
+de datos operacionales expuesta en la sección anterior, la cual utilizaba el campo \textit{Master:TimeSlot} como medida de 
+desagregación, que recoge la franja horaria del instante en el que el autobús inicia un viaje desde cabecera. En el caso de las 
+variables \textit{boards} y \textit{dropoffs}, resulta necesario distinguir los datos según el momento representativo en el que
+realizan su paso por la parada, ya que de no hacerlo se puede incurrir en datos no representativos de la realidad simulada. En 
+contraste, el filtrado por \textit{TimeSlot} del momento de salida de cabecera no resulta crucial, al caracterizarse este
+por ser una observación pasiva de la ocupación de los autobuses para análisis, no incurre en posibles anomalías al momento
+de simular. Se escoge un filtrado distinto por tanto que beneficie el porcentaje de hipótesis no rechazadas.
+
+En relación con las características propias de los parámetros a estudiar, se observa que, a diferencia de los datos estudiados 
+previamente, estos no se asocian en su totalidad con distribuciones \textit{normales}, mostrando cercanía a valores nulos
+y prominentes colas derechas. Debido a esta casuística se escoge un enfoque basado en tres distribuciones candidatas:
+Distribución \textbf{Normal}, distribución \textbf{geométrica} y distribución \textbf{binomial negativa}.
+Se utiliza el criterio de información de Akaike (AIC)~\cite{akaike1974new} como medida de qué hipótesis no rechazada se 
+aproxima más a los datos a modelar.
+El enfoque seguido en este análisis consta de un primer cribado y eliminado de valores anómalos. Para ello, como se expone
+en el estado del arte, al tratarse de un análisis que no se centra sobre un pilar central como puede ser la normalidad de los 
+datos, implementar el ESD~\cite{rosner1983} no es adecuado, por lo que esta detección se realiza con el 
+MAD~\cite{leys2013detecting}, que detecta anomalías de forma agnóstica, independientemente de qué tipo de distribución sigan 
+los datos.
+Posteriormente, se computan los tres testde hipótesis, uno para cada tipo de distribución y en primera instancia se
+selecciona aquel con menor~\textit{AIC}. En caso de que todos los test de hipótesis sean rechazados, se escoge aquella
+hipótesis que aún siendo rechazada, implique menor coste basándose en este mismo criterio de Akaike, tratando de mitigar
+la anomalía estadística producida de los rechazos.
+
+Para ambos sentidos de la ruta se alcanzan valores de porcentaje de hipótesis no rechazadas
+superiores al criterio establecido y ya expuesto del \textbf{85\%}. Desglosando por tipo de distribución, se obtiene
 
 
-\subsection{Adaptación de formato de parámetros de entrada}
+\paragraph{Datos Inter-parada}
 
+En contrapartida de los datos Intra-parada, los datos relativos a los tiempos entre las distintas paradas de la ruta si que 
+se muestran, en una fase inicial de visualización mediante histogramas, con indicios de resultar en hipótesis de normalidad
+no rechazadas, al presentar la característica forma de campana. Por este motivo, se utiliza un enfoque similar al realizado 
+para la viabilidad de datos operacionales, basado
+en hipótesis únicamente de normalidad, manteniendo el criterio desagregador de franja horaria escogido para la carga/descarga.
+Los resultados, al igual que en todos los casos previos, muestran un porcentaje de no rechazo superior al establecido, por 
+lo que resulta válido para su inclusión en el simulador.
 
-\textbf{Aqui se especifica, que los parametros board, dropoff y timebetweenstops se tienen que guardar en 
-ficheros csv, con una línea por parada, o tramos entre parada en el caso de tbs y que debe contener en 
-el caso de boarddropoff en un fichero unico, un cambo disttype, param1, param2 y en el caso de tbs
-un campo mean y otro std.Especificar tambien que se tiene que crear un fichero json que permita parametrizar
-el número de autobuses físicos, y sus respectivas salidas de cabecera. Especificar para cada archivo una plantilla}
+\paragraph{Adaptación de formato de parámetros de entrada}
+
+Para la correcta lectura de los datos por parte del simulador, se escoge un enfoque basado en ficheros CSV, un tipo de
+almacenamiento matricial, basado en filas y columnas, aceptado por el entorno de trabajo escogido.
+
+Se genera un fichero por cada sentido y tipo de dato. De esta forma, al tener dos sentidos y datos intra e inter parada,
+se dispone de cuatro archivos para la entrada del simulador como datos modelados.
+
+Dentro de estos archivos, se genera para cada parada o tramo entre parada una columna relativa al tipo de distribución,
+así como columnas relativas a sus parámetros característicos para ser modelada. Esta generación columnar se 
+realiza para cada \textit{timeslot} entre las cinco de la mañana y las once de la noche.

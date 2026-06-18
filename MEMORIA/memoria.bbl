@@ -2644,6 +2644,35 @@
       \verb 10.5281/zenodo.1441026
       \endverb
     \endentry
+    \entry{akaike1974new}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a9482d81bf0654208860e574639f7bf0}{%
+           family={Akaike},
+           familyi={A\bibinitperiod},
+           given={Hirotugu},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{fullhash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{bibnamehash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{authorbibnamehash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{authornamehash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{authorfullhash}{a9482d81bf0654208860e574639f7bf0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Automatic Control}
+      \field{number}{6}
+      \field{title}{A New Look at the Statistical Model Identification}
+      \field{volume}{19}
+      \field{year}{1974}
+      \field{pages}{716\bibrangedash 723}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/TAC.1974.1100705
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
