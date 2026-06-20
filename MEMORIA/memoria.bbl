@@ -2131,34 +2131,112 @@
       \verb 10.1007/978-3-642-49888-6
       \endverb
     \endentry
-    \entry{fhwa2019toolbox}{report}{}
-      \name{author}{1}{}{%
-        {{hash=b3514fa8307aa3a8a763bab4787e7ac8}{%
-           family={{Federal Highway Administration}},
-           familyi={F\bibinitperiod}}}%
+    \entry{burnham2002model}{book}{}
+      \name{author}{2}{}{%
+        {{hash=b0c95b47a095e05a82949d66da9b76ae}{%
+           family={Burnham},
+           familyi={B\bibinitperiod},
+           given={Kenneth\bibnamedelima P.},
+           giveni={K\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=9dcae0a4f92c194d22d9b6defb776251}{%
+           family={Anderson},
+           familyi={A\bibinitperiod},
+           given={David\bibnamedelima R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
       }
-      \list{institution}{1}{%
-        {U.S. Department of Transportation}%
+      \list{location}{1}{%
+        {New York}%
       }
-      \strng{namehash}{b3514fa8307aa3a8a763bab4787e7ac8}
-      \strng{fullhash}{b3514fa8307aa3a8a763bab4787e7ac8}
-      \strng{bibnamehash}{b3514fa8307aa3a8a763bab4787e7ac8}
-      \strng{authorbibnamehash}{b3514fa8307aa3a8a763bab4787e7ac8}
-      \strng{authornamehash}{b3514fa8307aa3a8a763bab4787e7ac8}
-      \strng{authorfullhash}{b3514fa8307aa3a8a763bab4787e7ac8}
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{87a82364bd1af40aa1d93f6afb00b14e}
+      \strng{fullhash}{87a82364bd1af40aa1d93f6afb00b14e}
+      \strng{bibnamehash}{87a82364bd1af40aa1d93f6afb00b14e}
+      \strng{authorbibnamehash}{87a82364bd1af40aa1d93f6afb00b14e}
+      \strng{authornamehash}{87a82364bd1af40aa1d93f6afb00b14e}
+      \strng{authorfullhash}{87a82364bd1af40aa1d93f6afb00b14e}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{number}{FHWA-HOP-18-036}
-      \field{title}{Traffic Analysis Toolbox Volume {III}: Guidelines for Applying Traffic Microsimulation Modeling Software --- 2019 Update}
+      \field{edition}{2}
+      \field{isbn}{978-0-387-95364-9}
+      \field{title}{Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach}
+      \field{year}{2002}
+      \verb{doi}
+      \verb 10.1007/b97636
+      \endverb
+    \endentry
+    \entry{akaike1974new}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a9482d81bf0654208860e574639f7bf0}{%
+           family={Akaike},
+           familyi={A\bibinitperiod},
+           given={Hirotugu},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{fullhash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{bibnamehash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{authorbibnamehash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{authornamehash}{a9482d81bf0654208860e574639f7bf0}
+      \strng{authorfullhash}{a9482d81bf0654208860e574639f7bf0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Automatic Control}
+      \field{number}{6}
+      \field{title}{A New Look at the Statistical Model Identification}
+      \field{volume}{19}
+      \field{year}{1974}
+      \field{pages}{716\bibrangedash 723}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/TAC.1974.1100705
+      \endverb
+    \endentry
+    \entry{dowling2004toolbox}{report}{}
+      \name{author}{3}{}{%
+        {{hash=9f5a88cf79ad9133be454863708d4ffe}{%
+           family={Dowling},
+           familyi={D\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a73cbd9f60f24692b7e8f6efb1ffb3f3}{%
+           family={Skabardonis},
+           familyi={S\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a5028009d1a68f2a93f59c14cac8f37f}{%
+           family={Alexiadis},
+           familyi={A\bibinitperiod},
+           given={Vassili},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {U.S. Department of Transportation, Federal Highway Administration}%
+      }
+      \strng{namehash}{5fd2b44c8e0f7e1f24f6e9b09e229293}
+      \strng{fullhash}{a8c7238b70f16e91d0f4190580132870}
+      \strng{bibnamehash}{a8c7238b70f16e91d0f4190580132870}
+      \strng{authorbibnamehash}{a8c7238b70f16e91d0f4190580132870}
+      \strng{authornamehash}{5fd2b44c8e0f7e1f24f6e9b09e229293}
+      \strng{authorfullhash}{a8c7238b70f16e91d0f4190580132870}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{FHWA-HRT-04-040}
+      \field{title}{Traffic Analysis Toolbox Volume {III}: Guidelines for Applying Traffic Microsimulation Modeling Software}
       \field{type}{techreport}
-      \field{year}{2019}
+      \field{year}{2004}
       \verb{urlraw}
-      \verb https://ops.fhwa.dot.gov/publications/fhwahop18036/
+      \verb https://ops.fhwa.dot.gov/trafficanalysistools/tat_vol3/
       \endverb
       \verb{url}
-      \verb https://ops.fhwa.dot.gov/publications/fhwahop18036/
+      \verb https://ops.fhwa.dot.gov/trafficanalysistools/tat_vol3/
       \endverb
     \endentry
     \entry{demoivre1738doctrine}{book}{}
@@ -2642,35 +2720,6 @@
       \field{year}{2018}
       \verb{doi}
       \verb 10.5281/zenodo.1441026
-      \endverb
-    \endentry
-    \entry{akaike1974new}{article}{}
-      \name{author}{1}{}{%
-        {{hash=a9482d81bf0654208860e574639f7bf0}{%
-           family={Akaike},
-           familyi={A\bibinitperiod},
-           given={Hirotugu},
-           giveni={H\bibinitperiod}}}%
-      }
-      \strng{namehash}{a9482d81bf0654208860e574639f7bf0}
-      \strng{fullhash}{a9482d81bf0654208860e574639f7bf0}
-      \strng{bibnamehash}{a9482d81bf0654208860e574639f7bf0}
-      \strng{authorbibnamehash}{a9482d81bf0654208860e574639f7bf0}
-      \strng{authornamehash}{a9482d81bf0654208860e574639f7bf0}
-      \strng{authorfullhash}{a9482d81bf0654208860e574639f7bf0}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Transactions on Automatic Control}
-      \field{number}{6}
-      \field{title}{A New Look at the Statistical Model Identification}
-      \field{volume}{19}
-      \field{year}{1974}
-      \field{pages}{716\bibrangedash 723}
-      \range{pages}{8}
-      \verb{doi}
-      \verb 10.1109/TAC.1974.1100705
       \endverb
     \endentry
   \enddatalist

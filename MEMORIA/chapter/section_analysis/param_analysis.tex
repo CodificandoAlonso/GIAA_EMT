@@ -54,13 +54,21 @@ entorno de trabajo de la plataforma de agentes GAMA.\@
  \centering
     \includegraphics[width=\textwidth]{imagenes/gama_shapefiles.png}
 \caption{Visualización en GAMA de los shapefile transformados}
-\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}
-\label{fig:shapefile_gama}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:shapefile_gama}
 \end{figure}
 
+De forma descriptiva, se expone a continuación información relativa a la línea \textit{Express 01}, línea escogida
+para el desarrollo del trabajo y visualizada en sendas figuras~\ref{fig:qgis_converted} y~\ref{fig:shapefile_gama}.
 
-Estos datos no se usan en las siguientes fases, al no requerir mayor estudio sobre ellos. Se vuelven a abordar
-en el capítulo~\ref{chapter:simulation_design}.
+Esta línea cubre el tránsito entre el barrio de Carabanchel y la céntrica plaza de Cibeles, ubicada en la zona centro
+de la capital. La nomenclatura que se sigue para referenciar ambos sentidos consta de nombrar ambas paradas finales de 
+cada uno. Concretamente las paradas finales, denotadas por (\textit{código parada : nombre parada}) son 
+(\textit{2646 : La Peseta}) y (\textit{5727 : Cibeles}). A lo largo del trabajo, de forma reducida se referencia cada sentido
+únicamente por el nombre de la parada final que representan.
+La línea presenta quince paradas en su sentido~\textit{Cibeles} y trece en el sentido opuesto,~\textit{La Peseta}.
+
+Los datos referentes a la geolocalización de la ruta no son usados en la fase de análisis, al no requerir mayor estudio
+ sobre ellos. Se vuelven a abordar en el capítulo~\ref{chapter:simulation_design}.
 
 \subsection{Datos de Operación}
 Los datos de operación representan la base empírica sobre la que se asienta el simulador.
@@ -276,17 +284,17 @@ el prefijo \textit{Transaccional::} o \textit{Master::} para no generar ambigüe
 
 En lo relativo a la limpieza de los datos, constituye una fase clave, dado que
 la no identificación de posibles anomalías en ciertos campos puede alterar la precisión del análisis
-posterior. En el caso particular, se redujo la limpieza a la eliminación de valores anómalos dentro
+posterior. En el caso particular, se centra la limpieza en la eliminación de valores anómalos dentro
 de los campos \textit{Transaccional::Occupation}, \textit{Transaccional::Board} y 
 \textit{Transaccional::DropOff}, debido a la identificación de inconsistencias relativas a valores
 negativos en estos campos, o a valores extremos derivados de errores en la recolección.
-La EMT especificó que para los modelos de autobús utilizados de forma regular, un valor de 
+La EMT especifica que para los modelos de autobús utilizados de forma regular, un valor de 
 \textit{Ocupación} superior a 80 pasajeros nunca se iba a dar, por lo que se decide, como criterio general para el resto
 del trabajo, considerar ese valor como límite de la capacidad de carga.
 Como se comenta de forma exhaustiva en la siguiente sección, estos campos limpiados se presentan como los 
 más importantes del análisis, motivo por el que se tratan con especial rigor para evitar problemas.
-Este proceso de eliminación de datos anómalos afectó de media a un \textbf{X\%} de los datos de cada parada, resultando
-en un porcentaje pequeño, pero que de no ser identificado, como ya se ha constatado, 
+Este proceso de eliminación de datos anómalos afectó de media a una fila cada dos dias de muestreo de los datos de cada parada,
+resultando en un porcentaje pequeño, pero que de no ser identificado, como ya se ha constatado, 
 resulta en inconsistencias en el análisis.
 
 \section{Estudio y Gaussianidad}\label{section:gauss_and_study}
@@ -337,7 +345,7 @@ Esta unión permite validar tanto las suposiciones de la normalidad del conjunto
 
 El resultado de este filtro resulta en una aceptación de la hipótesis de normalidad para la primera salida 
 de cabecera de los buses en la franja de las nueve de la mañana. No obstante, al aplicar \textit{ESD}~\cite{rosner1983} para
-la detección de anomalias, se detectan casos extremos que resulta necesario analizar. Ampliando este filtro
+la detección de anomalías, se detectan casos extremos que resulta necesario analizar. Ampliando este filtro
 temporal al resto de días laborables, los resultados son congruentes con lo observado en primera instancia:
 \textit{Las observaciones realizadas sobre la primera salida de cabecera a las nueve de la mañana
 para todos los días laborables no rechazan una hipótesis válida de \textbf{normalidad}.} Relativo a las anomalías detectadas, 
@@ -349,7 +357,7 @@ de \textit{Occupation} tienden a inducir variación o ruido en el estudio.
 
 Una vez realizado un primer estudio, útil para reducir el rango de aplicación, en una segunda fase se expande este análisis
 estudiado para todas las paradas en todas las franjas horarias. El escalado del análisis se realiza de forma progresiva, comenzando
-por la expansión a todas las franjas de un día, continuando por analizar el resto de días y posteeriormente escalarlo a todas las
+por la expansión a todas las franjas de un día, continuando por analizar el resto de días y posteriormente escalarlo a todas las
 paradas.
 A lo largo de cada expansión, se verifica que los resultados se mantengan de forma consistente. Una vez se alcanza el total
 de los datos a tratar, se realiza un análisis comparativo a dos niveles. Este nuevo enfoque estudia las diferencias
@@ -362,7 +370,7 @@ para cada día laborable de la semana (\textbf{L}: lunes, \textbf{M}: martes, \t
 Respecto a los resultados, a nivel general se observan varias cuestiones concretas que
 requieren ampliación y explicación. Primeramente, el resultado para la agregación \textit{All} resulta
 en un mayor número de hipótesis de normalidad no rechazadas, superando para ambos sentidos el umbral especificado 
-en la literatura del \textbf{85\%}~\cite{fhwa2019toolbox}, necesario para la validación del modelado de distribuciones para
+en la literatura del \textbf{85\%}~\cite{dowling2004toolbox}, necesario para la validación del modelado de distribuciones para
 la simulación. En las figuras~\ref{fig:comparison_toA},~\ref{fig:comparison_toB} 
 se observa la distinta comparativa de porcentaje de hipótesis no rechazadas para cada uno de los sentidos según su 
 tratamiento agregado (\textit{All}) o desagregado, ambas fragmentadas por franja horaria. 
@@ -449,10 +457,11 @@ muestran estos mapas de calor para ambos sentidos de la ruta.
 
 Los distintos mapas de calor reflejan de forma consistente las observaciones vistas en figuras anteriores, reflejando la mejoría que 
 supone el tratamiento de los datos laborables de forma agregada. De forma numérica, los resultados obtenidos de hipótesis no 
-rechazadas son los siguientes: Sentido Cibeles \textbf{94,39\%}, Sentido La Peseta \textbf{88,60\%}. Ambos superiores al umbral
+rechazadas son los siguientes: Sentido \textit{Cibeles} \textbf{94,39\%}, Sentido \textit{La Peseta} \textbf{88,60\%}. Ambos superiores al umbral
 definido en literatura. Por este motivo, se toma la decisión de utilizar este enfoque
 para el resto del trabajo. Esto implica que tanto para la parametrización de la entrada como para la fase de resultados, 
 se elimina la distinción por día, al considerar todo estudio centrado en el concepto de \textit{día laborable} sin distinción.
+
 
 Finalmente, se encapsula la información necesaria para la construcción de distribuciones normales (\textit{media}
 y \textit{desviación estándar}) para cada combinación parada-franja. Estos datos, no obstante, \textbf{no} se utilizan como 
@@ -477,6 +486,7 @@ tipos de datos: \textbf{Intra-parada}, para datos referentes a cada una de las p
 que incluye aquellos relativos a los tramos entre paradas.
 
 \paragraph{Datos Intra-parada}
+\mbox{}\\
 
 Dentro de la parada se utilizan dos variables como entradas al simulador, la carga de pasajeros (\textit{boards}) y la 
 descarga de estos (\textit{dropoffs}). Ambos parámetros se desagregan de forma temporal fragmentando su análisis por franja horaria.
@@ -492,43 +502,185 @@ por ser una observación pasiva de la ocupación de los autobuses para análisis
 de simular. Se escoge un filtrado distinto por tanto que beneficie el porcentaje de hipótesis no rechazadas.
 
 En relación con las características propias de los parámetros a estudiar, se observa que, a diferencia de los datos estudiados 
-previamente, estos no se asocian en su totalidad con distribuciones \textit{normales}, mostrando cercanía a valores nulos
+previamente, estos no se asocian en su totalidad con distribuciones \textit{normales}, mostrando en algunos casos
+cercanía a valores nulos
 y prominentes colas derechas. Debido a esta casuística se escoge un enfoque basado en tres distribuciones candidatas:
 Distribución \textbf{Normal}, distribución \textbf{geométrica} y distribución \textbf{binomial negativa}.
 Se utiliza el criterio de información de Akaike (AIC)~\cite{akaike1974new} como medida de qué hipótesis no rechazada se 
 aproxima más a los datos a modelar.
-El enfoque seguido en este análisis consta de un primer cribado y eliminado de valores anómalos. Para ello, como se expone
+El enfoque seguido en este análisis consta de un primer cribado y eliminación de valores anómalos. Para ello, como se expone
 en el estado del arte, al tratarse de un análisis que no se centra sobre un pilar central como puede ser la normalidad de los 
 datos, implementar el ESD~\cite{rosner1983} no es adecuado, por lo que esta detección se realiza con el 
 MAD~\cite{leys2013detecting}, que detecta anomalías de forma agnóstica, independientemente de qué tipo de distribución sigan 
 los datos.
-Posteriormente, se computan los tres testde hipótesis, uno para cada tipo de distribución y en primera instancia se
+Posteriormente, se computan los tres test de hipótesis, uno para cada tipo de distribución y en primera instancia se
 selecciona aquel con menor~\textit{AIC}. En caso de que todos los test de hipótesis sean rechazados, se escoge aquella
-hipótesis que aún siendo rechazada, implique menor coste basándose en este mismo criterio de Akaike, tratando de mitigar
-la anomalía estadística producida de los rechazos.
+hipótesis que aún siendo rechazada, implique menor coste basándose en este mismo criterio de Akaike, con el fin de reducir 
+la imprecisión estadística generada por el rechazo de los distintos test de hipótesis.
 
 Para ambos sentidos de la ruta se alcanzan valores de porcentaje de hipótesis no rechazadas
-superiores al criterio establecido y ya expuesto del \textbf{85\%}. Desglosando por tipo de distribución, se obtiene
+superiores al criterio establecido y ya expuesto del \textbf{85\%}.
+
+En la tabla~\ref{tab:pct_intra} se muestran los distintos valores alcanzados de no rechazo tanto para valores
+de \textit{boards} como de \textit{dropoffs} en ambos sentidos de la ruta estudiada.
+
+\begin{table}[H]
+    \ttabbox[\FBwidth]
+    {\caption{Porcentaje de hipótesis no rechazadas para datos intra-parada}\label{tab:pct_intra}}
+    {\begin{tabular}{|l|c|c|}
+        \hline
+        & \textbf{Sentido Cibeles} & \textbf{Sentido La Peseta} \\
+        \hline
+        \textit{Boards}   & 90,60\% & 87,56\% \\
+        \hline
+        \textit{Dropoffs}  & 93,61\% & 90,91\% \\
+        \hline
+        \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+
+Desglosando por tipo de distribución, se obtiene que la 
+distribución \textit{normal} se presenta como mayoritaria para ambos sentidos de la ruta, tanto en carga como en descarga,
+obteniendo un valor general de elección del \textbf{62,4\%}. En las 
+figuras~\ref{fig:cake_toA} y~\ref{fig:cake_toB} se muestran los gráficos de tarta relativos a estos resultados. 
+Con respecto a las dos nuevas 
+distribuciones, la \textit{binomial negativa} se erige como segunda, condensando el \textbf{23,9\%} general, aún presentándose
+en mayor porcentaje para \textit{boards} que para \textit{dropoffs}. El montante restante, un \textbf{13,7\%} recae sobre
+la distribución \textit{geométrica}.
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_A/fig1_global_pie_toA.png}
+\caption{Diagrama de tarta de las distribuciones elegidas para boards y dropoffs de pasajeros sentido Cibeles.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:cake_toA}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=\textwidth]{imagenes/to_B/fig1_global_pie_toB.png}
+\caption{Diagrama de tarta de las distribuciones elegidas para boards y dropoffs de pasajeros sentido La Peseta.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:cake_toB}
+\end{figure}
+
 
 
 \paragraph{Datos Inter-parada}
+\mbox{}\\
 
 En contrapartida de los datos Intra-parada, los datos relativos a los tiempos entre las distintas paradas de la ruta si que 
 se muestran, en una fase inicial de visualización mediante histogramas, con indicios de resultar en hipótesis de normalidad
-no rechazadas, al presentar la característica forma de campana. Por este motivo, se utiliza un enfoque similar al realizado 
-para la viabilidad de datos operacionales, basado
+no rechazadas. Por este motivo, se utiliza un enfoque similar al realizado para la viabilidad de datos operacionales, basado
 en hipótesis únicamente de normalidad, manteniendo el criterio desagregador de franja horaria escogido para la carga/descarga.
-Los resultados, al igual que en todos los casos previos, muestran un porcentaje de no rechazo superior al establecido, por 
-lo que resulta válido para su inclusión en el simulador.
+Este proceso se realiza también de forma incremental, validando en cada iteración los resultados parciales obtenidos.
+
+En cuanto a los valores alcanzados, se obtiene un porcentaje de no rechazo congruente con el establecido. Concretamente,
+para el sentido \textit{Cibeles} el valor es de: \textbf{95,49\%}, mientras que para el sentido \textit{La Peseta}: 
+\textbf{90,43\%}.
 
 \paragraph{Adaptación de formato de parámetros de entrada}
+\mbox{}\\
 
-Para la correcta lectura de los datos por parte del simulador, se escoge un enfoque basado en ficheros CSV, un tipo de
-almacenamiento matricial, basado en filas y columnas, aceptado por el entorno de trabajo escogido.
+Con el fin de realizar una correcta lectura de los distintos parámetros modelados y explicados en apartados previos,
+se expone a continuación, tanto para los tipos de datos ya estudiados, como para la información relativa a la operativa
+de autobuses que se implementa en la simulación, una plantilla especificando cómo se estandarizan estos y las justificaciones
+necesarias en cada caso.
 
-Se genera un fichero por cada sentido y tipo de dato. De esta forma, al tener dos sentidos y datos intra e inter parada,
-se dispone de cuatro archivos para la entrada del simulador como datos modelados.
+Relativo a los datos intra-parada, se escoge un enfoque basado en ficheros \textit{CSV}, almacenamiento matricial basado 
+en filas y columnas, que GAMA, a diferencia de otros casos, gestiona priorizando lectura columnar. En la tabla
+~\ref{tab:ejemplo_csv_intraparada} se muestra un ejemplo a modo ilustrativo del fichero original utilizado en el simulador.
+Se genera un fichero CSV por cada sentido existente de la línea a simular.
 
-Dentro de estos archivos, se genera para cada parada o tramo entre parada una columna relativa al tipo de distribución,
-así como columnas relativas a sus parámetros característicos para ser modelada. Esta generación columnar se 
-realiza para cada \textit{timeslot} entre las cinco de la mañana y las once de la noche.
+\begin{table}[H]
+\centering
+\ttabbox[\linewidth]
+{\caption{Ejemplo de formato del fichero CSV de parámetros de entrada generado
+         sobre datos intra-parada (fragmento ilustrativo).}\label{tab:ejemplo_csv_intraparada}}
+{\centering\small\begin{tabular}{ccclrr}
+\toprule
+\textbf{Parada} & \textbf{Franja} & \textbf{Tipo de dato} &
+\textbf{Distribución} & \textbf{Param1} & \textbf{Param2} \\
+\midrule
+82 & 5  & Board   & Binom.\ Negativa & 0,1401 & 0,1144 \\
+82 & 5  & DropOff & Binom.\ Negativa & 0,2178 & 0,6201 \\
+82 & 7  & Board   & Normal           & 7,1418 & 4,2352 \\
+82 & 7  & DropOff & Normal           & 12,661 & 5,0901 \\
+82 & 11 & Board   & Normal           & 3,1499 & 2,3351 \\
+82 & 15 & DropOff & Normal           & 9,1098 & 5,6768 \\
+82 & 20 & Board   & Geométrica       & 0,2562 & ---    \\
+82 & 20 & DropOff & Normal           & 9,3497 & 5,6877 \\
+\bottomrule
+\multicolumn{6}{l}{\small\textit{Fuente}: elaboración propia.}
+\end{tabular}}
+\end{table}
+
+Donde \textit{Param1} referencia para cada tipo de distribución: media $\mu$ (Normal), parámetro $r$ (Binomial Negativa)
+      o probabilidad $p$ (Geométrica)
+y \textit{Param2}: desviación estándar $\sigma$ (Normal), probabilidad $p$ (Binomial Negativa) o no aplicable (Geométrica).
+
+Relativo a los datos inter-parada, se escoge también el fichero \textit{CSV} como tipo de archivo y la segregación por línea
+en ficheros separados. En la tabla~\ref{tab:ejemplo_csv_interparada} se expone cómo se estructuran estos datos en concreto.
+
+\begin{table}[H]
+\centering
+\ttabbox[\linewidth]
+{\caption{Ejemplo de formato del fichero CSV de parámetros de entrada generado
+         sobre datos inter-parada (fragmento ilustrativo).}\label{tab:ejemplo_csv_interparada}}
+{\centering\small\begin{tabular}{crrrrrr}
+\toprule
+\textbf{StopsCodes} & \textbf{Mean\_5} & \textbf{Std\_5} &
+\textbf{Mean\_6} & \textbf{Std\_6} & \textbf{Mean\_7} & \textbf{Std\_7}\\
+\midrule
+2646-562 & 293,88811 & 171,7736 & 596,9620 & 233,4240 & 505,5713 & 268,3507 \\
+562-4090  & 114,4829 & 26,0383 & 127,2941 & 30,2708 & 137,3845 & 35,2622 \\
+4090-4188 & 149,6909 & 30,3440 & 152,9533 & 33,1415 & 168,2333 & 34,2092 \\
+\bottomrule
+\multicolumn{7}{l}{\small\textit{Fuente}: elaboración propia.}
+\end{tabular}}
+\end{table}
+
+Donde $\text{mean}$ y $\text{std}$ referencian los valores $\mu$ y $\sigma$ de cada distribución. Esta tabla, no obstante, se ha expuesto
+de forma incompleta, ya que se generan campos $\text{Mean}_N$ y $\text{Std}_N$ por cada valor $N$ referente a los distintos \textit{Timeslots}
+encontrados en los datos de operación. Concretamente entre las franjas cinco y veintitrés, generando un fichero con 
+$\text{Stops} - 1$ filas, una por cada bitupla $\text{stop}_i - \text{stop}_{i+1}$, y 37 columnas. Este sistema de almacenamiento beneficia el acceso
+columnar de la plataforma GAMA, ya que en cada \textit{timeslot} el acceso a los nuevos valores se realiza de forma continua,
+sin producir los fallos de lectura en la caché que generaría un acceso por filas.
+
+
+Con respecto a los mencionados datos de operativa de autobuses, estos no requieren de análisis de datos, motivo por el cual
+no se han mencionado de forma previa, pero que resulta imperioso exponer en este apartado al tratarse de un parámetro crucial
+de cara a la correcta realización de los escenarios a simular. Estos datos contienen la información referente a cuántos
+autobuses físicos se desea tomen parte en la simulación, y qué salida horaria esperada de cada cabecera tienen en sus 
+respectivos viajes. En este caso, a diferencia de sus predecesores, se escoge un formato basado en \textit{JSON}, que 
+permite mediante pares Clave:Valor, embeber la información expuesta. En el fragmento 
+de código~\ref{code:json_buses} se muestra un ejemplo ilustrativo de cómo se estructura este fichero.
+
+
+\begin{lstlisting}[language={}, caption={Fragmento del fichero JSON de dotación 
+de autobuses (dos vehículos mostrados).}, 
+label={code:json_buses}]
+{
+  "3579": [
+    ["5727", "6:40"],
+    ["2646", "7:37"],
+    ["5727", "9:10"],
+    ["2646", "10:12"],
+    ...
+  ],
+  "3560": [
+    ["2646", "6:00"],
+    ["5727", "7:36"],
+    ["2646", "8:36"],
+    ["5727", "9:50"],
+    ...
+  ],
+  ...
+}
+\end{lstlisting}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}
+
+
+Donde la clave principal de cada entrada del \textit{JSON} referencia el código del autobús, y su valor resulta de 
+una lista donde cada entrada representa una salida de cabecera. Dicha entrada, a su vez, es una lista de dos elementos, el 
+primero referenciando el código de parada origen, y el segundo relativo a la hora establecida, en formato \enquote{HH:MM}, 
+en la que el bus tiene programada su salida.

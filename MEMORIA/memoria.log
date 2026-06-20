@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  18 JUN 2026 15:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  20 JUN 2026 15:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -841,28 +841,50 @@ Package floatrow Info: Modified rotfloat package code loaded on input line 473.
 \LTleft=\skip85
 \LTright=\skip86
 \flrow@types=\toks61
+) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen307
+\lightrulewidth=\dimen308
+\cmidrulewidth=\dimen309
+\belowrulesep=\dimen310
+\belowbottomsep=\dimen311
+\aboverulesep=\dimen312
+\abovetopsep=\dimen313
+\cmidrulesep=\dimen314
+\cmidrulekern=\dimen315
+\defaultaddspace=\dimen316
+\@cmidla=\count365
+\@cmidlb=\count366
+\@aboverulesep=\dimen317
+\@belowrulesep=\dimen318
+\@thisruleclass=\count367
+\@lastruleclass=\count368
+\@thisrulewidth=\dimen319
+) (/usr/share/texlive/texmf-dist/tex/latex/threeparttable/threeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box75
 ) (/usr/share/texlive/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 Package: chngcntr 2018/04/09 v1.1a change counter resetting
 Package chngcntr Info: \counterwithout already defined.
 (chngcntr)             Quitting chngcntr on input line 21.
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count365
-\lst@gtempboxa=\box75
+\lst@mode=\count369
+\lst@gtempboxa=\box76
 \lst@token=\toks62
-\lst@length=\count366
-\lst@currlwidth=\dimen307
-\lst@column=\count367
-\lst@pos=\count368
-\lst@lostspace=\dimen308
-\lst@width=\dimen309
-\lst@newlines=\count369
-\lst@lineno=\count370
-\lst@maxwidth=\dimen310
+\lst@length=\count370
+\lst@currlwidth=\dimen320
+\lst@column=\count371
+\lst@pos=\count372
+\lst@lostspace=\dimen321
+\lst@width=\dimen322
+\lst@newlines=\count373
+\lst@lineno=\count374
+\lst@maxwidth=\dimen323
  (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count371
-\lst@skipnumbers=\count372
-\lst@framebox=\box76
+\c@lstnumber=\count375
+\lst@skipnumbers=\count376
+\lst@framebox=\box77
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
@@ -885,77 +907,77 @@ File: pgflibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box77
-\pgfnodeparttwobox=\box78
-\pgfnodepartthreebox=\box79
-\pgfnodepartfourbox=\box80
-\pgfnodeparttwentybox=\box81
-\pgfnodepartnineteenbox=\box82
-\pgfnodeparteighteenbox=\box83
-\pgfnodepartseventeenbox=\box84
-\pgfnodepartsixteenbox=\box85
-\pgfnodepartfifteenbox=\box86
-\pgfnodepartfourteenbox=\box87
-\pgfnodepartthirteenbox=\box88
-\pgfnodeparttwelvebox=\box89
-\pgfnodepartelevenbox=\box90
-\pgfnodeparttenbox=\box91
-\pgfnodepartninebox=\box92
-\pgfnodeparteightbox=\box93
-\pgfnodepartsevenbox=\box94
-\pgfnodepartsixbox=\box95
-\pgfnodepartfivebox=\box96
+\pgfnodepartlowerbox=\box78
+\pgfnodeparttwobox=\box79
+\pgfnodepartthreebox=\box80
+\pgfnodepartfourbox=\box81
+\pgfnodeparttwentybox=\box82
+\pgfnodepartnineteenbox=\box83
+\pgfnodeparteighteenbox=\box84
+\pgfnodepartseventeenbox=\box85
+\pgfnodepartsixteenbox=\box86
+\pgfnodepartfifteenbox=\box87
+\pgfnodepartfourteenbox=\box88
+\pgfnodepartthirteenbox=\box89
+\pgfnodeparttwelvebox=\box90
+\pgfnodepartelevenbox=\box91
+\pgfnodeparttenbox=\box92
+\pgfnodepartninebox=\box93
+\pgfnodeparteightbox=\box94
+\pgfnodepartsevenbox=\box95
+\pgfnodepartsixbox=\box96
+\pgfnodepartfivebox=\box97
 ))) (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
  (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count373
+\lrq@indent=\count377
  (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count374
-\c@listtotal=\count375
-\c@listcount=\count376
-\c@liststart=\count377
-\c@liststop=\count378
-\c@citecount=\count379
-\c@citetotal=\count380
-\c@multicitecount=\count381
-\c@multicitetotal=\count382
-\c@instcount=\count383
-\c@maxnames=\count384
-\c@minnames=\count385
-\c@maxitems=\count386
-\c@minitems=\count387
-\c@citecounter=\count388
-\c@maxcitecounter=\count389
-\c@savedcitecounter=\count390
-\c@uniquelist=\count391
-\c@uniquename=\count392
-\c@refsection=\count393
-\c@refsegment=\count394
-\c@maxextratitle=\count395
-\c@maxextratitleyear=\count396
-\c@maxextraname=\count397
-\c@maxextradate=\count398
-\c@maxextraalpha=\count399
-\c@abbrvpenalty=\count400
-\c@highnamepenalty=\count401
-\c@lownamepenalty=\count402
-\c@maxparens=\count403
-\c@parenlevel=\count404
-\blx@tempcnta=\count405
-\blx@tempcntb=\count406
-\blx@tempcntc=\count407
-\c@blx@maxsection=\count408
-\blx@maxsegment@0=\count409
-\blx@notetype=\count410
-\blx@parenlevel@text=\count411
-\blx@parenlevel@foot=\count412
-\blx@sectionciteorder@0=\count413
-\blx@sectionciteorderinternal@0=\count414
-\blx@entrysetcounter=\count415
-\blx@biblioinstance=\count416
+\c@tabx@nest=\count378
+\c@listtotal=\count379
+\c@listcount=\count380
+\c@liststart=\count381
+\c@liststop=\count382
+\c@citecount=\count383
+\c@citetotal=\count384
+\c@multicitecount=\count385
+\c@multicitetotal=\count386
+\c@instcount=\count387
+\c@maxnames=\count388
+\c@minnames=\count389
+\c@maxitems=\count390
+\c@minitems=\count391
+\c@citecounter=\count392
+\c@maxcitecounter=\count393
+\c@savedcitecounter=\count394
+\c@uniquelist=\count395
+\c@uniquename=\count396
+\c@refsection=\count397
+\c@refsegment=\count398
+\c@maxextratitle=\count399
+\c@maxextratitleyear=\count400
+\c@maxextraname=\count401
+\c@maxextradate=\count402
+\c@maxextraalpha=\count403
+\c@abbrvpenalty=\count404
+\c@highnamepenalty=\count405
+\c@lownamepenalty=\count406
+\c@maxparens=\count407
+\c@parenlevel=\count408
+\blx@tempcnta=\count409
+\blx@tempcntb=\count410
+\blx@tempcntc=\count411
+\c@blx@maxsection=\count412
+\blx@maxsegment@0=\count413
+\blx@notetype=\count414
+\blx@parenlevel@text=\count415
+\blx@parenlevel@foot=\count416
+\blx@sectionciteorder@0=\count417
+\blx@sectionciteorderinternal@0=\count418
+\blx@entrysetcounter=\count419
+\blx@biblioinstance=\count420
 \labelnumberwidth=\skip87
 \labelalphawidth=\skip88
 \biblabelsep=\skip89
@@ -967,9 +989,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@bcfin=\read5
 \blx@bcfout=\write5
 \blx@langwohyphens=\language90
-\c@mincomprange=\count417
-\c@maxcomprange=\count418
-\c@mincompwidth=\count419
+\c@mincomprange=\count421
+\c@maxcomprange=\count422
+\c@mincompwidth=\count423
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def
@@ -979,74 +1001,74 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'ieee.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count420
-\c@savedafterword=\count421
-\c@annotator=\count422
-\c@savedannotator=\count423
-\c@author=\count424
-\c@savedauthor=\count425
-\c@bookauthor=\count426
-\c@savedbookauthor=\count427
-\c@commentator=\count428
-\c@savedcommentator=\count429
-\c@editor=\count430
-\c@savededitor=\count431
-\c@editora=\count432
-\c@savededitora=\count433
-\c@editorb=\count434
-\c@savededitorb=\count435
-\c@editorc=\count436
-\c@savededitorc=\count437
-\c@foreword=\count438
-\c@savedforeword=\count439
-\c@holder=\count440
-\c@savedholder=\count441
-\c@introduction=\count442
-\c@savedintroduction=\count443
-\c@namea=\count444
-\c@savednamea=\count445
-\c@nameb=\count446
-\c@savednameb=\count447
-\c@namec=\count448
-\c@savednamec=\count449
-\c@translator=\count450
-\c@savedtranslator=\count451
-\c@shortauthor=\count452
-\c@savedshortauthor=\count453
-\c@shorteditor=\count454
-\c@savedshorteditor=\count455
-\c@labelname=\count456
-\c@savedlabelname=\count457
-\c@institution=\count458
-\c@savedinstitution=\count459
-\c@lista=\count460
-\c@savedlista=\count461
-\c@listb=\count462
-\c@savedlistb=\count463
-\c@listc=\count464
-\c@savedlistc=\count465
-\c@listd=\count466
-\c@savedlistd=\count467
-\c@liste=\count468
-\c@savedliste=\count469
-\c@listf=\count470
-\c@savedlistf=\count471
-\c@location=\count472
-\c@savedlocation=\count473
-\c@organization=\count474
-\c@savedorganization=\count475
-\c@origlocation=\count476
-\c@savedoriglocation=\count477
-\c@origpublisher=\count478
-\c@savedorigpublisher=\count479
-\c@publisher=\count480
-\c@savedpublisher=\count481
-\c@language=\count482
-\c@savedlanguage=\count483
-\c@origlanguage=\count484
-\c@savedoriglanguage=\count485
-\c@pageref=\count486
-\c@savedpageref=\count487
+\c@afterword=\count424
+\c@savedafterword=\count425
+\c@annotator=\count426
+\c@savedannotator=\count427
+\c@author=\count428
+\c@savedauthor=\count429
+\c@bookauthor=\count430
+\c@savedbookauthor=\count431
+\c@commentator=\count432
+\c@savedcommentator=\count433
+\c@editor=\count434
+\c@savededitor=\count435
+\c@editora=\count436
+\c@savededitora=\count437
+\c@editorb=\count438
+\c@savededitorb=\count439
+\c@editorc=\count440
+\c@savededitorc=\count441
+\c@foreword=\count442
+\c@savedforeword=\count443
+\c@holder=\count444
+\c@savedholder=\count445
+\c@introduction=\count446
+\c@savedintroduction=\count447
+\c@namea=\count448
+\c@savednamea=\count449
+\c@nameb=\count450
+\c@savednameb=\count451
+\c@namec=\count452
+\c@savednamec=\count453
+\c@translator=\count454
+\c@savedtranslator=\count455
+\c@shortauthor=\count456
+\c@savedshortauthor=\count457
+\c@shorteditor=\count458
+\c@savedshorteditor=\count459
+\c@labelname=\count460
+\c@savedlabelname=\count461
+\c@institution=\count462
+\c@savedinstitution=\count463
+\c@lista=\count464
+\c@savedlista=\count465
+\c@listb=\count466
+\c@savedlistb=\count467
+\c@listc=\count468
+\c@savedlistc=\count469
+\c@listd=\count470
+\c@savedlistd=\count471
+\c@liste=\count472
+\c@savedliste=\count473
+\c@listf=\count474
+\c@savedlistf=\count475
+\c@location=\count476
+\c@savedlocation=\count477
+\c@organization=\count478
+\c@savedorganization=\count479
+\c@origlocation=\count480
+\c@savedoriglocation=\count481
+\c@origpublisher=\count482
+\c@savedorigpublisher=\count483
+\c@publisher=\count484
+\c@savedpublisher=\count485
+\c@language=\count486
+\c@savedlanguage=\count487
+\c@origlanguage=\count488
+\c@savedoriglanguage=\count489
+\c@pageref=\count490
+\c@savedpageref=\count491
 \shorthandwidth=\skip95
 \shortjournalwidth=\skip96
 \shortserieswidth=\skip97
@@ -1070,19 +1092,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
-\c@textcitecount=\count488
-\c@textcitetotal=\count489
-\c@textcitemaxnames=\count490
-\c@biburlbigbreakpenalty=\count491
-\c@biburlbreakpenalty=\count492
-\c@biburlnumpenalty=\count493
-\c@biburlucpenalty=\count494
-\c@biburllcpenalty=\count495
+\c@textcitecount=\count492
+\c@textcitetotal=\count493
+\c@textcitemaxnames=\count494
+\c@biburlbigbreakpenalty=\count495
+\c@biburlbreakpenalty=\count496
+\c@biburlnumpenalty=\count497
+\c@biburlucpenalty=\count498
+\c@biburllcpenalty=\count499
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count496
+\c@smartand=\count500
 )
 Package biblatex Info: Trying to load bibliography style 'ieee'...
 Package biblatex Info: ... file 'ieee.bbx' found.
@@ -1100,8 +1122,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count497
-\c@bbx:relatedtotal=\count498
+\c@bbx:relatedcount=\count501
+\c@bbx:relatedtotal=\count502
 ))))
 Package biblatex Info: Trying to load citation style 'ieee'...
 Package biblatex Info: ... file 'ieee.cbx' found.
@@ -1111,10 +1133,10 @@ Package biblatex Info: Trying to load citation style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.cbx' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
 File: numeric-comp.cbx 2023/03/05 v3.19 biblatex citation style (PK/MW)
-\c@cbx@tempcnta=\count499
-\c@cbx@tempcntb=\count500
-\c@cbx@tempcntc=\count501
-\c@cbx@tempcntd=\count502
+\c@cbx@tempcnta=\count503
+\c@cbx@tempcntb=\count504
+\c@cbx@tempcntc=\count505
+\c@cbx@tempcntd=\count506
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
@@ -1142,8 +1164,8 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2024-01-22 L3 programming layer (loader) 
  (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count503
-\l__pdf_internal_box=\box97
+\l__color_backend_stack_int=\count507
+\l__pdf_internal_box=\box98
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2024-01-22 L3 programming layer (loader) 
@@ -1162,40 +1184,40 @@ LaTeX Info: Redefining \% on input line 12.
 )
 \openout1 = `memoria.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 243.
-LaTeX Font Info:    Trying to load font information for OML+txmi on input line 243.
+LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 245.
+LaTeX Font Info:    Trying to load font information for OML+txmi on input line 245.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 243.
-LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 243.
-LaTeX Font Info:    Trying to load font information for OMS+txsy on input line 243.
+LaTeX Font Info:    ... okay on input line 245.
+LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 245.
+LaTeX Font Info:    Trying to load font information for OMS+txsy on input line 245.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 243.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 243.
-LaTeX Font Info:    ... okay on input line 243.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 243.
-LaTeX Font Info:    ... okay on input line 243.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 243.
-LaTeX Font Info:    ... okay on input line 243.
-LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 243.
-LaTeX Font Info:    Trying to load font information for OMX+txex on input line 243.
+LaTeX Font Info:    ... okay on input line 245.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 245.
+LaTeX Font Info:    ... okay on input line 245.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 245.
+LaTeX Font Info:    ... okay on input line 245.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 245.
+LaTeX Font Info:    ... okay on input line 245.
+LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 245.
+LaTeX Font Info:    Trying to load font information for OMX+txex on input line 245.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omxtxex.fd
 File: omxtxex.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 243.
-LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 243.
-LaTeX Font Info:    Trying to load font information for U+txexa on input line 243.
+LaTeX Font Info:    ... okay on input line 245.
+LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 245.
+LaTeX Font Info:    Trying to load font information for U+txexa on input line 245.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxexa.fd
 File: utxexa.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 243.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 243.
-LaTeX Font Info:    ... okay on input line 243.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 243.
-LaTeX Font Info:    ... okay on input line 243.
+LaTeX Font Info:    ... okay on input line 245.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 245.
+LaTeX Font Info:    ... okay on input line 245.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 245.
+LaTeX Font Info:    ... okay on input line 245.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1233,16 +1255,16 @@ LaTeX Font Info:    ... okay on input line 243.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count504
-\scratchdimen=\dimen311
-\scratchbox=\box98
-\nofMPsegments=\count505
-\nofMParguments=\count506
+\scratchcounter=\count508
+\scratchdimen=\dimen324
+\scratchbox=\box99
+\nofMPsegments=\count509
+\nofMParguments=\count510
 \everyMPshowfont=\toks63
-\MPscratchCnt=\count507
-\MPscratchDim=\dimen312
-\MPnumerator=\count508
-\makeMPintoPDFobject=\count509
+\MPscratchCnt=\count511
+\MPscratchDim=\dimen325
+\MPnumerator=\count512
+\makeMPintoPDFobject=\count513
 \everyMPtoPDFconversion=\toks64
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1250,7 +1272,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 243.
+Package hyperref Info: Link coloring ON on input line 245.
  (./memoria.out) (./memoria.out)
 \@outlinefile=\write6
 \openout6 = `memoria.out'.
@@ -1258,15 +1280,16 @@ Package hyperref Info: Link coloring ON on input line 243.
 
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-LaTeX Info: Redefining \. on input line 243.
-LaTeX Info: Redefining \% on input line 243.
+LaTeX Info: Redefining \. on input line 245.
+LaTeX Info: Redefining \% on input line 245.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: floatrow package is loaded.
 Package caption Info: floatrow package is loaded.
 Package caption Info: listings package is loaded.
+Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count510
+\c@lstlisting=\count514
 Package biblatex Info: Trying to load language 'spanish'...
 Package biblatex Info: ... file 'spanish.lbx' found.
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
@@ -1280,53 +1303,53 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'memoria.bbl' found.
  (./memoria.bbl)
-Package biblatex Info: Reference section=0 on input line 243.
-Package biblatex Info: Reference segment=0 on input line 243.
-LaTeX Font Info:    Trying to load font information for T1+txss on input line 250.
+Package biblatex Info: Reference section=0 on input line 245.
+Package biblatex Info: Reference segment=0 on input line 245.
+LaTeX Font Info:    Trying to load font information for T1+txss on input line 252.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txss.fd
 File: t1txss.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 11.39996pt on input line 250.
+(Font)              scaled to size 11.39996pt on input line 252.
 <imagenes/logo_UC3M.png, id=152, 456.2865pt x 45.99pt>
 File: imagenes/logo_UC3M.png Graphic file (type png)
 <use imagenes/logo_UC3M.png>
-Package pdftex.def Info: imagenes/logo_UC3M.png  used on input line 254.
+Package pdftex.def Info: imagenes/logo_UC3M.png  used on input line 256.
 (pdftex.def)             Requested size: 455.24408pt x 45.88531pt.
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 16.41594pt on input line 257.
+(Font)              scaled to size 16.41594pt on input line 259.
 LaTeX Font Info:    Font shape `T1/txss/m/sl' will be
-(Font)              scaled to size 16.41594pt on input line 261.
+(Font)              scaled to size 16.41594pt on input line 263.
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 23.63593pt on input line 265.
+(Font)              scaled to size 23.63593pt on input line 267.
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 19.70294pt on input line 269.
+(Font)              scaled to size 19.70294pt on input line 271.
 <imagenes/creativecommons.png, id=154, 338.76563pt x 118.19156pt>
 File: imagenes/creativecommons.png Graphic file (type png)
 <use imagenes/creativecommons.png>
-Package pdftex.def Info: imagenes/creativecommons.png  used on input line 280.
+Package pdftex.def Info: imagenes/creativecommons.png  used on input line 282.
 (pdftex.def)             Requested size: 119.50148pt x 41.69228pt.
 LaTeX Font Info:    Font shape `T1/txss/b/n' in size <12> not available
-(Font)              Font shape `T1/txss/bx/n' tried instead on input line 281.
+(Font)              Font shape `T1/txss/bx/n' tried instead on input line 283.
 LaTeX Font Info:    Font shape `T1/txss/bx/n' will be
-(Font)              scaled to size 11.39996pt on input line 281.
+(Font)              scaled to size 11.39996pt on input line 283.
  [1
 
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} <./imagenes/logo_UC3M.png> <./imagenes/creativecommons.png>]
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.293 \begin{abstract}
+l.295 \begin{abstract}
                        [1]
 LaTeX Font Info:    Font shape `T1/txr/b/n' in size <12> not available
-(Font)              Font shape `T1/txr/bx/n' tried instead on input line 293.
+(Font)              Font shape `T1/txr/bx/n' tried instead on input line 295.
 LaTeX Font Info:    Font shape `T1/txr/b/n' in size <14.4> not available
-(Font)              Font shape `T1/txr/bx/n' tried instead on input line 293.
+(Font)              Font shape `T1/txr/bx/n' tried instead on input line 295.
  [3]
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.318 \chapter
+l.320 \chapter
               *{Agradecimientos} % \chapter* evita que aparezca en el Ã­ndice [1] [5
 
 ] [6] (./memoria.toc
@@ -1362,13 +1385,13 @@ File: utxmia.fd 2000/12/15 v3.1
 LaTeX Font Info:    Trying to load font information for U+txsyc on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxsyc.fd
 File: utxsyc.fd 2000/12/15 v3.1
-))
+) [10
+
+])
 \tf@lof=\write8
 \openout8 = `memoria.lof'.
 
- [10
-
-] [11] [12] (./memoria.lot
+ [11] [12] (./memoria.lot
 LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
@@ -1406,7 +1429,7 @@ LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10> not available
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [8] [9] [10]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [11] [12] [13] [14] [15]
-<imagenes/montecarlo_convergence_occupation.png, id=610, 867.24pt x 361.35pt>
+<imagenes/montecarlo_convergence_occupation.png, id=624, 867.24pt x 361.35pt>
 File: imagenes/montecarlo_convergence_occupation.png Graphic file (type png)
 <use imagenes/montecarlo_convergence_occupation.png>
 Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 218.
@@ -1425,12 +1448,16 @@ Overfull \hbox (12.0pt too wide) detected at line 218
  []
 
 [16 <./imagenes/montecarlo_convergence_occupation.png>]
-Package pgfplots info on input line 263: Overriding colorspace to rgb due to xcolor configuration.
+Package pgfplots info on input line 269: Overriding colorspace to rgb due to xcolor configuration.
  [17] [18]
-Package pgfplots info on input line 365: Overriding colorspace to rgb due to xcolor configuration.
-Package pgfplots info on input line 396: Overriding colorspace to rgb due to xcolor configuration.
- [19] [20]
-Overfull \hbox (8.7134pt too wide) in paragraph at lines 472--478
+Package pgfplots info on input line 371: Overriding colorspace to rgb due to xcolor configuration.
+Package pgfplots info on input line 402: Overriding colorspace to rgb due to xcolor configuration.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[19] [20]
+Overfull \hbox (8.7134pt too wide) in paragraph at lines 478--484
 \T1/txr/m/n/12 Donde $\OML/txmi/m/it/12 x[][]$ \T1/txr/m/n/12 de-no-ta la me-dia y $\OML/txmi/m/it/12 s$ \T1/txr/m/n/12 es la des-via-ción es-tán-dar mues-tral, que di-fie-re de $\OML/txmi/m/it/12 m[]$\T1/txr/m/n/12 (desviación
  []
 
@@ -1439,7 +1466,7 @@ Cap\'{\i }tulo 3.
 (./chapter/section_metodology/metodology.tex [23
 
 ] [24] [25]
-<imagenes/gantt_chart.png, id=725, 1001.6622pt x 351.9549pt>
+<imagenes/gantt_chart.png, id=743, 1001.6622pt x 351.9549pt>
 File: imagenes/gantt_chart.png Graphic file (type png)
 <use imagenes/gantt_chart.png>
 Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 97.
@@ -1458,7 +1485,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
  <./imagenes/gantt_chart.png>] [27
 
 ]
-<imagenes/regularidad.png, id=756, 435.87843pt x 445.665pt>
+<imagenes/regularidad.png, id=774, 435.87843pt x 445.665pt>
 File: imagenes/regularidad.png Graphic file (type png)
 <use imagenes/regularidad.png>
 Package pdftex.def Info: imagenes/regularidad.png  used on input line 170.
@@ -1466,7 +1493,7 @@ Package pdftex.def Info: imagenes/regularidad.png  used on input line 170.
  [28] [29 <./imagenes/regularidad.png>]) [30]
 Cap\'{\i }tulo 4.
 (./chapter/section_analysis/param_analysis.tex
-<imagenes/qgis_capture_e01_converted.png, id=780, 1861.95625pt x 1051.93pt>
+<imagenes/qgis_capture_e01_converted.png, id=798, 1861.95625pt x 1051.93pt>
 File: imagenes/qgis_capture_e01_converted.png Graphic file (type png)
 <use imagenes/qgis_capture_e01_converted.png>
 Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 47.
@@ -1474,152 +1501,183 @@ Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input 
  [31
 
 ]
-<imagenes/gama_shapefiles.png, id=787, 1862.96pt x 1054.94125pt>
+<imagenes/gama_shapefiles.png, id=805, 1862.96pt x 1054.94125pt>
 File: imagenes/gama_shapefiles.png Graphic file (type png)
 <use imagenes/gama_shapefiles.png>
 Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 55.
 (pdftex.def)             Requested size: 426.79135pt x 241.68166pt.
  [32 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
-<imagenes/image_tables_diagram.png, id=796, 331.2375pt x 785.93625pt>
+<imagenes/image_tables_diagram.png, id=816, 331.2375pt x 785.93625pt>
 File: imagenes/image_tables_diagram.png Graphic file (type png)
 <use imagenes/image_tables_diagram.png>
-Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 82.
+Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 90.
 (pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
  [33]
-Overfull \hbox (38.77354pt too wide) detected at line 163
+Overfull \hbox (38.77354pt too wide) detected at line 171
  [] 
  []
 
 [34 <./imagenes/image_tables_diagram.png (PNG copy)>]
-Overfull \hbox (38.77354pt too wide) detected at line 245
+Overfull \hbox (38.77354pt too wide) detected at line 253
  [] 
  []
 
 [35] [36] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 255.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 263.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 256.
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 264.
  [37] [38]
 LaTeX Font Info:    Font shape `T1/txr/b/it' in size <12> not available
-(Font)              Font shape `T1/txr/bx/it' tried instead on input line 343.
-<imagenes/to_A/comparison_ALL_vs_individual.png, id=843, 1156.32pt x 433.62pt>
+(Font)              Font shape `T1/txr/bx/it' tried instead on input line 351.
+<imagenes/to_A/comparison_ALL_vs_individual.png, id=863, 1156.32pt x 433.62pt>
 File: imagenes/to_A/comparison_ALL_vs_individual.png Graphic file (type png)
 <use imagenes/to_A/comparison_ALL_vs_individual.png>
-Package pdftex.def Info: imagenes/to_A/comparison_ALL_vs_individual.png  used on input line 374.
+Package pdftex.def Info: imagenes/to_A/comparison_ALL_vs_individual.png  used on input line 382.
 (pdftex.def)             Requested size: 426.79135pt x 160.04651pt.
  [39]
-<imagenes/to_B/comparison_ALL_vs_individual.png, id=849, 1156.32pt x 433.62pt>
+<imagenes/to_B/comparison_ALL_vs_individual.png, id=869, 1156.32pt x 433.62pt>
 File: imagenes/to_B/comparison_ALL_vs_individual.png Graphic file (type png)
 <use imagenes/to_B/comparison_ALL_vs_individual.png>
-Package pdftex.def Info: imagenes/to_B/comparison_ALL_vs_individual.png  used on input line 382.
+Package pdftex.def Info: imagenes/to_B/comparison_ALL_vs_individual.png  used on input line 390.
 (pdftex.def)             Requested size: 426.79135pt x 160.04651pt.
  [40 <./imagenes/to_A/comparison_ALL_vs_individual.png> <./imagenes/to_B/comparison_ALL_vs_individual.png>]
-<imagenes/to_A/heatmap_normality_ALL.png, id=864, 1156.32pt x 578.16pt>
+<imagenes/to_A/heatmap_normality_ALL.png, id=884, 1156.32pt x 578.16pt>
 File: imagenes/to_A/heatmap_normality_ALL.png Graphic file (type png)
 <use imagenes/to_A/heatmap_normality_ALL.png>
-Package pdftex.def Info: imagenes/to_A/heatmap_normality_ALL.png  used on input line 423.
+Package pdftex.def Info: imagenes/to_A/heatmap_normality_ALL.png  used on input line 431.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-<imagenes/to_A/heatmap_normality_individual.png, id=865, 1156.32pt x 578.16pt>
+<imagenes/to_A/heatmap_normality_individual.png, id=885, 1156.32pt x 578.16pt>
 File: imagenes/to_A/heatmap_normality_individual.png Graphic file (type png)
 <use imagenes/to_A/heatmap_normality_individual.png>
-Package pdftex.def Info: imagenes/to_A/heatmap_normality_individual.png  used on input line 430.
+Package pdftex.def Info: imagenes/to_A/heatmap_normality_individual.png  used on input line 438.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
  [41 <./imagenes/to_A/heatmap_normality_ALL.png>]
-<imagenes/to_B/heatmap_normality_ALL.png, id=872, 1156.32pt x 578.16pt>
+<imagenes/to_B/heatmap_normality_ALL.png, id=892, 1156.32pt x 578.16pt>
 File: imagenes/to_B/heatmap_normality_ALL.png Graphic file (type png)
 <use imagenes/to_B/heatmap_normality_ALL.png>
-Package pdftex.def Info: imagenes/to_B/heatmap_normality_ALL.png  used on input line 437.
+Package pdftex.def Info: imagenes/to_B/heatmap_normality_ALL.png  used on input line 445.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-<imagenes/to_B/heatmap_normality_individual.png, id=873, 1156.32pt x 578.16pt>
+<imagenes/to_B/heatmap_normality_individual.png, id=893, 1156.32pt x 578.16pt>
 File: imagenes/to_B/heatmap_normality_individual.png Graphic file (type png)
 <use imagenes/to_B/heatmap_normality_individual.png>
-Package pdftex.def Info: imagenes/to_B/heatmap_normality_individual.png  used on input line 444.
+Package pdftex.def Info: imagenes/to_B/heatmap_normality_individual.png  used on input line 452.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
- [42 <./imagenes/to_A/heatmap_normality_individual.png> <./imagenes/to_B/heatmap_normality_ALL.png>] [43 <./imagenes/to_B/heatmap_normality_individual.png>] [44]) [45]
+ [42 <./imagenes/to_A/heatmap_normality_individual.png> <./imagenes/to_B/heatmap_normality_ALL.png>] [43 <./imagenes/to_B/heatmap_normality_individual.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 489--490
+
+ []
+
+[44]
+Overfull \hbox (35.28078pt too wide) in paragraph at lines 539--539
+[] [] 
+ []
+
+
+Overfull \hbox (35.28078pt too wide) in paragraph at lines 539--539
+[] [] 
+ []
+
+<imagenes/to_A/fig1_global_pie_toA.png, id=915, 826.287pt x 357.4956pt>
+File: imagenes/to_A/fig1_global_pie_toA.png Graphic file (type png)
+<use imagenes/to_A/fig1_global_pie_toA.png>
+Package pdftex.def Info: imagenes/to_A/fig1_global_pie_toA.png  used on input line 554.
+(pdftex.def)             Requested size: 426.79135pt x 184.6496pt.
+[45]
+<imagenes/to_B/fig1_global_pie_toB.png, id=920, 817.6146pt x 357.4956pt>
+File: imagenes/to_B/fig1_global_pie_toB.png Graphic file (type png)
+<use imagenes/to_B/fig1_global_pie_toB.png>
+Package pdftex.def Info: imagenes/to_B/fig1_global_pie_toB.png  used on input line 561.
+(pdftex.def)             Requested size: 426.79135pt x 186.61337pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 569--570
+
+ []
+
+[46 <./imagenes/to_A/fig1_global_pie_toA.png> <./imagenes/to_B/fig1_global_pie_toB.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 582--583
+
+ []
+
+[47] [48]) [49]
 Cap\'{\i }tulo 5.
-(./chapter/section_design/Simulation_design.tex) [46
+(./chapter/section_design/Simulation_design.tex) [50
 
 ]
 Cap\'{\i }tulo 6.
-[47
-
-]
-Cap\'{\i }tulo 7.
-[48
-
-]
-Cap\'{\i }tulo 8.
-(./chapter/section_budget/budget.tex) [49
-
-]
-Cap\'{\i }tulo 9.
-[50
-
-]
-Cap\'{\i }tulo 10.
 [51
 
 ]
-Package csquotes Info: Disabling multilingual quotes on input line 473.
+Cap\'{\i }tulo 7.
+[52
+
+]
+Cap\'{\i }tulo 8.
+(./chapter/section_budget/budget.tex) [53
+
+]
+Cap\'{\i }tulo 9.
+[54
+
+]
+Cap\'{\i }tulo 10.
+[55
+
+]
+Package csquotes Info: Disabling multilingual quotes on input line 475.
 
 
 Package csquotes Warning: Quote style 'british/english' not defined.
-(csquotes)                Ignoring command on input line 473.
+(csquotes)                Ignoring command on input line 475.
 
 
-Overfull \hbox (1.37985pt too wide) in paragraph at lines 475--475
+Overfull \hbox (1.37985pt too wide) in paragraph at lines 477--477
 \T1/txr/m/n/12 li-te-ra-tu-re re-view,^^Q \T1/txr/m/it/12 Trans-por-ta-tion Re-search Part C: Emer-ging Tech-no-lo-gies\T1/txr/m/n/12 , vol. 19,
  []
 
 
-Overfull \hbox (1.42937pt too wide) in paragraph at lines 475--475
+Overfull \hbox (1.42937pt too wide) in paragraph at lines 477--477
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
-[52
+[56
 
 
-] [53]
-Overfull \hbox (5.85698pt too wide) in paragraph at lines 475--475
+] [57]
+Overfull \hbox (5.85698pt too wide) in paragraph at lines 477--477
 \T1/txr/m/n/12 tro Li-ne 7,^^Q \T1/txr/m/it/12 Mo-de-lling\T1/txr/m/n/12 , vol. 7, n.[] 2, p. 58, 2026. \T1/txr/m/sc/12 doi\T1/txr/m/n/12 : [][]$\T1/txtt/m/n/12 10 . 3390 / modelling7020058$[][]\T1/txr/m/n/12 . 
  []
 
 
-Overfull \hbox (2.62831pt too wide) in paragraph at lines 475--475
+Overfull \hbox (2.62831pt too wide) in paragraph at lines 477--477
 \T1/txr/m/n/12 lling,^^Q en \T1/txr/m/it/12 AIP Con-fe-ren-ce Pro-cee-dings\T1/txr/m/n/12 , vol. 2423, AIP Pu-blishing, 2021, p. 020 035.
  []
 
-[54]
-Overfull \hbox (4.97697pt too wide) in paragraph at lines 475--475
+[58]
+Overfull \hbox (4.97697pt too wide) in paragraph at lines 477--477
 \T1/txr/m/n/12 Con-trol Ac-tions to Im-pro-ve Bus-Service Re-gu-la-rity,^^Q en \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce. ECAI
  []
 
 
-Overfull \hbox (11.55956pt too wide) in paragraph at lines 475--475
+Overfull \hbox (11.55956pt too wide) in paragraph at lines 477--477
 \T1/txr/m/it/12 Workshops\T1/txr/m/n/12 , O. Ger-va-si et al., eds., ép. Lec-tu-re No-tes in Com-pu-ter Scien-ce, vol. 15898,
  []
 
-[55]
-Overfull \hbox (1.1455pt too wide) in paragraph at lines 475--475
-\T1/txr/m/n/12 Dis-po-ni-ble en: [][]$\T1/txtt/m/n/12 https : / / ops . fhwa . dot . gov / publications / fhwahop18036/$[][]\T1/txr/m/n/12 . 
- []
-
-
-Overfull \hbox (4.26741pt too wide) in paragraph at lines 475--475
+[59]
+Overfull \hbox (4.26741pt too wide) in paragraph at lines 477--477
 []\T1/txr/m/n/12 W. G. Co-chran, ^^P  So-me Methods for Strengthe-ning the Com-mon Chi-Squared Tests,^^Q
  []
 
-[56] [57] (./anex/anex_requirements/requirements.tex) [1
+[60] [61] (./anex/anex_requirements/requirements.tex) [1
 
 ] (./anex/anex_figures/operational.tex
-<imagenes/to_A/normality_stop_ALL.png, id=995, 722.7pt x 578.16pt>
+<imagenes/to_A/normality_stop_ALL.png, id=1061, 722.7pt x 578.16pt>
 File: imagenes/to_A/normality_stop_ALL.png Graphic file (type png)
 <use imagenes/to_A/normality_stop_ALL.png>
 Package pdftex.def Info: imagenes/to_A/normality_stop_ALL.png  used on input line 7.
 (pdftex.def)             Requested size: 426.79135pt x 341.43785pt.
-<imagenes/to_A/normality_stop_individual.png, id=996, 722.7pt x 578.16pt>
+<imagenes/to_A/normality_stop_individual.png, id=1062, 722.7pt x 578.16pt>
 File: imagenes/to_A/normality_stop_individual.png Graphic file (type png)
 <use imagenes/to_A/normality_stop_individual.png>
 Package pdftex.def Info: imagenes/to_A/normality_stop_individual.png  used on input line 14.
@@ -1632,7 +1690,7 @@ l.18
       [2
 
  <./imagenes/to_A/normality_stop_ALL.png>]
-<imagenes/to_B/normality_stop_ALL.png, id=1003, 722.7pt x 578.16pt>
+<imagenes/to_B/normality_stop_ALL.png, id=1068, 722.7pt x 578.16pt>
 File: imagenes/to_B/normality_stop_ALL.png Graphic file (type png)
 <use imagenes/to_B/normality_stop_ALL.png>
 Package pdftex.def Info: imagenes/to_B/normality_stop_ALL.png  used on input line 21.
@@ -1643,7 +1701,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
                    \relax 
 l.25 
       [3 <./imagenes/to_A/normality_stop_individual.png>]
-<imagenes/to_B/normality_stop_individual.png, id=1008, 722.7pt x 578.16pt>
+<imagenes/to_B/normality_stop_individual.png, id=1073, 722.7pt x 578.16pt>
 File: imagenes/to_B/normality_stop_individual.png Graphic file (type png)
 <use imagenes/to_B/normality_stop_individual.png>
 Package pdftex.def Info: imagenes/to_B/normality_stop_individual.png  used on input line 28.
@@ -1652,12 +1710,12 @@ Package pdftex.def Info: imagenes/to_B/normality_stop_individual.png  used on in
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.489 
+l.491 
        [4 <./imagenes/to_B/normality_stop_ALL.png>]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.492 \end{document}
+l.494 \end{document}
                      [5 <./imagenes/to_B/normality_stop_individual.png>] (./memoria.aux
 LaTeX Info: Redefining \sptext on input line 12.
 LaTeX Info: Redefining \. on input line 12.
@@ -1674,17 +1732,17 @@ Package logreq Info: Writing requests to 'memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 53718 strings out of 474222
- 1171131 string characters out of 5748734
- 2062665 words of memory out of 5000000
- 74836 multiletter control sequences out of 15000+600000
- 655726 words of font info for 183 fonts, out of 8000000 for 9000
+ 53898 strings out of 474222
+ 1174753 string characters out of 5748734
+ 2069082 words of memory out of 5000000
+ 74980 multiletter control sequences out of 15000+600000
+ 657679 words of font info for 185 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,18n,117p,1718b,3948s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,18n,117p,1718b,3962s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (76 pages, 4509469 bytes).
+Output written on memoria.pdf (80 pages, 4657065 bytes).
 PDF statistics:
- 1149 PDF objects out of 1200 (max. 8388607)
- 247 named destinations out of 1000 (max. 500000)
- 403 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1220 PDF objects out of 1440 (max. 8388607)
+ 275 named destinations out of 1000 (max. 500000)
+ 413 words of extra memory for PDF output out of 10000 (max. 10000000)
 

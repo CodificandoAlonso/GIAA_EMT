@@ -201,7 +201,7 @@ parámetros de interés.
 
 Juntando ambas ideas, se puede reducir en un \textbf{29,3\%} el error estándar derivado al elevar de 500 a 1000 el 
 valor de $N$ usado.
-Aumentar dicho parámetro por encima de esta cota resultaen mejoría del descenso de este error, pero incurre en coste 
+Aumentar dicho parámetro por encima de esta cota resulta en mejoría del descenso de este error, pero incurre en coste 
 computacional que no es justificable para el valor de mejora que se obtiene.
 
 
@@ -227,16 +227,22 @@ de las distribuciones de los datos estudiados. Para ello, se divide el contenido
 
 
 \subsubsection{Test de Hipótesis}\label{subsubsec:hyp_test}
-Los test de hipótesis suponen el principal método de validación de distribuciones empíricas. Se han usado
-diferentes distribuciones conocidas a lo largo de este trabajo, como son la distribución \textbf{Normal}
-o \textbf{Gaussiana}, la distribución \textbf{Binomial Negativa} y la distribución \textbf{Geométrica}.
-Esta subsección expone cómo son estas distribuciones y cuáles son los distintos test existentes para estas, 
-discutiendo sobre la viabilidad de sus aplicaciones.
+Los test de hipótesis suponen el principal método de validación de distribuciones empíricas. 
+Se han usado diferentes distribuciones conocidas a lo largo de este trabajo, como son la 
+distribución \textbf{Normal} o \textbf{Gaussiana}, la distribución \textbf{Binomial Negativa} 
+y la distribución \textbf{Geométrica}. Esta subsección expone cómo son estas distribuciones 
+y cuáles son los distintos test existentes para estas, discutiendo sobre la viabilidad de sus 
+aplicaciones. En los casos en que ninguna distribución candidata supere formalmente el test de 
+bondad de ajuste,~\textcite{burnham2002model} exponen que el Criterio de Información de 
+Akaike (AIC)~\cite{akaike1974new} permite seleccionar el modelo de menor pérdida de información relativa entre los 
+disponibles, sin requerir que el modelo verdadero figure entre los candidatos evaluados. 
+Adicionalmente,~\textcite{dowling2004toolbox} establecen como criterio de aceptabilidad global 
+en simulación de tráfico que al menos el \textbf{85\%} de los casos individuales satisfagan los 
+umbrales de calibración definidos, reconociendo que un porcentaje residual puede gestionarse 
+mediante criterios alternativos sin invalidar el modelo en su conjunto. Para la validación del 
+modelado mediante las distintas distribuciones expuestas a continuación, se utiliza este valor como umbral
+mínimo requerido.
 
-La viabilidad de sus aplicaciones, a parte de las características estadísticas de su validación o no como hipótesis
-deben cumplimentar el estudio relativo de la literatura que especifica un nivel de calibración superior al \textbf{85\%}
-para poder considerarse adecuado dentro del estudio de la simulación de transporte~\cite{fhwa2019toolbox}. 
-Este valor será utilizado para validar el modelo como distribuciones de los datos.
 
 \hspace*{1cm}\textbf{Distribución Normal o Gaussiana}
 
@@ -279,7 +285,7 @@ f(x)=\frac{1}{\sigma\sqrt{2\pi}}
 \end{equation}
 
 
-Donde $\mu$ resulta la media aritmética del conjunto de datos y $\sigma$ la desviación estandar.
+Donde $\mu$ resulta la media aritmética del conjunto de datos y $\sigma$ la desviación estándar.
 El origen de esta fórmula deriva de los estudios de \textcite{demoivre1738doctrine,
  laplace1812theorie, gauss1809theoria}. 
 
@@ -526,7 +532,7 @@ de \textit{outliers} sobre conjuntos de datos que pueden ser o pueden no ser nor
 más adecuado un test con un enfoque general sobre la consideración de una anomalía en los datos.
 En la literatura existen diversos test que permiten analizar posibles valores atípicos dentro de un conjunto de
 datos.~\textcite{leys2013detecting} discute sobre preferencia de realizar otros enfoques distintos al clásico de 
-considerar \textit{outliers} a aquellos datos más allá de dos o tres veces la \textit{desviación estandar}. Expone 
+considerar \textit{outliers} a aquellos datos más allá de dos o tres veces la \textit{desviación estándar}. Expone 
 que la media y la mediana son valores sensibles a esos \textit{outliers} y propone utilizar el \textbf{MAD} (Median Absolute
 Deviation) como un estimador más robusto, con la \textit{mediana} como tendencia central.
 
