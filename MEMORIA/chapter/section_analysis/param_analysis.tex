@@ -343,7 +343,7 @@ Esta unión permite validar tanto las suposiciones de la normalidad del conjunto
  tanto si se cumple la hipótesis como en caso contrario, verificar y analizar aquellas instancias que según
  criterios estadísticos formales suponen un \textit{outlier}.
 
-El resultado de este filtro resulta en una aceptación de la hipótesis de normalidad para la primera salida 
+El resultado de este filtro resulta en un no rechazo de la hipótesis de normalidad para la primera salida 
 de cabecera de los buses en la franja de las nueve de la mañana. No obstante, al aplicar \textit{ESD}~\cite{rosner1983} para
 la detección de anomalías, se detectan casos extremos que resulta necesario analizar. Ampliando este filtro
 temporal al resto de días laborables, los resultados son congruentes con lo observado en primera instancia:
@@ -464,8 +464,8 @@ se elimina la distinción por día, al considerar todo estudio centrado en el co
 
 
 Finalmente, se encapsula la información necesaria para la construcción de distribuciones normales (\textit{media}
-y \textit{desviación estándar}) para cada combinación parada-franja. Estos datos, no obstante, \textbf{no} se utilizan como 
-parámetro dentro de la simulación. Los distintos datos referentes a la variable inicial \textit{Occupation} se utilizan 
+y \textit{desviación estándar}) para cada combinación parada-franja. Estos datos, no obstante, \textbf{no se utilizan como 
+parámetro dentro de la simulación}. Los distintos datos referentes a la variable inicial \textit{Occupation} se utilizan 
 post simulación para la consecución de dos objetivos. El primero consta de validar estas distribuciones \textit{esperadas} 
 con los resultados obtenidos en la simulación. Es una forma adecuada de estudiar cómo se comporta el simulador, debido a que 
 este valor de \textit{Occupation} no se construye de forma directa, sino que resulta de la combinación de \textit{boards} y

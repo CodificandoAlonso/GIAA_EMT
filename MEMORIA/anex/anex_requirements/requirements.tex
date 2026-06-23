@@ -28,10 +28,10 @@
   \textbf{Tipo}               & #3 \\ \hline
   \textbf{Prioridad}          & #4 \\ \hline
   \textbf{Fuente}             & #5 \\ \hline
-  \textbf{Descripci\'{o}n}   & #6 \\ \hline
-  \textbf{Justificaci\'{o}n} & #7 \\ \hline
+  \textbf{Descripción}   & #6 \\ \hline
+  \textbf{Justificación} & #7 \\ \hline
   \textbf{Dependencias}       & #8 \\ \hline
-  \textbf{Verificaci\'{o}n}  & #9 \\ \hline
+  \textbf{Verificación}  & #9 \\ \hline
   \end{tabular}
   \vspace{8pt}
 }
@@ -58,3 +58,164 @@
   {[Por qué este requisito es necesario.]}
   {RF-XX, RNF-XX  o Ninguna}
   {[Como se comprueba que el requisito se cumple \quad Metodo T/I/A/D ]}
+
+
+\requisito
+  {RNF-01}%Identificador
+  {Fidelidad descriptiva}%Nombre
+  {RNF}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {El modelo de simulación deberá reproducir la operación de la línea de modo que las distribuciones de sus métricas de 
+  salida (intervalos de paso, tiempos de parada, ocupación y subidas/bajadas por parada y franja horaria) sean 
+  estadísticamente consistentes con los datos de referencia proporcionados por la EMT, dentro de una tolerancia 
+  previamente definida.}%Descripción
+  {La EMT requiere un modelo de carácter descriptivo, fiel a los datos observados, sin introducir comportamientos 
+  inventados ni desviaciones respecto de la operación real registrada. Este requisito constituye la restricción de 
+  validez que gobierna el paradigma de modelado adoptado.}%Justificación
+  {---}%Dependencias
+  {A --- Pruebas de bondad de ajuste (Kolmogórov--Smirnov / $\chi^2$) entre las distribuciones simuladas y las 
+  observadas sobre el conjunto de 1000 réplicas.}%Verificación
+ 
+ 
+% ---------- Requisitos funcionales: comportamiento del autobús ----------
+ 
+\requisito
+  {RF-01}%Identificador
+  {Salidas según horario programado}%Nombre
+  {RF}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {Cada agente autobús deberá iniciar su recorrido desde la cabecera en los instantes de salida establecidos en el 
+  horario oficial de la EMT.}%Descripción
+  {La planificación temporal del servicio forma parte de los datos operativos reales y debe respetarse para garantizar 
+  la fidelidad descriptiva (RNF-01).}%Justificación
+  {RNF-01}%Dependencias
+  {I --- Inspección de las trazas de ejecución frente al horario de referencia.}%Verificación
+ 
+\requisito
+  {RF-02}%Identificador
+  {Secuencia fija de paradas}%Nombre
+  {RF}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {Cada agente autobús deberá recorrer la secuencia ordenada y fija de paradas correspondiente a su ruta y 
+  sentido asignados.}%Descripción
+  {El trazado de la línea es un dato fijo de la operación real; no se contempla ninguna variación de itinerario 
+  (véase RD-01).}%Justificación
+  {RNF-01, RD-01}%Dependencias
+  {I --- Inspección de las trazas de paso por las paradas.}%Verificación
+ 
+\requisito
+  {RF-03}%Identificador
+  {Tiempo entre paradas empírico}%Nombre
+  {RF}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {El tiempo de viaje entre paradas consecutivas deberá obtenerse por muestreo de la distribución empírica 
+  de tiempos entre paradas correspondiente a la parada, el sentido y la franja horaria.}%Descripción
+  {Los tiempos de desplazamiento se derivan de los datos registrados, evitando cualquier valor inventado 
+  (RNF-01, RD-03).}%Justificación
+  {RNF-01, RD-03}%Dependencias
+  {A --- Comparación estadística entre la distribución de tiempos simulados y la empírica.}%Verificación
+ 
+\requisito
+  {RF-04}%Identificador
+  {Tiempo de parada derivado de la demanda}%Nombre
+  {RF}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {El tiempo de permanencia del autobús en cada parada deberá derivarse del número de subidas y bajadas 
+  procesadas en dicha parada.}%Descripción
+  {El tiempo de parada es una consecuencia directa de la demanda atendida; su cálculo a partir de subidas y 
+  bajadas asegura la coherencia con la operación real.}%Justificación
+  {RF-05, RF-06}%Dependencias
+  {T --- Prueba funcional sobre el cálculo del tiempo de espera en función de subidas y bajadas.}%Verificación
+ 
+ 
+% ---------- Requisitos funcionales: alineamiento empírico de subidas/bajadas ----------
+ 
+\requisito
+  {RF-05}%Identificador
+  {Subidas conforme a la distribución empírica}%Nombre
+  {RF}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {Las subidas de viajeros generadas en cada parada deberán muestrearse a partir de la distribución empírica 
+  de subidas correspondiente a la parada y la franja horaria.}%Descripción
+  {La generación de demanda debe reproducir los volúmenes de subida observados (RNF-01).}%Justificación
+  {RNF-01}%Dependencias
+  {A --- Comparación de distribuciones entre las subidas simuladas y las observadas.}%Verificación
+ 
+\requisito
+  {RF-06}%Identificador
+  {Bajadas conforme a la distribución empírica}%Nombre
+  {RF}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {Las bajadas de viajeros en cada parada deberán reproducir la distribución empírica de bajadas correspondiente a la
+   parada y la franja horaria. La selección de los viajeros que descienden se realiza mediante un mecanismo centralizado
+    (\textit{invisible hand}) que marca el número de descensos muestreado de dicha distribución.}%Descripción
+  {La EMT proporciona recuentos agregados de bajadas por parada y franja horaria, pero no datos de origen--destino
+   individuales de los viajeros. En ausencia de dicha información, imponer las bajadas como una función a nivel de 
+   sistema que reproduce la distribución medida es el único mecanismo coherente con RNF-01 sin vulnerar la prohibición 
+   de comportamientos no fundamentados en datos (RD-03).}%Justificación
+  {RNF-01, RD-03}%Dependencias
+  {A --- Comparación de distribuciones entre las bajadas simuladas y las observadas.}%Verificación
+ 
+\requisito
+  {RF-07}%Identificador
+  {Restricción de capacidad y subidas residuales}%Nombre
+  {RF}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {La ocupación de cada autobús no deberá superar la capacidad máxima del vehículo; las subidas que excedan 
+  dicha capacidad deberán registrarse como subidas residuales (no embarcadas).}%Descripción
+  {La capacidad finita del vehículo es una restricción física real, y la cuantificación de la demanda no atendida 
+  constituye una métrica relevante del análisis.}%Justificación
+  {RF-05}%Dependencias
+  {T --- Verificación del invariante de capacidad y del recuento de residuales sobre el conjunto de réplicas.}%Verificación
+ 
+ 
+% ---------- Restricciones de diseño: prohibiciones que delimitan el modelo descriptivo ----------
+ 
+\requisito
+  {RD-01}%Identificador
+  {Ausencia de reenrutamiento dinámico}%Nombre
+  {RD}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {Los agentes autobús no deberán realizar reenrutamiento dinámico; la ruta permanecerá fija durante toda la 
+  prestación del servicio.}%Descripción
+  {La EMT exige reproducir la operación real sin desviaciones de itinerario; el reenrutamiento introduciría un 
+  comportamiento no presente en los datos.}%Justificación
+  {RNF-01}%Dependencias
+  {I --- Inspección del modelo: ausencia de lógica de reenrutamiento.}%Verificación
+ 
+\requisito
+  {RD-02}%Identificador
+  {Ausencia de comportamiento cooperativo o estratégico}%Nombre
+  {RD}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {Los agentes no deberán exhibir comportamientos cooperativos, negociados o estratégicos más allá del 
+  protocolo de subida y bajada fundamentado en los datos (sin coordinación entre autobuses, sin regulación de 
+  intervalos ni peticiones de ayuda).}%Descripción
+  {Cualquier conducta deliberativa o cooperativa constituiría un comportamiento inventado, ajeno al carácter descriptivo 
+  del modelo y no validable frente a los datos de la EMT.}%Justificación
+  {RNF-01}%Dependencias
+  {I --- Inspección del modelo: ausencia de mecanismos de coordinación o negociación.}%Verificación
+ 
+\requisito
+  {RD-03}%Identificador
+  {Comportamiento fundamentado únicamente en datos}%Nombre
+  {RD}%Tipo
+  {Must}%Prioridad
+  {EMT}%Fuente
+  {No deberá introducirse ningún comportamiento de los agentes que no sea derivable de los datos de referencia de 
+  la EMT o calibrado contra ellos.}%Descripción
+  {Constituye la expresión, como restricción de diseño, del mandato de fidelidad descriptiva (RNF-01): el modelo debe 
+  limitarse a lo que los datos permiten fundamentar. RNF-01 y RD-03 son, por tanto, las dos formulaciones --- positiva y 
+  restrictiva --- de un mismo requisito de la EMT.}%Justificación
+  {RNF-01}%Dependencias
+  {I --- Inspección y trazabilidad de cada comportamiento del modelo hasta su fuente de datos.}%Verificación

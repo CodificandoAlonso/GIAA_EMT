@@ -1,0 +1,77 @@
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+
+% Settings
+\useinnertheme{uc3m}
+\useoutertheme{uc3m}
+\usecolortheme{uc3m}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=true]  
+\setbeamertemplate{footline}{%
+    \vspace{-2em}
+    \ifnum\thepage>1\relax%
+    \hfill
+    \color{uc3mblue}
+    \insertframenumber/\inserttotalframenumber 
+    \hspace{1em}
+    \vspace{0.5em}
+   \fi
+}
+
+
+\setbeamertemplate{section page}{
+  \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+      \fill[color=uc3mblue] (-1,0) rectangle (\the\paperwidth,\the\paperheight+2);
+      \node[align=center, left] at (current page.center) {\usebeamerfont{title} \color{white} \insertsectionhead};
+  \end{tikzpicture}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER LOGO COMMAND %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\headerlogo}{
+    \node (logo) at (0.9\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{uc3m-transparent}};
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% COVER LOGO COMMAND %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\logocover}{
+  \node[inner sep=0pt] (logo) at (0.5\paperwidth,0.72\paperheight){\includegraphics[height=0.4\paperheight]{logo-uc3m-transparent}};
+}
+\DeclareOption{polito}{
+    \renewcommand{\logocover}{
+      \node[inner sep=0pt] (logo) at (0.38\paperwidth,0.72\paperheight){\includegraphics[height=0.4\paperheight]{logo-uc3m}};
+      \node[inner sep=0pt] (logo) at (0.72\paperwidth,0.72\paperheight){\includegraphics[height=0.25\paperheight]{polito-logo}};
+    }
+
+
+  \renewcommand{\headerlogo}{
+    \node (logo) at (0.85\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{uc3m-transparent}};
+    \node (logo) at (0.93\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{polito-logo}};
+  }
+}
+\DeclareOption{politocnr}{
+    \renewcommand{\logocover}{
+      \node[inner sep=0pt] (logo-uc3m) at (0.22\paperwidth,0.72\paperheight){\includegraphics[height=0.3\paperheight]{logo-uc3m}};
+      \node[inner sep=0pt] (logo-polito) at (0.55\paperwidth,0.72\paperheight){\includegraphics[height=0.15\paperheight]{politecnicoditorino}};
+      \node[inner sep=0pt] (logo-cnr) at (0.83\paperwidth,0.72\paperheight){\includegraphics[height=0.12\paperheight]{cnrieiit}};
+    }
+
+
+  \renewcommand{\headerlogo}{
+    \node (logo) at (0.76\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{uc3m}};
+    \node (logo) at (0.84\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{polito-logo}};
+    \node (logo) at (0.93\paperwidth,0.6){\includegraphics[height=0.05\paperheight]{cnrieiit}};
+  }
+}
+\ProcessOptions\relax
+
+
+\mode<all>
