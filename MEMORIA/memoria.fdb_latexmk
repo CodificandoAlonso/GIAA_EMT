@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber memoria"] 1782298635.0647 "memoria.bcf" "memoria.bbl" "memoria" 1782308185.18622 0
-  "memoria.bcf" 1782308185.09291 121577 2b6509ad3047b5a5788c301a09c93a25 "pdflatex"
+["biber memoria"] 1782298635.0647 "memoria.bcf" "memoria.bbl" "memoria" 1782310493.60164 0
+  "memoria.bcf" 1782310493.38543 121577 2b6509ad3047b5a5788c301a09c93a25 "pdflatex"
   "referencias.bib" 1782295826.56866 28314 509a3469163ea4afb89be5ee884e9214 ""
   (generated)
   "memoria.bbl"
   "memoria.blg"
   (rewritten before read)
-["pdflatex"] 1782308180.72003 "/home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex" "memoria.pdf" "memoria" 1782308185.18644 0
+["pdflatex"] 1782310485.29471 "/home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex" "memoria.pdf" "memoria" 1782310493.60207 0
   "/etc/texmf/web2c/texmf.cnf" 1778326850.446 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex" 1782296795.69995 14750 84f4d84d25c7b458bc9da6cec5b22eff ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -354,7 +354,7 @@
   "anex/anex_requirements/requirements.tex" 1782293633.35821 9812 7b342cb0db41ed485547c479b9eb17f9 ""
   "chapter/section_analysis/param_analysis.tex" 1782203438.67177 40400 18f8149cb910860dc06ebf92799d0ec8 ""
   "chapter/section_budget/budget.tex" 1778340824.99866 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "chapter/section_design/Simulation_design.tex" 1782308179.18135 3062 9021ffdc573d89c36015861ebf7d94e8 ""
+  "chapter/section_design/Simulation_design.tex" 1782310476.64634 3204 f4afc632d2cc6056020a013c004b719c ""
   "chapter/section_introduction/intro.tex" 1781962087.73653 4376 c91f4ea7ee1e6c5a77be0266c3f8dcc7 ""
   "chapter/section_metodology/metodology.tex" 1780492503.87957 14491 ee70951e765f4fc9b400d8fad061d101 ""
   "chapter/section_state_of_art/agentes_inteligentes.tex" 1780324909.13284 28404 e9fa4b3bb0a9ad157f966eca044129c6 ""
@@ -380,15 +380,15 @@
   "imagenes/to_B/heatmap_normality_individual.png" 1780909997.99035 134584 370d5c578fe3203f1f07577687d9ac42 ""
   "imagenes/to_B/normality_stop_ALL.png" 1780909997.99676 67484 6fcdfb80f9c46cf9b9a87ee05ca95738 ""
   "imagenes/to_B/normality_stop_individual.png" 1780909997.99872 68705 c3f75a130c953a145674bd97a69b96b9 ""
-  "memoria.aux" 1782308185.07191 40032 12e29d4df086dbd21214f736b215b397 "pdflatex"
+  "memoria.aux" 1782310493.31443 40140 72b0156d6869fbea8d0e96df6ec039d1 "pdflatex"
   "memoria.bbl" 1782298635.78498 111137 0a1a7060da0dfc10ffb8755276311b3f "biber memoria"
-  "memoria.lof" 1782308185.09376 4081 49052439cacf93e1fa0994008be11b1e "pdflatex"
-  "memoria.lot" 1782308185.0939 1157 a4719e217fcb6db797bd1be1ee43f051 "pdflatex"
-  "memoria.out" 1782308185.09191 3061 7c7b901bc6659d8f46d4e8bd143a53b7 "pdflatex"
-  "memoria.run.xml" 1782308185.09376 2424 a07dca45c17754406fa301e7c073f94a "pdflatex"
+  "memoria.lof" 1782310493.38814 4081 49052439cacf93e1fa0994008be11b1e "pdflatex"
+  "memoria.lot" 1782310493.38814 1157 a4719e217fcb6db797bd1be1ee43f051 "pdflatex"
+  "memoria.out" 1782310493.38343 3061 7c7b901bc6659d8f46d4e8bd143a53b7 "pdflatex"
+  "memoria.run.xml" 1782310493.38814 2424 a07dca45c17754406fa301e7c073f94a "pdflatex"
   "memoria.tex" 1782296795.69995 14750 84f4d84d25c7b458bc9da6cec5b22eff ""
-  "memoria.toc" 1782308185.09376 4411 c75098cf6f2f129e8fe7ad8373fd4275 "pdflatex"
-  "pdfa.xmpi" 1782308181.06589 5042 f3ec96b35dc24753aa64d5c2631b0ace "pdflatex"
+  "memoria.toc" 1782310493.38814 4478 abfe9e3c504906c80c780793c5c50e9d "pdflatex"
+  "pdfa.xmpi" 1782310485.9539 5042 edacdb7277e8db483d2ed273fa1808f6 "pdflatex"
   (generated)
   "memoria.aux"
   "memoria.bcf"

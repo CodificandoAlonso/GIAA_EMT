@@ -2531,4 +2531,53 @@
     <bcf:citekey order="143" intorder="1">dagostino1973tests</bcf:citekey>
     <bcf:citekey order="144" intorder="1">kim2013normality</bcf:citekey>
     <bcf:citekey order="145" intorder="1">kim2013normality</bcf:citekey>
-    <bcf:cite
+    <bcf:citekey order="146" intorder="1">cameron2013regression</bcf:citekey>
+    <bcf:citekey order="147" intorder="1">cameron2013regression</bcf:citekey>
+    <bcf:citekey order="148" intorder="1">pearson1900criterion</bcf:citekey>
+    <bcf:citekey order="149" intorder="1">cochran1954methods</bcf:citekey>
+    <bcf:citekey order="150" intorder="1">cochran1954methods</bcf:citekey>
+    <bcf:citekey order="151" intorder="1">nist2012outlier</bcf:citekey>
+    <bcf:citekey order="152" intorder="1">rosner1983</bcf:citekey>
+    <bcf:citekey order="153" intorder="1">nist2012outlier</bcf:citekey>
+    <bcf:citekey order="153" intorder="2">rosner1983</bcf:citekey>
+    <bcf:citekey order="154" intorder="1">nist2012outlier</bcf:citekey>
+    <bcf:citekey order="155" intorder="1">wilcox2012</bcf:citekey>
+    <bcf:citekey order="156" intorder="1">leys2013detecting</bcf:citekey>
+    <bcf:citekey order="157" intorder="1">leys2013detecting</bcf:citekey>
+    <bcf:citekey order="158" intorder="1">taillandier2019gama</bcf:citekey>
+    <bcf:citekey order="159" intorder="1">taillandier2019gama</bcf:citekey>
+    <bcf:citekey order="160" intorder="1">fipa2002acl</bcf:citekey>
+    <bcf:citekey order="161" intorder="1">bhattacharyya1946divergence</bcf:citekey>
+    <bcf:citekey order="162" intorder="1">silverman1986density</bcf:citekey>
+    <bcf:citekey order="163" intorder="1">balaguer2018</bcf:citekey>
+    <bcf:citekey order="164" intorder="1">kim2013normality</bcf:citekey>
+    <bcf:citekey order="165" intorder="1">rosner1983</bcf:citekey>
+    <bcf:citekey order="166" intorder="1">dowling2004toolbox</bcf:citekey>
+    <bcf:citekey order="167" intorder="1">akaike1974new</bcf:citekey>
+    <bcf:citekey order="168" intorder="1">rosner1983</bcf:citekey>
+    <bcf:citekey order="169" intorder="1">leys2013detecting</bcf:citekey>
+    <bcf:citekey order="170" intorder="1">taillandier2019gama</bcf:citekey>
+    <bcf:citekey order="171" intorder="1">fipa2002specs</bcf:citekey>
+    <bcf:citekey order="172" intorder="1">Wooldridge1995</bcf:citekey>
+    <bcf:citekey order="173" intorder="1">Wooldridge1995</bcf:citekey>
+  </bcf:section>
+  <!-- SORTING TEMPLATES -->
+  <bcf:sortingtemplate name="none">
+    <bcf:sort order="1">
+      <bcf:sortitem order="1">citeorder</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="2">
+      <bcf:sortitem order="1">intciteorder</bcf:sortitem>
+    </bcf:sort>
+  </bcf:sortingtemplate>
+  <!-- DATALISTS -->
+  <bcf:datalist section="0"
+                name="none/global//global/global"
+                type="entry"
+                sortingtemplatename="none"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+</bcf:controlfile>

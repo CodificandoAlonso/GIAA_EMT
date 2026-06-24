@@ -1,0 +1,53 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Estado del Arte}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Agentes Inteligentes}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Definición}{3}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Taxonomía}{6}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Contexto histórico y evolución}{8}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Comunicación}{9}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Plataformas de Desarrollo}{10}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Viabilidad de la solución utilizando Agentes Inteligentes}{10}{subsection.2.1.6}%
+\contentsline {section}{\numberline {2.2}Simuladores de Transporte}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Técnicas de simulación}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Sistemas Multi-Agente como simuladores}{14}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Simulaciones de Monte Carlo}{15}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Análisis estadístico de datos}{16}{subsection.2.2.4}%
+\contentsline {subsubsection}{Test de Hipótesis}{17}{subsection.2.2.4}%
+\contentsline {paragraph}{Distribución Normal o Gaussiana}{17}{subsection.2.2.4}%
+\contentsline {paragraph}{Distribución Binomial Negativa y Distribución Geométrica}{18}{equation.2.2.5}%
+\contentsline {subsubsection}{Estudio de valores extremos}{20}{figure.caption.12}%
+\contentsline {paragraph}{Estudio de Normalidad}{20}{figure.caption.12}%
+\contentsline {paragraph}{Selección de distribuciones}{22}{equation.2.2.10}%
+\contentsline {chapter}{\numberline {3}Metodología}{23}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Definición del problema}{23}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Estructura de trabajo}{24}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Herramientas Utilizadas}{27}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Extracción de KPIs}{28}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Métricas a nivel general}{28}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Métricas a nivel de autobús}{29}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Métricas a nivel de ruta}{29}{subsection.3.4.3}%
+\contentsline {chapter}{\numberline {4}Análisis de los datos}{31}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Limpieza y preparación}{31}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Datos geoespaciales}{31}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Datos de Operación}{33}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Estudio y Gaussianidad}{38}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Estudio de viabilidad de datos operacionales}{38}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Preparación para simulador}{44}{subsection.4.2.2}%
+\contentsline {subsubsection}{Estudio y análisis de carga, descarga y tiempo entre paradas}{44}{subsection.4.2.2}%
+\contentsline {paragraph}{Datos Intra-parada}{44}{subsection.4.2.2}%
+\contentsline {paragraph}{Datos Inter-parada}{46}{figure.caption.28}%
+\contentsline {paragraph}{Adaptación de formato de parámetros de entrada}{47}{figure.caption.28}%
+\contentsline {chapter}{\numberline {5}Diseño de la simulación}{50}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Arquitecturas de las soluciones}{50}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Solución uno: Pasajeros como agentes}{50}{subsection.5.1.1}%
+\contentsline {subsubsection}{Caracterización de los agentes}{51}{subsection.5.1.1}%
+\contentsline {paragraph}{Agentes pasajero}{51}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Solución dos: Sin agentes pasajero}{51}{subsection.5.1.2}%
+\contentsline {chapter}{\numberline {6}Casos de Aplicación}{52}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Marco Regulador}{53}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Presupuesto y Costes}{54}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Trabajos futuros}{55}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Conclusión}{56}{chapter.10}%
+\contentsline {chapter}{Bibliografía}{57}{chapter.10}%
+\contentsfinish 
