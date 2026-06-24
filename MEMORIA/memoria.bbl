@@ -2722,6 +2722,27 @@
       \verb 10.5281/zenodo.1441026
       \endverb
     \endentry
+    \entry{fipa2002specs}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=9ea78c8bdcb65ac951c55622c18b20ec}{%
+           family={{Foundation for Intelligent Physical Agents}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{fullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{bibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{FIPA Specifications, IEEE FIPA Standards Committee}
+      \field{title}{{FIPA} Interaction Protocol Specifications}
+      \field{year}{2002}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
