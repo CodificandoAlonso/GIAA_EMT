@@ -1,9 +1,9 @@
-PWD /home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA
+PWD /home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex
+INPUT /home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex
 OUTPUT memoria.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -880,6 +880,10 @@ INPUT ./anex/anex_requirements/requirements.tex
 INPUT ./anex/anex_requirements/requirements.tex
 INPUT ./anex/anex_requirements/requirements.tex
 INPUT anex/anex_requirements/requirements.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xbi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/t1xbi.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxptmbi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxbi.tfm
 INPUT ./anex/anex_figures/operational.tex
 INPUT ./anex/anex_figures/operational.tex
 INPUT ./anex/anex_figures/operational.tex
