@@ -9,38 +9,60 @@ elementos que componen cada simulacion. Hablar tambien de como se recogen los re
 
 Este capítulo expone la construcción de las dos variantes de simulador desarrolladas en la plataforma de agentes 
 GAMA~\cite{taillandier2019gama} y se corresponde con la fase homónima del trabajo, presentada en la 
-sección~\ref{subsec:structure}. Se puede dividir este capítulo en X secciones. Nombreseccionuno presenta el diseño de los dos
+sección~\ref{subsec:structure}. Se puede dividir este capítulo en dos secciones, referentes a cada una de las alternativas
+creadas. En cada sección se detallan presenta el diseño de los dos
 sistemas multi-agente que se realizan en este trabajo, definiendo los distintos agentes involucrados, qué protocolos 
 de comunicación se realizan y cómo interactúan entre sí dentro de la simulación.
 
 
-\section{Arquitecturas de las soluciones}
-Como se ha mencionado anteriormente, el desarrollo del sistema multi-agente se ha dividido en dos variantes alternativas.
-Esta sección cubre, para cada una de estas soluciones, la caracterización de los agentes existentes en ellas, sus principales
-métodos de interacción, expresados mediante diagramas de flujo de los protocolos del estándar FIPA~\cite{fipa2002specs}, así 
-como el principal flujo de simulación existente. Se subdivide esta sección a su vez en dos subsecciones, cada una relativa a las 
-dos existentes soluciones.
-
-
-\subsection{Solución uno: Pasajeros como agentes}
+\section{Solución uno: Pasajeros como agentes}
 Esta implementación se caracteriza por incluir dentro del sistema la caracterización como agentes de los distintos pasajeros
 generados en la simulación. Su comportamiento, como se muestra a continuación, supone un enfoque más fideligno con la 
 realidad del escenario simulado. La siguiente sección cubre las características principales y las justificaciones de diseño
 de todos los tipos de agentes involucrados en esta simulación.
 
+\subsection{Arquitectura de la solución}
+Como se ha mencionado anteriormente, el desarrollo del sistema multi-agente se ha dividido en dos variantes alternativas.
+Esta sección cubre, para cada una de estas soluciones, la caracterización de los agentes existentes en ellas, sus principales
+métodos de interacción, expresados mediante diagramas de flujo de los protocolos del estándar FIPA~\cite{fipa2002specs}, así 
+como el principal comportamiento de la simulación existente. Se subdivide esta sección a su vez en dos subsecciones, cada una 
+relativa a las dos existentes soluciones.
+
+
 \subsubsection{Caracterización de los agentes}
 De forma previa a la presentación de los distintos agentes involucrados, cabe discutir acerca de su clasificación taxonómica 
 justificada dentro de la taxonomía expuesta por~\textcite{Wooldridge1995} y su consecuente justificación. Formalmente, 
-se considera a estos como agentes~\textbf{reactivos}. Estos se caracterizan 
+se considera a estos como~\textbf{agentes reactivos}. Esta característica choca, especialmente en~\textit{autobús} y en
+~\textit{pasajero}, con el posible comportamiento real inherente. En la vida real, un pasajero, de forma autónoma, es capaz
+de alterar sus planes iniciales para la consecución de sus objetivos mediante deliberación interna, lo que encaja según la 
+taxonomía con un agente \textbf{deliberativo}. De igual manera, el autobús en la vida real, puede reaccionar  autónomamente
+ante imprevistos, dotando a este de un proceso interno de elección. En el caso concreto, se ha optado por un sistema de agentes
+reactivos debido a distintas restricciones tanto de funcionalidad como de diseño. Desde la EMT no se busca un sistema basado en 
+deliberaciones y alteraciones del comportamiento base de los agentes, como se muestra en la \textbf{elicitación de requisitos
+del sistema}, presente en el anexo~\ref{anex:requirements}. En consecuencia, en adecuación con lo establecido por los
+stakeholders involucrados, en este caso la Empresa Municipal de Transportes, se escoge un enfoque donde los agentes, en lugar
+de mostrar un pensamiento deliberativo, tracen sus acciones de forma conducida por los datos ( \enquote{data driven} en inglés).
+Este tipo de caracterización de agente reactivo
+
 
 Dentro de esta solución coexisten tres agentes característicos. Concretamente, \textit{agentes pasajero}, \textit{agentes autobús}
 y \textit{agentes parada}. A continuación, para cada uno se exponen sus principales cualidades.
 
-\paragraph{Agentes pasajero}
-\mbox{}\\
+\medskip
+\noindent\textbf{Agente pasajero}
 
+\medskip
+\noindent\textbf{Agente autobús}
 
+\medskip
+\noindent\textbf{Agente parada}
 
 
 \subsection{Solución dos: Sin agentes pasajero}
 
+
+\medskip
+\noindent\textbf{Agente autobús}
+
+\medskip
+\noindent\textbf{Agente parada}
