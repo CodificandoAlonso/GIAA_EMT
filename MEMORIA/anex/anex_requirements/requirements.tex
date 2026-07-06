@@ -59,172 +59,6 @@
   {RF-XX, RNF-XX  o Ninguna}
   {[Como se comprueba que el requisito se cumple \quad Metodo T/I/A/D ]}
 
-
-\requisito
-  {RNF-01}%Identificador
-  {Fidelidad descriptiva}%Nombre
-  {RNF}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {El modelo de simulación deberá reproducir la operación de la línea de modo que las distribuciones de sus métricas de 
-  salida (intervalos de paso, tiempos de parada, ocupación y subidas/bajadas por parada y franja horaria) sean 
-  estadísticamente consistentes con los datos de referencia proporcionados por la EMT, dentro de una tolerancia 
-  previamente definida.}%Descripción
-  {La EMT requiere un modelo de carácter descriptivo, fiel a los datos observados, sin introducir comportamientos 
-  inventados ni desviaciones respecto de la operación real registrada. Este requisito constituye la restricción de 
-  validez que gobierna el paradigma de modelado adoptado.}%Justificación
-  {---}%Dependencias
-  {A --- Pruebas de bondad de ajuste (Kolmogórov---Smirnov / $\chi^2$) entre las distribuciones simuladas y las 
-  observadas sobre el conjunto de 1000 réplicas.}%Verificación
- 
- 
-% ---------- Requisitos funcionales: comportamiento del autobús ----------
- 
-\requisito
-  {RF-01}%Identificador
-  {Salidas según horario programado}%Nombre
-  {RF}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {Cada agente autobús deberá iniciar su recorrido desde la cabecera en los instantes de salida establecidos en el 
-  horario oficial de la EMT.}%Descripción
-  {La planificación temporal del servicio forma parte de los datos operativos reales y debe respetarse para garantizar 
-  la fidelidad descriptiva (RNF-01).}%Justificación
-  {RNF-01}%Dependencias
-  {I --- Inspección de las trazas de ejecución frente al horario de referencia.}%Verificación
- 
-\requisito
-  {RF-02}%Identificador
-  {Secuencia fija de paradas}%Nombre
-  {RF}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {Cada agente autobús deberá recorrer la secuencia ordenada y fija de paradas correspondiente a su ruta y 
-  sentido asignados.}%Descripción
-  {El trazado de la línea es un dato fijo de la operación real; no se contempla ninguna variación de itinerario 
-  (véase RD-01).}%Justificación
-  {RNF-01, RD-01}%Dependencias
-  {I --- Inspección de las trazas de paso por las paradas.}%Verificación
- 
-\requisito
-  {RF-03}%Identificador
-  {Tiempo entre paradas empírico}%Nombre
-  {RF}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {El tiempo de viaje entre paradas consecutivas deberá obtenerse por muestreo de la distribución empírica 
-  de tiempos entre paradas correspondiente a la parada, el sentido y la franja horaria.}%Descripción
-  {Los tiempos de desplazamiento se derivan de los datos registrados, evitando cualquier valor inventado 
-  (RNF-01, RD-03).}%Justificación
-  {RNF-01, RD-03}%Dependencias
-  {A --- Comparación estadística entre la distribución de tiempos simulados y la empírica.}%Verificación
- 
-\requisito
-  {RF-04}%Identificador
-  {Tiempo de parada derivado de la demanda}%Nombre
-  {RF}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {El tiempo de permanencia del autobús en cada parada deberá derivarse del número de subidas y bajadas 
-  procesadas en dicha parada.}%Descripción
-  {El tiempo de parada es una consecuencia directa de la demanda atendida; su cálculo a partir de subidas y 
-  bajadas asegura la coherencia con la operación real.}%Justificación
-  {RF-05, RF-06}%Dependencias
-  {T --- Prueba funcional sobre el cálculo del tiempo de espera en función de subidas y bajadas.}%Verificación
- 
- 
-% ---------- Requisitos funcionales: alineamiento empírico de subidas/bajadas ----------
- 
-\requisito
-  {RF-05}%Identificador
-  {Subidas conforme a la distribución empírica}%Nombre
-  {RF}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {Las subidas de viajeros generadas en cada parada deberán muestrearse a partir de la distribución empírica 
-  de subidas correspondiente a la parada y la franja horaria.}%Descripción
-  {La generación de demanda debe reproducir los volúmenes de subida observados (RNF-01).}%Justificación
-  {RNF-01}%Dependencias
-  {A --- Comparación de distribuciones entre las subidas simuladas y las observadas.}%Verificación
- 
-\requisito
-  {RF-06}%Identificador
-  {Bajadas conforme a la distribución empírica}%Nombre
-  {RF}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {Las bajadas de viajeros en cada parada deberán reproducir la distribución empírica de bajadas correspondiente a la
-   parada y la franja horaria. La selección de los viajeros que descienden se realiza mediante un mecanismo centralizado
-    (\textit{invisible hand}) que marca el número de descensos muestreado de dicha distribución.}%Descripción
-  {La EMT proporciona recuentos agregados de bajadas por parada y franja horaria, pero no datos de origen--destino
-   individuales de los viajeros. En ausencia de dicha información, imponer las bajadas como una función a nivel de 
-   sistema que reproduce la distribución medida es el único mecanismo coherente con RNF-01 sin vulnerar la prohibición 
-   de comportamientos no fundamentados en datos (RD-03).}%Justificación
-  {RNF-01, RD-03}%Dependencias
-  {A --- Comparación de distribuciones entre las bajadas simuladas y las observadas.}%Verificación
- 
-\requisito
-  {RF-07}%Identificador
-  {Restricción de capacidad y subidas residuales}%Nombre
-  {RF}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {La ocupación de cada autobús no deberá superar la capacidad máxima del vehículo; las subidas que excedan 
-  dicha capacidad deberán registrarse como subidas residuales (no embarcadas).}%Descripción
-  {La capacidad finita del vehículo es una restricción física real, y la cuantificación de la demanda no atendida 
-  constituye una métrica relevante del análisis.}%Justificación
-  {RF-05}%Dependencias
-  {T --- Verificación del invariante de capacidad y del recuento de residuales sobre el conjunto de réplicas.}%Verificación
- 
- 
-% ---------- Restricciones de diseño: prohibiciones que delimitan el modelo descriptivo ----------
- 
-\requisito
-  {RD-01}%Identificador
-  {Ausencia de reenrutamiento dinámico}%Nombre
-  {RD}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {Los agentes autobús no deberán realizar reenrutamiento dinámico; la ruta permanecerá fija durante toda la 
-  prestación del servicio.}%Descripción
-  {La EMT exige reproducir la operación real sin desviaciones de itinerario; el reenrutamiento introduciría un 
-  comportamiento no presente en los datos.}%Justificación
-  {RNF-01}%Dependencias
-  {I --- Inspección del modelo: ausencia de lógica de reenrutamiento.}%Verificación
- 
-\requisito
-  {RD-02}%Identificador
-  {Ausencia de comportamiento cooperativo o estratégico}%Nombre
-  {RD}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {Los agentes no deberán exhibir comportamientos cooperativos, negociados o estratégicos más allá del 
-  protocolo de subida y bajada fundamentado en los datos (sin coordinación entre autobuses, sin regulación de 
-  intervalos ni peticiones de ayuda).}%Descripción
-  {Cualquier conducta deliberativa o cooperativa constituiría un comportamiento inventado, ajeno al carácter descriptivo 
-  del modelo y no validable frente a los datos de la EMT.}%Justificación
-  {RNF-01}%Dependencias
-  {I --- Inspección del modelo: ausencia de mecanismos de coordinación o negociación.}%Verificación
- 
-\requisito
-  {RD-03}%Identificador
-  {Comportamiento fundamentado únicamente en datos}%Nombre
-  {RD}%Tipo
-  {Must}%Prioridad
-  {EMT}%Fuente
-  {No deberá introducirse ningún comportamiento de los agentes que no sea derivable de los datos de referencia de 
-  la EMT o calibrado contra ellos.}%Descripción
-  {Constituye la expresión, como restricción de diseño, del mandato de fidelidad descriptiva (RNF-01): el modelo debe 
-  limitarse a lo que los datos permiten fundamentar. RNF-01 y RD-03 son, por tanto, las dos formulaciones --- positiva y 
-  restrictiva --- de un mismo requisito de la EMT.}%Justificación
-  {RNF-01}%Dependencias
-  {I --- Inspección y trazabilidad de cada comportamiento del modelo hasta su fuente de datos.}%Verificación
-
-
-
-
-
-
 % =====================================================================
 % REQUISITOS DEL SISTEMA — Simulador multiagente de la línea E01 (EMT Madrid)
 %
@@ -237,14 +71,14 @@
 %                   D = Demostración
 % =====================================================================
 
-\subsection{Requisitos funcionales}
-
 \requisito{RF-01}{Creación de simulaciones desde la interfaz web}
 {Funcional}
 {Must}
 {EMT Madrid}
-{El sistema debe permitir al usuario crear una nueva simulación desde la interfaz web, generando un directorio de trabajo versionado e identificado mediante marca temporal que aísle la configuración y los resultados de cada ejecución.}
-{El personal técnico de la EMT debe poder preparar escenarios sin manipular ficheros ni ejecutar comandos manualmente, y cada escenario debe quedar aislado del resto para su posterior consulta.}
+{El sistema debe permitir al usuario crear una nueva simulación desde la interfaz web, generando un directorio de trabajo 
+versionado e identificado mediante marca temporal que aísle la configuración y los resultados de cada ejecución.}
+{El personal técnico de la EMT debe poder preparar escenarios sin manipular ficheros ni ejecutar comandos manualmente, 
+y cada escenario debe quedar aislado del resto para su posterior consulta.}
 {---}
 {Creación de una simulación desde la interfaz y comprobación del directorio generado. Método: D}
 
@@ -252,8 +86,11 @@
 {Funcional}
 {Must}
 {EMT Madrid}
-{Antes del lanzamiento, el sistema debe permitir al usuario personalizar los parámetros operativos del escenario, incluyendo el tamaño y la composición de la flota, los horarios e intervalos entre expediciones y las distribuciones de subidas y bajadas por parada y franja horaria.}
-{La utilidad del simulador para la EMT reside en evaluar escenarios operativos alternativos (más o menos autobuses, otras frecuencias, otras demandas) sin necesidad de modificar el modelo.}
+{Antes del lanzamiento, el sistema debe permitir al usuario personalizar los parámetros operativos del escenario, 
+incluyendo el tamaño y la composición de la flota, los horarios e intervalos entre expediciones y las distribuciones de 
+subidas y bajadas por parada y franja horaria.}
+{La utilidad del simulador para la EMT reside en evaluar escenarios operativos alternativos (más o menos autobuses, 
+otras frecuencias, otras demandas) sin necesidad de modificar el modelo.}
 {RF-01}
 {Modificación de cada parámetro desde la interfaz y comprobación de su efecto en la simulación resultante. Método: T}
 
@@ -261,8 +98,10 @@
 {Funcional}
 {Must}
 {EMT Madrid}
-{El sistema debe permitir lanzar la ejecución de la simulación configurada desde la propia interfaz web, invocando de forma transparente el motor de simulación en modo desatendido.}
-{Cierra el ciclo de uso autónomo por parte del personal de la EMT: configurar y ejecutar sin conocimiento de la plataforma GAMA ni de la línea de comandos.}
+{El sistema debe permitir lanzar la ejecución de la simulación configurada desde la propia interfaz web, 
+invocando de forma transparente el motor de simulación en modo desatendido.}
+{Cierra el ciclo de uso autónomo por parte del personal de la EMT: configurar y ejecutar sin conocimiento 
+de la plataforma GAMA ni de la línea de comandos.}
 {RF-01, RF-02}
 {Lanzamiento de una simulación desde la interfaz y verificación de su ejecución completa. Método: D}
 
@@ -270,17 +109,23 @@
 {Funcional}
 {Should}
 {EMT Madrid}
-{La interfaz debe mostrar el estado de las simulaciones en curso, actualizarlo en tiempo real para todos los clientes conectados y notificar la finalización de cada ejecución.}
-{Las simulaciones tienen una duración no despreciable; el usuario necesita saber cuándo puede consultar los resultados sin recargar ni supervisar manualmente el proceso.}
+{La interfaz debe mostrar el estado de las simulaciones en curso, actualizarlo en tiempo real para todos 
+los clientes conectados y notificar la finalización de cada ejecución.}
+{Las simulaciones tienen una duración no despreciable; el usuario necesita saber cuándo puede consultar 
+los resultados sin recargar ni supervisar manualmente el proceso.}
 {RF-03}
-{Lanzamiento de una simulación con dos clientes conectados y comprobación de la actualización y la notificación de finalización en ambos. Método: T}
+{Lanzamiento de una simulación con dos clientes conectados y comprobación de la actualización y la notificación 
+de finalización en ambos. Método: T}
 
-\requisito{RF-05}{Cálculo de los indicadores de rendimiento acordados}
+\requisito{RF-05}{Cálculo de los indicadores de rendimiento}
 {Funcional}
 {Must}
 {EMT Madrid}
-{Tras cada ejecución, el sistema debe calcular automáticamente los indicadores de rendimiento acordados con la EMT a partir de las salidas del simulador: ocupación, subidas, bajadas y pasajeros residuales por parada, franja horaria y sentido, así como los tiempos de recorrido.}
-{Los KPIs son el producto que la EMT consume del simulador: traducen las trazas de la simulación a las magnitudes con las que el operador evalúa el servicio.}
+{Tras cada ejecución, el sistema debe calcular automáticamente los indicadores de rendimiento establecidos 
+junto a la  EMT a partir de las salidas del simulador: ocupación, subidas, bajadas y pasajeros residuales por
+ parada, franja horaria y sentido, así como los tiempos de recorrido.}
+{Los KPIs son el producto que la EMT consume del simulador: traducen las trazas de la simulación a las magnitudes 
+con las que el operador evalúa el servicio.}
 {RF-03, RD-04}
 {Ejecución del extractor sobre una simulación completada y revisión de los indicadores generados. Método: A}
 
@@ -288,8 +133,12 @@
 {Funcional}
 {Must}
 {EMT Madrid}
-{El sistema debe calcular el Índice de Regularidad (IR) por expedición comparando el intervalo real entre autobuses consecutivos con el intervalo teórico del cuadro de servicio, aplicando las tres bandas de tolerancia definidas por la EMT en función del intervalo teórico ($I_t \leq 10$ min, $10 < I_t \leq 25$ min, $I_t > 25$ min).}
-{La regularidad es el indicador operativo de referencia del operador para líneas de alta frecuencia, y su fórmula por bandas es una especificación propia de la EMT que el simulador debe reproducir fielmente para que los resultados sean comparables con sus informes internos.}
+{El sistema debe calcular el Índice de Regularidad (IR) por expedición comparando el intervalo real entre 
+autobuses consecutivos con el intervalo teórico del cuadro de servicio, aplicando las tres bandas de tolerancia
+ definidas por la EMT en función del intervalo teórico ($I_t \leq 10$ min, $10 < I_t \leq 25$ min, $I_t > 25$ min).}
+{La regularidad es el indicador operativo de referencia del operador para líneas de alta frecuencia, y su fórmula 
+por bandas es una especificación propia de la EMT que el simulador debe reproducir fielmente para que los resultados 
+sean comparables con sus informes internos.}
 {RF-05}
 {Prueba unitaria del cálculo con casos en las tres bandas de tolerancia, contrastando con la especificación de la EMT. Método: T}
 
@@ -297,8 +146,10 @@
 {Funcional}
 {Must}
 {EMT Madrid}
-{La interfaz web debe permitir consultar de forma interactiva los resultados de cada simulación, incluyendo los indicadores calculados y las visualizaciones estadísticas generadas, organizados por parada, franja horaria y sentido.}
-{La EMT expresó la necesidad de explorar los resultados visualmente, sin procesar ficheros de salida; la visualización es la vía principal de explotación del sistema por parte del cliente.}
+{La interfaz web debe permitir consultar de forma interactiva los resultados de cada simulación, incluyendo los 
+indicadores calculados y las visualizaciones estadísticas generadas, organizados por parada, franja horaria y sentido.}
+{La EMT expresó la necesidad de explorar los resultados visualmente, sin procesar ficheros de salida; la visualización 
+es la vía principal de explotación del sistema por parte del cliente.}
 {RF-05}
 {Consulta de los resultados de una simulación completada desde la interfaz. Método: D}
 
@@ -306,8 +157,10 @@
 {Funcional}
 {Must}
 {EMT Madrid}
-{El sistema debe comparar las distribuciones simuladas con las observadas en los datos operacionales reales por parada, franja horaria de salida y sentido, empleando la distancia de Bhattacharyya, y presentar el grado de acuerdo obtenido.}
-{Permite a la EMT valorar la credibilidad del simulador frente a su propia operación real, condición necesaria para utilizarlo como herramienta de apoyo a la planificación.}
+{El sistema debe comparar las distribuciones simuladas con las observadas en los datos operacionales reales por parada,
+ franja horaria de salida y sentido, empleando la distancia de Bhattacharyya, y presentar el grado de acuerdo obtenido.}
+{Permite a la EMT valorar la credibilidad del simulador frente a su propia operación real, condición necesaria para 
+utilizarlo como herramienta de apoyo a la planificación.}
 {RF-05, RD-04}
 {Generación del informe de comparación y revisión de las tasas de acuerdo por sentido. Método: A}
 
@@ -315,8 +168,10 @@
 {Funcional}
 {Should}
 {EMT Madrid}
-{La interfaz debe listar el histórico de simulaciones ejecutadas, identificadas por su marca temporal, y permitir consultar o eliminar cualquiera de ellas.}
-{El uso previsto implica ejecutar y comparar múltiples escenarios a lo largo del tiempo; sin gestión del histórico los resultados serían inaccesibles o se acumularían indefinidamente.}
+{La interfaz debe listar el histórico de simulaciones ejecutadas, identificadas por su marca temporal, y permitir 
+consultar o eliminar cualquiera de ellas.}
+{El uso previsto implica ejecutar y comparar múltiples escenarios a lo largo del tiempo; sin gestión del histórico 
+los resultados serían inaccesibles o se acumularían indefinidamente.}
 {RF-01, RF-07}
 {Listado, consulta y borrado de simulaciones desde la interfaz, comprobando la eliminación efectiva en disco. Método: T}
 
@@ -324,28 +179,25 @@
 {Funcional}
 {Must}
 {EMT Madrid}
-{Los resultados de cada simulación (trazas, indicadores y ficheros de comparación) deben almacenarse en formatos estructurados y abiertos (CSV y JSON) en directorios accesibles desde el sistema de ficheros del anfitrión.}
-{Garantiza que la EMT pueda explotar los resultados con sus propias herramientas de análisis, más allá de la visualización ofrecida por la interfaz.}
+{Los resultados de cada simulación (trazas, indicadores y ficheros de comparación) deben almacenarse en formatos 
+estructurados y abiertos (CSV y JSON) en directorios accesibles desde el sistema de ficheros del anfitrión.}
+{Garantiza que la EMT pueda explotar los resultados con sus propias herramientas de análisis, más allá de la visualización 
+ofrecida por la interfaz.}
 {RF-05}
 {Inspección de los ficheros generados tras una simulación y carga de los mismos con herramientas externas. Método: I}
 
-\requisito{RF-11}{Ejecución de réplicas de Monte Carlo}
-{Funcional}
-{Should}
-{Tutor}
-{El sistema debe permitir ejecutar de forma desatendida múltiples réplicas de un mismo escenario con semillas distintas, agregando los resultados para el análisis de convergencia.}
-{Al ser el modelo estocástico, la estimación fiable de los indicadores exige promediar sobre un número suficiente de réplicas, lo que debe poder hacerse sin intervención manual.}
-{RF-03, RF-05}
-{Lanzamiento de un lote de réplicas y análisis del gráfico de convergencia resultante. Método: A}
 
-\subsection{Requisitos de diseño}
+\section*{A.3\quad Requisitos de diseño}
 
 \requisito{RD-01}{Modelado multiagente de la línea E01}
 {Restricción de diseño}
 {Must}
 {Equipo de diseño}
-{El simulador debe modelar la línea E01 como un sistema multiagente en el que autobuses, paradas y pasajeros son agentes individuales, recorriendo los autobuses la ruta bidireccional según el orden real de paradas de cada sentido derivado de los datos operacionales.}
-{El paradigma de agentes captura las interacciones individuales (embarques, rechazos, esperas) que los enfoques agregados no representan, y el orden real de paradas es condición para comparar con los datos de la EMT.}
+{El simulador debe modelar la línea E01 como un sistema multiagente en el que autobuses, paradas y pasajeros son 
+agentes individuales, recorriendo los autobuses la ruta bidireccional según el orden real de paradas de cada sentido
+ derivado de los datos operacionales.}
+{El paradigma de agentes captura las interacciones individuales (embarques, rechazos, esperas) que los enfoques 
+agregados no representan, y el orden real de paradas es condición para comparar con los datos de la EMT.}
 {RD-04}
 {Inspección del modelo y demostración de una vuelta completa en ambos sentidos. Método: I}
 
@@ -353,8 +205,10 @@
 {Restricción de diseño}
 {Must}
 {Equipo de diseño}
-{Las interacciones entre agentes deben implementarse mediante protocolos estándar FIPA (FIPA-Request y FIPA-Query), con el embarque iniciado por el agente pasajero mediante solicitud al autobús detenido en su parada.}
-{El uso de un estándar de comunicación de agentes dota al diseño de rigor formal y diferencia al sistema de modelos con elementos peatonales pasivos.}
+{Las interacciones entre agentes deben implementarse mediante protocolos estándar FIPA (FIPA-Request y FIPA-Query), 
+con el embarque iniciado por el agente pasajero mediante solicitud al autobús detenido en su parada.}
+{El uso de un estándar de comunicación de agentes dota al diseño de rigor formal y diferencia al sistema de modelos
+ con elementos peatonales pasivos.}
 {RD-01}
 {Inspección de la traza de mensajes FIPA de un ciclo de parada completo. Método: I}
 
@@ -362,8 +216,10 @@
 {Restricción de diseño}
 {Must}
 {EMT Madrid}
-{Cada autobús debe respetar una capacidad máxima de 80 pasajeros; las solicitudes de embarque con el vehículo completo deben rechazarse, permaneciendo el pasajero en la parada y contabilizándose como pasajero residual.}
-{La capacidad es una restricción física del vehículo real y los pasajeros residuales son un indicador de calidad de servicio de interés directo para el operador.}
+{Cada autobús debe respetar una capacidad máxima de 80 pasajeros; las solicitudes de embarque con el vehículo completo 
+deben rechazarse, permaneciendo el pasajero en la parada y contabilizándose como pasajero residual.}
+{La capacidad es una restricción física del vehículo real y los pasajeros residuales son un indicador de calidad de 
+servicio de interés directo para el operador.}
 {RD-01, RF-05}
 {Escenario forzado de saturación comprobando el tope de ocupación y el cómputo de residuales. Método: T}
 
@@ -371,17 +227,25 @@
 {Restricción de diseño}
 {Must}
 {Equipo de diseño}
-{Las subidas y bajadas de pasajeros y los tiempos de viaje entre paradas deben generarse muestreando las distribuciones estadísticas especificadas en los ficheros de parámetros de entrada, por parada, franja horaria y sentido. El simulador debe soportar el muestreo de las familias Normal, Binomial Negativa y Geométrica según el tipo indicado para cada combinación.}
-{Traslada al mundo simulado la demanda caracterizada a partir de los datos reales conservando su variabilidad estocástica; el soporte de las tres familias es necesario porque los ficheros de parámetros pueden especificar cualquiera de ellas según la parada y la franja.}
+{Las subidas y bajadas de pasajeros y los tiempos de viaje entre paradas deben generarse muestreando las distribuciones
+ estadísticas especificadas en los ficheros de parámetros de entrada, por parada, franja horaria y sentido. El 
+ simulador debe soportar el muestreo de las familias Normal, Binomial Negativa y Geométrica según el tipo indicado 
+ para cada combinación.}
+{Traslada al mundo simulado la demanda caracterizada a partir de los datos reales conservando su variabilidad 
+estocástica; el soporte de las tres familias es necesario porque los ficheros de parámetros pueden especificar 
+cualquiera de ellas según la parada y la franja.}
 {RD-01}
-{Contraste estadístico entre las muestras generadas y las distribuciones especificadas en los ficheros de entrada mediante réplicas. Método: A}
+{Contraste estadístico entre las muestras generadas y las distribuciones especificadas en los ficheros de entrada
+ mediante réplicas. Método: A}
 
 \requisito{RD-05}{Tiempo de detención en parada}
 {Restricción de diseño}
 {Should}
 {Equipo de diseño}
-{El autobús debe permanecer detenido en cada parada un tiempo mínimo fijo, extensible en función del número de operaciones de subida y bajada pendientes en esa parada.}
-{El tiempo de detención condiciona los tiempos de recorrido y la regularidad; un mínimo evita detenciones irrealmente breves en paradas sin demanda.}
+{El autobús debe permanecer detenido en cada parada un tiempo mínimo fijo, extensible en función del número de 
+operaciones de subida y bajada pendientes en esa parada.}
+{El tiempo de detención condiciona los tiempos de recorrido y la regularidad; un mínimo evita detenciones irrealmente 
+breves en paradas sin demanda.}
 {RD-01, RD-03}
 {Medición de los tiempos de detención en simulación y comprobación del mínimo. Método: T}
 
@@ -389,17 +253,28 @@
 {Restricción de diseño}
 {Must}
 {Equipo de diseño}
-{Los agentes autobús deben recorrer exclusivamente la secuencia fija de paradas de su sentido y ajustar sus salidas al cuadro de servicio configurado. El modelo no debe implementar reenrutamiento dinámico ni acciones de regulación en tiempo real (retenciones, saltos de parada o cortos de línea), y las llegadas anticipadas a terminal deben esperar hasta la hora de salida programada de la siguiente expedición.}
-{El objetivo del sistema es reproducir la operación observada en los datos, no optimizarla; introducir mecanismos de regulación ausentes en los datos rompería la comparabilidad con la realidad y desplazaría el trabajo hacia los sistemas de regulación de la literatura, fuera del alcance acordado.}
+{Los agentes autobús deben recorrer exclusivamente la secuencia fija de paradas de su sentido y ajustar sus 
+salidas al cuadro de servicio configurado. El modelo no debe implementar reenrutamiento dinámico ni acciones de 
+regulación en tiempo real (retenciones, saltos de parada o cortos de línea), y las llegadas anticipadas a terminal 
+deben esperar hasta la hora de salida programada de la siguiente expedición.}
+{El objetivo del sistema es reproducir la operación observada en los datos, no optimizarla; introducir mecanismos 
+de regulación ausentes en los datos rompería la comparabilidad con la realidad y desplazaría el trabajo hacia los 
+sistemas de regulación de la literatura, fuera del alcance acordado.}
 {RD-01}
-{Inspección del modelo comprobando la ausencia de lógica de reenrutamiento y prueba de espera en terminal ante una llegada anticipada. Método: I}
+{Inspección del modelo comprobando la ausencia de lógica de reenrutamiento y prueba de espera en terminal ante 
+una llegada anticipada. Método: I}
 
 \requisito{RD-07}{Arquitectura reactiva sin autonomía deliberativa}
 {Restricción de diseño}
 {Must}
 {Equipo de diseño}
-{Los agentes deben implementarse conforme a la noción débil de agencia (\textit{weak agency}): comportamiento puramente reactivo mediante reglas estímulo-respuesta, sin capacidades deliberativas, de planificación ni de aprendizaje. La lógica de coordinación relativa a magnitudes para las que no existen datos a nivel individual (como la selección de bajadas) puede residir en acciones globales del mundo, conservando los agentes su carácter reactivo.}
-{El sistema se clasifica formalmente como sistema multiagente reactivo bajo el marco de agencia débil; dotar a los agentes de autonomía deliberativa no está soportado por los datos disponibles y comprometería tanto la fidelidad del modelo como su verificabilidad.}
+{Los agentes deben implementarse conforme a la noción débil de agencia (\textit{weak agency}): comportamiento 
+puramente reactivo mediante reglas estímulo-respuesta, sin capacidades deliberativas, de planificación ni de aprendizaje.
+ La lógica de coordinación relativa a magnitudes para las que no existen datos a nivel individual 
+ (como la selección de bajadas) puede residir en acciones globales del mundo, conservando los agentes su carácter reactivo.}
+{El sistema se clasifica formalmente como sistema multiagente reactivo bajo el marco de agencia débil;
+ dotar a los agentes de autonomía deliberativa no está soportado por los datos disponibles y comprometería tanto la 
+ fidelidad del modelo como su verificabilidad.}
 {RD-01, RD-02}
 {Inspección de la arquitectura contrastando cada comportamiento de agente con el marco de agencia débil. Método: I}
 
@@ -407,8 +282,13 @@
 {Restricción de diseño}
 {Must}
 {EMT Madrid}
-{Todo parámetro estocástico del modelo (demanda de subidas y bajadas, tiempos de viaje entre paradas) debe proceder exclusivamente de los ficheros de parámetros derivados de los datos operacionales reales de la EMT, quedando excluida la introducción de parámetros sintéticos o ajustados manualmente con el fin de aproximar los resultados a un objetivo predeterminado.}
-{La parametrización íntegra con datos reales es el compromiso central del proyecto con el operador y la condición de validez de la comparación simulado--real; la calibración manual de parámetros invalidaría la validación e introduciría un sesgo de confirmación.}
+{Todo parámetro estocástico del modelo (demanda de subidas y bajadas, tiempos de viaje entre paradas) debe 
+proceder exclusivamente de los ficheros de parámetros derivados de los datos operacionales reales de la EMT, 
+quedando excluida la introducción de parámetros sintéticos o ajustados manualmente con el fin de aproximar los 
+resultados a un objetivo predeterminado.}
+{La parametrización íntegra con datos reales es el compromiso central del proyecto con el operador y la condición 
+de validez de la comparación simulado-real; la calibración manual de parámetros invalidaría la validación e 
+introduciría un sesgo de confirmación.}
 {RD-04}
 {Análisis de trazabilidad de cada parámetro del modelo hasta su origen en los datos operacionales. Método: A}
 
@@ -416,19 +296,25 @@
 {Restricción de diseño}
 {Must}
 {EMT Madrid}
-{El modelo debe limitarse a la operación de la línea E01 en días laborables normales. Quedan explícitamente fuera del alcance la interacción con el tráfico general, las incidencias y perturbaciones del servicio, la meteorología adversa, los transbordos y la interacción con otras líneas de la red.}
-{El acotado explícito del alcance, acordado con el operador, garantiza que las distribuciones ajustadas y la validación se refieran a un régimen operativo homogéneo, y hace el trabajo reproducible y defendible al documentar como decisión lo que de otro modo parecería una omisión.}
+{El modelo debe limitarse a la operación de la línea E01 en días laborables normales. Quedan explícitamente 
+fuera del alcance la interacción con el tráfico general, las incidencias y perturbaciones del servicio, la 
+meteorología adversa, los transbordos y la interacción con otras líneas de la red.}
+{El acotado explícito del alcance, acordado con el operador, garantiza que las distribuciones ajustadas y la 
+validación se refieran a un régimen operativo homogéneo, y hace el trabajo reproducible y defendible al documentar
+ como decisión lo que de otro modo parecería una omisión.}
 {RD-08}
 {Inspección de la memoria y del modelo verificando la ausencia de los elementos excluidos. Método: I}
 
-\subsection{Requisitos no funcionales}
+\section*{A.4\quad Requisitos no funcionales}
 
 \requisito{RNF-01}{Ejecución sin dependencias de la plataforma GAMA}
 {No funcional --- Portabilidad}
 {Must}
 {EMT Madrid}
-{El sistema completo debe distribuirse contenerizado mediante Docker, de forma que pueda ejecutarse en equipos de la EMT sin instalación previa de la plataforma GAMA ni de los entornos de ejecución de Python o Node.js.}
-{El personal de la EMT no dispone del entorno de desarrollo del proyecto; la contenerización es la condición práctica para que el simulador sea utilizable por el cliente.}
+{El sistema completo debe distribuirse contenerizado mediante Docker, de forma que pueda ejecutarse en equipos de
+ la EMT sin instalación previa de la plataforma GAMA ni de los entornos de ejecución de Python o Node.js.}
+{El personal de la EMT no dispone del entorno de desarrollo del proyecto; la contenerización es la condición 
+práctica para que el simulador sea utilizable por el cliente.}
 {---}
 {Despliegue y ejecución completa en una máquina limpia únicamente con Docker instalado. Método: D}
 
@@ -436,17 +322,22 @@
 {No funcional --- Fiabilidad}
 {Must}
 {EMT Madrid}
-{Los directorios de simulación y el registro de la última simulación preparada deben residir en almacenamiento del anfitrión montado en el contenedor, de modo que sobrevivan a reinicios del contenedor entre interacciones del usuario.}
-{El flujo de uso (preparar, configurar y lanzar en momentos distintos) y la conservación del histórico exigen que ningún estado relevante viva únicamente dentro del contenedor.}
+{Los directorios de simulación y el registro de la última simulación preparada deben residir en almacenamiento
+ del anfitrión montado en el contenedor, de modo que sobrevivan a reinicios del contenedor entre interacciones del usuario.}
+{El flujo de uso (preparar, configurar y lanzar en momentos distintos) y la conservación del histórico exigen
+ que ningún estado relevante viva únicamente dentro del contenedor.}
 {RNF-01, RF-09, RF-10}
-{Reinicio del contenedor entre la preparación y el lanzamiento de una simulación, y tras su finalización, comprobando la integridad del histórico. Método: T}
+{Reinicio del contenedor entre la preparación y el lanzamiento de una simulación, y tras su finalización, 
+comprobando la integridad del histórico. Método: T}
 
 \requisito{RNF-03}{Ejecución desatendida en modo \textit{headless}}
 {No funcional --- Rendimiento}
 {Must}
 {Equipo de diseño}
-{El motor de simulación debe poder ejecutarse en modo \textit{headless}, sin interfaz gráfica, permitiendo la ejecución de réplicas en paralelo en el hardware disponible.}
-{La interfaz gráfica de GAMA impide la automatización y multiplica el coste computacional; el modo desatendido es condición para las réplicas de Monte Carlo y para la integración con la interfaz web.}
+{El motor de simulación debe poder ejecutarse en modo \textit{headless}, sin interfaz gráfica, permitiendo 
+la ejecución de réplicas en paralelo en el hardware disponible.}
+{La interfaz gráfica de GAMA impide la automatización y multiplica el coste computacional; el modo desatendido 
+es condición para las réplicas de Monte Carlo y para la integración con la interfaz web.}
 {RF-03, RF-11}
 {Lanzamiento de un lote de réplicas sin entorno gráfico y verificación de su finalización. Método: T}
 
@@ -454,8 +345,10 @@
 {No funcional --- Usabilidad}
 {Could}
 {EMT Madrid}
-{La interfaz web debe admitir varios clientes conectados simultáneamente, manteniendo en todos ellos una vista coherente y actualizada del estado de las simulaciones.}
-{En un entorno de trabajo compartido, varios técnicos pueden consultar el sistema a la vez; las vistas desincronizadas inducirían a error sobre el estado real de las ejecuciones.}
+{La interfaz web debe admitir varios clientes conectados simultáneamente, manteniendo en todos ellos 
+una vista coherente y actualizada del estado de las simulaciones.}
+{En un entorno de trabajo compartido, varios técnicos pueden consultar el sistema a la vez; las vistas
+ desincronizadas inducirían a error sobre el estado real de las ejecuciones.}
 {RF-04}
 {Conexión simultánea de dos clientes y verificación de la coherencia de estado ante lanzamientos y finalizaciones. Método: T}
 
@@ -463,8 +356,10 @@
 {No funcional --- Legal}
 {Must}
 {Normativa (RGPD)}
-{El sistema debe operar exclusivamente con datos operacionales agregados (recuentos de ocupación y transacciones por parada), sin tratar en ningún punto del flujo datos de carácter personal de los pasajeros.}
-{Los datos cedidos por la EMT son agregados por diseño; verificar y documentar la ausencia de datos personales es necesario para el cumplimiento del RGPD en toda la cadena de tratamiento.}
+{El sistema debe operar exclusivamente con datos operacionales agregados (recuentos de ocupación y 
+transacciones por parada), sin tratar en ningún punto del flujo datos de carácter personal de los pasajeros.}
+{Los datos cedidos por la EMT son agregados por diseño; verificar y documentar la ausencia de datos 
+personales es necesario para el cumplimiento del RGPD en toda la cadena de tratamiento.}
 {RD-08}
 {Inspección de los esquemas de datos empleados en cada fase del sistema. Método: I}
 
@@ -472,7 +367,10 @@
 {No funcional --- Extensibilidad}
 {Could}
 {EMT Madrid}
-{Los parámetros específicos de la línea E01 (identificadores y número de paradas por sentido, horarios, distribuciones) deben residir en datos y ficheros de configuración, no en el código, de modo que el sistema pueda adaptarse a otras líneas de la red sustituyendo dichos ficheros.}
-{El interés del operador trasciende la línea piloto; la extensibilidad multiplica el valor del sistema como herramienta de planificación para el conjunto de la red.}
+{Los parámetros específicos de la línea E01 (identificadores y número de paradas por sentido, horarios, 
+distribuciones) deben residir en datos y ficheros de configuración, no en el código, de modo que el sistema 
+pueda adaptarse a otras líneas de la red sustituyendo dichos ficheros.}
+{El interés del operador trasciende la línea piloto; la extensibilidad multiplica el valor del sistema como 
+herramienta de planificación para el conjunto de la red.}
 {RF-02, RD-04}
 {Revisión de que ningún parámetro específico de línea está codificado de forma rígida en el modelo. Método: A}

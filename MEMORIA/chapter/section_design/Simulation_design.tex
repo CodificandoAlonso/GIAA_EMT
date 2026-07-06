@@ -25,8 +25,7 @@ de todos los tipos de agentes involucrados en esta simulación.
 Como se ha mencionado anteriormente, el desarrollo del sistema multi-agente se ha dividido en dos variantes alternativas.
 Esta sección cubre, para cada una de estas soluciones, la caracterización de los agentes existentes en ellas, sus principales
 métodos de interacción, expresados mediante diagramas de flujo de los protocolos del estándar FIPA~\cite{fipa2002specs}, así 
-como el principal comportamiento de la simulación existente. Se subdivide esta sección a su vez en dos subsecciones, cada una 
-relativa a las dos existentes soluciones.
+como el principal comportamiento de la simulación existente.
 
 
 \subsubsection{Caracterización de los agentes}
@@ -36,35 +35,134 @@ se considera a estos como~\textbf{agentes reactivos}. Esta característica choca
 ~\textit{pasajero}, con el posible comportamiento real inherente. En la vida real, un pasajero, de forma autónoma, es capaz
 de alterar sus planes iniciales para la consecución de sus objetivos mediante deliberación interna, lo que encaja según la 
 taxonomía con un agente \textbf{deliberativo}. De igual manera, el autobús en la vida real, puede reaccionar  autónomamente
-ante imprevistos, dotando a este de un proceso interno de elección. En el caso concreto, se ha optado por un sistema de agentes
-reactivos debido a distintas restricciones tanto de funcionalidad como de diseño. En el anexo relativo a los requisitos del
-sistema~\ref{anex:requirements} se detallan con mayor profundidad estos. En lo referente a la justificación de la taxonomía
-reactiva, los distintos requisitos
+ante imprevistos, dotando a este de un proceso interno de elección. No obstante, el objeto de este
+simulador no es reproducir los procesos cognitivos de los individuos, sino la operación observada de la línea, tratandose de 
+un modelo de carácter descriptivo, conducido por los datos (\textit{data driven}), en consonancia con lo acordado
+con la Empresa Municipal de Transportes en la elicitación de requisitos, descrita y expuesta en el anexo~\ref{anex:requirements}. 
+Dotar a los agentes de capacidades deliberativas exige información de la que no se dispone, como matrices origen-destino 
+individuales de los viajeros, lo que incurre en comportamientos no fundamentados en los datos operacionales.
+
+La legitimidad teórica de esta elección no descansa únicamente en las restricciones del proyecto. Como se expone en la 
+sección relativa a los agentes en el capítulo~\ref{chapter:state_of_art},~\textcite{brooks1991representation} 
+defiende que la arquitectura 
+reactiva constituye una categoría completa de agencia por derecho propio, en la que el comportamiento inteligente emerge de 
+la interacción entre el agente y su entorno mediante reglas estímulo respuesta, sin necesidad de un modelo simbólico interno 
+del mundo. En el caso concreto de la plataforma GAMA, este esquema de reglas se materializa de forma literal 
+mediante el mecanismo de \textit{reflexes} condicionados, donde cada comportamiento del agente se activa únicamente cuando se 
+satisface una condición relativa al estado del entorno.
+
+Por último,  las características constitutivas del concepto de agente, formuladas por~\textcite{Wooldridge1995},
+se exponen y se justifican para cada uno en su sección concreta.
+
+Dentro de esta solución coexisten tres agentes característicos. Concretamente, \textit{agentes pasajero}, 
+\textit{agentes autobús} y \textit{agentes parada}. A continuación, para cada uno se exponen sus principales 
+cualidades.
 
 
+\medskip
+\noindent\textbf{Agente autobús}
 
-Desde la EMT no se busca un sistema basado en 
-deliberaciones y alteraciones del comportamiento base de los agentes, como se muestra en la \textbf{elicitación de requisitos
-del sistema}, presente en el anexo~\ref{anex:requirements}. En consecuencia, en adecuación con lo establecido por los
-stakeholders involucrados, en este caso la Empresa Municipal de Transportes, se escoge un enfoque donde los agentes, en lugar
-de mostrar un pensamiento deliberativo, tracen sus acciones de forma conducida por los datos (\enquote{data driven} en inglés).
-Este tipo de caracterización de agente reactivo.
+Se caracteriza, como ya se ha discutido, por ser un agente \textbf{reactivo} basado en reglas de estímulo respuesta.
+Conceptualmente, se enmarca dentro del concepto de \textit{agencia débil}, presentando las cuatro características
+necesarias. Concretamente, la \textbf{autonomía} se justifica con la capacidad de, por cuenta propia, finalizar sus tareas sin 
+la necesidad de intervencionismo; la \textbf{proactividad} viene dada por la decisión propia del agente de iniciar su recorrido
+cuando recibe la percepción del entorno necesaria; la \textbf{sociabilidad} viene de la interacción con los agentes tanto
+pasajero como parada mediante protocolos \textit{FIPA} y la \textbf{reactividad}, propiedad homónima a su clasificación
+taxonómica, se origina de la respuesta a los distintos estímulos presentes en el entorno.
+
+En cuanto al rol que asume este agente en la simulación, el \textit{autobús} se encarga, para cada uno de los viajes 
+programados, de almacenar en un buffer la información relevante de los pasos por las distintas paradas, el cual
+se vuelca a un fichero \textit{CSV} al finalizar las salidas programadas del bus.
+
+Se genera un agente individual por cada autobús físico presente en el fichero de entrada relativo a la dotación.
+El ciclo de vida de estos agentes se inicia con su instanciación, realizada de forma previa al comienzo de la simulación, 
+y finaliza una vez este haya completado la totalidad de su servicio.
+
+En relación con el estado interno del agente a lo largo de su ciclo de vida, se dispone de un conjunto de atributos que
+permiten a cada uno de los autobuses mantener un control sobre el momento de la simulación que atraviesan.
+En la tabla~\ref{tab:estado_bus} se muestran aquellos campos más relevantes.
+
+\begin{table}[H]
+    \ttabbox[\FBwidth]
+    {\caption{Estado interno relevante del agente autobús}\label{tab:estado_bus}}
+    {\begin{tabular}{|P{3cm}|P{3cm}|P{4cm}|P{3cm}|}
+        \hline
+        \textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Origen}  \\
+        \hline
+        Código de vehículo & INT & Identificador del coche físico simulado & Input \\ \hline
+        Cuadro de servicio & INT & Número total de salidas programadas & Input \\ \hline
+        Viajes completados & INT & Número total de salidas finalizadas & Ejecución \\ \hline
+        Capacidad máxima & INT & Límite de 80 pasajeros & Constante \\ \hline
+        Ocupación actual & LIST & Agentes pasajero a bordo en el ciclo & Ejecución \\ \hline
+        Parada Alcanzada & INT & Posición lógica en la ruta & Ejecución \\ \hline
+        Sentido & STRING & Sentido de la ruta en el que se encuentra & Ejecución \\ \hline
+        Buffer de datos & STRING & Almacén de información relativa a los resultados de la ejecución & Ejecución \\ \hline
+        Control de comunicación & --- & Variables auxiliares de secuenciación de las conversaciones FIPA & Ejecución \\ \hline
+        \multicolumn{4}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+Con respecto al comportamiento y las distintas interacciones existentes para el agente, se pueden distinguir cuatro momentos
+característicos:~\textit{Movimiento},~\textit{comunicación con parada},~\textit{comunicación con pasajeros a cargar} y
+~\textit{comunicación con pasajeros que quieren bajar}. Los tres últimos momentos se encuentran incluidos en cuatro protocolos
+de comunicación existentes en la solución, basados en los estándares \textbf{FIPA-request} y \textbf{FIPA-query}.
+Pese a que la información completa relativa a cada uno de los protocolos se expone en la sección~\ref{subsec:comms_protocols}, 
 
 
-Dentro de esta solución coexisten tres agentes característicos. Concretamente, \textit{agentes pasajero}, \textit{agentes autobús}
-y \textit{agentes parada}. A continuación, para cada uno se exponen sus principales cualidades.
+la tabla~\ref{tab:behaviour_bus} muestra,
+
+a continuación se expone
+
+para cada momento característico del comportamiento del agente, 
+qué protocolo concreto contiene y qué función ejerce el autobús en él. Para el caso relativo a \textit{Movimiento}, se 
+presentan las acciones del agente según los posibles casos.
+
+\begin{enumerate}
+    \item \textbf{Movimiento}
+
+    Comportamiento binario mutuamente excluyente con el resto de acciones. Mientras que entre otros pueden coexistir,
+    si el agente se encuentra en movimiento, se garantiza haber resuelto todos los protocolos de comunicación. Bajo
+    esta acción, el agente únicamente transita entre paradas. Por el contrario, si no está en movimiento, es debido
+    o bien a que se encuentra inmerso en alguna otra acción referente a los protocolos de comunicación, o se encuentra
+    esperando el inicio de una nueva salida.
+
+    \item \textbf{Comunicación con parada}
+    Bla bla bla
+\end{enumerate}
+
+
+\begin{table}[H]
+    \ttabbox[\FBwidth]
+    {\caption{Momentos referentes al comportamiento del agente autobús}\label{tab:behaviour_bus}}
+    {\begin{tabular}{|P{3cm}|P{3cm}|P{4cm}|P{3cm}|}
+        \hline
+        \textbf{Momento} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Origen}  \\
+        \hline
+        Código de vehículo & INT & Identificador del coche físico simulado & Input \\ \hline
+        Cuadro de servicio & INT & Número total de salidas programadas & Input \\ \hline
+        Viajes completados & INT & Número total de salidas finalizadas & Ejecución \\ \hline
+        Capacidad máxima & INT & Límite de 80 pasajeros & Constante \\ \hline
+        Ocupación actual & LIST & Agentes pasajero a bordo en el ciclo & Ejecución \\ \hline
+        Parada Alcanzada & INT & Posición lógica en la ruta & Ejecución \\ \hline
+        Sentido & STRING & Sentido de la ruta en el que se encuentra & Ejecución \\ \hline
+        Buffer de datos & STRING & Almacén de información relativa a los resultados de la ejecución & Ejecución \\ \hline
+        Control de comunicación & --- & Variables auxiliares de secuenciación de las conversaciones FIPA & Ejecución \\ \hline
+        \multicolumn{4}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
 
 \medskip
 \noindent\textbf{Agente pasajero}
 
 \medskip
-\noindent\textbf{Agente autobús}
-
-\medskip
 \noindent\textbf{Agente parada}
 
 
-\subsection{Solución dos: Sin agentes pasajero}
+
+\subsection{Protocolos de Comunicación}\label{subsec:comms_protocols}
+
+\section{Solución dos: Sin agentes pasajero}
 
 
 \medskip
