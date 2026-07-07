@@ -102,20 +102,16 @@ En la tabla~\ref{tab:estado_bus} se muestran aquellos campos más relevantes.
     \end{tabular}}
 \end{table}
 
-Con respecto al comportamiento y las distintas interacciones existentes para el agente, se pueden distinguir cuatro momentos
-característicos:~\textit{Movimiento},~\textit{comunicación con parada},~\textit{comunicación con pasajeros a cargar} y
-~\textit{comunicación con pasajeros que quieren bajar}. Los tres últimos momentos se encuentran incluidos en cuatro protocolos
-de comunicación existentes en la solución, basados en los estándares \textbf{FIPA-request} y \textbf{FIPA-query}.
-Pese a que la información completa relativa a cada uno de los protocolos se expone en la sección~\ref{subsec:comms_protocols}, 
+
+Con respecto al comportamiento del agente, se pueden distinguir dos estados característicos: \textit{Parada} y 
+\textit{Movimiento}. El primero a su vez se puede subdividir en dos escenarios que se relacionan con el agente presentando un
+estado de \textit{parada}, que se corresponden con la carga/descarga de pasajeros en una parada, o la espera a iniciar
+una salida de cabecera. Por otra parte, el estado referente al movimiento únicamente se produce cuando el bus realiza 
+la transición entre paradas.
 
 
-la tabla~\ref{tab:behaviour_bus} muestra,
 
-a continuación se expone
-
-para cada momento característico del comportamiento del agente, 
-qué protocolo concreto contiene y qué función ejerce el autobús en él. Para el caso relativo a \textit{Movimiento}, se 
-presentan las acciones del agente según los posibles casos.
+¡\ref{subsec:comms_protocols}, 
 
 \begin{enumerate}
     \item \textbf{Movimiento}
