@@ -8,33 +8,21 @@ resultados sobre el papel. Puedo tmb meter una ontologia? Para mostrar un poco l
 elementos que componen cada simulacion. Hablar tambien de como se recogen los resultados, los logs etc}
 
 Este capítulo expone la construcción de las dos variantes de simulador desarrolladas en la plataforma de agentes 
-GAMA~\cite{taillandier2019gama} y se corresponde con la fase homónima del trabajo, presentada en la 
+GAMA~\cite{taillandier2019gama} y se corresponde con la fase homónima del trabajo, introducida en la 
 sección~\ref{subsec:structure}. Se puede dividir este capítulo en dos secciones, referentes a cada una de las alternativas
-creadas. En cada sección se detallan presenta el diseño de los dos
-sistemas multi-agente que se realizan en este trabajo, definiendo los distintos agentes involucrados, qué protocolos 
+creadas. De forma previa a la presentación de ambas, se expone una sección referente a la justificación de la taxonomía de los agentes
+involucrados. Posteriormente, en las secciones relativas a las soluciones, se presentan los diseños de los dos
+sistemas multi-agente realizados en este trabajo, caracterizando para cada uno los distintos agentes involucrados, qué protocolos 
 de comunicación se realizan y cómo interactúan entre sí dentro de la simulación.
 
-
-\section{Solución uno: Pasajeros como agentes}
-Esta implementación se caracteriza por incluir dentro del sistema la caracterización como agentes de los distintos pasajeros
-generados en la simulación. Su comportamiento, como se muestra a continuación, supone un enfoque más fideligno con la 
-realidad del escenario simulado. La siguiente sección cubre las características principales y las justificaciones de diseño
-de todos los tipos de agentes involucrados en esta simulación.
-
-\subsection{Arquitectura de la solución}
-Como se ha mencionado anteriormente, el desarrollo del sistema multi-agente se ha dividido en dos variantes alternativas.
-Esta sección cubre, para cada una de estas soluciones, la caracterización de los agentes existentes en ellas, sus principales
-métodos de interacción, expresados mediante diagramas de flujo de los protocolos del estándar FIPA~\cite{fipa2002specs}, así 
-como el principal comportamiento de la simulación existente.
-
-
-\subsubsection{Caracterización de los agentes}
-De forma previa a la presentación de los distintos agentes involucrados, cabe discutir acerca de su clasificación taxonómica 
-justificada dentro de la taxonomía expuesta por~\textcite{Wooldridge1995} y su consecuente justificación. Formalmente, 
+\section{Justificación de la taxonomía}
+De forma previa a la presentación de los distintos agentes involucrados en las soluciones existentes,
+ cabe discutir acerca de su clasificación taxonómica 
+presentada bajo el marco de la taxonomía expuesta por~\textcite{Wooldridge1995} y su consecuente justificación. Formalmente, 
 se considera a estos como~\textbf{agentes reactivos}. Esta característica choca, especialmente en~\textit{autobús} y en
 ~\textit{pasajero}, con el posible comportamiento real inherente. En la vida real, un pasajero, de forma autónoma, es capaz
 de alterar sus planes iniciales para la consecución de sus objetivos mediante deliberación interna, lo que encaja según la 
-taxonomía con un agente \textbf{deliberativo}. De igual manera, el autobús en la vida real, puede reaccionar  autónomamente
+taxonomía con un agente \textbf{deliberativo}. De igual manera, el autobús en la vida real, puede anteponer sus planes de forma autónoma
 ante imprevistos, dotando a este de un proceso interno de elección. No obstante, el objeto de este
 simulador no es reproducir los procesos cognitivos de los individuos, sino la operación observada de la línea, tratandose de 
 un modelo de carácter descriptivo, conducido por los datos (\textit{data driven}), en consonancia con lo acordado
@@ -54,6 +42,22 @@ satisface una condición relativa al estado del entorno.
 Por último,  las características constitutivas del concepto de agente, formuladas por~\textcite{Wooldridge1995},
 se exponen y se justifican para cada uno en su sección concreta.
 
+
+
+\section{Solución uno: Pasajeros como agentes}
+Esta implementación se caracteriza por incluir dentro del sistema la caracterización como agentes de los distintos pasajeros
+generados en la simulación. Su comportamiento, como se muestra a continuación, supone un enfoque más fideligno con la 
+realidad del escenario simulado. La siguiente sección cubre las características principales y las justificaciones de diseño
+de todos los tipos de agentes involucrados en esta simulación.
+
+\subsection{Arquitectura de la solución}
+Como se ha mencionado anteriormente, el desarrollo del sistema multi-agente se ha dividido en dos variantes alternativas.
+Esta sección cubre, para cada una de estas soluciones, la caracterización de los agentes existentes en ellas, sus principales
+métodos de interacción, expresados mediante diagramas de flujo de los protocolos del estándar FIPA~\cite{fipa2002specs}, así 
+como el principal comportamiento de la simulación existente.
+
+
+\subsubsection{Caracterización de los agentes}
 Dentro de esta solución coexisten tres agentes característicos. Concretamente, \textit{agentes pasajero}, 
 \textit{agentes autobús} y \textit{agentes parada}. A continuación, para cada uno se exponen sus principales 
 cualidades.
@@ -66,13 +70,15 @@ Se caracteriza, como ya se ha discutido, por ser un agente \textbf{reactivo} bas
 Conceptualmente, se enmarca dentro del concepto de \textit{agencia débil}, presentando las cuatro características
 necesarias. Concretamente, la \textbf{autonomía} se justifica con la capacidad de, por cuenta propia, finalizar sus tareas sin 
 la necesidad de intervencionismo; la \textbf{proactividad} viene dada por la decisión propia del agente de iniciar su recorrido
-cuando recibe la percepción del entorno necesaria; la \textbf{sociabilidad} viene de la interacción con los agentes tanto
+cuando recibe la percepción del entorno necesaria, por la decisión de iniciar comunicaciones cuando toque y de rechazar embarque
+de pasajeros si se supera la capacidad; la \textbf{sociabilidad} viene de la interacción con los agentes tanto
 pasajero como parada mediante protocolos \textit{FIPA} y la \textbf{reactividad}, propiedad homónima a su clasificación
 taxonómica, se origina de la respuesta a los distintos estímulos presentes en el entorno.
 
-En cuanto al rol que asume este agente en la simulación, el \textit{autobús} se encarga, para cada uno de los viajes 
-programados, de almacenar en un buffer la información relevante de los pasos por las distintas paradas, el cual
-se vuelca a un fichero \textit{CSV} al finalizar las salidas programadas del bus.
+En cuanto al rol que asume este agente en la simulación, el \textit{autobús} es el encargado, para cada uno de los viajes
+programados, de ejercer como núcleo del sistema. Es decir, su función es transitar a lo largo de la linea 
+embarcando y desembarcando pasajeros en cada parada, almacenando la información crítica necesaria para el volcado y 
+cálculo de los \textbf{índices de rendimiento} concretos. 
 
 Se genera un agente individual por cada autobús físico presente en el fichero de entrada relativo a la dotación.
 El ciclo de vida de estos agentes se inicia con su instanciación, realizada de forma previa al comienzo de la simulación, 
@@ -98,58 +104,97 @@ En la tabla~\ref{tab:estado_bus} se muestran aquellos campos más relevantes.
         Sentido & STRING & Sentido de la ruta en el que se encuentra & Ejecución \\ \hline
         Buffer de datos & STRING & Almacén de información relativa a los resultados de la ejecución & Ejecución \\ \hline
         Control de comunicación & --- & Variables auxiliares de secuenciación de las conversaciones FIPA & Ejecución \\ \hline
-        \multicolumn{4}{l}{Fuente: elaboración propia.}
+        \multicolumn{4}{l}{Fuente: Elaboración propia.}
     \end{tabular}}
 \end{table}
 
 
-Con respecto al comportamiento del agente, se pueden distinguir dos estados característicos: \textit{Parada} y 
+Con respecto al comportamiento del agente, se pueden distinguir dos estados característicos: \textit{detención} y 
 \textit{Movimiento}. El primero a su vez se puede subdividir en dos escenarios que se relacionan con el agente presentando un
-estado de \textit{parada}, que se corresponden con la carga/descarga de pasajeros en una parada, o la espera a iniciar
+estado de \textit{detención}, que se corresponden con la carga/descarga de pasajeros en una parada, o la espera a iniciar
 una salida de cabecera. Por otra parte, el estado referente al movimiento únicamente se produce cuando el bus realiza 
-la transición entre paradas.
+la transición entre paradas. \textbf{DUDA, No se si poner esto a continuación aqui o ponerlo en una secion dedicada 
+a como se realiza la simulacion como tal DE MOMENTO SE QUEDA PERO IRA PAA  FUERAAA PUÑETA}: 
+El movimiento se realiza de forma abstracta. Es decir, el agente desconoce
+su posición vectorial en el espacio, su tránsito entre paradas se mide en tiempo. Una vez finaliza su estancia en una 
+parada y necesita transitar a la siguiente, extrae del entorno el tiempo de tránsito hacia la siguiente parada, medido 
+en ciclos de simulación.
 
-
-
-¡\ref{subsec:comms_protocols}, 
-
-\begin{enumerate}
-    \item \textbf{Movimiento}
-
-    Comportamiento binario mutuamente excluyente con el resto de acciones. Mientras que entre otros pueden coexistir,
-    si el agente se encuentra en movimiento, se garantiza haber resuelto todos los protocolos de comunicación. Bajo
-    esta acción, el agente únicamente transita entre paradas. Por el contrario, si no está en movimiento, es debido
-    o bien a que se encuentra inmerso en alguna otra acción referente a los protocolos de comunicación, o se encuentra
-    esperando el inicio de una nueva salida.
-
-    \item \textbf{Comunicación con parada}
-    Bla bla bla
-\end{enumerate}
-
+Por último, este agente se puede considerar como el \textbf{núcleo} de la interacción del sistema, ya que resulta iniciador o receptor
+de cuatro de los cinco protocolos de comunicación existentes en esta solución. Dichos protocolos se realizan siempre dentro del estado
+de \textit{detención} correspondiente con la carga/descarga en una parada. Aunque la completitud de cada protocolo se expone
+en la sección~\ref{subsec:comms_protocols}, se presenta a continuación la información relevante relativa al agente autobús de dichos
+protocolos, relacionando estos con momentos internos del agente dentro del estado de \textit{detención}.
 
 \begin{table}[H]
     \ttabbox[\FBwidth]
-    {\caption{Momentos referentes al comportamiento del agente autobús}\label{tab:behaviour_bus}}
-    {\begin{tabular}{|P{3cm}|P{3cm}|P{4cm}|P{3cm}|}
-        \hline
-        \textbf{Momento} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Origen}  \\
-        \hline
-        Código de vehículo & INT & Identificador del coche físico simulado & Input \\ \hline
-        Cuadro de servicio & INT & Número total de salidas programadas & Input \\ \hline
-        Viajes completados & INT & Número total de salidas finalizadas & Ejecución \\ \hline
-        Capacidad máxima & INT & Límite de 80 pasajeros & Constante \\ \hline
-        Ocupación actual & LIST & Agentes pasajero a bordo en el ciclo & Ejecución \\ \hline
-        Parada Alcanzada & INT & Posición lógica en la ruta & Ejecución \\ \hline
-        Sentido & STRING & Sentido de la ruta en el que se encuentra & Ejecución \\ \hline
-        Buffer de datos & STRING & Almacén de información relativa a los resultados de la ejecución & Ejecución \\ \hline
-        Control de comunicación & --- & Variables auxiliares de secuenciación de las conversaciones FIPA & Ejecución \\ \hline
-        \multicolumn{4}{l}{Fuente: elaboración propia.}
+    {\caption{papel del agente autobús dentro de los distintos protocolos de comunicación existentes}\label{tab:interaccion_bus}}
+    {\begin{tabular}{|P{2cm}|P{2cm}|P{5cm}|P{5cm}|}
+    \hline
+    \textbf{Protocolo} & \textbf{Rol del Agente} & \textbf{Descripción} & \textbf{Momento}  \\
+    \hline
+    \textit{Broadcast Approach} & Iniciador & El agente autobús se comunica con los pasajeros presentes en él para saber si van a efectuar
+    desembarco en la parada próxima. & Este protocolo se inicia de forma previa a la llegada de un autobús a una parada. 
+    \\ \hline
+    \textit{Arrived to Stop} & Iniciador & El agente autobús se comunica con la parada a la que ha llegado haciéndole saber su 
+    presencia & Este protocolo se produce de forma inmediatamente posterior a la resolución del protocolo pretérito, coincidiendo
+    con el momento de llegada a una parada. 
+    \\ \hline
+    \textit{Boarding process} & Receptor & El agente autobús recibe de cada pasajero presente en la parada una propuesta de subida al autobús.
+    Según la capacidad de carga, acepta o rechaza dicha petición. & Este protocolo se produce mientras el autobús realiza su detención
+    en la parada correspondiente. 
+    \\ \hline
+    \textit{Update count} & Iniciador & El agente, una vez resuelva el embarque/desembarque de pasajeros, se comunica con la parada para que
+    esta actualice su conocimiento sobre qué pasajeros han embarcado y cuáles no han podido hacerlo. & Este protocolo se produce
+    después de la resolución de todos los protocolos pretéritos. 
+    \\ \hline
+    \multicolumn{4}{l}{Fuente: Elaboración propia.}
     \end{tabular}}
 \end{table}
 
 
 \medskip
 \noindent\textbf{Agente pasajero}
+
+Este agente, clave en la diferenciación de esta solución de la expuesta en la sección~\ref{sec:second_sol}, se caracteriza también
+por ser un agente \textbf{reactivo}, apoyándose en la justificación expuesta anteriormente. En relación con las características 
+propias del concepto agente, su \textbf{autonomía} se justifica de la misma forma que el agente \textit{autobús}, como la capacidad
+de completar sus tareas sin la acción externa; la \textbf{sociabilidad} del agente se genera por la interacción entre el mismo y 
+los agentes \textit{autobús} y \textit{parada}; la \textbf{proactividad} radica en la capacidad de decisión y de iniciación de la 
+conversación que presenta el agente a la hora de tratar de cumplir sus objetivos; por último, la \textbf{reactividad} se genera 
+por el conjunto de acciones que gobiernan su conducta, dotando al agente de un enfoque basado en un esquema de reglas condición
+acción.
+
+El rol de este agente es el de representar a una persona como entidad dentro de la simulación. Comprende desde la \enquote{llegada}
+del pasajero a la parada, hasta el momento de bajada del autobús. Su ciclo de vida comienza con su instanciación, representando
+su llegada a la parada, y acaba cuando este realiza su apeo del autobús correspondiente.
+
+En relación con su estado interno, el agente posee distintos atributos que le permiten guardar registro de su estado dentro
+del ciclo de vida. La tabla~\ref{tab:estado_pasajero} muestra estos atributos. 
+
+\begin{table}[H]
+    \ttabbox[\FBwidth]
+    {\caption{Estado interno relevante del agente pasajero}\label{tab:estado_pasajero}}
+    {\begin{tabular}{|P{3cm}|P{3cm}|P{4cm}|P{3cm}|}
+        \hline
+        \textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Origen}  \\
+        \hline
+        Parada & Agente \textit{parada} & Referencia de la parada en la que se encuentra & Ejecución \\ \hline
+        Autobús & Agente \textit{autobús} & Referencia del autobús en el que se encuentra & Ejecución \\ \hline
+        Tiempo transcurrido en la parada & FLOAT & Tiempo transcurrido desde su generación hasta su embarque & Ejecución \\ \hline
+        Deseo de bajarse & BOOL & Variable que sirve como referencia para saber si realizará desembarco en la siguiente parada & Ejecución 
+        \\ \hline
+        \multicolumn{4}{l}{Fuente: Elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+Nótese que los dos primeros atributos de la tabla~\ref{tab:estado_pasajero} resultan mutuamente excluyentes, sirviendo estos como 
+identificadores perfectos de los dos estados relativos al comportamiento en los que se puede encontrar el agente, que resultan 
+ser: \textit{esperando en parada} y \textit{montado en autobús}.
+
+
+
+
 
 \medskip
 \noindent\textbf{Agente parada}
@@ -158,7 +203,7 @@ la transición entre paradas.
 
 \subsection{Protocolos de Comunicación}\label{subsec:comms_protocols}
 
-\section{Solución dos: Sin agentes pasajero}
+\section{Solución dos: Sin agentes pasajero}\label{sec:second_sol}
 
 
 \medskip

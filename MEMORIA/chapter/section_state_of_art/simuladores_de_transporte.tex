@@ -151,7 +151,7 @@ datos \textbf{reales} sobre la operación de autobuses, a diferencia de~\textcit
 esta se plasman mediante Key Performance Indicators y se visualizan con el fin de facilitar su visualización.
 
 Para el correcto funcionamiento de la simulación, resulta necesario remarcar dos cuestiones relevantes acerca de esta.
-La primera consta de la especificación de uso de distribuciones contínuas conocidas para el tratamiento de los distintos
+La primera consta de la especificación de uso de distribuciones paramétricas conocidas para el tratamiento de los distintos
 datos usados como entrada del simulador. Estas distintas distribuciones se expanden en la Sección~\ref{subsec:statistics}.
 La otra, expuesta en la siguiente sección, trata del motor utilizado para la realización de las simulaciones, correspondiente
 con el \textbf{algoritmo de Monte Carlo}.
@@ -334,24 +334,27 @@ La distribución binomial Negativa, representada en la figura~\ref{fig:negbin}, 
 tipo de distribución discreta basada en una prominente cola derecha (skewness positivo). Esta característica se
 encuentra presente también en la distribución \textit{geométrica} (véase la figura~\ref{fig:geometric}).
 
-
-La distribución \textit{binomial negativa} normalmente se emplea para modelar el número de intentos necesarios
-para conseguir un determinado número de aciertos bajo condiciones probabilísticas. La \textit{geométrica}, como
-caso particular, modela el número de intentos hasta conseguir exactamente \textbf{un acierto}.
-Ambas distribuciones toman un parámetro referente a la \textit{probabilidad de éxito} y otro referente al
-\textit{Número de aciertos}.
-
-Matemáticamente, la función de masa de probabilidad de la distribución binomial 
-negativa viene dada por:
+La distribución binomial negativa modela el número de fracasos observados
+antes de alcanzar el $r$-ésimo éxito en una secuencia de ensayos de Bernoulli
+independientes con probabilidad de éxito $p$. Su función de masa de
+probabilidad viene dada por:
 \begin{equation}
-P(X=k) = \binom{k+r-1}{k}(1-p)^{k}p^{r}, 
-\quad k = 0, 1, 2, \ldots
+P(X = k) \;=\; \frac{\Gamma(k + r)}{k!\,\Gamma(r)}\, p^{r} (1-p)^{k},
+\qquad k = 0, 1, 2, \ldots
+\label{eq:nbinom}
 \end{equation}
-donde $r$ es el número de éxitos y $p$ la probabilidad de 
-éxito. La distribución geométrica constituye el caso particular $r=1$:
+donde la formulación mediante la función Gamma generaliza el coeficiente
+binomial y admite valores reales positivos de $r$, generalización empleada
+en este trabajo al estimarse dicho parámetro por el método de los momentos.
+La distribución geométrica constituye el caso particular $r = 1$:
 \begin{equation}
-P(X=k) = (1-p)^{k-1}p, \quad k = 1, 2, 3, \ldots
+P(X = k) \;=\; p\,(1-p)^{k}, \qquad k = 0, 1, 2, \ldots
+\label{eq:geom}
 \end{equation}
+que modela el número de fracasos previos al primer éxito. En ambos casos se
+adopta la convención de soporte iniciado en cero, coherente con la naturaleza
+de las variables modeladas ---recuentos de subidas y bajadas que admiten el
+valor nulo--- y con los muestreadores implementados en el simulador.
 
 
 \begin{figure}[h]
@@ -486,7 +489,7 @@ iteración $i+1$ se recalcula esa $R_{i+1}$ sin tener en cuenta el valor anterio
 
 Esto se repite hasta que se han computado los $r$ datos de la $H_a$
 
-Luego, con un nivel definido de significancia $\alpha$, para cada $R_i$ con $i \in 1,2,\ldots, i$ 
+Luego, con un nivel definido de significancia $\alpha$, para cada $R_i$ con $i \in 1,2,\ldots, r$ 
 se calcula un valor $\lambda_i$
 \begin{equation}
 \lambda_i = \frac {\left ( n - i \right ) t_{p, n-i-1}} {\sqrt{\left ( n- i -1 + t_{p, n-i-1}^{2} \right ) \left ( n -i +1 \right )}}
@@ -518,7 +521,7 @@ En este aspecto, en etapas iniciales con pocas muestras de datos, se ha realizad
 gráfico de los datos, en aquellos escenarios donde la posible normalidad representaba una hipótesis razonable.
 En casos expandidos con múltiples validaciones, se ha utilizado de una forma acotada y considerada.
 Bajo tamaños muestrales que rondan las 400 muestras, se ha implementado este test bajo especificación de una cota
-no superior al \textbf{1\%} del total de los datos, lo que representativamente supone una medida de hasta 6
+no superior al \textbf{1\%} del total de los datos, lo que representativamente supone una medida de hasta 4
 outliers posibles en la distribución. Este valor permite representar un margen lo suficientemente pequeño como 
 para poder ser utilizado como límite superior en la hipótesis alternativa del test sin dañar el comportamiento
 genuino de los datos~\cite{wilcox2012}.

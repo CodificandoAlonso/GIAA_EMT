@@ -979,16 +979,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{GeoInformatica}
       \field{number}{2}
-      \field{title}{Building, composing and experimenting macroscopic models with the {GAMA} platform}
+      \field{title}{Building, composing and experimenting complex spatial models with the {GAMA} platform}
       \field{volume}{23}
       \field{year}{2019}
       \field{pages}{299\bibrangedash 322}
       \range{pages}{24}
-      \verb{urlraw}
-      \verb https://gama-platform.org
-      \endverb
-      \verb{url}
-      \verb https://gama-platform.org
+      \verb{doi}
+      \verb 10.1007/s10707-018-00339-6
       \endverb
     \endentry
     \entry{saidallah2016comparative}{inproceedings}{}

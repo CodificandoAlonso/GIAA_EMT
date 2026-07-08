@@ -22,7 +22,7 @@ diariamente las dotaciones propuestas por la compañía de autobuses. La \enquot
 implica este paso para la validación supone un componente extra que justifica esta propuesta. La 
 realización de este proyecto se ha enmarcado en un trabajo de investigación de una duración de ocho 
 meses a lo largo de los cuales se ha ido desarrollando la solución planteada, bajo la supervisión 
-bisemanal por parte de la EMT mediante reuniones telemáticas.
+quincenal por parte de la EMT mediante reuniones telemáticas.
 
 En una fase de desarrollo inicial, se propuso por parte de la EMT la evaluación de las cinco 
 líneas \textit{express} de la compañía, al ser líneas con un número de paradas bajo relativo al 
@@ -56,7 +56,7 @@ Supone la fase inicial del trabajo. Al no disponer de los datos, expandidos en e
  sección~\ref{chapter:state_of_art}, junto con un estudio de la plataforma 
  GAMA~\cite{taillandier2019gama}, con el fin de realizar un acercamiento a los conceptos, 
  estándares y herramientas que se usan a lo largo del desarrollo. Durante esta fase, a lo 
- largo de las reuniones bisemanales, se acota el rango de aplicación del simulador, reduciéndose 
+ largo de las reuniones quincenales, se acota el rango de aplicación del simulador, reduciéndose 
  de las cinco líneas express inicialmente deseadas, a la línea E01, con el fin de no sobrecargar el 
  análisis de la fase posterior.
 
@@ -122,7 +122,7 @@ Herramienta usada con kernel de \textit{Python} para el análisis de los datos d
 Necesaria para la conversión de GeoJSON (Formato basado en JSON con especificación concreta de parámetros para representación geográfica de los datos) a archivo ESRI shapefile (formato estándar de representación vectorial de datos geoespaciales). Usada para la carga en el simulador de los datos de la ruta y de la ubicación de las paradas.
 
 \item \textbf{Node.js}\footnote{\url{https://nodejs.org} (accedido: 9 de mayo de 2026).}:
-Framework de desarrollo web utilizado para el despliegue de la herramienta en \textit{local}. Permite la creación de una arquitectura cliente/servidor que permita la conexión entre acciones o deseos del usuario en el navegador y su correspondiente cambio en la máquina anfitriona. Facilita la visualización de las simulaciones o el lanzamiento de nuevas.
+Entorno de ejecución del lenguaje JavaScript. Utilizado para el despliegue de la herramienta en \textit{local}. Permite la creación de una arquitectura cliente/servidor que permita la conexión entre acciones o deseos del usuario en el navegador y su correspondiente cambio en la máquina anfitriona. Facilita la visualización de las simulaciones o el lanzamiento de nuevas.
 
 \item \textbf{Docker}\footnote{\url{https://www.docker.com} (accedido: 9 de mayo de 2026).}:
 Usado para la estandarización y aislamiento de procesos, facilitando el uso global del sistema. Utilizado para el despliegue de un contenedor encargado de la ejecución del programa completo, emulando un \enquote{gemelo digital} con las características del ordenador utilizado para el desarrollo. Gracias a esta herramienta, se permite ejecutar simulaciones en entornos sin la plataforma de desarrollo de agentes instalada.
