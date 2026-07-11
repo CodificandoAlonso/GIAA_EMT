@@ -128,19 +128,19 @@ protocolos, relacionando estos con momentos internos del agente dentro del estad
 
 \begin{table}[H]
     \ttabbox[\FBwidth]
-    {\caption{papel del agente autobús dentro de los distintos protocolos de comunicación existentes}\label{tab:interaccion_bus}}
+    {\caption{Papel del agente autobús dentro de los distintos protocolos de comunicación existentes}\label{tab:interaccion_bus}}
     {\begin{tabular}{|P{2cm}|P{2cm}|P{5cm}|P{5cm}|}
     \hline
     \textbf{Protocolo} & \textbf{Rol del Agente} & \textbf{Descripción} & \textbf{Momento}  \\
     \hline
-    \textit{Broadcast Approach} & Iniciador & El agente autobús se comunica con los pasajeros presentes en él para saber si van a efectuar
+    \textit{Broadcast Approach} & Iniciador & El agente \textit{autobús} se comunica con los pasajeros presentes en él para saber si van a efectuar
     desembarco en la parada próxima. & Este protocolo se inicia de forma previa a la llegada de un autobús a una parada. 
     \\ \hline
-    \textit{Arrived to Stop} & Iniciador & El agente autobús se comunica con la parada a la que ha llegado haciéndole saber su 
+    \textit{Arrived to Stop} & Iniciador & El agente \textit{autobús} se comunica con la parada a la que ha llegado haciéndole saber su 
     presencia & Este protocolo se produce de forma inmediatamente posterior a la resolución del protocolo pretérito, coincidiendo
     con el momento de llegada a una parada. 
     \\ \hline
-    \textit{Boarding process} & Receptor & El agente autobús recibe de cada pasajero presente en la parada una propuesta de subida al autobús.
+    \textit{Boarding process} & Receptor & El agente \textit{autobús} recibe de cada pasajero presente en la parada una propuesta de subida al autobús.
     Según la capacidad de carga, acepta o rechaza dicha petición. & Este protocolo se produce mientras el autobús realiza su detención
     en la parada correspondiente. 
     \\ \hline
@@ -182,18 +182,43 @@ del ciclo de vida. La tabla~\ref{tab:estado_pasajero} muestra estos atributos.
         Parada & Agente \textit{parada} & Referencia de la parada en la que se encuentra & Ejecución \\ \hline
         Autobús & Agente \textit{autobús} & Referencia del autobús en el que se encuentra & Ejecución \\ \hline
         Tiempo transcurrido en la parada & FLOAT & Tiempo transcurrido desde su generación hasta su embarque & Ejecución \\ \hline
-        Deseo de bajarse & BOOL & Variable que sirve como referencia para saber si realizará desembarco en la siguiente parada & Ejecución 
+        Deseo de bajarse & BOOL & Variable que sirve como referencia para saber si realizará desembarco en la siguiente parada 
+        & Ejecución 
         \\ \hline
         \multicolumn{4}{l}{Fuente: Elaboración propia.}
     \end{tabular}}
 \end{table}
 
-Nótese que los dos primeros atributos de la tabla~\ref{tab:estado_pasajero} resultan mutuamente excluyentes, sirviendo estos como 
+Nótese que los dos primeros atributos de la tabla~\ref{tab:estado_pasajero} resultan mutuamente excluyentes, puesto que el agente
+o bien se localiza  en un autobús o en una parada, sirviendo estos como 
 identificadores perfectos de los dos estados relativos al comportamiento en los que se puede encontrar el agente, que resultan 
 ser: \textit{esperando en parada} y \textit{montado en autobús}.
 
+Con respecto a las interacciones entre agentes, este agente resulta tanto receptor como iniciador de los distintos protocolos en los
+ que se encuentra involcurado. Dichos protocolos, así como el rol del agente y el momento característico en el 
+ que suceden se muestran en la tabla
+~\ref{tab:interaccion_pasajero}.
 
-
+\begin{table}[H]
+    \ttabbox[\FBwidth]
+    {\caption{Papel del agente pasajero dentro de los distintos protocolos de comunicación existentes}\label{tab:interaccion_pasajero}}
+    {\begin{tabular}{|P{2cm}|P{2cm}|P{5cm}|P{5cm}|}
+    \hline
+    \textbf{Protocolo} & \textbf{Rol del Agente} & \textbf{Descripción} & \textbf{Momento}  \\
+    \hline
+    \textit{Broadcast Approach} & Receptor & El agente recibe un mensaje del autobús indicando que este se aproxima a una parada.
+    Su respuesta de vuelta depende del valor del estado interno relativo al deseo de bajarse. & Este protocolo se produce cuando 
+    el agente se encuentra en el estado~\textit{montado en autobús}
+    \\ \hline
+    \textit{Bus arriving} & Receptor & El agente \textit{pasajero} recibe un mensaje del agente \textit{parada} en el que se encuentra
+    \\ \hline
+    \textit{Boarding process} & Iniciador & El agente \textit{pasajero}, al conocer la referencia del agente \textit{autobús} que llega
+     a la parada, inicia comunicación con él expresando su solicitud de embarque. & Este protocolo se produce mientras el agente 
+     pasajero se encuentra \textit{esperando en parada}, justo posterior a la recepción del mensaje relativo al protocolo pretérito.
+    \\ \hline
+    \multicolumn{4}{l}{Fuente: Elaboración propia.}
+    \end{tabular}}
+\end{table}
 
 
 \medskip
