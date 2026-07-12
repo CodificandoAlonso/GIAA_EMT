@@ -2228,7 +2228,6 @@ species stop skills: [fipa]  {
     			}
     			
     			self.passengers_generated <- self.passengers_generated - n_boarded;
-    			
     		}
     	}//End loop
     	

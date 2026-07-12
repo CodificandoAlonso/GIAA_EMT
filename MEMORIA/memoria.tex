@@ -142,6 +142,7 @@ hmargin=3cm
 \usepackage{floatrow} % utilizamos este paquete y sus macros \ttabbox y \ffigbox para alinear los nombres de tablas y figuras de acuerdo con el estilo definido.
 \usepackage{array} % con este paquete podemos definir en la siguiente línea un nuevo tipo de columna para tablas: ancho personalizado y contenido centrado
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{Q}[1]{>{\centering\arraybackslash}p{\dimexpr#1\linewidth-2\tabcolsep\relax}}
 \DeclareCaptionFormat{upper}{#1#2\uppercase{#3}\par}
 
 % Diseño de tabla para ingeniería

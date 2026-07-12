@@ -645,7 +645,10 @@ OUTPUT memoria.lof
 INPUT ./memoria.lot
 INPUT ./memoria.lot
 INPUT memoria.lot
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xi.tfm
 OUTPUT memoria.lot
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/t1xi.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxi.tfm
 INPUT ./chapter/section_introduction/intro.tex
 INPUT ./chapter/section_introduction/intro.tex
 INPUT ./chapter/section_introduction/intro.tex
@@ -689,12 +692,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xtt.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xi.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xi.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/t1xr.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxptmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxr.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/t1xi.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxi.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/txfonts/t1xr.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxptmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/rtxr.tfm

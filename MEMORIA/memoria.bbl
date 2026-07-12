@@ -776,6 +776,76 @@
       \verb http://www.fipa.org/specs/fipa00037/
       \endverb
     \endentry
+    \entry{fipa2002query}{report}{}
+      \name{author}{1}{}{%
+        {{hash=9ea78c8bdcb65ac951c55622c18b20ec}{%
+           family={{Foundation for Intelligent Physical Agents}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Foundation for Intelligent Physical Agents}%
+      }
+      \strng{namehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{fullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{bibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \field{extraname}{3}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{SC00027H}
+      \field{title}{{FIPA} Query Interaction Protocol Specification}
+      \field{type}{FIPA Specification}
+      \field{urlday}{12}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2002}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.fipa.org/specs/fipa00027/
+      \endverb
+      \verb{url}
+      \verb http://www.fipa.org/specs/fipa00027/
+      \endverb
+    \endentry
+    \entry{fipa2002request}{report}{}
+      \name{author}{1}{}{%
+        {{hash=9ea78c8bdcb65ac951c55622c18b20ec}{%
+           family={{Foundation for Intelligent Physical Agents}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Foundation for Intelligent Physical Agents}%
+      }
+      \strng{namehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{fullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{bibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \field{extraname}{4}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{SC00026H}
+      \field{title}{{FIPA} Request Interaction Protocol Specification}
+      \field{type}{FIPA Specification}
+      \field{urlday}{12}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2002}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.fipa.org/specs/fipa00026/
+      \endverb
+      \verb{url}
+      \verb http://www.fipa.org/specs/fipa00026/
+      \endverb
+    \endentry
     \entry{bellifemine2007jade}{book}{}
       \name{author}{3}{}{%
         {{hash=2c27c4fb5c5619ffe27c1014fb65f568}{%
@@ -973,8 +1043,8 @@
       \strng{authorbibnamehash}{75decb3d48516684b8a92be814646850}
       \strng{authornamehash}{75decb3d48516684b8a92be814646850}
       \strng{authorfullhash}{cc717a6ea91633568502e5523b300d46}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{GeoInformatica}
@@ -1152,8 +1222,8 @@
       \strng{authornamehash}{4d52f59d2dfd78bc079116445c2eddc4}
       \strng{authorfullhash}{3ead96d2d8b00c5f5a06bb77ca16c5f5}
       \field{extraname}{2}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Transportation Research Record: Journal of the Transportation Research Board}
@@ -1375,8 +1445,8 @@
       \strng{authorbibnamehash}{a956274326fc8205c9f8dcdcbd89f37a}
       \strng{authornamehash}{a956274326fc8205c9f8dcdcbd89f37a}
       \strng{authorfullhash}{a956274326fc8205c9f8dcdcbd89f37a}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Modelling}
@@ -2731,7 +2801,7 @@
       \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
       \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
       \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
-      \field{extraname}{3}
+      \field{extraname}{5}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}

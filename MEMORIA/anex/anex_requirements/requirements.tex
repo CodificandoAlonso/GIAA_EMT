@@ -264,19 +264,22 @@ sistemas de regulación de la literatura, fuera del alcance acordado.}
 {Inspección del modelo comprobando la ausencia de lógica de reenrutamiento y prueba de espera en terminal ante 
 una llegada anticipada. Método: I}
 
-\requisito{RD-07}{Arquitectura reactiva sin autonomía deliberativa}
+\requisito{RD-07}{Ausencia de deliberación en el comportamiento de los agentes}
 {Restricción de diseño}
 {Must}
 {Equipo de diseño}
-{Los agentes deben implementarse conforme a la noción débil de agencia (\textit{weak agency}): comportamiento 
-puramente reactivo mediante reglas estímulo-respuesta, sin capacidades deliberativas, de planificación ni de aprendizaje.
- La lógica de coordinación relativa a magnitudes para las que no existen datos a nivel individual 
- (como la selección de bajadas) puede residir en acciones globales del mundo, conservando los agentes su carácter reactivo.}
-{El sistema se clasifica formalmente como sistema multiagente reactivo bajo el marco de agencia débil;
- dotar a los agentes de autonomía deliberativa no está soportado por los datos disponibles y comprometería tanto la 
- fidelidad del modelo como su verificabilidad.}
-{RD-01, RD-02}
-{Inspección de la arquitectura contrastando cada comportamiento de agente con el marco de agencia débil. Método: I}
+{El comportamiento de los agentes debe limitarse a respuestas predefinidas ante los cambios del entorno y ante la información 
+recibida de otros agentes, sin incorporar mecanismos de decisión deliberativa, planificación ni aprendizaje. La lógica de coordinación
+ relativa a magnitudes para las que los datos solo ofrecen caracterización agregada (como la selección de los pasajeros que descienden)
+  podrá residir en mecanismos globales de la simulación, externos a los agentes individuales.}
+{Los datos disponibles no permiten fundamentar ni validar procesos internos de
+decisión a nivel de individuo; incorporarlos introduciría dinámicas no
+contrastables frente a la operación observada, comprometiendo la validez
+descriptiva del modelo y la interpretabilidad de sus resultados.}
+{RD-01}
+{Inspección del modelo verificando que ningún comportamiento de agente
+incorpora planificación, aprendizaje ni decisiones no derivadas de reglas
+predefinidas sobre el estado del entorno. Método: I}
 
 \requisito{RD-08}{Fidelidad exclusiva a los datos operacionales}
 {Restricción de diseño}
