@@ -2810,6 +2810,89 @@
       \field{title}{{FIPA} Interaction Protocol Specifications}
       \field{year}{2002}
     \endentry
+    \entry{omg2001uml14}{manual}{}
+      \list{organization}{1}{%
+        {Object Management Group}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{month}{9}
+      \field{number}{formal/01-09-67}
+      \field{title}{{OMG Unified Modeling Language} (OMG UML) Specification, Version 1.4}
+      \field{type}{Standard}
+      \field{urlday}{13}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2001}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.omg.org/spec/UML/1.4/
+      \endverb
+      \verb{url}
+      \verb https://www.omg.org/spec/UML/1.4/
+      \endverb
+    \endentry
+    \entry{odell2001auml}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=6f5884c4c27b7afaf10344bd2b5bb51a}{%
+           family={Odell},
+           familyi={O\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=31cd92c4a8ed4df87e80db57ba92b92d}{%
+           family={Parunak},
+           familyi={P\bibinitperiod},
+           given={H.\bibnamedelimi Van\bibnamedelima Dyke},
+           giveni={H\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=c2ef1a18c9a03db4d48cdc0577ee7fcf}{%
+           family={Bauer},
+           familyi={B\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=16047a754da157f372b69b07e0820997}{%
+           family={Ciancarini},
+           familyi={C\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ea0f2db42141b96e5751d533bd719db5}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{cd875012b4f0d4919f5a541442ba5684}
+      \strng{fullhash}{eb8531d0cd101cb82d864aa6f6ad8d52}
+      \strng{bibnamehash}{eb8531d0cd101cb82d864aa6f6ad8d52}
+      \strng{authorbibnamehash}{eb8531d0cd101cb82d864aa6f6ad8d52}
+      \strng{authornamehash}{cd875012b4f0d4919f5a541442ba5684}
+      \strng{authorfullhash}{eb8531d0cd101cb82d864aa6f6ad8d52}
+      \strng{editorbibnamehash}{a9cd93f4c2c43196f8ff03a9a879b86e}
+      \strng{editornamehash}{a9cd93f4c2c43196f8ff03a9a879b86e}
+      \strng{editorfullhash}{a9cd93f4c2c43196f8ff03a9a879b86e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Agent-Oriented Software Engineering}
+      \field{series}{Lecture Notes in Computer Science}
+      \field{title}{Representing Agent Interaction Protocols in {UML}}
+      \field{volume}{1957}
+      \field{year}{2001}
+      \field{pages}{121\bibrangedash 140}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1007/3-540-44564-1_8
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

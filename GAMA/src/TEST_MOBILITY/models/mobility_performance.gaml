@@ -1027,17 +1027,17 @@ global
 		if (TimeSlot = 5 and direction = "toB"){
 			float mean <- global_time_stops_values[direction][stopNum][((TimeSlot+1)-5)*2];
 			float std <- global_time_stops_values[direction][stopNum][((TimeSlot+1)-5)*2 + 1];
-			return max(gauss(mean, std), step);
+			return max(gauss(mean, std), 4*step);
 		}
 		if (TimeSlot >= 24){
 			float mean <- global_time_stops_values[direction][stopNum][((23)-5)*2];
 			float std <- global_time_stops_values[direction][stopNum][((23)-5)*2 + 1];
-			return max(gauss(mean, std), step);
+			return max(gauss(mean, std), 4*step);
 		}
 		
 		float mean <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2];
 		float std <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2 + 1];
-		return max(gauss(mean, std), step);
+		return max(gauss(mean, std), 4*step);
 
 	}//end function stimate times betwween stops
 	

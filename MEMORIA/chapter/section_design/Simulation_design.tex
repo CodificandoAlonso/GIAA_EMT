@@ -355,7 +355,229 @@ cómo estos le permiten alterar su estado interno.
 
 
 
-\subsubsection{Protocolos de Comunicación}\label{subsubsec:comms_protocols}
+\subsubsection{Protocolos de comunicación}\label{subsubsec:comms_protocols}
+Como ya se ha mencionado en la sección anterior, existen para esta solución seis protocolos de comunicación basados en los estándares
+FIPA-Request~\cite{fipa2002request} y FIPA-Query~\cite{fipa2002query}. Este apartado cubre, para cada uno de esos protocolos, una
+formalización mediante diagramas de interacción con notación UML (\textbf{U}nified \textbf{M}odeling \textbf{L}anguage)~\cite{omg2001uml14}. 
+Concretamente, se utiliza una extensión del mismo denominada AUML (\textbf{A}gent~\textbf{U}nified \textbf{M}odeling \textbf{L}anguage)
+~\cite{odell2001auml}. Esta extensión se basa en el estándar UML en su versión 1.4. Por coherencia  y conformidad con los protocolos 
+establecidos para las comunicaciones FIPA, se utiliza este estándar pese a la existencia de revisiones posteriores resultantes en 
+versiones actualizadas. La sección cubre también la explicación de los distintos atributos enviados por cada
+agente en los correspondientes mensajes, y el uso que se hace de cada uno. 
+
+\medskip
+\noindent\textbf{Consulta de descenso}
+
+Este protocolo se realiza entre el agente~\textit{autobús} (\textbf{iniciador}) y el agente~\textit{pasajero} (\textbf{receptor}). 
+Se trata de un protocolo basado en FIPA-Query. Dicho protocolo, formalmente presenta dos actos comunicativos de apertura:
+ \textbf{query-ref} y \textbf{query-if}.
+Query-if solicita el valor de verdad de una proposición, mientras que por otro lado query-ref solicita el valor de una expresión referencial.
+En el caso concreto de aplicación, este protocolo se establece con el fin de que el agente~\textit{autobús} tenga el conocimiento de si cada
+pasajero va a realizar el desembarco o no. Esto puede mapearse al valor de verdad de una proposición de forma binaria, ya que o bien se baja,
+o bien no se baja. Es por esto que este protocolo resulta enmarcado dentro del caso \textbf{query-if}. Cabe remarcar que debido a la
+casuística de la caracterización de los agentes, no se enmarca completamente bajo el protocolo completo, sino que la implementación 
+materializa únicamente aquellos escenarios alcanzables en el sistema. Al tratarse el caso concreto de una aplicación en el que los participantes
+comparten vocabulario de contenidos y se presenta una acción determinista (siempre se va a contestar acorde a unas reglas y no existe condición
+legítima de rechazo), no se reflejan escenarios de rechazo de la petición, o de no entendimiento del mensaje, en concordancia con lo 
+implementado. 
+
+Por último, resulta necesario un apunte sobre el tratamiento que la plataforma GAMA hace de estos protocolos. Aunque el estándar define actos 
+cualificados como \textbf{query-if} o \textbf{inform-t/f}, la plataforma expone únicamente las performativas genéricas \textbf{query} e
+\textbf{inform}\footnote{GAMA Platform, \enquote{Using FIPA ACL},
+documentación oficial. Disponible en:
+\url{https://gama-platform.org/wiki/UsingFIPAACL} (accedido: 13 de julio de
+2026).}. En el marco de este trabajo, la correspondencia entre ambos planos se establece a nivel semántico del contenido de los mensajes, 
+en consonancia con la propia notación \textit{inform-t/f\,:\,inform} empleada por la especificación, que expresa el acto cualificado como 
+instancia del acto genérico.
+
+A continuación, la figura~\ref{fig:descenso_uno} muestra el diagrama de interacción relativo a este protocolo.
+
+\begin{figure}[H]
+ \centering
+    \includesvg[width=0.8\textwidth]{imagenes/protocols/consulta_de_descenso.svg}
+\caption{Diagrama de interacción referente al protocolo~\textit{consulta de descenso} para la solución uno.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:descenso_uno}
+\end{figure}
+
+
+Nótese que el contenido encapsulado en paréntesis hace referencia al cuerpo del mensaje enviado asociado. La tabla~\ref{tab:descenso_uno}
+traduce cada mensaje a sus valores reales en el simulador, explicando con detalle cada uno.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Relación y explicación de contenidos de los mensajes del protocolo \textit{consulta de descenso} para la solución uno}
+    \label{tab:descenso_uno}}
+    {\centering
+    \begin{tabular}{|Q{0.20}|Q{0.30}|Q{0.50}|}
+    \hline
+    \textbf{Mensaje} & \textbf{Alternativa} & \textbf{Descripción}  \\
+    \hline
+    \multirow{2}{*}{\textit{query-if}} & Consulta de aproximación & El \textit{autobús} envía la cadena de caracteres~\texttt{STOP\_APPROACH}.
+                                        Implica que este se aproxima a una parada no terminal. \\
+    \cline{2-3} & Final de trayecto & El \textit{autobús} envía la cadena de caracteres~\texttt{LAST\_STOP}. Indica completitud del trayecto. \\ 
+    \hline
+    \textit{Agree} & Mensaje de aceptación & El \textit{pasajero} envía un mensaje con la cadena de caracteres~\texttt{Ok} para indicar aceptación. \\
+    \hline
+    \multirow{2}{*}{\textit{inform-t/f}} & Descenso = verdadero & El \textit{pasajero} envía un mensaje con la cadena de caracteres~\texttt{I\_WILL\_DROP}. \\
+    \cline{2-3} & Descenso = falso & El \textit{pasajero} envía un mensaje con la cadena de caracteres~\texttt{I\_WILL\_STAY}. \\
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+Este protocolo no envía información característica de ningun agente, a diferencia de los protocolos siguientes, pero resulta necesario para
+que el agente~\textit{autobús} disponga del conocimiento de cuántos pasajeros se van a apear en la parada correspondiente.
+
+\medskip
+\noindent\textbf{Solicitud de descenso}
+
+Protocolo que involucra a los agentes: \textit{autobús}~(\textbf{iniciador}) y \textit{pasajero}~(\textbf{receptor}). Se trata de una
+implementación basada en el protocolo FIPA-Request. Formalmente, se enmarca dentro de este debido a la lógica de objetivos a conseguir.
+Request es un protocolo que involucra cambios en el estado interno del receptor, a petición del iniciador. Como el objetivo de este
+protocolo resulta de realizar de forma efectiva el apeo del pasajero del autobús correspondiente, esta acción acarrea cambios internos
+en el agente receptor, por lo que resulta efectiva la elección del protocolo. Este caso requiere de la previa resolución del protocolo
+anteriormente expuesto, ya que se realizará la interacción relativa a la~\textit{solicitud de descenso} a aquellos agentes \textit{pasajero}
+que resolvieran el protocolo anterior con una performativa afirmativa (descenso = verdadero). La figura~\ref{fig:solicitud_uno} muestra
+el correspondiente diagrama de interacción. Al igual que con el protocolo anterior, al no existir condición legítima de rechazo y presentar
+un vocabulario común, se reducen las acciones conversacionales del protocolo a las únicas materializables en la simulación.
+
+\begin{figure}[H]
+ \centering
+    \includesvg[width=0.8\textwidth]{imagenes/protocols/diagrama_solicitud_de_descenso.drawio.svg}
+\caption{Diagrama de interacción referente al protocolo~\textit{solicitud de descenso} para la solución uno.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:solicitud_uno}
+\end{figure}
+
+La tabla~\ref{tab:solicitud_uno} muestra el contenido concreto de cada mensaje.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Relación y explicación de contenidos de los mensajes del protocolo \textit{solicitud de descenso} para la solución uno}
+    \label{tab:solicitud_uno}}
+    {\centering
+    \begin{tabular}{|Q{0.20}|Q{0.30}|Q{0.50}|}
+    \hline
+    \textbf{Mensaje} & \textbf{Alternativa} & \textbf{Descripción}  \\
+    \hline
+    \textit{Request} & Solicitud de descenso & El \textit{autobús} inicia la conversación con una cadena de caracteres~\texttt{Drop Off},
+    solicitando al \textit{pasajero} que realice los cambios en su estado necesarios para concretar el apeo. \\
+    \hline
+    \textit{Agree} & Mensaje de aceptación & El \textit{pasajero} envía un mensaje con la cadena de caracteres~\texttt{Ok dropping} 
+    para indicar aceptación. \\
+    \hline
+    \textit{Inform Done: Inform} & Confirmación de descenso & El \textit{pasajero} envía un mensaje con la cadena de caracteres
+    ~\texttt{Dropped}, indicando su cambio de estado adecuado. Posteriormente, el pasajero morirá, poniendo fin a su ciclo de vida.\\
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+Este protocolo, una vez el \textit{autobús} recibe confirmación por parte del \textit{pasajero} correspondiente de que el apeo 
+se ha realizado de forma efectiva, sirve para proceder a actualizar el atributo interno relativo a la lista de agentes~\textit{pasajero}
+que se encuentran a bordo, habilitando mayor capacidad efectiva para embarques.
+
+\medskip
+\noindent\textbf{Notificación de llegada}
+
+Protocolo que da inicio al proceso de embarque de pasajeros. Involucra a: agente~\textit{autobús~}(\textbf{iniciador}) y 
+agente~\textit{parada}~(~\textbf{receptor}). Se basa en el protocolo FIPA-Request, y de igual manera que los anteriores, reduce 
+sus mensajes a los metodológicamente suficientes, porque al igual que especificado anteriormente, no existen motivos para rechazar
+las conversaciones y el vocabulario es común entre los agentes. A continuación, la figura~\ref{fig:notificacion_uno} presenta
+el diagrama de interaccion de este protocolo.
+
+\begin{figure}[H]
+ \centering
+    \includesvg[width=0.8\textwidth]{imagenes/protocols/notificacion_de_llegada.drawio.svg}
+\caption{Diagrama de interacción referente al protocolo~\textit{notificación de llegada} para la solución uno.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:notificacion_uno}
+\end{figure}
+
+Análogamente a los protcolos anteriores, se muestran en la tabla~\ref{tab:notificacion_uno} los distintos contenidos de los 
+mensajes de este protocolo.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Relación y explicación de contenidos de los mensajes del protocolo \textit{notificación de llegada} para la solución uno}
+    \label{tab:notificacion_uno}}
+    {\centering
+    \begin{tabular}{|Q{0.20}|Q{0.30}|Q{0.50}|}
+    \hline
+    \textbf{Mensaje} & \textbf{Alternativa} & \textbf{Descripción}  \\
+    \hline
+    \textit{Request} & Aviso de llegada & El~\textit{autobús} inicia la conversación con una cadena de caracteres~\texttt{Bus arrived},
+    anunciando su llegada a la parada. \\
+    \hline
+    \textit{Agree} & Mensaje de aceptación & El agente~\textit{parada} envía un mensaje con la cadena de caracteres~\texttt{Ok, 
+    telling passengers}. Esto hace saber al~\textit{autobús} que los pasajeros que deseen embarcar se comunicarán con él.\\
+    \hline
+    \textit{Inform Done: Inform} & Pasajeros comunicados & El agente~\textit{parada} envía un mensaje con la cadena de caracteres
+    ~\texttt{Done telling passengers} indicando el inicio de la comunicación con los~\textit{pasajeros} correspondientes. \\
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+Esta formalizaión no contempla, por otra parte, el funcionamiento que sucede entre que el agente~\textit{parada} acepta la solicitud y 
+confirma su realización, ya que el enfoque escapa este protocolo. En el caso en cuestión, de forma paralela, 
+el agente~\textit{parada} da inicio al siguiente protocolo:~\textit{Aviso de embarque}. El motivo detrás de esto subyace en el 
+cuerpo de lo que solicita el agente~\textit{autobús} en este caso, que es el de avisar a los pasajeros que un autobús ha llegado y 
+pueden proceder a embarcar. No obstante, no justificaba
+agrupar ambas interacciones en un mismo protocolo, pero resultaba imperioso remarcar el momento temporal en el que suceden.
+
+\medskip
+\noindent\textbf{Aviso de embarque}
+
+Este protocolo, como mencionado de forma anterior, se inicia de forma paralela a la completitud del protocolo~\textit{notificación de llegada}.
+Como interlocutores se encuentran: agente~\textit{parada}~(~\textbf{iniciador}) y agente~\textit{pasajero}~(~\textbf{receptor}). Al igual
+que sus antecesores y con excepción del primer protocolo expuesto, se enmarca bajo FIPA-Request, y de la misma forma, los cursos alternativos
+correspondientes a no entendimiento o rechazo de la solicitud quedan omitidos. En la figura~\ref{fig:aviso_uno} se formaliza mediante su
+~correspondiente diagrama de interacción.
+
+\begin{figure}[H]
+ \centering
+    \includesvg[width=0.8\textwidth]{imagenes/protocols/aviso_de_embarque.drawio.svg}
+\caption{Diagrama de interacción referente al protocolo~\textit{aviso  de embarque} para la solución uno.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:aviso_uno}
+\end{figure}
+
+
+Por consiguiente, el contenido del cuerpo de los mensajes se presenta en la tabla~\ref{tab:aviso_uno}.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Relación y explicación de contenidos de los mensajes del protocolo \textit{aviso de embarque} para la solución uno}
+    \label{tab:aviso_uno}}
+    {\centering
+    \begin{tabular}{|Q{0.20}|Q{0.30}|Q{0.50}|}
+    \hline
+    \textbf{Mensaje} & \textbf{Alternativa} & \textbf{Descripción}  \\
+    \hline
+    \textit{Request} & Aviso de llegada de autobús & La parada retransmite el aviso de llegada que a su vez recibe del propio agente.
+            Por primera vez, aparte de una cadena de caracteres, en este caso~\texttt{Board bus}, el agente iniciador manda la referencia
+            del agente~\textit{autobús} que indicó su llegada a la parada, con el objetivo de que el agente~\textit{pasajero} sepa con quién
+            comunicarse. \\
+    \hline
+    \textit{Agree} & Mensaje de aceptación & El agente~\textit{pasajero} envía un mensaje con la cadena de caracteres~\texttt{Ok} para
+    indicar aceptación. \\ 
+    \hline
+    \textit{Inform Done: Inform} & confirmación de recepción & Una vez el agente receptor guarda la referencia del~\textit{autobús} existente
+    en la parada, informa a la misma de la finalización del protocolo, confirmando el cambio en su estado interno. \\
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+Este protocolo resulta el primero que aparte de performativas de caracter linguístico, intercambia información relacionada con cambios 
+en el entorno,como indicar a los~\textit{pasajeros} con qué~\textit{autobús} se deben comunicar. Esa comunicación se implementa en el
+siguiente protocolo.C
+
+\medskip
+\noindent\textbf{Solicitud de embarque}
+
+
+\medskip
+\noindent\textbf{Actualización de recuento}
+
 
 
 \subsubsection{Entorno y nivel de mundo}\label{subsubsec:world_enviroment}

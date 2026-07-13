@@ -1136,17 +1136,17 @@ global
 		if (TimeSlot = 5 and direction = "toB"){
 			float mean <- global_time_stops_values[direction][stopNum][((TimeSlot+1)-5)*2];
 			float std <- global_time_stops_values[direction][stopNum][((TimeSlot+1)-5)*2 + 1];
-			return max(gauss(mean, std), step);
+			return max(gauss(mean, std), 4*step);
 		}
 		if (TimeSlot >= 24){
 			float mean <- global_time_stops_values[direction][stopNum][((23)-5)*2];
 			float std <- global_time_stops_values[direction][stopNum][((23)-5)*2 + 1];
-			return max(gauss(mean, std), step);
+			return max(gauss(mean, std), 4*step);
 		}
 		
 		float mean <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2];
 		float std <- global_time_stops_values[direction][stopNum][((TimeSlot)-5)*2 + 1];
-		return max(gauss(mean, std), step);
+		return max(gauss(mean, std), 4*step);
 
 	}//end function stimate times betwween stops
 	
@@ -1605,6 +1605,29 @@ species bus skills: [fipa] {
 		}
 		
 		
+		//--cleanup de Done Telling Passengers.
+		message m <- informs at 0;
+		list m_cont <- list(m.contents);
+		if (length(m_cont) < 1 and string(m_cont[0]) != 'Done telling passengers'){
+			write "Error, unknown message that should be done telling passengers" + m_cont;
+		}
+		
+		
+		//---- consume the stop's inform to dropoff ----
+		loop msg over: informs {
+			list b <- list(msg.contents);
+			if (length(b) < 1 and string(b[0]) != 'Dropped'){
+				write "Error, unknown message " + b;
+			}
+			else{
+				passengers_on_bus >> msg.sender;
+				write "BAJE PASAJERO PUÑET " + passengers;
+			}
+		}
+
+
+		
+		
 		//---- process board requests from passengers ----
 		loop board_msg over: requests {
 			list c <- list(board_msg.contents);
@@ -1768,7 +1791,7 @@ species bus skills: [fipa] {
      * (they do so in their die_after_drop reflex). Then transition to handle_shifts via finished_shift = true.
      */
     reflex finalize_last_stop_dropoffs when: (self.arrived_to_end = true and self.processing_passengers = true 
-    										and length(passengers_on_bus) = 0 and cycle > self.comms_cycle){
+    											 and cycle > self.comms_cycle){
     	
     	//Consume any dropper agrees still hanging in the inbox
     	loop msg over: agrees {
@@ -1777,12 +1800,18 @@ species bus skills: [fipa] {
 				agrees >> msg;
 			}
 		}
+		
+		
     	loop msg over: informs {
 	    	list c <- list(msg.contents);
 		    if (length(c) >= 1){
 		        string ctype <- string(c[0]);
-		        if (ctype != 'I_WILL_DROP' and ctype != 'I_WILL_STAY'){
-		        	write "Error unknown message";
+		        if (ctype != 'I_WILL_DROP' and ctype != 'I_WILL_STAY' and ctype != 'Dropped'){
+		        	write "Error unknown message" + ctype;
+	        	}
+	        	else if (ctype = 'Dropped'){
+	        		passengers_on_bus >> msg.sender;
+	        		write "Al final de trayecto baje a " + passengers;
 	        	}
 	    	}
 		}
@@ -2084,6 +2113,7 @@ species passenger skills: [fipa] {
     		list c <- list(msg.contents);
     		if (length(c) >= 1 and string(c[0]) = 'Drop off'){
     			do agree message: msg contents: ['Ok dropping'];
+				do inform message: msg contents: ['Dropped'];
     			die_flag <- true;
     		}
     	}//End loop
@@ -2098,9 +2128,9 @@ species passenger skills: [fipa] {
      */
     reflex die_after_drop when: die_flag = true {
     	
-    	if (mounted_bus != nil){
-    		ask mounted_bus { passengers_on_bus >> myself; }
-    	}
+//    	if (mounted_bus != nil){
+//    		ask mounted_bus { passengers_on_bus >> myself; }
+//    	}
     	do die;
     	
     }//End reflex die_after_drop
@@ -2302,7 +2332,7 @@ experiment test type: gui {
         	//LOAD THE BACKGROUNDS GUI INFORMATION
             species route aspect: default;
             species stop aspect: default;
-            //species bus aspect: default;
+            species bus aspect: default;
             species passenger aspect: default;
 
 
