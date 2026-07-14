@@ -82,48 +82,54 @@ global
     
     
     
-    //NEGATIVE BINOMIAL
-    
-    /*
-     * As negative binomial distribution is not implemented, using the Gamma-Poisson mixture gives the correct data
-     */
+  //NEGATIVE BINOMIAL
+
+	/*
+	* As the negative binomial distribution is not implemented in GAMA,
+	* sampling is performed via the Gamma-Poisson mixture:
+	*   lambda ~ Gamma(r, (1-p)/p),  X | lambda ~ Poisson(lambda)
+	* Shape-scale parameterization, consistent with scipy.stats.nbinom
+	* (support {0,1,2,...}, number of failures).
+	*/
 	int sample_negative_binomial(float r, float p) {
-		
-		
-		//Extreme case. If r detects a 0, value, just return, 0
-		if (r = 0.0){
+
+		// Degenerate cases: non-positive shape or p >= 1 imply X = 0
+		if (r <= 0.0 or p >= 1.0) {
 			return 0;
 		}
-		
-	    float gamma_val <- gamma_rnd(r, (1-p)/p);
-	    
-	    int result <- poisson(gamma_val);
-	    
-	    return max(0, result);
-	    
-	}//End function sample_negative_binomial
-    
-    
-    
-    
-    //GEOMETRICAL
-    
-    /*
-     * As geometrical distribution is not implemented, using the inverse transform method, taking ln's
-     */
-	float sample_geometric(float p) {
-		
-		
-		if (p >= 1.0) {
-        return 0.0;
-    	}
-		
-    	float u <- rnd(0.0001, 0.9999);
-    	
-    	return floor(ln(u) / ln(1 - p));
-    	
-	}//End function sample_geometric
-	
+
+		float gamma_val <- gamma_rnd(r, (1 - p) / p);
+
+		// Defensive guard only: poisson() is non-negative by definition
+		return max(0, poisson(gamma_val));
+
+	} //End function sample_negative_binomial
+
+
+
+	//GEOMETRIC
+
+	/*
+	* As the geometric distribution is not implemented in GAMA,
+	* sampling is performed via the inverse transform method:
+	*   X = floor( ln(U) / ln(1-p) ),  U ~ Uniform(0,1)
+	* Support {0,1,2,...} (number of failures), consistent with the
+	* fitting pipeline (p_hat = 1/(1 + mean), pmf (1-p)^k * p).
+	* ln(U) is used instead of ln(1-U): both are identically distributed.
+	*/
+	int sample_geometric(float p) {
+
+		// Degenerate cases
+		if (p >= 1.0) { return 0; }     // success guaranteed -> 0 failures
+		if (p <= 0.0) { return 0; }     // invalid parameter; should not occur post-fitting
+
+		float u <- rnd(0.0, 1.0);
+		if (u = 0.0) { u <- 1e-12; }    // avoid ln(0); negligible bias
+		if (u = 1.0) { u <- 1.0 - 1e-12; }
+
+		return int(floor(ln(u) / ln(1 - p)));
+
+	} //End function sample_geometric
 	
 	
 	

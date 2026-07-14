@@ -233,7 +233,7 @@ del ciclo de vida. La tabla~\ref{tab:estado_pasajero} muestra estos atributos.
         Autobús & AGENTE \textit{autobús} & Referencia del autobús en el que se encuentra & Ejecución \\ \hline
         Tiempo transcurrido en la parada & FLOAT & Tiempo transcurrido desde su generación hasta su embarque & Ejecución \\ \hline
         Deseo de bajarse & BOOL & Variable que sirve como referencia para saber si realizará desembarco en la siguiente parada.
-        Fijada por el mecanismo de selección de descensos definido a nivel de mundo (véase la sección~\enquote{\nameref{subsubsec:world_enviroment}})
+        Fijada por el mecanismo de selección de descensos definido a nivel de mundo (véase la sección~\enquote{\nameref{subsubsec:world_enviroment_one_one}})
         & Mundo \\ \hline
         Control de comunicación & --- & Variables auxiliares de secuenciación de las conversaciones FIPA & Ejecución \\ 
         \hline
@@ -567,28 +567,248 @@ Por consiguiente, el contenido del cuerpo de los mensajes se presenta en la tabl
     \end{tabular}}
 \end{table}
 
-Este protocolo resulta el primero que aparte de performativas de caracter linguístico, intercambia información relacionada con cambios 
-en el entorno,como indicar a los~\textit{pasajeros} con qué~\textit{autobús} se deben comunicar. Esa comunicación se implementa en el
-siguiente protocolo.C
+Este protocolo resulta el primero que aparte de performativas de caracter lingüístico, intercambia información relacionada con cambios 
+en el entorno,como indicar a los~\textit{pasajeros} con qué~\textit{autobús} se deben comunicar. Dicha comunicación se implementa en el
+siguiente protocolo.
 
 \medskip
 \noindent\textbf{Solicitud de embarque}
+
+Protocolo de comunicación establecido entre los agentes:~\textit{pasajero}~(~\textbf{iniciador}) y~\textit{autobús}~(~\textbf{receptor})
+usado para la resolución del embarque del pasajero. Basado en el protocolo FIPA-Request, este resulta el único de los protocolos donde
+existe metodológicamente una razón para implementar el rechazo de la solicitud. Este rechazo resulta derivado de la restricción de
+capacidad del agente~\textit{autobús}, ya que solicitudes de embarque cuando esta cota superior se ha alcanzado resultan en rechazos.
+La figura~\ref{fig:embarque_uno} presenta la formalización del protocolo. La tabla posterior~\ref{tab:embarque_uno} expande
+el contenido de los mensajes relativos a cada proceso comunicativo del mismo.
+
+\begin{figure}[H]
+ \centering
+    \includesvg[width=0.8\textwidth]{imagenes/protocols/solicitud_de_embarque.drawio.svg}
+\caption{Diagrama de interacción referente al protocolo~\textit{solicitud de embarque} para la solución uno.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:embarque_uno}
+\end{figure}
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Relación y explicación de contenidos de los mensajes del protocolo \textit{solicitud de embarque} para la solución uno}
+    \label{tab:embarque_uno}}
+    {\centering
+    \begin{tabular}{|Q{0.20}|Q{0.30}|Q{0.50}|}
+    \hline
+    \textbf{Mensaje} & \textbf{Alternativa} & \textbf{Descripción}  \\
+    \hline
+    \textit{Request} & Solicita Embarque & El \textit{pasajero} inicia la conversación hacia el~\textit{autobús} con la cadena
+    de caracteres~\texttt{Board me}. En este mensaje, el agente~\textbf{iniciador} envía también el tiempo que ha estado esperando
+    en la parada. \\
+    \hline
+    \textit{Reject} & Causas del rechazo & En caso de que el~\textit{autobús} haya alcanzado su capacidad máxima, \textbf{rechazará}
+    la solicitud de embarque, devolviendo una cadena de caracteres con el contenido~\texttt{Bus full}. \\
+    \hline
+    \textit{Agree} & Mensaje de aceptación & Si el agente~\textit{autobús} posee capacidad para embarcar al agente iniciador, este aceptará
+    la solicitud con el envío de una cadena de caracteres~\texttt{Boarded}. \\
+    \hline
+    \textit{Inform Done: Inform} & Bienvenida & Una vez que el receptor haya realizado los cambios en su estado interno que adecúen al
+    agente~\textit{pasajero}, este envia el mensaje final del protocolo con la cadena de caracteres~\texttt{Welcome}. \\
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+Este protocolo, al igual que el anterior, transmite mensajes con información que difieren de contenido puramente lingüístico, incorporando
+el valor del tiempo de espera de cada~\textit{pasajero} en el cuerpo del primer mensaje. Esto se debe a que con el fin de almacenar
+como~\textbf{indicador de rendimiento} el tiempo medio de espera de los pasajeros, el autobús almacena esta información de aquellos
+agentes que realizarán embarco efectivo. El motivo subyacente recae en que el agente~\textit{parada}, una vez el bus en el siguiente
+protocolo notifique qué~\textit{pasajeros} realizaron embarque, enviará asociada la información relativa a este tiempo de espera.
+De esta forma, será el agente~\textit{parada} correspondiente el que se encargue de almacenar esta información de forma asociada
+a su código interno de parada, para posterior desagregación de los datos aplicando su código como filtro.
 
 
 \medskip
 \noindent\textbf{Actualización de recuento}
 
+Este último protocolo de comunicación involucra a los siguientes agentes:~\textit{autobús}~(~\textbf{iniciador}) y~\textit{parada}
+~(\textbf{receptor}). Enmarcado dentro de FIPA-Request, a diferencia del protocolo previo y en concordancia con la mayoría 
+de los implementados, este protocolo no incorpora aquellas vías alternativas de comunicación que metodológicamente no son necesarias
+para expresar el comportamiento de los agentes simulados. Por lo tanto, mensajes como el rechazo o el no entendimiento no son 
+implementados. La figura~\ref{fig:actualizacion_uno} formaliza el protocolo, mientras que la tabla~\ref{tab:actualizacion_uno}
+expande los cuerpos de los mensajes.
 
 
-\subsubsection{Entorno y nivel de mundo}\label{subsubsec:world_enviroment}
+\begin{figure}[H]
+ \centering
+    \includesvg[width=0.8\textwidth]{imagenes/protocols/actualizacion_recuento.drawio.svg}
+\caption{Diagrama de interacción referente al protocolo~\textit{actualización de recuento} para la solución uno.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:actualizacion_uno}
+\end{figure}
+
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Relación y explicación de contenidos de los mensajes del protocolo \textit{actualizacion de recuento} para la solución uno}
+    \label{tab:actualizacion_uno}}
+    {\centering
+    \begin{tabular}{|Q{0.20}|Q{0.30}|Q{0.50}|}
+    \hline
+    \textbf{Mensaje} & \textbf{Alternativa} & \textbf{Descripción}  \\
+    \hline
+    \textit{Request} & Actualizar contenido & El agente iniciador envía junto con la cadena de caracteres~\texttt{Update count} dos
+    listas, contenedoras tanto de qué agentes~\textit{pasajero} han realizado embarque efectivo, junto al atributo referente a 
+    cuánto tiempo de espera han estado hasta embarcar.\\
+    \hline
+    \textit{Agree} & Mensaje de aceptación & El agente~\textit{parada} confirma la recepción de los datos mediante la cadena de caracteres
+    ~\texttt{Ok! Updating count}.\\
+    \hline
+    \textit{Inform Done: Inform} & Contenido actualizado & Una vez que el agente receptor modifique su estado interno en cumplimiento 
+    con lo solicitado, devuelve la cadena de caracteres~\texttt{Done updating}, indicando al agente~\textit{autobús} iniciador del 
+    protocolo la finalización de la solicitud.\\
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+Este protocolo supone el final del ciclo de comunicaciones que garantiza de forma efectiva el proceso de embarque/apeo de pasajeros en 
+una parada.
+
+
+\subsubsection{Entorno y nivel de mundo}\label{subsubsec:world_enviroment_one}
+Esta sección cubre las distintas características existentes que explícitamente no pertenecen al dominio de los agentes involucrados
+ya especificados. Desglosando, se pueden distinguir distintas especificaciones a cubrir.
+
+\medskip
+\noindent\textbf{Paso del tiempo}
+
+Como ya se ha mencionado en previas ocasiones, el dominio de aplicación temporal de las simulaciones abarca la totalidad de servicio
+de \textbf{un día}. Concretamente, la simulación inicia a las \textbf{05:00}~(formato \textit{veinticuatro horas}) y finaliza una vez
+el último agente~\textit{autobús} finalice toda su operativa de servicio. El transcurso del tiempo se realiza de forma~\textbf{discreta}
+en intervalos de~\textbf{dos segundos}. Cada iteración de la simulación supone un aumento del tiempo de esta cantidad. Se dispone 
+de variables a nivel de mundo que comprenden el mapeo de este tiempo discretizado en segundos a formato temporal \textit{HH:MM:SS},
+como de información relativa a la franja horaria comprendida en cada momento.
+
+Este paso del tiempo involucra una funcionalidad no resuelta en la caracterización del agente~\textit{autobús}, correspondiente
+a la abstracción de su movimiento entre paradas. Dicho movimiento ignora posicionalidad cartesiana y se basa puramente en 
+temporalidad. Para un agente~\textit{autobús}, su transición inter-parada se compone de un contador inicializado en cero con 
+incrementos de dos segundos, y un tiempo de duración del movimiento a cumplir. De esta forma, se reducen calculos espaciales para
+agilidad de la carga computacional.
+
+
+\medskip
+\noindent\textbf{Carga y actualización de distribuciones}
+
+Los distintos valores de las distribuciones de carga y descarga, presentados en el capítulo~\ref{chapter:param_analisys}, se
+almacenan de forma desagregada por franja horaria. Este sistema se mantiene para la duración de la simulación. Previo al inicio
+del conteo temporal, se almacenan estos valores en una lista global que contiene los datos necesarios para la construcción de cada
+distribución. Es decir, para las distribuciones \textbf{normales}, se almacena $\mu$, $\sigma$, para las distribuciones \textbf{
+binomiales negativas} se almacenan $r$, $p$ y para las distribuciones \textbf{geométricas} se conserva únicamente $p$.
+
+La actualización se realiza también a nivel de mundo, mediante una acción que se ejecuta cada vez que el contador global
+discreto del tiempo $t \equiv 0 \pmod{3600}$, es decir, cada hora en punto. Dicha actualización resulta
+diferente según si se trata de un valor relativo a la carga o a la descarga. Esto se debe a la forma en la que se generan estos datos.
+La información relativa a la carga de pasajeros resulta del cálculo del valor agregado de todos los pasajeros que embarcan 
+en algún autobús a lo largo de una hora, por lo que cada hora, lo que se necesita realizar es generar un valor aleatorio
+extraido de dicha distribución. Este supone el valor relativo a la \textbf{tasa de generación de pasajeros por 
+parada por hora}. La expansión de esta información así como la explicación de cómo se usa este valor se realiza en el apartado siguiente.
+Por otra parte, el valor de descarga de pasajeros se modela de forma desagregada por llegada, por lo que para cada hora no resulta
+necesario extraer un valor aleatorio al cambio de franja horaria. La actualización de este valor supone únicamente actualizar los
+valores necesarios para construir la distribución asociada a cada franja horaria.
+
+Relativo a la selección aleatoria basada en distribuciones, la generación de valores
+se fundamenta en el método de la transformada inversa~\cite{devroye1986}: dado un
+valor $U \sim \mathcal{U}(0,1)$, la variable $X = F^{-1}(U)$ sigue la distribución
+cuya función de distribución acumulada es $F$. Sobre esta base, cada familia de
+distribuciones recibe un tratamiento distinto según su disponibilidad en la plataforma.
+
+Para las distribuciones \textbf{normales}, GAMA proporciona el generador \textit{gauss}
+de forma nativa, cuyo método clásico de generación es la transformada de
+Box-Muller~\cite{box1958}:
+\begin{equation}
+    Z = \sqrt{-2\ln U_1}\,\cos(2\pi U_2), \qquad X = \mu + \sigma Z
+    \label{eq:box_muller}
+\end{equation}
+donde $U_1, U_2 \sim \mathcal{U}(0,1)$ son independientes.
+
+Las distribuciones \textbf{binomiales negativas} no disponen de implementación nativa,
+por lo que el muestreo se realiza mediante la mezcla
+Gamma--Poisson~\cite{devroye1986}, válida para valores no enteros del parámetro $r$:
+\begin{equation}
+    \lambda \sim \mathrm{Gamma}\!\left(r,\, \frac{1-p}{p}\right), \qquad
+    X \mid \lambda \sim \mathrm{Poisson}(\lambda)
+    \label{eq:gamma_poisson}
+\end{equation}
+donde $\mathrm{Gamma}(k,\theta)$ se parametriza en forma y escala. Esta construcción
+se implementa encadenando los generadores nativos \textit{gamma\_rnd} y
+\textit{poisson} de la plataforma.
+
+Por último, las distribuciones \textbf{geométricas} tampoco cuentan con implementación
+nativa, si bien su transformada inversa admite forma cerrada~\cite{devroye1986}:
+\begin{equation}
+    X = \left\lfloor \frac{\ln U}{\ln(1-p)} \right\rfloor, \qquad U \sim \mathcal{U}(0,1)
+    \label{eq:inv_geometrica}
+\end{equation}
+con soporte $\{0, 1, 2, \dots\}$, coherente con la parametrización empleada en el
+ajuste estadístico del capítulo~\ref{chapter:param_analisys}. Se emplea $\ln U$ en
+lugar de $\ln(1-U)$ por ser ambas variables idénticamente distribuidas.
+
+\medskip
+\noindent\textbf{Proceso de generación de agentes}
+
+Cada agente se instancia siguiendo un proceso distinto. Primeramente, tanto los agentes~\textit{autobús} como los agentes~\textit{
+parada} se generan de forma estática antes del inicio del conteo del tiempo discreto. Dicha generación deriva del parseo de 
+dos ficheros de entrada distintos. Los agentes~\textit{parada} se crean basandose en el archivo geoespacial, contenedor de 
+las paradas asociadas a cada sentido de la ruta. Posteriormente, se generan los agentes~\textit{autobús} al parsear
+el fichero \textit{JSON} que contiene la oferta de servicio. A cada agente~\textit{autobús} se le asocia la lista de 
+salidas de cabecera asociadas a su identificador numérico, así como la referencia al agente~\textit{parada} en el que origina
+su recorrido.
+
+Por otra parte, la generación de agentes~\textit{pasajero} se realiza de forma dinámica a lo largo de la simulación. Este
+proceso, constante en cada iteración discreta, se basa en el valor mencionado antes de \textbf{tasa de generación de pasajeros
+por parada por hora}. Como se calcula el valor agregando todos los embarques producidos en cada parada a lo largo de 
+una hora, este valor corresponde con el número de agentes~\textit{pasajero} creados en dicha parada durante esa hora de simulación.
+
+Para lograr esto inicialmente se divide el valor obtenido entre el número de iteraciones que componen una hora de simulación.
+De esta forma, si se agrega cada valor a un contador, a lo largo de las iteraciones se acaba obteniendo el número de pasajeros
+concreto. No obstante, el sistema que gestiona esta generación, cada vez que el truncamiento del contador a un valor 
+entero estrictamente positivo resulte en un valor mayor o igual a uno, realiza la instanciación de ese número concreto,
+~descartando posteriormente la parte entera correspondiente al número generado del contador asociado. Esta generación se 
+produce de forma independiente para cada una de las paradas, teniendo en cuenta la tasa de cada una.
+
+Esta generación sirve como base para crear los distintos agentes~\textit{pasajero}, pero posee una carencia relevante.
+Dicha carencia resulta ser la asunción de que la generación se realiza de forma constante a lo largo de la hora,
+presentada en la figura~\ref{fig:ilustrativa_linealidad}. En ella se observa claramente cómo se producen
+saltos en el ritmo de generación al realizar el cambio de franja horaria, aparte del ya comentado sesgo de linealidad.
+Posteriormente a exposición y debate sobre este mecanismo con la EMT, parte interesada (\textit{stakeholder}) del proyecto,
+esta propuso incorporar la tendencia hacia el valor de la franja inmediatamente posterior.
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/ilustrativa_linealidad.png}
+\caption{Ilustración del mecanismo de generación con tasas constantes por franja
+horaria (valores sintéticos, únicamente ilustrativos)}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:ilustrativa_linealidad}
+\end{figure}
 
 
 
-\subsection{Ejecución y simulación}\label{subsec:exe_and_sim}
+
+
+\medskip
+\noindent\textbf{Sistema de inferencia de bajada de pasajeros}
+
+
+\medskip
+\noindent\textbf{Guardado y registro de datos de simulación}
+
+
+
+\subsection{Ejecución y simulación}\label{subsec:exe_and_sim_one}
 
 
 
 \section{Solución dos: Sin agentes pasajero}\label{sec:second_sol}
+
+\subsection{Arquitectura de la solución}\label{subsec:arch_two}
+
+
+\subsubsection{Caracterización de los agentes}\label{subsubsec:agents_char_two}
 
 
 \medskip
@@ -596,3 +816,7 @@ siguiente protocolo.C
 
 \medskip
 \noindent\textbf{Agente parada}
+
+\subsubsection{Entorno y nivel de mundo}\label{subsubsec:world_environment_two}
+
+\subsection{Ejecución y simulación}\label{subsec:exe_and_sim_two}

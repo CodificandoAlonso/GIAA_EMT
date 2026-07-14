@@ -2893,6 +2893,70 @@
       \verb 10.1007/3-540-44564-1_8
       \endverb
     \endentry
+    \entry{devroye1986}{book}{}
+      \name{author}{1}{}{%
+        {{hash=33c7859e1f8c74639d1c015cbebd73e4}{%
+           family={Devroye},
+           familyi={D\bibinitperiod},
+           given={Luc},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{fullhash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{bibnamehash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{authorbibnamehash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{authornamehash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{authorfullhash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Non-Uniform Random Variate Generation}
+      \field{year}{1986}
+      \verb{doi}
+      \verb 10.1007/978-1-4613-8643-8
+      \endverb
+    \endentry
+    \entry{box1958}{article}{}
+      \name{author}{2}{}{%
+        {{hash=d30289ba50f0f7219fb405bc35b8b71c}{%
+           family={Box},
+           familyi={B\bibinitperiod},
+           given={George\bibnamedelimb E.\bibnamedelimi P.},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=1b50858d53381854180c6f662a8fba34}{%
+           family={Muller},
+           familyi={M\bibinitperiod},
+           given={Mervin\bibnamedelima E.},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{354aac50be3910d8309f92af89ad9206}
+      \strng{fullhash}{354aac50be3910d8309f92af89ad9206}
+      \strng{bibnamehash}{354aac50be3910d8309f92af89ad9206}
+      \strng{authorbibnamehash}{354aac50be3910d8309f92af89ad9206}
+      \strng{authornamehash}{354aac50be3910d8309f92af89ad9206}
+      \strng{authorfullhash}{354aac50be3910d8309f92af89ad9206}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Annals of Mathematical Statistics}
+      \field{number}{2}
+      \field{title}{A Note on the Generation of Random Normal Deviates}
+      \field{volume}{29}
+      \field{year}{1958}
+      \field{pages}{610\bibrangedash 611}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1214/aoms/1177706645
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
