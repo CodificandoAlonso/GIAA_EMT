@@ -776,6 +776,76 @@
       \verb http://www.fipa.org/specs/fipa00037/
       \endverb
     \endentry
+    \entry{fipa2002query}{report}{}
+      \name{author}{1}{}{%
+        {{hash=9ea78c8bdcb65ac951c55622c18b20ec}{%
+           family={{Foundation for Intelligent Physical Agents}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Foundation for Intelligent Physical Agents}%
+      }
+      \strng{namehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{fullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{bibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \field{extraname}{3}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{SC00027H}
+      \field{title}{{FIPA} Query Interaction Protocol Specification}
+      \field{type}{FIPA Specification}
+      \field{urlday}{12}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2002}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.fipa.org/specs/fipa00027/
+      \endverb
+      \verb{url}
+      \verb http://www.fipa.org/specs/fipa00027/
+      \endverb
+    \endentry
+    \entry{fipa2002request}{report}{}
+      \name{author}{1}{}{%
+        {{hash=9ea78c8bdcb65ac951c55622c18b20ec}{%
+           family={{Foundation for Intelligent Physical Agents}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Foundation for Intelligent Physical Agents}%
+      }
+      \strng{namehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{fullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{bibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \field{extraname}{4}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{SC00026H}
+      \field{title}{{FIPA} Request Interaction Protocol Specification}
+      \field{type}{FIPA Specification}
+      \field{urlday}{12}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2002}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.fipa.org/specs/fipa00026/
+      \endverb
+      \verb{url}
+      \verb http://www.fipa.org/specs/fipa00026/
+      \endverb
+    \endentry
     \entry{bellifemine2007jade}{book}{}
       \name{author}{3}{}{%
         {{hash=2c27c4fb5c5619ffe27c1014fb65f568}{%
@@ -973,22 +1043,19 @@
       \strng{authorbibnamehash}{75decb3d48516684b8a92be814646850}
       \strng{authornamehash}{75decb3d48516684b8a92be814646850}
       \strng{authorfullhash}{cc717a6ea91633568502e5523b300d46}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{GeoInformatica}
       \field{number}{2}
-      \field{title}{Building, composing and experimenting macroscopic models with the {GAMA} platform}
+      \field{title}{Building, composing and experimenting complex spatial models with the {GAMA} platform}
       \field{volume}{23}
       \field{year}{2019}
       \field{pages}{299\bibrangedash 322}
       \range{pages}{24}
-      \verb{urlraw}
-      \verb https://gama-platform.org
-      \endverb
-      \verb{url}
-      \verb https://gama-platform.org
+      \verb{doi}
+      \verb 10.1007/s10707-018-00339-6
       \endverb
     \endentry
     \entry{saidallah2016comparative}{inproceedings}{}
@@ -1155,8 +1222,8 @@
       \strng{authornamehash}{4d52f59d2dfd78bc079116445c2eddc4}
       \strng{authorfullhash}{3ead96d2d8b00c5f5a06bb77ca16c5f5}
       \field{extraname}{2}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Transportation Research Record: Journal of the Transportation Research Board}
@@ -1378,8 +1445,8 @@
       \strng{authorbibnamehash}{a956274326fc8205c9f8dcdcbd89f37a}
       \strng{authornamehash}{a956274326fc8205c9f8dcdcbd89f37a}
       \strng{authorfullhash}{a956274326fc8205c9f8dcdcbd89f37a}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Modelling}
@@ -2720,6 +2787,213 @@
       \field{year}{2018}
       \verb{doi}
       \verb 10.5281/zenodo.1441026
+      \endverb
+    \endentry
+    \entry{fipa2002specs}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=9ea78c8bdcb65ac951c55622c18b20ec}{%
+           family={{Foundation for Intelligent Physical Agents}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{fullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{bibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorbibnamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
+      \field{extraname}{5}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{FIPA Specifications, IEEE FIPA Standards Committee}
+      \field{title}{{FIPA} Interaction Protocol Specifications}
+      \field{year}{2002}
+    \endentry
+    \entry{omg2001uml14}{manual}{}
+      \list{organization}{1}{%
+        {Object Management Group}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{month}{9}
+      \field{number}{formal/01-09-67}
+      \field{title}{{OMG Unified Modeling Language} (OMG UML) Specification, Version 1.4}
+      \field{type}{Standard}
+      \field{urlday}{13}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2001}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.omg.org/spec/UML/1.4/
+      \endverb
+      \verb{url}
+      \verb https://www.omg.org/spec/UML/1.4/
+      \endverb
+    \endentry
+    \entry{odell2001auml}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=6f5884c4c27b7afaf10344bd2b5bb51a}{%
+           family={Odell},
+           familyi={O\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=31cd92c4a8ed4df87e80db57ba92b92d}{%
+           family={Parunak},
+           familyi={P\bibinitperiod},
+           given={H.\bibnamedelimi Van\bibnamedelima Dyke},
+           giveni={H\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=c2ef1a18c9a03db4d48cdc0577ee7fcf}{%
+           family={Bauer},
+           familyi={B\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=16047a754da157f372b69b07e0820997}{%
+           family={Ciancarini},
+           familyi={C\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ea0f2db42141b96e5751d533bd719db5}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{cd875012b4f0d4919f5a541442ba5684}
+      \strng{fullhash}{eb8531d0cd101cb82d864aa6f6ad8d52}
+      \strng{bibnamehash}{eb8531d0cd101cb82d864aa6f6ad8d52}
+      \strng{authorbibnamehash}{eb8531d0cd101cb82d864aa6f6ad8d52}
+      \strng{authornamehash}{cd875012b4f0d4919f5a541442ba5684}
+      \strng{authorfullhash}{eb8531d0cd101cb82d864aa6f6ad8d52}
+      \strng{editorbibnamehash}{a9cd93f4c2c43196f8ff03a9a879b86e}
+      \strng{editornamehash}{a9cd93f4c2c43196f8ff03a9a879b86e}
+      \strng{editorfullhash}{a9cd93f4c2c43196f8ff03a9a879b86e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Agent-Oriented Software Engineering}
+      \field{series}{Lecture Notes in Computer Science}
+      \field{title}{Representing Agent Interaction Protocols in {UML}}
+      \field{volume}{1957}
+      \field{year}{2001}
+      \field{pages}{121\bibrangedash 140}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1007/3-540-44564-1_8
+      \endverb
+    \endentry
+    \entry{devroye1986}{book}{}
+      \name{author}{1}{}{%
+        {{hash=33c7859e1f8c74639d1c015cbebd73e4}{%
+           family={Devroye},
+           familyi={D\bibinitperiod},
+           given={Luc},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{fullhash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{bibnamehash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{authorbibnamehash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{authornamehash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \strng{authorfullhash}{33c7859e1f8c74639d1c015cbebd73e4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Non-Uniform Random Variate Generation}
+      \field{year}{1986}
+      \verb{doi}
+      \verb 10.1007/978-1-4613-8643-8
+      \endverb
+    \endentry
+    \entry{box1958}{article}{}
+      \name{author}{2}{}{%
+        {{hash=d30289ba50f0f7219fb405bc35b8b71c}{%
+           family={Box},
+           familyi={B\bibinitperiod},
+           given={George\bibnamedelimb E.\bibnamedelimi P.},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=1b50858d53381854180c6f662a8fba34}{%
+           family={Muller},
+           familyi={M\bibinitperiod},
+           given={Mervin\bibnamedelima E.},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{354aac50be3910d8309f92af89ad9206}
+      \strng{fullhash}{354aac50be3910d8309f92af89ad9206}
+      \strng{bibnamehash}{354aac50be3910d8309f92af89ad9206}
+      \strng{authorbibnamehash}{354aac50be3910d8309f92af89ad9206}
+      \strng{authornamehash}{354aac50be3910d8309f92af89ad9206}
+      \strng{authorfullhash}{354aac50be3910d8309f92af89ad9206}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Annals of Mathematical Statistics}
+      \field{number}{2}
+      \field{title}{A Note on the Generation of Random Normal Deviates}
+      \field{volume}{29}
+      \field{year}{1958}
+      \field{pages}{610\bibrangedash 611}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1214/aoms/1177706645
+      \endverb
+    \endentry
+    \entry{boneva1971}{article}{}
+      \name{author}{3}{}{%
+        {{hash=1b2d92999c5175bea9a65d65264cb80d}{%
+           family={Boneva},
+           familyi={B\bibinitperiod},
+           given={Liliana\bibnamedelima I.},
+           giveni={L\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=5dbf9933b60627d4ccd3bc0f61a69e57}{%
+           family={Kendall},
+           familyi={K\bibinitperiod},
+           given={David\bibnamedelima G.},
+           giveni={D\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=da51fe3b16e8fe293ccabf0972cb3ce6}{%
+           family={Stefanov},
+           familyi={S\bibinitperiod},
+           given={Ivan},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{01e21590f80359c9fbcc8a823ab36312}
+      \strng{fullhash}{8c4803006f6ba9cd9121839d1d1d71e7}
+      \strng{bibnamehash}{8c4803006f6ba9cd9121839d1d1d71e7}
+      \strng{authorbibnamehash}{8c4803006f6ba9cd9121839d1d1d71e7}
+      \strng{authornamehash}{01e21590f80359c9fbcc8a823ab36312}
+      \strng{authorfullhash}{8c4803006f6ba9cd9121839d1d1d71e7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Royal Statistical Society: Series B (Methodological)}
+      \field{number}{1}
+      \field{title}{Spline Transformations: Three New Diagnostic Aids for the Statistical Data-Analyst}
+      \field{volume}{33}
+      \field{year}{1971}
+      \field{pages}{1\bibrangedash 71}
+      \range{pages}{71}
+      \verb{doi}
+      \verb 10.1111/j.2517-6161.1971.tb00855.x
       \endverb
     \endentry
   \enddatalist

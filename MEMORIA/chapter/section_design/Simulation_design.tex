@@ -862,20 +862,134 @@ Este sistema se diseña bajo una premisa fundamental:~\textbf{la inferencia de b
 los valores estudiados}. Esta premisa supone, como se menciona en la caracterización del agente~\textit{pasajero}~(véase
 ~\nameref{subsubsec:agents_char_one}), que no se puede modelar a estos mediante un sistema de creencias, deseos e intenciones
 ~(agente \textit{BDI}), ni representar el embarque/desembarque de cada pasajero mediante una matriz de origen/destino.
-Esto se debe a que en el momento de creación de cada agente individual, se debería anticipar para cada agente en cada parada
-en cada momento, tanto qué agente~\textit{autobús} va a ser el encargado de recoger al pasajero como de inferir
-cuántas paradas va a mantenerse en él hasta el apeo y que esta casuística mantenga una relación directa con las distribuciones
-de descarga estudiadas.
 
-Es por ello que se impone un método pragmático de, mediante acciones del mundo, escoger estocásticamente para cada momento
-de descarga de un agente~\textit{autobús} en una parada correspondiente, que instancias de agentes~\textit{pasajero} deben 
-efectuar el apeo para que la simulación refleje fielmente lo estudiado en el capítulo~\ref{chapter:param_analisys}.
+Esto deriva de la imposibilidad de planificar el destino efectivo de cada~\textit{pasajero} generado en su instanciación,
+debido a que la parada destino sería dependiente tanto del~\textit{autobús} que transporta al pasajero como del momento 
+exacto en el que se produce el apeo. Fijar estos valores para los~\textit{pasajeros} generados resultaría en inconsistencias 
+graves con la realidad operativa estudiada. Por ejemplo, asumir a la creación de un~\textit{pasajero} que este embarcará en 
+el siguiente \textit{autobús} y que el paso por la parada destino se produce a una hora concreta es completamente arbitrario e 
+inconsistente. Por este motivo, carece de sentido aplicar estos paradigmas a la simulación realizada.
 
+Adicionalmente, cualquier asignación de este tipo convertiría el número de descensos por llegada en una cantidad emergente, 
+sensible a la dinámica operativa de la simulación (retrasos, agrupamientos o rechazos por capacidad), lo que produciría 
+desviaciones sistemáticas respecto de las distribuciones de descarga, ajustadas precisamente por llegada.
+
+Por ello se impone un método pragmático que, mediante acciones del mundo, selecciona estocásticamente para cada momento
+de descarga del agente~\textit{autobús} en la parada correspondiente, qué instancias de agentes~\textit{pasajero} deben 
+efectuar el desembarco para que la simulación refleje fielmente las distribuciones estudiadas en el capítulo
+~\ref{chapter:param_analisys}.
+
+Dichas acciones son activadas por el agente~\textit{autobús} en el momento en que inicia el protocolo ya expuesto de~\textit{
+consulta de descenso}. El método estocástico recibe la lista de agentes~\textit{pasajero} que se ubican en ese momento dentro
+del autobús, y como criterio discriminante escoge aquellos $n$ primeros agentes (siendo $n$ el truncamiento del valor
+aleatorio regido por la distribución de descensos correspondiente) cuyo valor \textit{tiempo en parada}
+sea mayor. La selección mediante este atributo dota de un comportamiento determinista al algoritmo, pero escoger este frente
+a otro cualquiera resulta
+irrelevante para lo que se quiere conseguir, que sigue siendo reflejar la realidad operativa mediante las distribuciones 
+estudiadas. Para que el agente~\textit{pasajero} sepa que realizará el desembarco, la acción global \textbf{altera} el valor
+del campo~\textit{deseo de bajarse} del agente. De nuevo, esta medida constituye una decisión pragmática coherente con el 
+descarte ya expuesto: dado que el destino individual de cada pasajero carece de respaldo en los datos estudiados, dicha 
+información no se atribuye a los agentes en su creación, sino que se sintetiza a nivel de mundo en el momento del descenso, 
+único punto en el que existe una distribución empírica que la fundamente. El atributo~\textit{deseo de bajarse} actúa así como 
+interfaz entre la selección global y el comportamiento reactivo del agente, que conserva la ejecución del protocolo comunicativo
+correspondiente.
+
+\medskip
+\noindent\textbf{Gestión del tiempo en parada}
+
+Una decisión de diseño relevante es la adaptación del tiempo que el
+agente~\textit{autobús} permanece en cada parada. En términos de iteraciones de
+la simulación, la operativa de embarque y descenso de~\textit{pasajeros} resulta
+invariable ante el número de pasajeros involucrados, por lo que se implementa un
+sistema que estima el tiempo adicional de permanencia necesario para reflejar la
+duración de dicha operación en la realidad.
+
+El sistema se sustenta en dos premisas. La primera es que, en escenarios
+normales de operación, las secuencias de embarque y descenso se desarrollan en
+paralelo, una por cada puerta del vehículo; en consecuencia, el tiempo de
+operación queda acotado por el flujo más lento, es decir, por el máximo entre el
+número de embarques y el de descensos, y no por su suma. La segunda es que cada
+pasajero consume un tiempo de servicio aproximadamente constante, modelado
+mediante un parámetro configurable $k$ cuyo valor se establece, tras consulta
+con la EMT, en \textbf{cinco segundos por pasajero}. El tiempo de permanencia resulta:
+\begin{equation}
+    t_{parada} = \max\left(t_{proto},\; k \cdot \max(n_{emb},\, n_{desc})\right)
+    \label{eq:tiempo_parada}
+\end{equation}
+donde $t_{proto}$ denota el tiempo consumido por los intercambios comunicativos
+de los protocolos ya expuestos, que constituye la permanencia mínima.
+
+Como limitación, dicha permanencia mínima se aplica también en paradas sin
+actividad. Esto difiere de la realidad operativa, en la que, si ningún pasajero
+solicita el descenso ni se observa espera en la parada, el vehículo la ignora y
+continúa su trayecto. El sesgo introducido es, no obstante, un sobrecoste
+constante y reducido por parada, correspondiente a los ciclos del intercambio
+comunicativo.
 
 
 \medskip
 \noindent\textbf{Guardado y registro de datos de simulación}
 
+La fase de guardado de los datos de la simulación resulta un paso clave para la posterior extracción de los~\textbf{indicadores
+de rendimiento correspondientes}. Para ello, se escoge un sistema de almacenamiento tabular basado en ficheros~\textit{CSV}
+como elección.
+
+Este sistema deriva en tres subsistemas de almacenamiento predefinidos, expuestos a continuación.
+
+\begin{enumerate}
+    \item \textbf{Subsistema de almacenamiento de operativa de autobuses}
+    Este almacenamiento guarda información relativa al comportamiento de los distintos autobúses. La estructura del documento
+    se muestra traspuesta a continuación en la tabla~\ref{tab:subsistema_autobus}.
+
+    \begin{table}[H]
+\ttabbox[\linewidth]
+    {\caption{Estructura del fichero CSV contenedor de información referente a la operativa de autobuses}\label{tab:subsistema_autobus}}
+    {\centering
+    \begin{tabular}{|Q{0.06}|Q{0.30}|Q{0.44}|Q{0.20}|}
+    \hline
+    \textbf{N.º} & \textbf{Campo} & \textbf{Descripción} & \textbf{Ejemplo} \\
+    \hline
+    1  & \texttt{world.name}          & Identificador de la simulación (réplica)            & Simulation 0 \\
+    \hline
+    2  & \texttt{id}                  & Identificador numérico del agente~\textit{autobús}  & 3578 \\
+    \hline
+    3  & \texttt{travels\_completed}  & Expediciones completadas por el agente              & 0 \\
+    \hline
+    4  & \texttt{stopNum}             & Código de la parada alcanzada                       & 2646 \\
+    \hline
+    5  & \texttt{direction}           & Sentido del trayecto                                & toA \\
+    \hline
+    6  & \texttt{current\_time}       & Instante simulado de llegada a la parada            & 6:30:06 \\
+    \hline
+    7  & \texttt{TimeSlot}            & Franja horaria en el instante de registro           & 6 \\
+    \hline
+    8  & \texttt{departure\_timeslot} & Franja horaria de la salida de cabecera             & 6 \\
+    \hline
+    9  & \texttt{Boards}         &  Embarques efectivos en la parada                 & 42 \\
+    \hline
+    10 & \texttt{Residual boards}         & Pasajeros no embarcados por capacidad máxima                                      & 8 \\
+    \hline
+    11 & \texttt{dropoffs}            & Descensos efectuados en la parada                   & 1 \\
+    \hline
+    12 & \texttt{Occupation}         & Ocupación total       & 58 \\
+    \hline
+    13 & \texttt{time\_travelled}     & Tiempo transcurrido entre la parada previa y la actual                & 602.0 \\
+    \hline
+    \multicolumn{4}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+    \end{table}
+
+    Cada fila (representada en la tabla por la columna traspuesta \textbf{Ejemplo}) representa la detención 
+    de un agente~\textit{autobús} en una parada a lo largo de todo el proceso de simulación de Monte Carlo.
+    
+    Se guarda la información relativa a las distintas iteraciones (del proceso de Monte Carlo, no de las iteraciones que 
+    representan el paso del tiempo en la simulación) en ficheros distintos. Una expansión sobre los motivos detrás de esta
+    decisión se expone en la sección siguiente~\ref{subsec:exe_and_sim_one}.
+
+    \item \textbf{Subsistema de almacenamiento de información de pasajeros}
+    
+    \item \textbf{Subsistema de almacenamiento de anomalías}
+\end{enumerate}
 
 
 \subsection{Ejecución y simulación}\label{subsec:exe_and_sim_one}

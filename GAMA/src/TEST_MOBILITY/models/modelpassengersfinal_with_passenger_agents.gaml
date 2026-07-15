@@ -1627,7 +1627,6 @@ species bus skills: [fipa] {
 			}
 			else{
 				passengers_on_bus >> msg.sender;
-				write "BAJE PASAJERO PUÑET " + passengers;
 			}
 		}
 
@@ -1817,7 +1816,6 @@ species bus skills: [fipa] {
 	        	}
 	        	else if (ctype = 'Dropped'){
 	        		passengers_on_bus >> msg.sender;
-	        		write "Al final de trayecto baje a " + passengers;
 	        	}
 	    	}
 		}

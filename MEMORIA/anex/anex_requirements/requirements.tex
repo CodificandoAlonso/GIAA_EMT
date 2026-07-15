@@ -108,7 +108,7 @@ de la plataforma GAMA ni de la línea de comandos.}
 \requisito{RF-04}{Seguimiento del estado de las simulaciones}
 {Funcional}
 {Should}
-{EMT Madrid}
+{Equipo de diseño}
 {La interfaz debe mostrar el estado de las simulaciones en curso, actualizarlo en tiempo real para todos 
 los clientes conectados y notificar la finalización de cada ejecución.}
 {Las simulaciones tienen una duración no despreciable; el usuario necesita saber cuándo puede consultar 
@@ -241,7 +241,7 @@ cualquiera de ellas según la parada y la franja.}
 \requisito{RD-05}{Tiempo de detención en parada}
 {Restricción de diseño}
 {Should}
-{Equipo de diseño}
+{EMT Madrid}
 {El autobús debe permanecer detenido en cada parada un tiempo mínimo fijo, extensible en función del número de 
 operaciones de subida y bajada pendientes en esa parada.}
 {El tiempo de detención condiciona los tiempos de recorrido y la regularidad; un mínimo evita detenciones irrealmente 
@@ -252,7 +252,7 @@ breves en paradas sin demanda.}
 \requisito{RD-06}{Ruta fija y adhesión al cuadro de servicio}
 {Restricción de diseño}
 {Must}
-{Equipo de diseño}
+{EMT Madrid}
 {Los agentes autobús deben recorrer exclusivamente la secuencia fija de paradas de su sentido y ajustar sus 
 salidas al cuadro de servicio configurado. El modelo no debe implementar reenrutamiento dinámico ni acciones de 
 regulación en tiempo real (retenciones, saltos de parada o cortos de línea), y las llegadas anticipadas a terminal 
@@ -267,7 +267,7 @@ una llegada anticipada. Método: I}
 \requisito{RD-07}{Ausencia de deliberación en el comportamiento de los agentes}
 {Restricción de diseño}
 {Must}
-{Equipo de diseño}
+{EMT Madrid}
 {El comportamiento de los agentes debe limitarse a respuestas predefinidas ante los cambios del entorno y ante la información 
 recibida de otros agentes, sin incorporar mecanismos de decisión deliberativa, planificación ni aprendizaje. La lógica de coordinación
  relativa a magnitudes para las que los datos solo ofrecen caracterización agregada (como la selección de los pasajeros que descienden)
@@ -313,7 +313,7 @@ validación se refieran a un régimen operativo homogéneo, y hace el trabajo re
 \requisito{RNF-01}{Ejecución sin dependencias de la plataforma GAMA}
 {No funcional --- Portabilidad}
 {Must}
-{EMT Madrid}
+{Equipo de diseño}
 {El sistema completo debe distribuirse contenerizado mediante Docker, de forma que pueda ejecutarse en equipos de
  la EMT sin instalación previa de la plataforma GAMA ni de los entornos de ejecución de Python o Node.js.}
 {El personal de la EMT no dispone del entorno de desarrollo del proyecto; la contenerización es la condición 
@@ -344,18 +344,7 @@ es condición para las réplicas de Monte Carlo y para la integración con la in
 {RF-03, RF-11}
 {Lanzamiento de un lote de réplicas sin entorno gráfico y verificación de su finalización. Método: T}
 
-\requisito{RNF-04}{Acceso concurrente a la interfaz web}
-{No funcional --- Usabilidad}
-{Could}
-{EMT Madrid}
-{La interfaz web debe admitir varios clientes conectados simultáneamente, manteniendo en todos ellos 
-una vista coherente y actualizada del estado de las simulaciones.}
-{En un entorno de trabajo compartido, varios técnicos pueden consultar el sistema a la vez; las vistas
- desincronizadas inducirían a error sobre el estado real de las ejecuciones.}
-{RF-04}
-{Conexión simultánea de dos clientes y verificación de la coherencia de estado ante lanzamientos y finalizaciones. Método: T}
-
-\requisito{RNF-05}{Tratamiento exclusivo de datos agregados}
+\requisito{RNF-04}{Tratamiento exclusivo de datos agregados}
 {No funcional --- Legal}
 {Must}
 {Normativa (RGPD)}
@@ -366,7 +355,7 @@ personales es necesario para el cumplimiento del RGPD en toda la cadena de trata
 {RD-08}
 {Inspección de los esquemas de datos empleados en cada fase del sistema. Método: I}
 
-\requisito{RNF-06}{Extensibilidad a otras líneas de la red}
+\requisito{RNF-5}{Extensibilidad a otras líneas de la red}
 {No funcional --- Extensibilidad}
 {Could}
 {EMT Madrid}
