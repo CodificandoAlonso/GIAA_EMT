@@ -2957,6 +2957,45 @@
       \verb 10.1214/aoms/1177706645
       \endverb
     \endentry
+    \entry{boneva1971}{article}{}
+      \name{author}{3}{}{%
+        {{hash=1b2d92999c5175bea9a65d65264cb80d}{%
+           family={Boneva},
+           familyi={B\bibinitperiod},
+           given={Liliana\bibnamedelima I.},
+           giveni={L\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=5dbf9933b60627d4ccd3bc0f61a69e57}{%
+           family={Kendall},
+           familyi={K\bibinitperiod},
+           given={David\bibnamedelima G.},
+           giveni={D\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=da51fe3b16e8fe293ccabf0972cb3ce6}{%
+           family={Stefanov},
+           familyi={S\bibinitperiod},
+           given={Ivan},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{01e21590f80359c9fbcc8a823ab36312}
+      \strng{fullhash}{8c4803006f6ba9cd9121839d1d1d71e7}
+      \strng{bibnamehash}{8c4803006f6ba9cd9121839d1d1d71e7}
+      \strng{authorbibnamehash}{8c4803006f6ba9cd9121839d1d1d71e7}
+      \strng{authornamehash}{01e21590f80359c9fbcc8a823ab36312}
+      \strng{authorfullhash}{8c4803006f6ba9cd9121839d1d1d71e7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Royal Statistical Society: Series B (Methodological)}
+      \field{number}{1}
+      \field{title}{Spline Transformations: Three New Diagnostic Aids for the Statistical Data-Analyst}
+      \field{volume}{33}
+      \field{year}{1971}
+      \field{pages}{1\bibrangedash 71}
+      \range{pages}{71}
+      \verb{doi}
+      \verb 10.1111/j.2517-6161.1971.tb00855.x
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

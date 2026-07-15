@@ -786,12 +786,91 @@ horaria (valores sintéticos, únicamente ilustrativos)}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:ilustrativa_linealidad}
 \end{figure}
 
+La solución alternativa propone un método de generación que emplee una función
+lineal en lugar de una constante para cada una de las franjas horarias. Esta
+nueva función se obtiene del cálculo de la recta determinada por dos puntos. En
+un espacio bidimensional cartesiano, con el eje de abscisas representando el
+tiempo y el eje de ordenadas el valor agregado por iteración, dichos puntos
+resultan:
+\begin{equation}
+    P_1 = \left(t_h + \frac{T}{2},\; \delta_h\right), \qquad
+    P_2 = \left(t_h + T,\; \delta_{h+1}\right)
+    \label{eq:puntos_tendencia}
+\end{equation}
+donde $t_h$ denota el instante de inicio de la franja $h$, $T$ su duración,
+$N$ el número de iteraciones que la componen y $\delta_h = \tau_h / N$ el
+incremento por iteración asociado a la tasa horaria $\tau_h$. Es decir, la
+recta pivota sobre el punto medio de la franja, a la altura del valor constante
+del método original, y alcanza al final de la franja el incremento
+correspondiente a la franja siguiente. La función de generación resultante es:
+\begin{equation}
+    g_h(t) = \delta_h + \frac{2\,(\delta_{h+1} - \delta_h)}{T}
+             \left(t - t_h - \frac{T}{2}\right),
+    \qquad t \in [t_h,\, t_h + T)
+    \label{eq:recta_tendencia}
+\end{equation}
+
+Esta construcción constituye una~\textbf{reconstrucción lineal conservativa} del perfil
+constante a trozos original~\cite{boneva1971}: por simetría de la recta
+respecto al punto de pivote, el valor medio de $g_h$ en la franja coincide con
+$\delta_h$ y, por tanto, el área bajo ambas curvas es idéntica. La propiedad se
+mantiene de forma exacta en el dominio discreto: los incrementos evaluados en
+las $N$ iteraciones de la franja forman una progresión aritmética cuyos
+términos extremos, $2\delta_h - \delta_{h+1}$ y $\delta_{h+1}$, promedian
+exactamente $\delta_h$, de modo que:
+\begin{equation}
+    \sum_{k=1}^{N} g_h(t_k) = N\,\delta_h = \tau_h
+    \label{eq:conservacion}
+\end{equation}
+Esto garantiza que el número de agentes~\textit{pasajero} generados en cada
+franja es idéntico al del método escalonado. Esta modificación redistribuye los
+instantes de generación dentro de la franja, sin alterar el volumen total ni,
+en consecuencia, la fidelidad a las tasas ajustadas estadísticamente en el
+capítulo~\ref{chapter:param_analisys}.
+
+La figura~\ref{fig:solucion_reconstruccion} muestra las diferencias existentes entre los dos modelos propuestos.
 
 
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/comparativa_tendencia.png}
+\caption{Ilustración del mecanismo de generación con reconstrucción lineal conservativa frente 
+al mecanismo constante (valores sintéticos, únicamente ilustrativos)}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:solucion_reconstruccion}
+\end{figure}
 
+Nótese que en casos donde $\tau_{h+1} > 2\,\tau_h$, la pendiente resultante
+de la aplicación del método resulta en algunos valores de ordenadas \textbf{$<0$}. Esto lejos de poder parecer incongruente, 
+muestra una ventaja significativa con respecto del método escalonado. Estos valores negativos no hacen más que penalizar la 
+generación al inicio  de aquellas franjas con mucha menor tasa que sus inmediatamente posteriores.
+La reconstrucción lineal conservativa garantiza que esto se compense aumentando el ritmo de generación al acercarse al valor
+más elevado, reflejando esa tendencia que antes se obviaba. Esta casuística además no genera conflictos de posible
+\enquote{eliminación} de pasajeros que tendrían que generarse, debido a la generación inmediata de estos en el momento
+que el contador truncado alcance un valor entero superior o igual a uno.
+
+No obstante, al considerar tendencia local, es decir considerar únicamente el valor inmediatamente posterior, como se muestra
+en la figura~\ref{fig:solucion_reconstruccion} siguen existiendo saltos en los cambios de franja.
+Pese a que existen soluciones que implementan una continuidad global a lo largo de todas las franjas horarias, estas se 
+descartan debido a que la estructura fina que supone este ajuste no ha sido contrastada ni validada con datos empíricos,
+por lo que resulta necesario un análisis detallado para ello. A pesar de esto, en el capítulo~\ref{chapter:future_works}
+se discute esta idea.
 
 \medskip
 \noindent\textbf{Sistema de inferencia de bajada de pasajeros}
+
+Este sistema se diseña bajo una premisa fundamental:~\textbf{la inferencia de bajada de pasajeros debe corresponder con 
+los valores estudiados}. Esta premisa supone, como se menciona en la caracterización del agente~\textit{pasajero}~(véase
+~\nameref{subsubsec:agents_char_one}), que no se puede modelar a estos mediante un sistema de creencias, deseos e intenciones
+~(agente \textit{BDI}), ni representar el embarque/desembarque de cada pasajero mediante una matriz de origen/destino.
+Esto se debe a que en el momento de creación de cada agente individual, se debería anticipar para cada agente en cada parada
+en cada momento, tanto qué agente~\textit{autobús} va a ser el encargado de recoger al pasajero como de inferir
+cuántas paradas va a mantenerse en él hasta el apeo y que esta casuística mantenga una relación directa con las distribuciones
+de descarga estudiadas.
+
+Es por ello que se impone un método pragmático de, mediante acciones del mundo, escoger estocásticamente para cada momento
+de descarga de un agente~\textit{autobús} en una parada correspondiente, que instancias de agentes~\textit{pasajero} deben 
+efectuar el apeo para que la simulación refleje fielmente lo estudiado en el capítulo~\ref{chapter:param_analisys}.
+
 
 
 \medskip
