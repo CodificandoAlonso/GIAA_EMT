@@ -930,65 +930,117 @@ comunicativo.
 \medskip
 \noindent\textbf{Guardado y registro de datos de simulación}
 
-La fase de guardado de los datos de la simulación resulta un paso clave para la posterior extracción de los~\textbf{indicadores
-de rendimiento correspondientes}. Para ello, se escoge un sistema de almacenamiento tabular basado en ficheros~\textit{CSV}
-como elección.
+La fase de guardado de los datos de la simulación constituye un paso clave para la posterior extracción de los~\textbf{indicadores
+de rendimiento correspondientes}. Para ello, se escoge un sistema de almacenamiento tabular basado en ficheros~\textit{CSV}.
 
-Este sistema deriva en tres subsistemas de almacenamiento predefinidos, expuestos a continuación.
+Este sistema deriva en tres subsistemas de almacenamiento, expuestos a continuación.
 
 \begin{enumerate}
     \item \textbf{Subsistema de almacenamiento de operativa de autobuses}
-    Este almacenamiento guarda información relativa al comportamiento de los distintos autobúses. La estructura del documento
+    
+    Este almacenamiento guarda información relativa al comportamiento de los distintos autobuses. La estructura del documento
     se muestra traspuesta a continuación en la tabla~\ref{tab:subsistema_autobus}.
 
     \begin{table}[H]
 \ttabbox[\linewidth]
-    {\caption{Estructura del fichero CSV contenedor de información referente a la operativa de autobuses}\label{tab:subsistema_autobus}}
+    {\caption{Estructura traspuesta del fichero CSV contenedor de información referente a la operativa de autobuses}\label{tab:subsistema_autobus}}
     {\centering
-    \begin{tabular}{|Q{0.06}|Q{0.30}|Q{0.44}|Q{0.20}|}
+    \begin{tabular}{|Q{0.32}|Q{0.46}|Q{0.22}|}
     \hline
-    \textbf{N.º} & \textbf{Campo} & \textbf{Descripción} & \textbf{Ejemplo} \\
+    \textbf{Campo} & \textbf{Descripción} & \textbf{Ejemplo} \\
     \hline
-    1  & \texttt{world.name}          & Identificador de la simulación (réplica)            & Simulation 0 \\
+    \texttt{world.name}          & Identificador de la simulación (réplica)            & Simulation 0 \\
     \hline
-    2  & \texttt{id}                  & Identificador numérico del agente~\textit{autobús}  & 3578 \\
+    \texttt{id}                  & Identificador numérico del agente~\textit{autobús}  & 3578 \\
     \hline
-    3  & \texttt{travels\_completed}  & Expediciones completadas por el agente              & 0 \\
+    \texttt{travels\_completed}  & Expediciones completadas por el agente              & 0 \\
     \hline
-    4  & \texttt{stopNum}             & Código de la parada alcanzada                       & 2646 \\
+    \texttt{stopNum}             & Código de la parada alcanzada                       & 2646 \\
     \hline
-    5  & \texttt{direction}           & Sentido del trayecto                                & toA \\
+    \texttt{direction}           & Sentido del trayecto                                & toA \\
     \hline
-    6  & \texttt{current\_time}       & Instante simulado de llegada a la parada            & 6:30:06 \\
+    \texttt{current\_time}       & Instante simulado de llegada a la parada            & 6:30:06 \\
     \hline
-    7  & \texttt{TimeSlot}            & Franja horaria en el instante de registro           & 6 \\
+    \texttt{TimeSlot}            & Franja horaria en el instante de registro           & 6 \\
     \hline
-    8  & \texttt{departure\_timeslot} & Franja horaria de la salida de cabecera             & 6 \\
+    \texttt{departure\_timeslot} & Franja horaria de la salida de cabecera             & 6 \\
     \hline
-    9  & \texttt{Boards}         &  Embarques efectivos en la parada                 & 42 \\
+    \texttt{Boards}         &  Embarques efectivos en la parada                 & 42 \\
     \hline
-    10 & \texttt{Residual boards}         & Pasajeros no embarcados por capacidad máxima                                      & 8 \\
+    \texttt{Residual boards}         & Pasajeros no embarcados por capacidad máxima                                      & 8 \\
     \hline
-    11 & \texttt{dropoffs}            & Descensos efectuados en la parada                   & 1 \\
+    \texttt{dropoffs}            & Descensos efectuados en la parada                   & 1 \\
     \hline
-    12 & \texttt{Occupation}         & Ocupación total       & 58 \\
+    \texttt{Occupation}         & Ocupación total computada tras la operación de embarque/apeo      & 58 \\
     \hline
-    13 & \texttt{time\_travelled}     & Tiempo transcurrido entre la parada previa y la actual                & 602.0 \\
+    \texttt{time\_travelled}     & Tiempo transcurrido entre la parada previa y la actual                & 602.0 \\
     \hline
-    \multicolumn{4}{l}{Fuente: elaboración propia.}
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
     \end{tabular}}
     \end{table}
 
     Cada fila (representada en la tabla por la columna traspuesta \textbf{Ejemplo}) representa la detención 
-    de un agente~\textit{autobús} en una parada a lo largo de todo el proceso de simulación de Monte Carlo.
+    de un agente~\textit{autobús} en una parada a lo largo de todo el proceso de una réplica de la simulación de Monte Carlo.
     
-    Se guarda la información relativa a las distintas iteraciones (del proceso de Monte Carlo, no de las iteraciones que 
-    representan el paso del tiempo en la simulación) en ficheros distintos. Una expansión sobre los motivos detrás de esta
-    decisión se expone en la sección siguiente~\ref{subsec:exe_and_sim_one}.
+    El añadido de columnas como \texttt{id},~\texttt{travels\_completed},~\texttt{Timeslot} y~\texttt{direction}
+    permite el posterior filtrado para desagregaciones específicas, claves para generar los distintos KPIs.
 
-    \item \textbf{Subsistema de almacenamiento de información de pasajeros}
+    Nótese que se añade el campo~\texttt{departure\_timeslot} debido a lo expuesto en el capítulo~\ref{chapter:param_analisys}
+    en relación con el estudio de viabilidad de datos operacionales. En dicho análisis, la franja horaria asignada a cada registro
+    corresponde al momento de la salida de cabecera de la expedición, no al instante de paso por cada parada. Para permitir comparativas
+    de \textit{ocupación} coherentes con ese criterio, se incorpora este campo al registro.
+
+    Se guarda la información relativa a las distintas iteraciones (del proceso de Monte Carlo, no de las iteraciones que 
+    representan el paso del tiempo en la simulación) en ficheros distintos únicos por cada réplica.
+    Una expansión sobre los motivos detrás de esta decisión se expone en la sección siguiente~\ref{subsec:exe_and_sim_one}.
     
+    \item \textbf{Subsistema de almacenamiento de información de pasajeros}
+        
+    Con el fin de almacenar la información relativa a cuánto tiempo espera cada~\textit{pasajero} en una parada, se dispone 
+    de otro fichero por réplica que guarde esta información.
+    
+    De misma forma que con el subsitema previamente expuesto, se dispone de variables que permitan desagregar los datos 
+    para los filtros requeridos de los indicadores. En este caso no resulta necesario almacenar la franja temporal relativa 
+    al momento de salida de cabecera, ya que los datos comparativos derivados de ese filtrado no incluyen información referente
+    con los datos guardados en este subsistema.
+
+    La tabla~\ref{tab:subsistema_pasajeros} muestra, de forma traspuesta, el formato que rige el fichero de almacenamiento
+    de este sistema.
+    
+    \begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Estructura traspuesta del fichero CSV contenedor de información referente a la información de pasajeros}\label{tab:subsistema_pasajeros}}
+    {\centering
+    \begin{tabular}{|Q{0.36}|Q{0.42}|Q{0.22}|}
+    \hline
+    \textbf{Campo} & \textbf{Descripción} & \textbf{Ejemplo} \\
+    \hline
+    \texttt{world.name}                    & Identificador de la simulación (réplica)                                      & Simulation 0 \\
+    \hline
+    \texttt{bus\_id}                 & Identificador numérico del agente~\textit{autobús} que efectúa el embarque   & 3551 \\
+    \hline
+    \texttt{travels\_completed} & Expediciones completadas por el agente~\textit{autobús}                       & 0 \\
+    \hline
+    \texttt{stopNum}                       & Código de la parada en la que se produce el embarque                          & 3995 \\
+    \hline
+    \texttt{TimeSlot}                      & Franja horaria en el instante de registro                                     & 5 \\
+    \hline
+    \texttt{current\_time}                 & Instante simulado del embarque                                                & 5:16:28 \\
+    \hline
+    \texttt{time\_from\_passengers}        & Lista de tiempos de espera en parada de los pasajeros embarcados          & [666.0; 458.0; \dots] \\
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+    \end{table}
+
+
     \item \textbf{Subsistema de almacenamiento de anomalías}
+    
+    Este sistema se encarga de guardar la información referente a las anomalías detectadas en las distintas simulaciones.
+    Únicamente se registran los retrasos en las salidas de cabecera de los autobuses como anomalía, ya que el sistema, como
+    se ha especificado, no 
+
+
 \end{enumerate}
 
 
