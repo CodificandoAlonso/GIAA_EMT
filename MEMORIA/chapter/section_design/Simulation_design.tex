@@ -1,12 +1,3 @@
-\textbf{Aqui basicamente tengo que dividirlo en varias partes. Primeramente hablar del diseño y la eleccion como 
-de la arquitectura de los agentes, el por qué de cada protocolo de comunicacion, como funciona un flujo de un 
-autobus llegando a la parada, el tema del suavizado de cambios entre valores de franjas, etc.
-Tambien discutir sobre los dos modelos existentes, que el que incluye pasajeros puede ser considerado más 
-"de agentes" por su comportamiento mas parecido a la realidad, con pasajeros que piden bajar, buses que rechazan 
-subir más gente, y el otro que es más orientado a simulaciones rápidas(15 mins) pero que ambos generan mismos
-resultados sobre el papel. Puedo tmb meter una ontologia? Para mostrar un poco la arquitectura de los distintos
-elementos que componen cada simulacion. Hablar tambien de como se recogen los resultados, los logs etc}
-
 Este capítulo expone la construcción de las dos variantes de simulador desarrolladas en la plataforma de agentes 
 GAMA~\cite{taillandier2019gama} y se corresponde con la fase homónima del trabajo, introducida en la 
 sección~\ref{subsec:structure}. Se puede dividir este capítulo en dos secciones, referentes a cada una de las alternativas
@@ -132,7 +123,7 @@ En la tabla~\ref{tab:estado_bus} se muestran aquellos campos más relevantes.
 
 \begin{table}[H]
     \ttabbox[\linewidth]
-    {\caption{Estado interno relevante del agente autobús}\label{tab:estado_bus}}
+    {\caption{Estado interno relevante del agente autobús para la solución uno}\label{tab:estado_bus}}
     {\centering
     \begin{tabular}{|Q{0.23}|Q{0.23}|Q{0.31}|Q{0.23}|}
         \hline
@@ -171,7 +162,7 @@ protocolos, relacionando estos con momentos internos del agente dentro del estad
 
 \begin{table}[H]
     \ttabbox[\linewidth]
-    {\caption{Papel del agente \textit{autobús} dentro de los distintos protocolos de comunicación existentes}\label{tab:interaccion_bus}}
+    {\caption{Papel del agente \textit{autobús} dentro de los distintos protocolos de comunicación existentes en la solución uno}\label{tab:interaccion_bus}}
     {\centering
     \begin{tabular}{|Q{0.20}|Q{0.14}|Q{0.30}|Q{0.36}|}
     \hline
@@ -223,7 +214,7 @@ del ciclo de vida. La tabla~\ref{tab:estado_pasajero} muestra estos atributos.
 
 \begin{table}[H]
     \ttabbox[\linewidth]
-    {\caption{Estado interno relevante del agente pasajero}\label{tab:estado_pasajero}}
+    {\caption{Estado interno relevante del agente pasajero para la solución uno}\label{tab:estado_pasajero}}
     {\centering
     \begin{tabular}{|Q{0.23}|Q{0.20}|Q{0.37}|Q{0.20}|}
         \hline
@@ -253,7 +244,7 @@ Con respecto a las interacciones entre agentes, este agente resulta tanto recept
 
 \begin{table}[H]
     \ttabbox[\linewidth]
-    {\caption{Papel del agente \textit{pasajero} dentro de los distintos protocolos de comunicación existentes}\label{tab:interaccion_pasajero}}
+    {\caption{Papel del agente \textit{pasajero} dentro de los distintos protocolos de comunicación existentes en la solución uno}\label{tab:interaccion_pasajero}}
     {\centering
     \begin{tabular}{|Q{0.20}|Q{0.14}|Q{0.30}|Q{0.36}|}
     \hline
@@ -306,7 +297,7 @@ características principales de cada uno.
 
 \begin{table}[H]
     \ttabbox[\linewidth]
-    {\caption{Estado interno relevante del agente parada}\label{tab:estado_parada}}
+    {\caption{Estado interno relevante del agente parada para la solución uno}\label{tab:estado_parada}}
     {\centering
     \begin{tabular}{|Q{0.23}|Q{0.23}|Q{0.31}|Q{0.23}|}
         \hline
@@ -330,7 +321,7 @@ cómo estos le permiten alterar su estado interno.
 
 \begin{table}[H]
     \ttabbox[\linewidth]
-    {\caption{Papel del agente \textit{parada} dentro de los distintos protocolos de comunicación existentes}\label{tab:interaccion_parada}}
+    {\caption{Papel del agente \textit{parada} dentro de los distintos protocolos de comunicación existentes en la solución uno}\label{tab:interaccion_parada}}
     {\centering
     \begin{tabular}{|Q{0.20}|Q{0.14}|Q{0.30}|Q{0.36}|}
     \hline
@@ -999,7 +990,7 @@ Este sistema deriva en tres subsistemas de almacenamiento, expuestos a continuac
     Con el fin de almacenar la información relativa a cuánto tiempo espera cada~\textit{pasajero} en una parada, se dispone 
     de otro fichero por réplica que guarde esta información.
     
-    De misma forma que con el subsitema previamente expuesto, se dispone de variables que permitan desagregar los datos 
+    De la misma forma que con el subsistema previamente expuesto, se dispone de variables que permitan desagregar los datos 
     para los filtros requeridos de los indicadores. En este caso no resulta necesario almacenar la franja temporal relativa 
     al momento de salida de cabecera, ya que los datos comparativos derivados de ese filtrado no incluyen información referente
     con los datos guardados en este subsistema.
@@ -1037,8 +1028,42 @@ Este sistema deriva en tres subsistemas de almacenamiento, expuestos a continuac
     \item \textbf{Subsistema de almacenamiento de anomalías}
     
     Este sistema se encarga de guardar la información referente a las anomalías detectadas en las distintas simulaciones.
-    Únicamente se registran los retrasos en las salidas de cabecera de los autobuses como anomalía, ya que el sistema, como
-    se ha especificado, no 
+    Únicamente se registran \textbf{los retrasos en las salidas de cabecera de los autobuses} como anomalías, ya que el sistema
+    no contempla otros escenarios como pudieran ser averías o cortes de carretera.
+
+    La estructura del archivo contenedor de la información se presenta en la tabla~\ref{tab:subsistema_anomalias}.
+
+    \begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Estructura traspuesta del fichero CSV contenedor de información referente a las anomalías}\label{tab:subsistema_anomalias}}
+    {\centering
+    \begin{tabular}{|Q{0.36}|Q{0.42}|Q{0.22}|}
+    \hline
+    \textbf{Campo} & \textbf{Descripción} & \textbf{Ejemplo} \\
+    \hline
+    \texttt{world.name}                    & Identificador de la simulación (réplica)                                      & Simulation 0 \\
+    \hline
+    \texttt{bus\_id}                 & Identificador numérico del agente~\textit{autobús} que registra un retraso.  & 3577 \\
+    \hline
+    \texttt{travels\_completed}     & Expediciones completadas por el agente~\textit{autobús}.                       & 8 \\
+    \hline
+    \texttt{direction}                       &    Sentido del autobús cuya salida supone un retraso.               & toA \\
+    \hline
+    \texttt{stopNum}                       &    Parada de cabecera donde se registra el retraso.                  & 2646 \\
+    \hline
+    \texttt{TimeSlot}                      & Franja horaria en el instante de registro.                                & 21 \\
+    \hline
+    \texttt{EventType}                      & Tipo de anomalía detectada (únicamente existe retraso en salida de cabecera).   & DELAY \\
+    \hline
+    \texttt{current\_time}                 & Momento en el que el autobús efectúa la salida.           & 21:03:38 \\
+    \hline
+    \texttt{expected\_time}        &   Tiempo esperado de salida de cabecera.        & 21:00 \\
+    \hline
+    \texttt{delay\_time}        &   Tiempo de retraso medido en minutos.    & 3 \\
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+    \end{table}
 
 
 \end{enumerate}
@@ -1046,22 +1071,214 @@ Este sistema deriva en tres subsistemas de almacenamiento, expuestos a continuac
 
 \subsection{Ejecución y simulación}\label{subsec:exe_and_sim_one}
 
+Esta sección cubre los aspectos más relevantes que rigen el comportamiento de las distintas iteraciones de Monte Carlo.
 
+En primer lugar, dichas simulaciones se realizan bajo el modo experimento \textit{batch} que ofrece el lenguaje \textit{GAML}.
+Este modo permite seleccionar un número de repeticiones a simular y la condición de parada que rige el fin de cada una de ellas.
+En el caso que ocupa, la simulación continúa hasta que no queden agentes~\textit{autobús}, debido a que cada uno 
+se elimina al completar su oferta de servicio, por lo que la ausencia total de estos agentes constituye la condición de parada.
+
+Como se menciona en la sección~\ref{subsec:montecarlo}, se realizan \textbf{mil réplicas de Monte Carlo} para cada simulación.
+
+Estas simulaciones se realizan de forma paralela. GAMA permite esta opción, indicando el número de réplicas que se
+ejecutan de forma simultánea. Concretamente, se ha especificado un valor de \textbf{dieciséis réplicas en paralelo},
+valor correspondiente al número de unidades de procesamiento lógicas del ordenador utilizado para el desarrollo de este trabajo,
+presentado en la sección~\ref{section:usage_tools}.
+
+Al existir comportamiento paralelo, si las distintas réplicas que se ejecutan simultáneamente escriben sobre el mismo archivo
+de registro de datos existe \textbf{comportamiento no deteminista debido a condiciones de carrera no controladas}. Por esta cuestión,
+como se menciona previamente, se escoge un enfoque que garantiza la no existencia de estas condiciones de carrera, asegurando que 
+cada réplica vuelque sus datos sobre ficheros diferenciados para evitar posibles inconsistencias derivadas.
+
+Cada archivo relativo a los distintos subsistemas de registro de datos se nombra \\
+\texttt{log\_Simulation N.csv}, donde \texttt{N} referencia
+el identificador numérico de cada una de las réplicas. Para distinguir entre los subsistemas, estos se guardan en directorios
+diferenciados, denotando \texttt{RESULTS} para el subsistema de datos de autobús, \texttt{PASSENGERS} para el de pasajeros y
+\texttt{EVENTS} para las anomalías. De esta forma, cada subsistema se ubica en localizaciones segregadas para facilitar
+la extracción de métricas de rendimiento.
+
+Dichos directorios viven dentro de otro directorio general que contiene el esqueleto base de un proyecto de la plataforma.
+La figura~\ref{fig:structure_hierarchy} muestra cómo se subdivide este esquema.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.8\linewidth}
+\dirtree{%
+.1 .\hspace{2mm}\DTcomment{directorio raíz del proyecto}.
+.2 includes\hspace{2mm}\DTcomment{ficheros de entrada del simulador}.
+.3 INPUTS.
+.3 ROUTE.
+.3 STOPS.
+.2 logs\hspace{2mm}\DTcomment{registros de simulación, por subsistema}.
+.3 EVENTS\hspace{2mm}\DTcomment{anomalías}.
+.3 PASSENGERS\hspace{2mm}\DTcomment{información de pasajeros}.
+.3 RESULTS\hspace{2mm}\DTcomment{operativa de autobuses}.
+.2 models\hspace{2mm}\DTcomment{código GAML}.
+.3 solución\_uno.gaml.
+.3 solución\_dos.gaml.
+}
+\end{minipage}
+\caption{Estructura de directorios del proyecto base de simulación}
+\label{fig:structure_hierarchy}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}
+\end{figure}
+
+Con el fin de reducir la carga computacional existente para la realización de las distintas simulaciones, se implementa
+el lanzamiento de estas de forma orquestada mediante el modo \textit{headless} existente en la plataforma. Dicho modo permite
+ejecutar ficheros de extensión \textit{GAML} sin la necesidad de ejecutar la aplicación GAMA. Esto reduce significativamente el 
+uso de recursos que un entorno de desarrollo consume, mejorando la eficiencia de la simulación.
+
+Dicha orquestación se realiza mediante la ejecución de dos ficheros \textit{shell script} diferenciados. El primero crea un 
+nuevo espacio de trabajo mediante la copia del directorio presentado en la figura~\ref{fig:structure_hierarchy}
+a un nuevo directorio cuyo nombre utiliza la plantilla~\texttt{SIMULATION\_YYYYMMDD\_HHMMSS}, que 
+permite diferenciar cada simulación por su momento de creación. La copia independiente del directorio de trabajo entero 
+garantiza que cada simulación disponga de una copia aislada de los archivos de entrada, de modo que las modificaciones 
+paramétricas de un escenario no afecten al resto.
+
+El segundo fichero de shell es el encargado de lanzar el modo~\textit{headless} una vez que para cada simulación concreta se han 
+ajustado los parámetros de entrada a lo que se busca simular en cada escenario. El detalle sobre cómo se realiza esta modificación
+paramétrica se presenta en el capítulo~\ref{chapter:application_cases}.
 
 \section{Solución dos: Sin agentes pasajero}\label{sec:second_sol}
+Debido al elevado coste computacional que deriva en tiempos de simulación grandes (véase~\ref{fig:futurafiguraderesutados}~\textbf{
+todo: Mostrar una figura que presente diferencias en tiempo de ejecucion entre simulaciones,
+ para justificar el por qué se hace esta. \textit{No se si lafigura ponerla aqui o presentar una seccion en el capitulo de resultados
+ que muestre las diferencias en ejecucion de ambas simulaciones y sus similares resultados}}),
+se presenta una solución alternativa. Dicha solución muestra un comportamiento en lógica de resultados equivalente al modelo expuesto 
+con anterioridad, pero difiere en algunos aspectos clave de la construcción de la misma. Esta sección expone únicamente aquellos puntos
+de diferencia existentes entre ambas, con el objetivo de no replicar contenido que resulta igual para ambos modelos.
 
 \subsection{Arquitectura de la solución}\label{subsec:arch_two}
+La arquitectura, en cuanto a la caracterización de los agentes, presenta una de las mayores diferencias entre ambos modelos,
+diferencia que da nombre a la sección~\ref{sec:second_sol} y que consta de la eliminación del sistema del agente~\textit{pasajero}. Esto se debe a la 
+alta cardinalidad de instanciación de agentes independientes, lo que deriva en un elevado coste computacional. Se presenta, por tanto,
+una arquitectura alternativa, que pasa a representar a estos de forma agregada numéricamente. La agregación no se produce de forma total,
+ya que se mantiene de forma parcial el registro individual del tiempo de espera, con el fin de mantener el indicador de rendimiento
+correspondiente. Al eliminar agentes de la simulación, se reduce también 
+la carga comunicativa en cuanto a protocolos se refiere. De la misma forma que para la solución anterior, se dedica una sección a la 
+formalización de los distintos protocolos existentes~(véase~\ref{subsubsec:comms_protocols_two}). No obstante, debido a la utilización
+de los nombres de los mismos en la caracterización de los agentes involucrados, se introducen en la tabla~\ref{tab:protocolos_two}
+mostrada a continuación.
 
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Protocolos de comunicación existentes en la solución dos}\label{tab:protocolos_two}}
+    {\centering
+    \begin{tabular}{|Q{0.25}|Q{0.25}|Q{0.50}|}
+    \hline
+    \textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción}\\
+    \hline
+    \textit{Consulta tras llegada} & FIPA-Query & Protocolo con el que el autobús anuncia su presencia a la parada solicitando información \\ 
+    \hline
+    \textit{Actualización de recuento} & FIPA-Request & Protocolo que informa y llama a registrar los embarques efectivos y actualizar 
+    los contadores que se mantienen en la parada después del paso del autobús. \\ 
+    \hline
+    \multicolumn{3}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
 
 \subsubsection{Caracterización de los agentes}\label{subsubsec:agents_char_two}
+Esta sección cubre la caracterización completa de los dos agentes existentes en esta implementación. Aunque en esencia puedan resultar 
+similares, la caracterización completa sirve para ejemplificar qué atributos nuevos asumen estos al no existir el agente~\textit{pasajero}.
 
 
 \medskip
 \noindent\textbf{Agente autobús}
 
+La taxonomía y la justificación de las cuatro propiedades del concepto de~\textit{agencia débil} resultan iguales a la caracterización
+de la solución anterior, ya que este agente no varía su comportamiento.
+
+En relación con el rol, sigue manteniendo el rol de transitar a lo largo de la línea 
+embarcando y desembarcando pasajeros en cada parada, almacenando la información crítica necesaria para el volcado y 
+cálculo de los \textbf{índices de rendimiento} concretos.
+
+La diferencia radica tanto en su estado interno, definido por variables distintas, con el fin de acomodar la nueva realidad de inexistencia
+de agentes~\textit{pasajero}, como en la significativa reducción del número de protocolos implementados.
+La tabla resultante del estado interno del autobús resulta equivalente a la mostrada en la tabla~\ref{tab:estado_bus}, diferenciandose
+por la variable~\texttt{Ocupación actual}, que pasa de ser de tipo \textit{LIST} a ser de tipo \textit{INT} y la reducción del número
+de variables de~\texttt{Control de comunicación}, debido a la reducción de comunicación derivada de la eliminación de agentes.
+
+El papel que juega el agente~\textit{autobús} en los nuevos protocolos de comunicación se expone a continuación en la tabla
+~\ref{tab:interaccion_bus_two}.
+
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Papel del agente \textit{autobús} dentro de los distintos protocolos de comunicación existentes en la solución dos}\label{tab:interaccion_bus_two}}
+    {\centering
+    \begin{tabular}{|Q{0.20}|Q{0.14}|Q{0.30}|Q{0.36}|}
+    \hline
+    \textbf{Protocolo} & \textbf{Rol del agente} & \textbf{Descripción} & \textbf{Momento}  \\
+    \hline
+    \textit{Consulta tras llegada} & Iniciador & El agente \textit{autobús} se comunica con la parada a la que ha llegado solicitando
+    los campos relativos al proceso de embarque/apeo & Este protocolo se produce en el momento que rige la llegada de un agente~\textit{
+    autobús} a una parada.
+    \\ \hline
+    \textit{Actualización de recuento} & Iniciador & El agente, una vez resuelva el embarque/desembarque de pasajeros, se comunica con la parada para que
+    esta actualice su conocimiento sobre el número de pasajeros que han embarcado & Este protocolo se produce una vez el autobús haya finalizado su proceso
+    de actualización del estado interno relativo a la ocupación.
+    \\ \hline
+    \multicolumn{4}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
 \medskip
 \noindent\textbf{Agente parada}
 
+Este agente, al igual que en el caso del~\textit{autobús}, mantiene su clasificación taxonómica y la justificación del concepto débil 
+de agencia expuesto para la primera solución.
+
+El rol en este caso cambia, ya que no es el encargado de ejercer de mediador comunicativo entre agentes~\textit{autobús} y~\textit{pasajero}.
+Al no existir este segundo, su rol cambia a transmitir él mismo la información relativa al número de pasajeros existentes
+en la parada y cuántos deben realizar apeo. Al no existir la entidad~\textit{pasajero} con el fin de mantener la información
+relativa al tiempo de espera en parada, es este agente el encargado de acumular esa información para poder mantener el indicador
+de rendimiento correspondiente.
+
+El estado interno por tanto, sufre modificaciones significativas como para referenciarlo entero mediante la tabla~\ref{tab:estado_parada_two}.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Estado interno relevante del agente parada para la solución dos}\label{tab:estado_parada_two}}
+    {\centering
+    \begin{tabular}{|Q{0.23}|Q{0.23}|Q{0.31}|Q{0.23}|}
+        \hline
+        \textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Origen}  \\
+        \hline
+        Código de parada & INT & Referencia numérica relativa al código de la parada. & \textit{Input} \\ \hline
+        Pasajeros & INT & Número de pasajeros que se encuentran en la parada. & Ejecución \\ \hline
+        Pasajeros con tiempo & LIST & Lista que contiene tantas tuplas como valor del campo \texttt{Pasajeros}, donde para
+        cada una se guarda el índice y un valor relativo al momento de generación. & Ejecución \\ \hline
+        Control de comunicación & --- & Variables auxiliares de secuenciación de las conversaciones FIPA. & Ejecución \\ 
+        \hline
+        \multicolumn{4}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+En relación a los protocolos de comunicación, se presenta el papel de este agente en la tabla~\ref{tab:interaccion_parada_two}.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Papel del agente \textit{parada} dentro de los distintos protocolos de comunicación existentes en la solución dos}\label{tab:interaccion_parada_two}}
+    {\centering
+    \begin{tabular}{|Q{0.20}|Q{0.14}|Q{0.30}|Q{0.36}|}
+    \hline
+    \textbf{Protocolo} & \textbf{Rol del agente} & \textbf{Descripción} & \textbf{Momento}  \\
+    \hline
+    \textit{Consulta tras llegada} & Receptor & El agente~\textit{parada} recibe una consulta del autobús y responde indicando
+    el número de pasajeros existente en ese momento y el valor correspondiente con el desembarco. & Este protocolo se produce cuando
+    el agente~\textit{autobús} inicia el proceso comunicativo al llegar a la parada.
+    \\ \hline
+    \textit{Actualización de recuento} & Receptor & El agente~\textit{parada} recibe una solicitud indicando cuántos pasajeros
+    han realizado embarque efectivo. El agente actualiza sus campos \texttt{Pasajeros} y \texttt{Pasajeros con tiempo} & Este protocolo
+    se produce como finalización del intercambio comunicativo entre \textit{autobús}-\textit{parada}.
+    \\ \hline
+    \multicolumn{4}{l}{Fuente: elaboración propia.}
+    \end{tabular}}
+\end{table}
+
+
+\subsubsection{Protocolos de comunicación}\label{subsubsec:comms_protocols_two}
+
 \subsubsection{Entorno y nivel de mundo}\label{subsubsec:world_environment_two}
 
-\subsection{Ejecución y simulación}\label{subsec:exe_and_sim_two}
+\subsection{Ejecución y simulación}\label{subsec:exe_and_sim_two} 

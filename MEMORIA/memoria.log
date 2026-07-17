@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  16 JUL 2026 21:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  17 JUL 2026 14:04
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -965,57 +965,76 @@ File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgfnodepartsevenbox=\box96
 \pgfnodepartsixbox=\box97
 \pgfnodepartfivebox=\box98
-))) (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+))) (/usr/share/texlive/texmf-dist/tex/generic/dirtree/dirtree.sty
+Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
+ (/usr/share/texlive/texmf-dist/tex/generic/dirtree/dirtree.tex `dirtree' v0.32, 2012/12/11 (jcc)
+\DT@offset=\dimen324
+\DT@width=\dimen325
+\DT@sep=\dimen326
+\DT@all=\dimen327
+\DT@rulewidth=\dimen328
+\DT@dotwidth=\dimen329
+\DTbaselineskip=\dimen330
+\DT@counti=\count379
+\DT@countii=\count380
+\DT@countiii=\count381
+\DT@countiv=\count382
+\DT@indent=\dimen331
+\DT@parskip=\dimen332
+\DT@baselineskip=\dimen333
+)
+File: dirtree.tex 2012/12/11 v0.32 `dirtree' (jcc)
+) (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
  (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count379
+\lrq@indent=\count383
  (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count380
-\c@listtotal=\count381
-\c@listcount=\count382
-\c@liststart=\count383
-\c@liststop=\count384
-\c@citecount=\count385
-\c@citetotal=\count386
-\c@multicitecount=\count387
-\c@multicitetotal=\count388
-\c@instcount=\count389
-\c@maxnames=\count390
-\c@minnames=\count391
-\c@maxitems=\count392
-\c@minitems=\count393
-\c@citecounter=\count394
-\c@maxcitecounter=\count395
-\c@savedcitecounter=\count396
-\c@uniquelist=\count397
-\c@uniquename=\count398
-\c@refsection=\count399
-\c@refsegment=\count400
-\c@maxextratitle=\count401
-\c@maxextratitleyear=\count402
-\c@maxextraname=\count403
-\c@maxextradate=\count404
-\c@maxextraalpha=\count405
-\c@abbrvpenalty=\count406
-\c@highnamepenalty=\count407
-\c@lownamepenalty=\count408
-\c@maxparens=\count409
-\c@parenlevel=\count410
-\blx@tempcnta=\count411
-\blx@tempcntb=\count412
-\blx@tempcntc=\count413
-\c@blx@maxsection=\count414
-\blx@maxsegment@0=\count415
-\blx@notetype=\count416
-\blx@parenlevel@text=\count417
-\blx@parenlevel@foot=\count418
-\blx@sectionciteorder@0=\count419
-\blx@sectionciteorderinternal@0=\count420
-\blx@entrysetcounter=\count421
-\blx@biblioinstance=\count422
+\c@tabx@nest=\count384
+\c@listtotal=\count385
+\c@listcount=\count386
+\c@liststart=\count387
+\c@liststop=\count388
+\c@citecount=\count389
+\c@citetotal=\count390
+\c@multicitecount=\count391
+\c@multicitetotal=\count392
+\c@instcount=\count393
+\c@maxnames=\count394
+\c@minnames=\count395
+\c@maxitems=\count396
+\c@minitems=\count397
+\c@citecounter=\count398
+\c@maxcitecounter=\count399
+\c@savedcitecounter=\count400
+\c@uniquelist=\count401
+\c@uniquename=\count402
+\c@refsection=\count403
+\c@refsegment=\count404
+\c@maxextratitle=\count405
+\c@maxextratitleyear=\count406
+\c@maxextraname=\count407
+\c@maxextradate=\count408
+\c@maxextraalpha=\count409
+\c@abbrvpenalty=\count410
+\c@highnamepenalty=\count411
+\c@lownamepenalty=\count412
+\c@maxparens=\count413
+\c@parenlevel=\count414
+\blx@tempcnta=\count415
+\blx@tempcntb=\count416
+\blx@tempcntc=\count417
+\c@blx@maxsection=\count418
+\blx@maxsegment@0=\count419
+\blx@notetype=\count420
+\blx@parenlevel@text=\count421
+\blx@parenlevel@foot=\count422
+\blx@sectionciteorder@0=\count423
+\blx@sectionciteorderinternal@0=\count424
+\blx@entrysetcounter=\count425
+\blx@biblioinstance=\count426
 \labelnumberwidth=\skip87
 \labelalphawidth=\skip88
 \biblabelsep=\skip89
@@ -1027,9 +1046,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@bcfin=\read5
 \blx@bcfout=\write5
 \blx@langwohyphens=\language90
-\c@mincomprange=\count423
-\c@maxcomprange=\count424
-\c@mincompwidth=\count425
+\c@mincomprange=\count427
+\c@maxcomprange=\count428
+\c@mincompwidth=\count429
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def
@@ -1039,74 +1058,74 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'ieee.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count426
-\c@savedafterword=\count427
-\c@annotator=\count428
-\c@savedannotator=\count429
-\c@author=\count430
-\c@savedauthor=\count431
-\c@bookauthor=\count432
-\c@savedbookauthor=\count433
-\c@commentator=\count434
-\c@savedcommentator=\count435
-\c@editor=\count436
-\c@savededitor=\count437
-\c@editora=\count438
-\c@savededitora=\count439
-\c@editorb=\count440
-\c@savededitorb=\count441
-\c@editorc=\count442
-\c@savededitorc=\count443
-\c@foreword=\count444
-\c@savedforeword=\count445
-\c@holder=\count446
-\c@savedholder=\count447
-\c@introduction=\count448
-\c@savedintroduction=\count449
-\c@namea=\count450
-\c@savednamea=\count451
-\c@nameb=\count452
-\c@savednameb=\count453
-\c@namec=\count454
-\c@savednamec=\count455
-\c@translator=\count456
-\c@savedtranslator=\count457
-\c@shortauthor=\count458
-\c@savedshortauthor=\count459
-\c@shorteditor=\count460
-\c@savedshorteditor=\count461
-\c@labelname=\count462
-\c@savedlabelname=\count463
-\c@institution=\count464
-\c@savedinstitution=\count465
-\c@lista=\count466
-\c@savedlista=\count467
-\c@listb=\count468
-\c@savedlistb=\count469
-\c@listc=\count470
-\c@savedlistc=\count471
-\c@listd=\count472
-\c@savedlistd=\count473
-\c@liste=\count474
-\c@savedliste=\count475
-\c@listf=\count476
-\c@savedlistf=\count477
-\c@location=\count478
-\c@savedlocation=\count479
-\c@organization=\count480
-\c@savedorganization=\count481
-\c@origlocation=\count482
-\c@savedoriglocation=\count483
-\c@origpublisher=\count484
-\c@savedorigpublisher=\count485
-\c@publisher=\count486
-\c@savedpublisher=\count487
-\c@language=\count488
-\c@savedlanguage=\count489
-\c@origlanguage=\count490
-\c@savedoriglanguage=\count491
-\c@pageref=\count492
-\c@savedpageref=\count493
+\c@afterword=\count430
+\c@savedafterword=\count431
+\c@annotator=\count432
+\c@savedannotator=\count433
+\c@author=\count434
+\c@savedauthor=\count435
+\c@bookauthor=\count436
+\c@savedbookauthor=\count437
+\c@commentator=\count438
+\c@savedcommentator=\count439
+\c@editor=\count440
+\c@savededitor=\count441
+\c@editora=\count442
+\c@savededitora=\count443
+\c@editorb=\count444
+\c@savededitorb=\count445
+\c@editorc=\count446
+\c@savededitorc=\count447
+\c@foreword=\count448
+\c@savedforeword=\count449
+\c@holder=\count450
+\c@savedholder=\count451
+\c@introduction=\count452
+\c@savedintroduction=\count453
+\c@namea=\count454
+\c@savednamea=\count455
+\c@nameb=\count456
+\c@savednameb=\count457
+\c@namec=\count458
+\c@savednamec=\count459
+\c@translator=\count460
+\c@savedtranslator=\count461
+\c@shortauthor=\count462
+\c@savedshortauthor=\count463
+\c@shorteditor=\count464
+\c@savedshorteditor=\count465
+\c@labelname=\count466
+\c@savedlabelname=\count467
+\c@institution=\count468
+\c@savedinstitution=\count469
+\c@lista=\count470
+\c@savedlista=\count471
+\c@listb=\count472
+\c@savedlistb=\count473
+\c@listc=\count474
+\c@savedlistc=\count475
+\c@listd=\count476
+\c@savedlistd=\count477
+\c@liste=\count478
+\c@savedliste=\count479
+\c@listf=\count480
+\c@savedlistf=\count481
+\c@location=\count482
+\c@savedlocation=\count483
+\c@organization=\count484
+\c@savedorganization=\count485
+\c@origlocation=\count486
+\c@savedoriglocation=\count487
+\c@origpublisher=\count488
+\c@savedorigpublisher=\count489
+\c@publisher=\count490
+\c@savedpublisher=\count491
+\c@language=\count492
+\c@savedlanguage=\count493
+\c@origlanguage=\count494
+\c@savedoriglanguage=\count495
+\c@pageref=\count496
+\c@savedpageref=\count497
 \shorthandwidth=\skip95
 \shortjournalwidth=\skip96
 \shortserieswidth=\skip97
@@ -1130,19 +1149,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
-\c@textcitecount=\count494
-\c@textcitetotal=\count495
-\c@textcitemaxnames=\count496
-\c@biburlbigbreakpenalty=\count497
-\c@biburlbreakpenalty=\count498
-\c@biburlnumpenalty=\count499
-\c@biburlucpenalty=\count500
-\c@biburllcpenalty=\count501
+\c@textcitecount=\count498
+\c@textcitetotal=\count499
+\c@textcitemaxnames=\count500
+\c@biburlbigbreakpenalty=\count501
+\c@biburlbreakpenalty=\count502
+\c@biburlnumpenalty=\count503
+\c@biburlucpenalty=\count504
+\c@biburllcpenalty=\count505
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count502
+\c@smartand=\count506
 )
 Package biblatex Info: Trying to load bibliography style 'ieee'...
 Package biblatex Info: ... file 'ieee.bbx' found.
@@ -1160,8 +1179,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count503
-\c@bbx:relatedtotal=\count504
+\c@bbx:relatedcount=\count507
+\c@bbx:relatedtotal=\count508
 ))))
 Package biblatex Info: Trying to load citation style 'ieee'...
 Package biblatex Info: ... file 'ieee.cbx' found.
@@ -1171,10 +1190,10 @@ Package biblatex Info: Trying to load citation style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.cbx' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
 File: numeric-comp.cbx 2023/03/05 v3.19 biblatex citation style (PK/MW)
-\c@cbx@tempcnta=\count505
-\c@cbx@tempcntb=\count506
-\c@cbx@tempcntc=\count507
-\c@cbx@tempcntd=\count508
+\c@cbx@tempcnta=\count509
+\c@cbx@tempcntb=\count510
+\c@cbx@tempcntc=\count511
+\c@cbx@tempcntd=\count512
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
@@ -1202,7 +1221,7 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2024-01-22 L3 programming layer (loader) 
  (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count509
+\l__color_backend_stack_int=\count513
 \l__pdf_internal_box=\box99
 ))
 Package biblatex Info: ... and expl3
@@ -1222,40 +1241,40 @@ LaTeX Info: Redefining \% on input line 13.
 )
 \openout1 = `memoria.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 248.
-LaTeX Font Info:    Trying to load font information for OML+txmi on input line 248.
+LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 251.
+LaTeX Font Info:    Trying to load font information for OML+txmi on input line 251.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 248.
-LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 248.
-LaTeX Font Info:    Trying to load font information for OMS+txsy on input line 248.
+LaTeX Font Info:    ... okay on input line 251.
+LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 251.
+LaTeX Font Info:    Trying to load font information for OMS+txsy on input line 251.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 248.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 248.
-LaTeX Font Info:    ... okay on input line 248.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 248.
-LaTeX Font Info:    ... okay on input line 248.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 248.
-LaTeX Font Info:    ... okay on input line 248.
-LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 248.
-LaTeX Font Info:    Trying to load font information for OMX+txex on input line 248.
+LaTeX Font Info:    ... okay on input line 251.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 251.
+LaTeX Font Info:    ... okay on input line 251.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 251.
+LaTeX Font Info:    ... okay on input line 251.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 251.
+LaTeX Font Info:    ... okay on input line 251.
+LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 251.
+LaTeX Font Info:    Trying to load font information for OMX+txex on input line 251.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omxtxex.fd
 File: omxtxex.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 248.
-LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 248.
-LaTeX Font Info:    Trying to load font information for U+txexa on input line 248.
+LaTeX Font Info:    ... okay on input line 251.
+LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 251.
+LaTeX Font Info:    Trying to load font information for U+txexa on input line 251.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxexa.fd
 File: utxexa.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 248.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 248.
-LaTeX Font Info:    ... okay on input line 248.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 248.
-LaTeX Font Info:    ... okay on input line 248.
+LaTeX Font Info:    ... okay on input line 251.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 251.
+LaTeX Font Info:    ... okay on input line 251.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 251.
+LaTeX Font Info:    ... okay on input line 251.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1293,16 +1312,16 @@ LaTeX Font Info:    ... okay on input line 248.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count510
-\scratchdimen=\dimen324
+\scratchcounter=\count514
+\scratchdimen=\dimen334
 \scratchbox=\box100
-\nofMPsegments=\count511
-\nofMParguments=\count512
+\nofMPsegments=\count515
+\nofMParguments=\count516
 \everyMPshowfont=\toks63
-\MPscratchCnt=\count513
-\MPscratchDim=\dimen325
-\MPnumerator=\count514
-\makeMPintoPDFobject=\count515
+\MPscratchCnt=\count517
+\MPscratchDim=\dimen335
+\MPnumerator=\count518
+\makeMPintoPDFobject=\count519
 \everyMPtoPDFconversion=\toks64
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1310,7 +1329,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 248.
+Package hyperref Info: Link coloring ON on input line 251.
  (./memoria.out) (./memoria.out)
 \@outlinefile=\write6
 \openout6 = `memoria.out'.
@@ -1318,8 +1337,8 @@ Package hyperref Info: Link coloring ON on input line 248.
 
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-LaTeX Info: Redefining \. on input line 248.
-LaTeX Info: Redefining \% on input line 248.
+LaTeX Info: Redefining \. on input line 251.
+LaTeX Info: Redefining \% on input line 251.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: floatrow package is loaded.
@@ -1327,7 +1346,7 @@ Package caption Info: floatrow package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count516
+\c@lstlisting=\count520
 Package biblatex Info: Trying to load language 'spanish'...
 Package biblatex Info: ... file 'spanish.lbx' found.
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
@@ -1341,53 +1360,53 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'memoria.bbl' found.
  (./memoria.bbl)
-Package biblatex Info: Reference section=0 on input line 248.
-Package biblatex Info: Reference segment=0 on input line 248.
-LaTeX Font Info:    Trying to load font information for T1+txss on input line 255.
+Package biblatex Info: Reference section=0 on input line 251.
+Package biblatex Info: Reference segment=0 on input line 251.
+LaTeX Font Info:    Trying to load font information for T1+txss on input line 258.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txss.fd
 File: t1txss.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 11.39996pt on input line 255.
+(Font)              scaled to size 11.39996pt on input line 258.
 <imagenes/logo_UC3M.png, id=180, 456.2865pt x 45.99pt>
 File: imagenes/logo_UC3M.png Graphic file (type png)
 <use imagenes/logo_UC3M.png>
-Package pdftex.def Info: imagenes/logo_UC3M.png  used on input line 259.
+Package pdftex.def Info: imagenes/logo_UC3M.png  used on input line 262.
 (pdftex.def)             Requested size: 455.24408pt x 45.88531pt.
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 16.41594pt on input line 262.
+(Font)              scaled to size 16.41594pt on input line 265.
 LaTeX Font Info:    Font shape `T1/txss/m/sl' will be
-(Font)              scaled to size 16.41594pt on input line 266.
+(Font)              scaled to size 16.41594pt on input line 269.
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 23.63593pt on input line 270.
+(Font)              scaled to size 23.63593pt on input line 273.
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 19.70294pt on input line 274.
+(Font)              scaled to size 19.70294pt on input line 277.
 <imagenes/creativecommons.png, id=182, 338.76563pt x 118.19156pt>
 File: imagenes/creativecommons.png Graphic file (type png)
 <use imagenes/creativecommons.png>
-Package pdftex.def Info: imagenes/creativecommons.png  used on input line 285.
+Package pdftex.def Info: imagenes/creativecommons.png  used on input line 288.
 (pdftex.def)             Requested size: 119.50148pt x 41.69228pt.
 LaTeX Font Info:    Font shape `T1/txss/b/n' in size <12> not available
-(Font)              Font shape `T1/txss/bx/n' tried instead on input line 286.
+(Font)              Font shape `T1/txss/bx/n' tried instead on input line 289.
 LaTeX Font Info:    Font shape `T1/txss/bx/n' will be
-(Font)              scaled to size 11.39996pt on input line 286.
+(Font)              scaled to size 11.39996pt on input line 289.
  [1
 
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} <./imagenes/logo_UC3M.png> <./imagenes/creativecommons.png>]
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.298 \begin{abstract}
+l.301 \begin{abstract}
                        [1]
 LaTeX Font Info:    Font shape `T1/txr/b/n' in size <12> not available
-(Font)              Font shape `T1/txr/bx/n' tried instead on input line 298.
+(Font)              Font shape `T1/txr/bx/n' tried instead on input line 301.
 LaTeX Font Info:    Font shape `T1/txr/b/n' in size <14.4> not available
-(Font)              Font shape `T1/txr/bx/n' tried instead on input line 298.
+(Font)              Font shape `T1/txr/bx/n' tried instead on input line 301.
  [3]
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.323 \chapter
+l.326 \chapter
               *{Agradecimientos} % \chapter* evita que aparezca en el Ã­ndice [1] [5
 
 ] [6] (./memoria.toc
@@ -1467,7 +1486,7 @@ LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10> not available
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [8] [9] [10]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [11] [12] [13] [14] [15]
-<imagenes/montecarlo_convergence_occupation.png, id=729, 867.24pt x 361.35pt>
+<imagenes/montecarlo_convergence_occupation.png, id=744, 867.24pt x 361.35pt>
 File: imagenes/montecarlo_convergence_occupation.png Graphic file (type png)
 <use imagenes/montecarlo_convergence_occupation.png>
 Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 218.
@@ -1504,7 +1523,7 @@ Cap\'{\i }tulo 3.
 (./chapter/section_metodology/metodology.tex [23
 
 ] [24] [25]
-<imagenes/gantt_chart.png, id=848, 1001.6622pt x 351.9549pt>
+<imagenes/gantt_chart.png, id=863, 1001.6622pt x 351.9549pt>
 File: imagenes/gantt_chart.png Graphic file (type png)
 <use imagenes/gantt_chart.png>
 Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 97.
@@ -1523,7 +1542,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
  <./imagenes/gantt_chart.png>] [27
 
 ]
-<imagenes/regularidad.png, id=879, 435.87843pt x 445.665pt>
+<imagenes/regularidad.png, id=894, 435.87843pt x 445.665pt>
 File: imagenes/regularidad.png Graphic file (type png)
 <use imagenes/regularidad.png>
 Package pdftex.def Info: imagenes/regularidad.png  used on input line 170.
@@ -1531,7 +1550,7 @@ Package pdftex.def Info: imagenes/regularidad.png  used on input line 170.
  [28] [29 <./imagenes/regularidad.png>]) [30]
 Cap\'{\i }tulo 4.
 (./chapter/section_analysis/param_analysis.tex
-<imagenes/qgis_capture_e01_converted.png, id=903, 1861.95625pt x 1051.93pt>
+<imagenes/qgis_capture_e01_converted.png, id=918, 1861.95625pt x 1051.93pt>
 File: imagenes/qgis_capture_e01_converted.png Graphic file (type png)
 <use imagenes/qgis_capture_e01_converted.png>
 Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 47.
@@ -1539,13 +1558,13 @@ Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input 
  [31
 
 ]
-<imagenes/gama_shapefiles.png, id=910, 1862.96pt x 1054.94125pt>
+<imagenes/gama_shapefiles.png, id=925, 1862.96pt x 1054.94125pt>
 File: imagenes/gama_shapefiles.png Graphic file (type png)
 <use imagenes/gama_shapefiles.png>
 Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 55.
 (pdftex.def)             Requested size: 426.79135pt x 241.68166pt.
  [32 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
-<imagenes/image_tables_diagram.png, id=921, 331.2375pt x 785.93625pt>
+<imagenes/image_tables_diagram.png, id=936, 331.2375pt x 785.93625pt>
 File: imagenes/image_tables_diagram.png Graphic file (type png)
 <use imagenes/image_tables_diagram.png>
 Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 90.
@@ -1569,13 +1588,13 @@ LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
  [37] [38]
 LaTeX Font Info:    Font shape `T1/txr/b/it' in size <12> not available
 (Font)              Font shape `T1/txr/bx/it' tried instead on input line 351.
-<imagenes/to_A/comparison_ALL_vs_individual.png, id=968, 1156.32pt x 433.62pt>
+<imagenes/to_A/comparison_ALL_vs_individual.png, id=983, 1156.32pt x 433.62pt>
 File: imagenes/to_A/comparison_ALL_vs_individual.png Graphic file (type png)
 <use imagenes/to_A/comparison_ALL_vs_individual.png>
 Package pdftex.def Info: imagenes/to_A/comparison_ALL_vs_individual.png  used on input line 382.
 (pdftex.def)             Requested size: 426.79135pt x 160.04651pt.
  [39]
-<imagenes/to_B/comparison_ALL_vs_individual.png, id=974, 1156.32pt x 433.62pt>
+<imagenes/to_B/comparison_ALL_vs_individual.png, id=989, 1156.32pt x 433.62pt>
 File: imagenes/to_B/comparison_ALL_vs_individual.png Graphic file (type png)
 <use imagenes/to_B/comparison_ALL_vs_individual.png>
 Package pdftex.def Info: imagenes/to_B/comparison_ALL_vs_individual.png  used on input line 390.
@@ -1610,23 +1629,23 @@ See the caption package documentation for explanation.
 LaTeX Warning: Reference `fig:normality_toB_deagregated' on page 40 undefined on input line 419.
 
 [40 <./imagenes/to_A/comparison_ALL_vs_individual.png> <./imagenes/to_B/comparison_ALL_vs_individual.png>]
-<imagenes/to_A/heatmap_normality_ALL.png, id=990, 1156.32pt x 578.16pt>
+<imagenes/to_A/heatmap_normality_ALL.png, id=1005, 1156.32pt x 578.16pt>
 File: imagenes/to_A/heatmap_normality_ALL.png Graphic file (type png)
 <use imagenes/to_A/heatmap_normality_ALL.png>
 Package pdftex.def Info: imagenes/to_A/heatmap_normality_ALL.png  used on input line 431.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-<imagenes/to_A/heatmap_normality_individual.png, id=991, 1156.32pt x 578.16pt>
+<imagenes/to_A/heatmap_normality_individual.png, id=1006, 1156.32pt x 578.16pt>
 File: imagenes/to_A/heatmap_normality_individual.png Graphic file (type png)
 <use imagenes/to_A/heatmap_normality_individual.png>
 Package pdftex.def Info: imagenes/to_A/heatmap_normality_individual.png  used on input line 438.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
  [41 <./imagenes/to_A/heatmap_normality_ALL.png>]
-<imagenes/to_B/heatmap_normality_ALL.png, id=1001, 1156.32pt x 578.16pt>
+<imagenes/to_B/heatmap_normality_ALL.png, id=1016, 1156.32pt x 578.16pt>
 File: imagenes/to_B/heatmap_normality_ALL.png Graphic file (type png)
 <use imagenes/to_B/heatmap_normality_ALL.png>
 Package pdftex.def Info: imagenes/to_B/heatmap_normality_ALL.png  used on input line 445.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-<imagenes/to_B/heatmap_normality_individual.png, id=1002, 1156.32pt x 578.16pt>
+<imagenes/to_B/heatmap_normality_individual.png, id=1017, 1156.32pt x 578.16pt>
 File: imagenes/to_B/heatmap_normality_individual.png Graphic file (type png)
 <use imagenes/to_B/heatmap_normality_individual.png>
 Package pdftex.def Info: imagenes/to_B/heatmap_normality_individual.png  used on input line 452.
@@ -1641,13 +1660,13 @@ Overfull \hbox (35.28078pt too wide) in paragraph at lines 539--539
 [] [] 
  []
 
-<imagenes/to_A/fig1_global_pie_toA.png, id=1024, 826.287pt x 357.4956pt>
+<imagenes/to_A/fig1_global_pie_toA.png, id=1039, 826.287pt x 357.4956pt>
 File: imagenes/to_A/fig1_global_pie_toA.png Graphic file (type png)
 <use imagenes/to_A/fig1_global_pie_toA.png>
 Package pdftex.def Info: imagenes/to_A/fig1_global_pie_toA.png  used on input line 554.
 (pdftex.def)             Requested size: 426.79135pt x 184.6496pt.
 [45]
-<imagenes/to_B/fig1_global_pie_toB.png, id=1029, 817.6146pt x 357.4956pt>
+<imagenes/to_B/fig1_global_pie_toB.png, id=1044, 817.6146pt x 357.4956pt>
 File: imagenes/to_B/fig1_global_pie_toB.png Graphic file (type png)
 <use imagenes/to_B/fig1_global_pie_toB.png>
 Package pdftex.def Info: imagenes/to_B/fig1_global_pie_toB.png  used on input line 561.
@@ -1657,347 +1676,401 @@ Cap\'{\i }tulo 5.
 (./chapter/section_design/Simulation_design.tex [50
 
 ]
-Overfull \hbox (11.61494pt too wide) in paragraph at lines 43--45
+Overfull \hbox (11.61494pt too wide) in paragraph at lines 34--36
 []\T1/txr/m/n/12 Por úl-ti-mo, las ca-rac-te-rís-ti-cas cons-ti-tu-ti-vas del con-cep-to de agen-te, for-mu-la-das por Wool-
  []
 
-[51]
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 99--99
+
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 90--90
  [][] 
  []
 
 
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 99--99
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 90--90
  [][] 
  []
 
-[52]
-Overfull \hbox (1.99345pt too wide) in paragraph at lines 151--151
- [][] 
- []
-
-
-Overfull \hbox (1.99345pt too wide) in paragraph at lines 151--151
- [][] 
- []
-
-[53] [54]
-Overfull \hbox (1.99994pt too wide) in paragraph at lines 200--200
+[51] [52]
+Overfull \hbox (1.99345pt too wide) in paragraph at lines 142--142
  [][] 
  []
 
 
-Overfull \hbox (1.99994pt too wide) in paragraph at lines 200--200
+Overfull \hbox (1.99345pt too wide) in paragraph at lines 142--142
  [][] 
  []
 
-[55]
-Overfull \vbox (24.96797pt too high) has occurred while \output is active []
-
- [56]
-
-LaTeX Warning: Reference `subsubsec:world_enviroment_one_one' on page 57 undefined on input line 241.
-
-
-Overfull \hbox (1.99344pt too wide) in paragraph at lines 241--241
+[53]
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 191--191
  [][] 
  []
 
 
-LaTeX Warning: Reference `subsubsec:world_enviroment_one_one' on page 57 undefined on input line 241.
-
-
-Overfull \hbox (1.99344pt too wide) in paragraph at lines 241--241
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 191--191
  [][] 
  []
 
-[57]
-Overfull \hbox (1.99994pt too wide) in paragraph at lines 281--281
- [][] 
- []
+[54]
+Overfull \vbox (40.6079pt too high) has occurred while \output is active []
+
+ [55]
+
+LaTeX Warning: Reference `subsubsec:world_enviroment_one_one' on page 56 undefined on input line 232.
 
 
-Overfull \hbox (1.99994pt too wide) in paragraph at lines 281--281
- [][] 
- []
-
-[58] [59]
-Overfull \hbox (1.99345pt too wide) in paragraph at lines 320--320
+Overfull \hbox (1.99344pt too wide) in paragraph at lines 232--232
  [][] 
  []
 
 
-Overfull \hbox (1.99345pt too wide) in paragraph at lines 320--320
+LaTeX Warning: Reference `subsubsec:world_enviroment_one_one' on page 56 undefined on input line 232.
+
+
+Overfull \hbox (1.99344pt too wide) in paragraph at lines 232--232
  [][] 
  []
 
-[60]
-Overfull \hbox (1.99994pt too wide) in paragraph at lines 353--353
+[56]
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 272--272
  [][] 
  []
 
 
-Overfull \hbox (1.99994pt too wide) in paragraph at lines 353--353
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 272--272
+ [][] 
+ []
+
+[57] [58]
+Overfull \hbox (1.99345pt too wide) in paragraph at lines 311--311
  [][] 
  []
 
 
-Overfull \hbox (0.33667pt too wide) in paragraph at lines 359--367
+Overfull \hbox (1.99345pt too wide) in paragraph at lines 311--311
+ [][] 
+ []
+
+[59]
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 344--344
+ [][] 
+ []
+
+
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 344--344
+ [][] 
+ []
+
+
+Overfull \hbox (0.33667pt too wide) in paragraph at lines 350--358
 \T1/txr/m/n/12 to-co-los de co-mu-ni-ca-ción ba-sa-dos en los es-tán-da-res FIPA-Request [[][]24[][]] y FIPA-Query [[][]23[][]].
  []
 
-[61]
-Package svg Info: Last page of `./svg-inkscape/consulta_de_descenso_svg-tex.pdf' is 1 on input line 397.
+[60]
+Package svg Info: Last page of `./svg-inkscape/consulta_de_descenso_svg-tex.pdf' is 1 on input line 388.
  (./svg-inkscape/consulta_de_descenso_svg-tex.pdf_tex
-<./svg-inkscape/consulta_de_descenso_svg-tex.pdf, id=1151, page=1, 362.10281pt x 535.2497pt>
+<./svg-inkscape/consulta_de_descenso_svg-tex.pdf, id=1162, page=1, 362.10281pt x 535.2497pt>
 File: ./svg-inkscape/consulta_de_descenso_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/consulta_de_descenso_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/consulta_de_descenso_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 504.7029pt.
-) [62]
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 425--425
+) [61]
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 416--416
  [][] 
  []
 
 
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 425--425
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 416--416
  [][] 
  []
 
-[63 <./svg-inkscape/consulta_de_descenso_svg-tex.pdf>]
-Package svg Info: Last page of `./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf' is 1 on input line 446.
+[62 <./svg-inkscape/consulta_de_descenso_svg-tex.pdf>]
+Package svg Info: Last page of `./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf' is 1 on input line 437.
  (./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf_tex
-<./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, id=1201, page=1, 362.10281pt x 535.2497pt>
+<./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, id=1212, page=1, 362.10281pt x 535.2497pt>
 File: ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 504.7029pt.
-) [64]
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 472--472
+) [63]
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 463--463
  [][] 
  []
 
 
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 472--472
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 463--463
  [][] 
  []
 
-[65 <./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf>]
-Package svg Info: Last page of `./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf' is 1 on input line 490.
+[64 <./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf>]
+Package svg Info: Last page of `./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf' is 1 on input line 481.
  (./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf_tex
-<./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, id=1252, page=1, 362.10281pt x 550.30594pt>
+<./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, id=1263, page=1, 362.10281pt x 550.30594pt>
 File: ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 518.89987pt.
-) [66]
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 517--517
+) [65]
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 508--508
  [][] 
  []
 
 
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 517--517
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 508--508
  [][] 
  []
 
-[67 <./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf>]
-Package svg Info: Last page of `./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf' is 1 on input line 538.
+[66 <./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf>]
+Package svg Info: Last page of `./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf' is 1 on input line 529.
  (./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf_tex
-<./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, id=1298, page=1, 362.10281pt x 542.77782pt>
+<./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, id=1309, page=1, 362.10281pt x 542.77782pt>
 File: ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 511.80138pt.
-) [68]
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 567--567
+) [67]
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 558--558
  [][] 
  []
 
 
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 567--567
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 558--558
  [][] 
  []
 
-[69 <./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf>]
-Package svg Info: Last page of `./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf' is 1 on input line 586.
+[68 <./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf>]
+Package svg Info: Last page of `./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf' is 1 on input line 577.
  (./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf_tex
-<./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, id=1345, page=1, 362.10281pt x 475.02469pt>
+<./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, id=1356, page=1, 362.10281pt x 475.02469pt>
 File: ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 447.91493pt.
-) [70]
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 614--614
+) [69]
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 605--605
  [][] 
  []
 
 
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 614--614
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 605--605
  [][] 
  []
 
-[71 <./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf>]
-Overfull \hbox (5.44545pt too wide) in paragraph at lines 629--635
+[70 <./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf>]
+Overfull \hbox (5.44545pt too wide) in paragraph at lines 620--626
 []\T1/txr/m/n/12 Este úl-ti-mo pro-to-co-lo de co-mu-ni-ca-ción in-vo-lu-cra a los si-guien-tes agen-tes: \T1/txr/m/it/12 au-to-bús \T1/txr/m/n/12 ( \T1/txr/bx/n/12 ini-
  []
 
-[72]
-Package svg Info: Last page of `./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf' is 1 on input line 639.
+[71]
+Package svg Info: Last page of `./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf' is 1 on input line 630.
  (./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf_tex
-<./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, id=1404, page=1, 362.10281pt x 490.08093pt>
+<./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, id=1415, page=1, 362.10281pt x 490.08093pt>
 File: ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 462.11192pt.
 )
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 666--666
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 657--657
  [][] 
  []
 
 
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 666--666
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 657--657
  [][] 
  []
 
-[73 <./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf>] [74] [75] [76]
-<imagenes/ilustrativa_linealidad.png, id=1468, 425.30894pt x 279.6849pt>
+[72 <./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf>] [73] [74] [75]
+<imagenes/ilustrativa_linealidad.png, id=1478, 425.30894pt x 279.6849pt>
 File: imagenes/ilustrativa_linealidad.png Graphic file (type png)
 <use imagenes/ilustrativa_linealidad.png>
-Package pdftex.def Info: imagenes/ilustrativa_linealidad.png  used on input line 783.
+Package pdftex.def Info: imagenes/ilustrativa_linealidad.png  used on input line 774.
 (pdftex.def)             Requested size: 320.0935pt x 210.50572pt.
- [77 <./imagenes/ilustrativa_linealidad.png>]
-<imagenes/comparativa_tendencia.png, id=1480, 453.1329pt x 293.4162pt>
+ [76 <./imagenes/ilustrativa_linealidad.png>]
+<imagenes/comparativa_tendencia.png, id=1491, 453.1329pt x 293.4162pt>
 File: imagenes/comparativa_tendencia.png Graphic file (type png)
 <use imagenes/comparativa_tendencia.png>
-Package pdftex.def Info: imagenes/comparativa_tendencia.png  used on input line 836.
+Package pdftex.def Info: imagenes/comparativa_tendencia.png  used on input line 827.
 (pdftex.def)             Requested size: 320.0935pt x 207.27034pt.
- [78 <./imagenes/comparativa_tendencia.png>] [79]
-Overfull \hbox (1.60646pt too wide) in paragraph at lines 979--979
+ [77 <./imagenes/comparativa_tendencia.png>] [78]
+Overfull \hbox (1.60646pt too wide) in paragraph at lines 970--970
  [][] 
  []
 
 
-Overfull \hbox (1.60646pt too wide) in paragraph at lines 979--979
+Overfull \hbox (1.60646pt too wide) in paragraph at lines 970--970
  [][] 
  []
 
-[80] [81]
-Overfull \hbox (1.59995pt too wide) in paragraph at lines 1033--1033
+[79] [80]
+Overfull \hbox (1.59995pt too wide) in paragraph at lines 1024--1024
  [][] 
  []
 
 
-Overfull \hbox (1.59995pt too wide) in paragraph at lines 1033--1033
+Overfull \hbox (1.59995pt too wide) in paragraph at lines 1024--1024
  [][] 
  []
 
-[82]) [83]
+[81]
+Overfull \hbox (1.59995pt too wide) in paragraph at lines 1065--1065
+ [][] 
+ []
+
+
+Overfull \hbox (1.59995pt too wide) in paragraph at lines 1065--1065
+ [][] 
+ []
+
+[82] [83]
+
+LaTeX Warning: Reference `fig:futurafiguraderesutados' on page 84 undefined on input line 1143.
+
+[84]
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 1177--1177
+ [][] 
+ []
+
+
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 1177--1177
+ [][] 
+ []
+
+[85]
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 1222--1222
+ [][] 
+ []
+
+
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 1222--1222
+ [][] 
+ []
+
+
+Overfull \hbox (1.99345pt too wide) in paragraph at lines 1254--1254
+ [][] 
+ []
+
+
+Overfull \hbox (1.99345pt too wide) in paragraph at lines 1254--1254
+ [][] 
+ []
+
+[86]
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 1276--1276
+ [][] 
+ []
+
+
+Overfull \hbox (1.99994pt too wide) in paragraph at lines 1276--1276
+ [][] 
+ []
+
+[87]) [88]
 Cap\'{\i }tulo 6.
-[84
+[89
 
 ]
 Cap\'{\i }tulo 7.
-[85
+[90
 
 ]
 Cap\'{\i }tulo 8.
-(./chapter/section_budget/budget.tex) [86
+(./chapter/section_budget/budget.tex) [91
 
 ]
 Cap\'{\i }tulo 9.
-(./chapter/section_future_works/future.tex) [87
+(./chapter/section_future_works/future.tex) [92
 
 ]
 Cap\'{\i }tulo 10.
-[88
+[93
 
 ]
-Package csquotes Info: Disabling multilingual quotes on input line 479.
+Package csquotes Info: Disabling multilingual quotes on input line 482.
 
 
 Package csquotes Warning: Quote style 'british/english' not defined.
-(csquotes)                Ignoring command on input line 479.
+(csquotes)                Ignoring command on input line 482.
 
 
-Overfull \hbox (1.37985pt too wide) in paragraph at lines 481--481
+Overfull \hbox (1.37985pt too wide) in paragraph at lines 484--484
 \T1/txr/m/n/12 li-te-ra-tu-re re-view,^^Q \T1/txr/m/it/12 Trans-por-ta-tion Re-search Part C: Emer-ging Tech-no-lo-gies\T1/txr/m/n/12 , vol. 19,
  []
 
 
-Overfull \hbox (1.42937pt too wide) in paragraph at lines 481--481
+Overfull \hbox (1.42937pt too wide) in paragraph at lines 484--484
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
-[89
+[94
 
 
 ]
-Overfull \hbox (14.67084pt too wide) in paragraph at lines 481--481
+Overfull \hbox (14.67084pt too wide) in paragraph at lines 484--484
 \T1/txr/m/n/12 ci-fi-ca-tion,^^Q Foun-da-tion for In-te-lli-gent Phy-si-cal Agents, FI-PA Spe-ci-fi-ca-tion SC00027H,
  []
 
 
-Overfull \hbox (32.67084pt too wide) in paragraph at lines 481--481
+Overfull \hbox (32.67084pt too wide) in paragraph at lines 484--484
 \T1/txr/m/n/12 Spe-ci-fi-ca-tion,^^Q Foun-da-tion for In-te-lli-gent Phy-si-cal Agents, FI-PA Spe-ci-fi-ca-tion SC00026H,
  []
 
-[90]
-Overfull \hbox (5.85698pt too wide) in paragraph at lines 481--481
+[95]
+Overfull \hbox (5.85698pt too wide) in paragraph at lines 484--484
 \T1/txr/m/n/12 tro Li-ne 7,^^Q \T1/txr/m/it/12 Mo-de-lling\T1/txr/m/n/12 , vol. 7, n.[] 2, p. 58, 2026. \T1/txr/m/sc/12 doi\T1/txr/m/n/12 : [][]$\T1/txtt/m/n/12 10 . 3390 / modelling7020058$[][]\T1/txr/m/n/12 . 
  []
 
-[91]
-Overfull \hbox (2.62831pt too wide) in paragraph at lines 481--481
+[96]
+Overfull \hbox (2.62831pt too wide) in paragraph at lines 484--484
 \T1/txr/m/n/12 lling,^^Q en \T1/txr/m/it/12 AIP Con-fe-ren-ce Pro-cee-dings\T1/txr/m/n/12 , vol. 2423, AIP Pu-blishing, 2021, p. 020 035.
  []
 
 
-Overfull \hbox (4.97697pt too wide) in paragraph at lines 481--481
+Overfull \hbox (4.97697pt too wide) in paragraph at lines 484--484
 \T1/txr/m/n/12 Con-trol Ac-tions to Im-pro-ve Bus-Service Re-gu-la-rity,^^Q en \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce. ECAI
  []
 
 
-Overfull \hbox (11.55956pt too wide) in paragraph at lines 481--481
+Overfull \hbox (11.55956pt too wide) in paragraph at lines 484--484
 \T1/txr/m/it/12 Workshops\T1/txr/m/n/12 , O. Ger-va-si et al., eds., ép. Lec-tu-re No-tes in Com-pu-ter Scien-ce, vol. 15898,
  []
 
-[92] [93]
-Overfull \hbox (4.26741pt too wide) in paragraph at lines 481--481
+[97] [98]
+Overfull \hbox (4.26741pt too wide) in paragraph at lines 484--484
 []\T1/txr/m/n/12 W. G. Co-chran, ^^P  So-me Methods for Strengthe-ning the Com-mon Chi-Squared Tests,^^Q
  []
 
 
-Overfull \hbox (12.66684pt too wide) in paragraph at lines 481--481
+Overfull \hbox (12.66684pt too wide) in paragraph at lines 484--484
 []\T1/txr/m/it/12 OMG Uni-fied Mo-de-ling Lan-gua-ge (OMG UML) Spe-ci-fi-ca-tion, Ver-sion 1.4\T1/txr/m/n/12 , formal/01-
  []
 
 
-Overfull \hbox (2.67517pt too wide) in paragraph at lines 481--481
+Overfull \hbox (2.67517pt too wide) in paragraph at lines 484--484
 []\T1/txr/m/n/12 L. De-vro-ye, \T1/txr/m/it/12 Non-Uniform Ran-dom Va-ria-te Ge-ne-ra-tion\T1/txr/m/n/12 . New York: Springer-Verlag,
  []
 
-[94] [95] (./anex/anex_requirements/requirements.tex [96
+[99] [100] (./anex/anex_requirements/requirements.tex [101
 
-] [97] [98] [99] [100] [101] [102] [103]
-Overfull \hbox (3.0998pt too wide) in paragraph at lines 282--282
+] [102] [103] [104] [105] [106] [107] [108]
+Overfull \hbox (3.0998pt too wide) in paragraph at lines 304--304
 \T1/txr/bx/n/10.95 RD-07 ^^V AU-SEN-CIA DE DE-LI-BE-RA-CIÓN EN EL COM-POR-TA-MIEN-TO DE LOS AGEN-
  []
 
-[104] [105] [106]
+[109] [110] [111]
 LaTeX Font Info:    Font shape `T1/txr/b/it' in size <10.95> not available
-(Font)              Font shape `T1/txr/bx/it' tried instead on input line 345.
- [107]) [1]
+(Font)              Font shape `T1/txr/bx/it' tried instead on input line 367.
+ [112]) [1]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.493 \chapter
+l.496 \chapter
               *{Anexo B. Figuras complementarias del estudio de viabilidad d... [2] (./anex/anex_figures/operational.tex
-<imagenes/to_A/normality_stop_ALL.png, id=1681, 722.7pt x 578.16pt>
+<imagenes/to_A/normality_stop_ALL.png, id=1731, 722.7pt x 578.16pt>
 File: imagenes/to_A/normality_stop_ALL.png Graphic file (type png)
 <use imagenes/to_A/normality_stop_ALL.png>
 Package pdftex.def Info: imagenes/to_A/normality_stop_ALL.png  used on input line 7.
 (pdftex.def)             Requested size: 426.79135pt x 341.43785pt.
-<imagenes/to_A/normality_stop_individual.png, id=1682, 722.7pt x 578.16pt>
+<imagenes/to_A/normality_stop_individual.png, id=1732, 722.7pt x 578.16pt>
 File: imagenes/to_A/normality_stop_individual.png Graphic file (type png)
 <use imagenes/to_A/normality_stop_individual.png>
 Package pdftex.def Info: imagenes/to_A/normality_stop_individual.png  used on input line 14.
@@ -2010,7 +2083,7 @@ l.18
       [3
 
  <./imagenes/to_A/normality_stop_ALL.png>]
-<imagenes/to_B/normality_stop_ALL.png, id=1688, 722.7pt x 578.16pt>
+<imagenes/to_B/normality_stop_ALL.png, id=1738, 722.7pt x 578.16pt>
 File: imagenes/to_B/normality_stop_ALL.png Graphic file (type png)
 <use imagenes/to_B/normality_stop_ALL.png>
 Package pdftex.def Info: imagenes/to_B/normality_stop_ALL.png  used on input line 21.
@@ -2021,7 +2094,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
                    \relax 
 l.25 
       [4 <./imagenes/to_A/normality_stop_individual.png>]
-<imagenes/to_B/normality_stop_individual.png, id=1693, 722.7pt x 578.16pt>
+<imagenes/to_B/normality_stop_individual.png, id=1743, 722.7pt x 578.16pt>
 File: imagenes/to_B/normality_stop_individual.png Graphic file (type png)
 <use imagenes/to_B/normality_stop_individual.png>
 Package pdftex.def Info: imagenes/to_B/normality_stop_individual.png  used on input line 28.
@@ -2030,12 +2103,12 @@ Package pdftex.def Info: imagenes/to_B/normality_stop_individual.png  used on in
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.495 
+l.498 
        [5 <./imagenes/to_B/normality_stop_ALL.png>]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.498 \end{document}
+l.501 \end{document}
                      [6 <./imagenes/to_B/normality_stop_individual.png>] (./memoria.aux
 LaTeX Info: Redefining \sptext on input line 13.
 LaTeX Info: Redefining \. on input line 13.
@@ -2056,17 +2129,17 @@ Package logreq Info: Writing requests to 'memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 55232 strings out of 474222
- 1207891 string characters out of 5748734
- 2131428 words of memory out of 5000000
- 76146 multiletter control sequences out of 15000+600000
+ 55342 strings out of 474222
+ 1209734 string characters out of 5748734
+ 2134636 words of memory out of 5000000
+ 76239 multiletter control sequences out of 15000+600000
  660694 words of font info for 188 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,117p,1718b,3966s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (128 pages, 5169168 bytes).
+Output written on memoria.pdf (133 pages, 5195442 bytes).
 PDF statistics:
- 1860 PDF objects out of 2073 (max. 8388607)
- 371 named destinations out of 1000 (max. 500000)
+ 1912 PDF objects out of 2073 (max. 8388607)
+ 382 named destinations out of 1000 (max. 500000)
  539 words of extra memory for PDF output out of 10000 (max. 10000000)
 

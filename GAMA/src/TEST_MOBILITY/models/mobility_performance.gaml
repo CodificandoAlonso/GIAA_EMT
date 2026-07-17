@@ -12,12 +12,6 @@ model mobility_model
 
 
 
-//Unnecesary import since the routes_loader.gaml is fully implemented in this code
-//import "routes_loader.gaml"
-
-
-
-
 //--------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------GLOBAL_STATEMENT-----------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -128,6 +122,44 @@ global
 		return int(floor(ln(u) / ln(1 - p)));
 
 	} //End function sample_geometric
+	
+	
+	
+	/*
+	 * Global function to sample a value from a distribution descriptor
+	 * ["DistrType", Param1, Param2]. NORMAL samples are clamped to 0.0 as a
+	 * negative hourly value has no operational meaning.
+	 */
+	float sample_distribution(list distro) {
+		
+		if (distro[0] = "NORMAL") {
+			return max(0.0, gauss(float(distro[1]), float(distro[2])));
+		}
+		if (distro[0] = "NEGATIVE BINOMIAL") {
+			return float(sample_negative_binomial(float(distro[1]), float(distro[2])));
+		}
+		if (distro[0] = "GEOMETRICAL") {
+			return float(sample_geometric(float(distro[1])));
+		}
+		//"NO DATA" or unknown type
+		return 0.0;
+		
+	}//End function sample_distribution
+	
+	
+	
+	/*
+	 * World-level inference of the number of dropoffs for a given stop at the current TimeSlot.
+	 * The stop agent merely transmits this value through the FIPA reply; the knowledge is
+	 * synthesized here, consistently with the inference system of the passenger-agent solution.
+	 */
+	int infer_dropoffs(int stop_num) {
+		
+		int ts <- min(TimeSlot, 23);
+		
+		return int(floor(sample_distribution(global_distribution_values[stop_num][ts]["DropOffs"])));
+		
+	}//End function infer_dropoffs
 		
 
     
@@ -738,7 +770,7 @@ global
 	
 	
 	//#DEFINE. CHANGE THIS IN CASE THE SIMULATION HAS TO RUN ON LOWER/HIGHER ITERATIONS
-	float step <- 5 #seconds;
+	float step <- 2 #seconds;
 	
 
 	float time <- cycle * step;
@@ -810,74 +842,27 @@ global
 	 	
 	 	loop stop_iter over: all_unique_stops{
 	 		
-	 		list distribution_per_timeslot_boards;
-		 	list next_distribution_per_timeslot_boards;
 		 	float board_generation_ratio;
 		 	float next_board_generation_ratio;
 
 	 		if (TimeSlot < 23){
 			
-			//Loading the distros
-			distribution_per_timeslot_boards <- global_distribution_values[stop_iter.stopNum][TimeSlot]["Boards"];
-			
-			
-			//Loading the following distros
-			next_distribution_per_timeslot_boards <- global_distribution_values[stop_iter.stopNum][TimeSlot + 1]["Boards"];
-			
-			
 			//Infer the new and the following exact random values based on the distribution.
 
 			//Actual VAL
-			if(distribution_per_timeslot_boards[0] = "NORMAL"){
-				board_generation_ratio <- gauss(float(distribution_per_timeslot_boards[1]), float(distribution_per_timeslot_boards[2]));
-			}
-			if(distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
-				board_generation_ratio <- float(sample_negative_binomial(float(distribution_per_timeslot_boards[1]),
-					float(distribution_per_timeslot_boards[2])));			
-			}
-			if (distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
-				board_generation_ratio <- sample_geometric(float(distribution_per_timeslot_boards[1]));
-			}
-			if (distribution_per_timeslot_boards[0] = "NO DATA"){
-				board_generation_ratio <- 0.0;
-			}
+			board_generation_ratio <- sample_distribution(global_distribution_values[stop_iter.stopNum][TimeSlot]["Boards"]);
 
 		
 			//Following VAL
-			if(next_distribution_per_timeslot_boards[0] = "NORMAL"){
-				next_board_generation_ratio <- gauss(float(next_distribution_per_timeslot_boards[1]), float(next_distribution_per_timeslot_boards[2]));
-			}
-			if(next_distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
-				next_board_generation_ratio <- float(sample_negative_binomial(float(next_distribution_per_timeslot_boards[1]),
-					float(next_distribution_per_timeslot_boards[2])));			
-			}
-			if (next_distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
-				next_board_generation_ratio <- sample_geometric(float(next_distribution_per_timeslot_boards[1]));
-			}
-			if (next_distribution_per_timeslot_boards[0] = "NO DATA"){
-				next_board_generation_ratio <- 0.0;
-			}
+			next_board_generation_ratio <- sample_distribution(global_distribution_values[stop_iter.stopNum][TimeSlot + 1]["Boards"]);
 
 		}
 		else if (TimeSlot = 23){
 			
 			//Last TimeSlot, no next, but for no error will be 0.0
-			distribution_per_timeslot_boards <- global_distribution_values[stop_iter.stopNum][TimeSlot]["Boards"];
 			
 			//Actual VAL
-			if(distribution_per_timeslot_boards[0] = "NORMAL"){
-				board_generation_ratio <- gauss(float(distribution_per_timeslot_boards[1]), float(distribution_per_timeslot_boards[2]));
-			}
-			if(distribution_per_timeslot_boards[0] = "NEGATIVE BINOMIAL"){
-				board_generation_ratio <- float(sample_negative_binomial(float(distribution_per_timeslot_boards[1]),
-					float(distribution_per_timeslot_boards[2])));			
-			}
-			if (distribution_per_timeslot_boards[0] = "GEOMETRICAL"){
-				board_generation_ratio <- sample_geometric(float(distribution_per_timeslot_boards[1]));
-			}
-			if (distribution_per_timeslot_boards[0] = "NO DATA"){
-				board_generation_ratio <- 0.0;
-			}
+			board_generation_ratio <- sample_distribution(global_distribution_values[stop_iter.stopNum][TimeSlot]["Boards"]);
 			
 			//The next 0.0 as no TimeSlot 24
 			next_board_generation_ratio <- 0.0;
@@ -1665,35 +1650,9 @@ species stop skills: [fipa]  {
 			write "QUE PUÑETAAS";
 		}
 		
-		//THIS IS WRONG. THIS SHOULD BE GENERATED FROM THE SIM. In this case of performance, DropOff is just the indicator of how many it
-		//Decrease the occupation value.
-		
-		//Infer the number of passengers that are gonna drop off 
-		int dropoff_passengers;
-		
-		int ts <- min(TimeSlot, 23);
-		
-		if (global_distribution_values[stopNum][ts]["DropOffs"][0] = "NORMAL"){
-			
-			dropoff_passengers <- max(floor(gauss(float(global_distribution_values[stopNum][ts]["DropOffs"][1]),
-												float(global_distribution_values[stopNum][ts]["DropOffs"][2]))), 0);
-		}
-		if (global_distribution_values[stopNum][ts]["DropOffs"][0] = "NEGATIVE BINOMIAL"){
-			
-			dropoff_passengers <- max(floor(world.sample_negative_binomial(float(global_distribution_values[stopNum][ts]["DropOffs"][1]),
-												float(global_distribution_values[stopNum][ts]["DropOffs"][2]))), 0);
-			
-		}
-		if (global_distribution_values[stopNum][ts]["DropOffs"][0] = "GEOMETRICAL"){
-			
-			dropoff_passengers <- max(floor(world.sample_geometric(float(global_distribution_values[stopNum][ts]["DropOffs"][1]))), 0);
-			
-		}
-		
-		if (global_distribution_values[stopNum][ts]["DropOffs"][0] = "NO DATA"){
-			
-			dropoff_passengers <- 0;
-		}
+		//Infer the number of passengers that are gonna drop off. Synthesized at world level,
+		//the stop only transmits the value through the FIPA reply.
+		int dropoff_passengers <- world.infer_dropoffs(stopNum);
 		
 		//ANSWER BACK WITH FIPA PROTOCOL QUERY
 		do agree message: queryFromInitiator contents: ["Here is the passenger list"];
@@ -1815,4 +1774,3 @@ experiment test type: gui {
 
 experiment batch_1000 type: batch repeat: 1000 parallel: 16 until: empty(bus) {
 }
-
