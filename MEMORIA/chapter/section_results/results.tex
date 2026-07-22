@@ -1,0 +1,86 @@
+Este capítulo recoge los resultados obtenidos con el sistema desarrollado, abarcando tanto la validación del simulador frente a los datos
+operativos reales como la experimentación mediante modificación paramétrica de los escenarios. Para ello, se estructura en cuatro secciones.
+La primera, a modo introductorio, presenta el funcionamiento operativo del sistema completo. La segunda presenta los distintos indicadores de
+rendimiento (KPIs) considerados y su visualización para cada solución. La tercera aborda la validación operativa del simulador y la comparativa
+entre las dos soluciones presentadas en el capítulo anterior. Por último, la cuarta cubre la experimentación mediante modificación paramétrica
+del sistema, contrastando los resultados obtenidos frente a las hipótesis planteadas.
+
+\section{Funcionamiento operativo del sistema final}\label{sec:general_behaviour}
+Si bien el núcleo del presente trabajo lo constituye el simulador multiagente desarrollado sobre GAMA, su explotación práctica requiere de un medio
+que permita a un usuario no especializado configurar, lanzar y consultar simulaciones sin interactuar directamente con la plataforma.
+Con este propósito, y conforme a los requisitos definidos en el marco de la colaboración con la EMT~(recogidos en el anexo~\ref{anex:requirements}),
+el sistema final incorpora una interfaz web que actúa como capa intermedia entre el usuario y el simulador. Cabe destacar que dicha interfaz no 
+constituye un objetivo de investigación en sí misma, sino el instrumento mediante el cual se orquestan los lanzamientos y se visualizan los 
+resultados que se presentan a lo largo de este capítulo.
+
+La interfaz centraliza tres funciones: la parametrización de los escenarios de simulación, el lanzamiento y almacenamiento de las ejecuciones,
+y la visualización de los indicadores de rendimiento resultantes. Con el fin de garantizar la reproducibilidad del despliegue y eliminar
+dependencias del sistema anfitrión, el conjunto completo se distribuye sobre una imagen de \textit{Docker}, de modo que simulador, interfaz y
+persistencia de resultados se ejecutan de forma autocontenida.
+
+Los resultados presentados en las secciones posteriores derivan tanto de figuras como de instantáneas de dicha interfaz. La exposición acerca
+de cómo se visualiza cada indicador de forma individual se presenta a continuación en la siguiente sección.
+
+\section{Estructura y visualización de los KPIs}\label{sec:kpi_visualization}
+
+Manteniendo la estructura de métricas presentada en la sección~\ref{sec:kpi_extraction}, se presenta para cada categoría su
+correspondiente indicador mostrado en la interfaz. Cabe destacar que tanto las figuras generadas como los valores relativos a cada 
+indicador se computan una única vez al finalizar cada simulación, y no bajo demanda en el momento de la consulta. Este cómputo se 
+realiza para todas las combinaciones de filtrado posibles, por lo que el usuario final experimentará tiempos de respuesta prácticamente
+inmediatos en el muestreo de resultados. 
+
+De forma previa a la presentación de cada métrica, resulta imperioso remarcar que, con el objetivo de sintetizar alertas visuales
+para la detección de posibles puntos críticos, donde se estén dando resultados anómalos, se ha dispuesto de un sistema heurístico basado
+en umbrales que, mediante clasificación por colores, permita al usuario identificar dichos puntos para una rápida exploración de estos.
+Dicho sistema resulta implementado tanto en las \textbf{métricas a nivel de ruta} como en las \textbf{métricas a nivel de autobús}. En cada apartado
+correspondiente se expande la información relevante sobre los umbrales determinados.
+
+\subsection{Métricas a nivel general}
+
+\subsection{Métricas a nivel de ruta}
+
+\subsection{Métricas a nivel de autobús}
+
+
+% \subsection{Sistema de catalogación de resultados}
+% Resulta importante exponer el \textbf{criterio de identificación de resultados destacables} implementado para la interfaz.
+
+% Este consiste en una clasificación por colores según distintos parámetros, que, a modo de nivel de alerta visual, permiten identificar
+% posibles puntos donde se estén dando resultados anómalos. Para ello, se especifican valores a modo de frontera para cada uno de los cuatro
+% campos a estudiar.
+
+% Concretamente:
+
+% \begin{enumerate}
+%     \item \textit{Valor de regularidad}:
+
+%     Se establece el valor~\textbf{80} como valor mínimo requerido para no activar este indicador.
+
+%     \item \textit{Porcentaje de simulaciones con retraso}:
+    
+%     Se activa este indicador siempre que el indicador relativo a este campo para cada expedición de un un autobús muestre un porcentaje
+%     de réplicas con retraso \textbf{superior al 20\%}.
+
+%     \item \textit{Tiempo medio de retraso en la salida}:
+    
+%     Por otra parte y relativo al retraso en la salida, este indicador se activará siempre que 
+% \end{enumerate}
+
+
+% const ALERT_THRESHOLDS = {
+%   regularity_min:  80,   // Regularity_value < 80
+%   delay_pct_max:   20,   // Percentage_sims_delay_departure > 20%
+%   delay_secs_max: 300,   // Mean_Minutes_departure_delay > 300s (5 min)
+%   occupation_max:  60,   // Mean_Occupation_Percentage > 60%
+% };
+
+
+
+\section{Validación operativa y comparativa de soluciones}\label{sec:validation}
+
+
+
+\section{Experimentación paramétrica}\label{sec:experiments}
+
+
+

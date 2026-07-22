@@ -27,7 +27,7 @@ sección relativa a los agentes en el capítulo~\ref{chapter:state_of_art},~\tex
 defiende que la arquitectura 
 reactiva constituye una categoría completa de agencia por derecho propio, en la que el comportamiento inteligente emerge de 
 la interacción entre el agente y su entorno mediante reglas estímulo-respuesta, sin necesidad de un modelo simbólico interno 
-del mundo. En el caso concreto de la plataforma GAMA, este esquema de reglas se materializa de forma literal 
+de este. En el caso concreto de la plataforma GAMA, este esquema de reglas se materializa de forma literal 
 mediante el mecanismo de \textit{reflexes} condicionados, donde cada comportamiento del agente se activa únicamente cuando se 
 satisface una condición relativa al estado del entorno.
 
@@ -41,15 +41,15 @@ Esta implementación se caracteriza por incluir dentro del sistema la caracteriz
 generados en la simulación. Su comportamiento, como se muestra a continuación, supone un enfoque más fidedigno con la 
 realidad del escenario simulado. Esta sección, a su vez, se puede dividir en dos partes diferenciadas. La primera  
 cubre las características principales y las justificaciones de diseño de todos los tipos de agentes involucrados en esta simulación,
-la presentación formal y detallada de los protocolos de comunicación que existen y las características que rigen el mundo
-y el entorno. Posteriormente, se expone cómo funciona todo esto integrado en un ciclo de simulación, indicando cómo se realiza el 
+la presentación formal y detallada de los protocolos de comunicación que existen y las características que rigen el entorno.
+Posteriormente, se expone cómo funciona todo esto integrado en un ciclo de simulación, indicando cómo se realiza el 
 volcado de los datos para la posterior extracción de métricas de rendimiento.
 
 \subsection{Arquitectura de la solución}
 Con el fin de exponer de forma detallada las características que componen la arquitectura del sistema desarrollado, se ha dispuesto
 esta sección en tres subsecciones características: la primera relativa a la~\textit{caracterización de los agentes}; la segunda 
 referente a los distintos~\textit{protocolos de comunicación}, expresados mediante diagramas de flujo del
-estándar FIPA~\cite{fipa2002specs}; y por último~\textit{entorno y nivel de mundo}, encargado de exponer las características referentes
+estándar FIPA~\cite{fipa2002specs}; y por último~\textit{Características del entorno}, encargado de exponer la idiosincrasia referente
 al entorno en el que coexisten los agentes.
 
 
@@ -129,8 +129,8 @@ En la tabla~\ref{tab:estado_bus} se muestran aquellos campos más relevantes.
         \hline
         \textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Origen}  \\
         \hline
-        Código de vehículo & INT & Identificador del coche físico simulado & \textit{Input} \\ \hline
-        Cuadro de servicio & LIST & Lista de horas de salidas programadas & \textit{Input} \\ \hline
+        Código de vehículo & INT & Identificador del coche físico simulado & Entrada \\ \hline
+        Cuadro de servicio & LIST & Lista de horas de salidas programadas & Entrada \\ \hline
         Viajes completados & INT & Número total de salidas finalizadas & Ejecución \\ \hline
         Capacidad máxima & INT & Límite de 80 pasajeros & Constante \\ \hline
         Ocupación actual & LIST & Agentes pasajero a bordo en el ciclo & Ejecución \\ \hline
@@ -149,7 +149,7 @@ estado de \textit{detención}, que se corresponden con la carga/descarga de pasa
 una salida de cabecera. Por otra parte, el estado referente al movimiento únicamente se produce cuando el bus realiza 
 la transición entre paradas.
 
-Por último, este agente se puede considerar como el \textbf{núcleo} de la interacción del sistema, ya que resulta iniciador o receptor
+Por último, este agente se puede considerar como el \textbf{núcleo} de la interacción del sistema, ya que resulta iniciador o participante
 de cinco de los seis protocolos de comunicación existentes en esta solución. Dichos protocolos se realizan en su mayoría dentro del estado
 de \textit{detención} correspondiente con la carga/descarga en una parada, con la particularidad del primero, realizado instantes 
 antes del mismo. Se presenta a continuación la información relevante relativa al agente autobús de dichos
@@ -174,7 +174,7 @@ protocolos, relacionando estos con momentos internos del agente dentro del estad
     presencia. & Este protocolo se produce de forma paralela a la iniciación del protocolo~\textit{Solicitud de descenso}, coincidiendo
     con el momento de llegada a una parada. 
     \\ \hline
-    \textit{Solicitud de embarque} & Receptor & El agente \textit{autobús} recibe de cada pasajero presente en la parada una propuesta de subida al autobús.
+    \textit{Solicitud de embarque} & Participante & El agente \textit{autobús} recibe de cada pasajero presente en la parada una propuesta de subida al autobús.
     Según la capacidad de carga, acepta o rechaza dicha petición. & Este protocolo se produce mientras el autobús realiza su detención
     en la parada correspondiente. 
     \\ \hline
@@ -219,8 +219,8 @@ del ciclo de vida. La tabla~\ref{tab:estado_pasajero} muestra estos atributos.
         Autobús & AGENTE \textit{autobús} & Referencia del autobús en el que se encuentra & Ejecución \\ \hline
         Tiempo transcurrido en la parada & FLOAT & Tiempo transcurrido desde su generación hasta su embarque & Ejecución \\ \hline
         Deseo de bajarse & BOOL & Variable que sirve como referencia para saber si realizará desembarco en la siguiente parada.
-        Fijada por el mecanismo de selección de descensos definido a nivel de mundo (véase la sección~\enquote{\nameref{subsubsec:world_enviroment_one}})
-        & Mundo \\ \hline
+        Fijada por el mecanismo de selección de descensos definido a nivel global (véase la sección~\enquote{\nameref{subsubsec:world_enviroment_one}})
+        & Entorno \\ \hline
         Control de comunicación & --- & Variables auxiliares de secuenciación de las conversaciones FIPA & Ejecución \\ 
         \hline
         \multicolumn{4}{l}{Fuente: elaboración propia.}
@@ -232,7 +232,7 @@ o bien se localiza en un autobús o en una parada, sirviendo estos como
 identificadores perfectos de los dos estados relativos al comportamiento en los que se puede encontrar el agente, que resultan 
 ser: \textit{esperando en parada} y \textit{montado en autobús}.
 
-Con respecto a las interacciones entre agentes, este agente resulta tanto receptor como iniciador de los distintos protocolos en los
+Con respecto a las interacciones entre agentes, este agente resulta tanto participante como iniciador de los distintos protocolos en los
  que se encuentra involucrado. Dichos protocolos, así como el rol del agente y el momento característico en el 
  que suceden se muestran en la tabla
 ~\ref{tab:interaccion_pasajero}.
@@ -245,17 +245,17 @@ Con respecto a las interacciones entre agentes, este agente resulta tanto recept
     \hline
     \textbf{Protocolo} & \textbf{Rol del agente} & \textbf{Descripción} & \textbf{Momento}  \\
     \hline
-    \textit{Consulta de descenso} & Receptor & El agente recibe un mensaje del autobús indicando que este se aproxima a una parada.
+    \textit{Consulta de descenso} & Participante & El agente recibe un mensaje del autobús indicando que este se aproxima a una parada.
     Su respuesta de vuelta depende del valor del estado interno relativo al deseo de bajarse o si el autobús indica final de 
     trayecto. & Este protocolo se produce cuando 
     el agente se encuentra en el estado~\textit{montado en autobús}.
     \\ \hline
-    \textit{Solicitud de descenso} & Receptor & El agente recibe este mensaje cuando ha indicado en el protocolo anterior al autobús
+    \textit{Solicitud de descenso} & Participante & El agente recibe este mensaje cuando ha indicado en el protocolo anterior al autobús
     que realizará el apeo a la llegada de la parada correspondiente. & Este protocolo se produce de forma posterior a la resolución
     del protocolo pretérito.
     \\ \hline
 
-    \textit{Aviso de embarque} & Receptor & El agente \textit{pasajero} recibe un mensaje del agente \textit{parada} en el que se encuentra
+    \textit{Aviso de embarque} & Participante & El agente \textit{pasajero} recibe un mensaje del agente \textit{parada} en el que se encuentra
     indicando la llegada de un autobús. & Este protocolo se produce en el estado~\textit{esperando en parada}, previo a interacciones
     con otros agentes.
     \\ \hline
@@ -298,7 +298,7 @@ características principales de cada uno.
         \hline
         \textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Origen}  \\
         \hline
-        Código de parada & INT & Referencia numérica relativa al código de la parada & \textit{Input} \\ \hline
+        Código de parada & INT & Referencia numérica relativa al código de la parada & Entrada \\ \hline
         Pasajeros & LIST & Lista de agentes~\textit{pasajero} que se encuentran en la parada & Ejecución \\ \hline
         Control de comunicación & --- & Variables auxiliares de secuenciación de las conversaciones FIPA & Ejecución \\ 
         \hline
@@ -322,7 +322,7 @@ cómo estos le permiten alterar su estado interno.
     \hline
     \textbf{Protocolo} & \textbf{Rol del agente} & \textbf{Descripción} & \textbf{Momento}  \\
     \hline
-    \textit{Notificación de llegada} & Receptor & El agente~\textit{autobús} transmite mediante el inicio de este protocolo la información
+    \textit{Notificación de llegada} & Participante & El agente~\textit{autobús} transmite mediante el inicio de este protocolo la información
     relativa a que está preparado para iniciar el proceso de carga/descarga. & Este protocolo sirve para iniciar el cambio de estado hacia~
     \textit{estancia de autobús}.
     \\ \hline
@@ -330,7 +330,7 @@ cómo estos le permiten alterar su estado interno.
     se comunica con los agentes~\textit{pasajero} presentes con el fin de transferir el conocimiento y que inicien el proceso de carga.
     & Este protocolo se inicia una vez se resuelve el protocolo pretérito.
     \\ \hline
-    \textit{Actualización de recuento} & Receptor & Este agente recibe del~\textit{autobús} la información relativa a cuántos pasajeros ha embarcado
+    \textit{Actualización de recuento} & Participante & Este agente recibe del~\textit{autobús} la información relativa a cuántos pasajeros ha embarcado
     ~de forma efectiva, con el objetivo de que la parada registre los embarques efectivos y actualice sus contadores internos.
      & Este protocolo se realiza como paso último del proceso de~\textit{estancia de autobús}, suponiendo su fin
     la vuelta al estado~\textit{custodia de pasajeros}.
@@ -354,7 +354,7 @@ agente en los correspondientes mensajes, y el uso que se hace de cada uno.
 \medskip
 \noindent\textbf{Consulta de descenso}
 
-Este protocolo se realiza entre el agente~\textit{autobús} (\textbf{iniciador}) y el agente~\textit{pasajero} (\textbf{receptor}). 
+Este protocolo se realiza entre el agente~\textit{autobús} (\textbf{iniciador}) y el agente~\textit{pasajero} (\textbf{participante}). 
 Se trata de un protocolo basado en FIPA-Query. Dicho protocolo, formalmente presenta dos actos comunicativos de apertura:
  \textbf{query-ref} y \textbf{query-if}.
 Query-if solicita el valor de verdad de una proposición, mientras que por otro lado query-ref solicita el valor de una expresión referencial.
@@ -362,7 +362,7 @@ En el caso concreto de aplicación, este protocolo se establece con el fin de qu
 pasajero va a realizar el desembarco o no. Esto puede mapearse al valor de verdad de una proposición de forma binaria, ya que o bien se baja,
 o bien no se baja. Es por esto que este protocolo resulta enmarcado dentro del caso \textbf{query-if}. Cabe remarcar que debido a la
 casuística de la caracterización de los agentes, no se enmarca completamente bajo el protocolo completo, sino que la implementación 
-materializa únicamente aquellos escenarios alcanzables en el sistema. Al tratarse el caso concreto de una aplicación en el que los participantes
+materializa únicamente aquellos escenarios alcanzables en el sistema. Al tratarse el caso concreto de una aplicación en el que los interlocutores
 comparten vocabulario de contenidos y se presenta una acción determinista (siempre se va a contestar acorde a unas reglas y no existe condición
 legítima de rechazo), no se reflejan escenarios de rechazo de la petición, o de no entendimiento del mensaje, en concordancia con lo 
 implementado. 
@@ -417,11 +417,11 @@ que el agente~\textit{autobús} disponga del conocimiento de cuántos pasajeros 
 \medskip
 \noindent\textbf{Solicitud de descenso}
 
-Protocolo que involucra a los agentes: \textit{autobús}~(\textbf{iniciador}) y \textit{pasajero}~(\textbf{receptor}). Se trata de una
+Protocolo que involucra a los agentes: \textit{autobús}~(\textbf{iniciador}) y \textit{pasajero}~(\textbf{participante}). Se trata de una
 implementación basada en el protocolo FIPA-Request. Formalmente, se enmarca dentro de este debido a la lógica de objetivos a conseguir.
-Request es un protocolo que involucra cambios en el estado interno del receptor, a petición del iniciador. Como el objetivo de este
+Request es un protocolo que involucra cambios en el estado interno del participante, a petición del iniciador. Como el objetivo de este
 protocolo resulta de realizar de forma efectiva el apeo del pasajero del autobús correspondiente, esta acción acarrea cambios internos
-en el agente receptor, por lo que resulta efectiva la elección del protocolo. Este caso requiere de la previa resolución del protocolo
+en el agente participante, por lo que resulta efectiva la elección del protocolo. Este caso requiere de la previa resolución del protocolo
 anteriormente expuesto, ya que se realizará la interacción relativa a la~\textit{solicitud de descenso} a aquellos agentes \textit{pasajero}
 que resolvieran el protocolo anterior con una performativa afirmativa (descenso = verdadero). La figura~\ref{fig:solicitud_uno} muestra
 el correspondiente diagrama de interacción. Al igual que con el protocolo anterior, al no existir condición legítima de rechazo y presentar
@@ -466,7 +466,7 @@ que se encuentran a bordo, habilitando mayor capacidad efectiva para embarques.
 \noindent\textbf{Notificación de llegada}
 
 Protocolo que da inicio al proceso de embarque de pasajeros. Involucra a: agente~\textit{autobús~}(\textbf{iniciador}) y 
-agente~\textit{parada}~(~\textbf{receptor}). Se basa en el protocolo FIPA-Request, y de igual manera que los anteriores, reduce 
+agente~\textit{parada}~(~\textbf{participante}). Se basa en el protocolo FIPA-Request, y de igual manera que los anteriores, reduce 
 sus mensajes a los metodológicamente suficientes, porque al igual que especificado anteriormente, no existen motivos para rechazar
 las conversaciones y el vocabulario es común entre los agentes. A continuación, la figura~\ref{fig:notificacion_uno} presenta
 el diagrama de interacción de este protocolo.
@@ -514,7 +514,7 @@ agrupar ambas interacciones en un mismo protocolo, pero resultaba imperioso rema
 \noindent\textbf{Aviso de embarque}
 
 Este protocolo, como se ha mencionado de forma anterior, se inicia de forma paralela a la completitud del protocolo~\textit{notificación de llegada}.
-Como interlocutores se encuentran: agente~\textit{parada}~(~\textbf{iniciador}) y agente~\textit{pasajero}~(~\textbf{receptor}). Al igual
+Como interlocutores se encuentran: agente~\textit{parada}~(~\textbf{iniciador}) y agente~\textit{pasajero}~(~\textbf{participante}). Al igual
 que sus antecesores y con excepción del primer protocolo expuesto, se enmarca bajo FIPA-Request, y de la misma forma, los cursos alternativos
 correspondientes a no entendimiento o rechazo de la solicitud quedan omitidos. En la figura~\ref{fig:aviso_uno} se formaliza mediante su
 ~correspondiente diagrama de interacción.
@@ -546,7 +546,7 @@ Por consiguiente, el contenido del cuerpo de los mensajes se presenta en la tabl
     \textit{Agree} & Mensaje de aceptación & El agente~\textit{pasajero} envía un mensaje con la cadena de caracteres~\texttt{Ok} para
     indicar aceptación. \\ 
     \hline
-    \textit{Inform Done: Inform} & confirmación de recepción & Una vez el agente receptor guarda la referencia del~\textit{autobús} existente
+    \textit{Inform Done: Inform} & confirmación de recepción & Una vez el agente participante guarda la referencia del~\textit{autobús} existente
     en la parada, informa a la misma de la finalización del protocolo, confirmando el cambio en su estado interno. \\
     \hline
     \multicolumn{3}{l}{Fuente: elaboración propia.}
@@ -560,7 +560,7 @@ siguiente protocolo.
 \medskip
 \noindent\textbf{Solicitud de embarque}
 
-Protocolo de comunicación establecido entre los agentes:~\textit{pasajero}~(~\textbf{iniciador}) y~\textit{autobús}~(~\textbf{receptor})
+Protocolo de comunicación establecido entre los agentes:~\textit{pasajero}~(~\textbf{iniciador}) y~\textit{autobús}~(~\textbf{participante})
 usado para la resolución del embarque del pasajero. Basado en el protocolo FIPA-Request, este resulta el único de los protocolos donde
 existe metodológicamente una razón para implementar el rechazo de la solicitud. Este rechazo resulta derivado de la restricción de
 capacidad del agente~\textit{autobús}, ya que solicitudes de embarque cuando esta cota superior se ha alcanzado resultan en rechazos.
@@ -593,7 +593,7 @@ el contenido de los mensajes relativos a cada proceso comunicativo del mismo.
     \textit{Agree} & Mensaje de aceptación & Si el agente~\textit{autobús} posee capacidad para embarcar al agente iniciador, este aceptará
     la solicitud con el envío de una cadena de caracteres~\texttt{Boarded}. \\
     \hline
-    \textit{Inform Done: Inform} & Bienvenida & Una vez que el receptor haya realizado los cambios en su estado interno que adecúen al
+    \textit{Inform Done: Inform} & Bienvenida & Una vez que el participante haya realizado los cambios en su estado interno que adecúen al
     agente~\textit{pasajero}, este envía el mensaje final del protocolo con la cadena de caracteres~\texttt{Welcome}. \\
     \hline
     \multicolumn{3}{l}{Fuente: elaboración propia.}
@@ -613,7 +613,7 @@ a su código interno de parada, para posterior desagregación de los datos aplic
 \noindent\textbf{Actualización de recuento}
 
 Este último protocolo de comunicación involucra a los siguientes agentes:~\textit{autobús}~(~\textbf{iniciador}) y~\textit{parada}
-~(\textbf{receptor}). Enmarcado dentro de FIPA-Request, a diferencia del protocolo previo y en concordancia con la mayoría 
+~(\textbf{participante}). Enmarcado dentro de FIPA-Request, a diferencia del protocolo previo y en concordancia con la mayoría 
 de los implementados, este protocolo no incorpora aquellas vías alternativas de comunicación que metodológicamente no son necesarias
 para expresar el comportamiento de los agentes simulados. Por lo tanto, mensajes como el rechazo o el no entendimiento no son 
 implementados. La figura~\ref{fig:actualizacion_uno} formaliza el protocolo, mientras que la tabla~\ref{tab:actualizacion_uno}
@@ -644,7 +644,7 @@ expande los cuerpos de los mensajes.
     \textit{Agree} & Mensaje de aceptación & El agente~\textit{parada} confirma la recepción de los datos mediante la cadena de caracteres
     ~\texttt{Ok! Updating count}.\\
     \hline
-    \textit{Inform Done: Inform} & Contenido actualizado & Una vez que el agente receptor modifique su estado interno en cumplimiento 
+    \textit{Inform Done: Inform} & Contenido actualizado & Una vez que el agente participante modifique su estado interno en cumplimiento 
     con lo solicitado, devuelve la cadena de caracteres~\texttt{Done updating}, indicando al agente~\textit{autobús} iniciador del 
     protocolo la finalización de la solicitud.\\
     \hline
@@ -656,8 +656,8 @@ Este protocolo supone el final del ciclo de comunicaciones que garantiza de form
 una parada.
 
 
-\subsubsection{Entorno y nivel de mundo}\label{subsubsec:world_enviroment_one}
-Esta sección cubre las distintas características existentes que explícitamente no pertenecen al dominio de los agentes involucrados
+\subsubsection{Características del entorno}\label{subsubsec:world_enviroment_one}
+Esta sección cubre las distintas peculiaridades existentes que explícitamente no pertenecen al dominio de los agentes involucrados
 ya especificados. Desglosando, se pueden distinguir distintas especificaciones a cubrir.
 
 \medskip
@@ -667,7 +667,7 @@ Como ya se ha mencionado en previas ocasiones, el dominio de aplicación tempora
 de \textbf{un día}. Concretamente, la simulación inicia a las \textbf{05:00}~(formato \textit{veinticuatro horas}) y finaliza una vez
 el último agente~\textit{autobús} finalice toda su operativa de servicio. El transcurso del tiempo se realiza de forma~\textbf{discreta}
 en intervalos de~\textbf{dos segundos}. Cada iteración de la simulación supone un aumento del tiempo de esta cantidad. Se dispone 
-de variables a nivel de mundo que comprenden el mapeo de este tiempo discretizado en segundos a formato temporal \textit{HH:MM:SS},
+de variables globales que comprenden el mapeo de este tiempo discretizado en segundos a formato temporal \textit{HH:MM:SS},
 como de información relativa a la franja horaria comprendida en cada momento.
 
 Este paso del tiempo involucra una funcionalidad no resuelta en la caracterización del agente~\textit{autobús}, correspondiente
@@ -686,7 +686,7 @@ del conteo temporal, se almacenan estos valores en una lista global que contiene
 distribución. Es decir, para las distribuciones \textbf{normales}, se almacena $\mu$, $\sigma$, para las distribuciones \textbf{
 binomiales negativas} se almacenan $r$, $p$ y para las distribuciones \textbf{geométricas} se conserva únicamente $p$.
 
-La actualización se realiza también a nivel de mundo, mediante una acción que se ejecuta cada vez que el contador global
+La actualización se realiza también a nivel de entorno, mediante una acción que se ejecuta cada vez que el contador global
 discreto del tiempo $t \equiv 0 \pmod{3600}$, es decir, cada hora en punto. Dicha actualización resulta
 diferente según si se trata de un valor relativo a la carga o a la descarga. Esto se debe a la forma en la que se generan estos datos.
 La información relativa a la carga de pasajeros resulta del cálculo del valor agregado de todos los pasajeros que embarcan 
@@ -797,7 +797,7 @@ correspondiente a la franja siguiente. La función de generación resultante es:
 \end{equation}
 
 Esta construcción constituye una~\textbf{reconstrucción lineal conservativa} del perfil
-constante a trozos original~\cite{boneva1971}: por simetría de la recta
+constante a trozos original~\cite{boneva1971}, donde por simetría de la recta
 respecto al punto de pivote, el valor medio de $g_h$ en la franja coincide con
 $\delta_h$ y, por tanto, el área bajo ambas curvas es idéntica. La propiedad se
 mantiene de forma exacta en el dominio discreto: los incrementos evaluados en
@@ -860,7 +860,7 @@ Adicionalmente, cualquier asignación de este tipo convertiría el número de de
 sensible a la dinámica operativa de la simulación (retrasos, agrupamientos o rechazos por capacidad), lo que produciría 
 desviaciones sistemáticas respecto de las distribuciones de descarga, ajustadas precisamente por llegada.
 
-Por ello se impone un método pragmático que, mediante acciones del mundo, selecciona estocásticamente para cada momento
+Por ello se impone un método pragmático que, mediante acciones del entorno, selecciona estocásticamente para cada momento
 de descarga del agente~\textit{autobús} en la parada correspondiente, qué instancias de agentes~\textit{pasajero} deben 
 efectuar el desembarco para que la simulación refleje fielmente las distribuciones estudiadas en el capítulo
 ~\ref{chapter:param_analisys}.
@@ -875,7 +875,7 @@ irrelevante para lo que se quiere conseguir, que sigue siendo reflejar la realid
 estudiadas. Para que el agente~\textit{pasajero} sepa que realizará el desembarco, la acción global \textbf{altera} el valor
 del campo~\textit{deseo de bajarse} del agente. De nuevo, esta medida constituye una decisión pragmática coherente con el 
 descarte ya expuesto: dado que el destino individual de cada pasajero carece de respaldo en los datos estudiados, dicha 
-información no se atribuye a los agentes en su creación, sino que se sintetiza a nivel de mundo en el momento del descenso, 
+información no se atribuye a los agentes en su creación, sino que se sintetiza a nivel global en el momento del descenso, 
 único punto en el que existe una distribución empírica que la fundamente. El atributo~\textit{deseo de bajarse} actúa así como 
 interfaz entre la selección global y el comportamiento reactivo del agente, que conserva la ejecución del protocolo comunicativo
 correspondiente.
@@ -1242,7 +1242,7 @@ sí que resultan equivalentes en esta implementación.
         \hline
         \textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Origen}  \\
         \hline
-        Código de parada & INT & Referencia numérica relativa al código de la parada. & \textit{Input} \\ \hline
+        Código de parada & INT & Referencia numérica relativa al código de la parada. & Entrada \\ \hline
         Pasajeros & INT & Número de pasajeros que se encuentran en la parada. & Ejecución \\ \hline
         Pasajeros con tiempo & LIST & Lista que contiene tantas tuplas como valor del campo \texttt{Pasajeros}, donde para
         cada una se guarda el índice y un valor relativo al momento de generación. & Ejecución \\ \hline
@@ -1262,12 +1262,12 @@ En relación con los protocolos de comunicación, se presenta el papel de este a
     \hline
     \textbf{Protocolo} & \textbf{Rol del agente} & \textbf{Descripción} & \textbf{Momento}  \\
     \hline
-    \textit{Consulta tras llegada} & Receptor & El agente~\textit{parada} recibe una consulta del autobús y responde indicando
+    \textit{Consulta tras llegada} & Participante & El agente~\textit{parada} recibe una consulta del autobús y responde indicando
     el número de pasajeros existente en ese momento y el valor correspondiente con el desembarco (dicho valor se obtiene de una 
-    consulta a nivel de mundo, véase \nameref{subsubsec:world_environment_two}). & Este protocolo se produce cuando
+    consulta a nivel de entorno, véase \nameref{subsubsec:world_environment_two}). & Este protocolo se produce cuando
     el agente~\textit{autobús} inicia el proceso comunicativo al llegar a la parada.
     \\ \hline
-    \textit{Actualización de recuento} & Receptor & El agente~\textit{parada} recibe una solicitud indicando cuántos pasajeros
+    \textit{Actualización de recuento} & Participante & El agente~\textit{parada} recibe una solicitud indicando cuántos pasajeros
     han realizado embarque efectivo. El agente actualiza sus campos \texttt{Pasajeros} y \texttt{Pasajeros con tiempo} & Este protocolo
     se produce como finalización del intercambio comunicativo entre \textit{autobús}-\textit{parada}.
     \\ \hline
@@ -1285,9 +1285,9 @@ No obstante, de los dos protocolos existentes, es preciso formalizar estos, al i
 \medskip
 \noindent\textbf{Consulta tras llegada}
 
-Protocolo implementado entre: agente~\textit{autobús}~(~\textbf{iniciador}) y agente~\textit{parada}~(~\textbf{receptor}). Se trata 
+Protocolo implementado entre: agente~\textit{autobús}~(~\textbf{iniciador}) y agente~\textit{parada}~(~\textbf{participante}). Se trata 
 de un protocolo basado en FIPA-Query. Al tratarse de buscar el intercambio de información sin necesidad de que el 
-receptor altere su estado interno, este resulta idóneo. De la misma forma que en los protocolos ya presentados, al no existir
+participante altere su estado interno, este resulta idóneo. De la misma forma que en los protocolos ya presentados, al no existir
 justificaciones razonables de rechazo ni ser el objetivo del mismo, no se incluyen aquellos mensajes de la formalización del 
 protocolo que muestran esos caminos. En la figura~\ref{fig:consulta_tras_llegada} se muestra el diagrama de interacción de este.
 
@@ -1314,7 +1314,7 @@ protocolo que muestran esos caminos. En la figura~\ref{fig:consulta_tras_llegada
     \textit{Agree} & Mensaje de aceptación & El agente~\textit{parada} confirma la recepción de la consulta mediante la cadena de caracteres
     ~\texttt{Here is the passengers information}.\\
     \hline
-    \textit{Inform Result: Inform} & Información sobre embarque/apeo & Una vez que a nivel de mundo (véase 
+    \textit{Inform Result: Inform} & Información sobre embarque/apeo & Una vez que a nivel global (véase 
     \nameref{subsubsec:world_environment_two}) el agente parada obtiene la información sobre cuántos pasajeros deben desembarcar, transmite
     al autobús tanto esa información como el número de pasajeros que se han generado en esa parada.\\
     \hline
@@ -1323,13 +1323,14 @@ protocolo que muestran esos caminos. En la figura~\ref{fig:consulta_tras_llegada
 \end{table}
 
 Nótese cómo en este caso la parada transmite tanto el número de pasajeros como el parámetro referente a los descensos esperados. Este valor,
-~como se indica, se obtiene mediante una consulta a nivel de mundo, debido a que no se puede considerar que el agente~\textit{parada} tenga
+~como se indica, se obtiene mediante una consulta del entorno, debido a que no se puede considerar que el agente~\textit{parada} tenga
 el poder de disponer de ese conocimiento, únicamente es encargado de transmitirlo.
 
 \medskip
 \noindent\textbf{Actualización de recuento}
-Este segundo y último protocolo de esta solución surge de la interacción entre: agente~\textit{autobús}~(~\textbf{iniciador}) y agente~\textit{parada}~(~\textbf{receptor}).
-Basado en FIPA-Request, supone un método mediante el cual el agente iniciador insta al receptor a actualizar su estado interno conforme
+
+Este segundo y último protocolo de esta solución surge de la interacción entre: agente~\textit{autobús}~(~\textbf{iniciador}) y agente~\textit{parada}~(~\textbf{participante}).
+Basado en FIPA-Request, supone un método mediante el cual el agente iniciador insta al participante a actualizar su estado interno conforme
 a la información transmitida. El diagrama de interacción resulta equivalente al presentado para el protocolo homónimo de la solución uno
 ~(véase~\ref{fig:actualizacion_uno}). No obstante, las performativas resultantes de cada mensaje contienen información que difiere de este.
 La tabla~\ref{tab:actualizacion_dos} muestra la información asociada a cada mensaje.
@@ -1351,7 +1352,7 @@ La tabla~\ref{tab:actualizacion_dos} muestra la información asociada a cada men
     \textit{Agree} & Mensaje de aceptación & El agente~\textit{parada} confirma la recepción de los datos mediante la cadena de caracteres
     ~\texttt{Ok}.\\
     \hline
-    \textit{Inform Done: Inform} & Contenido actualizado & Una vez que el agente receptor modifique su estado interno en cumplimiento 
+    \textit{Inform Done: Inform} & Contenido actualizado & Una vez que el agente participante modifique su estado interno en cumplimiento 
     con lo solicitado, devuelve la cadena de caracteres~\texttt{Done}, indicando al agente~\textit{autobús} iniciador del 
     protocolo la finalización de la solicitud.\\
     \hline
@@ -1364,8 +1365,8 @@ comunicaciones con el agente~\textit{pasajero}, el flujo de información resulta
 igual en fondo para ambas soluciones.
 
 
-\subsubsection{Entorno y nivel de mundo}\label{subsubsec:world_environment_two}
-Esta implementación presenta dos diferencias significativas en lo que al nivel de mundo se refiere.
+\subsubsection{Características del entorno}\label{subsubsec:world_environment_two}
+Esta implementación presenta dos diferencias significativas en lo que al nivel global se refiere.
 La primera se presenta relativa a la generación de pasajeros y la segunda relativa a la inferencia de pasajeros que efectúan bajada.
 
 \medskip
@@ -1379,7 +1380,7 @@ en una lista de tuplas contenedora del instante de generación de cada entidad.
 \noindent\textbf{Sistema de inferencia de bajada de pasajeros}
 
 Al igual que en la simulación previa, la inferencia de selección de pasajeros, para cumplimentar los distintos requisitos de diseño
-relativos a que esta selección debe basarse en los datos empíricos de distribuciones estudiadas, se realiza a nivel de mundo.
+relativos a que esta selección debe basarse en los datos empíricos de distribuciones estudiadas, se realiza a nivel de entorno.
 En este caso, es el agente~\textit{parada} el encargado de invocar este método y transmitir, en el protocolo de comunicación
 ~\textit{Consulta tras llegada}, la información referente al valor inferido por el mundo. Esta constituye una solución pragmática, ya que
 en la realidad operativa no es la parada quien dispone de dicha información, sino cada pasajero individual tomando sus propias decisiones.
