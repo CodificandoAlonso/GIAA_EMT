@@ -2359,5 +2359,5 @@ experiment test type: gui {
 
 
 
-experiment batch_1000 type: batch repeat: 1000 parallel: 16 until: empty(bus) {
+experiment batch_1000 type: batch repeat: 1000 parallel: 12 until: empty(bus) {
 }

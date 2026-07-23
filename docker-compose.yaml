@@ -10,17 +10,36 @@ services:
       - 3000:3000
 
     volumes:
-
       - ./WEB_DEVEL/data/logs:/app/WEB_DEVEL/data/logs
-
       - ./WEB_DEVEL/data/known_data:/app/WEB_DEVEL/data/known_data:ro
-
 
     restart: unless-stopped
 
-    # Resource limits
+    # ------------------------------------------------------------------
+    # Anclaje de CPU (obligatorio para la comparacion energetica)
+    #
+    # 0-11 = los 12 hilos logicos de los 6 P-cores del i7-13620H.
+    # Excluye deliberadamente los E-cores (12-15), que topan a 3.6 GHz
+    # frente a 4.7-4.9 GHz y tienen otra energia por unidad de trabajo.
+    # Sin este anclaje, Intel Thread Director reparte los hilos de GAMA
+    # entre ambos tipos de nucleo en funcion del perfil de la carga: como
+    # la solucion uno y la dos tienen perfiles distintos, el reparto P/E
+    # podria diferir sistematicamente entre ellas y contaminar el ratio.
+    #
+    # Efecto lateral util: el servidor Node, el muestreador y el SO quedan
+    # en los E-cores y no roban ciclos a la carga medida.
+    #
+    # NOTA: 'cpuset' es una clave de nivel de servicio, NO va bajo 'deploy'.
+    # Sustituye a 'cpus: 12', que era cuota CFS (ancho de banda) y no
+    # fijaba en que CPUs se ejecuta nada.
+    # ------------------------------------------------------------------
+    cpuset: "0-11"
+
     deploy:
       resources:
         limits:
-          cpus: 12
+          # El heap de la JVM (-m 11264m en run_simulation.sh) debe caber
+          # aqui junto al off-heap y al servidor Node. La JVM ignora el
+          # cgroup cuando -Xmx es explicito, asi que la coherencia entre
+          # ambos valores es responsabilidad nuestra, no del runtime.
           memory: "14G"

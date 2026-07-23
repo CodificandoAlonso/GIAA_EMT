@@ -23,19 +23,35 @@ NC='\033[0m' # No Color
 
 BASE_DIR=$(cat ./.last_simulation)
 GAMA_SRC="/opt/headless/"
-MODEL_NAME="modelpassengersfinal_with_passenger_agents.gaml"
+MODEL_NAME="mobility_performance.gaml"
 BATCH_NAME="batch_1000"
 SIM_MODEL_PATH="${BASE_DIR}/TEST_MOBILITY/models/${MODEL_NAME}"
 
-HPC_CORES=16
+# [MOD] 16 -> 12: debe coincidir con el numero de CPUs del cpuset del
+# contenedor (0-11 = los 12 hilos logicos de los 6 P-cores). Con 16 hilos
+# contra 12 CPUs habria throttling CFS y varianza no determinista.
+HPC_CORES=12
 
+# [MOD] Heap: 16384m excedia el limite de 14G del contenedor. La JVM ignora
+# el cgroup cuando -Xmx es explicito, asi que el kernel habria matado el
+# contenedor a mitad de batch. 11G heap + ~1.5G off-heap + Node ~= 12.7G.
+# Este valor DEBE ser identico en ambas soluciones: el tamano de heap
+# determina la frecuencia de GC y por tanto el consumo energetico.
+JAVA_HEAP="11264m"
+
+# [MOD] SCRIPT_DIR se necesita ya en la Fase 1 (antes estaba en la Fase 6)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# [MOD] Directorio de monitorizacion. Cuelga de BASE_DIR, fuera de
+# TEST_MOBILITY/, asi que la Fase 4 no tiene que moverlo.
+MONITOR_DIR="${BASE_DIR}/MONITOR"
 
 LOG_FILE="${BASE_DIR}/log_result_${BASE_DIR: -15}.log"
 
 # ----------------------------- FUNCIONES ----------------------------------
 
 format_time() {
-    local total_seconds=$1
+    local total_seconds=${1:-0}
     local hours=$((total_seconds / 3600))
     local minutes=$(((total_seconds % 3600) / 60))
     local seconds=$((total_seconds % 60))
@@ -69,6 +85,13 @@ log_success() {
 cleanup_on_exit() {
     echo ""
     log_warning "Execution interrupted by user"
+    # [MOD] SIGTERM (no -9) al monitor: necesita capturarlo para volcar el
+    # summary. Con -9 se pierde la ejecucion interrumpida entera.
+    if [ -n "${MONITOR_PID:-}" ]; then
+        log_warning "TERMINATING MONITOR PROCESS... ${MONITOR_PID}"
+        kill -TERM $MONITOR_PID 2>/dev/null
+        wait $MONITOR_PID 2>/dev/null
+    fi
     log_warning "TRYING TO TERMINATE GAMA PROCESS... ${GAMA_PID}"
     kill -9 $GAMA_PID 2>/dev/null
     rm -rf ./.workspace*
@@ -86,6 +109,7 @@ log_info "  GAMA BATCH EXECUTION PIPELINE"
 log_info "=========================================="
 log_info "Batch experiment: $BATCH_NAME"
 log_info "HPC cores: $HPC_CORES"
+log_info "JVM heap: $JAVA_HEAP"
 log_info "Source project: $GAMA_PROJECT"
 log_info "Simulation directory: $BASE_DIR"
 
@@ -103,14 +127,34 @@ TOTAL_SIMS="${BATCH_NAME##*_}"
 # Results land inside the copied project
 RESULTS_DIR="$BASE_DIR/TEST_MOBILITY/logs/RESULTS"
 
-#debug flags disable to enable boost performance
-export JAVA_TOOL_OPTIONS="-Denable_debug=false -Denable_logging=false -XX:+UseG1GC"
+# [MOD] El directorio del monitor debe existir antes de exportar
+# JAVA_TOOL_OPTIONS, porque el log de GC escribe dentro.
+mkdir -p "$MONITOR_DIR"
 
-#-m 16gb of available RAM heap and HPC_CORES "threads" which parallelyzes the simulations
-"${GAMA_SRC}gama-headless.sh" -m 16384m -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" \
+# [MOD] -Xlog:gc* anadido. El pico de heap real del log de GC es exacto;
+# memory.peak del cgroup mide RSS del arbol completo. Son complementarios:
+# a 2s de muestreo se pierden picos transitorios de GC.
+#debug flags disable to enable boost performance
+export JAVA_TOOL_OPTIONS="-Denable_debug=false -Denable_logging=false -XX:+UseG1GC -Xlog:gc*:file=${MONITOR_DIR}/gc.log:time,uptime,level:filecount=1,filesize=100m"
+
+#-m heap and HPC_CORES "threads" which parallelyzes the simulations
+"${GAMA_SRC}gama-headless.sh" -m $JAVA_HEAP -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" \
 >> "$LOG_FILE" 2>&1 &
 
 GAMA_PID=$!
+
+# [MOD] Muestreador de recursos del contenedor (cgroup v2). Lee el cgroup,
+# no $GAMA_PID, porque gama-headless.sh es un wrapper y el trabajo real
+# esta en el proceso java hijo. --watch-pid solo sirve de red de seguridad.
+python3 "${SCRIPT_DIR}/monitor_resources.py" \
+    --outdir "$MONITOR_DIR" \
+    --results-dir "$RESULTS_DIR" \
+    --watch-pid "$GAMA_PID" \
+    --cores "$HPC_CORES" \
+    --interval 2 \
+    --label "${MODEL_NAME%.gaml}" >> "$LOG_FILE" 2>&1 &
+MONITOR_PID=$!
+log_info "Resource monitor started (PID $MONITOR_PID) -> $MONITOR_DIR"
 
 echo ""
 
@@ -157,6 +201,13 @@ echo ""
 wait $GAMA_PID
 GAMA_EXIT_CODE=$?
 
+# [MOD] Cerrar el monitor DESPUES de que GAMA termine, con SIGTERM para que
+# vuelque monitor_summary.json antes de salir.
+log_info "Stopping resource monitor..."
+kill -TERM "$MONITOR_PID" 2>/dev/null
+wait "$MONITOR_PID" 2>/dev/null
+MONITOR_PID=""
+
 BATCH_END=$(date +%s)
 BATCH_TIME=$((BATCH_END - BATCH_START))
 
@@ -186,6 +237,8 @@ mkdir -p "$BASE_DIR/PLOTS/to_B/stops"
 mkdir -p "$BASE_DIR/PLOTS/to_B/times"
 mkdir -p "$BASE_DIR/PLOTS/general"
 mkdir -p "$BASE_DIR/PLOTS/buses"
+# [MOD] Subdirectorio para las figuras de monitorizacion
+mkdir -p "$BASE_DIR/PLOTS/monitoring"
 
 # Keep the inputs that drove this simulation
 mv "$BASE_DIR/TEST_MOBILITY/includes"     "$BASE_DIR/includes"
@@ -216,6 +269,16 @@ log_info "Event CSV files generated: $EVENT_FILES"
 log_info "Passenger CSV files generated: $PASSENGER_FILES"
 log_info "Total results size: $TOTAL_SIZE"
 
+# [MOD] Validacion de la monitorizacion: si el summary no existe, el
+# batch no es utilizable para la comparacion energetica.
+if [ -f "$MONITOR_DIR/monitor_summary.json" ]; then
+    MONITOR_OK="yes"
+    log_success "Resource monitor summary present"
+else
+    MONITOR_OK="NO"
+    log_error "monitor_summary.json MISSING - this batch cannot be used for the energy comparison"
+fi
+
 # ------------------- FASE 6: DATA EXTRACTION & ANALYSIS -------------------
 
 EXTRACTION_START=$(date +%s)
@@ -225,7 +288,7 @@ log_info "--- Phase 6: Data Extraction & Analysis ---"
 # data_extractor.py uses os.getcwd() to resolve .last_simulation and all
 # relative paths, so it must be invoked from the bash_scripts directory
 # where it lives (same directory as this shell script).
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# [MOD] SCRIPT_DIR ya definido en el bloque de settings.
 
 # --- Dependency check ---
 REQUIRED_PACKAGES=("pandas" "numpy" "matplotlib" "scipy")
@@ -280,10 +343,12 @@ log_info "  $BASE_DIR/"
 log_info "  ├── RESULTS/          (simulation output CSVs)"
 log_info "  ├── EVENTS/           (event logs)"
 log_info "  ├── PASSENGERS/       (passenger wait-time logs)"
+log_info "  ├── MONITOR/          (resource timeseries, summary, GC log)"
 log_info "  ├── PLOTS/"
 log_info "  │   ├── to_A/         (occupation & time distribution plots)"
 log_info "  │   ├── to_B/         (occupation & time distribution plots)"
 log_info "  │   ├── general/      (aggregate occupation plots)"
+log_info "  │   ├── monitoring/   (CPU, memory, power & progress plots)"
 log_info "  │   ├── buses/        (per-bus per-trip plots + general_info.json)"
 log_info "  │   └── json_output_general_info.json"
 log_info "  ├── includes/         (frozen simulation parameters)"
@@ -299,14 +364,20 @@ echo "==========================================" | tee -a "$LOG_FILE"
 echo "     EXECUTION SUMMARY" | tee -a "$LOG_FILE"
 echo "==========================================" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
-printf "%-35s %s\n" "1. Pre-cleanup:" "$(format_time $CLEANUP_TIME)" | tee -a "$LOG_FILE"
+# [MOD] CLEANUP_TIME y SNAPSHOT_TIME vienen de prepare_simulation.sh, que es
+# OTRO proceso: sus variables no se heredan. Antes se imprimia "0s" en
+# silencio (falso positivo). Ahora se marca como no disponible.
+printf "%-35s %s\n" "1. Pre-cleanup:" "${CLEANUP_TIME:+$(format_time $CLEANUP_TIME)}${CLEANUP_TIME:-n/a (prepare_simulation.sh)}" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
-printf "%-35s %s\n" "2. Project snapshot:" "$(format_time $SNAPSHOT_TIME)" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "2. Project snapshot:" "${SNAPSHOT_TIME:+$(format_time $SNAPSHOT_TIME)}${SNAPSHOT_TIME:-n/a (prepare_simulation.sh)}" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "3. Batch execution:" "$(format_time $BATCH_TIME)" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - Exit code:" "$GAMA_EXIT_CODE" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - Result files:" "$RESULT_FILES" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - Total size:" "$TOTAL_SIZE" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "   - HPC cores:" "$HPC_CORES" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "   - JVM heap:" "$JAVA_HEAP" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "   - Monitor summary:" "$MONITOR_OK" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "4. Extract & cleanup:" "$(format_time $POST_CLEANUP_TIME)" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
