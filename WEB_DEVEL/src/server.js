@@ -257,7 +257,7 @@ app.get('/api/simulations/:id/inputs', (req, res) => {
   }
 
   try {
-    const buses = JSON.parse(fs.readFileSync(path.join(inputsPath, 'input_data_buses.json'), 'utf8'));
+    const buses = JSON.parse(fs.readFileSync(path.join(inputsPath, 'final_input.json'), 'utf8'));
 
     const parseCSVRows = (filepath) => {
       const content = fs.readFileSync(filepath, 'utf8');
@@ -310,7 +310,7 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
 
     // Write buses JSON
     if (buses) {
-      fs.writeFileSync(path.join(inputsPath, 'input_data_buses.json'), JSON.stringify(buses, null, 2));
+      fs.writeFileSync(path.join(inputsPath, 'final_input.json'), JSON.stringify(buses, null, 2));
     }
 
     const writeCSV = (filepath, rows) => {
@@ -420,7 +420,7 @@ app.get('/api/simulations/:id/plots-info', (req, res) => {
     const inputsPath = resolveInputsPath(simPath);
     if (inputsPath) {
       busSchedule = JSON.parse(
-        fs.readFileSync(path.join(inputsPath, 'input_data_buses.json'), 'utf8')
+        fs.readFileSync(path.join(inputsPath, 'final_input.json'), 'utf8')
       );
     }
   } catch (_) {}

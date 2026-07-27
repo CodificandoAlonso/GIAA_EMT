@@ -721,7 +721,7 @@ for stopcode in stops_list_toB:
 unique_bus = joint_dataframe_results["bus_code"].unique()
 
 
-input_json_route = f"{os.getcwd()}/{sim_dir}/includes/INPUTS/input_data_buses.json"
+input_json_route = f"{os.getcwd()}/{sim_dir}/includes/INPUTS/final_input.json"
 
 with open(input_json_route, "r") as f:
     input_json = json.load(f)

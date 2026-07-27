@@ -30,59 +30,215 @@ realiza para todas las combinaciones de filtrado posibles, por lo que el usuario
 inmediatos en el muestreo de resultados. 
 
 De forma previa a la presentación de cada métrica, resulta imperioso remarcar que, con el objetivo de sintetizar alertas visuales
-para la detección de posibles puntos críticos, donde se estén dando resultados anómalos, se ha dispuesto de un sistema heurístico basado
-en umbrales que, mediante clasificación por colores, permita al usuario identificar dichos puntos para una rápida exploración de estos.
-Dicho sistema resulta implementado tanto en las \textbf{métricas a nivel de ruta} como en las \textbf{métricas a nivel de autobús}. En cada apartado
-correspondiente se expande la información relevante sobre los umbrales determinados.
+para la detección de posibles puntos críticos donde se estén dando resultados anómalos, se ha dispuesto un sistema heurístico basado
+en umbrales que, mediante clasificación por colores, permite al usuario identificar dichos puntos para una rápida exploración de estos.
+Dicho sistema resulta implementado tanto en las \textbf{métricas a nivel de ruta} como en las \textbf{métricas a nivel de autobús}. 
+En cada apartado correspondiente se expande la información relevante sobre los umbrales determinados para cada tipo de 
+métrica.
 
+No obstante, cabe presentar el criterio de aplicación de esta escala. Para cada métrica, se realiza \textbf{una clasificación de colores
+por franja horaria}. Dicho resultado se obtiene de dividir las distintas activaciones de los indicadores entre el total de estos.
+De esta forma, se asocia este valor entre cero y uno con la categoría más cercana. Los resultados posibles son:
+\textit{Normal, Leve, Moderado, Alto, Crítico}, donde \textit{Normal} se corresponde con valor cero, equivalente a no presentar
+activo ningún indicador de alerta, y \textit{Crítico} con valor uno, presentando activos todos los indicadores de alerta posibles.
+En aquellos casos donde existan menos indicadores que posibles niveles de alerta, se reduce el número de posibilidades, siendo el mínimo
+una activación binaria (o \textit{Normal} o \textit{Crítico}).
 
-
-
-
-
-
+Una vez obtenidos los valores para cada franja horaria,~\textbf{se computa a nivel visual el color correspondiente con el nivel
+de alerta más elevado}. De esta forma no se opacan aquellos casos de interés en los casos donde exista un filtrado general a nivel
+temporal. La clasificación de colores se realiza en niveles discretos, asociando un color base a cada nivel dentro de una escala cromática
+discreta verde/rojo.
 
 
 \subsection{Métricas a nivel general}
+A nivel general, las métricas obtenidas se muestran en el panel principal una vez se selecciona una simulación finalizada.
+Un ejemplo del muestreo de dichas métricas, ya presentadas con anterioridad, se expone a continuación en la figura~\ref{fig:general_metrics}
+
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/general_results_simulations.png}
+\caption{Ejemplo de muestra de resultados de métricas a nivel general (valores sintéticos, únicamente ilustrativos).}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics}
+\end{figure}
+
+Nótese que aparte de los indicadores mencionados, se incluye información relativa asociada al número de autobuses físicos y
+al total de viajes realizados. Dichos valores no resultan de métricas operativas, pero permiten contextualizar posibles
+escenarios asociados a la variabilidad de estos campos.
 
 \subsection{Métricas a nivel de ruta}
+En relación al nivel de ruta, estos cubren tanto métricas asociadas a cada parada, como métricas asociadas al tramo 
+entre paradas. Esta familia de indicadores presenta tanto valores agregados a lo largo del día, como desagregados
+por franja horaria.
+
+La presentación de estos indicadores se realiza de forma interactiva. Se genera para la ruta simulada un mapa 
+bidimensional basado en los archivos de tipo~\textit{SHAPEFILE} expuestos en la sección referente al análisis de
+datos. Este mapa interactivo permite la selección de la parada/tramo correspondiente, y la información relativa a sus
+KPIs se muestra debajo del mapa. De esta forma se tiene un filtrado a dos escalas: la primera resulta de aplicar el 
+filtro \textit{general (agregado)}/ \textit{franja horaria} y la segunda resulta de seleccionar una parada/tramo concreto.
+
+La figura~\ref{fig:route_metrics_general} muestra cómo se visualiza este mapa para cada sentido dentro de la interfaz y 
+como se genera el filtro a dos niveles.
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/route_general_simulations.png}
+\caption{Ejemplo de muestra de resultados de métricas a nivel de ruta (valores sintéticos, únicamente ilustrativos).}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:route_metrics_general}
+\end{figure}
+
+\subsubsection{Métricas de las paradas}
+
+Dentro de los distintos KPIs asociados a las paradas, al seleccionar el filtro general se muestran los indicadores
+específicos para la parada de forma agregada, junto con una figura asociada relativa al valor medio de ocupación 
+del autobús por franja horaria al paso por la parada. Las Figuras~\ref{fig:occ_mean_timeslot} y~\ref{fig:kpi_stop_general} 
+muestran cómo se visualizan dentro de la interfaz.
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/occupation_per_timeslot.png}
+\caption{Ejemplo de muestra de resultados de figura de ocupación media por franja horaria al paso por parada
+    (valores sintéticos, únicamente ilustrativos).}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:occ_mean_timeslot}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/kpi_stop_general.png}
+\caption{Ejemplo de muestra de resultados de métricas por parada (valores sintéticos, únicamente ilustrativos).}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:kpi_stop_general}
+\end{figure}
+
+
+En el caso de desagregar por franja horaria, los resultados presentes en la figura~\ref{fig:kpi_stop_general} se visualizan
+de forma desagregada, mientras que en sustitución de la figura~\ref{fig:occ_mean_timeslot} se introduce una nueva figura
+que proyecta en el mismo plano la distribución obtenida del valor de~\textit{ocupación} frente al valor esperado. Dicho
+valor esperado resulta de las distribuciones obtenidas en el estudio de viabilidad de datos operacionales (véase la sección\ref{section:operational}). La figura resultante en cuestión (véase la figura~\ref{fig:occupation_comparative}) muestra además,
+si según la distancia y el coeficiente de Bhattacharyya~\cite{bhattacharyya1946divergence} resultan o no equivalentes.
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/occupation_comparaison.png}
+\caption{Ejemplo de muestra de comparativa de valores de ocupación (valores sintéticos, únicamente ilustrativos).}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:occupation_comparative}
+\end{figure}
+
+\subsubsection{Métricas de los tramos entre paradas}
+
+En el caso de la selección de los tramos entre paradas, como única métrica se muestra el tiempo medido en \textit{MM:SS}.
+Cuando el filtro indique agregación, se presenta únicamente el valor medio simulado frente al valor medio esperado. 
+En cambio, al filtrar por franja horaria, se presenta una figura como la resultante de la comparativa del valor de ocupación
+(véase la figura~\ref{fig:occupation_comparative}) pero presentando los valores de las distribuciones del tiempo simulado frente
+al esperado.
+
+\subsubsection{Umbrales de índice de alerta}
+
+Como se observa en la figura~\ref{fig:route_metrics_general}, se induce un patrón de colores en escala 
+cromática verde/rojo, congruente con el índice de alerta visual mencionado con anterioridad. A continuación, para los 
+indicadores de rendimiento relativos a este apartado se presentan los umbrales que definen el nivel de alerta.
+
+En relación a las paradas:
+\begin{enumerate}
+    \item \textbf{Ocupación}: 
+    
+    Valores superiores al \textbf{75}~\% de la ocupación total del autobús resultan en activación de este
+    indicador.
+    \item \textbf{Tiempo medio de espera}:
+    
+    Valores que sean superiores a \textbf{tres veces} el tiempo medio general resultan en activación de este indicador. Dicho tiempo medio 
+    resulta un parámetro de las \textbf{métricas a nivel general}.
+
+    \item \textbf{Pasajeros que no pueden embarcar}:
+    
+    Valores superiores a \textbf{cuatro pasajeros} en este campo resultan en la activación de este indicador.
+\end{enumerate}
+
+En relación al tiempo entre paradas, únicamente se presenta como umbral el valor asociado al propio tiempo, activando el indicador
+en aquellos casos donde el tiempo entre paradas sea \textbf{dos veces superior} al tiempo medio esperado para la franja.
+
 
 \subsection{Métricas a nivel de autobús}
+Dentro de este grupo de métricas, podemos encontrar una clasificación a dos niveles. Esta clasificación deriva
+de la selección del filtro: \textit{autobús físico}/~\textit{franja horaria}.
 
 
-% \subsection{Sistema de catalogación de resultados}
-% Resulta importante exponer el \textbf{criterio de identificación de resultados destacables} implementado para la interfaz.
+\subsubsection{Filtrado por autobús físico}
+Si expandimos la información asociada con el filtro~\textit{autobús físico} y la selección de una entidad,
+se presenta en la interfaz una tabla contenedora de todas las salidas de cabecera realizadas por dicho autobús.
 
-% Este consiste en una clasificación por colores según distintos parámetros, que, a modo de nivel de alerta visual, permiten identificar
-% posibles puntos donde se estén dando resultados anómalos. Para ello, se especifican valores a modo de frontera para cada uno de los cuatro
-% campos a estudiar.
+La figura~\ref{fig:bus_schedule} muestra un ejemplo de dicha tabla. En ella se presentan los distintos KPIs esperados.
 
-% Concretamente:
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/bus_schedule.png}
+\caption{Ejemplo de muestra de tabla de información asociada a un autobús físico (valores sintéticos, únicamente ilustrativos).}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bus_schedule}
+\end{figure}
 
-% \begin{enumerate}
-%     \item \textit{Valor de regularidad}:
+donde \texttt{PARADA} representa el código de parada asociado a la cabecera de la cual sale; \texttt{PROG.}
+la hora de salida programada; \texttt{SENTIDO} el sentido que lleva ese viaje;  \texttt{OCUP.} el porcentaje medio de ocupación,
+\texttt{SALIDA} la hora de salida media real del viaje; \texttt{T.VIAJE} la duración media del viaje y por último,
+\texttt{REGULARIDAD} introduce el valor de regularidad computado según lo establecido por la empresa.
 
-%     Se establece el valor~\textbf{80} como valor mínimo requerido para no activar este indicador.
 
-%     \item \textit{Porcentaje de simulaciones con retraso}:
+
+A la selección de una fila concreta, dicha información relativa se presenta de igual manera que otros KPIs, como se 
+expone en la figura~\ref{fig:kpi_bus_fisic}. Asociado a esta, se añade una figura que contiene la evolución de ocupación
+media a lo largo de las distintas paradas de la ruta. La figura~\ref{fig:evolution_route} ejemplifica esta.
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/kpi_bus_fisic.png}
+\caption{Ejemplo de muestra de resultados de valores a nivel de autobús físico (valores sintéticos, únicamente ilustrativos).}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:kpi_bus_fisic}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/evolution_route.png}
+\caption{Ejemplo de muestra de evolución de ocupación media a lo largo de las paradas de una ruta (valores sintéticos, únicamente ilustrativos).}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:evolution_route}
+\end{figure}
+
+\subsubsection{Filtrado por franja horaria}
+Este filtrado presenta los mismos campos presentes en la figura~\ref{fig:bus_schedule}, con la diferencia que la agregación 
+no se realiza por código de autobús, sino por autobuses que realizan salida de cabecera en la franja correspondiente. En congruencia
+con las métricas establecidas, a la selección de una expedición concreta, se muestran resultados similares a los presentados en las
+figuras~\ref{fig:kpi_bus_fisic} y~\ref{fig:evolution_route}.
+
+
+\subsubsection{Umbrales de índice de alerta}
+En el caso de las métricas a nivel de autobús, estas presentan unos umbrales distintos a los expuestos para la sección previa, por
+lo que resulta necesario su presentación.
+
+Dichos umbrales, tanto para los resultados filtrados por franja horaria, como para los resultados filtrados por autobús físico
+resultan similares, ya que se centran sobre una expedición concreta.
+
+Específicamente, para cada expedición:
+
+\begin{enumerate}
+    \item \textbf{Ocupación media}:
     
-%     Se activa este indicador siempre que el indicador relativo a este campo para cada expedición de un un autobús muestre un porcentaje
-%     de réplicas con retraso \textbf{superior al 20\%}.
+    Un valor de ocupación media superior al~\textbf{60}\% activa este indicador.
 
-%     \item \textit{Tiempo medio de retraso en la salida}:
+    \item \textbf{Valor de regularidad}:
     
-%     Por otra parte y relativo al retraso en la salida, este indicador se activará siempre que 
-% \end{enumerate}
+    Un valor de regularidad media inferior al~\textbf{80}\% activa este indicador.
 
+    \item \textbf{Porcentaje de simulaciones con retraso}:
+    
+    Si una expedición, en al menos el \textbf{20}\% de las réplicas presenta retraso en su salida, se activa este indicador.
 
-% const ALERT_THRESHOLDS = {
-%   regularity_min:  80,   // Regularity_value < 80
-%   delay_pct_max:   20,   // Percentage_sims_delay_departure > 20%
-%   delay_secs_max: 300,   // Mean_Minutes_departure_delay > 300s (5 min)
-%   occupation_max:  60,   // Mean_Occupation_Percentage > 60%
-% };
+    \item \textbf{Tiempo medio de retraso}:
+    
+    Si el valor asociado al tiempo medio de retraso, computado como la media de la resta entre la salida real y la salida esperada,
+    supera el valor de~\textbf{cinco minutos}, se activa este indicador.
+\end{enumerate}
 
-
+La visualización gráfica de su resultado se realiza a dos niveles. Cada expedición, en sus tablas correspondientes, presenta un 
+círculo que se colorea con el color correspondiente. En una capa superior, según el tipo de filtro, se selecciona el resultado
+con un valor más elevado, generando una mejor visualización de aquellas franjas/autobúses físicos que presentan alguna anomalía
+en sus resultados.
 
 \section{Validación operativa y comparativa de soluciones}\label{sec:validation}
 

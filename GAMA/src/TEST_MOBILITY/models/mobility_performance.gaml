@@ -1059,7 +1059,7 @@ global
     	do load_401;
 			
 		//Load the input bus departure scheduled times		
-		file input_json <- json_file("../includes/INPUTS/input_data_buses.json");
+		file input_json <- json_file("../includes/INPUTS/final_input.json");
 		map json_map <- input_json.contents;
 		
 		loop bus_key over: json_map.keys {
