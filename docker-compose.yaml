@@ -12,6 +12,7 @@ services:
     volumes:
       - ./WEB_DEVEL/data/logs:/app/WEB_DEVEL/data/logs
       - ./WEB_DEVEL/data/known_data:/app/WEB_DEVEL/data/known_data:ro
+      - ./WEB_DEVEL/bash_scripts:/app/WEB_DEVEL/bash_scripts
 
     restart: unless-stopped
 

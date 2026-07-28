@@ -104,6 +104,7 @@ async function loadInputs() {
     if (data.description.title)       document.getElementById('input-title').value       = data.description.title;
     if (data.description.description) document.getElementById('input-description').value = data.description.description;
     if (data.description.line)        document.getElementById('input-line').value         = data.description.line;
+    if (data.description.model)       document.getElementById('input-model').value = data.description.model || 'without_agents';
   }
 
   // Load direction names from general_info for the selected line
@@ -118,6 +119,7 @@ async function saveInputs() {
     title:       document.getElementById('input-title').value.trim(),
     description: document.getElementById('input-description').value.trim(),
     line:        document.getElementById('input-line').value,
+    model:       document.getElementById('input-model').value,
   };
 
   const body = {

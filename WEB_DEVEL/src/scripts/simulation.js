@@ -78,6 +78,11 @@ const ALERT_THRESHOLDS = {
   occupation_max:  60,   // Mean_Occupation_Percentage > 60%
 };
 
+const MODEL_LABELS = {
+  with_agents:    'Con agentes pasajero',
+  without_agents: 'Sin agentes pasajero',
+};
+
 // Returns 0..1: fraction of anomaly flags triggered for one trip's metrics
 function computeAlertScore(m) {
   if (!m) return 0;
@@ -203,6 +208,9 @@ async function loadDetail(simId) {
 
     document.getElementById('ds-runs').textContent = formatNum(detail.runCount);
 
+    document.getElementById('ds-model').textContent =
+      MODEL_LABELS[detail.model] || MODEL_LABELS['without_agents'];
+      
     if (detail.logContent) {
       const match = detail.logContent.match(/TOTAL PIPELINE TIME:\s*(.+)/);
       if (match) {

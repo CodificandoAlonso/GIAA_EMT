@@ -29,7 +29,7 @@ indicador se computan una única vez al finalizar cada simulación, y no bajo de
 realiza para todas las combinaciones de filtrado posibles, por lo que el usuario final experimentará tiempos de respuesta prácticamente
 inmediatos en el muestreo de resultados. 
 
-De forma previa a la presentación de cada métrica, resulta imperioso remarcar que, con el objetivo de sintetizar alertas visuales
+De forma previa a la presentación de cada métrica, y con el objetivo de sintetizar alertas visuales
 para la detección de posibles puntos críticos donde se estén dando resultados anómalos, se ha dispuesto un sistema heurístico basado
 en umbrales que, mediante clasificación por colores, permite al usuario identificar dichos puntos para una rápida exploración de estos.
 Dicho sistema resulta implementado tanto en las \textbf{métricas a nivel de ruta} como en las \textbf{métricas a nivel de autobús}. 
@@ -47,7 +47,11 @@ una activación binaria (o \textit{Normal} o \textit{Crítico}).
 Una vez obtenidos los valores para cada franja horaria,~\textbf{se computa a nivel visual el color correspondiente con el nivel
 de alerta más elevado}. De esta forma no se opacan aquellos casos de interés en los casos donde exista un filtrado general a nivel
 temporal. La clasificación de colores se realiza en niveles discretos, asociando un color base a cada nivel dentro de una escala cromática
-discreta verde/rojo.
+verde/rojo.
+
+Por último, es imperioso remarcar que los valores de estos indicadores se han establecido en concordancia y con retroalimentación
+de personal experto de la Empresa Municipal de Transportes, garantizando que estos cumplen unos criterios de coherencia y precisión
+operativa, y no se establecen de forma arbitraria por el equipo de diseño.
 
 
 \subsection{Métricas a nivel general}
@@ -113,7 +117,7 @@ muestran cómo se visualizan dentro de la interfaz.
 En el caso de desagregar por franja horaria, los resultados presentes en la figura~\ref{fig:kpi_stop_general} se visualizan
 de forma desagregada, mientras que en sustitución de la figura~\ref{fig:occ_mean_timeslot} se introduce una nueva figura
 que proyecta en el mismo plano la distribución obtenida del valor de~\textit{ocupación} frente al valor esperado. Dicho
-valor esperado se obtiene de las distribuciones obtenidas en el estudio de viabilidad de datos operacionales (véase la sección\ref{section:operational}). La figura resultante en cuestión (véase la figura~\ref{fig:occupation_comparative}) muestra además,
+valor esperado se obtiene de las distribuciones obtenidas en el estudio de viabilidad de datos operacionales (véase la sección~\ref{section:operational}). La figura resultante en cuestión (figura~\ref{fig:occupation_comparative}) muestra además,
 si según la distancia y el coeficiente de Bhattacharyya~\cite{bhattacharyya1946divergence} resultan o no equivalentes.
 
 \begin{figure}[H]
@@ -176,7 +180,7 @@ La figura~\ref{fig:bus_schedule} muestra un ejemplo de dicha tabla. En ella se p
 \end{figure}
 
 donde \texttt{PARADA} representa el código de parada asociado a la cabecera de la cual sale; \texttt{PROG.}
-la hora de salida programada; \texttt{SENTIDO} el sentido que lleva ese viaje;  \texttt{OCUP.} el porcentaje medio de ocupación,
+la hora de salida programada; \texttt{SENTIDO} el sentido que lleva ese viaje; \texttt{OCUP.} el porcentaje medio de ocupación;
 \texttt{SALIDA} la hora de salida media real del viaje; \texttt{T.VIAJE} la duración media del viaje y por último,
 \texttt{REGULARIDAD} introduce el valor de regularidad computado según lo establecido por la empresa.
 
@@ -209,7 +213,7 @@ figuras~\ref{fig:kpi_bus_fisic} y~\ref{fig:evolution_route}.
 
 \subsubsection{Umbrales de índice de alerta}
 En el caso de las métricas a nivel de autobús, estas presentan unos umbrales distintos a los expuestos para la sección previa, por
-lo que resulta necesario su presentación.
+lo que resulta necesaria su presentación.
 
 Dichos umbrales, tanto para los resultados filtrados por franja horaria, como para los resultados filtrados por autobús físico
 resultan similares, ya que se centran sobre una expedición concreta.
@@ -236,15 +240,13 @@ Específicamente, para cada expedición:
 \end{enumerate}
 
 La visualización gráfica de su resultado se realiza a dos niveles. Cada expedición, en sus tablas correspondientes, presenta un 
-círculo que se colorea con el color correspondiente. En una capa superior, según el tipo de filtro, se selecciona el resultado
+círculo que se colorea con el color correspondiente (ejemplificado en figura~\ref{fig:bus_schedule}). En una capa superior, según el tipo de filtro, se selecciona el resultado
 con un valor más elevado, generando una mejor visualización de aquellas franjas/autobuses físicos que presentan alguna anomalía
 en sus resultados.
 
 \section{Validación operativa y comparativa de soluciones}\label{sec:validation}
-
-
+Esta sección presenta los resultados referentes a la validación operativa. Dicha validación consiste en simular un escenario donde
+no se alteren los valores relacionados con distribuciones de embarque/apeo, y donde la operativa de autobuses dispuesta sea congruente
+con la establecida de referencia para un día real de servicio.
 
 \section{Experimentación paramétrica}\label{sec:experiments}
-
-
-

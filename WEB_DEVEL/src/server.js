@@ -15,6 +15,13 @@ const PAGES_DIR = path.join(__dirname, 'pages');
 const IMGS_DIR = path.join(__dirname,'..', 'img');
 
 
+const GAMA_MODELS = {
+  with_agents:    'modelpassengersfinal_with_passenger_agents.gaml',
+  without_agents: 'mobility_performance.gaml',
+};
+const DEFAULT_MODEL_KEY = 'without_agents';
+
+
 app.use(express.json({ limit: '100mb' }));
 app.use('/styles', express.static(path.join(__dirname, 'styles')));
 app.use('/scripts', express.static(path.join(__dirname, 'scripts')));
@@ -53,10 +60,10 @@ function resolveInputsPath(simPath) {
 // Parse description.txt: `title "..."`, `description "..."`, `line "..."`
 function parseDescription(simPath) {
   const descPath = path.join(simPath, 'description.txt');
-  if (!fs.existsSync(descPath)) return { title: null, description: null, line: null };
+  if (!fs.existsSync(descPath)) return { title: null, description: null, line: null, model: null };
   try {
     const lines = fs.readFileSync(descPath, 'utf8').split('\n');
-    let title = null, description = null, line = null;
+    let title = null, description = null, line = null, model = null;
     for (const rawLine of lines) {
       const sp = rawLine.indexOf(' ');
       if (sp === -1) continue;
@@ -66,10 +73,11 @@ function parseDescription(simPath) {
       if (key === 'title') title = val;
       else if (key === 'description') description = val;
       else if (key === 'line') line = val;
+      else if (key === 'model') model = val;
     }
-    return { title, description, line };
+    return { title, description, line, model };
   } catch (_) {
-    return { title: null, description: null, line: null };
+    return { title: null, description: null, line: null, model: null };
   }
 }
 
@@ -106,8 +114,8 @@ app.get('/api/simulations', (req, res) => {
         else{ 
           status = 'En progreso';
         }
-        const { title, description } = parseDescription(simPath);
-        return { id, datetime, runCount, hasCharts, title, description, status };
+        const { title, description, model} = parseDescription(simPath);
+        return { id, datetime, runCount, hasCharts, title, description, status, model };
       })
       .sort((a, b) => b.id.localeCompare(a.id));
 
@@ -166,8 +174,8 @@ app.get('/api/simulations/:id', (req, res) => {
     datetime = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)} ${t.slice(0, 2)}:${t.slice(2, 4)}:${t.slice(4, 6)}`;
   }
 
-  const { title, description } = parseDescription(simPath);
-  res.json({ id, datetime, runCount, charts, logContent, title, description });
+  const { title, description, model } = parseDescription(simPath);
+  res.json({ id, datetime, runCount, charts, logContent, title, description , model});
 });
 
 
@@ -306,6 +314,7 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
     if (description?.title)       descLines.push(`title "${description.title}"`);
     if (description?.description) descLines.push(`description "${description.description}"`);
     descLines.push(`line ${description?.line || 401}`); //HARDCODDED
+    descLines.push(`model ${description?.model || DEFAULT_MODEL_KEY}`);
     fs.writeFileSync(path.join(simPath, 'description.txt'), descLines.join('\n') + '\n');
 
     // Write buses JSON
@@ -351,10 +360,16 @@ app.post('/api/simulations/:id/run', (req, res) => {
   const lastSimFile = path.join(bashScriptsDir, '.last_simulation');
   fs.writeFileSync(lastSimFile, `../data/logs/${id}\n`);
 
+  // Resolve the chosen GAML model from description.txt against the allowlist and
+  // hand it to the bash scripts via GAMA_MODEL_NAME.
+  const { model: modelKey } = parseDescription(path.join(DATA_DIR, id));
+  const modelFile = GAMA_MODELS[modelKey] || GAMA_MODELS[DEFAULT_MODEL_KEY];
+
   const proc = spawn('bash', [scriptPath], {
     cwd: bashScriptsDir,
     detached: true,
     stdio: 'ignore',
+    env: { ...process.env, GAMA_MODEL_NAME: modelFile },
   });
   proc.unref();
 

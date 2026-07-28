@@ -9,6 +9,12 @@ function toast(msg, type = 'info') {
   setTimeout(() => el.remove(), 4000);
 }
 
+
+const MODEL_LABELS = {
+  with_agents:    'Con agentes pasajero',
+  without_agents: 'Sin agentes pasajero',
+};
+
 function formatNum(n) {
   if (n === null || n === undefined || isNaN(n)) return '—';
   return Number(n).toLocaleString('es-ES');
@@ -48,6 +54,10 @@ function renderCard(sim) {
       <div class="sim-meta-row">
         <span class="meta-label">Numero de Repeticiones por experimento</span>
         <span class="meta-value">${formatNum(sim.runCount)}</span>
+      </div>
+      <div class="sim-meta-row">
+        <span class="meta-label">Solución</span>
+        <span class="meta-value">${MODEL_LABELS[sim.model] || MODEL_LABELS['without_agents']}</span>
       </div>
       <div class="sim-meta-row">
         <span class="meta-label">Estado</span>
@@ -224,7 +234,7 @@ function applySimProgress(sims) {
     // Update run count and status text in the meta rows
     const metaValues = card.querySelectorAll('.meta-value');
     if (metaValues[0]) metaValues[0].textContent = formatNum(runCount);
-    if (metaValues[1]) metaValues[1].textContent = status;
+    if (metaValues[2]) metaValues[2].textContent = status;
 
 
     if (metaValues[1].textContent != 'Esperando Gr\u00e1ficas'){

@@ -23,7 +23,7 @@ NC='\033[0m' # No Color
 
 BASE_DIR=$(cat ./.last_simulation)
 GAMA_SRC="/opt/headless/"
-MODEL_NAME="mobility_performance.gaml"
+MODEL_NAME="${GAMA_MODEL_NAME:-mobility_performance.gaml}"
 BATCH_NAME="batch_1000"
 SIM_MODEL_PATH="${BASE_DIR}/TEST_MOBILITY/models/${MODEL_NAME}"
 

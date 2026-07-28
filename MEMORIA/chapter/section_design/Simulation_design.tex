@@ -1135,13 +1135,16 @@ ajustado los parámetros de entrada a lo que se busca simular en cada escenario.
 paramétrica se presenta en el capítulo~\ref{chapter:application_cases}.
 
 \section{Solución dos: Sin agentes pasajero}\label{sec:second_sol}
-Debido al elevado coste computacional que deriva en tiempos de simulación grandes (véase~\ref{fig:futurafiguraderesutados}~\textbf{
-todo: Mostrar una figura que presente diferencias en tiempo de ejecución entre simulaciones,
- para justificar el por qué se hace esta. \textit{No se si lafigura ponerla aquí o presentar una seccion en el capitulo de resultados
- que muestre las diferencias en ejecución de ambas simulaciones y sus similares resultados}}),
+Debido al elevado coste computacional que deriva en tiempos de simulación grandes (véase~\ref{sec:validation}),
 se presenta una solución alternativa. Dicha solución muestra un comportamiento en lógica de resultados equivalente al modelo expuesto 
 con anterioridad, pero difiere en algunos aspectos clave de la construcción de la misma. Esta sección expone únicamente aquellos puntos
 de diferencia existentes entre ambas, con el objetivo de no replicar contenido que resulta igual para ambos modelos.
+
+Cabe remarcar que la falta de un apartado específico dedicado a la \textbf{ejecución y simulación} se debe a que
+esta resulta en su completitud equivalente a lo expuesto para la
+solución anterior. Es decir, simulaciones lanzadas mediante el modo~\textit{headless} de GAMA, orquestadas mediante ficheros~\textit{bash},
+donde cada lanzamiento ejecuta \textbf{mil réplicas} de Monte Carlo, con condiciones de parada iguales. No existe diferencia alguna
+en el guardado de los datos, con el objetivo de que la extracción de KPIs resulte equivalente.
 
 \subsection{Arquitectura de la solución}\label{subsec:arch_two}
 La arquitectura, en cuanto a la caracterización de los agentes, presenta una de las mayores diferencias entre ambos modelos,
@@ -1386,12 +1389,4 @@ En este caso, es el agente~\textit{parada} el encargado de invocar este método 
 en la realidad operativa no es la parada quien dispone de dicha información, sino cada pasajero individual tomando sus propias decisiones.
 No obstante, con el fin de garantizar la fidelidad a las distribuciones de descarga estudiadas, se adopta este enfoque intermedio que, de
 la misma forma que en la solución anterior, evita que el conocimiento subyacente a la inferencia recaiga sobre agente alguno, ya que
-estos se limitan a transmitir entre sí la información resultante
-
-\subsection{Ejecución y simulación}\label{subsec:exe_and_sim_two} 
-Relativo a la ejecución y a la simulación de esta implementación, esta resulta en su completitud equivalente a lo expuesto para la
-solución anterior. Es decir, simulaciones lanzadas mediante el modo~\textit{headless} de GAMA, orquestadas mediante ficheros~\textit{bash},
-donde cada lanzamiento ejecuta \textbf{mil réplicas} de Monte Carlo, con condiciones de parada iguales. No existe diferencia alguna
-en el guardado de los datos, con el objetivo de que la extracción de KPIs resulte equivalente.
- \textbf{todo: No se realmente si para poner tan solo esto hace falta que sea una subseccion concreta, o simplemente
-se puede mencionar en otro lado que es exactamente igual.}
+estos se limitan a transmitir entre sí la información resultante.
