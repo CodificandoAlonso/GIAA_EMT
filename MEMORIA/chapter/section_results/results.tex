@@ -192,7 +192,7 @@ media a lo largo de las distintas paradas de la ruta. La figura~\ref{fig:evoluti
 
 \begin{figure}[H]
  \centering
-    \includegraphics[width=0.75\textwidth]{imagenes/simulations/kpi_bus_fisic.png}
+    \includegraphics[width=0.50\textwidth]{imagenes/simulations/kpi_bus_fisic.png}
 \caption{Ejemplo de muestra de resultados de valores a nivel de autobús físico (valores sintéticos, únicamente ilustrativos).}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:kpi_bus_fisic}
 \end{figure}
@@ -248,5 +248,14 @@ en sus resultados.
 Esta sección presenta los resultados referentes a la validación operativa. Dicha validación consiste en simular un escenario donde
 no se alteren los valores relacionados con distribuciones de embarque/apeo, y donde la operativa de autobuses dispuesta sea congruente
 con la establecida de referencia para un día real de servicio.
+
+Se esperan validar dos premisas clave. La primera es obtener un resultado que sea congruente con los datos estudiados
+de~\enquote{normalidad}~(con normalidad refiriendose a la no existencia de anomalías reseñables para un día laborable), y
+sin que exista ningún punto donde haya signos de alerta, ni a nivel de ruta ni a nivel de autobús.
+La segunda premisa es, ejecutando esta simulación para ambas soluciones existentes, que estas sean equivalentes en los resultados obtenidos,
+lo cual validaría lo presentado en el capítulo anterior, donde se especificaba que ambas opciones deben obtener KPIs similares,
+al no cambiar el fondo de la ejecución, solo la forma.
+
+\subsection{KPIs obtenidos en la solución con agentes pasajero}
 
 \section{Experimentación paramétrica}\label{sec:experiments}
