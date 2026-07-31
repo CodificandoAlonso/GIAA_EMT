@@ -28,6 +28,27 @@ if DESCRIPTION.get("line") == "401":
     to_B = "La Peseta"
 
 
+# ---------------------------------------------------------------------------
+# Paradas cabecera excluidas de la COMPARACION de distribuciones.
+#
+# 2646 (La Peseta) y 5727 (Cibeles) son cabecera y terminal segun el sentido.
+# En la terminal la magnitud registrada son bajadas, y en la cabecera la
+# ocupacion es el resultado inmediato del embarque: en ninguno de los dos
+# casos se compara lo mismo que en una parada intermedia, de modo que su
+# coeficiente de Bhattacharyya no es homogeneo con el resto y distorsiona el
+# porcentaje de equivalencia.
+#
+# ALCANCE: SOLO la comparacion de distribuciones de ocupacion. Las medias
+# (KPIs globales, ocupacion por franja, ocupacion por viaje) siguen
+# calculandose sobre TODAS las paradas, sin cambios respecto al original.
+#
+# NO se aplica a los tiempos entre paradas: el tramo 2646-562 es una medida
+# de transito legitima con valor esperado propio. Poner a True la bandera de
+# abajo si se quiere excluir tambien los tramos que tocan una cabecera.
+# ---------------------------------------------------------------------------
+EXCLUDED_STOPS = {2646, 5727}
+EXCLUDE_TERMINALS_IN_TIMES = False
+
 
 #HARDCODDED NUMBER OF SIMS
 N_SIMS = 1000
@@ -46,54 +67,6 @@ for iteration in range(0,N_SIMS):
 
 
 joint_dataframe_results = pd.concat(data for data in dataframes_to_join_results)
-
-# # ── Monte Carlo convergence plot ──────────────────────────────────
-# CONVERGENCE_OUTPUT = os.path.expanduser("~/Desktop")
-
-# # Mean occupation per simulation run
-# occupation_per_sim = (
-#     joint_dataframe_results
-#     .groupby("simulation_id")["occupation"]
-#     .mean()
-#     .sort_index()
-#     .values
-# )
-
-# # Running cumulative mean
-# running_mean = np.cumsum(occupation_per_sim) / np.arange(1, len(occupation_per_sim) + 1)
-# final_mean = running_mean[-1]
-
-# # Running standard error
-# running_std = np.array([
-#     np.std(occupation_per_sim[:i+1], ddof=1) / np.sqrt(i+1)
-#     if i > 0 else 0.0
-#     for i in range(len(occupation_per_sim))
-# ])
-
-# fig, ax1 = plt.subplots(figsize=(12, 5))
-
-# ax1.plot(range(1, len(running_mean) + 1), running_mean, color="blue", linewidth=1.5,
-#          label="Media acumulada de ocupación")
-# ax1.axhline(y=final_mean, color="red", linestyle="--", linewidth=1,
-#             label=f"Media final: {final_mean:.4f}")
-# ax1.fill_between(
-#     range(1, len(running_mean) + 1),
-#     running_mean - 1.96 * running_std,
-#     running_mean + 1.96 * running_std,
-#     alpha=0.2, color="blue", label="IC 95%"
-# )
-# ax1.set_xlabel("Número de iteraciones")
-# ax1.set_ylabel("Media acumulada de ocupación (pasajeros)")
-# ax1.set_title("Convergencia Monte Carlo — Ocupación media por iteración")
-# ax1.legend(loc="upper right")
-# ax1.grid(True, alpha=0.3)
-
-# plt.tight_layout()
-# plt.savefig(f"{CONVERGENCE_OUTPUT}/montecarlo_convergence_occupation.png", dpi=300)
-# plt.close()
-
-# print(f"[✓] Convergence plot saved to {CONVERGENCE_OUTPUT}/montecarlo_convergence_occupation.png")
-# # ──────────────────────────────────────────────────────────────────
 
 
 N_SIMS = 1000
@@ -192,6 +165,84 @@ from math import exp
 
 
 threshold = 0.97
+
+
+# ---------------------------------------------------------------------------
+# Registro de comparaciones Bhattacharyya.
+#
+# Una fila por celda (tipo, sentido, parada/tramo, franja), TAMBIEN si la
+# celda se descarta. Las funciones de comparacion tienen returns tempranos
+# (varianza esperada nula, menos de dos muestras, varianza simulada nula):
+# si solo se contasen las celdas que llegan a dibujarse, el denominador del
+# porcentaje seria falso. Se reportan por eso dos porcentajes, sobre celdas
+# evaluadas y sobre celdas totales.
+#
+# Las paradas de EXCLUDED_STOPS no se registran: quedan fuera del numerador
+# y del denominador, no cuentan como "no evaluables".
+# ---------------------------------------------------------------------------
+bhatt_registry = []
+
+
+def register_bhatt(tipo, direction, key, timeslot, coeff=None, dist=None,
+                   estado="evaluada", metodo=None, n_sim=0,
+                   mean_sim=None, std_sim=None, mean_esp=None, std_esp=None):
+    """tipo: 'ocupacion' | 'tiempo'.  key: codigo de parada o 'A-B'.
+
+    Se guardan las medias y desviaciones de ambos lados: sin ellas el
+    coeficiente dice QUE una celda falla, pero no HACIA DONDE. Con ellas se
+    distingue un desfase sistematico de nivel (todas las celdas por debajo)
+    de un error de perfil (unas por encima y otras por debajo, que se
+    cancelan en la media global).
+    """
+    sesgo = None
+    if mean_sim is not None and mean_esp is not None:
+        sesgo = float(mean_sim) - float(mean_esp)
+    sesgo_sigmas = None
+    if sesgo is not None and std_esp:
+        sesgo_sigmas = sesgo / float(std_esp)
+    bhatt_registry.append({
+        "tipo": tipo,
+        "direccion": direction,
+        "elemento": str(key),
+        "franja": timeslot,
+        "metodo": metodo,                    # 'normal' | 'kde' | None
+        "n_sim": n_sim,
+        "coeff": coeff,
+        "distancia": dist,
+        "estado": estado,                    # evaluada | sin_* (motivo)
+        "fusionable": (None if coeff is None else bool(coeff >= threshold)),
+        "mean_sim": (None if mean_sim is None else float(mean_sim)),
+        "std_sim": (None if std_sim is None else float(std_sim)),
+        "mean_esp": (None if mean_esp is None else float(mean_esp)),
+        "std_esp": (None if std_esp is None else float(std_esp)),
+        "sesgo": sesgo,                      # sim - esperado
+        "sesgo_sigmas": sesgo_sigmas,        # normalizado por sigma esperada
+    })
+
+
+def resumen_bhatt(sub):
+    """Agrega un subconjunto del registro a un diccionario de metricas."""
+    n = len(sub)
+    ev = sub[sub["estado"] == "evaluada"]
+    n_ev = len(ev)
+    fus = int(ev["fusionable"].sum()) if n_ev else 0
+    return {
+        "celdas": n,
+        "evaluadas": n_ev,
+        "no_evaluables": n - n_ev,
+        "fusionables": fus,
+        "pct_fusionables": (100.0 * fus / n_ev) if n_ev else None,
+        "pct_fusionables_sobre_total": (100.0 * fus / n) if n else None,
+        "coeff_medio": float(ev["coeff"].mean()) if n_ev else None,
+        "coeff_mediana": float(ev["coeff"].median()) if n_ev else None,
+        "coeff_min": float(ev["coeff"].min()) if n_ev else None,
+    }
+
+
+def tramo_excluido(par):
+    """True si el tramo toca una cabecera y se ha pedido excluirlos."""
+    return EXCLUDE_TERMINALS_IN_TIMES and bool(set(par) & EXCLUDED_STOPS)
+
 
 def bhattacharyya_distance(mean_1, mean_2, std_1, std_2):
     return 0.25*((mean_1 -mean_2)**2/(std_1**2 + std_2**2)) + 0.5*(log((std_1**2 + std_2**2)/(2*(std_1 * std_2))))
@@ -385,7 +436,15 @@ def compute_and_save_distribution_comparasion(
     direction, stopcode, timeslot,
     is_normal=True
 ):
+    # Cabeceras fuera del numerador y del denominador del porcentaje.
+    if int(stopcode) in EXCLUDED_STOPS:
+        return
+
     if std_2 <= 1e-9 or len(sim_data) < 2:
+        register_bhatt("ocupacion", direction, stopcode, timeslot,
+                       estado=("sin_varianza_esperada" if std_2 <= 1e-9
+                               else "sin_datos_sim"),
+                       n_sim=len(sim_data))
         return
 
     x_min_exp = mean_2 - 4 * std_2
@@ -396,6 +455,9 @@ def compute_and_save_distribution_comparasion(
         mean_1 = np.mean(sim_data)
         std_1  = np.std(sim_data, ddof=1)
         if std_1 <= 1e-9:
+            register_bhatt("ocupacion", direction, stopcode, timeslot,
+                           estado="sin_varianza_sim", metodo="normal",
+                           n_sim=len(sim_data))
             return
 
         x_min = min(mean_1 - 4 * std_1, x_min_exp)
@@ -413,6 +475,9 @@ def compute_and_save_distribution_comparasion(
         from scipy.stats import gaussian_kde
 
         if np.std(sim_data, ddof=1) <= 1e-9:
+            register_bhatt("ocupacion", direction, stopcode, timeslot,
+                           estado="sin_varianza_sim", metodo="kde",
+                           n_sim=len(sim_data))
             return
         kde = gaussian_kde(sim_data)
         x_min = min(np.min(sim_data) - 1, x_min_exp)
@@ -431,6 +496,15 @@ def compute_and_save_distribution_comparasion(
 
     veredict = ("Fusionables ('Equivalentes')" if bhatt_coeff >= threshold
                else "No fusionables (Distintas)")
+
+    register_bhatt("ocupacion", direction, stopcode, timeslot,
+                   coeff=float(bhatt_coeff), dist=float(bhatt_dist),
+                   estado="evaluada",
+                   metodo=("normal" if is_normal else "kde"),
+                   n_sim=len(sim_data),
+                   mean_sim=float(np.mean(sim_data)),
+                   std_sim=float(np.std(sim_data, ddof=1)),
+                   mean_esp=float(mean_2), std_esp=float(std_2))
 
     plt.figure(figsize=(12, 5))
     plt.plot(x, y1, color="blue", linewidth=2, label=sim_label)
@@ -462,7 +536,17 @@ def compute_and_save_distribution_comparasion_times(
     direction, stopcode, timeslot,
     is_normal=True
 ):
+    # Los tramos solo se excluyen si se ha pedido explicitamente.
+    if tramo_excluido(stopcode):
+        return
+
+    tramo = f"{stopcode[0]}-{stopcode[1]}"
+
     if std_2 <= 1e-9 or len(sim_data) < 2:
+        register_bhatt("tiempo", direction, tramo, timeslot,
+                       estado=("sin_varianza_esperada" if std_2 <= 1e-9
+                               else "sin_datos_sim"),
+                       n_sim=len(sim_data))
         return
 
     x_min_exp = mean_2 - 4 * std_2
@@ -472,6 +556,9 @@ def compute_and_save_distribution_comparasion_times(
         mean_1 = np.mean(sim_data)
         std_1  = np.std(sim_data, ddof=1)
         if std_1 <= 1e-9:
+            register_bhatt("tiempo", direction, tramo, timeslot,
+                           estado="sin_varianza_sim", metodo="normal",
+                           n_sim=len(sim_data))
             return
 
         x_min = min(mean_1 - 4 * std_1, x_min_exp)
@@ -488,6 +575,9 @@ def compute_and_save_distribution_comparasion_times(
         from scipy.stats import gaussian_kde
 
         if np.std(sim_data, ddof=1) <= 1e-9:
+            register_bhatt("tiempo", direction, tramo, timeslot,
+                           estado="sin_varianza_sim", metodo="kde",
+                           n_sim=len(sim_data))
             return
         
         kde = gaussian_kde(sim_data)
@@ -506,6 +596,15 @@ def compute_and_save_distribution_comparasion_times(
 
     verdict = ("Fusionables ('Equivalentes')" if bhatt_coeff >= threshold
                else "No fusionables (Distintas)")
+
+    register_bhatt("tiempo", direction, tramo, timeslot,
+                   coeff=float(bhatt_coeff), dist=float(bhatt_dist),
+                   estado="evaluada",
+                   metodo=("normal" if is_normal else "kde"),
+                   n_sim=len(sim_data),
+                   mean_sim=float(np.mean(sim_data)),
+                   std_sim=float(np.std(sim_data, ddof=1)),
+                   mean_esp=float(mean_2), std_esp=float(std_2))
 
     plt.figure(figsize=(12, 5))
     plt.plot(x, y1, color="blue", linewidth=2, label=sim_label)
@@ -555,6 +654,10 @@ for stopcode in stops_list_toA:
     json_stops_info_toA[f"{stopcode}"] = {}
 
     data_stopcode = data_toA[data_toA["stop_num"] == stopcode]
+
+    # Marca para la interfaz: la parada se calcula igual que siempre, solo
+    # queda fuera del porcentaje de equivalencia de distribuciones.
+    json_stops_info_toA[f"{stopcode}"]["excluded_from_bhatt"] = bool(stopcode in EXCLUDED_STOPS)
 
     json_stops_info_toA[f"{stopcode}"]["Occupation_percentage_per_timeslot"] = {}
 
@@ -640,6 +743,7 @@ for stopcode in stops_list_toB:
     list_per_ts_per_stop = []
 
     json_stops_info_toB[f"{stopcode}"] = {}
+    json_stops_info_toB[f"{stopcode}"]["excluded_from_bhatt"] = bool(stopcode in EXCLUDED_STOPS)
     json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"] = {}
 
 
@@ -946,6 +1050,77 @@ for stop in stops_list_toB[1:]:
 json_output_general_info["Regularity_value"] = np.nanmean(regularity_global)
 
 
+# ---------------------------------------------------------------------------
+# Porcentaje de distribuciones equivalentes (coeficiente de Bhattacharyya)
+#
+# Agregacion a cuatro niveles y separando ocupacion de tiempos entre paradas,
+# porque son magnitudes distintas con distinto numero de celdas y no deben
+# promediarse juntas salvo como cifra de contexto ('conjunto').
+# ---------------------------------------------------------------------------
+df_bhatt = pd.DataFrame(bhatt_registry)
+
+bhatt_summary = {
+    "umbral": threshold,
+    "paradas_excluidas_de_la_comparacion": sorted(EXCLUDED_STOPS),
+    "tramos_excluidos": EXCLUDE_TERMINALS_IN_TIMES,
+    "general": {},
+    "por_direccion": {},
+    "por_elemento": {},
+    "por_franja": {},
+}
+
+if len(df_bhatt):
+    for tipo in ("ocupacion", "tiempo"):
+        sub = df_bhatt[df_bhatt["tipo"] == tipo]
+        if not len(sub):
+            continue
+        _res = resumen_bhatt(sub)
+        _ev = sub[sub["estado"] == "evaluada"].dropna(subset=["sesgo"])
+        if len(_ev):
+            _res["sesgo_medio"] = float(_ev["sesgo"].astype(float).mean())
+            _res["sesgo_medio_sigmas"] = float(
+                _ev["sesgo_sigmas"].dropna().astype(float).mean())
+            _res["pct_celdas_por_debajo"] = float(
+                100.0 * (_ev["sesgo"].astype(float) < 0).mean())
+        bhatt_summary["general"][tipo] = _res
+        bhatt_summary["por_direccion"][tipo] = {
+            str(x): resumen_bhatt(sub[sub["direccion"] == x])
+            for x in sorted(sub["direccion"].unique())
+        }
+        bhatt_summary["por_elemento"][tipo] = {
+            str(x): resumen_bhatt(sub[sub["elemento"] == x])
+            for x in sorted(sub["elemento"].unique())
+        }
+        bhatt_summary["por_franja"][tipo] = {
+            str(int(x)): resumen_bhatt(sub[sub["franja"] == x])
+            for x in sorted(sub["franja"].unique())
+        }
+    # Cifra de contexto: ocupacion y tiempos juntos.
+    bhatt_summary["general"]["conjunto"] = resumen_bhatt(df_bhatt)
+
+json_output_general_info["Bhattacharyya"] = bhatt_summary
+
+# Cifras planas para la interfaz, sin navegar el diccionario.
+for _t in ("ocupacion", "tiempo", "conjunto"):
+    _g = bhatt_summary["general"].get(_t)
+    if _g:
+        json_output_general_info[f"Pct_equivalentes_{_t}"] = _g["pct_fusionables"]
+
+print(f"\n=== Equivalencia de distribuciones (Bhattacharyya >= {threshold}) ===")
+print(f"  paradas fuera de la comparacion: {sorted(EXCLUDED_STOPS)}")
+for _t in ("ocupacion", "tiempo", "conjunto"):
+    _g = bhatt_summary["general"].get(_t)
+    if not _g:
+        continue
+    _p = "n/d" if _g["pct_fusionables"] is None else f"{_g['pct_fusionables']:.2f}%"
+    print(f"  {_t:10} {_g['fusionables']:4}/{_g['evaluadas']:4} = {_p:>8}"
+          f"   (no evaluables: {_g['no_evaluables']}, "
+          f"coeff medio: {_g['coeff_medio']})")
+    if _g.get("sesgo_medio") is not None:
+        print(f"             sesgo medio {_g['sesgo_medio']:+.3f} "
+              f"({_g['sesgo_medio_sigmas']:+.2f} sigma), "
+              f"{_g['pct_celdas_por_debajo']:.1f}% de celdas por debajo")
+
 
 def sanitize_for_json(obj):
     """Recursively replace NaN/Inf with None for valid JSON."""
@@ -972,3 +1147,146 @@ with open(f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/general_info_toA.json", "w") as f
 
 with open(f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/general_info_toB.json", "w") as f:
     json.dump(sanitize_for_json(json_stops_info_toB), f,indent=4)
+
+
+# ---------------------------------------------------------------------------
+# Salidas de la equivalencia de distribuciones
+# ---------------------------------------------------------------------------
+BHATT_DIR = f"{os.getcwd()}/{sim_dir}/PLOTS/general"
+BHATT_COL = {"ocupacion": "#1f77b4", "tiempo": "#d62728"}
+
+
+def fig_bhatt_pct_por_franja(summary, outfile):
+    tipos = [t for t in ("ocupacion", "tiempo") if t in summary["por_franja"]]
+    if not tipos:
+        return
+    franjas = sorted({int(f) for t in tipos for f in summary["por_franja"][t]})
+    x = np.arange(len(franjas))
+    w = 0.8 / len(tipos)
+    plt.figure(figsize=(12, 5))
+    for i, t in enumerate(tipos):
+        vals = [(summary["por_franja"][t].get(str(f)) or {}).get("pct_fusionables")
+                for f in franjas]
+        vals = [np.nan if v is None else v for v in vals]
+        plt.bar(x + i * w, vals, width=w, label=t.capitalize(),
+                color=BHATT_COL[t])
+    plt.xticks(x + 0.4 - w / 2, franjas)
+    plt.ylim(0, 105)
+    plt.xlabel("Franja horaria")
+    plt.ylabel("% de distribuciones equivalentes")
+    plt.title("Equivalencia de distribuciones por franja "
+              f"(Bhattacharyya >= {threshold})")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(outfile, dpi=300)
+    plt.close()
+
+
+def fig_bhatt_histograma(df, outfile):
+    ev = df[df["estado"] == "evaluada"]
+    if not len(ev):
+        return
+    plt.figure(figsize=(12, 5))
+    for t in ("ocupacion", "tiempo"):
+        s = ev[ev["tipo"] == t]["coeff"].astype(float)
+        if len(s):
+            plt.hist(s, bins=40, alpha=0.55, color=BHATT_COL[t],
+                     label=f"{t.capitalize()} (n={len(s)})")
+    plt.axvline(threshold, ls="--", lw=1.5, color="black",
+                label=f"umbral = {threshold}")
+    plt.xlabel("Coeficiente de Bhattacharyya")
+    plt.ylabel("Numero de celdas")
+    plt.title("Distribucion del coeficiente de Bhattacharyya")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(outfile, dpi=300)
+    plt.close()
+
+
+def fig_bhatt_sim_vs_esperado(df, tipo, outfile):
+    """Diagnostico: media simulada frente a media esperada, celda a celda.
+
+    Nube por debajo de la diagonal = desfase sistematico de nivel.
+    Nube dispersa a ambos lados  = error de perfil que se cancela en la
+    media global y que el KPI agregado no deja ver.
+    """
+    ev = df[(df["estado"] == "evaluada") & (df["tipo"] == tipo)]
+    ev = ev.dropna(subset=["mean_sim", "mean_esp"])
+    if not len(ev):
+        return
+    xs = ev["mean_esp"].astype(float)
+    ys = ev["mean_sim"].astype(float)
+    ok = ev["fusionable"].astype(bool)
+    lim = float(max(xs.max(), ys.max())) * 1.05
+    plt.figure(figsize=(7, 7))
+    plt.scatter(xs[~ok], ys[~ok], s=18, alpha=0.55, color="#d62728",
+                label=f"No equivalentes (n={int((~ok).sum())})")
+    plt.scatter(xs[ok], ys[ok], s=18, alpha=0.75, color="#2ca02c",
+                label=f"Equivalentes (n={int(ok.sum())})")
+    plt.plot([0, lim], [0, lim], ls="--", lw=1.2, color="black",
+             label="identidad")
+    _b = float(ev["sesgo"].astype(float).mean())
+    plt.xlim(0, lim); plt.ylim(0, lim)
+    plt.xlabel("Media esperada (datos EMT)")
+    plt.ylabel("Media simulada")
+    plt.title(f"Simulado frente a esperado por celda ({tipo})\n"
+              f"sesgo medio = {_b:+.2f}")
+    plt.legend(loc="upper left")
+    plt.tight_layout()
+    plt.savefig(outfile, dpi=300)
+    plt.close()
+
+
+def fig_bhatt_pct_por_elemento(summary, tipo, outfile):
+    d = summary["por_elemento"].get(tipo)
+    if not d:
+        return
+    items = sorted(d.items(),
+                   key=lambda kv: (kv[1]["pct_fusionables"] is None,
+                                   kv[1]["pct_fusionables"]))
+    keys = [k for k, _ in items]
+    vals = [np.nan if v["pct_fusionables"] is None else v["pct_fusionables"]
+            for _, v in items]
+    plt.figure(figsize=(12, 5))
+    plt.bar(np.arange(len(keys)), vals, width=0.6, color=BHATT_COL[tipo])
+    plt.xticks(np.arange(len(keys)), keys, rotation=90)
+    plt.ylim(0, 105)
+    plt.xlabel("Parada" if tipo == "ocupacion" else "Tramo")
+    plt.ylabel("% de distribuciones equivalentes")
+    plt.title("Equivalencia por "
+              f"{'parada' if tipo == 'ocupacion' else 'tramo'} ({tipo})")
+    plt.tight_layout()
+    plt.savefig(outfile, dpi=300)
+    plt.close()
+
+
+if len(df_bhatt):
+    df_bhatt.to_csv(f"{BHATT_DIR}/bhatt_detalle.csv", index=False)
+
+    _rows = []
+    for _nivel in ("general", "por_direccion", "por_elemento", "por_franja"):
+        _blk = bhatt_summary[_nivel]
+        for _tipo, _v in _blk.items():
+            if _nivel == "general":
+                _rows.append({"nivel": _nivel, "tipo": _tipo, "clave": "-", **_v})
+            else:
+                for _k, _m in _v.items():
+                    _rows.append({"nivel": _nivel, "tipo": _tipo,
+                                  "clave": _k, **_m})
+    pd.DataFrame(_rows).to_csv(f"{BHATT_DIR}/bhatt_resumen.csv", index=False)
+
+    fig_bhatt_pct_por_franja(bhatt_summary,
+                             f"{BHATT_DIR}/bhatt_pct_por_franja.png")
+    fig_bhatt_histograma(df_bhatt,
+                         f"{BHATT_DIR}/bhatt_histograma_coeff.png")
+    fig_bhatt_pct_por_elemento(bhatt_summary, "ocupacion",
+                               f"{BHATT_DIR}/bhatt_pct_por_parada.png")
+    fig_bhatt_pct_por_elemento(bhatt_summary, "tiempo",
+                               f"{BHATT_DIR}/bhatt_pct_por_tramo.png")
+    fig_bhatt_sim_vs_esperado(df_bhatt, "ocupacion",
+                              f"{BHATT_DIR}/bhatt_sim_vs_esperado_ocupacion.png")
+    fig_bhatt_sim_vs_esperado(df_bhatt, "tiempo",
+                              f"{BHATT_DIR}/bhatt_sim_vs_esperado_tiempo.png")
+
+    with open(f"{BHATT_DIR}/bhatt_summary.json", "w") as f:
+        json.dump(sanitize_for_json(bhatt_summary), f, indent=4)
