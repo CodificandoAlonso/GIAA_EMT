@@ -1,9 +1,8 @@
 Este capítulo recoge los resultados obtenidos con el sistema desarrollado, abarcando tanto la validación del simulador frente a los datos
-operativos reales como la experimentación mediante modificación paramétrica de los escenarios. Para ello, se estructura en cuatro secciones.
+operativos reales como la comparativa entre las dos soluciones propuestas. Para ello, se estructura en tres secciones.
 La primera, a modo introductorio, presenta el funcionamiento operativo del sistema completo. La segunda presenta los distintos indicadores de
-rendimiento (KPIs) considerados y su visualización para cada solución. La tercera aborda la validación operativa del simulador y la comparativa
-entre las dos soluciones presentadas en el capítulo anterior. Por último, la cuarta cubre la experimentación mediante modificación paramétrica
-del sistema, contrastando los resultados obtenidos frente a las hipótesis planteadas.
+rendimiento (KPIs) considerados y su visualización. Por último, la tercera aborda la validación operativa del simulador y la comparativa
+entre las dos soluciones presentadas en el capítulo anterior, objetivo principal de este trabajo.
 
 \section{Funcionamiento operativo del sistema final}\label{sec:general_behaviour}
 Si bien el núcleo del presente trabajo lo constituye el simulador multiagente desarrollado sobre GAMA, su explotación práctica requiere de un medio
@@ -31,8 +30,8 @@ inmediatos en el muestreo de resultados.
 
 De forma previa a la presentación de cada métrica, y con el objetivo de sintetizar alertas visuales
 para la detección de posibles puntos críticos donde se estén dando resultados anómalos, se ha dispuesto un sistema heurístico basado
-en umbrales que, mediante clasificación por colores, permite al usuario identificar dichos puntos para una rápida exploración de estos.
-Dicho sistema resulta implementado tanto en las \textbf{métricas a nivel de ruta} como en las \textbf{métricas a nivel de autobús}. 
+en umbrales, que, mediante clasificación por colores, permite al usuario identificar dichos puntos para una rápida exploración de estos.
+Este sistema resulta implementado tanto en las \textbf{métricas a nivel de ruta} como en las \textbf{métricas a nivel de autobús}. 
 En cada apartado correspondiente se expande la información relevante sobre los umbrales determinados para cada tipo de 
 métrica.
 
@@ -60,7 +59,7 @@ Un ejemplo del muestreo de dichas métricas, ya presentadas con anterioridad, se
 
 
 \begin{figure}[H]
- \centering
+\centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/general_results_simulations.png}
 \caption{Ejemplo de muestra de resultados de métricas a nivel general (valores sintéticos, únicamente ilustrativos).}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics}
@@ -85,7 +84,7 @@ La figura~\ref{fig:route_metrics_general} muestra cómo se visualiza este mapa p
 como se genera el filtro a dos niveles.
 
 \begin{figure}[H]
- \centering
+\centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/route_general_simulations.png}
 \caption{Ejemplo de muestra de resultados de métricas a nivel de ruta (valores sintéticos, únicamente ilustrativos).}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:route_metrics_general}
@@ -99,7 +98,7 @@ del autobús por franja horaria al paso por la parada. Las Figuras~\ref{fig:occ_
 muestran cómo se visualizan dentro de la interfaz.
 
 \begin{figure}[H]
- \centering
+\centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/occupation_per_timeslot.png}
 \caption{Ejemplo de muestra de resultados de figura de ocupación media por franja horaria al paso por parada
     (valores sintéticos, únicamente ilustrativos).}
@@ -107,7 +106,7 @@ muestran cómo se visualizan dentro de la interfaz.
 \end{figure}
 
 \begin{figure}[H]
- \centering
+\centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/kpi_stop_general.png}
 \caption{Ejemplo de muestra de resultados de métricas por parada (valores sintéticos, únicamente ilustrativos).}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:kpi_stop_general}
@@ -121,7 +120,7 @@ valor esperado se obtiene de las distribuciones obtenidas en el estudio de viabi
 si según la distancia y el coeficiente de Bhattacharyya~\cite{bhattacharyya1946divergence} resultan o no equivalentes.
 
 \begin{figure}[H]
- \centering
+\centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/occupation_comparaison.png}
 \caption{Ejemplo de muestra de comparativa de valores de ocupación (valores sintéticos, únicamente ilustrativos).}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:occupation_comparative}
@@ -173,7 +172,7 @@ se presenta en la interfaz una tabla contenedora de todas las salidas de cabecer
 La figura~\ref{fig:bus_schedule} muestra un ejemplo de dicha tabla. En ella se presentan los distintos KPIs esperados.
 
 \begin{figure}[H]
- \centering
+\centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/bus_schedule.png}
 \caption{Ejemplo de muestra de tabla de información asociada a un autobús físico (valores sintéticos, únicamente ilustrativos).}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bus_schedule}
@@ -191,14 +190,14 @@ expone en la figura~\ref{fig:kpi_bus_fisic}. Asociado a esta, se añade una figu
 media a lo largo de las distintas paradas de la ruta. La figura~\ref{fig:evolution_route} ejemplifica esta.
 
 \begin{figure}[H]
- \centering
+\centering
     \includegraphics[width=0.50\textwidth]{imagenes/simulations/kpi_bus_fisic.png}
 \caption{Ejemplo de muestra de resultados de valores a nivel de autobús físico (valores sintéticos, únicamente ilustrativos).}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:kpi_bus_fisic}
 \end{figure}
 
 \begin{figure}[H]
- \centering
+\centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/evolution_route.png}
 \caption{Ejemplo de muestra de evolución de ocupación media a lo largo de las paradas de una ruta (valores sintéticos, únicamente ilustrativos).}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:evolution_route}
@@ -250,16 +249,107 @@ no se alteren los valores relacionados con distribuciones de embarque/apeo, y do
 con la establecida de referencia para un día real de servicio.
 
 Se esperan validar dos premisas clave. La primera es obtener un resultado que sea congruente con los datos estudiados
-de~\enquote{normalidad}~(con normalidad refiriendose a la no existencia de anomalías reseñables para un día laborable), y
+de~\enquote{normalidad}~(con normalidad refiriéndose a la no existencia de anomalías reseñables para un día laborable), y
 sin que exista ningún punto donde haya signos de alerta, ni a nivel de ruta ni a nivel de autobús.
 La segunda premisa es, ejecutando esta simulación para ambas soluciones existentes, que estas sean equivalentes en los resultados obtenidos,
 lo cual validaría lo presentado en el capítulo anterior, donde se especificaba que ambas opciones deben obtener KPIs similares,
 al no cambiar el fondo de la ejecución, solo la forma.
 
 
-\section{Validación operativa}
-La congruencia con los datos estudiados
+\subsection{Validación operativa}
+La validación operativa supone el estudio sobre la primera premisa presentada. Para ello, antes de discutir los resultados obtenidos
+por la simulación, se presentan los valores medios esperables,computados sobre los datos de los días laborables sin gratuidad utilizados
+a lo largo del trabajo.
 
-\subsection{KPIs obtenidos en la solución con agentes pasajero}
+Concretamente, ateniéndose a las métricas generales, se observa un porcentaje medio de ocupación del \textbf{31,9}\%, donde al desagregar
+por sentido se obtienen valores medios \textit{sentido Cibeles}: \textbf{33,9}\% y \textit{sentido La Peseta}: \textbf{30}\%.
+En cuanto a la operativa de servicio, el promedio de autobuses físicos utilizados es \textbf{11,4}, mientras que los viajes totales contando
+ambos sentidos promedia los \textbf{163,1}. Estos valores son más relevantes de lo que podría parecer, puesto a que \textbf{existe una limitación 
+relevante} que relaciona la oferta con el modelado de las distribuciones de entrada del simulador.
 
-\section{Experimentación paramétrica}\label{sec:experiments}
+Dicha limitación no obstante \textbf{no choca con el objetivo principal del trabajo}, que sigue siendo estudiar la viabilidad operativa
+de la simulación de los días laborables, sino que impide estudiar con precisión escenarios que alteren paramétricamente la oferta y la demanda.
+Esto se debe a la forma de modelar la descarga de pasajeros, ya que esta resulta \textbf{invariante frente a la oferta}, generando
+mismas distribuciones de los valores de apeo independientemente del número de autobuses que operen o de la carga de estos.
+Al modelar la descarga de pasajeros como distribución de eventos independientes, considerando
+el espacio muestral como los valores de descarga de todos los autobuses en una parada a lo largo de una hora, estos se presentan \textbf{fuertemente
+sesgados} tanto al valor de ocupación del autobús como a la oferta de servicio en cuestión. Como el estudio comparativo de la simulación
+con los valores promedio de los días laborables no se desvía de estos valores,~\textbf{este sesgo no supone motivo de rechazo} de la 
+validación del simulador. No obstante, esta casuística alteraría los distintos KPIs obtenidos en el caso de estudiar escenarios
+que alteren oferta y/o demanda, por lo que estos experimentos resultan fuera del alcance de este trabajo.
+
+Es por este motivo además, que el estudio de la validación operativa necesita que la oferta a incluir en la simulación se presente
+lo más parecida a la media esperada, puesto que no hacerlo incurriría en valores alterados por este sesgo. Por ello, el fichero
+utilizado para establecer la oferta de autobuses presenta~\textbf{163} viajes totales, valor congruente con la media esperada,
+y las salidas de cabecera se adecúan a las medias estimadas por hora y franja horaria.
+
+Para la presentación de los resultados, se exponen los consecuentes de ejecutar la simulación utilizando la arquitectura 
+de la solución dos. Este criterio de elección, como se muestra en la siguiente sección, resulta irrelevante, al presentar 
+resultados similares para ambas.
+
+En cuanto a las métricas generales obtenidas, mostradas en la figura~\ref{fig:general_metrics_results}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/general_results_SIMULATION.png}
+\caption{Resultados de métricas a nivel general de la validación operativa.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics_results}
+\end{figure}
+
+se observa que los valores de ocupación son congruentes con los esperados. Se muestra una disminución de más o menos
+tres puntos porcentuales para cada resultado, manifestando no obstante la diferencia entre sentidos. Tres puntos porcentuales
+representan unos 2,4 pasajeros sobre el total de la ocupación del autobús, resultando una cifra asumible teniendo en cuenta
+que el valor se construye sobre variables aleatorias estimadas mediante distribuciones ajustadas, lo que puede inducir varianza
+en el modelo.
+
+Como se expone en la sección relativa a la metodología y al estudio de viabilidad de datos operacionales (véase secciones
+~\ref{sec:kpi_extraction} y~\ref{section:operational} respectivamente), la comparativa entre los distintos valores
+de \textit{ocupación} para cada parada y franja horaria se realiza mediante métricas de Bhattacharyya~\cite{bhattacharyya1946divergence}.
+Concretamente, se utiliza el~\textbf{coeficiente de Bhattacharyya}, que mide la distancia existente entre dos distribuciones
+gaussianas. El valor del coeficiente no mide en sí mismo si dos distribuciones son equivalentes, únicamente cuantifica
+la distancia existente entre ambas. Por ello, se establece arbitrariamente una estricta frontera con valor de~\textbf{0.97} como
+límite inferior a igualar o superar para considerar dos distribuciones equivalentes. Esto, considerando que el coeficiente
+representa el producto de comparativa de varianzas y comparativa de niveles, equivale ante varianzas iguales que
+la diferencia en el nivel de las distribuciones no puede superar $0.49\sigma$.
+
+El resultado sobre la aplicación de esta comparativa para cada parada en cada franja horaria resulta en un discreto
+~\textbf{33,6}\% de distribuciones equivalentes. No obstante, al proyectar el valor de media esperado versus simulado
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png}
+\caption{Proyección de media simulada de ocupación por parada y franja horaria frente a media esperada}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bhat_occ_comparative}
+\end{figure}
+
+se observa como existe un sesgo medio de unos dos pasajeros por debajo, consistente con lo establecido en las métricas
+generales.
+
+Lo interesante de esta figura resulta en la existencia de puntos cercanos en valor de nivel a la identidad que presentan
+basado en el coeficiente una no equivalencia. Esto representa una realidad de la simulación y es que
+\textbf{existe una sobredispersión latente frente a los valores esperados}.
+
+Esto se ejemplifica en la siguiente figura, que muestra cómo, si se asumieran varianzas iguales y se proyecta sobre la
+figura previa la sombra que representa esa diferencia de $0.49\sigma$, existe hasta un \textbf{33}\% de distribuciones
+que se considerarían equivalentes que considerando ambas métricas (media y desviación), no lo son, ejemplificando esta
+sobredispersión.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/bhatt_banda.png}
+\caption{Figura~\ref{fig:bhat_occ_comparative} con sombra proyectada sobre $0.49\sigma$ el valor de la identidad.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bhat_occ_comparative_with_shadow}
+\end{figure}
+
+
+
+
+
+% \subsubsection{KPIs obtenidos en la solución con agentes pasajero (Solución uno)}
+
+
+% \subsubsection{KPIs obtenidos en la solución sin agentes pasajero (Solución dos)}
+
+
+%\section{Experimentación paramétrica}\label{sec:experiments}
+

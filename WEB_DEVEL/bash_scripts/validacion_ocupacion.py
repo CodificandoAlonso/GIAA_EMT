@@ -17,7 +17,7 @@ y anade las metricas de validacion habituales en simulacion: regresion de lo
 simulado frente a lo observado (pendiente, ordenada, R2), RMSE, MAE y el
 coeficiente de desigualdad de Theil con su descomposicion en sesgo, varianza
 y covarianza.
-
+bhat
 Uso:
   python3 validacion_ocupacion.py /ruta/PLOTS/general/bhatt_detalle.csv \
                                   --tipo ocupacion --outdir /ruta/PLOTS/general
