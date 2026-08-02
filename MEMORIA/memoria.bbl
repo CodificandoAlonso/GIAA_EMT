@@ -3020,6 +3020,35 @@
       \verb 10.1111/j.2517-6161.1971.tb00855.x
       \endverb
     \endentry
+    \entry{kailath1967divergence}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6082ac1a24c2837363f648b9699f0ed2}{%
+           family={Kailath},
+           familyi={K\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{fullhash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{bibnamehash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{authorbibnamehash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{authornamehash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{authorfullhash}{6082ac1a24c2837363f648b9699f0ed2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Communication Technology}
+      \field{number}{1}
+      \field{title}{The Divergence and {Bhattacharyya} Distance Measures in Signal Selection}
+      \field{volume}{15}
+      \field{year}{1967}
+      \field{pages}{52\bibrangedash 60}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1109/TCOM.1967.1089532
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

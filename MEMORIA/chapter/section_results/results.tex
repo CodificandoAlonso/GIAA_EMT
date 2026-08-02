@@ -250,7 +250,7 @@ con la establecida de referencia para un día real de servicio.
 
 Se esperan validar dos premisas clave. La primera es obtener un resultado que sea congruente con los datos estudiados
 de~\enquote{normalidad}~(con normalidad refiriéndose a la no existencia de anomalías reseñables para un día laborable), y
-sin que exista ningún punto donde haya signos de alerta, ni a nivel de ruta ni a nivel de autobús.
+sin que exista ningún punto donde haya signos de alerta extrema, ni a nivel de ruta ni a nivel de autobús.
 La segunda premisa es, ejecutando esta simulación para ambas soluciones existentes, que estas sean equivalentes en los resultados obtenidos,
 lo cual validaría lo presentado en el capítulo anterior, donde se especificaba que ambas opciones deben obtener KPIs similares,
 al no cambiar el fondo de la ejecución, solo la forma.
@@ -287,6 +287,8 @@ Para la presentación de los resultados, se exponen los consecuentes de ejecutar
 de la solución dos. Este criterio de elección, como se muestra en la siguiente sección, resulta irrelevante, al presentar 
 resultados similares para ambas.
 
+\subsubsection{Métricas generales y discusión de resultados}
+
 En cuanto a las métricas generales obtenidas, mostradas en la figura~\ref{fig:general_metrics_results}
 
 \begin{figure}[H]
@@ -296,24 +298,34 @@ En cuanto a las métricas generales obtenidas, mostradas en la figura~\ref{fig:g
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics_results}
 \end{figure}
 
-se observa que los valores de ocupación son congruentes con los esperados. Se muestra una disminución de más o menos
-tres puntos porcentuales para cada resultado, manifestando no obstante la diferencia entre sentidos. Tres puntos porcentuales
-representan unos 2,4 pasajeros sobre el total de la ocupación del autobús, resultando una cifra asumible teniendo en cuenta
-que el valor se construye sobre variables aleatorias estimadas mediante distribuciones ajustadas, lo que puede inducir varianza
-en el modelo.
+se observa que los valores de ocupación resultan congruentes con los esperados. Se presenta una disminución en torno a los
+tres puntos porcentuales en ambos sentidos, lo que equivale a 2,01 pasajeros sobre la capacidad total del vehículo, o a 0,13
+desviaciones estándar de la propia distribución de ocupación. Conviene precisar que dicho desplazamiento no constituye un
+desfase constante sino multiplicativo: la regresión de la ocupación simulada frente a la esperada arroja una pendiente de
+0,901 con ordenada en el origen de +0,74, valor estadísticamente indistinguible de cero.
+
+El origen principal del sesgo se identifica en la oferta simulada. Una ejecución preliminar con 176 viajes, frente a
+los 163,1 que promedian los días laborables estudiados, arrojaba un sesgo negativo de 4,41 pasajeros; al ajustar el horario de
+expediciones a la oferta real observada, este se redujo a 2,01, confirmando el mecanismo previsto. La magnitud remanente
+resulta ya del orden del propio desbalance presente en los datos de partida, ya que los conteos operacionales registran un
+4,4\% menos de bajadas que de subidas sobre el conjunto del periodo, discrepancia incompatible con la conservación de
+pasajeros de una línea cerrada y atribuible al sistema de conteo embarcado, que establece una cota inferior al grado de
+concordancia alcanzable.
 
 Como se expone en la sección relativa a la metodología y al estudio de viabilidad de datos operacionales (véase secciones
 ~\ref{sec:kpi_extraction} y~\ref{section:operational} respectivamente), la comparativa entre los distintos valores
 de \textit{ocupación} para cada parada y franja horaria se realiza mediante métricas de Bhattacharyya~\cite{bhattacharyya1946divergence}.
-Concretamente, se utiliza el~\textbf{coeficiente de Bhattacharyya}, que mide la distancia existente entre dos distribuciones
-gaussianas. El valor del coeficiente no mide en sí mismo si dos distribuciones son equivalentes, únicamente cuantifica
-la distancia existente entre ambas. Por ello, se establece arbitrariamente una estricta frontera con valor de~\textbf{0.97} como
+Concretamente, se utiliza el~\textbf{coeficiente de Bhattacharyya}, que mide el grado de solapamiento
+existente entre dos distribuciones gaussianas, inferido mediante la fórmula cerrada para el caso derivada por~\textcite{kailath1967divergence}.
+El valor del coeficiente, expresado mediante un valor entre 0 (nada de solapamiento) y 1 (solapamiento completo),
+no mide en sí mismo si dos distribuciones son equivalentes, únicamente cuantifica
+el solapamiento de ambas. Por ello, se establece de forma conservadora una estricta frontera con valor de~\textbf{0.97} como
 límite inferior a igualar o superar para considerar dos distribuciones equivalentes. Esto, considerando que el coeficiente
 representa el producto de comparativa de varianzas y comparativa de niveles, equivale ante varianzas iguales que
-la diferencia en el nivel de las distribuciones no puede superar $0.49\sigma$.
+la diferencia en la media de las distribuciones no puede superar $0.49\sigma$.
 
 El resultado sobre la aplicación de esta comparativa para cada parada en cada franja horaria resulta en un discreto
-~\textbf{33,6}\% de distribuciones equivalentes. No obstante, al proyectar el valor de media esperado versus simulado
+~\textbf{33,6}\% de distribuciones equivalentes.
 
 \begin{figure}[H]
 \centering
@@ -322,12 +334,10 @@ El resultado sobre la aplicación de esta comparativa para cada parada en cada f
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bhat_occ_comparative}
 \end{figure}
 
-se observa como existe un sesgo medio de unos dos pasajeros por debajo, consistente con lo establecido en las métricas
-generales.
-
 Lo interesante de esta figura resulta en la existencia de puntos cercanos en valor de nivel a la identidad que presentan
 basado en el coeficiente una no equivalencia. Esto representa una realidad de la simulación y es que
 \textbf{existe una sobredispersión latente frente a los valores esperados}.
+
 
 Esto se ejemplifica en la siguiente figura, que muestra cómo, si se asumieran varianzas iguales y se proyecta sobre la
 figura previa la sombra que representa esa diferencia de $0.49\sigma$, existe hasta un \textbf{33}\% de distribuciones
@@ -341,15 +351,101 @@ sobredispersión.
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bhat_occ_comparative_with_shadow}
 \end{figure}
 
+El origen de este comportamiento reside en el muestreo independiente de las bajadas. La ocupación constituye una magnitud
+acumulada a lo largo del recorrido, de modo que las varianzas de embarque y apeo se componen parada a parada. En el sistema
+real dicha composición se encuentra atenuada por la covarianza negativa entre las bajadas de paradas consecutivas,
+~correlación que el modelo no reproduce al sortear las bajadas de cada parada por separado.
+La varianza acumulada resulta en consecuencia superior a la observada, y el efecto se agrava conforme avanza el itinerario.
+
+Esto se expone en las figuras~\ref{fig:evolucion_de_dispersion_por_ruta_toA} y~\ref{fig:evolucion_de_dispersion_por_ruta_toB},
+en la que se observa cómo a medida que avanza la
+posición en la ruta, esa falta de covarianza negativa entre los valores de bajada aumentan la dispersión de las distribuciones
+de ocupación.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/dispersion_posicion_to_A.png}
+\caption{Evolución del valor $\sigma_{sim}/\sigma_{exp}$ a lo largo del sentido \textit{Cibeles}.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:evolucion_de_dispersion_por_ruta_toA}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/dispersion_posicion_to_B.png}
+\caption{Evolución del valor $\sigma_{sim}/\sigma_{exp}$ a lo largo del sentido \textit{La Peseta}.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:evolucion_de_dispersion_por_ruta_toB}
+\end{figure}
+
+Evaluando el resto de indicadores de rendimiento, como último análisis de las métricas a nivel general, se puede
+extraer información no existente en los datos esperados, al no poder estimarse, y se corresponde con el tiempo
+de espera medio por pasajero, desde el momento que llega a la parada hasta que se montan en un autobús. Concretamente
+se observa un valor de \textbf{9 minutos y 43 segundos}, un valor bastante estándar. De media, en 19 franjas horarias con 
+82 salidas~(la mitad de las 163 totales), por sentido se presenta una salida de cabecera cada 14 minutos, por lo que 
+una espera media de entre 9 y 10 minutos resulta congruente. Por último, el valor de \textit{regularidad} simulado
+resulta \textbf{96,2}, lo que implica que no están existiendo muchas expediciones con tiempos entre paradas superiores
+a los esperados.
 
 
+En cuanto las métricas a nivel de ruta, se observa como en las franjas horarias de las 5, 6, 7 y 8 de la mañana, en sentido
+\textit{Cibeles}, se presenta la activación de un nivel de alerta para alguna parada de la ruta, como se muestra en la
+figura~\ref{fig:ruta_cibeles_ocupacion}. Concretamente, los indicadores de alerta se activan debido a valores altos
+de ocupación o derivados, como pueden ser elevados tiempos de espera de pasajeros debido a saturación del autobús, 
+lo que coincide con el comportamiento esperado de la ruta. Esas franjas horarias para los días laborables
+en concreto se corresponden
+con la hora punta de tránsito de pasajeros hacia el centro de la capital, por lo que lejos de resultar anomalías reseñables,
+contextualiza la realidad de la línea simulada.
 
 
-% \subsubsection{KPIs obtenidos en la solución con agentes pasajero (Solución uno)}
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/ruta_cibeles_ocupacion.png}
+\caption{Resultados visuales a nivel de ruta de la simulación.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:ruta_cibeles_ocupacion}
+\end{figure}
 
 
-% \subsubsection{KPIs obtenidos en la solución sin agentes pasajero (Solución dos)}
+En relación con los tiempos entre parada, no resulta un parámetro destacable a estudiar, ya que al ser un parámetro
+obtenido directamente de las distribuciones de tiempo entre paradas estudiadas, estas coinciden prácticamente en su totalidad
+con la media esperada. La figura~\ref{fig:bhat_sim_tiempo} muestra cómo las medias se alinean en su totalidad práctica
+con la identidad.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png}
+\caption{Resultados visuales a nivel de ruta de la simulación.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bhat_sim_tiempo}
+\end{figure}
+
+Por último, en relación a las métricas a nivel de autobús, filtrando por autobús físico a nivel visual puede resultar
+que estos no se presentan \enquote{óptimos}, al activarse en la mayoria de los casos dos indicadores de alerta~(véase
+~\ref{fig:autobus_simulacion})
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/autobus_simulacion.png}
+\caption{Resultados visuales a nivel de autobús físico de la simulación.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:autobus_simulacion}
+\end{figure}
+
+Sin embargo, analizando las expediciones destacadas, se observa que la presencia de estos indicadores de alerta resulta
+de retrasos en las salidas reales frente a las esperadas por la planificación de la oferta. Esto no resulta un problema,
+sino que deriva de la necesidad de ajustar en la medida de lo posible las salidas a la media esperada, con el fin de capturar
+con precisión la validación operativa. Además, el retraso existente no representa una medida extrema, sino que es congruente
+con pequeños retrasos relacionados con variaciones en el tiempo de tránsito según la franja horaria.
+
+Conclusiones similares se derivan del filtrado por franja horaria, mostrado en la figura~\ref{fig:autobus_franja_simulacion},
+donde los indicadores de alerta en cualquier caso únicamente derivan de pequeños retrasos en la salida esperada.
+No se observa saturación excesiva en los autobuses, implicando que la oferta media planificada para esta ruta es capaz
+de capturar y satisfacer la demanda existente para los días laborables.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/autobus_franja_simulacion.png}
+\caption{Resultados visuales a nivel de autobús por franja horaria de la simulación.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:autobus_franja_simulacion}
+\end{figure}
 
 
-%\section{Experimentación paramétrica}\label{sec:experiments}
-
+Este análisis supone la validación de la primera premisa especificada, ya que se puede considerar que el sistema propuesto
+es capaz de replicar de forma consistente, pese al sesgo encontrado, la simulación de los días laborables emulando 
+la media de oferta programada.
