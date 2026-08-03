@@ -81,7 +81,7 @@ KPIs se muestra debajo del mapa. De esta forma se tiene un filtrado a dos escala
 filtro \textit{general (agregado)}/ \textit{franja horaria} y la segunda resulta de seleccionar una parada/tramo concreto.
 
 La figura~\ref{fig:route_metrics_general} muestra cómo se visualiza este mapa para cada sentido dentro de la interfaz y 
-como se genera el filtro a dos niveles.
+cómo se genera el filtro a dos niveles.
 
 \begin{figure}[H]
 \centering
@@ -94,7 +94,7 @@ como se genera el filtro a dos niveles.
 
 Dentro de los distintos KPIs asociados a las paradas, al seleccionar el filtro general se muestran los indicadores
 específicos para la parada de forma agregada, junto con una figura asociada relativa al valor medio de ocupación 
-del autobús por franja horaria al paso por la parada. Las Figuras~\ref{fig:occ_mean_timeslot} y~\ref{fig:kpi_stop_general} 
+del autobús por franja horaria al paso por la parada. Las figuras~\ref{fig:occ_mean_timeslot} y~\ref{fig:kpi_stop_general} 
 muestran cómo se visualizan dentro de la interfaz.
 
 \begin{figure}[H]
@@ -183,8 +183,6 @@ la hora de salida programada; \texttt{SENTIDO} el sentido que lleva ese viaje; \
 \texttt{SALIDA} la hora de salida media real del viaje; \texttt{T.VIAJE} la duración media del viaje y por último,
 \texttt{REGULARIDAD} introduce el valor de regularidad computado según lo establecido por la empresa.
 
-
-
 A la selección de una fila concreta, dicha información relativa se presenta de igual manera que otros KPIs, como se 
 expone en la figura~\ref{fig:kpi_bus_fisic}. Asociado a esta, se añade una figura que contiene la evolución de ocupación
 media a lo largo de las distintas paradas de la ruta. La figura~\ref{fig:evolution_route} ejemplifica esta.
@@ -248,7 +246,7 @@ Esta sección presenta los resultados referentes a la validación operativa. Dic
 no se alteren los valores relacionados con distribuciones de embarque/apeo, y donde la operativa de autobuses dispuesta sea congruente
 con la establecida de referencia para un día real de servicio.
 
-Se esperan validar dos premisas clave. La primera es obtener un resultado que sea congruente con los datos estudiados
+Se pretende validar dos premisas clave. La primera es obtener un resultado que sea congruente con los datos estudiados
 de~\enquote{normalidad}~(con normalidad refiriéndose a la no existencia de anomalías reseñables para un día laborable), y
 sin que exista ningún punto donde haya signos de alerta extrema, ni a nivel de ruta ni a nivel de autobús.
 La segunda premisa es, ejecutando esta simulación para ambas soluciones existentes, que estas sean equivalentes en los resultados obtenidos,
@@ -258,23 +256,25 @@ al no cambiar el fondo de la ejecución, solo la forma.
 
 \subsection{Validación operativa}
 La validación operativa supone el estudio sobre la primera premisa presentada. Para ello, antes de discutir los resultados obtenidos
-por la simulación, se presentan los valores medios esperables,computados sobre los datos de los días laborables sin gratuidad utilizados
+por la simulación, se presentan los valores medios esperables, computados sobre los datos de los días laborables sin gratuidad utilizados
 a lo largo del trabajo.
 
 Concretamente, ateniéndose a las métricas generales, se observa un porcentaje medio de ocupación del \textbf{31,9}\%, donde al desagregar
 por sentido se obtienen valores medios \textit{sentido Cibeles}: \textbf{33,9}\% y \textit{sentido La Peseta}: \textbf{30}\%.
 En cuanto a la operativa de servicio, el promedio de autobuses físicos utilizados es \textbf{11,4}, mientras que los viajes totales contando
-ambos sentidos promedia los \textbf{163,1}. Estos valores son más relevantes de lo que podría parecer, puesto a que \textbf{existe una limitación 
+ambos sentidos promedia los \textbf{163,1}. Estos valores son más relevantes de lo que podría parecer, puesto que \textbf{existe una limitación 
 relevante} que relaciona la oferta con el modelado de las distribuciones de entrada del simulador.
 
 Dicha limitación no obstante \textbf{no choca con el objetivo principal del trabajo}, que sigue siendo estudiar la viabilidad operativa
 de la simulación de los días laborables, sino que impide estudiar con precisión escenarios que alteren paramétricamente la oferta y la demanda.
 Esto se debe a la forma de modelar la descarga de pasajeros, ya que esta resulta \textbf{invariante frente a la oferta}, generando
 mismas distribuciones de los valores de apeo independientemente del número de autobuses que operen o de la carga de estos.
-Al modelar la descarga de pasajeros como distribución de eventos independientes, considerando
-el espacio muestral como los valores de descarga de todos los autobuses en una parada a lo largo de una hora, estos se presentan \textbf{fuertemente
-sesgados} tanto al valor de ocupación del autobús como a la oferta de servicio en cuestión. Como el estudio comparativo de la simulación
-con los valores promedio de los días laborables no se desvía de estos valores,~\textbf{este sesgo no supone motivo de rechazo} de la 
+Al modelar la descarga de pasajeros como distribución de eventos independientes, estas llevan implícitas las condiciones reales de oferta y 
+ocupación bajo las que fueron registradas. En consecuencia, el apeo resulta \textbf{invariante frente a la oferta simulada},
+lo que invalida su uso en escenarios de tipo \textit{what-if}.
+
+Como el estudio comparativo de la simulación
+con los valores promedio de los días laborables no se desvía de estos,~\textbf{este sesgo no supone motivo de rechazo} de la 
 validación del simulador. No obstante, esta casuística alteraría los distintos KPIs obtenidos en el caso de estudiar escenarios
 que alteren oferta y/o demanda, por lo que estos experimentos resultan fuera del alcance de este trabajo.
 
@@ -298,14 +298,14 @@ En cuanto a las métricas generales obtenidas, mostradas en la figura~\ref{fig:g
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics_results}
 \end{figure}
 
-se observa que los valores de ocupación resultan congruentes con los esperados. Se presenta una disminución en torno a los
+se observa que los valores de ocupación resultan congruentes con los esperados. Se presenta una \textbf{disminución} en torno a los
 tres puntos porcentuales en ambos sentidos, lo que equivale a 2,01 pasajeros sobre la capacidad total del vehículo, o a 0,13
 desviaciones estándar de la propia distribución de ocupación. Conviene precisar que dicho desplazamiento no constituye un
-desfase constante sino multiplicativo: la regresión de la ocupación simulada frente a la esperada arroja una pendiente de
+desfase constante sino multiplicativo, ya que la regresión de la ocupación simulada frente a la esperada arroja una pendiente de
 0,901 con ordenada en el origen de +0,74, valor estadísticamente indistinguible de cero.
 
 El origen principal del sesgo se identifica en la oferta simulada. Una ejecución preliminar con 176 viajes, frente a
-los 163,1 que promedian los días laborables estudiados, arrojaba un sesgo negativo de 4,41 pasajeros; al ajustar el horario de
+los 163,1 que promedian los días laborables estudiados, arroja un sesgo negativo de 4,41 pasajeros; al ajustar el horario de
 expediciones a la oferta real observada, este se redujo a 2,01, confirmando el mecanismo previsto. La magnitud remanente
 resulta ya del orden del propio desbalance presente en los datos de partida, ya que los conteos operacionales registran un
 4,4\% menos de bajadas que de subidas sobre el conjunto del periodo, discrepancia incompatible con la conservación de
@@ -319,18 +319,19 @@ Concretamente, se utiliza el~\textbf{coeficiente de Bhattacharyya}, que mide el 
 existente entre dos distribuciones gaussianas, inferido mediante la fórmula cerrada para el caso derivada por~\textcite{kailath1967divergence}.
 El valor del coeficiente, expresado mediante un valor entre 0 (nada de solapamiento) y 1 (solapamiento completo),
 no mide en sí mismo si dos distribuciones son equivalentes, únicamente cuantifica
-el solapamiento de ambas. Por ello, se establece de forma conservadora una estricta frontera con valor de~\textbf{0.97} como
+el solapamiento de ambas. Por ello, se establece de forma conservadora una estricta frontera con valor de~\textbf{0,97} como
 límite inferior a igualar o superar para considerar dos distribuciones equivalentes. Esto, considerando que el coeficiente
-representa el producto de comparativa de varianzas y comparativa de niveles, equivale ante varianzas iguales que
-la diferencia en la media de las distribuciones no puede superar $0.49\sigma$.
+representa el producto de comparativa de varianzas y comparativa de niveles, equivale a que, ante varianzas iguales,
+~la diferencia en la media de las distribuciones no puede superar $0,49\sigma$.
 
 El resultado sobre la aplicación de esta comparativa para cada parada en cada franja horaria resulta en un discreto
-~\textbf{33,6}\% de distribuciones equivalentes.
+~\textbf{33,6}\% de distribuciones equivalentes. A continuación, en la figura~\ref{fig:bhat_occ_comparative} se proyecta
+el valor de las medias simuladas frente a las esperadas, caracterizando por colores verde y rojo su equivalencia.
 
 \begin{figure}[H]
 \centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png}
-\caption{Proyección de media simulada de ocupación por parada y franja horaria frente a media esperada}
+\caption{Proyección de media simulada de ocupación por parada y franja horaria frente a media esperada.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bhat_occ_comparative}
 \end{figure}
 
@@ -340,9 +341,9 @@ basado en el coeficiente una no equivalencia. Esto representa una realidad de la
 
 
 Esto se ejemplifica en la siguiente figura, que muestra cómo, si se asumieran varianzas iguales y se proyecta sobre la
-figura previa la sombra que representa esa diferencia de $0.49\sigma$, existe hasta un \textbf{33}\% de distribuciones
-que se considerarían equivalentes que considerando ambas métricas (media y desviación), no lo son, ejemplificando esta
-sobredispersión.
+figura previa la sombra que representa esa diferencia de $0,49\sigma$, existen hasta un \textbf{33}\% de distribuciones
+que con su valor de media dentro de esta banda, no alcanzan el umbral del coeficiente debido a la dispersión existente
+sobre los datos simulados.
 
 \begin{figure}[H]
 \centering
@@ -354,12 +355,12 @@ sobredispersión.
 El origen de este comportamiento reside en el muestreo independiente de las bajadas. La ocupación constituye una magnitud
 acumulada a lo largo del recorrido, de modo que las varianzas de embarque y apeo se componen parada a parada. En el sistema
 real dicha composición se encuentra atenuada por la covarianza negativa entre las bajadas de paradas consecutivas,
-~correlación que el modelo no reproduce al sortear las bajadas de cada parada por separado.
+~correlación que el modelo no reproduce al muestrear las bajadas de cada parada por separado.
 La varianza acumulada resulta en consecuencia superior a la observada, y el efecto se agrava conforme avanza el itinerario.
 
 Esto se expone en las figuras~\ref{fig:evolucion_de_dispersion_por_ruta_toA} y~\ref{fig:evolucion_de_dispersion_por_ruta_toB},
 en la que se observa cómo a medida que avanza la
-posición en la ruta, esa falta de covarianza negativa entre los valores de bajada aumentan la dispersión de las distribuciones
+posición en la ruta, esa falta de covarianza negativa entre los valores de bajada aumenta la dispersión de las distribuciones
 de ocupación.
 
 \begin{figure}[H]
@@ -376,17 +377,47 @@ de ocupación.
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:evolucion_de_dispersion_por_ruta_toB}
 \end{figure}
 
-Evaluando el resto de indicadores de rendimiento, como último análisis de las métricas a nivel general, se puede
-extraer información no existente en los datos esperados, al no poder estimarse, y se corresponde con el tiempo
-de espera medio por pasajero, desde el momento que llega a la parada hasta que se montan en un autobús. Concretamente
-se observa un valor de \textbf{9 minutos y 43 segundos}, un valor bastante estándar. De media, en 19 franjas horarias con 
-82 salidas~(la mitad de las 163 totales), por sentido se presenta una salida de cabecera cada 14 minutos, por lo que 
-una espera media de entre 9 y 10 minutos resulta congruente. Por último, el valor de \textit{regularidad} simulado
-resulta \textbf{96,2}, lo que implica que no están existiendo muchas expediciones con tiempos entre paradas superiores
+Evaluando el resto de indicadores de rendimiento, como último análisis de las métricas a nivel general,
+se puede evaluar un indicador
+que no admite contraste directo con los datos de referencia de EMT, ya que
+estos no registran la espera individual de cada viajero, y se corresponde con su tiempo medio de
+espera. La simulación arroja un valor de \textbf{9 minutos y 43 segundos}.
+
+Aunque no exista una referencia con el que validarlo, sí es posible
+acotarlo analíticamente. Bajo incidencia aleatoria de llegadas a la parada,
+supuesto que el modelo satisface por construcción, el tiempo de espera
+esperado depende únicamente de la media y la varianza del intervalo de paso
+$H$ \cite{welding1957instability, osuna1972control}:
+
+\begin{equation}
+E[W] = \frac{E[H]}{2}\left(1 + CV_H^{2}\right),
+\qquad CV_H = \frac{\sigma_H}{E[H]}
+\label{eq:espera-teorica}
+\end{equation}
+
+Con 82 salidas de cabecera por sentido distribuidas sobre las 19 franjas
+horarias simuladas, el intervalo medio de paso resulta de aproximadamente
+14~minutos. Si dicho reparto fuera perfectamente equitativo, el coeficiente de
+variación sería nulo y la ecuación~\eqref{eq:espera-teorica} se reduciría a
+$E[W] = E[H]/2 = 7$~minutos. Este valor constituye una \textbf{cota inferior}
+del tiempo de espera: bajo intervalos regulares y capacidad ilimitada,
+ninguna configuración puede situarse por debajo.
+
+En la operación simulada, sin embargo, ni la frecuencia de paso es constante
+ni la capacidad de los vehículos es ilimitada, de modo que un
+pasajero puede no embarcar en el primer autobús que llega. Ambos factores
+degeneran la espera, por lo que el
+valor de 9~min 43~s se sitúa por encima de la cota, como cabe esperar, y
+resulta congruente en orden de magnitud con el comportamiento analítico de
+referencia.
+
+Por último, se obtiene un valor de \textit{regularidad}
+de \textbf{96,2}, lo que implica que no están existiendo muchas expediciones con tiempos de ruta superiores
 a los esperados.
 
+\subsubsection{Métricas a nivel de ruta}
 
-En cuanto las métricas a nivel de ruta, se observa como en las franjas horarias de las 5, 6, 7 y 8 de la mañana, en sentido
+En cuanto a las métricas a nivel de ruta, se observa como en las franjas horarias de las 5, 6, 7 y 8 de la mañana, en sentido
 \textit{Cibeles}, se presenta la activación de un nivel de alerta para alguna parada de la ruta, como se muestra en la
 figura~\ref{fig:ruta_cibeles_ocupacion}. Concretamente, los indicadores de alerta se activan debido a valores altos
 de ocupación o derivados, como pueden ser elevados tiempos de espera de pasajeros debido a saturación del autobús, 
@@ -412,12 +443,15 @@ con la identidad.
 \begin{figure}[H]
 \centering
     \includegraphics[width=0.75\textwidth]{imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png}
-\caption{Resultados visuales a nivel de ruta de la simulación.}
+\caption{Proyección de media simulada de tiempo entre paradas frente a media esperada.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:bhat_sim_tiempo}
 \end{figure}
 
+
+
+\subsubsection{Métricas a nivel de autobús}
 Por último, en relación a las métricas a nivel de autobús, filtrando por autobús físico a nivel visual puede resultar
-que estos no se presentan \enquote{óptimos}, al activarse en la mayoria de los casos dos indicadores de alerta~(véase
+que estos no se presentan \enquote{óptimos}, al activarse en la mayoría de los casos dos indicadores de alerta~(véase
 ~\ref{fig:autobus_simulacion})
 
 \begin{figure}[H]
@@ -445,7 +479,144 @@ de capturar y satisfacer la demanda existente para los días laborables.
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:autobus_franja_simulacion}
 \end{figure}
 
-
-Este análisis supone la validación de la primera premisa especificada, ya que se puede considerar que el sistema propuesto
+\textbf{Este análisis supone la validación de la primera premisa especificada}, ya que se puede considerar que el sistema propuesto
 es capaz de replicar de forma consistente, pese al sesgo encontrado, la simulación de los días laborables emulando 
 la media de oferta programada.
+
+\subsection{Comparativa de soluciones}\label{subsec:solution_comparative}
+La segunda premisa establecida es la igualdad en resultados de las dos soluciones propuestas en este trabajo.
+Para validar esta, se muestran figuras comparativas de los resultados obtenidos por ambas soluciones, analizando
+los posibles puntos de divergencia con el fin de estudiar su igualdad.
+
+\subsubsection{Métricas a nivel general}
+
+En el contexto general los resultados se muestran bastante parecidos. Comparando las métricas obtenidas para la segunda
+solución (véase figura~\ref{fig:general_metrics_results}) con la primera (figura~\ref{fig:general_metrics_results_one})
+
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/general_metrics_results_one.png}
+\caption{Resultados de métricas a nivel general de la solución uno.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics_results_one}
+\end{figure}
+se observan unos resultados similares. Tanto el porcentaje medio como por sentido se presentan prácticamente iguales, salvo
+una variación de 0,3\% en sentido \textit{La Peseta}, que deriva en un porcentaje medio que difiere 0,2 de la referencia de la segunda solución.
+
+Con respecto al valor de la regularidad, se presenta equivalente (95,33 frente a 96,2), sugiriendo que ambos modelos capturan de la misma forma
+el tiempo de recorrido de las rutas, hecho lógico ya que como se presenta en el capítulo anterior, no existen diferencias en el tránsito de los 
+autobuses. Por último, se obtiene un valor de tiempo medio de espera por pasajero de 08:23. Este valor supone un minuto y cuarenta segundos menos
+de media de espera, tiempo que no se considera alarmantemente distinto, ya que la propia aleatoriedad del problema puede generar diferencias
+de esta escala.
+
+\subsubsection{Métricas a nivel de ruta}
+Si se comparan métricas a nivel de ruta, basándose únicamente en las activaciones de los niveles de alerta se observa como la simulación uno
+presenta en la franja de las cinco de la mañana una parada que activa dos indicadores (véase figura~\ref{fig:nivel_ruta_uno}), mientras que 
+su referente figura de la solución dos únicamente presenta un indicador de alerta activo en esa combinación parada/franja.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/nivel_ruta_uno.png}
+\caption{Resultados visuales a nivel de ruta de la simulación uno}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:nivel_ruta_uno}
+\end{figure}
+
+No obstante, al ampliar el contenido de ambas paradas
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/parada_apilada.png}
+\caption{Comparativa de KPIs a nivel de parada para parada 2535 franja 5AM (Simulación uno arriba vs Simulación dos abajo)}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:parada_apilada}
+\end{figure}
+
+se detecta cómo el indicador común a ambas resulta el tiempo medio por pasajero, elevado para esta franja debido a que al ser la primera de la 
+operativa y representar una hora donde la mayoría de servicios de la ciudad no están activos y, por lo tanto, no existe mucha demanda operativa,
+la oferta de buses existente en esa franja genera tiempos de espera elevados. La diferencia fundamental entre ambas simulaciones radica en una 
+ligera variación del porcentaje de ocupación. Como el límite para la activación se encontraba en el \textbf{75\%}, esa sutil diferencia entre
+simulaciones genera que a nivel visual el indicador de alerta sea distinto.
+
+El resto de escenarios y la casuística de la ruta se presentan similares, en relación con el comportamiento inherente de la propia ruta (mucha 
+demanda en las primeras horas de la mañana en sentido \textit{Cibeles} y mayor actividad por la tarde en sentido \textit{La Peseta}).
+
+Si se analizan también los porcentajes de equivalencia entre distribuciones de la simulación uno:
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/resultados_occ_uno.png}
+\caption{Resultados visuales a nivel de ruta de la solución uno}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:resultados_occ_uno}
+\end{figure}
+
+Se observa el mismo patrón identificado y discutido en la sección referente a la validación operativa, lo que efectivamente refuerza
+las conclusiones extraídas. Concretamente la diferencia media en la ocupación sobre las 437 combinaciones parada/franja evaluadas
+es de 0,37 pasajeros en valor absoluto, magnitud del mismo orden del error estándar esperado por el muestreo de réplicas (0,36).
+
+\subsubsection{Métricas a nivel de autobús}
+Con respecto a los autobuses, si se aplica el filtrado por autobús físico, los resultados arrojan un supuesto interesante.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/fisical_one.png}
+\caption{Resultados visuales a nivel de autobús físico de la solución uno}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:fisical_one}
+\end{figure}
+
+Se observa cómo, a diferencia de la solución dos (véase figura~\ref{fig:autobus_simulacion}) existen menos unidades físicas 
+que presentan dos indicadores de alerta. Esto, no obstante, no hace más que ejemplificar las conclusiones extraídas en la sección
+anterior, y es que el retraso existente no representa una magnitud temporal elevada. En el caso de la solución uno, no se activan
+los indicadores de alerta correspondientes con \textit{\% de simulaciones con retraso} y \textit{tiempo medio de retraso} debido 
+a que en su mayoría, estos resultaban ser cercanos a los cinco minutos. Como dada la casuística en este caso, el retraso promedio
+de salida no alcanza los cinco minutos estipulados por el indicador, se encuentran casos donde no se activa el indicador de alerta.
+
+Misma casuística se produce filtrando por franja horaria, donde este desajuste de colores se debe a estas ligeras variaciones en 
+el tiempo medio de retraso.
+
+Tras evaluar la comparación en base a las métricas de rendimiento estipuladas, \textbf{puede considerarse satisfecha} la segunda premisa,
+al presentar para la misma parametrización de entrada \textbf{un resultado equivalente para ambas soluciones propuestas en este trabajo}.
+
+
+\subsubsection{Diferencias existentes a nivel de rendimiento}
+Pese a la validación de la premisa de que ambas soluciones presentan resultados equivalentes, existe una diferencia clave entre
+ambas que cabe destacar.
+Esta resulta ser el tiempo total de ejecución. Mientras que las simulaciones realizadas sobre
+la implementación de la arquitectura de la solución dos presentan tiempos de ejecución cercanos a los \textbf{40~minutos},
+el tiempo de aquellas relativas a la solución uno promedian los \textbf{150~minutos} (unas dos horas y media).
+
+Aunque el objetivo de este trabajo \textbf{no es evaluar en rendimiento y consumo ambas soluciones}, un análisis basado en estas métricas
+puede arrojar luz acerca de los motivos detrás de la diferencia entre tiempos de ejecución. Para ello, debido a las características
+del ordenador empleado para el desarrollo (véase sección~\ref{section:usage_tools}), este incorpora un procesador que tiene 
+integrado el sistema \textit{RAPL} (de sus siglas en inglés \textbf{R}unning \textbf{A}verage \textbf{P}ower \textbf{L}imit), que 
+permite analizar en tiempo real valores relacionados con el consumo de CPU y de RAM del dispositivo.
+
+Al analizar las figuras~\ref{fig:cmp_cpu},~\ref{fig:cmp_memoria} y~\ref{fig:cmp_potencia_temperatura} resulta curioso observar que ni en cuanto a la energía, ni la potencia,
+ni la temperatura, las soluciones presentan diferencias que expliquen el elevado coste computacional de la solución uno.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/cmp_cpu.png}
+\caption{Comparativa de rendimiento de CPU para ambas soluciones.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:cmp_cpu}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/cmp_memoria.png}
+\caption{Comparativa de uso de memoria para ambas soluciones.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:cmp_memoria}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.75\textwidth]{imagenes/simulations/cmp_potencia_temperatura.png}
+\caption{Comparativa de consumo de potencia y valor de temperatura para ambas soluciones.}
+\par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:cmp_potencia_temperatura}
+\end{figure}
+
+No obstante, al analizar información relacionada con el uso dinámico de memoria, se observa cómo la memoria liberada total 
+por parte de la solución uno constituye un valor \textbf{cuatro veces mayor} que la implementada para la solución dos.
+El volumen total de memoria liberada por el recolector en la solución uno cuadriplica el de la solución dos, magnitud coherente
+con el ciclo de vida de los agentes \textit{pasajero}, creados y destruidos de forma continua a lo largo de la simulación. Ello sitúa
+el sobrecoste en la gestión del ciclo de vida de dichos agentes y en su evaluación por parte del planificador, junto con el aumento
+inherente de ciclos de ejecución presente en la simulación, pero descarta un mayor consumo
+instantáneo de recursos. El capítulo~\ref{chapter:future_works} discute posibles escenarios derivados de esta casuística.

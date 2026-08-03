@@ -3049,6 +3049,69 @@
       \verb 10.1109/TCOM.1967.1089532
       \endverb
     \endentry
+    \entry{welding1957instability}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a8c8e33e182b724c37edbcb32326fca4}{%
+           family={Welding},
+           familyi={W\bibinitperiod},
+           given={P.\bibnamedelimi I.},
+           giveni={P\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{fullhash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{bibnamehash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{authorbibnamehash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{authornamehash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{authorfullhash}{a8c8e33e182b724c37edbcb32326fca4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Operational Research Quarterly}
+      \field{number}{3}
+      \field{title}{The Instability of a Close-Interval Service}
+      \field{volume}{8}
+      \field{year}{1957}
+      \field{pages}{133\bibrangedash 142}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1057/jors.1957.21
+      \endverb
+    \endentry
+    \entry{osuna1972control}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3a070031a3eb43fd13d3989a19d3fc11}{%
+           family={Osuna},
+           familyi={O\bibinitperiod},
+           given={E.\bibnamedelimi E.},
+           giveni={E\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=be68673b1840973a709b55b9ffbd740a}{%
+           family={Newell},
+           familyi={N\bibinitperiod},
+           given={G.\bibnamedelimi F.},
+           giveni={G\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{fullhash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{bibnamehash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{authorbibnamehash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{authornamehash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{authorfullhash}{3570e499c0dd673bda3ff1bf6c146718}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Science}
+      \field{number}{1}
+      \field{title}{Control Strategies for an Idealized Public Transportation System}
+      \field{volume}{6}
+      \field{year}{1972}
+      \field{pages}{52\bibrangedash 72}
+      \range{pages}{21}
+      \verb{doi}
+      \verb 10.1287/trsc.6.1.52
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
