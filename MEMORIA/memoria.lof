@@ -1,72 +1,73 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Representación conceptual de un agente y el entorno en el que se encuentra}}{6}{figure.caption.6}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Evolución histórica del paradigma de agentes inteligentes}}{9}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Convergencia del estimador de ocupación media}}{16}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Representación de la distribución normal o de Gauss ($\mu =0$, $\sigma =1$)}}{17}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Representación de la distribución binomial negativa ($r=5$, $p=0{,}4$)}}{19}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Representación de la distribución geométrica ($p=0{,}3$)}}{20}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Representación conceptual de un agente y el entorno en el que se encuentra}}{8}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Evolución histórica del paradigma de agentes inteligentes}}{11}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Convergencia del estimador de ocupación media}}{18}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Representación de la distribución normal o de Gauss ($\mu =0$, $\sigma =1$)}}{19}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Representación de la distribución binomial negativa ($r=5$, $p=0{,}4$)}}{21}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Representación de la distribución geométrica ($p=0{,}3$)}}{22}{figure.caption.12}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de Gantt explicativo relativo a las distintas fases del desarrollo}}{26}{figure.caption.13}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Fórmula de regularidad para cada caso concreto de aplicación}}{29}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de Gantt explicativo relativo a las distintas fases del desarrollo}}{28}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Fórmula de regularidad para cada caso concreto de aplicación}}{31}{figure.caption.14}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Visualización en QGIS del mapa geoespacial convertido a shapefile}}{32}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Visualización en GAMA de los shapefile transformados}}{32}{figure.caption.16}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Modelo Master:Transaccional de la base de datos}}{34}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido Cibeles fragmentados por franja horaria.}}{40}{figure.caption.20}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido La Peseta fragmentados por franja horaria.}}{40}{figure.caption.21}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Mapa de calor de combinaciones parada-franja en sentido Cibeles con datos agregados.}}{41}{figure.caption.22}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Mapa de calor de combinaciones parada-franja en sentido Cibeles con datos desagregados.}}{42}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Mapa de calor de combinaciones parada-franja en sentido La Peseta con datos agregados.}}{42}{figure.caption.24}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Mapa de calor de combinaciones parada-franja en sentido La Peseta con datos desagregados.}}{43}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Diagrama de tarta de las distribuciones elegidas para boards y dropoffs de pasajeros sentido Cibeles.}}{46}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Diagrama de tarta de las distribuciones elegidas para boards y dropoffs de pasajeros sentido La Peseta.}}{46}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Visualización en QGIS del mapa geoespacial convertido a shapefile}}{34}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Visualización en GAMA de los shapefile transformados}}{34}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Modelo Master:Transaccional de la base de datos}}{36}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido Cibeles fragmentados por franja horaria.}}{42}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido La Peseta fragmentados por franja horaria.}}{42}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Mapa de calor de combinaciones parada-franja en sentido Cibeles con datos agregados.}}{43}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Mapa de calor de combinaciones parada-franja en sentido Cibeles con datos desagregados.}}{44}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Mapa de calor de combinaciones parada-franja en sentido La Peseta con datos agregados.}}{44}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Mapa de calor de combinaciones parada-franja en sentido La Peseta con datos desagregados.}}{45}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Diagrama de tarta de las distribuciones elegidas para boards y dropoffs de pasajeros sentido Cibeles.}}{48}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Diagrama de tarta de las distribuciones elegidas para boards y dropoffs de pasajeros sentido La Peseta.}}{48}{figure.caption.28}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {consulta de descenso} para la solución uno.}}{62}{figure.caption.38}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {solicitud de descenso} para la solución uno.}}{64}{figure.caption.40}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {notificación de llegada} para la solución uno.}}{66}{figure.caption.42}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {aviso de embarque} para la solución uno.}}{68}{figure.caption.44}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {solicitud de embarque} para la solución uno.}}{70}{figure.caption.46}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {actualización de recuento} para la solución uno.}}{72}{figure.caption.48}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Ilustración del mecanismo de generación con tasas constantes por franja horaria (valores sintéticos, únicamente ilustrativos)}}{76}{figure.caption.50}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Ilustración del mecanismo de generación con reconstrucción lineal conservativa frente al mecanismo constante (valores sintéticos, únicamente ilustrativos)}}{77}{figure.caption.51}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Estructura de directorios del proyecto base de simulación}}{83}{figure.caption.55}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {consulta tras llegada} para la solución dos.}}{89}{figure.caption.60}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {consulta de descenso} para la solución uno.}}{64}{figure.caption.38}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {solicitud de descenso} para la solución uno.}}{66}{figure.caption.40}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {notificación de llegada} para la solución uno.}}{68}{figure.caption.42}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {aviso de embarque} para la solución uno.}}{70}{figure.caption.44}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {solicitud de embarque} para la solución uno.}}{72}{figure.caption.46}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {actualización de recuento} para la solución uno.}}{74}{figure.caption.48}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Ilustración del mecanismo de generación con tasas constantes por franja horaria (valores sintéticos, únicamente ilustrativos)}}{78}{figure.caption.50}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Ilustración del mecanismo de generación con reconstrucción lineal conservativa frente al mecanismo constante (valores sintéticos, únicamente ilustrativos)}}{79}{figure.caption.51}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Estructura de directorios del proyecto base de simulación}}{85}{figure.caption.55}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {consulta tras llegada} para la solución dos.}}{91}{figure.caption.60}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Ejemplo de muestra de resultados de métricas a nivel general (valores sintéticos, únicamente ilustrativos).}}{95}{figure.caption.63}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Ejemplo de muestra de resultados de métricas a nivel de ruta (valores sintéticos, únicamente ilustrativos).}}{96}{figure.caption.64}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Ejemplo de muestra de resultados de figura de ocupación media por franja horaria al paso por parada (valores sintéticos, únicamente ilustrativos).}}{96}{figure.caption.65}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Ejemplo de muestra de resultados de métricas por parada (valores sintéticos, únicamente ilustrativos).}}{96}{figure.caption.66}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Ejemplo de muestra de comparativa de valores de ocupación (valores sintéticos, únicamente ilustrativos).}}{97}{figure.caption.67}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Ejemplo de muestra de tabla de información asociada a un autobús físico (valores sintéticos, únicamente ilustrativos).}}{99}{figure.caption.68}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Ejemplo de muestra de resultados de valores a nivel de autobús físico (valores sintéticos, únicamente ilustrativos).}}{100}{figure.caption.69}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Ejemplo de muestra de evolución de ocupación media a lo largo de las paradas de una ruta (valores sintéticos, únicamente ilustrativos).}}{100}{figure.caption.70}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Resultados de métricas a nivel general de la validación operativa.}}{103}{figure.caption.71}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces Proyección de media simulada de ocupación por parada y franja horaria frente a media esperada.}}{104}{figure.caption.72}%
-\contentsline {figure}{\numberline {6.11}{\ignorespaces Figura~\ref {fig:bhat_occ_comparative} con sombra proyectada sobre $0.49\sigma $ el valor de la identidad.}}{105}{figure.caption.73}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces Evolución del valor $\sigma _{sim}/\sigma _{exp}$ a lo largo del sentido \textit {Cibeles}.}}{106}{figure.caption.74}%
-\contentsline {figure}{\numberline {6.13}{\ignorespaces Evolución del valor $\sigma _{sim}/\sigma _{exp}$ a lo largo del sentido \textit {La Peseta}.}}{106}{figure.caption.75}%
-\contentsline {figure}{\numberline {6.14}{\ignorespaces Resultados visuales a nivel de ruta de la simulación.}}{108}{figure.caption.76}%
-\contentsline {figure}{\numberline {6.15}{\ignorespaces Proyección de media simulada de tiempo entre paradas frente a media esperada.}}{108}{figure.caption.77}%
-\contentsline {figure}{\numberline {6.16}{\ignorespaces Resultados visuales a nivel de autobús físico de la simulación.}}{109}{figure.caption.78}%
-\contentsline {figure}{\numberline {6.17}{\ignorespaces Resultados visuales a nivel de autobús por franja horaria de la simulación.}}{110}{figure.caption.79}%
-\contentsline {figure}{\numberline {6.18}{\ignorespaces Resultados de métricas a nivel general de la solución uno.}}{111}{figure.caption.80}%
-\contentsline {figure}{\numberline {6.19}{\ignorespaces Resultados visuales a nivel de ruta de la simulación uno}}{111}{figure.caption.81}%
-\contentsline {figure}{\numberline {6.20}{\ignorespaces Comparativa de KPIs a nivel de parada para parada 2535 franja 5AM (Simulación uno arriba vs Simulación dos abajo)}}{112}{figure.caption.82}%
-\contentsline {figure}{\numberline {6.21}{\ignorespaces Resultados visuales a nivel de ruta de la solución uno}}{113}{figure.caption.83}%
-\contentsline {figure}{\numberline {6.22}{\ignorespaces Resultados visuales a nivel de autobús físico de la solución uno}}{113}{figure.caption.84}%
-\contentsline {figure}{\numberline {6.23}{\ignorespaces Comparativa de rendimiento de CPU para ambas soluciones.}}{115}{figure.caption.85}%
-\contentsline {figure}{\numberline {6.24}{\ignorespaces Comparativa de uso de memoria para ambas soluciones.}}{115}{figure.caption.86}%
-\contentsline {figure}{\numberline {6.25}{\ignorespaces Comparativa de consumo de potencia y valor de temperatura para ambas soluciones.}}{116}{figure.caption.87}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Ejemplo de muestra de resultados de métricas a nivel general (valores sintéticos, únicamente ilustrativos).}}{97}{figure.caption.63}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Ejemplo de muestra de resultados de métricas a nivel de ruta (valores sintéticos, únicamente ilustrativos).}}{98}{figure.caption.64}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Ejemplo de muestra de resultados de figura de ocupación media por franja horaria al paso por parada (valores sintéticos, únicamente ilustrativos).}}{98}{figure.caption.65}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Ejemplo de muestra de resultados de métricas por parada (valores sintéticos, únicamente ilustrativos).}}{98}{figure.caption.66}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Ejemplo de muestra de comparativa de valores de ocupación (valores sintéticos, únicamente ilustrativos).}}{99}{figure.caption.67}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Ejemplo de muestra de tabla de información asociada a un autobús físico (valores sintéticos, únicamente ilustrativos).}}{101}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Ejemplo de muestra de resultados de valores a nivel de autobús físico (valores sintéticos, únicamente ilustrativos).}}{102}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Ejemplo de muestra de evolución de ocupación media a lo largo de las paradas de una ruta (valores sintéticos, únicamente ilustrativos).}}{102}{figure.caption.70}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Resultados de métricas a nivel general de la validación operativa.}}{105}{figure.caption.71}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Proyección de media simulada de ocupación por parada y franja horaria frente a media esperada.}}{106}{figure.caption.72}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Figura~\ref {fig:bhat_occ_comparative} con sombra proyectada sobre $0.49\sigma $ el valor de la identidad.}}{107}{figure.caption.73}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Evolución del valor $\sigma _{sim}/\sigma _{exp}$ a lo largo del sentido \textit {Cibeles}.}}{108}{figure.caption.74}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Evolución del valor $\sigma _{sim}/\sigma _{exp}$ a lo largo del sentido \textit {La Peseta}.}}{108}{figure.caption.75}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Resultados visuales a nivel de ruta de la simulación.}}{110}{figure.caption.76}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Proyección de media simulada de tiempo entre paradas frente a media esperada.}}{110}{figure.caption.77}%
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Resultados visuales a nivel de autobús físico de la simulación.}}{111}{figure.caption.78}%
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Resultados visuales a nivel de autobús por franja horaria de la simulación.}}{112}{figure.caption.79}%
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Resultados de métricas a nivel general de la solución uno.}}{113}{figure.caption.80}%
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Resultados visuales a nivel de ruta de la simulación uno}}{113}{figure.caption.81}%
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Comparativa de KPIs a nivel de parada para parada 2535 franja 5AM (Simulación uno arriba vs Simulación dos abajo)}}{114}{figure.caption.82}%
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Resultados visuales a nivel de ruta de la solución uno}}{115}{figure.caption.83}%
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Resultados visuales a nivel de autobús físico de la solución uno}}{115}{figure.caption.84}%
+\contentsline {figure}{\numberline {6.23}{\ignorespaces Comparativa de rendimiento de CPU para ambas soluciones.}}{117}{figure.caption.85}%
+\contentsline {figure}{\numberline {6.24}{\ignorespaces Comparativa de uso de memoria para ambas soluciones.}}{117}{figure.caption.86}%
+\contentsline {figure}{\numberline {6.25}{\ignorespaces Comparativa de consumo de potencia y valor de temperatura para ambas soluciones.}}{118}{figure.caption.87}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido Cibeles con datos agregados.}}{142}{figure.caption.89}%
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido Cibeles con datos desagregados.}}{143}{figure.caption.90}%
-\contentsline {figure}{\numberline {B.3}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido La Peseta con datos agregados.}}{144}{figure.caption.91}%
-\contentsline {figure}{\numberline {B.4}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido La Peseta con datos desagregados.}}{145}{figure.caption.92}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido Cibeles con datos agregados.}}{145}{figure.caption.89}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido Cibeles con datos desagregados.}}{146}{figure.caption.90}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido La Peseta con datos agregados.}}{147}{figure.caption.91}%
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido La Peseta con datos desagregados.}}{148}{figure.caption.92}%
+\addvspace {10\p@ }
 \contentsfinish 

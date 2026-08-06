@@ -394,6 +394,10 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def
@@ -1155,6 +1159,11 @@ INPUT ./imagenes/simulations/cmp_potencia_temperatura.png
 INPUT ./imagenes/simulations/cmp_potencia_temperatura.png
 INPUT ./imagenes/simulations/cmp_potencia_temperatura.png
 INPUT ./imagenes/simulations/cmp_potencia_temperatura.png
+INPUT ./chapter/section_regulatory/regulatory.tex
+INPUT ./chapter/section_regulatory/regulatory.tex
+INPUT ./chapter/section_regulatory/regulatory.tex
+INPUT ./chapter/section_regulatory/regulatory.tex
+INPUT chapter/section_regulatory/regulatory.tex
 INPUT ./chapter/section_budget/budget.tex
 INPUT ./chapter/section_budget/budget.tex
 INPUT ./chapter/section_budget/budget.tex
@@ -1165,6 +1174,11 @@ INPUT ./chapter/section_future_works/future.tex
 INPUT ./chapter/section_future_works/future.tex
 INPUT ./chapter/section_future_works/future.tex
 INPUT chapter/section_future_works/future.tex
+INPUT ./chapter/section_ending/conclusion.tex
+INPUT ./chapter/section_ending/conclusion.tex
+INPUT ./chapter/section_ending/conclusion.tex
+INPUT ./chapter/section_ending/conclusion.tex
+INPUT chapter/section_ending/conclusion.tex
 INPUT ./anex/anex_requirements/requirements.tex
 INPUT ./anex/anex_requirements/requirements.tex
 INPUT ./anex/anex_requirements/requirements.tex
@@ -1199,6 +1213,12 @@ INPUT ./imagenes/to_B/normality_stop_individual.png
 INPUT ./imagenes/to_B/normality_stop_individual.png
 INPUT ./imagenes/to_B/normality_stop_individual.png
 INPUT ./imagenes/to_B/normality_stop_individual.png
+INPUT ./anex/anex_iag/iag.tex
+INPUT ./anex/anex_iag/iag.tex
+INPUT ./anex/anex_iag/iag.tex
+INPUT ./anex/anex_iag/iag.tex
+INPUT anex/anex_iag/iag.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xr.tfm
 INPUT memoria.aux
 INPUT ./memoria.out
 INPUT ./memoria.out
@@ -1214,6 +1234,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txex.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsya.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb

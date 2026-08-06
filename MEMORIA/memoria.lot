@@ -1,37 +1,38 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Comparativa de plataformas de desarrollo de sistemas multiagente}}{10}{table.caption.8}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Comparativa de plataformas de desarrollo de sistemas multiagente}}{12}{table.caption.8}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Parámetros de la tabla Master}}{35}{table.caption.18}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Parámetros de la tabla Transaccional}}{36}{table.caption.19}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Porcentaje de hipótesis no rechazadas para datos intra-parada}}{45}{table.caption.26}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Ejemplo de formato del fichero CSV de parámetros de entrada generado sobre datos intra-parada (fragmento ilustrativo).}}{47}{table.caption.29}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Ejemplo de formato del fichero CSV de parámetros de entrada generado sobre datos inter-parada (fragmento ilustrativo).}}{48}{table.caption.30}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Parámetros de la tabla Master}}{37}{table.caption.18}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Parámetros de la tabla Transaccional}}{38}{table.caption.19}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Porcentaje de hipótesis no rechazadas para datos intra-parada}}{47}{table.caption.26}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Ejemplo de formato del fichero CSV de parámetros de entrada generado sobre datos intra-parada (fragmento ilustrativo).}}{49}{table.caption.29}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Ejemplo de formato del fichero CSV de parámetros de entrada generado sobre datos inter-parada (fragmento ilustrativo).}}{50}{table.caption.30}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Protocolos de comunicación existentes en la solución uno}}{52}{table.caption.31}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Estado interno relevante del agente autobús para la solución uno}}{53}{table.caption.32}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Papel del agente \textit {autobús} dentro de los distintos protocolos de comunicación existentes en la solución uno}}{55}{table.caption.33}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Estado interno relevante del agente pasajero para la solución uno}}{57}{table.caption.34}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Papel del agente \textit {pasajero} dentro de los distintos protocolos de comunicación existentes en la solución uno}}{58}{table.caption.35}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Estado interno relevante del agente parada para la solución uno}}{59}{table.caption.36}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Papel del agente \textit {parada} dentro de los distintos protocolos de comunicación existentes en la solución uno}}{60}{table.caption.37}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {consulta de descenso} para la solución uno}}{63}{table.caption.39}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {solicitud de descenso} para la solución uno}}{65}{table.caption.41}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {notificación de llegada} para la solución uno}}{67}{table.caption.43}%
-\contentsline {table}{\numberline {5.11}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {aviso de embarque} para la solución uno}}{69}{table.caption.45}%
-\contentsline {table}{\numberline {5.12}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {solicitud de embarque} para la solución uno}}{71}{table.caption.47}%
-\contentsline {table}{\numberline {5.13}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {actualización de recuento} para la solución uno}}{73}{table.caption.49}%
-\contentsline {table}{\numberline {5.14}{\ignorespaces Estructura traspuesta del fichero CSV contenedor de información referente a la operativa de autobuses}}{80}{table.caption.52}%
-\contentsline {table}{\numberline {5.15}{\ignorespaces Estructura traspuesta del fichero CSV contenedor de información referente a la información de pasajeros}}{81}{table.caption.53}%
-\contentsline {table}{\numberline {5.16}{\ignorespaces Estructura traspuesta del fichero CSV contenedor de información referente a las anomalías}}{82}{table.caption.54}%
-\contentsline {table}{\numberline {5.17}{\ignorespaces Protocolos de comunicación existentes en la solución dos}}{85}{table.caption.56}%
-\contentsline {table}{\numberline {5.18}{\ignorespaces Papel del agente \textit {autobús} dentro de los distintos protocolos de comunicación existentes en la solución dos}}{86}{table.caption.57}%
-\contentsline {table}{\numberline {5.19}{\ignorespaces Estado interno relevante del agente parada para la solución dos}}{87}{table.caption.58}%
-\contentsline {table}{\numberline {5.20}{\ignorespaces Papel del agente \textit {parada} dentro de los distintos protocolos de comunicación existentes en la solución dos}}{88}{table.caption.59}%
-\contentsline {table}{\numberline {5.21}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo~\textit {consulta tras llegada} para la solución dos}}{90}{table.caption.61}%
-\contentsline {table}{\numberline {5.22}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {actualización de recuento} para la solución dos}}{91}{table.caption.62}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Protocolos de comunicación existentes en la solución uno}}{54}{table.caption.31}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Estado interno relevante del agente autobús para la solución uno}}{55}{table.caption.32}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Papel del agente \textit {autobús} dentro de los distintos protocolos de comunicación existentes en la solución uno}}{57}{table.caption.33}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Estado interno relevante del agente pasajero para la solución uno}}{59}{table.caption.34}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Papel del agente \textit {pasajero} dentro de los distintos protocolos de comunicación existentes en la solución uno}}{60}{table.caption.35}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Estado interno relevante del agente parada para la solución uno}}{61}{table.caption.36}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Papel del agente \textit {parada} dentro de los distintos protocolos de comunicación existentes en la solución uno}}{62}{table.caption.37}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {consulta de descenso} para la solución uno}}{65}{table.caption.39}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {solicitud de descenso} para la solución uno}}{67}{table.caption.41}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {notificación de llegada} para la solución uno}}{69}{table.caption.43}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {aviso de embarque} para la solución uno}}{71}{table.caption.45}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {solicitud de embarque} para la solución uno}}{73}{table.caption.47}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {actualización de recuento} para la solución uno}}{75}{table.caption.49}%
+\contentsline {table}{\numberline {5.14}{\ignorespaces Estructura traspuesta del fichero CSV contenedor de información referente a la operativa de autobuses}}{82}{table.caption.52}%
+\contentsline {table}{\numberline {5.15}{\ignorespaces Estructura traspuesta del fichero CSV contenedor de información referente a la información de pasajeros}}{83}{table.caption.53}%
+\contentsline {table}{\numberline {5.16}{\ignorespaces Estructura traspuesta del fichero CSV contenedor de información referente a las anomalías}}{84}{table.caption.54}%
+\contentsline {table}{\numberline {5.17}{\ignorespaces Protocolos de comunicación existentes en la solución dos}}{87}{table.caption.56}%
+\contentsline {table}{\numberline {5.18}{\ignorespaces Papel del agente \textit {autobús} dentro de los distintos protocolos de comunicación existentes en la solución dos}}{88}{table.caption.57}%
+\contentsline {table}{\numberline {5.19}{\ignorespaces Estado interno relevante del agente parada para la solución dos}}{89}{table.caption.58}%
+\contentsline {table}{\numberline {5.20}{\ignorespaces Papel del agente \textit {parada} dentro de los distintos protocolos de comunicación existentes en la solución dos}}{90}{table.caption.59}%
+\contentsline {table}{\numberline {5.21}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo~\textit {consulta tras llegada} para la solución dos}}{92}{table.caption.61}%
+\contentsline {table}{\numberline {5.22}{\ignorespaces Relación y explicación de contenidos de los mensajes del protocolo \textit {actualización de recuento} para la solución dos}}{93}{table.caption.62}%
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
