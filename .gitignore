@@ -18,7 +18,8 @@ _site/
 Gemfile.lock
 
 WEB_DEVEL/node_modules
-
+*.o
+*.d
 
 .claude
 

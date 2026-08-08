@@ -1,4 +1,256 @@
 \section{Presupuesto}
 
+En esta sección se detalla la estimación económica del proyecto, entendida como el coste
+que habría supuesto el desarrollo completo del simulador durante los ocho meses de
+trabajo. Se trata de la valoración de un proyecto de investigación desarrollado en el
+marco de una cátedra universitaria, si bien se han incorporado los márgenes habituales
+en este tipo de documentos con el fin de reflejar el coste de su ejecución en un contexto
+profesional.
+
+\subsection{Metodología y supuestos de cálculo}
+
+Las retribuciones del personal docente e investigador se han obtenido de las tablas
+retributivas publicadas por la universidad~\cite{uc3m_retribuciones}, tomando en ambos
+casos la correspondiente a la categoría profesional a jornada completa, sin incorporar
+trienios, complementos por méritos docentes ni complementos autonómicos. La estimación
+resultante es, por tanto, conservadora. El coste del personal investigador en formación se
+ha calculado a partir de las nóminas asociadas al contrato vinculado al proyecto.
+
+Sobre las retribuciones brutas se aplican las cargas sociales correspondientes a la
+aportación empresarial, que en el caso del contrato del autor ascienden al 24,64\,\% del
+bruto según las cuotas patronales que figuran en las propias nóminas, y que para el
+personal docente funcionario se han estimado en un 32\,\%. El coste horario se obtiene
+sobre una jornada anual de referencia de 1.642 horas, correspondiente a las 37,5 horas
+semanales de la jornada general del sector público.
+
+El periodo de amortización de los recursos materiales se ha fijado en 48 meses, valor que
+se deriva del coeficiente lineal máximo del 25\,\% anual establecido para los equipos
+destinados a procesos de información~\cite{ley27_2014}. Finalmente, sobre el total de
+costes directos se aplican un 15\,\% de costes indirectos, un 10\,\% de riesgo y un
+6\,\% de beneficio industrial.
+
+\subsection{Costes de personal}
+
+En el desarrollo del proyecto han intervenido tres perfiles con dedicaciones
+diferenciadas. El autor del trabajo, en calidad de personal investigador en formación, ha
+asumido el desarrollo íntegro del sistema, con una dedicación de 15 horas semanales
+conforme al contrato asociado al proyecto, lo que arroja un total de 520 horas. El tutor,
+con categoría de Profesor Titular de Universidad, ha ejercido la dirección técnica y
+metodológica mediante un seguimiento continuado, estimado en 65 horas. El codirector, con
+categoría de Catedrático de Universidad, ha aportado supervisión de carácter puntual
+centrada en el encuadre del trabajo y en la revisión del enfoque general, estimada en 25
+horas.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Desglose de costes de personal}\label{tab:presupuesto-personal}}
+    {\centering
+\begin{tabular}{|Q{0.40}|Q{0.20}|Q{0.15}|Q{0.25}|}
+\hline
+\textbf{Categoría profesional} & \textbf{Coste horario} & \textbf{Horas} & \textbf{Coste total}\\
+\hline
+Catedrático de Universidad & 39,20 € & 25 & 980,00 €\\
+\hline
+Titular de Universidad & 31,14 € & 65 & 2.024,10 €\\
+\hline
+Contrato formativo en alternancia & 12,54 € & 520 & 6.519,12 €\\
+\hline
+\textbf{Total} & & \textbf{610} & \textbf{9.523,22 €}\\
+\hline
+\multicolumn{4}{l}{Fuente: elaboración propia.}
+\end{tabular}}
+\end{table}
+
+Sobre un salario bruto mensual de 653,79 €, las cuotas de aportación empresarial suman
+161,10 €, de modo que el coste mensual asciende a 814,89 €. La proporción entre ambas
+magnitudes se explica por las cuotas reducidas de cuantía fija aplicables a los contratos
+formativos en alternancia. El contrato se distribuye en doce mensualidades sin pagas
+extraordinarias adicionales.
+
+\subsection{Costes de recursos materiales}
+
+Los recursos materiales se valoran mediante amortización lineal, atribuyendo al proyecto
+únicamente la fracción del coste correspondiente al periodo de uso efectivo:
+
+\begin{equation}
+    C_{\text{imputable}} = \frac{A}{B} \times C \times D
+    \label{eq:amortizacion}
+\end{equation}
+
+donde $A$ representa el número de meses de uso, $B$ el periodo de amortización, $C$ el
+coste de adquisición y $D$ el porcentaje de dedicación al proyecto.
+
+El único elemento de \textit{hardware} imputable es el ordenador portátil empleado para
+el desarrollo y la ejecución de las simulaciones, cuyas características se detallan en la
+sección~\ref{section:usage_tools}. Su coste de adquisición fue de 719 €, precio que
+incorpora el descuento educativo aplicable a estudiantes universitarios.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Amortización de los recursos materiales empleados}\label{tab:presupuesto-amortizacion}}
+    {\centering
+\begin{tabular}{|Q{0.30}|Q{0.14}|Q{0.12}|Q{0.14}|Q{0.15}|Q{0.15}|}
+\hline
+\textbf{Recurso} & \textbf{Coste} & \textbf{Uso} & \textbf{Amort.} & \textbf{Dedicación} & \textbf{Imputado}\\
+\hline
+Ordenador portátil & 719,00 € & 8 & 48 & 100 \% & 119,83 €\\
+\hline
+GAMA & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
+\hline
+Python y bibliotecas científicas & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
+\hline
+Docker Engine & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
+\hline
+\LaTeX{} y Overleaf & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
+\hline
+\textbf{Total} & & & & & \textbf{119,83 €}\\
+\hline
+\multicolumn{6}{l}{Fuente: elaboración propia.}
+\end{tabular}}
+\end{table}
+
+El coste asociado al \textit{software} empleado es nulo, dado que la totalidad de las
+herramientas utilizadas se distribuye bajo licencias libres o de código abierto. La
+elección de una plataforma de simulación de licencia comercial habría incrementado
+sensiblemente esta partida.
+
+\subsection{Otros costes directos}
+
+Se recogen bajo esta denominación las partidas de consumo atribuibles al desarrollo del
+proyecto pero no asociadas a recursos amortizables. La primera corresponde al servicio de
+conectividad a internet, sobre cuya cuota mensual de 35 € se ha imputado un 50\,\% al
+proyecto. La segunda corresponde al suministro eléctrico del puesto de trabajo a lo largo
+de los ocho meses de desarrollo. En conjunto, ambas partidas suponen 165 €.
+
+\subsection{Presupuesto total}\label{sec:presupuesto-total}
+
+Sobre la suma de los costes directos se aplican los tres márgenes anunciados. Los costes
+indirectos recogen los recursos consumidos por el proyecto que no resultan imputables de
+manera directa, tales como el espacio de trabajo o los servicios generales de la
+universidad. El margen de riesgo responde a la incertidumbre inherente a un proyecto de
+investigación, en el cual la obtención de resultados satisfactorios no está garantizada de
+antemano. El beneficio industrial corresponde al margen que aplicaría una entidad que
+ejecutase el proyecto en régimen de prestación de servicios. Sobre la base imponible
+resultante se aplica el Impuesto sobre el Valor Añadido al tipo general vigente del
+21\,\%~\cite{ley37_1992}.
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Presupuesto total del proyecto}\label{tab:presupuesto-total}}
+    {\centering
+\begin{tabular}{|Q{0.65}|Q{0.35}|}
+\hline
+\textbf{Concepto} & \textbf{Importe}\\
+\hline
+Costes de personal & 9.523,22 €\\
+\hline
+Amortización de recursos materiales & 119,83 €\\
+\hline
+Otros costes directos & 165,00 €\\
+\hline
+\textbf{Total de costes directos} & \textbf{9.808,05 €}\\
+\hline
+Costes indirectos (15 \%) & 1.471,21 €\\
+\hline
+Riesgo (10 \%) & 1.127,93 €\\
+\hline
+Beneficio industrial (6 \%) & 744,43 €\\
+\hline
+\textbf{Base imponible} & \textbf{13.151,62 €}\\
+\hline
+IVA (21 \%) & 2.761,84 €\\
+\hline
+\textbf{Total} & \textbf{15.913,46 €}\\
+\hline
+\multicolumn{2}{l}{Fuente: elaboración propia.}
+\end{tabular}}
+\end{table}
+
+El presupuesto total del proyecto asciende a quince mil novecientos trece euros con
+cuarenta y seis céntimos (15.913,46 €), impuestos incluidos. La partida de personal
+representa el 97,1\,\% de los costes directos, proporción característica de los proyectos
+de desarrollo de \textit{software} en los que no median adquisiciones de equipamiento
+especializado ni licencias comerciales.
 
 \section{Impacto socio-económico}
+
+\subsection{Contexto del sector}
+
+El transporte público urbano constituye un servicio esencial cuya operación se caracteriza
+por una fuerte rigidez estructural. La configuración de una línea, entendida como el
+conjunto formado por su trazado, la ubicación de sus paradas, las frecuencias programadas
+y los recursos de flota asignados, se establece mediante procesos de planificación de
+horizonte anual o plurianual, y su modificación conlleva costes operativos y de
+coordinación considerables.
+
+ \textbf{TODO: completar con datos de la memoria anual de EMT y del Consorcio Regional de
+ Transportes (flota, viajeros anuales, presupuesto de explotación) y citar la fuente.}
+
+Esta rigidez dificulta la evaluación de alternativas operativas. Valorar el efecto de una
+modificación en la frecuencia de una línea exigiría implantarla sobre el servicio real y
+observar sus consecuencias durante un periodo prolongado, lo que resulta costoso,
+difícilmente reversible y afecta directamente a la experiencia de las personas usuarias.
+A ello se añade que las condiciones externas no son controlables, de modo que resulta
+problemático atribuir las variaciones observadas a la modificación introducida y no a
+factores ajenos a ella. Es en este contexto donde adquiere sentido la construcción de
+herramientas de simulación.
+
+\subsection{Impacto económico}
+
+La valoración del impacto económico requiere distinguir entre aquello que ha quedado
+demostrado y aquello que constituye un retorno potencial condicionado a desarrollos
+posteriores, en coherencia con las limitaciones de validez identificadas en el
+capítulo~\ref{chapter:future_works}.
+
+El resultado con impacto económico demostrable es la verificación de que una arquitectura
+multiagente reactiva reproduce el comportamiento observado de una línea de autobús urbano
+con un grado de fidelidad cuantificado. La reproducción fiel del comportamiento base
+constituye el requisito previo de cualquier herramienta de evaluación de alternativas, y
+la caracterización de los errores del modelo delimita el alcance de las conclusiones que
+el simulador permite extraer. Frente a ello, el coste de desarrollo estimado en la sección
+anterior resulta modesto en comparación con el que supondría obtener un conocimiento
+equivalente mediante experimentación sobre el servicio real.
+
+El retorno asociado a la evaluación sistemática de alternativas operativas no puede
+atribuirse, en cambio, al estado actual del simulador. El modelado de descensos mediante
+muestreo de cantidades absolutas independientes por llegada de vehículo determina que el
+volumen total de descensos escale con la oferta de servicio en lugar de permanecer
+invariante a ella, lo que invalida el análisis contrafactual. La evaluación de escenarios
+alternativos constituye, por tanto, un retorno condicionado a la implementación de una
+formulación proporcional del descenso, propuesta en el mencionado capítulo.
+
+\subsection{Impacto social}
+
+Las dimensiones que el simulador reproduce, señaladamente la ocupación de los vehículos y
+los tiempos asociados al recorrido, se corresponden con aquellos aspectos del servicio que
+la persona usuaria experimenta de manera directa. En la medida en que una comprensión más
+precisa del comportamiento de la línea permita fundamentar decisiones operativas mejor
+informadas, el efecto último recae sobre la experiencia de quienes utilizan el servicio.
+Esta contribución se alinea con la meta 11.2 de los Objetivos de Desarrollo
+Sostenible~\cite{onu_ods}, orientada a la provisión de acceso a sistemas de transporte
+seguros, asequibles y sostenibles, con atención específica a las necesidades de las
+personas en situación de vulnerabilidad.
+
+El trabajo constituye asimismo una actividad de transferencia de conocimiento. Su
+desarrollo en el marco de la Cátedra UC3M-EMT, sobre datos operacionales cedidos por el
+propio operador, determina que tanto la herramienta como el conocimiento metodológico
+generado permanezcan en el ámbito de la universidad pública y del operador de titularidad
+municipal.
+
+\subsection{Impacto medioambiental}
+
+La simulación computacional evita las emisiones asociadas a la circulación de vehículos
+con fines exclusivamente experimentales, dado que la evaluación de una modificación
+operativa mediante pruebas de campo requeriría la operación efectiva de los recursos de
+flota implicados durante el periodo de observación.
+
+No obstante, la simulación tampoco constituye una actividad ambientalmente neutra. Las
+mediciones recogidas en el apartado correspondiente de la sección~\ref{subsec:solution_comparative} muestran que la
+solución basada en agentes pasajero individuales requiere aproximadamente 4,37 veces más
+tiempo de CPU por réplica que la solución agregada, con un consumo energético
+proporcional. Dado que la validación ha exigido campañas de mil réplicas por
+configuración, la elección entre arquitecturas posee una dimensión ambiental que conviene
+hacer explícita, puesto que la solución individualizada resulta necesaria cuando el objeto de estudio
+son los protocolos de interacción, mientras que la solución agregada proporciona
+resultados equivalentes en términos de ocupación a un coste energético sensiblemente
+inferior.

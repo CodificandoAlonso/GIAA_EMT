@@ -576,18 +576,18 @@ Tras evaluar la comparación en base a las métricas de rendimiento estipuladas,
 al presentar para la misma parametrización de entrada \textbf{un resultado equivalente para ambas soluciones propuestas en este trabajo}.
 
 
-\subsubsection{Diferencias existentes a nivel de rendimiento}
+\subsubsection{Diferencias existentes a nivel de rendimiento}\label{subsubsec:performance}
 Pese a la validación de la premisa de que ambas soluciones presentan resultados equivalentes, existe una diferencia clave entre
 ambas que cabe destacar.
 Esta resulta ser el tiempo total de ejecución. Mientras que las simulaciones realizadas sobre
 la implementación de la arquitectura de la solución dos presentan tiempos de ejecución cercanos a los \textbf{40~minutos},
 el tiempo de aquellas relativas a la solución uno promedian los \textbf{150~minutos} (unas dos horas y media).
 
-Aunque el objetivo de este trabajo \textbf{no es evaluar en rendimiento y consumo ambas soluciones}, un análisis basado en estas métricas
+Aunque el objetivo de este trabajo \textbf{no es evaluar en rendimiento y consumo de ambas soluciones}, un análisis basado en estas métricas
 puede arrojar luz acerca de los motivos detrás de la diferencia entre tiempos de ejecución. Para ello, debido a las características
 del ordenador empleado para el desarrollo (véase sección~\ref{section:usage_tools}), este incorpora un procesador que tiene 
-integrado el sistema \textit{RAPL} (de sus siglas en inglés \textbf{R}unning \textbf{A}verage \textbf{P}ower \textbf{L}imit), que 
-permite analizar en tiempo real valores relacionados con el consumo de CPU y de RAM del dispositivo.
+integrado el sistema \textit{RAPL} (de sus siglas en inglés \textbf{R}unning \textbf{A}verage \textbf{P}ower \textbf{L}imit)~\cite{david2010rapl}, que 
+permite analizar en tiempo real valores relacionados con el consumo de CPU y de RAM del dispositivo~\cite{khan2018rapl}.
 
 Al analizar las figuras~\ref{fig:cmp_cpu},~\ref{fig:cmp_memoria} y~\ref{fig:cmp_potencia_temperatura} resulta curioso observar que ni en cuanto a la energía, ni la potencia,
 ni la temperatura, las soluciones presentan diferencias que expliquen el elevado coste computacional de la solución uno.
@@ -612,6 +612,9 @@ ni la temperatura, las soluciones presentan diferencias que expliquen el elevado
 \caption{Comparativa de consumo de potencia y valor de temperatura para ambas soluciones.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:cmp_potencia_temperatura}
 \end{figure}
+
+
+~\textbf{Meter tabla con los datos del Garbage collector, si no parece que me he inventado los datos}
 
 No obstante, al analizar información relacionada con el uso dinámico de memoria, se observa cómo la memoria liberada total 
 por parte de la solución uno constituye un valor \textbf{cuatro veces mayor} que la implementada para la solución dos.

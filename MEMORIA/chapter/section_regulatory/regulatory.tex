@@ -1,38 +1,165 @@
-Este capítulo cubre 
-
-
-
+Este capítulo recoge el marco normativo aplicable al trabajo, atendiendo al tratamiento de
+los datos empleados, a las condiciones de uso de las herramientas utilizadas y a la
+titularidad de los resultados obtenidos. Se cierra con los principios deontológicos que han
+orientado las decisiones de diseño.
 
 \section{Protección de datos y privacidad (RGPD)}
 
+El proyecto se ha nutrido de dos fuentes de datos de naturaleza distinta, cuyo régimen
+conviene diferenciar.
+
+La primera es la oferta programada de la red, publicada en formato GTFS por el Consorcio
+Regional de Transportes de Madrid~\cite{crtm_gtfs}, y comprende la topología de la línea,
+la ubicación de las paradas y los horarios planificados.
+
+La segunda procede del acuerdo institucional que sustenta la Cátedra UC3M-EMT y opera a
+nivel de expedición y de estancia en parada. Se compone de dos tablas relacionadas: una que
+identifica cada expedición realizada, con su línea, sentido y marcas temporales asociadas,
+y otra que registra una entrada por cada detención del vehículo en una parada del
+recorrido, con los recuentos de embarque y descenso correspondientes.
+
+Ninguna de las dos fuentes incorpora datos de carácter personal en el sentido del artículo
+4.1 del Reglamento General de Protección de Datos~\cite{rgpd}. La granularidad de los
+registros operacionales es fina, en tanto que la unidad de observación es la estancia
+individual de un vehículo en una parada, pero las magnitudes registradas son recuentos y
+marcas temporales referidas al vehículo, no a las personas que lo utilizan. Los conjuntos no
+contienen identificadores de viajero ni referencias a validaciones individuales, por lo que
+no resulta posible atribuir ninguna observación a una persona física identificada o
+identificable. Conforme al considerando 26 del propio Reglamento, la información que no
+permite tal identificación queda fuera del ámbito de aplicación de la norma, de modo que no
+ha sido necesario articular una base para el tratamiento ni adoptar las medidas que la norma
+exige respecto de los datos personales. La misma consideración resulta aplicable a la Ley
+Orgánica 3/2018~\cite{lopdgdd}.
+
+Conviene precisar que la agregación por parada y franja horaria sobre la que se ajustan las
+distribuciones del modelo, descrita en el capítulo~\ref{chapter:param_analisys}, es una
+decisión metodológica propia del análisis y no una medida de protección de datos. Los
+agentes \textit{pasajero} que intervienen en la simulación no se corresponden con personas
+reales, sino que se generan por muestreo a partir de dichas distribuciones, y el sistema no
+reconstruye trayectorias individuales ni permite inferirlas de sus resultados.
+
+Con independencia de lo anterior, los datos cedidos por el operador no son de acceso
+público. Su tratamiento se ha limitado a las finalidades propias del trabajo, y no se
+incorporan al documento los ficheros originales ni tabulaciones que permitan su
+reconstrucción.
+
 \section{Licencias de software y herramientas de terceros}
 
-\section{Uso de la información del sector público (Open data)}
+La totalidad de las herramientas empleadas se distribuye bajo licencias libres o de código
+abierto, lo que ha condicionado favorablemente tanto el presupuesto del proyecto como la
+reproducibilidad de los resultados.
+
+GAMA, plataforma sobre la que se han implementado ambas soluciones, se distribuye bajo la
+licencia GNU General Public License versión 3~\cite{gpl3}. Esta licencia impone obligaciones
+de reciprocidad sobre las obras derivadas, si bien dichas obligaciones se activan únicamente
+con la distribución del \textit{software}. Los modelos desarrollados están escritos en GAML
+y son interpretados por la plataforma sin modificar ni incorporar su código fuente, por lo
+que no constituyen obra derivada de GAMA.
+
+El resto de las herramientas se acoge a licencias permisivas. El intérprete de Python se
+distribuye bajo la Python Software Foundation License, y las bibliotecas empleadas en el
+análisis de datos, señaladamente NumPy, pandas y Matplotlib, bajo licencias de la
+familia BSD. Docker Engine se distribuye bajo licencia Apache 2.0 y el servidor web auxiliar
+desarrollado sobre Node.js se apoya en componentes de licencia MIT. La composición del
+documento se ha realizado mediante \LaTeX{} y el paquete biblatex, ambos bajo la \LaTeX{}
+Project Public License.
+
+Ninguna de estas licencias restringe el uso académico ni la publicación de los resultados
+obtenidos, y todas exigen únicamente la conservación de los avisos de \textit{copyright}
+correspondientes, requisito que no resulta aplicable en tanto no se redistribuya el código de
+terceros.
+
+\section{Uso de la información del sector público (\textit{open data})}
+
+El empleo de la oferta programada en formato GTFS se encuadra en el régimen de reutilización
+de la información del sector público establecido por la Ley 37/2007~\cite{ley37_2007}, que
+traspone al ordenamiento español la directiva europea en la materia. Dicho régimen habilita
+la reutilización de la información publicada por las entidades del sector público con fines
+comerciales y no comerciales, sometiéndola a la obligación de no alterar el contenido de la
+información, no desnaturalizar su sentido y citar la fuente y la fecha de la última
+actualización del conjunto de datos empleado.
+
+El trabajo cumple dichas condiciones. Los ficheros GTFS se han empleado sin modificación de
+su contenido, limitándose el tratamiento a las operaciones de filtrado necesarias para
+aislar la línea objeto de estudio, y la fuente se cita de forma expresa en el capítulo
+dedicado al análisis de los datos.
+
+Este régimen no alcanza, sin embargo, a los datos operacionales cedidos por el operador.
+Aunque ambas fuentes proceden en última instancia de una entidad del sector público, la
+primera está deliberadamente publicada para su reutilización mientras que la segunda se ha
+comunicado en virtud de un acuerdo específico y con una finalidad determinada. La distinción
+condiciona las posibilidades de difusión de los resultados y se ha respetado a lo largo del
+desarrollo.
 
 \section{Propiedad intelectual del proyecto}
 
+Los programas de ordenador reciben protección como obra en virtud del artículo 10.1.i del
+Texto Refundido de la Ley de Propiedad Intelectual~\cite{trlpi}, cuyo Título VII establece
+el régimen específico aplicable a esta categoría de creaciones y alcanza tanto al código
+fuente como a la documentación técnica asociada.
+
+La titularidad de los resultados de este proyecto viene determinada por el contrato en cuyo
+marco se ha desarrollado. Su cláusula decimotercera establece que cualquier obra susceptible
+de generar derechos de propiedad intelectual o industrial realizada durante la relación
+laboral, cuando afecte a las actividades de la universidad o resulte susceptible de ser
+utilizada por ella, deberá comunicarse a la UC3M y será de su exclusiva propiedad. Los
+derechos de explotación sobre los modelos desarrollados en GAML, los guiones de análisis en
+Python y la infraestructura de ejecución corresponden, por tanto, a la universidad. Esta
+previsión resulta coherente con el régimen supletorio del artículo 97.4 del propio Texto
+Refundido, que atribuye al empleador los derechos de explotación de los programas de
+ordenador creados por una persona asalariada en el ejercicio de sus funciones.
+
+La cesión alcanza a los derechos de explotación, no a los derechos morales, que el artículo
+14 del Texto Refundido configura como irrenunciables e inalienables. Se mantiene, en
+consecuencia, la condición de autor sobre las obras desarrolladas y el derecho al
+reconocimiento de dicha autoría.
+
+La cláusula duodécima del mismo contrato establece un compromiso de confidencialidad que
+subsiste tras la extinción de la relación laboral y que abarca cualquier información de la
+universidad a la que se haya accedido en el desempeño de la actividad. Este compromiso opera
+de forma acumulativa con las obligaciones derivadas del acuerdo de la cátedra respecto de los
+datos operacionales, y determina que la difusión del código y de los datos empleados requiera
+autorización previa.
+
+La memoria queda depositada en el repositorio institucional conforme a la normativa
+reguladora de los Trabajos de Fin de Grado, lo que habilita su consulta pública en los
+términos previstos en dicha normativa.
+
 \section{Ética profesional}
 
+El desarrollo del trabajo se ha guiado por los principios del Código de Ética y Práctica
+Profesional de la Ingeniería del \textit{Software} de ACM e IEEE~\cite{acm_ieee_ethics}.
+Desde una perspectiva deontológica, la ingeniería informática no consiste únicamente en la
+resolución técnica de problemas, sino en la aplicación del conocimiento empírico para
+orientar la tecnología hacia el interés general. El simulador diseñado persigue un beneficio
+identificable en este sentido: proporcionar al operador una herramienta con la que analizar
+el comportamiento de una línea de servicio a partir de evidencia empírica, y no de supuestos
+no verificados.
 
+El principio que ha resultado más determinante es el de veracidad respecto de las capacidades
+y limitaciones del producto. Un simulador cuya fidelidad no ha sido caracterizada resulta
+potencialmente más perjudicial que la ausencia de herramienta, en la medida en que puede
+fundamentar decisiones operativas sobre resultados de validez desconocida. Por ello la
+validación no se ha limitado a demostrar el grado de acuerdo entre lo simulado y lo
+observado, sino que ha perseguido delimitar dónde falla el modelo y por qué mecanismo. El
+sesgo sistemático identificado en la ocupación y el crecimiento de la sobredispersión a lo
+largo del recorrido se documentan de forma explícita en el
+capítulo~\ref{chapter:results}, y la limitación derivada del muestreo independiente de
+descensos, que invalida el análisis contrafactual, se declara sin atenuaciones en el
+capítulo~\ref{chapter:future_works}. La decisión de acotar las conclusiones al escenario
+base, renunciando a presentar la evaluación de escenarios alternativos como una capacidad
+actual del sistema, responde a esta misma exigencia.
 
-\textit{ \textbf{Posible opción}
-El desarrollo de este Trabajo de Fin de Grado se ha guiado por los principios fundamentales del Código de Ética y
-Práctica Profesional de Ingeniería de Software (ACM/IEEE). Desde una perspectiva deontológica, la ingeniería 
-informática no consiste únicamente en la resolución técnica de problemas, sino en la aplicación del conocimiento 
-empírico para orientar la tecnología hacia el bien común. En este contexto, el simulador diseñado busca un beneficio 
-social tangible e inmediato: proporcionar a la Empresa Municipal de Transportes una herramienta objetiva para 
-optimizar las dotaciones programadas, mejorando así la eficiencia y sostenibilidad de la movilidad urbana. Si bien 
-es inherente a la ingeniería de software que los sistemas complejos pueden generar consecuencias operativas o sociales 
-imprevisibles, la responsabilidad ética del diseño se ha salvaguardado mediante la aplicación de medidas rigurosas y 
-estándares contrastados de la profesión. El uso de validaciones estadísticas exhaustivas y metodologías robustas como 
-la simulación de Monte Carlo garantiza los más altos niveles de calidad técnica y fiabilidad, limitando los riesgos 
-derivados de la puesta en producción del software.
-Asimismo, el compromiso ético del proyecto trasciende el estricto cumplimiento legal impuesto por normativas de
-privacidad como el RGPD. En el ámbito de la automatización y el diseño algorítmico, se ha prestado especial atención a
-la mitigación de sesgos computacionales que pudieran derivar en discriminación o en un análisis deficiente de la
-calidad del servicio. Por ello, el sistema modela el comportamiento de la red basándose de forma estricta en datos
-operacionales empíricos y agregados. Al descartar explícitamente dotar a los agentes simulados de capacidades
-deliberativas arbitrarias sin fundamento en los datos, se evita la introducción de sesgos de confirmación o decisiones
-algorítmicas opacas. De este modo, se asegura que la herramienta evalúe el rendimiento del transporte público de manera
-transparente y equitativa, respetando el interés general de la ciudadanía y evitando cualquier discriminación en la
-planificación de los recursos urbanos.}
+Se ha atendido asimismo al principio de transparencia en el diseño. El comportamiento de los
+agentes se fundamenta en distribuciones ajustadas sobre datos operacionales, y las reglas de
+decisión implementadas son explícitas y trazables. Los valores umbral que gobiernan la
+detección de situaciones anómalas constituyen, en cambio, parámetros heurísticos establecidos
+conforme a criterio operativo, y se han declarado como tales y expuesto de forma
+parametrizable en lugar de quedar embebidos en el código, de manera que quien utilice la
+herramienta pueda examinar y cuestionar los criterios que incorpora.
+
+Finalmente, el tratamiento de los datos cedidos por el operador se ha regido por un criterio
+de prudencia que excede el estricto cumplimiento de la normativa de protección de datos. Aun
+tratándose de información ajena al ámbito del Reglamento General de Protección de Datos, se
+ha limitado su uso a las finalidades propias del trabajo y se ha evitado su reproducción en
+el documento.
