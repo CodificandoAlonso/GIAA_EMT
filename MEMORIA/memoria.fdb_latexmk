@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber memoria"] 1786191636.69677 "memoria.bcf" "memoria.bbl" "memoria" 1786193734.19978 0
-  "memoria.bcf" 1786193733.98138 124290 c236c0c4a0a56ee4c773ce357ac1f8f5 "pdflatex"
+["biber memoria"] 1786191636.69677 "memoria.bcf" "memoria.bbl" "memoria" 1786273944.53537 0
+  "memoria.bcf" 1786273944.34218 124290 c236c0c4a0a56ee4c773ce357ac1f8f5 "pdflatex"
   "referencias.bib" 1786191601.38846 37122 75e4ed802c965c0738fea1b4256461fe ""
   (generated)
   "memoria.bbl"
   "memoria.blg"
   (rewritten before read)
-["pdflatex"] 1786193723.33662 "/home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex" "memoria.pdf" "memoria" 1786193734.2001 0
+["pdflatex"] 1786273933.57276 "/home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex" "memoria.pdf" "memoria" 1786273944.53572 0
   "/etc/texmf/web2c/texmf.cnf" 1778705118.01411 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex" 1786180988.53817 12288 f1b9b0894eec555a20a215dd24946681 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -373,10 +373,10 @@
   "anex/anex_iag/iag.tex" 1786176161.47891 7590 40c3f9d0f0df4f84829f4e124bf46dca ""
   "anex/anex_requirements/requirements.tex" 1785576491.08333 20633 32eb6c3d279512fd3ef7a6e00fae4783 ""
   "chapter/section_analysis/param_analysis.tex" 1786179337.38033 40093 4b61367314be412e57ec276dc95cf4dc ""
-  "chapter/section_budget/budget.tex" 1786189759.22449 13422 f7a95ca58067f76d486c5375b8ec4edb ""
+  "chapter/section_budget/budget.tex" 1786268194.03019 13438 632ebadb035262b7d700e88744ad72fe ""
   "chapter/section_design/Simulation_design.tex" 1786176223.14429 94143 4ca368de10b1da4e317736171bbdda21 ""
   "chapter/section_ending/conclusion.tex" 1786176161.47952 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "chapter/section_future_works/future.tex" 1786176161.50759 133 241f526169b5aa5f3f175259062efa76 ""
+  "chapter/section_future_works/future.tex" 1786273933.2898 3916 284e434265c1e05acc0987207b6d4070 ""
   "chapter/section_introduction/intro.tex" 1786183024.88218 10626 6f7ffd632934ad1cc3f57ee96104526b ""
   "chapter/section_metodology/metodology.tex" 1785576491.08419 14658 96895d883d33abdcdca8ec204a93abdd ""
   "chapter/section_regulatory/regulatory.tex" 1786193723.06115 11149 23303994d7615c80683d5f96f71f3e24 ""
@@ -438,16 +438,16 @@
   "imagenes/to_B/heatmap_normality_individual.png" 1783246525.82031 134584 370d5c578fe3203f1f07577687d9ac42 ""
   "imagenes/to_B/normality_stop_ALL.png" 1783246525.82173 67484 6fcdfb80f9c46cf9b9a87ee05ca95738 ""
   "imagenes/to_B/normality_stop_individual.png" 1783246525.82204 68705 c3f75a130c953a145674bd97a69b96b9 ""
-  "memoria.aux" 1786193733.94407 76921 6f90519b0a7ed55936bf9163cbe7fc70 "pdflatex"
+  "memoria.aux" 1786273944.30362 77507 4e47c2973e5fa4e377c221e7b3f777d2 "pdflatex"
   "memoria.bbl" 1786191637.82214 141580 93387236449e2971f6335e834cf8deb7 "biber memoria"
-  "memoria.lof" 1786193733.98322 10356 5e54beb0a6f23cec1c676efc262c50b4 "pdflatex"
-  "memoria.lot" 1786193733.98322 5587 231e98552c135cbd12760f22b23b3cca "pdflatex"
-  "memoria.out" 1786193733.98007 6329 ebd0ee97b2857804c32c7183f5512f23 "pdflatex"
-  "memoria.run.xml" 1786193733.98322 2424 a07dca45c17754406fa301e7c073f94a "pdflatex"
+  "memoria.lof" 1786273944.34406 10356 2d38642737f5a6f55bbd31766ee1351d "pdflatex"
+  "memoria.lot" 1786273944.34406 5587 231e98552c135cbd12760f22b23b3cca "pdflatex"
+  "memoria.out" 1786273944.34062 6629 d1762a08d1a14519fd53c41862229848 "pdflatex"
+  "memoria.run.xml" 1786273944.34406 2424 a07dca45c17754406fa301e7c073f94a "pdflatex"
   "memoria.tex" 1786180988.53817 12288 f1b9b0894eec555a20a215dd24946681 ""
-  "memoria.toc" 1786193733.98322 8914 34832cdc1f4d95b7352ec90f249aff0f "pdflatex"
-  "memoria.xmpdata" 1785576491.12953 429 a53491fb6090252f9d07de70f20193f6 ""
-  "pdfa.xmpi" 1786193723.64481 6162 54209609f57a12f10d7d4befea9cd8ea "pdflatex"
+  "memoria.toc" 1786273944.34406 9234 490e9686b8961056032d1916b1182a66 "pdflatex"
+  "memoria.xmpdata" 1786272613.74889 429 b65c9ca3ea343b49e0d29b9c7c464176 ""
+  "pdfa.xmpi" 1786273933.87935 6162 1833de5194ddb4d41d4d93fc196e8327 "pdflatex"
   "svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf" 1785576491.12991 37415 ab42b942e4e713317c375e7b2c2b015f ""
   "svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf_tex" 1785576491.13008 2124 288aafa214dae44eda8e42a6c1d4561e ""
   "svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf" 1785576491.13026 39059 c0e373f60f40c2eff5368c79d1f352d3 ""

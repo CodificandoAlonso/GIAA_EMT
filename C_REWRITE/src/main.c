@@ -53,7 +53,7 @@ void *generate_samples(void *arg)
     }
 
     fclose(file);
-
+    
     return NULL;
 }
 

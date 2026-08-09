@@ -1,10 +1,61 @@
 \textbf{Hablar de la funcion constante  del ratio de generacion de psajeros}
 
+\textbf{Hablar del tema de sistema ad hoc de sim en C para alivianar coste y manejode memoria propio}
 
-\section{Limitaciones}
+\textbf{Ampliar horizontes de dias de analisis. esto va de la mano con el tema principal que es el muestreo de bajadas}
+
+Este capítulo presenta las distintas limitaciones existentes en el problema y discute los posibles trabajos futuros a realizar
+a partir del sistema creado.
 
 
 
+\section{Limitaciones}\label{section:limitations}
+
+A lo largo del presente trabajo, se han expuesto diferentes limitaciones que acotan el alcance del sistema. Concretamente,
+existen X características a desarrollar.
+
+La principal limitación existente radica en la forma de modelado del apeo de pasajeros en
+las paradas. Al modelar la descarga considerando las llegadas como eventos independientes,
+sin tener en cuenta la ocupación de cada autobús ni la oferta concreta, los escenarios
+alternativos de tipo \textit{what if} resultan fuera del alcance del sistema: al muestrearse
+los descensos como cantidades absolutas, su volumen total escala con el número de llegadas
+en lugar de permanecer acotado por la demanda real, de modo que esta forma de modelado
+únicamente resulta viable para aquellos casos en los que la oferta y la demanda se ajustan
+a las presentes en los datos. Esta elección se alinea con el objetivo principal del trabajo,
+pero supone una limitación que invalida el estudio de pruebas alternativas.
+
+Una segunda limitación deriva de la cobertura temporal de los datos operacionales
+disponibles, que abarcan desde el 1 de julio de 2025 y comprenden ocho meses de servicio.
+Aunque el volumen de observaciones es elevado, dicho periodo no cubre un ciclo anual
+completo, de modo que cada mes o estación aparece representado por una única realización.
+Esta circunstancia impide separar la componente estacional del comportamiento de la demanda
+de las particularidades del periodo concreto observado, dado que no existe repetición del
+ciclo con la que contrastar los patrones detectados.
+En consecuencia, queda fuera del alcance del trabajo la adopción de un enfoque basado en la
+descomposición de series temporales, así como cualquier extrapolación más allá del rango
+observado. Esta limitación motiva el acotamiento del estudio a días laborables
+normales, en tanto que la caracterización de fines de
+semana, periodos vacacionales o condiciones meteorológicas adversas exigiría una cobertura
+temporal que permitiese distinguir el patrón recurrente de la anomalía puntual.
+
+Por último, la tercera limitación viene impuesta en la selección del entorno de desarrollo escogido, la plataforma GAMA.
+A pesar de que es una elección adecuada para, en una fase de viabilidad de construcción de un sistema multi-agente (objetivo principal
+del trabajo), validar que la solución implementada resulta válida, y que la arquitectura de los agentes se realice de forma correcta,
+su construcción sobre el lenguaje de programación \textit{JAVA}, interpretado vía JVM (Java Virtual Machine), ligado
+al \enquote{recolector de basura}, incurren ambos en un aumento del tiempo de cómputo. Con el objetivo de presentar un sistema 
+que sea capaz de evaluar distintos escenarios de una forma veloz, esta elección se presenta como limitación principal ante ello.
+
+\section{Trabajos Futuros}\label{section:future}
+El desarrollo futuro del trabajo se puede dividir en tres ramificaciones específicas, donde cada una explota una mejora significativa
+del sistema. Se pueden nombrar a las distintas vías de desarrollo como: \textit{mejoras del análisis de datos},
+\textit{mejoras del rendimiento computacional} y \textit{evolución del simulador multi-agente}.
+
+\subsection{Mejoras del análisis de datos}
+Esta ramificación 
 
 
-\section{Trabajos Futuros}
+\subsection{Mejoras del rendimiento computacional}
+
+
+
+\subsection{Evolución del simulador multi-agente}
