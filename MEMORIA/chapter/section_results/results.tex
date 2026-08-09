@@ -614,12 +614,57 @@ ni la temperatura, las soluciones presentan diferencias que expliquen el elevado
 \end{figure}
 
 
-~\textbf{Meter tabla con los datos del Garbage collector, si no parece que me he inventado los datos}
 
-No obstante, al analizar información relacionada con el uso dinámico de memoria, se observa cómo la memoria liberada total 
-por parte de la solución uno constituye un valor \textbf{cuatro veces mayor} que la implementada para la solución dos.
-El volumen total de memoria liberada por el recolector en la solución uno cuadriplica el de la solución dos, magnitud coherente
-con el ciclo de vida de los agentes \textit{pasajero}, creados y destruidos de forma continua a lo largo de la simulación. Ello sitúa
-el sobrecoste en la gestión del ciclo de vida de dichos agentes y en su evaluación por parte del planificador, junto con el aumento
-inherente de ciclos de ejecución presente en la simulación, pero descarta un mayor consumo
-instantáneo de recursos. El capítulo~\ref{chapter:future_works} discute posibles escenarios derivados de esta casuística.
+Las trazas del recolector de basura permiten precisar el origen de dicha disparidad. La
+tabla~\ref{tab:gc_comparativa} recoge las métricas obtenidas del análisis de los registros
+generados durante ambas campañas.
+
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Métricas de gestión dinámica de memoria para ambas soluciones}\label{tab:gc_comparativa}}
+    {\centering
+\begin{tabular}{|Q{0.40}|Q{0.20}|Q{0.20}|Q{0.20}|}
+\hline
+\textbf{Métrica} & \textbf{Solución 1} & \textbf{Solución 2} & \textbf{Cociente}\\
+\hline
+Ventana observada (s) & 8.634,7 & 1.999,8 & 4,32\\
+\hline
+Eventos de recolección & 16.539 & 2.854 & 5,79\\
+\hline
+Memoria liberada total (GiB) & 16.289,4 & 4.017,1 & 4,05\\
+\hline
+Tasa de asignación (MiB/s) & 1.931,8 & 2.057,0 & 0,94\\
+\hline
+Conjunto vivo, p50 (MiB) & 580 & 799 & 0,73\\
+\hline
+Heap comprometido máximo (MiB) & 4.016 & 3.888 & 1,03\\
+\hline
+Pausa total acumulada (s) & 81,64 & 34,38 & 2,37\\
+\hline
+Pausa media (ms) & 4,9 & 12,0 & 0,41\\
+\hline
+\textbf{Sobrecoste del recolector (\%)} & \textbf{0,95} & \textbf{1,72} & \textbf{0,55}\\
+\hline
+\multicolumn{4}{l}{Fuente: elaboración propia.}
+\end{tabular}}
+\end{table}
+
+Tres observaciones se desprenden de estos valores. En primer lugar, la tasa de asignación de
+memoria es equivalente en ambas soluciones, en torno a los 2 GiB por segundo, por lo que el
+volumen total de memoria liberada escala con la duración de la ejecución y no constituye una
+diferencia cualitativa entre ellas. En segundo lugar, el conjunto vivo tras las pausas de
+recolección resulta incluso inferior en la solución uno, lo que indica que los agentes
+\textit{pasajero} no incrementan la memoria residente: se crean, intervienen en el ciclo
+correspondiente y se destruyen sin sobrevivir a las sucesivas recolecciones. En tercer lugar,
+y de forma determinante, el tiempo de parada atribuible al recolector representa un
+0,95\,\% de la ventana de ejecución en la solución uno, magnitud que descarta la gestión
+automática de memoria como causa del sobrecoste observado.
+
+De ambos análisis se obtiene que la solución uno no opera con mayor
+intensidad, sino durante más tiempo realizando un volumen de trabajo superior. El
+sobrecoste se sitúa en la gestión del ciclo de vida de los agentes
+\textit{pasajero}, en su evaluación por parte del planificador y en el intercambio de
+mensajes asociado a los protocolos de comunicación, y no en la infraestructura de ejecución
+subyacente. El capítulo~\ref{chapter:future_works} discute las implicaciones de este
+resultado.
