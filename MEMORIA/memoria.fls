@@ -1,9 +1,9 @@
-PWD /home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA
+PWD /home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex
+INPUT /home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex
 OUTPUT memoria.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -448,15 +448,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-INPUT /usr/share/texlive/texmf-dist/tex/generic/catchfile/catchfile.sty
-INPUT /usr/share/texlive/texmf-dist/tex/generic/catchfile/catchfile.sty
-INPUT /usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
-INPUT /usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
-INPUT ./memoria.w18
-INPUT ./memoria.w18
-INPUT memoria.w18
 INPUT /usr/share/texlive/texmf-dist/tex/latex/transparent/transparent.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/transparent/transparent.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/transparent/transparent-nometadata.sty
