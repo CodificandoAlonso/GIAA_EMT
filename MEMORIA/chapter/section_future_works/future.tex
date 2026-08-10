@@ -1,23 +1,15 @@
-\textbf{Hablar de la funcion constante  del ratio de generacion de psajeros}
-
-\textbf{Hablar del tema de sistema ad hoc de sim en C para alivianar coste y manejode memoria propio}
-
-\textbf{Ampliar horizontes de dias de analisis. esto va de la mano con el tema principal que es el muestreo de bajadas}
-
 Este capítulo presenta las distintas limitaciones existentes en el problema y discute los posibles trabajos futuros a realizar
 a partir del sistema creado.
-
-
 
 \section{Limitaciones}\label{section:limitations}
 
 A lo largo del presente trabajo, se han expuesto diferentes limitaciones que acotan el alcance del sistema. Concretamente,
-existen X características a desarrollar.
+existen 3 características a desarrollar.
 
 La principal limitación existente radica en la forma de modelado del apeo de pasajeros en
 las paradas. Al modelar la descarga considerando las llegadas como eventos independientes,
 sin tener en cuenta la ocupación de cada autobús ni la oferta concreta, los escenarios
-alternativos de tipo \textit{what if} resultan fuera del alcance del sistema: al muestrearse
+alternativos de tipo \textit{what if} resultan fuera del alcance del sistema. Al muestrearse
 los descensos como cantidades absolutas, su volumen total escala con el número de llegadas
 en lugar de permanecer acotado por la demanda real, de modo que esta forma de modelado
 únicamente resulta viable para aquellos casos en los que la oferta y la demanda se ajustan
@@ -38,15 +30,12 @@ normales, en tanto que la caracterización de fines de
 semana, periodos vacacionales o condiciones meteorológicas adversas exigiría una cobertura
 temporal que permitiese distinguir el patrón recurrente de la anomalía puntual.
 
-
-\textbf{REESCTIBIR}
-\textit{Por último, la tercera limitación viene impuesta en la selección del entorno de desarrollo escogido, la plataforma GAMA.
-A pesar de que es una elección adecuada para, en una fase de viabilidad de construcción de un sistema multi-agente (objetivo principal
-del trabajo), validar que la solución implementada resulta válida, y que la arquitectura de los agentes se realice de forma correcta,
-su construcción sobre el lenguaje de programación \textit{JAVA}, interpretado vía JVM (Java Virtual Machine), ligado
-al \enquote{recolector de basura}, incurren ambos en un aumento del tiempo de cómputo. Con el objetivo de presentar un sistema 
-que sea capaz de evaluar distintos escenarios de una forma veloz, esta elección se presenta como limitación principal ante ello.
-}
+Por último, la tercera limitación viene dada por la selección del entorno de desarrollo escogido. Concretamente en la plataforma GAMA.
+Pese a que esta se presenta adecuada para la construcción, en una fase de estudio de viabilidad, de un sistema multi-agente,
+el uso de esta conlleva ciertas limitaciones en cuanto al rendimiento se refiere. Al ser una plataforma generalista para el diseño de
+agentes, cada instancia de estos conlleva un \textit{overhead} que excede las necesidades de un sistema específico. De la misma forma,
+el uso de un lenguaje construido sobre Java, ejecutado vía JVM (\textit{Java Virtual Machine}), adoptando un enfoque híbrido entre
+lenguaje compilado e interpretado, lastra el rendimiento computacional en comparación con otros lenguajes.
 
 
 
@@ -56,13 +45,42 @@ del sistema. Se pueden nombrar a las distintas vías de desarrollo como: \textit
 \textit{mejoras del rendimiento computacional} y \textit{evolución del simulador multi-agente}.
 
 \subsection{Mejoras del análisis de datos}
-Esta ramificación 
+Esta ramificación buscaría expandir en base a dos horizontes la fase correspondiente al análisis de datos.
 
+El primer horizonte se basa en la reestructuración del modelado de descensos. Al resultar suficiente para el objetivo principal del trabajo,
+se modela un sistema de descensos que imposibilita el estudio de escenarios alternativos. Ello motiva a que un trabajo futuro estudie
+un sistema alternativo que modele el descenso de pasajeros como resultado proporcional a la ocupación del autobús en ese momento.
+El resultado satisfactorio de este cambio de paradigma exigiría revalidar el sistema frente a los datos observados
+
+El segundo horizonte se presenta dependiente y ligado a una ampliación de los datos de operación por parte de la entidad correspondiente.
+Si se obtienen datos cuya cobertura temporal abarque varios ciclos anuales de servicio completos, un trabajo futuro consistiría en el estudio de estos
+mediante descomposición de series temporales, permitiendo expandir el horizonte de análisis de día laborable a distinguir según
+estaciones o considerar tendencias de demanda concretas.
 
 \subsection{Mejoras del rendimiento computacional}
+Esta vía de desarrollo busca desligarse de las dependencias de la plataforma GAMA. Con el fin
+de escalar el simulador hacia un sistema más veloz y completamente diseñado por el equipo de
+desarrollo, un trabajo futuro consistiría en la migración completa del sistema.
 
-
+Dicha migración daría lugar a un sistema \textit{ad hoc} sobre un lenguaje compilado como C,
+en el que los agentes carecerían del \textit{overhead} innecesario para su funcionamiento
+concreto y en el que la gestión de memoria quedaría dictada por el propio diseño. Conservando
+la arquitectura presentada en el capítulo~\ref{chapter:simulation_design}, así como los
+protocolos de comunicación que la articulan, dicha implementación reduciría considerablemente
+el tiempo de ejecución por conjunto de réplicas.
 
 
 \subsection{Evolución del simulador multi-agente}
-Al modelar el sistema mediante el paradigma multi-agente.
+Al modelar el sistema mediante el paradigma multi-agente, este asienta una base sólida sobre la que expandir a futuro.
+
+Uno de los caminos de evolución consistiría en ampliar el sistema hacia una arquitectura más deliberativa. Aunque implicase variaciones
+en la arquitectura y el modelado de algunos agentes concretos, el esqueleto se mantendría similar, y se podrían incluir decisiones
+de los agentes~\textit{autobús} basadas en dinámicas concretas, o llamadas de cooperación por parte de agentes~\textit{parada},
+indicando sobredemanda en algún momento concreto. Este tipo de escenarios no ha resultado objeto de estudio debido al objetivo
+de validar el comportamiento del simulador bajo días~\enquote{normales}, pero el modelado de este mediante el paradigma multi-agente
+permite este tipo de alternativas, reforzando su idoneidad.
+
+Un segundo camino atañe al refinamiento de mecanismos concretos del sistema actual, como puede ser el expuesto en el capítulo~\ref{chapter:simulation_design}
+sobre la reconstrucción lineal conservativa. Actualmente, el sistema sigue presentando un salto en la generación entre franjas horarias.
+El estudio sobre la adopción de una reconstrucción que considere todas las franjas en su totalidad en vez de únicamente la inmediatamente
+posterior resulta un objeto de estudio futuro sobre la mejora del mismo.

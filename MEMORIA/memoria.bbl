@@ -3312,6 +3312,121 @@
       \verb https://www.gnu.org/licenses/gpl-3.0.html
       \endverb
     \endentry
+    \entry{bsd3}{online}{}
+      \name{author}{1}{}{%
+        {{hash=35d827e2a8f2127b88fab45ef43a4f09}{%
+           family={{Open Source Initiative}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{fullhash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{bibnamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authorbibnamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authornamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authorfullhash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The 3-Clause BSD License}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://opensource.org/license/bsd-3-clause
+      \endverb
+      \verb{url}
+      \verb https://opensource.org/license/bsd-3-clause
+      \endverb
+    \endentry
+    \entry{apache2}{online}{}
+      \name{author}{1}{}{%
+        {{hash=f57c55dac81a8285538aae51dacc9857}{%
+           family={{The Apache Software Foundation}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{fullhash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{bibnamehash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{authorbibnamehash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{authornamehash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{authorfullhash}{f57c55dac81a8285538aae51dacc9857}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Apache License, Version 2.0}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2004}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.apache.org/licenses/LICENSE-2.0
+      \endverb
+      \verb{url}
+      \verb https://www.apache.org/licenses/LICENSE-2.0
+      \endverb
+    \endentry
+    \entry{mit}{online}{}
+      \name{author}{1}{}{%
+        {{hash=35d827e2a8f2127b88fab45ef43a4f09}{%
+           family={{Open Source Initiative}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{fullhash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{bibnamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authorbibnamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authornamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authorfullhash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The MIT License}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://opensource.org/license/mit
+      \endverb
+      \verb{url}
+      \verb https://opensource.org/license/mit
+      \endverb
+    \endentry
+    \entry{lppl}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8064f3902d168b0348d9d93d2c7a2565}{%
+           family={{\LaTeX{} Project}},
+           familyi={_\bibinitperiod}}}%
+      }
+      \strng{namehash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{fullhash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{bibnamehash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{authorbibnamehash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{authornamehash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{authorfullhash}{8064f3902d168b0348d9d93d2c7a2565}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The \LaTeX{} Project Public License, Version 1.3c}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.latex-project.org/lppl/lppl-1-3c/
+      \endverb
+      \verb{url}
+      \verb https://www.latex-project.org/lppl/lppl-1-3c/
+      \endverb
+    \endentry
     \entry{ley37_2007}{misc}{}
       \name{author}{1}{}{%
         {{hash=ffcaa79a49ffccd02ea8bab3b4f0e047}{%

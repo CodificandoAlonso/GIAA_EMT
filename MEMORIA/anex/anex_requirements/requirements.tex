@@ -93,19 +93,7 @@ y cada escenario debe quedar aislado del resto para su posterior consulta.}
 {---}
 {Creación de una simulación desde la interfaz y comprobación del directorio generado. Método: D}
 
-\requisito{RF-02}{Configuración de los parámetros del escenario}
-{Funcional}
-{Must}
-{EMT Madrid}
-{Antes del lanzamiento, el sistema debe permitir al usuario personalizar los parámetros operativos del escenario, 
-incluyendo el tamaño y la composición de la flota, los horarios e intervalos entre expediciones y las distribuciones de 
-subidas y bajadas por parada y franja horaria.}
-{La utilidad del simulador para la EMT reside en evaluar escenarios operativos alternativos (más o menos autobuses, 
-otras frecuencias, otras demandas) sin necesidad de modificar el modelo.}
-{RF-01}
-{Modificación de cada parámetro desde la interfaz y comprobación de su efecto en la simulación resultante. Método: T}
-
-\requisito{RF-03}{Lanzamiento de simulaciones desde la interfaz web}
+\requisito{RF-02}{Lanzamiento de simulaciones desde la interfaz web}
 {Funcional}
 {Must}
 {EMT Madrid}
@@ -113,10 +101,10 @@ otras frecuencias, otras demandas) sin necesidad de modificar el modelo.}
 invocando de forma transparente el motor de simulación en modo desatendido.}
 {Cierra el ciclo de uso autónomo por parte del personal de la EMT: configurar y ejecutar sin conocimiento 
 de la plataforma GAMA ni de la línea de comandos.}
-{RF-01, RF-02}
+{RF-01}
 {Lanzamiento de una simulación desde la interfaz y verificación de su ejecución completa. Método: D}
 
-\requisito{RF-04}{Seguimiento del estado de las simulaciones}
+\requisito{RF-03}{Seguimiento del estado de las simulaciones}
 {Funcional}
 {Should}
 {Equipo de diseño}
@@ -124,11 +112,11 @@ de la plataforma GAMA ni de la línea de comandos.}
 los clientes conectados y notificar la finalización de cada ejecución.}
 {Las simulaciones tienen una duración no despreciable; el usuario necesita saber cuándo puede consultar 
 los resultados sin recargar ni supervisar manualmente el proceso.}
-{RF-03}
+{RF-02}
 {Lanzamiento de una simulación con dos clientes conectados y comprobación de la actualización y la notificación 
 de finalización en ambos. Método: T}
 
-\requisito{RF-05}{Cálculo de los indicadores de rendimiento}
+\requisito{RF-04}{Cálculo de los indicadores de rendimiento}
 {Funcional}
 {Must}
 {EMT Madrid}
@@ -137,10 +125,10 @@ junto a la  EMT a partir de las salidas del simulador: ocupación, subidas, baja
  parada, franja horaria y sentido, así como los tiempos de recorrido.}
 {Los KPIs son el producto que la EMT consume del simulador: traducen las trazas de la simulación a las magnitudes 
 con las que el operador evalúa el servicio.}
-{RF-03, RD-04}
+{RF-02, RD-04}
 {Ejecución del extractor sobre una simulación completada y revisión de los indicadores generados. Método: A}
 
-\requisito{RF-06}{Índice de Regularidad conforme a la especificación de la EMT}
+\requisito{RF-05}{Índice de Regularidad conforme a la especificación de la EMT}
 {Funcional}
 {Must}
 {EMT Madrid}
@@ -150,10 +138,10 @@ autobuses consecutivos con el intervalo teórico del cuadro de servicio, aplican
 {La regularidad es el indicador operativo de referencia del operador para líneas de alta frecuencia, y su fórmula 
 por bandas es una especificación propia de la EMT que el simulador debe reproducir fielmente para que los resultados 
 sean comparables con sus informes internos.}
-{RF-05}
+{RF-04}
 {Prueba unitaria del cálculo con casos en las tres bandas de tolerancia, contrastando con la especificación de la EMT. Método: T}
 
-\requisito{RF-07}{Visualización interactiva de resultados}
+\requisito{RF-06}{Visualización interactiva de resultados}
 {Funcional}
 {Must}
 {EMT Madrid}
@@ -161,10 +149,10 @@ sean comparables con sus informes internos.}
 indicadores calculados y las visualizaciones estadísticas generadas, organizados por parada, franja horaria y sentido.}
 {La EMT expresó la necesidad de explorar los resultados visualmente, sin procesar ficheros de salida; la visualización 
 es la vía principal de explotación del sistema por parte del cliente.}
-{RF-05}
+{RF-04}
 {Consulta de los resultados de una simulación completada desde la interfaz. Método: D}
 
-\requisito{RF-08}{Comparación entre resultados simulados y datos reales}
+\requisito{RF-07}{Comparación entre resultados simulados y datos reales}
 {Funcional}
 {Must}
 {EMT Madrid}
@@ -172,10 +160,10 @@ es la vía principal de explotación del sistema por parte del cliente.}
  franja horaria de salida y sentido, empleando la distancia de Bhattacharyya, y presentar el grado de acuerdo obtenido.}
 {Permite a la EMT valorar la credibilidad del simulador frente a su propia operación real, condición necesaria para 
 utilizarlo como herramienta de apoyo a la planificación.}
-{RF-05, RD-04}
+{RF-04, RD-04}
 {Generación del informe de comparación y revisión de las tasas de acuerdo por sentido. Método: A}
 
-\requisito{RF-09}{Gestión del histórico de simulaciones}
+\requisito{RF-08}{Gestión del histórico de simulaciones}
 {Funcional}
 {Should}
 {EMT Madrid}
@@ -183,10 +171,10 @@ utilizarlo como herramienta de apoyo a la planificación.}
 consultar o eliminar cualquiera de ellas.}
 {El uso previsto implica ejecutar y comparar múltiples escenarios a lo largo del tiempo; sin gestión del histórico 
 los resultados serían inaccesibles o se acumularían indefinidamente.}
-{RF-01, RF-07}
+{RF-01, RF-06}
 {Listado, consulta y borrado de simulaciones desde la interfaz, comprobando la eliminación efectiva en disco. Método: T}
 
-\requisito{RF-10}{Persistencia de resultados en formato estructurado}
+\requisito{RF-09}{Persistencia de resultados en formato estructurado}
 {Funcional}
 {Must}
 {EMT Madrid}
@@ -194,7 +182,7 @@ los resultados serían inaccesibles o se acumularían indefinidamente.}
 estructurados y abiertos (CSV y JSON) en directorios accesibles desde el sistema de ficheros del anfitrión.}
 {Garantiza que la EMT pueda explotar los resultados con sus propias herramientas de análisis, más allá de la visualización 
 ofrecida por la interfaz.}
-{RF-05}
+{RF-04}
 {Inspección de los ficheros generados tras una simulación y carga de los mismos con herramientas externas. Método: I}
 
 
@@ -231,7 +219,7 @@ con el embarque iniciado por el agente pasajero mediante solicitud al autobús d
 deben rechazarse, permaneciendo el pasajero en la parada y contabilizándose como pasajero residual.}
 {La capacidad es una restricción física del vehículo real y los pasajeros residuales son un indicador de calidad de 
 servicio de interés directo para el operador.}
-{RD-01, RF-05}
+{RD-01, RF-04}
 {Escenario forzado de saturación comprobando el tope de ocupación y el cómputo de residuales. Método: T}
 
 \requisito{RD-04}{Muestreo de las distribuciones de entrada}
@@ -340,7 +328,7 @@ práctica para que el simulador sea utilizable por el cliente.}
  del anfitrión montado en el contenedor, de modo que sobrevivan a reinicios del contenedor entre interacciones del usuario.}
 {El flujo de uso (preparar, configurar y lanzar en momentos distintos) y la conservación del histórico exigen
  que ningún estado relevante viva únicamente dentro del contenedor.}
-{RNF-01, RF-09, RF-10}
+{RNF-01, RF-08, RF-09}
 {Reinicio del contenedor entre la preparación y el lanzamiento de una simulación, y tras su finalización, 
 comprobando la integridad del histórico. Método: T}
 
@@ -352,7 +340,7 @@ comprobando la integridad del histórico. Método: T}
 la ejecución de réplicas en paralelo en el hardware disponible.}
 {La interfaz gráfica de GAMA impide la automatización y multiplica el coste computacional; el modo desatendido 
 es condición para las réplicas de Monte Carlo y para la integración con la interfaz web.}
-{RF-03, RF-11}
+{RF-02, RF-10}
 {Lanzamiento de un lote de réplicas sin entorno gráfico y verificación de su finalización. Método: T}
 
 \requisito{RNF-04}{Tratamiento exclusivo de datos agregados}
@@ -375,5 +363,5 @@ distribuciones) deben residir en datos y ficheros de configuración, no en el c�
 pueda adaptarse a otras líneas de la red sustituyendo dichos ficheros.}
 {El interés del operador trasciende la línea piloto; la extensibilidad multiplica el valor del sistema como 
 herramienta de planificación para el conjunto de la red.}
-{RF-02, RD-04}
+{RD-04}
 {Revisión de que ningún parámetro específico de línea está codificado de forma rígida en el modelo. Método: A}

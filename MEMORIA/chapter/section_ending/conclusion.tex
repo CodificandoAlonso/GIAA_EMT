@@ -1,0 +1,82 @@
+\section{Resumen del trabajo realizado}
+El trabajo expuesto a lo largo de este documento resulta de la consecución de cuatro fases concretas.
+
+Conceptualmente se inicia con la contextualización del problema, donde se introduce la idea de buscar la forma de simular
+la operación de una línea de autobús a lo largo de un día de servicio. Para ello, previa investigación de literatura existente,
+se escoge el paradigma multi-agente, debido a las características del entorno dinámicas y complejas, junto a la capacidad de evolución
+que presenta.
+
+Una vez queda definido el objetivo, se empieza a trabajar sobre el conjunto de datos otorgado por la EMT. Durante esta fase, se acota
+el alcance del simulador debido a distintas características observadas, como la exclusión de fines de semana o de días con gratuidad.
+Debido también a la estructura de los datos, se caracteriza estadísticamente mediante distribuciones tanto valores comparativos 
+de ocupación, como la carga y descarga de pasajeros, siendo estos últimos los principales parámetros estocásticos del sistema multi-agente.
+
+Con los datos estudiados y el objetivo contextualizado, se inicia la fase de construcción del sistema. En esta fase se opta por el
+desarrollo de dos sistemas paralelos, que se diferencian por la caracterización en uno de ellos de los pasajeros como agentes, pero
+con el objetivo de que ambos sean plenamente funcionales bajo el escenario a modelar. En esta fase se modela la arquitectura
+en la plataforma de diseño de agentes GAMA, y se implementan conceptos como la reconstrucción lineal conservativa, para incorporar
+la tendencia en la generación de pasajeros, se diseñan protocolos de comunicación basados en los estandares FIPA, 
+o se resuelven conflictos como la abstracción de la inferencia de bajada de pasajeros mediante acciones del entorno, extrayendo
+estas capacidades de los agentes.
+
+Por último, y en concordancia con lo establecido en los requisitos del sistema, se construye
+una interfaz que facilita el lanzamiento y la visualización de las simulaciones, permitiendo
+abordar la validación de forma más ágil.
+
+Dicha validación muestra que el simulador reproduce la operativa de la línea con un sesgo
+medio en torno a los dos pasajeros y una sobredispersión que crece a lo largo del recorrido,
+magnitudes ambas caracterizadas y documentadas. Se identifica asimismo que el modelado de
+descensos como eventos independientes restringe la validez del sistema al escenario base,
+excluyendo el análisis de configuraciones alternativas de servicio.
+
+\section{Satisfacción de objetivos}
+Para el presente trabajo se establece un objetivo principal y tres objetivos secundarios. A lo largo del documento se ha discutido,
+especialmente en el capítulo correspondiente a los casos de aplicación (véase capítulo~\ref{chapter:application_cases}), la completitud
+de los distintos objetivos. A continuación, para cada uno se formaliza y se discute en profundidad su grado de conformidad alcanzado.
+
+\subsection{Satisfacción del objetivo principal del trabajo}
+Este objetivo concretamente es \textbf{determinar en qué medida un sistema multi-agente parametrizado a partir de datos reales
+es capaz de reproducir la operativa de una línea de autobús urbano.} Tras la construcción
+y evaluación del sistema multi-agente para las dos implementaciones, se puede concluir que el objetivo principal del trabajo
+resulta satisfecho, ya que se constata que, pese a la discusión relativa al sesgo y a la sobredispersión, el sistema es capaz
+de capturar el comportamiento general de la línea de estudio para los días laborables y estudiar, en base a los indicadores
+de rendimiento obtenidos, la capacidad de absorción de la demanda por parte de la operativa de servicio promedio.
+
+\subsection{Satisfacción de los objetivos secundarios}
+
+En cuanto a los objetivos secundarios, el primero de ellos, \textbf{caracterizar estadísticamente los datos operacionales de la línea},
+se satisface mediante el análisis
+recogido en el capítulo~\ref{chapter:param_analisys}. Los datos operacionales cedidos por la
+EMT han sido depurados y caracterizados estadísticamente, ajustando distribuciones de
+probabilidad sobre los valores de ocupación, embarque y descenso para cada combinación de
+parada y franja horaria, con la selección de familia realizada mediante criterios de bondad
+de ajuste y de información.
+
+El segundo objetivo, \textbf{validar que ambas propuestas arquitectónicas generan resultados equivalentes},
+queda igualmente cumplido. El contraste directo de los indicadores de
+rendimiento generados por ambas soluciones, bajo idénticos parámetros de entrada, confirma que las dos propuestas arquitectónicas
+producen resultados equivalentes. Se puede concluir entonces que tanto la representación agregada como la
+representación basada en agentes pasajero individuales reproducen el comportamiento esperado.
+
+Por último, el tercer objetivo, \textbf{proporcionar una herramienta que permita ejecutar, almacenar y visualizar de forma
+interactiva las distintas simulaciones generadas por el sistema}, queda satisfecho mediante la construcción de la interfaz presentada
+al inicio del capítulo~\ref{chapter:application_cases}, que unifica todos los requerimientos del objetivo.
+
+\section{Conclusiones generales}
+En un cómputo general, este trabajo de investigación se posiciona como la fase inicial o de validación de un proyecto colaborativo
+entre entidades públicas, cuyo objetivo último es servir como herramienta para analizar y mejorar el servicio de autobuses 
+urbanos.
+
+El trabajo realizado asienta la base sobre la que evolucionar el sistema hacia dicho
+objetivo. La elección del paradigma multi-agente permite un escalado posterior hacia
+arquitecturas deliberativas sin alterar el esqueleto del modelo. La interfaz implementada
+facilita el lanzamiento, almacenamiento y visualización de escenarios. Y el análisis de los
+datos operacionales, si bien constituye el origen de la principal limitación identificada,
+delimita con precisión qué aspectos del servicio resultan reproducibles y con qué grado de
+fidelidad.
+
+Cabe destacar que la validación del sistema no se ha limitado a demostrar el acuerdo entre
+lo simulado y lo observado, sino que ha perseguido caracterizar dónde falla el modelo y por
+qué mecanismo. Es dicha caracterización, más que el acuerdo en sí, la que permite establecer
+sobre qué preguntas puede el simulador aportar respuesta y cuáles quedan condicionadas a
+desarrollos posteriores.
