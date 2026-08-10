@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.7.5)  10 AUG 2026 11:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  10 AUG 2026 11:23
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex
-(/home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex
+**/home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex
+(/home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -757,7 +757,7 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 Package: babel 2024/01/07 v24.1 The Babel package
 \babel@savecnt=\count349
 \U@D=\dimen293
-\l@unhyphenated=\language12
+\l@unhyphenated=\language89
  (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read4
 \bbl@dirlevel=\count350
@@ -905,7 +905,19 @@ Already applied: [0000/00/00] Usage of raw or classic option list on input line 
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
-Package shellesc Info: Restricted shell escape enabled on input line 77.
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
+) (/usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
+ (/usr/share/texlive/texmf-dist/tex/generic/catchfile/catchfile.sty
+Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
+ (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+))
+runsystem(uname -s > "memoria.w18")...executed.
+
+ (./memoria.w18)
+runsystem(rm -- "memoria.w18")...executed.
+
 )
 \c@svg@param@lastpage=\count372
 \svg@box=\box77
@@ -1058,7 +1070,7 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \bibhang=\skip95
 \blx@bcfin=\read5
 \blx@bcfout=\write5
-\blx@langwohyphens=\language13
+\blx@langwohyphens=\language90
 \c@mincomprange=\count430
 \c@maxcomprange=\count431
 \c@mincompwidth=\count432
@@ -1248,7 +1260,10 @@ Package: blx-case-expl3 2023/03/05 v3.19 expl3 case changing code for biblatex
 ))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
- (./memoria.aux)
+ (./memoria.aux
+LaTeX Info: Redefining \. on input line 13.
+LaTeX Info: Redefining \% on input line 13.
+)
 \openout1 = `memoria.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 255.
@@ -1340,6 +1355,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring ON on input line 255.
+ (./memoria.out) (./memoria.out)
 \@outlinefile=\write6
 \openout6 = `memoria.out'.
 
@@ -1377,7 +1393,7 @@ File: t1txss.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
 (Font)              scaled to size 11.39996pt on input line 262.
-<imagenes/logo_UC3M.png, id=9, 456.2865pt x 45.99pt>
+<imagenes/logo_UC3M.png, id=324, 456.2865pt x 45.99pt>
 File: imagenes/logo_UC3M.png Graphic file (type png)
 <use imagenes/logo_UC3M.png>
 Package pdftex.def Info: imagenes/logo_UC3M.png  used on input line 266.
@@ -1390,7 +1406,7 @@ LaTeX Font Info:    Font shape `T1/txss/m/n' will be
 (Font)              scaled to size 23.63593pt on input line 277.
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
 (Font)              scaled to size 19.70294pt on input line 281.
-<imagenes/creativecommons.png, id=11, 338.76563pt x 118.19156pt>
+<imagenes/creativecommons.png, id=326, 338.76563pt x 118.19156pt>
 File: imagenes/creativecommons.png Graphic file (type png)
 <use imagenes/creativecommons.png>
 Package pdftex.def Info: imagenes/creativecommons.png  used on input line 292.
@@ -1418,105 +1434,89 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has b
 l.330 \chapter
               *{Agradecimientos} % \chapter* evita que aparezca en el Ã­ndice [1] [5
 
-] [6]
-No file memoria.toc.
+] [6] (./memoria.toc
+LaTeX Info: Redefining \sptext on input line 1.
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+ [7
+
+] [8]
+Overfull \hbox (3.30765pt too wide) in paragraph at lines 101--101
+[]|\T1/txr/m/n/12 B.[][]FIGURAS COM-PLE-MEN-TA-RIAS DEL ES-TU-DIO DE VIA-BI-LI-DAD DE DA- 
+ []
+
+)
 \tf@toc=\write7
 \openout7 = `memoria.toc'.
 
-[7
-
-] [8]
-No file memoria.lof.
-\tf@lof=\write8
-\openout8 = `memoria.lof'.
-
-[9
-
-] [10]
-No file memoria.lot.
-\tf@lot=\write9
-\openout9 = `memoria.lot'.
-
-[11
-
-] [12]
-Cap\'{\i }tulo 1.
-(./chapter/section_introduction/intro.tex
-LaTeX Font Info:    Trying to load font information for OT1+txr on input line 11.
+ [9] [10] (./memoria.lof
+LaTeX Info: Redefining \sptext on input line 1.
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+LaTeX Font Info:    Trying to load font information for OT1+txr on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Trying to load font information for U+txsya on input line 11.
+LaTeX Font Info:    Trying to load font information for U+txsya on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxsya.fd
 File: utxsya.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Trying to load font information for U+txsyb on input line 11.
+LaTeX Font Info:    Trying to load font information for U+txsyb on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxsyb.fd
 File: utxsyb.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Trying to load font information for U+txmia on input line 11.
+LaTeX Font Info:    Trying to load font information for U+txmia on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxmia.fd
 File: utxmia.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Trying to load font information for U+txsyc on input line 11.
+LaTeX Font Info:    Trying to load font information for U+txsyc on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/utxsyc.fd
 File: utxsyc.fd 2000/12/15 v3.1
-)
+) [11
+
+] [12])
+\tf@lof=\write8
+\openout8 = `memoria.lof'.
+
+ [13] [14] (./memoria.lot
+LaTeX Info: Redefining \sptext on input line 1.
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+ [15
+
+])
+\tf@lot=\write9
+\openout9 = `memoria.lot'.
+
+ [16] [17]
+Cap\'{\i }tulo 1.
+(./chapter/section_introduction/intro.tex
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 11.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 ) [1
 
 
-] [2] [3]
-
-LaTeX Warning: Reference `chapter:param_analisys' on page 4 undefined on input line 169.
-
-) [4]
+] [2] [3]) [4]
 Cap\'{\i }tulo 2.
-(./chapter/section_state_of_art/intro.tex) (./chapter/section_state_of_art/agentes_inteligentes.tex
-
-LaTeX Warning: Reference `fig:agente_entorno' on page 5 undefined on input line 9.
-
-[5
+(./chapter/section_state_of_art/intro.tex) (./chapter/section_state_of_art/agentes_inteligentes.tex [5
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+txr on input line 25.
  (/usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txr.fd
 File: ts1txr.fd 2000/12/15 v3.1
-) [6]
-
-LaTeX Warning: Reference `subsec:comunicacion' on page 7 undefined on input line 34.
-
-[7]
+) [6] [7]
 LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10.95> not available
 (Font)              Font shape `T1/txr/bx/n' tried instead on input line 61.
  [8] [9]
-
-LaTeX Warning: Reference `chapter:simulation_design' on page 10 undefined on input line 110.
-
 LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10> not available
 (Font)              Font shape `T1/txr/bx/n' tried instead on input line 162.
 
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[10]
-
-LaTeX Warning: Reference `tab:comparativa_plataformas' on page 11 undefined on input line 181.
-
-[11] [12]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [13]
-
-LaTeX Warning: Reference `sec:agents' on page 14 undefined on input line 55.
-
-[14] [15] [16]
-
-LaTeX Warning: Reference `subsec:statistics' on page 17 undefined on input line 155.
-
-[17]
-
-LaTeX Warning: Reference `fig:montecarlo' on page 18 undefined on input line 184.
-
-<imagenes/montecarlo_convergence_occupation.png, id=356, 867.24pt x 361.35pt>
+[10] [11] [12]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [13] [14] [15] [16] [17]
+<imagenes/montecarlo_convergence_occupation.png, id=1071, 867.24pt x 361.35pt>
 File: imagenes/montecarlo_convergence_occupation.png Graphic file (type png)
 <use imagenes/montecarlo_convergence_occupation.png>
 Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 218.
@@ -1534,25 +1534,9 @@ Overfull \hbox (12.0pt too wide) detected at line 218
  [] 
  []
 
-
-LaTeX Warning: Reference `subsubsec:hyp_test' on page 18 undefined on input line 226.
-
-
-LaTeX Warning: Reference `subsubsec:extreme_case' on page 18 undefined on input line 226.
-
 [18 <./imagenes/montecarlo_convergence_occupation.png>]
-
-LaTeX Warning: Reference `fig:gaussian' on page 19 undefined on input line 250.
-
 Package pgfplots info on input line 269: Overriding colorspace to rgb due to xcolor configuration.
-[19]
-
-LaTeX Warning: Reference `fig:negbin' on page 20 undefined on input line 333.
-
-
-LaTeX Warning: Reference `fig:geometric' on page 20 undefined on input line 335.
-
-[20]
+ [19] [20]
 Package pgfplots info on input line 375: Overriding colorspace to rgb due to xcolor configuration.
 Package pgfplots info on input line 406: Overriding colorspace to rgb due to xcolor configuration.
 
@@ -1566,27 +1550,10 @@ Overfull \hbox (8.7134pt too wide) in paragraph at lines 483--489
 
 [23]) [24]
 Cap\'{\i }tulo 3.
-(./chapter/section_metodology/metodology.tex
+(./chapter/section_metodology/metodology.tex [25
 
-LaTeX Warning: Reference `section:gauss_and_study' on page 25 undefined on input line 35.
-
-
-LaTeX Warning: Reference `chapter:future_works' on page 25 undefined on input line 36.
-
-[25
-
-]
-
-LaTeX Warning: Reference `fig:gantt_diagram' on page 26 undefined on input line 45.
-
-
-LaTeX Warning: Reference `chapter:param_analisys' on page 26 undefined on input line 54.
-
-
-LaTeX Warning: Reference `chapter:state_of_art' on page 26 undefined on input line 56.
-
-[26] [27]
-<imagenes/gantt_chart.png, id=473, 1001.6622pt x 351.9549pt>
+] [26] [27]
+<imagenes/gantt_chart.png, id=1190, 1001.6622pt x 351.9549pt>
 File: imagenes/gantt_chart.png Graphic file (type png)
 <use imagenes/gantt_chart.png>
 Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 97.
@@ -1602,179 +1569,89 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [28
 
 
- <./imagenes/gantt_chart.png>]
-
-LaTeX Warning: Reference `chapter:budget' on page 29 undefined on input line 137.
-
-[29
+ <./imagenes/gantt_chart.png>] [29
 
 ]
-
-LaTeX Warning: Reference `fig:regularity' on page 30 undefined on input line 165.
-
-<imagenes/regularidad.png, id=504, 435.87843pt x 445.665pt>
+<imagenes/regularidad.png, id=1221, 435.87843pt x 445.665pt>
 File: imagenes/regularidad.png Graphic file (type png)
 <use imagenes/regularidad.png>
 Package pdftex.def Info: imagenes/regularidad.png  used on input line 170.
 (pdftex.def)             Requested size: 426.79135pt x 436.37471pt.
-[30] [31 <./imagenes/regularidad.png>]) [32]
+ [30] [31 <./imagenes/regularidad.png>]) [32]
 Cap\'{\i }tulo 4.
 (./chapter/section_analysis/param_analysis.tex
-
-LaTeX Warning: Reference `fig:qgis_converted' on page 33 undefined on input line 39.
-
-
-LaTeX Warning: Reference `fig:shapefile_gama' on page 33 undefined on input line 41.
-
-<imagenes/qgis_capture_e01_converted.png, id=531, 1861.95625pt x 1051.93pt>
+<imagenes/qgis_capture_e01_converted.png, id=1245, 1861.95625pt x 1051.93pt>
 File: imagenes/qgis_capture_e01_converted.png Graphic file (type png)
 <use imagenes/qgis_capture_e01_converted.png>
 Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 47.
 (pdftex.def)             Requested size: 426.79135pt x 241.1202pt.
-[33
+ [33
 
 ]
-<imagenes/gama_shapefiles.png, id=541, 1862.96pt x 1054.94125pt>
+<imagenes/gama_shapefiles.png, id=1252, 1862.96pt x 1054.94125pt>
 File: imagenes/gama_shapefiles.png Graphic file (type png)
 <use imagenes/gama_shapefiles.png>
 Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 55.
 (pdftex.def)             Requested size: 426.79135pt x 241.68166pt.
-
-
-LaTeX Warning: Reference `fig:qgis_converted' on page 34 undefined on input line 61.
-
-
-LaTeX Warning: Reference `fig:shapefile_gama' on page 34 undefined on input line 61.
-
-[34 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
-
-LaTeX Warning: Reference `chapter:simulation_design' on page 35 undefined on input line 71.
-
-
-LaTeX Warning: Reference `fig:relational_model' on page 35 undefined on input line 81.
-
-<imagenes/image_tables_diagram.png, id=550, 331.2375pt x 785.93625pt>
+ [34 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
+<imagenes/image_tables_diagram.png, id=1263, 331.2375pt x 785.93625pt>
 File: imagenes/image_tables_diagram.png Graphic file (type png)
 <use imagenes/image_tables_diagram.png>
 Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 90.
 (pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
-[35]
-
-LaTeX Warning: Reference `fig:relational_model' on page 36 undefined on input line 171.
-
-
-LaTeX Warning: Reference `fig:relational_model' on page 36 undefined on input line 171.
-
-
-LaTeX Warning: Reference `fig:relational_model' on page 36 undefined on input line 171.
-
-
+ [35]
 Overfull \hbox (38.77354pt too wide) detected at line 171
  [] 
  []
 
 [36 <./imagenes/image_tables_diagram.png (PNG copy)>]
-
-LaTeX Warning: Reference `fig:relational_model' on page 37 undefined on input line 253.
-
-
-LaTeX Warning: Reference `fig:relational_model' on page 37 undefined on input line 253.
-
-
-LaTeX Warning: Reference `fig:relational_model' on page 37 undefined on input line 253.
-
-
 Overfull \hbox (38.77354pt too wide) detected at line 253
  [] 
  []
 
-[37]
-
-LaTeX Warning: Reference `code:sql_query' on page 38 undefined on input line 259.
-
-[38] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[37] [38] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 263.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
 (Font)              Font shape `T1/txtt/bx/n' tried instead on input line 264.
- [39]
-
-LaTeX Warning: Reference `section:problem_def' on page 40 undefined on input line 307.
-
-[40]
+ [39] [40]
 LaTeX Font Info:    Font shape `T1/txr/b/it' in size <12> not available
 (Font)              Font shape `T1/txr/bx/it' tried instead on input line 351.
-
-
-LaTeX Warning: Reference `fig:comparison_toA' on page 41 undefined on input line 374.
-
-
-LaTeX Warning: Reference `fig:comparison_toB' on page 41 undefined on input line 374.
-
-<imagenes/to_A/comparison_ALL_vs_individual.png, id=593, 1156.32pt x 433.62pt>
+<imagenes/to_A/comparison_ALL_vs_individual.png, id=1310, 1156.32pt x 433.62pt>
 File: imagenes/to_A/comparison_ALL_vs_individual.png Graphic file (type png)
 <use imagenes/to_A/comparison_ALL_vs_individual.png>
 Package pdftex.def Info: imagenes/to_A/comparison_ALL_vs_individual.png  used on input line 382.
 (pdftex.def)             Requested size: 426.79135pt x 160.04651pt.
-[41]
-<imagenes/to_B/comparison_ALL_vs_individual.png, id=599, 1156.32pt x 433.62pt>
+ [41]
+<imagenes/to_B/comparison_ALL_vs_individual.png, id=1316, 1156.32pt x 433.62pt>
 File: imagenes/to_B/comparison_ALL_vs_individual.png Graphic file (type png)
 <use imagenes/to_B/comparison_ALL_vs_individual.png>
 Package pdftex.def Info: imagenes/to_B/comparison_ALL_vs_individual.png  used on input line 390.
 (pdftex.def)             Requested size: 426.79135pt x 160.04651pt.
-
-
-LaTeX Warning: Reference `fig:normality_toA_all' on page 42 undefined on input line 406.
-
-
-LaTeX Warning: Reference `fig:normality_toA_deagregated' on page 42 undefined on input line 407.
-
-
-LaTeX Warning: Reference `fig:normality_toB_all' on page 42 undefined on input line 419.
-
-
-LaTeX Warning: Reference `fig:normality_toB_deagregated' on page 42 undefined on input line 419.
-
-[42 <./imagenes/to_A/comparison_ALL_vs_individual.png> <./imagenes/to_B/comparison_ALL_vs_individual.png>]
-
-LaTeX Warning: Reference `fig:heatmap_toA_all' on page 43 undefined on input line 426.
-
-
-LaTeX Warning: Reference `fig:heatmap_toA_deagregated' on page 43 undefined on input line 426.
-
-
-LaTeX Warning: Reference `fig:heatmap_toB_all' on page 43 undefined on input line 426.
-
-
-LaTeX Warning: Reference `fig:heatmap_toB_deagregated' on page 43 undefined on input line 426.
-
-<imagenes/to_A/heatmap_normality_ALL.png, id=608, 1156.32pt x 578.16pt>
+ [42 <./imagenes/to_A/comparison_ALL_vs_individual.png> <./imagenes/to_B/comparison_ALL_vs_individual.png>]
+<imagenes/to_A/heatmap_normality_ALL.png, id=1331, 1156.32pt x 578.16pt>
 File: imagenes/to_A/heatmap_normality_ALL.png Graphic file (type png)
 <use imagenes/to_A/heatmap_normality_ALL.png>
 Package pdftex.def Info: imagenes/to_A/heatmap_normality_ALL.png  used on input line 431.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-<imagenes/to_A/heatmap_normality_individual.png, id=609, 1156.32pt x 578.16pt>
+<imagenes/to_A/heatmap_normality_individual.png, id=1332, 1156.32pt x 578.16pt>
 File: imagenes/to_A/heatmap_normality_individual.png Graphic file (type png)
 <use imagenes/to_A/heatmap_normality_individual.png>
 Package pdftex.def Info: imagenes/to_A/heatmap_normality_individual.png  used on input line 438.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-[43 <./imagenes/to_A/heatmap_normality_ALL.png>]
-<imagenes/to_B/heatmap_normality_ALL.png, id=617, 1156.32pt x 578.16pt>
+ [43 <./imagenes/to_A/heatmap_normality_ALL.png>]
+<imagenes/to_B/heatmap_normality_ALL.png, id=1338, 1156.32pt x 578.16pt>
 File: imagenes/to_B/heatmap_normality_ALL.png Graphic file (type png)
 <use imagenes/to_B/heatmap_normality_ALL.png>
 Package pdftex.def Info: imagenes/to_B/heatmap_normality_ALL.png  used on input line 445.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-<imagenes/to_B/heatmap_normality_individual.png, id=618, 1156.32pt x 578.16pt>
+<imagenes/to_B/heatmap_normality_individual.png, id=1339, 1156.32pt x 578.16pt>
 File: imagenes/to_B/heatmap_normality_individual.png Graphic file (type png)
 <use imagenes/to_B/heatmap_normality_individual.png>
 Package pdftex.def Info: imagenes/to_B/heatmap_normality_individual.png  used on input line 452.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
  [44 <./imagenes/to_A/heatmap_normality_individual.png> <./imagenes/to_B/heatmap_normality_ALL.png>] [45 <./imagenes/to_B/heatmap_normality_individual.png>] [46]
-
-LaTeX Warning: Reference `tab:pct_intra' on page 47 undefined on input line 524.
-
-
 Overfull \hbox (35.28078pt too wide) in paragraph at lines 539--539
 [] [] 
  []
@@ -1784,47 +1661,20 @@ Overfull \hbox (35.28078pt too wide) in paragraph at lines 539--539
 [] [] 
  []
 
-
-LaTeX Warning: Reference `fig:cake_toA' on page 47 undefined on input line 546.
-
-
-LaTeX Warning: Reference `fig:cake_toB' on page 47 undefined on input line 546.
-
-<imagenes/to_A/fig1_global_pie_toA.png, id=641, 826.287pt x 357.4956pt>
+<imagenes/to_A/fig1_global_pie_toA.png, id=1362, 826.287pt x 357.4956pt>
 File: imagenes/to_A/fig1_global_pie_toA.png Graphic file (type png)
 <use imagenes/to_A/fig1_global_pie_toA.png>
 Package pdftex.def Info: imagenes/to_A/fig1_global_pie_toA.png  used on input line 554.
 (pdftex.def)             Requested size: 426.79135pt x 184.6496pt.
 [47]
-<imagenes/to_B/fig1_global_pie_toB.png, id=647, 817.6146pt x 357.4956pt>
+<imagenes/to_B/fig1_global_pie_toB.png, id=1367, 817.6146pt x 357.4956pt>
 File: imagenes/to_B/fig1_global_pie_toB.png Graphic file (type png)
 <use imagenes/to_B/fig1_global_pie_toB.png>
 Package pdftex.def Info: imagenes/to_B/fig1_global_pie_toB.png  used on input line 561.
 (pdftex.def)             Requested size: 426.79135pt x 186.61337pt.
- [48 <./imagenes/to_A/fig1_global_pie_toA.png> <./imagenes/to_B/fig1_global_pie_toB.png>]
-
-LaTeX Warning: Reference `tab:ejemplo_csv_intraparada' on page 49 undefined on input line 590.
-
-
-LaTeX Warning: Reference `tab:ejemplo_csv_interparada' on page 49 undefined on input line 621.
-
-[49]
-
-LaTeX Warning: Reference `code:json_buses' on page 50 undefined on input line 652.
-
-[50]) [51]
+ [48 <./imagenes/to_A/fig1_global_pie_toA.png> <./imagenes/to_B/fig1_global_pie_toB.png>] [49] [50]) [51]
 Cap\'{\i }tulo 5.
-(./chapter/section_design/Simulation_design.tex
-
-LaTeX Warning: Reference `subsec:structure' on page 52 undefined on input line 3.
-
-
-LaTeX Warning: Reference `anex:requirements' on page 52 undefined on input line 21.
-
-
-LaTeX Warning: Reference `chapter:state_of_art' on page 52 undefined on input line 26.
-
-[52
+(./chapter/section_design/Simulation_design.tex [52
 
 ]
 Overfull \hbox (11.61494pt too wide) in paragraph at lines 34--36
@@ -1832,12 +1682,6 @@ Overfull \hbox (11.61494pt too wide) in paragraph at lines 34--36
  []
 
 
-LaTeX Warning: Reference `subsec:comunicacion' on page 53 undefined on input line 61.
-
-
-LaTeX Warning: Reference `tab:protocolos' on page 53 undefined on input line 62.
-
-
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 90--90
  [][] 
  []
@@ -1847,15 +1691,7 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 90--90
  [][] 
  []
 
-[53]
-
-LaTeX Warning: Reference `subsubsec:comms_protocols' on page 54 undefined on input line 94.
-
-[54]
-
-LaTeX Warning: Reference `tab:estado_bus' on page 55 undefined on input line 122.
-
-
+[53] [54]
 Overfull \hbox (1.99345pt too wide) in paragraph at lines 142--142
  [][] 
  []
@@ -1889,36 +1725,16 @@ Overfull \hbox (2.00647pt too wide) in paragraph at lines 186--186
 Overfull \vbox (57.2828pt too high) has occurred while \output is active []
 
  [57]
-
-LaTeX Warning: Reference `sec:second_sol' on page 58 undefined on input line 193.
-
-
-LaTeX Warning: Reference `tab:estado_pasajero' on page 58 undefined on input line 208.
-
-
-LaTeX Warning: Reference `subsubsec:world_enviroment_one' on page 58 undefined on input line 227.
-
-
 Overfull \hbox (1.99344pt too wide) in paragraph at lines 227--227
  [][] 
  []
 
 
-LaTeX Warning: Reference `subsubsec:world_enviroment_one' on page 58 undefined on input line 227.
-
-
 Overfull \hbox (1.99344pt too wide) in paragraph at lines 227--227
  [][] 
  []
-
-
-LaTeX Warning: Reference `tab:estado_pasajero' on page 58 undefined on input line 230.
 
 [58]
-
-LaTeX Warning: Reference `tab:interaccion_pasajero' on page 59 undefined on input line 238.
-
-
 Overfull \hbox (0.85582pt too wide) in paragraph at lines 267--267
  []|\T1/txr/m/n/12 Participante| 
  []
@@ -1959,10 +1775,6 @@ Overfull \hbox (2.00647pt too wide) in paragraph at lines 267--267
  []
 
 [59] [60]
-
-LaTeX Warning: Reference `tab:estado_parada' on page 61 undefined on input line 290.
-
-
 Overfull \hbox (1.99345pt too wide) in paragraph at lines 306--306
  [][] 
  []
@@ -1971,9 +1783,6 @@ Overfull \hbox (1.99345pt too wide) in paragraph at lines 306--306
 Overfull \hbox (1.99345pt too wide) in paragraph at lines 306--306
  [][] 
  []
-
-
-LaTeX Warning: Reference `tab:interaccion_parada' on page 61 undefined on input line 314.
 
 [61]
 Overfull \hbox (0.85582pt too wide) in paragraph at lines 339--339
@@ -2011,21 +1820,14 @@ Overfull \hbox (0.33667pt too wide) in paragraph at lines 345--353
  []
 
 [62]
-
-LaTeX Warning: Reference `fig:descenso_uno' on page 63 undefined on input line 379.
-
 Package svg Info: Last page of `./svg-inkscape/consulta_de_descenso_svg-tex.pdf' is 1 on input line 383.
-(./svg-inkscape/consulta_de_descenso_svg-tex.pdf_tex
-<./svg-inkscape/consulta_de_descenso_svg-tex.pdf, id=762, page=1, 362.10281pt x 535.2497pt>
+ (./svg-inkscape/consulta_de_descenso_svg-tex.pdf_tex
+<./svg-inkscape/consulta_de_descenso_svg-tex.pdf, id=1487, page=1, 362.10281pt x 535.2497pt>
 File: ./svg-inkscape/consulta_de_descenso_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/consulta_de_descenso_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/consulta_de_descenso_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 504.7029pt.
 ) [63]
-
-LaTeX Warning: Reference `tab:descenso_uno' on page 64 undefined on input line 389.
-
-
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 411--411
  [][] 
  []
@@ -2036,21 +1838,14 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 411--411
  []
 
 [64 <./svg-inkscape/consulta_de_descenso_svg-tex.pdf>]
-
-LaTeX Warning: Reference `fig:solicitud_uno' on page 65 undefined on input line 426.
-
 Package svg Info: Last page of `./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf' is 1 on input line 432.
-(./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf_tex
-<./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, id=811, page=1, 362.10281pt x 535.2497pt>
+ (./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf_tex
+<./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, id=1537, page=1, 362.10281pt x 535.2497pt>
 File: ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 504.7029pt.
 ) [65]
-
-LaTeX Warning: Reference `tab:solicitud_uno' on page 66 undefined on input line 437.
-
-
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 458--458
  [][] 
  []
@@ -2061,21 +1856,14 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 458--458
  []
 
 [66 <./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf>]
-
-LaTeX Warning: Reference `fig:notificacion_uno' on page 67 undefined on input line 471.
-
 Package svg Info: Last page of `./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf' is 1 on input line 476.
-(./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf_tex
-<./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, id=861, page=1, 362.10281pt x 550.30594pt>
+ (./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf_tex
+<./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, id=1587, page=1, 362.10281pt x 550.30594pt>
 File: ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 518.89987pt.
 ) [67]
-
-LaTeX Warning: Reference `tab:notificacion_uno' on page 68 undefined on input line 481.
-
-
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 503--503
  [][] 
  []
@@ -2086,21 +1874,14 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 503--503
  []
 
 [68 <./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf>]
-
-LaTeX Warning: Reference `fig:aviso_uno' on page 69 undefined on input line 519.
-
 Package svg Info: Last page of `./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf' is 1 on input line 524.
-(./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf_tex
-<./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, id=908, page=1, 362.10281pt x 542.77782pt>
+ (./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf_tex
+<./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, id=1634, page=1, 362.10281pt x 542.77782pt>
 File: ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 341.43437pt x 511.80138pt.
 ) [69]
-
-LaTeX Warning: Reference `tab:aviso_uno' on page 70 undefined on input line 530.
-
-
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 553--553
  [][] 
  []
@@ -2111,15 +1892,9 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 553--553
  []
 
 [70 <./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf>]
-
-LaTeX Warning: Reference `fig:embarque_uno' on page 71 undefined on input line 567.
-
-
-LaTeX Warning: Reference `tab:embarque_uno' on page 71 undefined on input line 567.
-
 Package svg Info: Last page of `./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf' is 1 on input line 572.
-(./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf_tex
-<./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, id=954, page=1, 362.10281pt x 475.02469pt>
+ (./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf_tex
+<./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, id=1681, page=1, 362.10281pt x 475.02469pt>
 File: ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf , page1 used on input line 56.
@@ -2135,13 +1910,6 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 600--600
  []
 
 [72 <./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf>]
-
-LaTeX Warning: Reference `fig:actualizacion_uno' on page 73 undefined on input line 619.
-
-
-LaTeX Warning: Reference `tab:actualizacion_uno' on page 73 undefined on input line 619.
-
-
 Overfull \hbox (5.44545pt too wide) in paragraph at lines 615--621
 []\T1/txr/m/n/12 Este úl-ti-mo pro-to-co-lo de co-mu-ni-ca-ción in-vo-lu-cra a los si-guien-tes agen-tes: \T1/txr/m/it/12 au-to-bús \T1/txr/m/n/12 ( \T1/txr/bx/n/12 ini-
  []
@@ -2149,7 +1917,7 @@ Overfull \hbox (5.44545pt too wide) in paragraph at lines 615--621
 [73]
 Package svg Info: Last page of `./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf' is 1 on input line 625.
  (./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf_tex
-<./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, id=1014, page=1, 362.10281pt x 490.08093pt>
+<./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, id=1739, page=1, 362.10281pt x 490.08093pt>
 File: ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf , page1 used on input line 56.
@@ -2164,53 +1932,19 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 652--652
  [][] 
  []
 
-[74 <./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf>] [75]
-
-LaTeX Warning: Reference `chapter:param_analisys' on page 76 undefined on input line 683.
-
-[76]
-
-LaTeX Warning: Reference `chapter:param_analisys' on page 77 undefined on input line 734.
-
-
-LaTeX Warning: Reference `fig:ilustrativa_linealidad' on page 77 undefined on input line 762.
-
-[77]
-<imagenes/ilustrativa_linealidad.png, id=1076, 425.30894pt x 279.6849pt>
+[74 <./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf>] [75] [76] [77]
+<imagenes/ilustrativa_linealidad.png, id=1803, 425.30894pt x 279.6849pt>
 File: imagenes/ilustrativa_linealidad.png Graphic file (type png)
 <use imagenes/ilustrativa_linealidad.png>
 Package pdftex.def Info: imagenes/ilustrativa_linealidad.png  used on input line 769.
 (pdftex.def)             Requested size: 320.0935pt x 210.50572pt.
  [78 <./imagenes/ilustrativa_linealidad.png>]
-
-LaTeX Warning: Reference `chapter:param_analisys' on page 79 undefined on input line 815.
-
-
-LaTeX Warning: Reference `fig:solucion_reconstruccion' on page 79 undefined on input line 817.
-
-<imagenes/comparativa_tendencia.png, id=1087, 453.1329pt x 293.4162pt>
+<imagenes/comparativa_tendencia.png, id=1815, 453.1329pt x 293.4162pt>
 File: imagenes/comparativa_tendencia.png Graphic file (type png)
 <use imagenes/comparativa_tendencia.png>
 Package pdftex.def Info: imagenes/comparativa_tendencia.png  used on input line 822.
 (pdftex.def)             Requested size: 320.0935pt x 207.27034pt.
-
-LaTeX Warning: Reference `fig:solucion_reconstruccion' on page 79 undefined on input line 838.
-
-
-LaTeX Warning: Reference `chapter:future_works' on page 79 undefined on input line 841.
-
-[79 <./imagenes/comparativa_tendencia.png>]
-
-LaTeX Warning: Reference `subsubsec:agents_char_one' on page 80 undefined on input line 849.
-
-
-LaTeX Warning: Reference `chapter:param_analisys' on page 80 undefined on input line 866.
-
-[80]
-
-LaTeX Warning: Reference `tab:subsistema_autobus' on page 81 undefined on input line 928.
-
-
+ [79 <./imagenes/comparativa_tendencia.png>] [80]
 Overfull \hbox (1.60646pt too wide) in paragraph at lines 965--965
  [][] 
  []
@@ -2220,18 +1954,7 @@ Overfull \hbox (1.60646pt too wide) in paragraph at lines 965--965
  [][] 
  []
 
-[81]
-
-LaTeX Warning: Reference `chapter:param_analisys' on page 82 undefined on input line 974.
-
-
-LaTeX Warning: Reference `subsec:exe_and_sim_one' on page 82 undefined on input line 981.
-
-[82]
-
-LaTeX Warning: Reference `tab:subsistema_pasajeros' on page 83 undefined on input line 993.
-
-
+[81] [82]
 Overfull \hbox (1.59995pt too wide) in paragraph at lines 1019--1019
  [][] 
  []
@@ -2242,10 +1965,6 @@ Overfull \hbox (1.59995pt too wide) in paragraph at lines 1019--1019
  []
 
 [83]
-
-LaTeX Warning: Reference `tab:subsistema_anomalias' on page 84 undefined on input line 1029.
-
-
 Overfull \hbox (1.59995pt too wide) in paragraph at lines 1060--1060
  [][] 
  []
@@ -2255,33 +1974,7 @@ Overfull \hbox (1.59995pt too wide) in paragraph at lines 1060--1060
  [][] 
  []
 
-[84]
-
-LaTeX Warning: Reference `subsec:montecarlo' on page 85 undefined on input line 1076.
-
-
-LaTeX Warning: Reference `section:usage_tools' on page 85 undefined on input line 1081.
-
-
-LaTeX Warning: Reference `fig:structure_hierarchy' on page 85 undefined on input line 1096.
-
-[85]
-
-LaTeX Warning: Reference `fig:structure_hierarchy' on page 86 undefined on input line 1127.
-
-
-LaTeX Warning: Reference `subsec:solution_comparative' on page 86 undefined on input line 1137.
-
-
-LaTeX Warning: Reference `sec:second_sol' on page 86 undefined on input line 1150.
-
-
-LaTeX Warning: Reference `subsubsec:comms_protocols_two' on page 86 undefined on input line 1156.
-
-
-LaTeX Warning: Reference `tab:protocolos_two' on page 86 undefined on input line 1157.
-
-[86]
+[84] [85] [86]
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 1174--1174
  [][] 
  []
@@ -2290,12 +1983,6 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 1174--1174
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 1174--1174
  [][] 
  []
-
-
-LaTeX Warning: Reference `tab:estado_bus' on page 87 undefined on input line 1194.
-
-
-LaTeX Warning: Reference `tab:interaccion_bus_two' on page 87 undefined on input line 1199.
 
 [87]
 Overfull \hbox (2.00647pt too wide) in paragraph at lines 1219--1219
@@ -2308,9 +1995,6 @@ Overfull \hbox (2.00647pt too wide) in paragraph at lines 1219--1219
  []
 
 
-LaTeX Warning: Reference `tab:estado_parada_two' on page 88 undefined on input line 1235.
-
-
 Overfull \hbox (1.99345pt too wide) in paragraph at lines 1254--1254
  [][] 
  []
@@ -2321,16 +2005,9 @@ Overfull \hbox (1.99345pt too wide) in paragraph at lines 1254--1254
  []
 
 [88]
-
-LaTeX Warning: Reference `tab:interaccion_parada_two' on page 89 undefined on input line 1257.
-
-
 Overfull \hbox (0.85582pt too wide) in paragraph at lines 1277--1277
  []|\T1/txr/m/n/12 Participante| 
  []
-
-
-LaTeX Warning: Reference `subsubsec:world_environment_two' on page 89 undefined on input line 1277.
 
 
 Overfull \hbox (0.85582pt too wide) in paragraph at lines 1277--1277
@@ -2348,9 +2025,6 @@ Overfull \hbox (0.85582pt too wide) in paragraph at lines 1277--1277
  []
 
 
-LaTeX Warning: Reference `subsubsec:world_environment_two' on page 89 undefined on input line 1277.
-
-
 Overfull \hbox (0.85582pt too wide) in paragraph at lines 1277--1277
  []|\T1/txr/m/n/12 Participante| 
  []
@@ -2360,65 +2034,25 @@ Overfull \hbox (2.00647pt too wide) in paragraph at lines 1277--1277
  [][] 
  []
 
-[89]
-
-LaTeX Warning: Reference `fig:consulta_tras_llegada' on page 90 undefined on input line 1294.
-
-
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `imagenes/protocols/consulta_llegada.drawio.svg' on input line 1298.
-
-
-./chapter/section_design/Simulation_design.tex:1298: Package svg Error: File `consulta_llegada.drawio_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1298 ...s/protocols/consulta_llegada.drawio.svg}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf'
-although `imagenes/protocols/consulta_llegada.drawio.svg' was found.
-
-
-./chapter/section_design/Simulation_design.tex:1298: Package svg Error: File `consulta_llegada.drawio_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1298 ...s/protocols/consulta_llegada.drawio.svg}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf_tex'
-although `imagenes/protocols/consulta_llegada.drawio.svg' was found.
-
-[90]
-
-LaTeX Warning: Reference `subsubsec:world_environment_two' on page 91 undefined on input line 1324.
+[89] [90]
+Package svg Info: Last page of `./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf' is 1 on input line 1298.
+ (./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf_tex
+<./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf, id=1899, page=1, 362.10281pt x 527.72156pt>
+File: ./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf Graphic file (type pdf)
+<use ./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf, page 1>
+Package pdftex.def Info: ./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf , page1 used on input line 56.
+(pdftex.def)             Requested size: 341.43437pt x 497.6044pt.
+)
+Overfull \hbox (1.59996pt too wide) in paragraph at lines 1324--1324
+ [][] 
+ []
 
 
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 1324--1324
  [][] 
  []
 
-
-LaTeX Warning: Reference `subsubsec:world_environment_two' on page 91 undefined on input line 1324.
-
-
-Overfull \hbox (1.59996pt too wide) in paragraph at lines 1324--1324
- [][] 
- []
-
-
-LaTeX Warning: Reference `fig:actualizacion_uno' on page 91 undefined on input line 1337.
-
-
-LaTeX Warning: Reference `tab:actualizacion_dos' on page 91 undefined on input line 1338.
-
-
+[91 <./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf>]
 Overfull \hbox (1.59996pt too wide) in paragraph at lines 1362--1362
  [][] 
  []
@@ -2428,283 +2062,156 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 1362--1362
  [][] 
  []
 
-[91]) [92] [93]
+[92]) [93] [94]
 Cap\'{\i }tulo 6.
-(./chapter/section_results/results.tex
-
-LaTeX Warning: Reference `anex:requirements' on page 94 undefined on input line 10.
-
-
-LaTeX Warning: Reference `sec:kpi_extraction' on page 94 undefined on input line 25.
-
-[94
+(./chapter/section_results/results.tex [95
 
 ]
-
-LaTeX Warning: Reference `fig:general_metrics' on page 95 undefined on input line 58.
-
-<imagenes/simulations/general_results_simulations.png, id=1179, 1217.54875pt x 366.36874pt>
+<imagenes/simulations/general_results_simulations.png, id=1962, 1217.54875pt x 366.36874pt>
 File: imagenes/simulations/general_results_simulations.png Graphic file (type png)
 <use imagenes/simulations/general_results_simulations.png>
 Package pdftex.def Info: imagenes/simulations/general_results_simulations.png  used on input line 63.
 (pdftex.def)             Requested size: 320.0935pt x 96.31578pt.
-[95]
-
-LaTeX Warning: Reference `fig:route_metrics_general' on page 96 undefined on input line 83.
-
-<imagenes/simulations/route_general_simulations.png, id=1185, 1209.51875pt x 536.0025pt>
+ [96]
+<imagenes/simulations/route_general_simulations.png, id=1968, 1209.51875pt x 536.0025pt>
 File: imagenes/simulations/route_general_simulations.png Graphic file (type png)
 <use imagenes/simulations/route_general_simulations.png>
 Package pdftex.def Info: imagenes/simulations/route_general_simulations.png  used on input line 88.
 (pdftex.def)             Requested size: 320.0935pt x 141.85187pt.
-[96 <./imagenes/simulations/general_results_simulations.png>]
-
-LaTeX Warning: Reference `fig:occ_mean_timeslot' on page 97 undefined on input line 97.
-
-
-LaTeX Warning: Reference `fig:kpi_stop_general' on page 97 undefined on input line 97.
-
-<imagenes/simulations/occupation_per_timeslot.png, id=1193, 867.24pt x 361.35pt>
+ [97 <./imagenes/simulations/general_results_simulations.png>]
+<imagenes/simulations/occupation_per_timeslot.png, id=1976, 867.24pt x 361.35pt>
 File: imagenes/simulations/occupation_per_timeslot.png Graphic file (type png)
 <use imagenes/simulations/occupation_per_timeslot.png>
 Package pdftex.def Info: imagenes/simulations/occupation_per_timeslot.png  used on input line 102.
 (pdftex.def)             Requested size: 320.0935pt x 133.37209pt.
-<imagenes/simulations/kpi_stop_general.png, id=1194, 1222.5675pt x 304.13625pt>
+<imagenes/simulations/kpi_stop_general.png, id=1977, 1222.5675pt x 304.13625pt>
 File: imagenes/simulations/kpi_stop_general.png Graphic file (type png)
 <use imagenes/simulations/kpi_stop_general.png>
 Package pdftex.def Info: imagenes/simulations/kpi_stop_general.png  used on input line 110.
 (pdftex.def)             Requested size: 320.0935pt x 79.6258pt.
-
-LaTeX Warning: Reference `fig:kpi_stop_general' on page 97 undefined on input line 116.
-
-
-LaTeX Warning: Reference `fig:occ_mean_timeslot' on page 97 undefined on input line 117.
-
-
-LaTeX Warning: Reference `section:operational' on page 97 undefined on input line 119.
-
-
-LaTeX Warning: Reference `fig:occupation_comparative' on page 97 undefined on input line 119.
-
-[97 <./imagenes/simulations/route_general_simulations.png> <./imagenes/simulations/occupation_per_timeslot.png> <./imagenes/simulations/kpi_stop_general.png>]
-<imagenes/simulations/occupation_comparaison.png, id=1207, 867.24pt x 361.35pt>
+ [98 <./imagenes/simulations/route_general_simulations.png> <./imagenes/simulations/occupation_per_timeslot.png> <./imagenes/simulations/kpi_stop_general.png>]
+<imagenes/simulations/occupation_comparaison.png, id=1991, 867.24pt x 361.35pt>
 File: imagenes/simulations/occupation_comparaison.png Graphic file (type png)
 <use imagenes/simulations/occupation_comparaison.png>
 Package pdftex.def Info: imagenes/simulations/occupation_comparaison.png  used on input line 124.
 (pdftex.def)             Requested size: 320.0935pt x 133.37209pt.
-
-
-LaTeX Warning: Reference `fig:occupation_comparative' on page 98 undefined on input line 134.
-
-
-LaTeX Warning: Reference `fig:route_metrics_general' on page 98 undefined on input line 139.
-
-[98 <./imagenes/simulations/occupation_comparaison.png>]
-
-LaTeX Warning: Reference `fig:bus_schedule' on page 99 undefined on input line 172.
-
-<imagenes/simulations/bus_schedule.png, id=1215, 832.10875pt x 651.43375pt>
+ [99 <./imagenes/simulations/occupation_comparaison.png>]
+<imagenes/simulations/bus_schedule.png, id=2001, 832.10875pt x 651.43375pt>
 File: imagenes/simulations/bus_schedule.png Graphic file (type png)
 <use imagenes/simulations/bus_schedule.png>
 Package pdftex.def Info: imagenes/simulations/bus_schedule.png  used on input line 176.
 (pdftex.def)             Requested size: 320.0935pt x 250.58905pt.
-[99]
-
-LaTeX Warning: Reference `fig:kpi_bus_fisic' on page 100 undefined on input line 187.
-
-
-LaTeX Warning: Reference `fig:evolution_route' on page 100 undefined on input line 188.
-
-<imagenes/simulations/kpi_bus_fisic.png, id=1223, 388.45125pt x 413.545pt>
+ [100]
+<imagenes/simulations/kpi_bus_fisic.png, id=2010, 388.45125pt x 413.545pt>
 File: imagenes/simulations/kpi_bus_fisic.png Graphic file (type png)
 <use imagenes/simulations/kpi_bus_fisic.png>
 Package pdftex.def Info: imagenes/simulations/kpi_bus_fisic.png  used on input line 192.
 (pdftex.def)             Requested size: 213.39568pt x 227.18541pt.
-[100 <./imagenes/simulations/bus_schedule.png>]
-<imagenes/simulations/evolution_route.png, id=1230, 867.24pt x 361.35pt>
+ [101 <./imagenes/simulations/bus_schedule.png>]
+<imagenes/simulations/evolution_route.png, id=2016, 867.24pt x 361.35pt>
 File: imagenes/simulations/evolution_route.png Graphic file (type png)
 <use imagenes/simulations/evolution_route.png>
 Package pdftex.def Info: imagenes/simulations/evolution_route.png  used on input line 199.
 (pdftex.def)             Requested size: 320.0935pt x 133.37209pt.
-
-
-LaTeX Warning: Reference `fig:bus_schedule' on page 101 undefined on input line 205.
-
-
-LaTeX Warning: Reference `fig:kpi_bus_fisic' on page 101 undefined on input line 208.
-
-
-LaTeX Warning: Reference `fig:evolution_route' on page 101 undefined on input line 208.
-
-[101 <./imagenes/simulations/kpi_bus_fisic.png> <./imagenes/simulations/evolution_route.png>]
-
-LaTeX Warning: Reference `fig:bus_schedule' on page 102 undefined on input line 240.
-
-[102] [103]
-
-LaTeX Warning: Reference `fig:general_metrics_results' on page 104 undefined on input line 292.
-
-<imagenes/simulations/general_results_SIMULATION.png, id=1254, 1219.55624pt x 368.37625pt>
+ [102 <./imagenes/simulations/kpi_bus_fisic.png> <./imagenes/simulations/evolution_route.png>] [103] [104]
+<imagenes/simulations/general_results_SIMULATION.png, id=2041, 1219.55624pt x 368.37625pt>
 File: imagenes/simulations/general_results_SIMULATION.png Graphic file (type png)
 <use imagenes/simulations/general_results_SIMULATION.png>
 Package pdftex.def Info: imagenes/simulations/general_results_SIMULATION.png  used on input line 296.
 (pdftex.def)             Requested size: 320.0935pt x 96.68616pt.
-
-LaTeX Warning: Reference `sec:kpi_extraction' on page 104 undefined on input line 316.
-
-
-LaTeX Warning: Reference `section:operational' on page 104 undefined on input line 316.
-
-[104 <./imagenes/simulations/general_results_SIMULATION.png>]
-
-LaTeX Warning: Reference `fig:bhat_occ_comparative' on page 105 undefined on input line 328.
-
-<imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png, id=1264, 505.89pt x 505.89pt>
+ [105 <./imagenes/simulations/general_results_SIMULATION.png>]
+<imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png, id=2053, 505.89pt x 505.89pt>
 File: imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png Graphic file (type png)
 <use imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png>
 Package pdftex.def Info: imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png  used on input line 333.
 (pdftex.def)             Requested size: 320.0935pt x 320.10184pt.
-<imagenes/simulations/bhatt_banda.png, id=1265, 542.025pt x 542.025pt>
+ [106 <./imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png>]
+<imagenes/simulations/bhatt_banda.png, id=2059, 542.025pt x 542.025pt>
 File: imagenes/simulations/bhatt_banda.png Graphic file (type png)
 <use imagenes/simulations/bhatt_banda.png>
 Package pdftex.def Info: imagenes/simulations/bhatt_banda.png  used on input line 350.
 (pdftex.def)             Requested size: 320.0935pt x 320.10625pt.
-
-LaTeX Warning: Reference `fig:bhat_occ_comparative' on page 105 undefined on input line 351.
-
-[105 <./imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png>]
-
-LaTeX Warning: Reference `fig:evolucion_de_dispersion_por_ruta_toA' on page 106 undefined on input line 361.
-
-
-LaTeX Warning: Reference `fig:evolucion_de_dispersion_por_ruta_toB' on page 106 undefined on input line 361.
-
-<imagenes/simulations/dispersion_posicion_to_A.png, id=1272, 578.16pt x 397.485pt>
+<imagenes/simulations/dispersion_posicion_to_A.png, id=2063, 578.16pt x 397.485pt>
 File: imagenes/simulations/dispersion_posicion_to_A.png Graphic file (type png)
 <use imagenes/simulations/dispersion_posicion_to_A.png>
 Package pdftex.def Info: imagenes/simulations/dispersion_posicion_to_A.png  used on input line 368.
 (pdftex.def)             Requested size: 320.0935pt x 220.06091pt.
-[106 <./imagenes/simulations/bhatt_banda.png>]
-<imagenes/simulations/dispersion_posicion_to_B.png, id=1279, 578.16pt x 397.485pt>
+ [107 <./imagenes/simulations/bhatt_banda.png>]
+<imagenes/simulations/dispersion_posicion_to_B.png, id=2069, 578.16pt x 397.485pt>
 File: imagenes/simulations/dispersion_posicion_to_B.png Graphic file (type png)
 <use imagenes/simulations/dispersion_posicion_to_B.png>
 Package pdftex.def Info: imagenes/simulations/dispersion_posicion_to_B.png  used on input line 375.
 (pdftex.def)             Requested size: 320.0935pt x 220.06091pt.
- [107 <./imagenes/simulations/dispersion_posicion_to_A.png> <./imagenes/simulations/dispersion_posicion_to_B.png>]
-
-LaTeX Warning: Reference `eq:espera-teorica' on page 108 undefined on input line 401.
-
-
-LaTeX Warning: Reference `fig:ruta_cibeles_ocupacion' on page 108 undefined on input line 422.
-
-<imagenes/simulations/ruta_cibeles_ocupacion.png, id=1290, 1221.56375pt x 637.38126pt>
+ [108 <./imagenes/simulations/dispersion_posicion_to_A.png> <./imagenes/simulations/dispersion_posicion_to_B.png>]
+<imagenes/simulations/ruta_cibeles_ocupacion.png, id=2080, 1221.56375pt x 637.38126pt>
 File: imagenes/simulations/ruta_cibeles_ocupacion.png Graphic file (type png)
 <use imagenes/simulations/ruta_cibeles_ocupacion.png>
 Package pdftex.def Info: imagenes/simulations/ruta_cibeles_ocupacion.png  used on input line 432.
 (pdftex.def)             Requested size: 320.0935pt x 167.01845pt.
-[108]
-
-LaTeX Warning: Reference `fig:bhat_sim_tiempo' on page 109 undefined on input line 440.
-
-<imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png, id=1298, 505.89pt x 505.89pt>
+ [109]
+<imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png, id=2089, 505.89pt x 505.89pt>
 File: imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png Graphic file (type png)
 <use imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png>
 Package pdftex.def Info: imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png  used on input line 445.
 (pdftex.def)             Requested size: 320.0935pt x 320.10184pt.
-
-LaTeX Warning: Reference `fig:autobus_simulacion' on page 109 undefined on input line 455.
-
-[109 <./imagenes/simulations/ruta_cibeles_ocupacion.png> <./imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png>]
-<imagenes/simulations/autobus_simulacion.png, id=1308, 1210.5225pt x 854.19125pt>
+ [110 <./imagenes/simulations/ruta_cibeles_ocupacion.png> <./imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png>]
+<imagenes/simulations/autobus_simulacion.png, id=2098, 1210.5225pt x 854.19125pt>
 File: imagenes/simulations/autobus_simulacion.png Graphic file (type png)
 <use imagenes/simulations/autobus_simulacion.png>
 Package pdftex.def Info: imagenes/simulations/autobus_simulacion.png  used on input line 459.
 (pdftex.def)             Requested size: 320.0935pt x 225.86432pt.
-
-
-LaTeX Warning: Reference `fig:autobus_franja_simulacion' on page 110 undefined on input line 470.
-
-<imagenes/simulations/autobus_franja_simulacion.png, id=1309, 1220.56pt x 859.21pt>
+<imagenes/simulations/autobus_franja_simulacion.png, id=2100, 1220.56pt x 859.21pt>
 File: imagenes/simulations/autobus_franja_simulacion.png Graphic file (type png)
 <use imagenes/simulations/autobus_franja_simulacion.png>
 Package pdftex.def Info: imagenes/simulations/autobus_franja_simulacion.png  used on input line 477.
 (pdftex.def)             Requested size: 320.0935pt x 225.32968pt.
-[110 <./imagenes/simulations/autobus_simulacion.png>]
-
-LaTeX Warning: Reference `fig:general_metrics_results' on page 111 undefined on input line 494.
-
-
-LaTeX Warning: Reference `fig:general_metrics_results_one' on page 111 undefined on input line 494.
-
-<imagenes/simulations/general_metrics_results_one.png, id=1316, 1221.56375pt x 368.37625pt>
+ [111 <./imagenes/simulations/autobus_simulacion.png>]
+<imagenes/simulations/general_metrics_results_one.png, id=2108, 1221.56375pt x 368.37625pt>
 File: imagenes/simulations/general_metrics_results_one.png Graphic file (type png)
 <use imagenes/simulations/general_metrics_results_one.png>
 Package pdftex.def Info: imagenes/simulations/general_metrics_results_one.png  used on input line 499.
 (pdftex.def)             Requested size: 320.0935pt x 96.52876pt.
-[111 <./imagenes/simulations/autobus_franja_simulacion.png>]
-
-LaTeX Warning: Reference `fig:nivel_ruta_uno' on page 112 undefined on input line 514.
-
-<imagenes/simulations/nivel_ruta_uno.png, id=1324, 1218.5525pt x 635.37375pt>
+ [112 <./imagenes/simulations/autobus_franja_simulacion.png>]
+<imagenes/simulations/nivel_ruta_uno.png, id=2115, 1218.5525pt x 635.37375pt>
 File: imagenes/simulations/nivel_ruta_uno.png Graphic file (type png)
 <use imagenes/simulations/nivel_ruta_uno.png>
 Package pdftex.def Info: imagenes/simulations/nivel_ruta_uno.png  used on input line 519.
 (pdftex.def)             Requested size: 320.0935pt x 166.8996pt.
-<imagenes/simulations/parada_apilada.png, id=1325, 1223.57124pt x 624.3325pt>
+<imagenes/simulations/parada_apilada.png, id=2116, 1223.57124pt x 624.3325pt>
 File: imagenes/simulations/parada_apilada.png Graphic file (type png)
 <use imagenes/simulations/parada_apilada.png>
 Package pdftex.def Info: imagenes/simulations/parada_apilada.png  used on input line 528.
 (pdftex.def)             Requested size: 320.0935pt x 163.3229pt.
-[112 <./imagenes/simulations/general_metrics_results_one.png> <./imagenes/simulations/nivel_ruta_uno.png>]
-<imagenes/simulations/resultados_occ_uno.png, id=1334, 542.025pt x 542.025pt>
+ [113 <./imagenes/simulations/general_metrics_results_one.png> <./imagenes/simulations/nivel_ruta_uno.png>]
+<imagenes/simulations/resultados_occ_uno.png, id=2123, 542.025pt x 542.025pt>
 File: imagenes/simulations/resultados_occ_uno.png Graphic file (type png)
 <use imagenes/simulations/resultados_occ_uno.png>
 Package pdftex.def Info: imagenes/simulations/resultados_occ_uno.png  used on input line 546.
 (pdftex.def)             Requested size: 320.0935pt x 320.10625pt.
- [113 <./imagenes/simulations/parada_apilada.png (PNG copy)>]
-<imagenes/simulations/fisical_one.png, id=1340, 1215.54124pt x 243.91125pt>
+ [114 <./imagenes/simulations/parada_apilada.png (PNG copy)>]
+<imagenes/simulations/fisical_one.png, id=2128, 1215.54124pt x 243.91125pt>
 File: imagenes/simulations/fisical_one.png Graphic file (type png)
 <use imagenes/simulations/fisical_one.png>
 Package pdftex.def Info: imagenes/simulations/fisical_one.png  used on input line 560.
 (pdftex.def)             Requested size: 320.0935pt x 64.23048pt.
-
-
-LaTeX Warning: Reference `fig:autobus_simulacion' on page 114 undefined on input line 565.
-
-[114 <./imagenes/simulations/resultados_occ_uno.png> <./imagenes/simulations/fisical_one.png>]
-
-LaTeX Warning: Reference `section:usage_tools' on page 115 undefined on input line 588.
-
-
-LaTeX Warning: Reference `fig:cmp_cpu' on page 115 undefined on input line 592.
-
-
-LaTeX Warning: Reference `fig:cmp_memoria' on page 115 undefined on input line 592.
-
-
-LaTeX Warning: Reference `fig:cmp_potencia_temperatura' on page 115 undefined on input line 592.
-
-<imagenes/simulations/cmp_cpu.png, id=1351, 722.7pt x 433.62pt>
+ [115 <./imagenes/simulations/resultados_occ_uno.png> <./imagenes/simulations/fisical_one.png>]
+<imagenes/simulations/cmp_cpu.png, id=2142, 722.7pt x 433.62pt>
 File: imagenes/simulations/cmp_cpu.png Graphic file (type png)
 <use imagenes/simulations/cmp_cpu.png>
 Package pdftex.def Info: imagenes/simulations/cmp_cpu.png  used on input line 597.
 (pdftex.def)             Requested size: 320.0935pt x 192.05714pt.
-[115]
-<imagenes/simulations/cmp_memoria.png, id=1359, 722.7pt x 433.62pt>
+ [116]
+<imagenes/simulations/cmp_memoria.png, id=2150, 722.7pt x 433.62pt>
 File: imagenes/simulations/cmp_memoria.png Graphic file (type png)
 <use imagenes/simulations/cmp_memoria.png>
 Package pdftex.def Info: imagenes/simulations/cmp_memoria.png  used on input line 604.
 (pdftex.def)             Requested size: 320.0935pt x 192.05714pt.
-<imagenes/simulations/cmp_potencia_temperatura.png, id=1360, 722.7pt x 433.62pt>
+<imagenes/simulations/cmp_potencia_temperatura.png, id=2151, 722.7pt x 433.62pt>
 File: imagenes/simulations/cmp_potencia_temperatura.png Graphic file (type png)
 <use imagenes/simulations/cmp_potencia_temperatura.png>
 Package pdftex.def Info: imagenes/simulations/cmp_potencia_temperatura.png  used on input line 611.
 (pdftex.def)             Requested size: 320.0935pt x 192.05714pt.
- [116 <./imagenes/simulations/cmp_cpu.png> <./imagenes/simulations/cmp_memoria.png>]
-
-LaTeX Warning: Reference `tab:gc_comparativa' on page 117 undefined on input line 619.
-
-
+ [117 <./imagenes/simulations/cmp_cpu.png> <./imagenes/simulations/cmp_memoria.png>]
 Overfull \hbox (1.99344pt too wide) in paragraph at lines 650--650
  [][] 
  []
@@ -2714,26 +2221,11 @@ Overfull \hbox (1.99344pt too wide) in paragraph at lines 650--650
  [][] 
  []
 
-[117 <./imagenes/simulations/cmp_potencia_temperatura.png>]
-
-LaTeX Warning: Reference `chapter:future_works' on page 118 undefined on input line 669.
-
-) [118]
+[118 <./imagenes/simulations/cmp_potencia_temperatura.png>]) [119]
 Cap\'{\i }tulo 7.
-(./chapter/section_regulatory/regulatory.tex
+(./chapter/section_regulatory/regulatory.tex [120
 
-LaTeX Warning: Reference `chapter:param_analisys' on page 119 undefined on input line 35.
-
-[119
-
-] [120] [121]
-
-LaTeX Warning: Reference `chapter:application_cases' on page 122 undefined on input line 147.
-
-
-LaTeX Warning: Reference `chapter:future_works' on page 122 undefined on input line 149.
-
-) [122]
+] [121] [122]) [123]
 Cap\'{\i }tulo 8.
 (./chapter/section_budget/budget.tex
 LaTeX Font Info:    Font shape `TS1/txr/b/n' in size <12> not available
@@ -2748,13 +2240,9 @@ Overfull \hbox (1.99342pt too wide) in paragraph at lines 61--61
  [][] 
  []
 
-[123
+[124
 
 ]
-
-LaTeX Warning: Reference `section:usage_tools' on page 124 undefined on input line 85.
-
-
 Overfull \hbox (4.64792pt too wide) in paragraph at lines 109--109
  []|\T1/txr/bx/n/12 Dedicación| 
  []
@@ -2774,7 +2262,7 @@ Overfull \hbox (2.79338pt too wide) in paragraph at lines 109--109
  [][] 
  []
 
-[124]
+[125]
 Overfull \hbox (1.19997pt too wide) in paragraph at lines 166--166
  [][] 
  []
@@ -2784,26 +2272,18 @@ Overfull \hbox (1.19997pt too wide) in paragraph at lines 166--166
  [][] 
  []
 
-[125] [126]
-
-LaTeX Warning: Reference `chapter:future_works' on page 127 undefined on input line 203.
-
-
+[126] [127]
 Overfull \hbox (7.97823pt too wide) in paragraph at lines 224--233
 []\T1/txr/m/n/12 Las di-men-sio-nes que el si-mu-la-dor re-pro-du-ce, se-ña-la-da-men-te la ocu-pa-ción de los vehícu-
  []
 
-[127]
-
-LaTeX Warning: Reference `subsec:solution_comparative' on page 128 undefined on input line 248.
-
-) [128]
+[128]) [129]
 Cap\'{\i }tulo 9.
-(./chapter/section_future_works/future.tex [129
+(./chapter/section_future_works/future.tex [130
 
-]) [130]
+]) [131]
 Cap\'{\i }tulo 10.
-(./chapter/section_ending/conclusion.tex) [131
+(./chapter/section_ending/conclusion.tex) [132
 
 ]
 Package csquotes Info: Disabling multilingual quotes on input line 434.
@@ -2822,7 +2302,7 @@ Overfull \hbox (1.42937pt too wide) in paragraph at lines 436--436
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
-[132
+[133
 
 
 ]
@@ -2835,12 +2315,12 @@ Overfull \hbox (32.67084pt too wide) in paragraph at lines 436--436
 \T1/txr/m/n/12 Spe-ci-fi-ca-tion,^^Q Foun-da-tion for In-te-lli-gent Phy-si-cal Agents, FI-PA Spe-ci-fi-ca-tion SC00026H,
  []
 
-[133]
+[134]
 Overfull \hbox (5.85698pt too wide) in paragraph at lines 436--436
 \T1/txr/m/n/12 tro Li-ne 7,^^Q \T1/txr/m/it/12 Mo-de-lling\T1/txr/m/n/12 , vol. 7, n.[] 2, p. 58, 2026. \T1/txr/m/sc/12 doi\T1/txr/m/n/12 : [][]$\T1/txtt/m/n/12 10 . 3390 / modelling7020058$[][]\T1/txr/m/n/12 . 
  []
 
-[134]
+[135]
 Overfull \hbox (2.62831pt too wide) in paragraph at lines 436--436
 \T1/txr/m/n/12 lling,^^Q en \T1/txr/m/it/12 AIP Con-fe-ren-ce Pro-cee-dings\T1/txr/m/n/12 , vol. 2423, AIP Pu-blishing, 2021, p. 020 035.
  []
@@ -2855,7 +2335,7 @@ Overfull \hbox (11.55956pt too wide) in paragraph at lines 436--436
 \T1/txr/m/it/12 Workshops\T1/txr/m/n/12 , O. Ger-va-si et al., eds., ép. Lec-tu-re No-tes in Com-pu-ter Scien-ce, vol. 15898,
  []
 
-[135] [136]
+[136] [137]
 Overfull \hbox (4.26741pt too wide) in paragraph at lines 436--436
 []\T1/txr/m/n/12 W. G. Co-chran, ^^P  So-me Methods for Strengthe-ning the Com-mon Chi-Squared Tests,^^Q
  []
@@ -2870,64 +2350,60 @@ Overfull \hbox (2.67517pt too wide) in paragraph at lines 436--436
 []\T1/txr/m/n/12 L. De-vro-ye, \T1/txr/m/it/12 Non-Uniform Ran-dom Va-ria-te Ge-ne-ra-tion\T1/txr/m/n/12 . New York: Springer-Verlag,
  []
 
-[137]
+[138]
 Overfull \hbox (57.07735pt too wide) in paragraph at lines 436--436
 \T1/txr/m/n/12 po-ni-ble en: [][]$\T1/txtt/m/n/12 https : / / datos . crtm . es / datasets / 868df0e58fca47e79b942902dffd7da0$[][]
  []
 
-[138]
+[139]
 Overfull \hbox (3.49881pt too wide) in paragraph at lines 436--436
 \T1/txr/m/it/12 2030 pa-ra el De-sa-rro-llo Sos-te-ni-ble\T1/txr/m/n/12 , Re-so-lu-ción A/-RE-S/70/1, apro-ba-da por la Asam-
  []
 
-[139]
+[140]
 Anexo A.
-(./anex/anex_requirements/requirements.tex
+(./anex/anex_requirements/requirements.tex [141
 
-LaTeX Warning: Reference `section:problem_def' on page 140 undefined on input line 66.
-
-[140
-
-] [141] [142] [143] [144] [145] [146] [147]
+] [142] [143] [144] [145] [146] [147] [148]
 Overfull \hbox (3.0998pt too wide) in paragraph at lines 293--293
 \T1/txr/bx/n/10.95 RD-07 ^^V AU-SEN-CIA DE DE-LI-BE-RA-CIÓN EN EL COM-POR-TA-MIEN-TO DE LOS AGEN-
  []
 
-[148] [149] [150]
+[149] [150] [151]
 LaTeX Font Info:    Font shape `T1/txr/b/it' in size <10.95> not available
 (Font)              Font shape `T1/txr/bx/it' tried instead on input line 356.
- [151]) [152] [153]
+ [152]) [153] [154]
 Anexo B.
 (./anex/anex_figures/operational.tex
-<imagenes/to_A/normality_stop_ALL.png, id=1642, 722.7pt x 578.16pt>
+<imagenes/to_A/normality_stop_ALL.png, id=2409, 722.7pt x 578.16pt>
 File: imagenes/to_A/normality_stop_ALL.png Graphic file (type png)
 <use imagenes/to_A/normality_stop_ALL.png>
 Package pdftex.def Info: imagenes/to_A/normality_stop_ALL.png  used on input line 7.
 (pdftex.def)             Requested size: 426.79135pt x 341.43785pt.
-<imagenes/to_A/normality_stop_individual.png, id=1643, 722.7pt x 578.16pt>
+<imagenes/to_A/normality_stop_individual.png, id=2410, 722.7pt x 578.16pt>
 File: imagenes/to_A/normality_stop_individual.png Graphic file (type png)
 <use imagenes/to_A/normality_stop_individual.png>
 Package pdftex.def Info: imagenes/to_A/normality_stop_individual.png  used on input line 14.
 (pdftex.def)             Requested size: 426.79135pt x 341.43785pt.
- [154
+ [155
 
  <./imagenes/to_A/normality_stop_ALL.png>]
-<imagenes/to_B/normality_stop_ALL.png, id=1651, 722.7pt x 578.16pt>
+<imagenes/to_B/normality_stop_ALL.png, id=2416, 722.7pt x 578.16pt>
 File: imagenes/to_B/normality_stop_ALL.png Graphic file (type png)
 <use imagenes/to_B/normality_stop_ALL.png>
 Package pdftex.def Info: imagenes/to_B/normality_stop_ALL.png  used on input line 21.
 (pdftex.def)             Requested size: 426.79135pt x 341.43785pt.
- [155 <./imagenes/to_A/normality_stop_individual.png>]
-<imagenes/to_B/normality_stop_individual.png, id=1658, 722.7pt x 578.16pt>
+ [156 <./imagenes/to_A/normality_stop_individual.png>]
+<imagenes/to_B/normality_stop_individual.png, id=2422, 722.7pt x 578.16pt>
 File: imagenes/to_B/normality_stop_individual.png Graphic file (type png)
 <use imagenes/to_B/normality_stop_individual.png>
 Package pdftex.def Info: imagenes/to_B/normality_stop_individual.png  used on input line 28.
 (pdftex.def)             Requested size: 426.79135pt x 341.43785pt.
-) [156 <./imagenes/to_B/normality_stop_ALL.png>] [157 <./imagenes/to_B/normality_stop_individual.png>]
+) [157 <./imagenes/to_B/normality_stop_ALL.png>] [158 <./imagenes/to_B/normality_stop_individual.png>]
 Anexo C.
-(./anex/anex_iag/iag.tex [158
+(./anex/anex_iag/iag.tex [159
 
-] [159]) [160] (./memoria.aux
+] [160]) [161] (./memoria.aux
 LaTeX Info: Redefining \sptext on input line 13.
 LaTeX Info: Redefining \. on input line 13.
 LaTeX Info: Redefining \% on input line 13.
@@ -2936,42 +2412,24 @@ LaTeX Info: Redefining \% on input line 13.
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `memoria.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `memoria.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D1762A08D1A14519FD53C41862229848;6629.
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                memoria
-(biblatex)                and rerun LaTeX afterwards.
-
+Package rerunfilecheck Info: File `memoria.out' has not changed.
+(rerunfilecheck)             Checksum: D1762A08D1A14519FD53C41862229848;6629.
 Package logreq Info: Writing requests to 'memoria.run.xml'.
 \openout1 = `memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 56062 strings out of 476047
- 1229775 string characters out of 5792076
- 2131483 words of memory out of 5000000
- 76570 multiletter control sequences out of 15000+600000
+ 56279 strings out of 474222
+ 1234058 string characters out of 5748734
+ 2166355 words of memory out of 5000000
+ 76991 multiletter control sequences out of 15000+600000
  663026 words of font info for 191 fonts, out of 8000000 for 9000
- 85 hyphenation exceptions out of 8191
- 99i,19n,117p,1713b,3219s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 1141 hyphenation exceptions out of 8191
+ 99i,19n,117p,1718b,3966s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (172 pages, 8129202 bytes).
+Output written on memoria.pdf (178 pages, 8278273 bytes).
 PDF statistics:
- 1889 PDF objects out of 2073 (max. 8388607)
- 521 named destinations out of 1000 (max. 500000)
- 320 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2652 PDF objects out of 2984 (max. 8388607)
+ 527 named destinations out of 1000 (max. 500000)
+ 962 words of extra memory for PDF output out of 10000 (max. 10000000)
 
