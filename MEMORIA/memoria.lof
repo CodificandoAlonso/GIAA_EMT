@@ -34,40 +34,40 @@
 \contentsline {figure}{\numberline {5.9}{\ignorespaces Estructura de directorios del proyecto base de simulación}}{85}{figure.caption.55}%
 \contentsline {figure}{\numberline {5.10}{\ignorespaces Diagrama de interacción referente al protocolo~\textit {consulta tras llegada} para la solución dos.}}{91}{figure.caption.60}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Ejemplo de muestra de resultados de métricas a nivel general (valores sintéticos, únicamente ilustrativos).}}{97}{figure.caption.63}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Ejemplo de muestra de resultados de métricas a nivel de ruta (valores sintéticos, únicamente ilustrativos).}}{98}{figure.caption.64}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Ejemplo de muestra de resultados de figura de ocupación media por franja horaria al paso por parada (valores sintéticos, únicamente ilustrativos).}}{98}{figure.caption.65}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Ejemplo de muestra de resultados de métricas por parada (valores sintéticos, únicamente ilustrativos).}}{98}{figure.caption.66}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Ejemplo de muestra de comparativa de valores de ocupación (valores sintéticos, únicamente ilustrativos).}}{99}{figure.caption.67}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Ejemplo de muestra de tabla de información asociada a un autobús físico (valores sintéticos, únicamente ilustrativos).}}{101}{figure.caption.68}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Ejemplo de muestra de resultados de valores a nivel de autobús físico (valores sintéticos, únicamente ilustrativos).}}{102}{figure.caption.69}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Ejemplo de muestra de evolución de ocupación media a lo largo de las paradas de una ruta (valores sintéticos, únicamente ilustrativos).}}{102}{figure.caption.70}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Resultados de métricas a nivel general de la validación operativa.}}{105}{figure.caption.71}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces Proyección de media simulada de ocupación por parada y franja horaria frente a media esperada.}}{106}{figure.caption.72}%
-\contentsline {figure}{\numberline {6.11}{\ignorespaces Figura~\ref {fig:bhat_occ_comparative} con sombra proyectada sobre $0.49\sigma $ el valor de la identidad.}}{107}{figure.caption.73}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces Evolución del valor $\sigma _{sim}/\sigma _{exp}$ a lo largo del sentido \textit {Cibeles}.}}{108}{figure.caption.74}%
-\contentsline {figure}{\numberline {6.13}{\ignorespaces Evolución del valor $\sigma _{sim}/\sigma _{exp}$ a lo largo del sentido \textit {La Peseta}.}}{108}{figure.caption.75}%
-\contentsline {figure}{\numberline {6.14}{\ignorespaces Resultados visuales a nivel de ruta de la simulación.}}{110}{figure.caption.76}%
-\contentsline {figure}{\numberline {6.15}{\ignorespaces Proyección de media simulada de tiempo entre paradas frente a media esperada.}}{110}{figure.caption.77}%
-\contentsline {figure}{\numberline {6.16}{\ignorespaces Resultados visuales a nivel de autobús físico de la simulación.}}{111}{figure.caption.78}%
-\contentsline {figure}{\numberline {6.17}{\ignorespaces Resultados visuales a nivel de autobús por franja horaria de la simulación.}}{112}{figure.caption.79}%
-\contentsline {figure}{\numberline {6.18}{\ignorespaces Resultados de métricas a nivel general de la solución uno.}}{113}{figure.caption.80}%
-\contentsline {figure}{\numberline {6.19}{\ignorespaces Resultados visuales a nivel de ruta de la simulación uno}}{113}{figure.caption.81}%
-\contentsline {figure}{\numberline {6.20}{\ignorespaces Comparativa de KPIs a nivel de parada para parada 2535 franja 5AM (Simulación uno arriba vs Simulación dos abajo)}}{114}{figure.caption.82}%
-\contentsline {figure}{\numberline {6.21}{\ignorespaces Resultados visuales a nivel de ruta de la solución uno}}{115}{figure.caption.83}%
-\contentsline {figure}{\numberline {6.22}{\ignorespaces Resultados visuales a nivel de autobús físico de la solución uno}}{115}{figure.caption.84}%
-\contentsline {figure}{\numberline {6.23}{\ignorespaces Comparativa de rendimiento de CPU para ambas soluciones.}}{117}{figure.caption.85}%
-\contentsline {figure}{\numberline {6.24}{\ignorespaces Comparativa de uso de memoria para ambas soluciones.}}{117}{figure.caption.86}%
-\contentsline {figure}{\numberline {6.25}{\ignorespaces Comparativa de consumo de potencia y valor de temperatura para ambas soluciones.}}{118}{figure.caption.87}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Ejemplo de muestra de resultados de métricas a nivel general (valores sintéticos, únicamente ilustrativos).}}{96}{figure.caption.63}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Ejemplo de muestra de resultados de métricas a nivel de ruta (valores sintéticos, únicamente ilustrativos).}}{97}{figure.caption.64}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Ejemplo de muestra de resultados de figura de ocupación media por franja horaria al paso por parada (valores sintéticos, únicamente ilustrativos).}}{97}{figure.caption.65}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Ejemplo de muestra de resultados de métricas por parada (valores sintéticos, únicamente ilustrativos).}}{97}{figure.caption.66}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Ejemplo de muestra de comparativa de valores de ocupación (valores sintéticos, únicamente ilustrativos).}}{98}{figure.caption.67}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Ejemplo de muestra de tabla de información asociada a un autobús físico (valores sintéticos, únicamente ilustrativos).}}{100}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Ejemplo de muestra de resultados de valores a nivel de autobús físico (valores sintéticos, únicamente ilustrativos).}}{101}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Ejemplo de muestra de evolución de ocupación media a lo largo de las paradas de una ruta (valores sintéticos, únicamente ilustrativos).}}{101}{figure.caption.70}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Resultados de métricas a nivel general de la validación operativa.}}{104}{figure.caption.71}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Proyección de media simulada de ocupación por parada y franja horaria frente a media esperada.}}{105}{figure.caption.72}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Figura~\ref {fig:bhat_occ_comparative} con sombra proyectada sobre $0.49\sigma $ el valor de la identidad.}}{106}{figure.caption.73}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Evolución del valor $\sigma _{sim}/\sigma _{exp}$ a lo largo del sentido \textit {Cibeles}.}}{107}{figure.caption.74}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Evolución del valor $\sigma _{sim}/\sigma _{exp}$ a lo largo del sentido \textit {La Peseta}.}}{107}{figure.caption.75}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Resultados visuales a nivel de ruta de la simulación.}}{109}{figure.caption.76}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Proyección de media simulada de tiempo entre paradas frente a media esperada.}}{109}{figure.caption.77}%
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Resultados visuales a nivel de autobús físico de la simulación.}}{110}{figure.caption.78}%
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Resultados visuales a nivel de autobús por franja horaria de la simulación.}}{111}{figure.caption.79}%
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Resultados de métricas a nivel general de la solución uno.}}{112}{figure.caption.80}%
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Resultados visuales a nivel de ruta de la simulación uno}}{112}{figure.caption.81}%
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Comparativa de KPIs a nivel de parada para parada 2535 franja 5AM (Simulación uno arriba vs Simulación dos abajo)}}{113}{figure.caption.82}%
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Resultados visuales a nivel de ruta de la solución uno}}{114}{figure.caption.83}%
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Resultados visuales a nivel de autobús físico de la solución uno}}{114}{figure.caption.84}%
+\contentsline {figure}{\numberline {6.23}{\ignorespaces Comparativa de rendimiento de CPU para ambas soluciones.}}{116}{figure.caption.85}%
+\contentsline {figure}{\numberline {6.24}{\ignorespaces Comparativa de uso de memoria para ambas soluciones.}}{116}{figure.caption.86}%
+\contentsline {figure}{\numberline {6.25}{\ignorespaces Comparativa de consumo de potencia y valor de temperatura para ambas soluciones.}}{117}{figure.caption.87}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido Cibeles con datos agregados.}}{155}{figure.caption.93}%
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido Cibeles con datos desagregados.}}{156}{figure.caption.94}%
-\contentsline {figure}{\numberline {B.3}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido La Peseta con datos agregados.}}{157}{figure.caption.95}%
-\contentsline {figure}{\numberline {B.4}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido La Peseta con datos desagregados.}}{158}{figure.caption.96}%
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido Cibeles con datos agregados.}}{154}{figure.caption.93}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido Cibeles con datos desagregados.}}{155}{figure.caption.94}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido La Peseta con datos agregados.}}{156}{figure.caption.95}%
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Porcentaje de no rechazo de hipótesis de normalidad por parada en sentido La Peseta con datos desagregados.}}{157}{figure.caption.96}%
 \addvspace {10\p@ }
 \contentsfinish 

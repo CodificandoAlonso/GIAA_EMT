@@ -1076,8 +1076,8 @@ se elimina al completar su oferta de servicio, por lo que la ausencia total de e
 Como se menciona en la sección~\ref{subsec:montecarlo}, se realizan \textbf{mil réplicas de Monte Carlo} para cada simulación.
 
 Estas simulaciones se realizan de forma paralela. GAMA permite esta opción, indicando el número de réplicas que se
-ejecutan de forma simultánea. Concretamente, se ha especificado un valor de \textbf{dieciséis réplicas en paralelo},
-valor correspondiente al número de unidades de procesamiento lógicas del ordenador utilizado para el desarrollo de este trabajo,
+ejecutan de forma simultánea. Concretamente, se ha especificado un valor de \textbf{doce réplicas en paralelo},
+valor correspondiente al 75\% del número de unidades de procesamiento lógicas del ordenador utilizado para el desarrollo de este trabajo,
 presentado en la sección~\ref{section:usage_tools}.
 
 Al existir comportamiento paralelo, si las distintas réplicas que se ejecutan simultáneamente escriben sobre el mismo archivo
@@ -1131,8 +1131,7 @@ garantiza que cada simulación disponga de una copia aislada de los archivos de 
 paramétricas de un escenario no afecten al resto.
 
 El segundo fichero de shell es el encargado de lanzar el modo~\textit{headless} una vez que para cada simulación concreta se han 
-ajustado los parámetros de entrada a lo que se busca simular en cada escenario. El detalle sobre cómo se realiza esta modificación
-paramétrica se presenta en el capítulo~\ref{chapter:application_cases}.
+ajustado los parámetros de entrada a lo que se busca simular en cada escenario.
 
 \section{Solución dos: Sin agentes pasajero}\label{sec:second_sol}
 Debido al elevado coste computacional que deriva en tiempos de simulación grandes (véase~\ref{subsec:solution_comparative}),
@@ -1188,7 +1187,7 @@ de la solución anterior, ya que este agente no varía su comportamiento.
 
 En relación con el rol, sigue manteniendo el rol de transitar a lo largo de la línea 
 embarcando y desembarcando pasajeros en cada parada, almacenando la información crítica necesaria para el volcado y 
-cálculo de los \textbf{índices de rendimiento} concretos.
+cálculo de los índices de rendimiento concretos.
 
 La diferencia radica tanto en su estado interno, definido por variables distintas, con el fin de acomodar la nueva realidad de inexistencia
 de agentes~\textit{pasajero}, como en la significativa reducción del número de protocolos implementados.

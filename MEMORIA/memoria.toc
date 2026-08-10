@@ -48,56 +48,56 @@
 \contentsline {subsection}{\numberline {5.3.1}Arquitectura de la solución}{86}{subsection.5.3.1}%
 \contentsline {subsubsection}{Caracterización de los agentes}{87}{table.caption.56}%
 \contentsline {subsubsection}{Protocolos de comunicación}{90}{table.caption.59}%
-\contentsline {subsubsection}{Características del entorno}{93}{table.caption.62}%
-\contentsline {chapter}{\numberline {6}Casos de Aplicación}{95}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Funcionamiento operativo del sistema final}{95}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Estructura y visualización de los KPIs}{95}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Métricas a nivel general}{96}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Métricas a nivel de ruta}{97}{subsection.6.2.2}%
-\contentsline {subsubsection}{Métricas de las paradas}{98}{figure.caption.64}%
-\contentsline {subsubsection}{Métricas de los tramos entre paradas}{99}{figure.caption.67}%
-\contentsline {subsubsection}{Umbrales de índice de alerta}{99}{figure.caption.67}%
-\contentsline {subsection}{\numberline {6.2.3}Métricas a nivel de autobús}{100}{subsection.6.2.3}%
-\contentsline {subsubsection}{Filtrado por autobús físico}{100}{subsection.6.2.3}%
-\contentsline {subsubsection}{Filtrado por franja horaria}{102}{figure.caption.70}%
-\contentsline {subsubsection}{Umbrales de índice de alerta}{103}{figure.caption.70}%
-\contentsline {section}{\numberline {6.3}Validación operativa y comparativa de soluciones}{103}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Validación operativa}{104}{subsection.6.3.1}%
-\contentsline {subsubsection}{Métricas generales y discusión de resultados}{105}{subsection.6.3.1}%
-\contentsline {subsubsection}{Métricas a nivel de ruta}{109}{equation.6.3.1}%
-\contentsline {subsubsection}{Métricas a nivel de autobús}{111}{figure.caption.77}%
-\contentsline {subsection}{\numberline {6.3.2}Comparativa de soluciones}{112}{subsection.6.3.2}%
-\contentsline {subsubsection}{Métricas a nivel general}{112}{subsection.6.3.2}%
-\contentsline {subsubsection}{Métricas a nivel de ruta}{113}{figure.caption.80}%
-\contentsline {subsubsection}{Métricas a nivel de autobús}{115}{figure.caption.83}%
-\contentsline {subsubsection}{Diferencias existentes a nivel de rendimiento}{116}{figure.caption.84}%
-\contentsline {chapter}{\numberline {7}Marco Regulador}{120}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Protección de datos y privacidad (RGPD)}{120}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Licencias de software y herramientas de terceros}{121}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Uso de la información del sector público (\textit {open data})}{121}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Propiedad intelectual del proyecto}{122}{section.7.4}%
-\contentsline {section}{\numberline {7.5}Ética profesional}{123}{section.7.5}%
-\contentsline {chapter}{\numberline {8}Entorno socio-económico}{124}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Presupuesto}{124}{section.8.1}%
-\contentsline {subsection}{\numberline {8.1.1}Metodología y supuestos de cálculo}{124}{subsection.8.1.1}%
-\contentsline {subsection}{\numberline {8.1.2}Costes de personal}{124}{subsection.8.1.2}%
-\contentsline {subsection}{\numberline {8.1.3}Costes de recursos materiales}{125}{subsection.8.1.3}%
-\contentsline {subsection}{\numberline {8.1.4}Otros costes directos}{126}{subsection.8.1.4}%
-\contentsline {subsection}{\numberline {8.1.5}Presupuesto total}{126}{subsection.8.1.5}%
-\contentsline {section}{\numberline {8.2}Impacto socio-económico}{127}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}Contexto del sector}{127}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}Impacto económico}{128}{subsection.8.2.2}%
-\contentsline {subsection}{\numberline {8.2.3}Impacto social}{128}{subsection.8.2.3}%
-\contentsline {subsection}{\numberline {8.2.4}Impacto medioambiental}{129}{subsection.8.2.4}%
-\contentsline {chapter}{\numberline {9}Limitaciones y trabajos futuros}{130}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Limitaciones}{130}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Trabajos Futuros}{131}{section.9.2}%
-\contentsline {subsection}{\numberline {9.2.1}Mejoras del análisis de datos}{131}{subsection.9.2.1}%
-\contentsline {subsection}{\numberline {9.2.2}Mejoras del rendimiento computacional}{131}{subsection.9.2.2}%
-\contentsline {subsection}{\numberline {9.2.3}Evolución del simulador multi-agente}{131}{subsection.9.2.3}%
-\contentsline {chapter}{\numberline {10}Conclusión}{132}{chapter.10}%
-\contentsline {chapter}{Bibliografía}{133}{chapter.10}%
-\contentsline {chapter}{\numberline {A}Especificación de Requisitos del Sistema}{141}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Figuras complementarias del estudio de viabilidad de datos operacionales}{155}{appendix.Alph2}%
-\contentsline {chapter}{\numberline {C}Declaración de uso de IA generativa}{159}{appendix.Alph3}%
+\contentsline {subsubsection}{Características del entorno}{92}{table.caption.62}%
+\contentsline {chapter}{\numberline {6}Casos de Aplicación}{94}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Funcionamiento operativo del sistema final}{94}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Estructura y visualización de los KPIs}{94}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Métricas a nivel general}{95}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Métricas a nivel de ruta}{96}{subsection.6.2.2}%
+\contentsline {subsubsection}{Métricas de las paradas}{97}{figure.caption.64}%
+\contentsline {subsubsection}{Métricas de los tramos entre paradas}{98}{figure.caption.67}%
+\contentsline {subsubsection}{Umbrales de índice de alerta}{98}{figure.caption.67}%
+\contentsline {subsection}{\numberline {6.2.3}Métricas a nivel de autobús}{99}{subsection.6.2.3}%
+\contentsline {subsubsection}{Filtrado por autobús físico}{99}{subsection.6.2.3}%
+\contentsline {subsubsection}{Filtrado por franja horaria}{101}{figure.caption.70}%
+\contentsline {subsubsection}{Umbrales de índice de alerta}{102}{figure.caption.70}%
+\contentsline {section}{\numberline {6.3}Validación operativa y comparativa de soluciones}{102}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Validación operativa}{103}{subsection.6.3.1}%
+\contentsline {subsubsection}{Métricas generales y discusión de resultados}{104}{subsection.6.3.1}%
+\contentsline {subsubsection}{Métricas a nivel de ruta}{108}{equation.6.3.1}%
+\contentsline {subsubsection}{Métricas a nivel de autobús}{110}{figure.caption.77}%
+\contentsline {subsection}{\numberline {6.3.2}Comparativa de soluciones}{111}{subsection.6.3.2}%
+\contentsline {subsubsection}{Métricas a nivel general}{111}{subsection.6.3.2}%
+\contentsline {subsubsection}{Métricas a nivel de ruta}{112}{figure.caption.80}%
+\contentsline {subsubsection}{Métricas a nivel de autobús}{114}{figure.caption.83}%
+\contentsline {subsubsection}{Diferencias existentes a nivel de rendimiento}{115}{figure.caption.84}%
+\contentsline {chapter}{\numberline {7}Marco Regulador}{119}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Protección de datos y privacidad (RGPD)}{119}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Licencias de software y herramientas de terceros}{120}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Uso de la información del sector público (\textit {open data})}{120}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Propiedad intelectual del proyecto}{121}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Ética profesional}{122}{section.7.5}%
+\contentsline {chapter}{\numberline {8}Entorno socio-económico}{123}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Presupuesto}{123}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Metodología y supuestos de cálculo}{123}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Costes de personal}{123}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}Costes de recursos materiales}{124}{subsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.1.4}Otros costes directos}{125}{subsection.8.1.4}%
+\contentsline {subsection}{\numberline {8.1.5}Presupuesto total}{125}{subsection.8.1.5}%
+\contentsline {section}{\numberline {8.2}Impacto socio-económico}{126}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Contexto del sector}{126}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Impacto económico}{127}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Impacto social}{127}{subsection.8.2.3}%
+\contentsline {subsection}{\numberline {8.2.4}Impacto medioambiental}{128}{subsection.8.2.4}%
+\contentsline {chapter}{\numberline {9}Limitaciones y trabajos futuros}{129}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Limitaciones}{129}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Trabajos Futuros}{130}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Mejoras del análisis de datos}{130}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}Mejoras del rendimiento computacional}{130}{subsection.9.2.2}%
+\contentsline {subsection}{\numberline {9.2.3}Evolución del simulador multi-agente}{130}{subsection.9.2.3}%
+\contentsline {chapter}{\numberline {10}Conclusión}{131}{chapter.10}%
+\contentsline {chapter}{Bibliografía}{132}{chapter.10}%
+\contentsline {chapter}{\numberline {A}Especificación de Requisitos del Sistema}{140}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Figuras complementarias del estudio de viabilidad de datos operacionales}{154}{appendix.Alph2}%
+\contentsline {chapter}{\numberline {C}Declaración de uso de IA generativa}{158}{appendix.Alph3}%
 \contentsfinish 
