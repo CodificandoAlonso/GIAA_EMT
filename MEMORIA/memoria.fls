@@ -489,6 +489,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/dirtree/dirtree.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/dirtree/dirtree.tex
 INPUT /usr/share/texlive/texmf-dist/tex/generic/dirtree/dirtree.tex
 INPUT /usr/share/texlive/texmf-dist/tex/generic/dirtree/dirtree.tex
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
@@ -569,6 +571,10 @@ INPUT memoria.out
 INPUT ./memoria.out
 INPUT ./memoria.out
 OUTPUT memoria.out
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/floatrow/fr-longtable.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/floatrow/fr-longtable.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
 OUTPUT memoria.bcf
 INPUT memoria.bbl

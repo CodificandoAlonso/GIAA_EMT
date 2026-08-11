@@ -1,4 +1,5 @@
 \babel@toc {spanish}{}\relax 
+\contentsline {chapter}{Lista de acrónimos}{\es@scroman {xviii}}{chapter*.6}%
 \contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Objetivos}{2}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Objetivo principal}{2}{subsection.1.1.1}%
@@ -19,7 +20,7 @@
 \contentsline {subsection}{\numberline {2.2.3}Simulaciones de Monte Carlo}{17}{subsection.2.2.3}%
 \contentsline {subsection}{\numberline {2.2.4}Análisis estadístico de datos}{18}{subsection.2.2.4}%
 \contentsline {subsubsection}{Test de Hipótesis}{19}{subsection.2.2.4}%
-\contentsline {subsubsection}{Estudio de valores extremos}{22}{figure.caption.12}%
+\contentsline {subsubsection}{Estudio de valores extremos}{22}{figure.caption.13}%
 \contentsline {chapter}{\numberline {3}Metodología}{25}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Definición del problema}{25}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Estructura de trabajo}{26}{section.3.2}%
@@ -41,36 +42,36 @@
 \contentsline {section}{\numberline {5.2}Solución uno: Pasajeros como agentes}{53}{section.5.2}%
 \contentsline {subsection}{\numberline {5.2.1}Arquitectura de la solución}{53}{subsection.5.2.1}%
 \contentsline {subsubsection}{Caracterización de los agentes}{53}{subsection.5.2.1}%
-\contentsline {subsubsection}{Protocolos de comunicación}{62}{table.caption.37}%
-\contentsline {subsubsection}{Características del entorno}{75}{table.caption.49}%
+\contentsline {subsubsection}{Protocolos de comunicación}{62}{table.caption.38}%
+\contentsline {subsubsection}{Características del entorno}{75}{table.caption.50}%
 \contentsline {subsection}{\numberline {5.2.2}Ejecución y simulación}{84}{subsection.5.2.2}%
 \contentsline {section}{\numberline {5.3}Solución dos: Sin agentes pasajero}{86}{section.5.3}%
 \contentsline {subsection}{\numberline {5.3.1}Arquitectura de la solución}{86}{subsection.5.3.1}%
-\contentsline {subsubsection}{Caracterización de los agentes}{87}{table.caption.56}%
-\contentsline {subsubsection}{Protocolos de comunicación}{90}{table.caption.59}%
-\contentsline {subsubsection}{Características del entorno}{93}{table.caption.62}%
+\contentsline {subsubsection}{Caracterización de los agentes}{87}{table.caption.57}%
+\contentsline {subsubsection}{Protocolos de comunicación}{90}{table.caption.60}%
+\contentsline {subsubsection}{Características del entorno}{93}{table.caption.63}%
 \contentsline {chapter}{\numberline {6}Casos de Aplicación}{95}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Funcionamiento operativo del sistema final}{95}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Estructura y visualización de los KPIs}{95}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Métricas a nivel general}{96}{subsection.6.2.1}%
 \contentsline {subsection}{\numberline {6.2.2}Métricas a nivel de ruta}{97}{subsection.6.2.2}%
-\contentsline {subsubsection}{Métricas de las paradas}{98}{figure.caption.64}%
-\contentsline {subsubsection}{Métricas de los tramos entre paradas}{99}{figure.caption.67}%
-\contentsline {subsubsection}{Umbrales de índice de alerta}{99}{figure.caption.67}%
+\contentsline {subsubsection}{Métricas de las paradas}{98}{figure.caption.65}%
+\contentsline {subsubsection}{Métricas de los tramos entre paradas}{99}{figure.caption.68}%
+\contentsline {subsubsection}{Umbrales de índice de alerta}{99}{figure.caption.68}%
 \contentsline {subsection}{\numberline {6.2.3}Métricas a nivel de autobús}{100}{subsection.6.2.3}%
 \contentsline {subsubsection}{Filtrado por autobús físico}{100}{subsection.6.2.3}%
-\contentsline {subsubsection}{Filtrado por franja horaria}{102}{figure.caption.70}%
-\contentsline {subsubsection}{Umbrales de índice de alerta}{103}{figure.caption.70}%
+\contentsline {subsubsection}{Filtrado por franja horaria}{102}{figure.caption.71}%
+\contentsline {subsubsection}{Umbrales de índice de alerta}{103}{figure.caption.71}%
 \contentsline {section}{\numberline {6.3}Validación operativa y comparativa de soluciones}{103}{section.6.3}%
 \contentsline {subsection}{\numberline {6.3.1}Validación operativa}{104}{subsection.6.3.1}%
 \contentsline {subsubsection}{Métricas generales y discusión de resultados}{105}{subsection.6.3.1}%
 \contentsline {subsubsection}{Métricas a nivel de ruta}{109}{equation.6.3.1}%
-\contentsline {subsubsection}{Métricas a nivel de autobús}{111}{figure.caption.77}%
+\contentsline {subsubsection}{Métricas a nivel de autobús}{111}{figure.caption.78}%
 \contentsline {subsection}{\numberline {6.3.2}Comparativa de soluciones}{112}{subsection.6.3.2}%
 \contentsline {subsubsection}{Métricas a nivel general}{112}{subsection.6.3.2}%
-\contentsline {subsubsection}{Métricas a nivel de ruta}{113}{figure.caption.80}%
-\contentsline {subsubsection}{Métricas a nivel de autobús}{115}{figure.caption.83}%
-\contentsline {subsubsection}{Diferencias existentes a nivel de rendimiento}{116}{figure.caption.84}%
+\contentsline {subsubsection}{Métricas a nivel de ruta}{113}{figure.caption.81}%
+\contentsline {subsubsection}{Métricas a nivel de autobús}{115}{figure.caption.84}%
+\contentsline {subsubsection}{Diferencias existentes a nivel de rendimiento}{116}{figure.caption.85}%
 \contentsline {chapter}{\numberline {7}Marco Regulador}{120}{chapter.7}%
 \contentsline {section}{\numberline {7.1}Protección de datos y privacidad (RGPD)}{120}{section.7.1}%
 \contentsline {section}{\numberline {7.2}Licencias de software y herramientas de terceros}{121}{section.7.2}%
@@ -103,6 +104,6 @@
 \contentsline {section}{\numberline {10.3}Conclusiones generales}{135}{section.10.3}%
 \contentsline {chapter}{Bibliografía}{136}{section.10.3}%
 \contentsline {chapter}{\numberline {A}Especificación de Requisitos del Sistema}{144}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Figuras complementarias del estudio de viabilidad de datos operacionales}{158}{appendix.Alph2}%
-\contentsline {chapter}{\numberline {C}Declaración de uso de IA generativa}{162}{appendix.Alph3}%
+\contentsline {chapter}{\numberline {B}Figuras complementarias del estudio de viabilidad de datos operacionales}{159}{appendix.Alph2}%
+\contentsline {chapter}{\numberline {C}Declaración de uso de IA generativa}{163}{appendix.Alph3}%
 \contentsfinish 

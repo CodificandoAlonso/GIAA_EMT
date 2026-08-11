@@ -222,7 +222,7 @@ hmargin=3cm
 \lstset{style=estilo}
 \renewcommand{\lstlistingname}{\uppercase{Código}}
 
-
+\usepackage{longtable}
 
 %BIBLIOGRAFÍA 
 
@@ -306,14 +306,39 @@ maxcitenames=2,mincitenames=1]{biblatex} % Configuración para el estilo de cita
 \thispagestyle{plain}
 \setcounter{page}{3}
 	
-	% ESCRIBIR EL RESUMEN AQUÍ
-    RESUMEN RESUMEN RESUMEN
-	\textbf{METER E INCLUIR GLOSARIO}
+El presente trabajo determina en qué medida un sistema multiagente parametrizado
+con datos operacionales reales es capaz de reproducir el comportamiento observado
+de una línea de autobús urbano y de sostener el cálculo de indicadores clave de
+rendimiento sobre la dotación programada, cuya adecuación a la demanda resulta
+difícil de contrastar mediante el análisis descriptivo de los registros históricos.
 
+Partiendo de ocho meses de datos operacionales de la línea E01 de la Empresa
+Municipal de Transportes de Madrid, se caracteriza la demanda de cada parada y
+franja horaria mediante el ajuste de distribuciones normal, binomial negativa y
+geométrica, seleccionadas por criterio de información de Akaike tras el contraste
+de hipótesis correspondiente. Sobre esa parametrización se diseñan e implementan
+dos arquitecturas multiagente en la plataforma GAMA, comunicadas mediante
+protocolos FIPA. La primera presenta representación individual del pasajero y la
+segunda utiliza demanda agregada en la parada. Ambas se ejecutan
+bajo un esquema de simulación de Monte Carlo de mil réplicas, del que se derivan
+los indicadores de ocupación, regularidad, tiempo de espera y pasajeros residuales,
+explotados a través de una herramienta web de visualización.
+
+La fidelidad del modelo se evalúa comparando las distribuciones de ocupación
+simuladas y observadas mediante el coeficiente de Bhattacharyya. Los resultados
+reproducen el nivel medio observado con un déficit medio de 2,01 pasajeros,
+equivalente a 0,13 desviaciones típicas, y una sobredispersión creciente atribuible
+al muestreo independiente de subidas y bajadas, que omite la covarianza negativa
+presente en la operación real. Ambas arquitecturas producen resultados equivalentes,
+siendo la agregada 4,3 veces más rápida.
+
+Se concluye que el modelo sostiene el análisis del nivel medio de ocupación y la
+comparación relativa entre configuraciones, pero no la estimación de percentiles
+extremos ni el análisis de escenarios que alteren la oferta.
     
 	\textbf{Palabras clave:}
-	% Escribir las palabras clave aquí
-    Agentes Inteligentes, KPI, Simulación de Monte Carlo, GAMA
+	Sistemas multi-agente, simulación de Monte Carlo, transporte público urbano, transporte inteligente,
+	indicadores clave de rendimiento, GAMA
     
     
 
@@ -371,6 +396,38 @@ maxcitenames=2,mincitenames=1]{biblatex} % Configuración para el estilo de cita
 \thispagestyle{fancy}
 
 \newpage % página en blanco o de cortesía
+\thispagestyle{empty}
+\mbox{}
+
+
+\chapter*{Lista de acrónimos}
+\addcontentsline{toc}{chapter}{Lista de acrónimos}
+\thispagestyle{fancy}
+
+\begin{longtable}{@{}p{2.5cm}p{\dimexpr\textwidth-3cm\relax}@{}}
+\textbf{ABM}   & \textit{Agent-Based Model}. Modelo basado en agentes \\
+\textbf{ACL}   & \textit{Agent Communication Language}. Lenguaje de comunicación entre agentes definido por FIPA \\
+\textbf{AIC}   & \textit{Akaike Information Criterion}. Criterio de información de Akaike \\
+\textbf{AUML}  & \textit{Agent Unified Modeling Language} \\
+\textbf{BDI}   & \textit{Belief--Desire--Intention}. Arquitectura de agente deliberativo \\
+\textbf{CRTM}  & Consorcio Regional de Transportes de Madrid \\
+\textbf{DAI}   & \textit{Distributed Artificial Intelligence}. Inteligencia artificial distribuida \\
+\textbf{EMT}   & Empresa Municipal de Transportes de Madrid \\
+\textbf{ESD}   & \textit{Extreme Studentized Deviate}. Contraste de desviación studentizada extrema \\
+\textbf{FIPA}  & \textit{Foundation for Intelligent Physical Agents} \\
+\textbf{GAML}  & \textit{GAma Modeling Language}. Lenguaje de modelado de la plataforma GAMA \\
+\textbf{GIS}   & \textit{Geographic Information System}. Sistema de información geográfica \\
+\textbf{GTFS}  & \textit{General Transit Feed Specification} \\
+\textbf{JVM}   & \textit{Java Virtual Machine}. Máquina virtual de Java \\
+\textbf{KDE}   & \textit{Kernel Density Estimation}. Estimación de densidad por núcleos \\
+\textbf{KPI}   & \textit{Key Performance Indicator}. Indicador clave de rendimiento \\
+\textbf{MAD}   & \textit{Median Absolute Deviation}. Desviación absoluta mediana \\
+\textbf{RAPL}  & \textit{Running Average Power Limit}. Interfaz de medición de consumo energético \\
+\textbf{RGPD}  & Reglamento General de Protección de Datos \\
+\textbf{MAS}   & \textit{Multi Agent System}. Sistema multi-agente \\
+\end{longtable}
+
+\newpage
 \thispagestyle{empty}
 \mbox{}
 
