@@ -418,3 +418,138 @@ herramienta de planificación para el conjunto de la red.}
 {RD-04}
 {Se verificaría mediante revisión del modelo y de los ficheros de configuración, comprobando que ningún parámetro
 específico de línea está codificado de forma rígida en el modelo. Método: A}
+
+
+
+% =====================================================================
+%  A.5  TRAZABILIDAD
+%  Añadir al final de anex/anex_requirements/requirements.tex
+%
+%  No requiere paquetes adicionales: booktabs, threeparttable, floatrow
+%  y el tipo de columna P{} ya están en el preámbulo.
+%
+%  REVISAR antes de compilar: los números de sección de la columna
+%  "Materialización" son los que se deducen del contenido de la memoria.
+%  Confírmalos contra tu numeración real.
+% =====================================================================
+
+
+\section*{A.5\quad Trazabilidad}
+
+Las tablas~\ref{tab:traza-rf}, \ref{tab:traza-rd} y~\ref{tab:traza-rnf} vinculan
+cada requisito con la sección del documento en la que se materializa la decisión
+que lo satisface y con el método mediante el cual se comprobaría su cumplimiento.
+Su propósito es doble: permitir recorrer la cadena que va de la necesidad
+especificada a la solución adoptada, y hacer visibles tanto los requisitos que no
+encuentran reflejo en el diseño como los elementos del diseño que no responden a
+ningún requisito. Los requisitos correspondientes a la herramienta de explotación
+se concentran en la sección dedicada a esta última, de acuerdo con el alcance
+declarado en A.1. Los métodos indicados se corresponden con los recogidos en las
+fichas de las secciones A.2 a A.4: T, prueba; I, inspección; A, análisis; D,
+demostración.
+
+Conforme a lo expuesto en A.1, este anexo documenta el procedimiento mediante el
+cual se comprobaría el cumplimiento de cada requisito, sin que la ejecución de
+dicho procedimiento forme parte del alcance del trabajo.
+
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Trazabilidad de los requisitos funcionales}\label{tab:traza-rf}}
+    {\centering
+\begin{tabular}{|Q{0.15}|Q{0.30}|Q{0.44}|Q{0.11}|}
+\hline
+\textbf{Requisito} & \textbf{Enunciado abreviado} & \textbf{Materialización en el documento} & \textbf{Método}\\
+\hline
+\multicolumn{4}{|l|}{\textit{Método de simulación}}\\
+\hline
+RF-01 & Cálculo de los indicadores de rendimiento & Definición de indicadores, sección 3.4; extracción y agregación de
+    resultados, capítulo~\ref{chapter:application_cases} & A\\
+\hline
+RF-02 & Índice de Regularidad & Definición y fórmula, sección 3.4.1; resultados, sección 6.3.1 & A\\
+\hline
+RF-03 & Comparación entre resultados simulados y datos reales & Criterio de equivalencia, sección 3.4.3; resultados,
+    sección 6.3.1 & A\\
+\hline
+RF-04 & Persistencia en formato estructurado & Ficheros de salida de la simulación, capítulo~\ref{chapter:simulation_design} & I\\
+\hline
+\multicolumn{4}{|l|}{\textit{Herramienta de explotación}}\\
+\hline
+RF-05 & Creación de simulaciones & Herramienta de visualización, sección 6.1 & D\\
+\hline
+RF-06 & Lanzamiento de simulaciones & Herramienta de visualización, sección 6.1 & D\\
+\hline
+RF-07 & Seguimiento del estado & Herramienta de visualización, sección 6.1 & T\\
+\hline
+RF-08 & Visualización interactiva de resultados & Herramienta de visualización, secciones 6.1 y 6.2 & D\\
+\hline
+RF-09 & Gestión del histórico de simulaciones & Herramienta de visualización, sección 6.1 & T\\
+\hline
+\multicolumn{4}{l}{Fuente: elaboración propia.}
+\end{tabular}}
+\end{table}
+
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Trazabilidad de las restricciones de diseño}\label{tab:traza-rd}}
+    {\centering
+\begin{tabular}{|Q{0.15}|Q{0.30}|Q{0.44}|Q{0.11}|}
+\hline
+\textbf{Requisito} & \textbf{Enunciado abreviado} & \textbf{Materialización en el documento} & \textbf{Método}\\
+\hline
+RD-01 & Modelado multiagente de la línea E01 & Taxonomía de agentes y solución uno, capítulo~\ref{chapter:simulation_design};
+    solución dos, sección 5.3 & I\\
+\hline
+RD-02 & Comunicación mediante protocolos FIPA & Protocolos de comunicación de ambas soluciones,
+    capítulo~\ref{chapter:simulation_design} & I\\
+\hline
+RD-03 & Capacidad máxima, pasajeros residuales y disciplina FIFO & Protocolo de embarque y gestión de rechazos,
+    secciones 5.2.1 y 5.3.1 & T\\
+\hline
+RD-04 & Muestreo y truncamiento de las distribuciones de entrada & Ajuste de distribuciones, sección 4.2; generación de
+    subidas y bajadas, sección 5.2.1 & A\\
+\hline
+RD-05 & Tiempo de detención en parada & Ciclo de parada del agente autobús, capítulo~\ref{chapter:simulation_design} & T\\
+\hline
+RD-06 & Ruta fija y adhesión al cuadro de servicio & Generación de expediciones y espera en terminal,
+    capítulo~\ref{chapter:simulation_design} & I\\
+\hline
+RD-07 & Ausencia de deliberación en los agentes & Descarte de arquitecturas deliberativas, sección 2.1; comportamiento
+    de los agentes, capítulo~\ref{chapter:simulation_design} & I\\
+\hline
+RD-08 & Fidelidad exclusiva a los datos operacionales & Origen y depuración de los datos, sección 4.1; ficheros de
+    parámetros, sección 4.2 & A\\
+\hline
+RD-09 & Ámbito y exclusiones del modelo & Alcance del trabajo, sección 1.1; criterio de día laborable normal,
+    sección 4.1.2; limitaciones, sección 9.1 & I\\
+\hline
+\multicolumn{4}{l}{Fuente: elaboración propia.}
+\end{tabular}}
+\end{table}
+
+
+\begin{table}[H]
+    \ttabbox[\linewidth]
+    {\caption{Trazabilidad de los requisitos no funcionales}\label{tab:traza-rnf}}
+    {\centering
+\begin{tabular}{|Q{0.15}|Q{0.30}|Q{0.44}|Q{0.11}|}
+\hline
+\textbf{Requisito} & \textbf{Enunciado abreviado} & \textbf{Materialización en el documento} & \textbf{Método}\\
+\hline
+RNF-01 & Ejecución sin dependencias de la plataforma GAMA & Entorno de ejecución y contenerización, sección 3.3 & D\\
+\hline
+RNF-02 & Persistencia de resultados frente a reinicios & Entorno de ejecución, sección 3.3; herramienta de
+    visualización, sección 6.1 & T\\
+\hline
+RNF-03 & Ejecución desatendida en modo \textit{headless} & Esquema de ejecución de réplicas, sección 6.1; rendimiento
+    comparado, sección 6.3.2 & T\\
+\hline
+RNF-04 & Ausencia de datos de carácter personal & Protección de datos, sección 7.1 & I\\
+\hline
+RNF-05 & Extensibilidad a otras líneas de la red & Ficheros de configuración y parámetros, sección 4.2; trabajo futuro,
+    sección 9.2 & A\\
+\hline
+\multicolumn{4}{l}{Fuente: elaboración propia.}
+\end{tabular}}
+\end{table}
