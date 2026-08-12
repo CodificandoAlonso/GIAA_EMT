@@ -10,7 +10,7 @@ Este trabajo se realiza dentro de la Cátedra
 \textit{Inteligencia Artificial para el Transporte y Movilidad}\footnote{La UC3M y 
 EMT Madrid presentan una nueva Cátedra en Inteligencia Artificial para el transporte y 
 la movilidad \url{https://www.uc3m.es/ss/Satellite/UC3MInstitucional/es/Detalle/Comunicacion_C/1371438766717/1371216001122/La_UC3M_y_EMT_Madrid_presentan_una_nueva_Catedra_en_Inteligencia_Artificial_para_el_transporte_y_l} 
-(accedido: 6 de mayo de 2026).}. Esta establece un nexo colaborativo entre la EMT y la Universidad 
+(accedido: 6 de mayo de 2026).}. Esta establece un nexo colaborativo entre la EMT y la Universidad Carlos III de Madrid
 a través del grupo de investigación GIAA\footnote{(Grupo de Inteligencia Artificial Aplicada) 
 \url{https://giaa.uc3m.es/} (accedido: 6 de mayo de 2026).}. Como se explica de forma breve en 
 la introducción, la Empresa Municipal de Transportes propone estudiar la viabilidad de la construcción 
@@ -125,7 +125,7 @@ Usada en el desarrollo del sistema multi-agente, facilita la implementación del
 Herramienta usada con kernel de \textit{Python} para el análisis de los datos de operación de la línea a simular. Facilita la visualización de resultados, el análisis exploratorio de datos o la construcción de modelos estadísticos. Con  su estructura de celdas \enquote{markdown} y sus celdas de código, mejora la lectura y la explicabilidad de los procesos que se realizan en cada documento \enquote{ipynb} (formato de cuadernos Jupyter).
 
 \item \textbf{QGIS}\footnote{\url{https://qgis.org} (accedido: 9 de mayo de 2026).}:
-Necesaria para la conversión de GeoJSON (Formato basado en JSON con especificación concreta de parámetros para representación geográfica de los datos) a archivo ESRI shapefile (formato estándar de representación vectorial de datos geoespaciales). Usada para la carga en el simulador de los datos de la ruta y de la ubicación de las paradas.
+Necesaria para la conversión de GeoJSON (formato basado en JSON con especificación concreta de parámetros para la representación geográfica de los datos) a archivo ESRI shapefile (formato estándar de representación vectorial de datos geoespaciales). Usada para la carga en el simulador de los datos de la ruta y de la ubicación de las paradas.
 
 \item \textbf{Node.js}\footnote{\url{https://nodejs.org} (accedido: 9 de mayo de 2026).}:
 Entorno de ejecución del lenguaje JavaScript. Utilizado para el despliegue de la herramienta en \textit{local}. Permite la creación de una arquitectura cliente/servidor que permita la conexión entre acciones o deseos del usuario en el navegador y su correspondiente cambio en la máquina anfitriona. Facilita la visualización de las simulaciones o el lanzamiento de nuevas.
@@ -181,9 +181,8 @@ parada de la ruta. En la figura~\ref{fig:regularity} se observa la fórmula util
 
 \subsection{Métricas a nivel de autobús}
 Se extraen parámetros a nivel de autobús correspondientes a cada viaje realizado por unidad física. La información
-contenida de cada expedición incluye \textbf{gráfico de evolución de ocupación a lo largo de la ruta}, \textbf{
-probabilidad del viaje de salir con retraso} y \textbf{tiempo medio en ese caso}, así como el valor de \textbf{
-    regularidad} concreto del viaje.
+contenida de cada expedición incluye \textbf{gráfico de evolución de ocupación a lo largo de la ruta}, \textbf{probabilidad del viaje de salir con retraso}
+y \textbf{tiempo medio en ese caso}, así como el valor de \textbf{regularidad} concreto del viaje.
 
 \subsection{Métricas a nivel de ruta}
 A nivel de ruta, se expone información concreta sobre cada parada, indicando \textbf{subidas}, \textbf{bajadas}

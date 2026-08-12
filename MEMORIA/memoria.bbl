@@ -273,33 +273,6 @@
       \field{pages}{56\bibrangedash 70}
       \range{pages}{15}
     \endentry
-    \entry{brooks1986robust}{article}{}
-      \name{author}{1}{}{%
-        {{hash=c5572a6f2e05a08f36cab3bae8fdb643}{%
-           family={Brooks},
-           familyi={B\bibinitperiod},
-           given={Rodney\bibnamedelima A.},
-           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-      }
-      \strng{namehash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{fullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{bibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{authorbibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{authornamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{authorfullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \field{extraname}{1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Journal on Robotics and Automation}
-      \field{number}{1}
-      \field{title}{A Robust Layered Control System for a Mobile Robot}
-      \field{volume}{2}
-      \field{year}{1986}
-      \field{pages}{14\bibrangedash 23}
-      \range{pages}{10}
-    \endentry
     \entry{franklin1996agent}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=e3905352d4e0f537e5b25f72df123db7}{%
@@ -342,8 +315,8 @@
       \strng{editorbibnamehash}{8b92a16afd02c2749fb5de196aeba9ec}
       \strng{editornamehash}{5a092dc6799d29ea6bc4ce8518d5c414}
       \strng{editorfullhash}{8b92a16afd02c2749fb5de196aeba9ec}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Intelligent Agents {III} ({LNAI} Volume 1193)}
@@ -351,6 +324,33 @@
       \field{year}{1997}
       \field{pages}{21\bibrangedash 35}
       \range{pages}{15}
+    \endentry
+    \entry{brooks1986robust}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c5572a6f2e05a08f36cab3bae8fdb643}{%
+           family={Brooks},
+           familyi={B\bibinitperiod},
+           given={Rodney\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{fullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{bibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorbibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authornamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorfullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal on Robotics and Automation}
+      \field{number}{1}
+      \field{title}{A Robust Layered Control System for a Mobile Robot}
+      \field{volume}{2}
+      \field{year}{1986}
+      \field{pages}{14\bibrangedash 23}
+      \range{pages}{10}
     \endentry
     \entry{bratman1987intention}{book}{}
       \name{author}{1}{}{%

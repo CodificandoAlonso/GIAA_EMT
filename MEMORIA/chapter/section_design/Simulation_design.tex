@@ -272,15 +272,15 @@ Con respecto a las interacciones entre agentes, este agente resulta tanto partic
 
 El último agente dentro de esta solución resulta el agente~\textit{parada}. Este agente se caracteriza, al igual que los anteriores, 
 por ubicarse dentro de la taxonomía escogida como un agente~\textbf{reactivo}. Explorando las características propias de los agentes,
-~se destaca este como el de menor encaje formal dentro del paradigma, al presentarse más como un enlace gestor de datos, sin toma de
-~decisiones propia. No obstante, su papel en la~\textbf{interacción} entre los agentes del sistema le confiere una función de
+se destaca este como el de menor encaje formal dentro del paradigma, al presentarse más como un enlace gestor de datos, sin toma de
+decisiones propia. No obstante, su papel en la~\textbf{interacción} entre los agentes del sistema le confiere una función de
 mediador conversacional que lo distingue de una mera estructura de datos del entorno, al actuar como respondedor ante las solicitudes
-~del autobús y, de forma singular, como iniciador del aviso de embarque hacia los pasajeros en espera. Esta doble participación
-~en los protocolos FIPA constituye la manifestación de la propiedad de \textbf{sociabilidad} que justifica su modelado como
+del autobús y, de forma singular, como iniciador del aviso de embarque hacia los pasajeros en espera. Esta doble participación
+en los protocolos FIPA constituye la manifestación de la propiedad de \textbf{sociabilidad} que justifica su modelado como
 agente, correspondiendo su perfil deliberadamente austero en las otras características. Concretamente, presenta~\textbf{reactividad}
-~plena en cuanto a su modelado mediante acciones estímulo-respuesta; su~\textbf{autonomía} se presenta meramente ejecutiva
+plena en cuanto a su modelado mediante acciones estímulo-respuesta; su~\textbf{autonomía} se presenta meramente ejecutiva
 y su~\textbf{proactividad} resulta residual, resultando conforme a la naturaleza de su referente real. Es decir, una infraestructura
-~física carente de objetivos propios.
+física carente de objetivos propios.
 
 Su rol comprende tanto el almacenamiento temporal de la información referente a la generación de pasajeros, expresada mediante la
 vinculación de los agentes~\textit{pasajero} generados a este agente concreto, como el de actuar de nexo comunicativo entre 
@@ -309,7 +309,7 @@ características principales de cada uno.
 Nótese que únicamente existe como atributo dinámico la lista de pasajeros asociados al agente \textit{parada}. Esto se debe a la 
 lógica de estados característicos del agente, ya que se pueden distinguir dos:~\textit{estancia de autobús} y~\textit{custodia de pasajeros}.
 La diferencia latente entre ambos radica en la lógica interna de respuesta y comunicación con otros agentes, ya que transita del estado
-~\textit{custodia de pasajeros} a~\textit{estancia de autobús} cuando inicia la secuencia de comunicaciones característica de la 
+\textit{custodia de pasajeros} a~\textit{estancia de autobús} cuando inicia la secuencia de comunicaciones característica de la 
 llegada de un autobús. A continuación,
 la tabla~\ref{tab:interaccion_parada} muestra cómo se involucra el agente en cuestión en los distintos protocolos de comunicación, y
 cómo estos le permiten alterar su estado interno.
@@ -345,8 +345,7 @@ cómo estos le permiten alterar su estado interno.
 Como ya se ha mencionado en la sección anterior, existen para esta solución seis protocolos de comunicación basados en los estándares
 FIPA-Request~\cite{fipa2002request} y FIPA-Query~\cite{fipa2002query}. Este apartado cubre, para cada uno de esos protocolos, una
 formalización mediante diagramas de interacción con notación UML (\textbf{U}nified \textbf{M}odeling \textbf{L}anguage)~\cite{omg2001uml14}. 
-Concretamente, se utiliza una extensión del mismo denominada AUML (\textbf{A}gent~\textbf{U}nified \textbf{M}odeling \textbf{L}anguage)
-~\cite{odell2001auml}. Esta extensión se basa en el estándar UML en su versión 1.4. Por coherencia  y conformidad con los protocolos 
+Concretamente, se utiliza una extensión del mismo denominada AUML (\textbf{A}gent~\textbf{U}nified \textbf{M}odeling \textbf{L}anguage)~\cite{odell2001auml}. Esta extensión se basa en el estándar UML en su versión 1.4. Por coherencia  y conformidad con los protocolos 
 establecidos para las comunicaciones FIPA, se utiliza este estándar pese a la existencia de revisiones posteriores resultantes en 
 versiones actualizadas. La sección cubre también la explicación de los distintos atributos enviados por cada
 agente en los correspondientes mensajes, y el uso que se hace de cada uno. 
@@ -356,7 +355,7 @@ agente en los correspondientes mensajes, y el uso que se hace de cada uno.
 
 Este protocolo se realiza entre el agente~\textit{autobús} (\textbf{iniciador}) y el agente~\textit{pasajero} (\textbf{participante}). 
 Se trata de un protocolo basado en FIPA-Query. Dicho protocolo, formalmente presenta dos actos comunicativos de apertura:
- \textbf{query-ref} y \textbf{query-if}.
+\textbf{query-ref} y \textbf{query-if}.
 Query-if solicita el valor de verdad de una proposición, mientras que por otro lado query-ref solicita el valor de una expresión referencial.
 En el caso concreto de aplicación, este protocolo se establece con el fin de que el agente~\textit{autobús} tenga el conocimiento de si cada
 pasajero va a realizar el desembarco o no. Esto puede mapearse al valor de verdad de una proposición de forma binaria, ya que o bien se baja,
@@ -514,10 +513,10 @@ agrupar ambas interacciones en un mismo protocolo, pero resultaba imperioso rema
 \noindent\textbf{Aviso de embarque}
 
 Este protocolo, como se ha mencionado de forma anterior, se inicia de forma paralela a la completitud del protocolo~\textit{notificación de llegada}.
-Como interlocutores se encuentran: agente~\textit{parada}~(~\textbf{iniciador}) y agente~\textit{pasajero}~(~\textbf{participante}). Al igual
+Como interlocutores se encuentran: agente~\textit{parada} (\textbf{iniciador}) y agente~\textit{pasajero} (\textbf{participante}). Al igual
 que sus antecesores y con excepción del primer protocolo expuesto, se enmarca bajo FIPA-Request, y de la misma forma, los cursos alternativos
 correspondientes a no entendimiento o rechazo de la solicitud quedan omitidos. En la figura~\ref{fig:aviso_uno} se formaliza mediante su
-~correspondiente diagrama de interacción.
+correspondiente diagrama de interacción.
 
 \begin{figure}[H]
  \centering
@@ -612,8 +611,8 @@ a su código interno de parada, para posterior desagregación de los datos aplic
 \medskip
 \noindent\textbf{Actualización de recuento}
 
-Este último protocolo de comunicación involucra a los siguientes agentes:~\textit{autobús}~(~\textbf{iniciador}) y~\textit{parada}
-~(\textbf{participante}). Enmarcado dentro de FIPA-Request, a diferencia del protocolo previo y en concordancia con la mayoría 
+Este último protocolo de comunicación involucra a los siguientes agentes:~\textit{autobús} (\textbf{iniciador}) y \textit{parada}
+(\textbf{participante}). Enmarcado dentro de FIPA-Request, a diferencia del protocolo previo y en concordancia con la mayoría 
 de los implementados, este protocolo no incorpora aquellas vías alternativas de comunicación que metodológicamente no son necesarias
 para expresar el comportamiento de los agentes simulados. Por lo tanto, mensajes como el rechazo o el no entendimiento no son 
 implementados. La figura~\ref{fig:actualizacion_uno} formaliza el protocolo, mientras que la tabla~\ref{tab:actualizacion_uno}
@@ -664,7 +663,7 @@ ya especificados. Desglosando, se pueden distinguir distintas especificaciones a
 \noindent\textbf{Paso del tiempo}
 
 Como ya se ha mencionado en previas ocasiones, el dominio de aplicación temporal de las simulaciones abarca la totalidad de servicio
-de \textbf{un día}. Concretamente, la simulación inicia a las \textbf{05:00}~(formato \textit{veinticuatro horas}) y finaliza una vez
+de \textbf{un día}. Concretamente, la simulación inicia a las \textbf{05:00} (formato \textit{veinticuatro horas}) y finaliza una vez
 el último agente~\textit{autobús} finalice toda su operativa de servicio. El transcurso del tiempo se realiza de forma~\textbf{discreta}
 en intervalos de~\textbf{dos segundos}. Cada iteración de la simulación supone un aumento del tiempo de esta cantidad. Se dispone 
 de variables globales que comprenden el mapeo de este tiempo discretizado en segundos a formato temporal \textit{HH:MM:SS},
@@ -683,15 +682,15 @@ agilidad de la carga computacional.
 Los distintos valores de las distribuciones de carga y descarga, presentados en el capítulo~\ref{chapter:param_analisys}, se
 almacenan de forma desagregada por franja horaria. Este sistema se mantiene para la duración de la simulación. Previo al inicio
 del conteo temporal, se almacenan estos valores en una lista global que contiene los datos necesarios para la construcción de cada
-distribución. Es decir, para las distribuciones \textbf{normales}, se almacena $\mu$, $\sigma$, para las distribuciones \textbf{
-binomiales negativas} se almacenan $r$, $p$ y para las distribuciones \textbf{geométricas} se conserva únicamente $p$.
+distribución. Es decir, para las distribuciones \textbf{normales} se almacena $\mu$ y $\sigma$; para las distribuciones
+\textbf{binomiales negativas} se almacenan $r$ y $p$; y para las distribuciones \textbf{geométricas} se conserva únicamente $p$.
 
 La actualización se realiza también a nivel de entorno, mediante una acción que se ejecuta cada vez que el contador global
 discreto del tiempo $t \equiv 0 \pmod{3600}$, es decir, cada hora en punto. Dicha actualización resulta
 diferente según si se trata de un valor relativo a la carga o a la descarga. Esto se debe a la forma en la que se generan estos datos.
 La información relativa a la carga de pasajeros resulta del cálculo del valor agregado de todos los pasajeros que embarcan 
-en algún autobús a lo largo de una hora, por lo que cada hora, lo que se necesita realizar es generar un valor aleatorio
-extraído de dicha distribución. Este supone el valor relativo a la \textbf{tasa de generación de pasajeros por 
+en algún autobús a lo largo de una hora, por lo que cada hora, siendo únicamente necesario generar un valor aleatorio
+extraído de dicha distribución por hora. Este supone el valor relativo a la \textbf{tasa de generación de pasajeros por 
 parada por hora}. La expansión de esta información así como la explicación de cómo se usa este valor se realiza en el apartado siguiente.
 Por otra parte, el valor de descarga de pasajeros se modela de forma desagregada por llegada, por lo que para cada hora no resulta
 necesario extraer un valor aleatorio al cambio de franja horaria. La actualización de este valor supone únicamente actualizar los
@@ -846,8 +845,8 @@ se discute esta idea.
 
 Este sistema se diseña bajo una premisa fundamental:~\textbf{la inferencia de bajada de pasajeros debe corresponder con 
 los valores estudiados}. Esta premisa supone, como se menciona en la caracterización del agente~\textit{pasajero}~(véase
-~\nameref{subsubsec:agents_char_one}), que no se puede modelar a estos mediante un sistema de creencias, deseos e intenciones
-~(agente \textit{BDI}), ni representar el embarque/desembarque de cada pasajero mediante una matriz de origen/destino.
+\nameref{subsubsec:agents_char_one}), que no se puede modelar a estos mediante un sistema de creencias, deseos e intenciones
+(agente \textit{BDI}), ni representar el embarque/desembarque de cada pasajero mediante una matriz de origen/destino.
 
 Esto deriva de la imposibilidad de planificar el destino efectivo de cada~\textit{pasajero} generado en su instanciación,
 debido a que la parada destino sería dependiente tanto del~\textit{autobús} que transporta al pasajero como del momento 
@@ -863,7 +862,7 @@ desviaciones sistemáticas respecto de las distribuciones de descarga, ajustadas
 Por ello se impone un método pragmático que, mediante acciones del entorno, selecciona estocásticamente para cada momento
 de descarga del agente~\textit{autobús} en la parada correspondiente, qué instancias de agentes~\textit{pasajero} deben 
 efectuar el desembarco para que la simulación refleje fielmente las distribuciones estudiadas en el capítulo
-~\ref{chapter:param_analisys}.
+\ref{chapter:param_analisys}.
 
 Dichas acciones son activadas por el agente~\textit{autobús} en el momento en que inicia el protocolo ya expuesto de~\textit{
 consulta de descenso}. El método estocástico recibe la lista de agentes~\textit{pasajero} que se ubican en ese momento dentro
@@ -1225,7 +1224,7 @@ El papel que juega el agente~\textit{autobús} en los nuevos protocolos de comun
 Este agente, al igual que en el caso del~\textit{autobús}, mantiene su clasificación taxonómica y la justificación del concepto débil 
 de agencia expuesto para la primera solución.
 
-El rol en este caso cambia, ya que no es el encargado de ejercer de mediador comunicativo entre agentes~\textit{autobús} y~\textit{pasajero}.
+El rol en este caso cambia, al no ser el encargado de ejercer de mediador comunicativo entre agentes~\textit{autobús} y~\textit{pasajero}.
 Al no existir este segundo, su rol cambia a transmitir él mismo la información relativa al número de pasajeros existentes
 en la parada y cuántos deben realizar apeo. Al no existir la entidad~\textit{pasajero} con el fin de mantener la información
 relativa al tiempo de espera en parada, es este agente el encargado de acumular esa información para poder mantener el indicador
@@ -1325,16 +1324,16 @@ protocolo que muestran esos caminos. En la figura~\ref{fig:consulta_tras_llegada
 \end{table}
 
 Nótese cómo en este caso la parada transmite tanto el número de pasajeros como el parámetro referente a los descensos esperados. Este valor,
-~como se indica, se obtiene mediante una consulta del entorno, debido a que no se puede considerar que el agente~\textit{parada} tenga
+como se indica, se obtiene mediante una consulta del entorno, debido a que no se puede considerar que el agente~\textit{parada} tenga
 el poder de disponer de ese conocimiento, únicamente es encargado de transmitirlo.
 
 \medskip
 \noindent\textbf{Actualización de recuento}
 
-Este segundo y último protocolo de esta solución surge de la interacción entre: agente~\textit{autobús}~(~\textbf{iniciador}) y agente~\textit{parada}~(~\textbf{participante}).
+Este segundo y último protocolo de esta solución surge de la interacción entre: agente~\textit{autobús} (\textbf{iniciador}) y agente~\textit{parada} (\textbf{participante}).
 Basado en FIPA-Request, supone un método mediante el cual el agente iniciador insta al participante a actualizar su estado interno conforme
 a la información transmitida. El diagrama de interacción resulta equivalente al presentado para el protocolo homónimo de la solución uno
-~(véase~\ref{fig:actualizacion_uno}). No obstante, las performativas resultantes de cada mensaje contienen información que difiere de este.
+(véase~\ref{fig:actualizacion_uno}). No obstante, las performativas resultantes de cada mensaje contienen información que difiere de este.
 La tabla~\ref{tab:actualizacion_dos} muestra la información asociada a cada mensaje.
 
 
@@ -1352,7 +1351,7 @@ La tabla~\ref{tab:actualizacion_dos} muestra la información asociada a cada men
     número de pasajeros que han realizado embarque efectivo. \\
     \hline
     \textit{Agree} & Mensaje de aceptación & El agente~\textit{parada} confirma la recepción de los datos mediante la cadena de caracteres
-    ~\texttt{Ok}.\\
+    \texttt{Ok}.\\
     \hline
     \textit{Inform Done: Inform} & Contenido actualizado & Una vez que el agente participante modifique su estado interno en cumplimiento 
     con lo solicitado, devuelve la cadena de caracteres~\texttt{Done}, indicando al agente~\textit{autobús} iniciador del 
@@ -1384,7 +1383,7 @@ en una lista de tuplas contenedora del instante de generación de cada entidad.
 Al igual que en la simulación previa, la inferencia de selección de pasajeros, para cumplimentar los distintos requisitos de diseño
 relativos a que esta selección debe basarse en los datos empíricos de distribuciones estudiadas, se realiza a nivel de entorno.
 En este caso, es el agente~\textit{parada} el encargado de invocar este método y transmitir, en el protocolo de comunicación
-~\textit{Consulta tras llegada}, la información referente al valor inferido por el mundo. Esta constituye una solución pragmática, ya que
+\textit{Consulta tras llegada}, la información referente al valor inferido por el mundo. Esta constituye una solución pragmática, ya que
 en la realidad operativa no es la parada quien dispone de dicha información, sino cada pasajero individual tomando sus propias decisiones.
 No obstante, con el fin de garantizar la fidelidad a las distribuciones de descarga estudiadas, se adopta este enfoque intermedio que, de
 la misma forma que en la solución anterior, evita que el conocimiento subyacente a la inferencia recaiga sobre agente alguno, ya que

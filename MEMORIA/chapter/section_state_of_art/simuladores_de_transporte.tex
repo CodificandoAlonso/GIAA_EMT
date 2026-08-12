@@ -55,7 +55,7 @@ en la literatura, junto con sus aportaciones y limitaciones en el ámbito del tr
     Basados en los conceptos de \textit{agente inteligente} ya discutidos y expuestos en la sección~\ref{sec:agents},
     resultan útiles en escenarios dinámicos y complejos, que requieran de interacción o colaboración entre
     individuos. En la literatura se pueden encontrar trabajos como
-    \textcite{saval2023gama}, que utiliza un sistema multi-agente para estudio de
+    \textcite{saval2023gama}, que utilizan un sistema multi-agente para el estudio de
     rendimiento de rutas, o \textcite{Shaharuddin2021Traffic}, usado para comparar los resultados derivados de
     simular dos escenarios de tráfico.
     \item \textbf{Aprendizaje profundo por refuerzo}
@@ -64,7 +64,7 @@ en la literatura, junto con sus aportaciones y limitaciones en el ámbito del tr
     aprendizaje por refuerzo, sistema de aprendizaje iterativo que aprende en base a una política de actuación,
     recibiendo recompensas que guían la optimización en el largo plazo, con técnicas de \enquote{deep learning}
     (aprendizaje profundo), consistente en redes neuronales que permiten aprender estrategias de control adaptativas
-    en tiempo real. Se presenta útil en entornos cambiantes. En casos de transporte, \textcite{Bajada2024DeepRL}
+    en tiempo real, siendo útil en entornos cambiantes. En casos de transporte, \textcite{Bajada2024DeepRL}
     o \textcite{Tang2024Robust} implementan esta mezcla con el objetivo de mejorar la toma de decisiones de los
     autobuses en tiempo real.
 \end{enumerate}
@@ -179,7 +179,7 @@ donde $g$ representa el modelo simulado. Del cómputo de $N$ se obtiene:
 Donde $\hat{\theta}_N$ especifica cada uno de los parámetros usados como indicadores de rendimiento, las distribuciones $F_i$
 se obtienen de un estudio derivado de los datos de operación, y $g$ hace referencia al modelo realizado en GAMA.
 
-Este método, usado como motor estocástico de la simulación,requiere de un parámetro $N$ relativo al número de repeticiones
+Este método, usado como motor estocástico de la simulación, requiere de un parámetro $N$ relativo al número de repeticiones
 a realizar. Para el caso concreto de aplicación, la elección de este valor se justifica en dos ángulos. El primero, presente
 en la figura~\ref{fig:montecarlo} muestra la evolución del valor $\hat{\theta}_i$ desde $i=1$ hasta $i=N$. Se observa cómo
 el inicio presenta mucha variabilidad, estabilizándose hacia las 400-500 iteraciones.
@@ -298,7 +298,7 @@ El origen de esta fórmula deriva de los estudios de \textcite{demoivre1738doctr
  de unas 20 muestras, se opta por un enfoque de Test de hipótesis basado en la \textbf{skewness}
  (\textit{asimetría}) y la \textbf{kurtosis} (\textit{curtosis}).
  \textcite{kim2013normality} especifica que este test en cuestión permite
- ser utilizado con rigor estadístico para estudio de normalidad en muestras pequeñas, por lo que se optó
+ ser utilizado con rigor estadístico para estudio de normalidad en muestras pequeñas, por lo que se opta
  por su implementación.
 
  Skewness y kurtosis son coeficientes que se obtienen calculando y estandarizando los momentos centrales
@@ -327,10 +327,10 @@ De esta forma, no solo se obtiene información acerca de si la distribución tes
 \noindent\textbf{Distribución Binomial Negativa y Distribución Geométrica}
 
 Encapsuladas en un apartado debido a la particularidad de la distribución \textit{geométrica}, que resulta ser 
-un caso de aplicación concreto de la distribución \textit{Binomial Negativa}, y debido al uso conjunto que 
+un caso de aplicación concreto de la distribución \textit{binomial negativa}, y debido al uso conjunto que 
 se hace de estas dos distribuciones en el caso concreto de aplicación.
 
-La distribución binomial Negativa, representada en la figura~\ref{fig:negbin}, consiste en un 
+La distribución binomial negativa, representada en la figura~\ref{fig:negbin}, consiste en un 
 tipo de distribución discreta basada en una prominente cola derecha (skewness positivo). Esta característica se
 encuentra presente también en la distribución \textit{geométrica} (véase la figura~\ref{fig:geometric}).
 
@@ -454,9 +454,9 @@ se asemejan a una distribución gaussiana, asunto ya discutido y explicado. En c
 entra en juego el análisis de los posibles valores atípicos. Dentro del análisis de normalidad de los datos,
 existen en la literatura distintos tests. El \enquote{NIST} (National Institute of Standards and Technology)
 \footnote{\url{https://www.nist.gov/} (accedido: 13 de mayo de 2026).} define tres preguntas clave para la 
-elección del mejor estimador. Estas preguntas son: ¿Qué distribución siguen los datos?, ¿Test diseñado para
+elección del mejor estimador. Estas preguntas son: ¿Qué distribución siguen los datos? ¿Está el test diseñado para
 encontrar uno o varios \textit{outliers}? y, si está diseñado para más de uno, ¿Es necesario especificar
-cuántos existen o solo una barrera superior?\cite{nist2012outlier}.
+cuántos existen o solo una barrera superior?~\cite{nist2012outlier}
 
 Según la respuesta a estas preguntas se puede reducir el número de modelos que sirvan para el caso 
 concreto. Dentro del problema en cuestión, se busca encontrar qué \textit{outliers} pueden existir en 
@@ -482,20 +482,20 @@ iteración $i$:
 R_i = \frac {\max_i{\left|x_i-\bar{x}\right|}}{s}
 \end{equation}
 Donde $\bar{x}$ denota la media y $s$ es la desviación estándar muestral, 
-que difiere de $m_2$(desviación estándar de la población) en que en su cálculo se 
-multiplica por $\frac {1} {n - 1}$ en vez de $\frac {1} {n}$
-En cada iteración se encuentra el valor que maximiza esa $R_i$, y se almacena. En la siguiente 
-iteración $i+1$ se recalcula esa $R_{i+1}$ sin tener en cuenta el valor anterior
+que difiere de $m_2$ (desviación estándar de la población) en que en su cálculo se 
+multiplica por $\frac {1} {n - 1}$ en vez de $\frac {1} {n}$.
+En cada iteración se encuentra el valor que maximiza $R_i$, y se almacena. En la siguiente 
+iteración $i+1$ se recalcula $R_{i+1}$ sin tener en cuenta el valor anterior.
 
-Esto se repite hasta que se han computado los $r$ datos de la $H_a$
+Esto se repite hasta que se han computado los $r$ datos de la $H_a$.
 
 Luego, con un nivel definido de significancia $\alpha$, para cada $R_i$ con $i \in 1,2,\ldots, r$ 
-se calcula un valor $\lambda_i$
+se calcula un valor $\lambda_i$:
 \begin{equation}
 \lambda_i = \frac {\left ( n - i \right ) t_{p, n-i-1}} {\sqrt{\left ( n- i -1 + t_{p, n-i-1}^{2} \right ) \left ( n -i +1 \right )}}
 \end{equation}
 Donde $t_{p,v}$ se corresponde con el cuantil p de la distribución t con 
-v grados de libertad. En estas fórmulas, $v$ se corresponde con $n-i-1$ y p con
+v grados de libertad. En estas fórmulas, $v$ se corresponde con $n-i-1$ y p:
 \begin{equation}
 p = 1 - \frac {\alpha} {2 \left ( n - i + 1 \right )}
 \end{equation}

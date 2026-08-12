@@ -40,7 +40,7 @@ const input_data_stop_row *get_distribution_per_timeslot(input_data_stop *stop_i
 const size_t stop_mapper_toA(u16 stopcode, input_data_matrix *matrix){
 
     for (size_t index = 0; index < MAX_DIRECTION_LEN; index ++){
-        if (matrix->route_stops_a[index]->stop_distributions[0].stop_code == stopcode){
+        if (matrix->route_stops_a[index].stop_distributions[0].stop_code == stopcode){
             return index;
         }
     }
@@ -50,7 +50,7 @@ const size_t stop_mapper_toA(u16 stopcode, input_data_matrix *matrix){
 
 const size_t stop_mapper_toB(u16 stopcode, input_data_matrix *matrix){
     for (size_t index = 0; index < MAX_DIRECTION_LEN; index ++){
-        if (matrix->route_stops_b[index]->stop_distributions[0].stop_code == stopcode){
+        if (matrix->route_stops_b[index].stop_distributions[0].stop_code == stopcode){
             return index;
         }
     }

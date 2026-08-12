@@ -245,7 +245,7 @@ El resto de parámetros se especifican a continuación.
         Occupation}
         & INT
         & NO
-        & Valor de la carga de pasajeros derivada del cálculo $\text{Transac::\textit{Occupation}} 
+        & Valor de la carga de pasajeros derivada del cálculo: $\text{Transac::\textit{Occupation}} 
         = \text{Transac::\textit{Occupation}}_{\text{prev}} + \text{Transac::\textit{Board}} - 
         \text{Transac::\textit{DropOff}}$. \\
         \hline
@@ -371,7 +371,7 @@ Respecto a los resultados, a nivel general se observan varias cuestiones concret
 requieren ampliación y explicación. Primeramente, el resultado para la agregación \textit{All} resulta
 en un mayor número de hipótesis de normalidad no rechazadas, superando para ambos sentidos el umbral especificado 
 en la literatura del \textbf{85\%}~\cite{dowling2004toolbox}, necesario para la validación del modelado de distribuciones para
-la simulación. En las figuras~\ref{fig:comparison_toA},~\ref{fig:comparison_toB} 
+la simulación. En las figuras~\ref{fig:comparison_toA} y~\ref{fig:comparison_toB} 
 se observa la distinta comparativa de porcentaje de hipótesis no rechazadas para cada uno de los sentidos según su 
 tratamiento agregado (\textit{All}) o desagregado, ambas fragmentadas por franja horaria. 
 
@@ -403,7 +403,7 @@ superan el \textbf{1\%} relativo al valor muestral sobre el que se estudia, por 
 significativos para considerarse una parte intrínseca de la muestra, sino valores anómalos que por la casuística aleatoria del 
 problema pueden aparecer.
 
-Relativo a la fragmentación por parada, en sentido~\textit{Cibeles} como se observa en las figuras~\ref{fig:normality_toA_all},
+Relativo a la fragmentación por parada, en sentido~\textit{Cibeles} como se observa en las figuras~\ref{fig:normality_toA_all} y
 ~\ref{fig:normality_toA_deagregated}, la parada más interesante de analizar resulta la \textit{5727}, correspondiente con 
 \textit{Cibeles}, \textbf{final de trayecto}. Este hecho resulta relevante debido a dos cuestiones.
 La primera recae sobre la naturaleza del comportamiento de los autobuses, ya que esta parada, al igual que la
@@ -416,14 +416,14 @@ La segunda es relativa al cálculo del valor de $occupation$, computado mediante
  genera que la carga de pasajeros que inicia el siguiente viaje se compute como carga de la última parada del viaje
  ya finalizado y viceversa. Debido a esto, el posible análisis relativo a los valores de ocupación de estas paradas se descarta,
  tanto en sentido \textit{Cibeles} mostrado en las figuras referenciadas, como su análisis paralelo del sentido \textit{La Peseta},
- mostrado en las figuras~\ref{fig:normality_toB_all},~\ref{fig:normality_toB_deagregated}.
+ mostrado en las figuras~\ref{fig:normality_toB_all} y~\ref{fig:normality_toB_deagregated}.
 
 
 Al combinar este análisis, tanto en segmentar según franja horaria como según parada, se genera un~\enquote{heatmap} donde
 se muestran los valores del porcentaje de hipótesis de normalidad para cada parada en cada franja horaria. Nótese que en el caso
 del agregado~\textit{All}, resulta en un caso binario: o la combinación parada-franja no rechaza la hipótesis, o sí lo hace,
 por lo que la paleta de colores del~\enquote{heatmap} en este caso no muestra más de dos colores. Las figuras
-~\ref{fig:heatmap_toA_all},~\ref{fig:heatmap_toA_deagregated},~\ref{fig:heatmap_toB_all},~\ref{fig:heatmap_toB_deagregated}
+~\ref{fig:heatmap_toA_all},~\ref{fig:heatmap_toA_deagregated},~\ref{fig:heatmap_toB_all} y~\ref{fig:heatmap_toB_deagregated}
 muestran estos mapas de calor para ambos sentidos de la ruta.
 
 \begin{figure}[H]
@@ -499,7 +499,7 @@ variables \textit{boards} y \textit{dropoffs}, resulta necesario distinguir los 
 realizan su paso por la parada, ya que de no hacerlo se puede incurrir en datos no representativos de la realidad simulada. En 
 contraste, el filtrado por \textit{TimeSlot} del momento de salida de cabecera no resulta crucial, al caracterizarse este
 por ser una observación pasiva de la ocupación de los autobuses para análisis, no incurre en posibles anomalías al momento
-de simular. Se escoge un filtrado distinto por tanto que beneficie el porcentaje de hipótesis no rechazadas.
+de simular. Se escoge por tanto un filtrado distinto que beneficie el porcentaje de hipótesis no rechazadas.
 
 En relación con las características propias de los parámetros a estudiar, se observa que, a diferencia de los datos estudiados 
 previamente, estos no se asocian en su totalidad con distribuciones \textit{normales}, mostrando en algunos casos
@@ -586,8 +586,7 @@ de autobuses que se implementa en la simulación, una plantilla especificando c�
 necesarias en cada caso.
 
 Relativo a los datos intra-parada, se escoge un enfoque basado en ficheros \textit{CSV}, almacenamiento matricial basado 
-en filas y columnas. En la tabla
-~\ref{tab:ejemplo_csv_intraparada} se muestra un ejemplo a modo ilustrativo del fichero original utilizado en el simulador.
+en filas y columnas. En la tabla \ref{tab:ejemplo_csv_intraparada} se muestra un ejemplo a modo ilustrativo del fichero original utilizado en el simulador.
 Se genera un fichero CSV por cada sentido existente de la línea a simular.
 
 \begin{table}[H]
@@ -638,7 +637,7 @@ en ficheros separados. En la tabla~\ref{tab:ejemplo_csv_interparada} se expone c
 \end{tabular}}
 \end{table}
 
-Donde $\text{mean}$ y $\text{std}$ referencian los valores $\mu$ y $\sigma$ de cada distribución. Esta tabla, no obstante, se ha expuesto
+Donde \textit{mean} y \textit{std} referencian los valores $\mu$ y $\sigma$ de cada distribución. Esta tabla, no obstante, se ha expuesto
 de forma incompleta, ya que se generan campos $\text{Mean}_N$ y $\text{Std}_N$ por cada valor $N$ referente a los distintos \textit{Timeslots}
 encontrados en los datos de operación. Concretamente entre las franjas cinco y veintitrés, generando un fichero con 
 $\text{Stops} - 1$ filas, una por cada bitupla $\text{stop}_i - \text{stop}_{i+1}$, y 39 columnas.
@@ -651,7 +650,6 @@ respectivos viajes. En este caso, a diferencia de sus predecesores, se escoge un
 permite mediante pares Clave:Valor, embeber la información expuesta. En el fragmento 
 de código~\ref{code:json_buses} se muestra un ejemplo ilustrativo de cómo se estructura este fichero.
 
-
 \begin{lstlisting}[language={}, caption={Fragmento del fichero JSON de dotación 
 de autobuses (dos vehículos mostrados).}, 
 label={code:json_buses}]
@@ -661,15 +659,13 @@ label={code:json_buses}]
     ["2646", "7:37"],
     ["5727", "9:10"],
     ["2646", "10:12"],
-    ...
-  ],
+    ...],
   "3560": [
     ["2646", "6:00"],
     ["5727", "7:36"],
     ["2646", "8:36"],
     ["5727", "9:50"],
-    ...
-  ],
+    ...],
   ...
 }
 \end{lstlisting}

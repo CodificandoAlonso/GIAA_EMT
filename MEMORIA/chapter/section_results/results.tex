@@ -38,7 +38,7 @@ métrica.
 No obstante, cabe presentar el criterio de aplicación de esta escala. Para cada métrica, se realiza \textbf{una clasificación de colores
 por franja horaria}. Dicho resultado se obtiene de dividir las distintas activaciones de los indicadores entre el total de estos.
 De esta forma, se asocia este valor entre cero y uno con la categoría más cercana. Los resultados posibles son:
-\textit{Normal, Leve, Moderado, Alto, Crítico}, donde \textit{Normal} se corresponde con valor cero, equivalente a no presentar
+\textit{Normal, Leve, Moderado, Alto y Crítico}; donde \textit{Normal} se corresponde con valor cero, equivalente a no presentar
 activo ningún indicador de alerta, y \textit{Crítico} con valor uno, presentando activos todos los indicadores de alerta posibles.
 En aquellos casos donde existan menos indicadores que posibles niveles de alerta, se reduce el número de posibilidades, siendo el mínimo
 una activación binaria (o \textit{Normal} o \textit{Crítico}).
@@ -500,12 +500,13 @@ solución (véase figura~\ref{fig:general_metrics_results}) con la primera (figu
 \caption{Resultados de métricas a nivel general de la solución uno.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics_results_one}
 \end{figure}
+
 se observan unos resultados similares. Tanto el porcentaje medio como por sentido se presentan prácticamente iguales, salvo
 una variación de 0,3\% en sentido \textit{La Peseta}, que deriva en un porcentaje medio que difiere 0,2 de la referencia de la segunda solución.
 
 Con respecto al valor de la regularidad, se presenta equivalente (95,33 frente a 96,2), sugiriendo que ambos modelos capturan de la misma forma
 el tiempo de recorrido de las rutas, hecho lógico ya que como se presenta en el capítulo anterior, no existen diferencias en el tránsito de los 
-autobuses. Por último, se obtiene un valor de tiempo medio de espera por pasajero de 08:23. Este valor supone un minuto y cuarenta segundos menos
+autobuses. Por último, se obtiene un valor de tiempo medio de espera por pasajero de 09:14. Este valor supone diez segundos menos
 de media de espera, tiempo que no se considera alarmantemente distinto, ya que la propia aleatoriedad del problema puede generar diferencias
 de esta escala.
 
