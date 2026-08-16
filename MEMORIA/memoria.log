@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.5.9)  12 AUG 2026 18:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.7.5)  16 AUG 2026 19:53
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex
-(/home/hectoralv22/Desktop/CATEDRA/REPO/GIAA_EMT/MEMORIA/memoria.tex
+**/home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex
+(/home/hectoralv22/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -757,7 +757,7 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 Package: babel 2024/01/07 v24.1 The Babel package
 \babel@savecnt=\count349
 \U@D=\dimen293
-\l@unhyphenated=\language89
+\l@unhyphenated=\language12
  (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read4
 \bbl@dirlevel=\count350
@@ -905,19 +905,7 @@ Already applied: [0000/00/00] Usage of raw or classic option list on input line 
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
-Package shellesc Info: Unrestricted shell escape enabled on input line 75.
-) (/usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
- (/usr/share/texlive/texmf-dist/tex/generic/catchfile/catchfile.sty
-Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
- (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
-Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
-))
-runsystem(uname -s > "memoria.w18")...executed.
-
- (./memoria.w18)
-runsystem(rm -- "memoria.w18")...executed.
-
+Package shellesc Info: Restricted shell escape enabled on input line 77.
 )
 \c@svg@param@lastpage=\count372
 \svg@box=\box77
@@ -1088,7 +1076,7 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \bibhang=\skip99
 \blx@bcfin=\read5
 \blx@bcfout=\write5
-\blx@langwohyphens=\language90
+\blx@langwohyphens=\language13
 \c@mincomprange=\count435
 \c@maxcomprange=\count436
 \c@mincompwidth=\count437
@@ -1542,34 +1530,30 @@ LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10.95> not available
  [8] [9]
 LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10> not available
 (Font)              Font shape `T1/txr/bx/n' tried instead on input line 164.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[10] [11] [12]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [13] [14] [15] [16] [17]
-<imagenes/montecarlo_convergence_occupation.png, id=1117, 867.24pt x 361.35pt>
+ [10] [11] [12]) (./chapter/section_state_of_art/simuladores_de_transporte.tex [13] [14] [15] [16] [17]
+<imagenes/montecarlo_convergence_occupation.png, id=1116, 867.24pt x 361.35pt>
 File: imagenes/montecarlo_convergence_occupation.png Graphic file (type png)
 <use imagenes/montecarlo_convergence_occupation.png>
-Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 218.
+Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 216.
 (pdftex.def)             Requested size: 390.2544pt x 162.60599pt.
 File: imagenes/montecarlo_convergence_occupation.png Graphic file (type png)
 <use imagenes/montecarlo_convergence_occupation.png>
-Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 218.
+Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 216.
 (pdftex.def)             Requested size: 390.2544pt x 162.60599pt.
 File: imagenes/montecarlo_convergence_occupation.png Graphic file (type png)
 <use imagenes/montecarlo_convergence_occupation.png>
-Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 218.
+Package pdftex.def Info: imagenes/montecarlo_convergence_occupation.png  used on input line 216.
 (pdftex.def)             Requested size: 390.2544pt x 162.60599pt.
 
-Overfull \hbox (12.0pt too wide) detected at line 218
+Overfull \hbox (12.0pt too wide) detected at line 216
  [] 
  []
 
 [18 <./imagenes/montecarlo_convergence_occupation.png>]
-Package pgfplots info on input line 269: Overriding colorspace to rgb due to xcolor configuration.
+Package pgfplots info on input line 267: Overriding colorspace to rgb due to xcolor configuration.
  [19] [20]
-Package pgfplots info on input line 375: Overriding colorspace to rgb due to xcolor configuration.
-Package pgfplots info on input line 406: Overriding colorspace to rgb due to xcolor configuration.
+Package pgfplots info on input line 373: Overriding colorspace to rgb due to xcolor configuration.
+Package pgfplots info on input line 404: Overriding colorspace to rgb due to xcolor configuration.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1579,7 +1563,7 @@ Cap\'{\i }tulo 3.
 (./chapter/section_metodology/metodology.tex [25
 
 ] [26] [27]
-<imagenes/gantt_chart.png, id=1236, 1001.6622pt x 351.9549pt>
+<imagenes/gantt_chart.png, id=1235, 1001.6622pt x 351.9549pt>
 File: imagenes/gantt_chart.png Graphic file (type png)
 <use imagenes/gantt_chart.png>
 Package pdftex.def Info: imagenes/gantt_chart.png  used on input line 103.
@@ -1595,108 +1579,111 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [28
 
 
- <./imagenes/gantt_chart.png>] [29
+ <./imagenes/gantt_chart.png>]
+LaTeX Font Info:    Font shape `T1/txr/b/n' in size <8> not available
+(Font)              Font shape `T1/txr/bx/n' tried instead on input line 139.
+ [29
 
-]
-<imagenes/regularidad.png, id=1267, 435.87843pt x 445.665pt>
+] [30]
+<imagenes/regularidad.png, id=1274, 435.87843pt x 445.665pt>
 File: imagenes/regularidad.png Graphic file (type png)
 <use imagenes/regularidad.png>
-Package pdftex.def Info: imagenes/regularidad.png  used on input line 176.
+Package pdftex.def Info: imagenes/regularidad.png  used on input line 183.
 (pdftex.def)             Requested size: 426.79135pt x 436.37471pt.
- [30] [31 <./imagenes/regularidad.png>]) [32]
+ [31 <./imagenes/regularidad.png>]) [32]
 Cap\'{\i }tulo 4.
 (./chapter/section_analysis/param_analysis.tex
-<imagenes/qgis_capture_e01_converted.png, id=1291, 1861.95625pt x 1051.93pt>
+<imagenes/qgis_capture_e01_converted.png, id=1293, 1861.95625pt x 1051.93pt>
 File: imagenes/qgis_capture_e01_converted.png Graphic file (type png)
 <use imagenes/qgis_capture_e01_converted.png>
-Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 47.
+Package pdftex.def Info: imagenes/qgis_capture_e01_converted.png  used on input line 46.
 (pdftex.def)             Requested size: 426.79135pt x 241.1202pt.
  [33
 
 ]
-<imagenes/gama_shapefiles.png, id=1298, 1862.96pt x 1054.94125pt>
+<imagenes/gama_shapefiles.png, id=1300, 1862.96pt x 1054.94125pt>
 File: imagenes/gama_shapefiles.png Graphic file (type png)
 <use imagenes/gama_shapefiles.png>
-Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 55.
+Package pdftex.def Info: imagenes/gama_shapefiles.png  used on input line 54.
 (pdftex.def)             Requested size: 426.79135pt x 241.68166pt.
  [34 <./imagenes/qgis_capture_e01_converted.png> <./imagenes/gama_shapefiles.png>]
-<imagenes/image_tables_diagram.png, id=1309, 331.2375pt x 785.93625pt>
+<imagenes/image_tables_diagram.png, id=1311, 331.2375pt x 785.93625pt>
 File: imagenes/image_tables_diagram.png Graphic file (type png)
 <use imagenes/image_tables_diagram.png>
-Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 90.
+Package pdftex.def Info: imagenes/image_tables_diagram.png  used on input line 89.
 (pdftex.def)             Requested size: 213.39568pt x 506.33138pt.
  [35]
-Overfull \hbox (38.77354pt too wide) detected at line 171
+Overfull \hbox (38.77354pt too wide) detected at line 170
  [] 
  []
 
 [36 <./imagenes/image_tables_diagram.png (PNG copy)>]
-Overfull \hbox (38.77354pt too wide) detected at line 253
+Overfull \hbox (38.77354pt too wide) detected at line 252
  [] 
  []
 
 [37] [38] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 263.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 262.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 264.
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 263.
  [39] [40]
 LaTeX Font Info:    Font shape `T1/txr/b/it' in size <12> not available
-(Font)              Font shape `T1/txr/bx/it' tried instead on input line 351.
-<imagenes/to_A/comparison_ALL_vs_individual.png, id=1356, 1156.32pt x 433.62pt>
+(Font)              Font shape `T1/txr/bx/it' tried instead on input line 350.
+<imagenes/to_A/comparison_ALL_vs_individual.png, id=1360, 1156.32pt x 433.62pt>
 File: imagenes/to_A/comparison_ALL_vs_individual.png Graphic file (type png)
 <use imagenes/to_A/comparison_ALL_vs_individual.png>
-Package pdftex.def Info: imagenes/to_A/comparison_ALL_vs_individual.png  used on input line 382.
+Package pdftex.def Info: imagenes/to_A/comparison_ALL_vs_individual.png  used on input line 381.
 (pdftex.def)             Requested size: 426.79135pt x 160.04651pt.
  [41]
-<imagenes/to_B/comparison_ALL_vs_individual.png, id=1362, 1156.32pt x 433.62pt>
+<imagenes/to_B/comparison_ALL_vs_individual.png, id=1366, 1156.32pt x 433.62pt>
 File: imagenes/to_B/comparison_ALL_vs_individual.png Graphic file (type png)
 <use imagenes/to_B/comparison_ALL_vs_individual.png>
-Package pdftex.def Info: imagenes/to_B/comparison_ALL_vs_individual.png  used on input line 390.
+Package pdftex.def Info: imagenes/to_B/comparison_ALL_vs_individual.png  used on input line 389.
 (pdftex.def)             Requested size: 426.79135pt x 160.04651pt.
  [42 <./imagenes/to_A/comparison_ALL_vs_individual.png> <./imagenes/to_B/comparison_ALL_vs_individual.png>]
-<imagenes/to_A/heatmap_normality_ALL.png, id=1378, 1156.32pt x 578.16pt>
+<imagenes/to_A/heatmap_normality_ALL.png, id=1382, 1156.32pt x 578.16pt>
 File: imagenes/to_A/heatmap_normality_ALL.png Graphic file (type png)
 <use imagenes/to_A/heatmap_normality_ALL.png>
-Package pdftex.def Info: imagenes/to_A/heatmap_normality_ALL.png  used on input line 431.
+Package pdftex.def Info: imagenes/to_A/heatmap_normality_ALL.png  used on input line 430.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-<imagenes/to_A/heatmap_normality_individual.png, id=1379, 1156.32pt x 578.16pt>
+<imagenes/to_A/heatmap_normality_individual.png, id=1383, 1156.32pt x 578.16pt>
 File: imagenes/to_A/heatmap_normality_individual.png Graphic file (type png)
 <use imagenes/to_A/heatmap_normality_individual.png>
-Package pdftex.def Info: imagenes/to_A/heatmap_normality_individual.png  used on input line 438.
+Package pdftex.def Info: imagenes/to_A/heatmap_normality_individual.png  used on input line 437.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
  [43 <./imagenes/to_A/heatmap_normality_ALL.png>]
-<imagenes/to_B/heatmap_normality_ALL.png, id=1385, 1156.32pt x 578.16pt>
+<imagenes/to_B/heatmap_normality_ALL.png, id=1389, 1156.32pt x 578.16pt>
 File: imagenes/to_B/heatmap_normality_ALL.png Graphic file (type png)
 <use imagenes/to_B/heatmap_normality_ALL.png>
-Package pdftex.def Info: imagenes/to_B/heatmap_normality_ALL.png  used on input line 445.
+Package pdftex.def Info: imagenes/to_B/heatmap_normality_ALL.png  used on input line 444.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
-<imagenes/to_B/heatmap_normality_individual.png, id=1386, 1156.32pt x 578.16pt>
+<imagenes/to_B/heatmap_normality_individual.png, id=1390, 1156.32pt x 578.16pt>
 File: imagenes/to_B/heatmap_normality_individual.png Graphic file (type png)
 <use imagenes/to_B/heatmap_normality_individual.png>
-Package pdftex.def Info: imagenes/to_B/heatmap_normality_individual.png  used on input line 452.
+Package pdftex.def Info: imagenes/to_B/heatmap_normality_individual.png  used on input line 451.
 (pdftex.def)             Requested size: 426.79135pt x 213.39536pt.
  [44 <./imagenes/to_A/heatmap_normality_individual.png> <./imagenes/to_B/heatmap_normality_ALL.png>] [45 <./imagenes/to_B/heatmap_normality_individual.png>] [46]
-Overfull \hbox (35.28078pt too wide) in paragraph at lines 539--539
+Overfull \hbox (35.28078pt too wide) in paragraph at lines 538--538
 [] [] 
  []
 
 
-Overfull \hbox (35.28078pt too wide) in paragraph at lines 539--539
+Overfull \hbox (35.28078pt too wide) in paragraph at lines 538--538
 [] [] 
  []
 
-<imagenes/to_A/fig1_global_pie_toA.png, id=1408, 826.287pt x 357.4956pt>
+<imagenes/to_A/fig1_global_pie_toA.png, id=1412, 826.287pt x 357.4956pt>
 File: imagenes/to_A/fig1_global_pie_toA.png Graphic file (type png)
 <use imagenes/to_A/fig1_global_pie_toA.png>
-Package pdftex.def Info: imagenes/to_A/fig1_global_pie_toA.png  used on input line 554.
+Package pdftex.def Info: imagenes/to_A/fig1_global_pie_toA.png  used on input line 553.
 (pdftex.def)             Requested size: 426.79135pt x 184.6496pt.
 [47]
-<imagenes/to_B/fig1_global_pie_toB.png, id=1413, 817.6146pt x 357.4956pt>
+<imagenes/to_B/fig1_global_pie_toB.png, id=1417, 817.6146pt x 357.4956pt>
 File: imagenes/to_B/fig1_global_pie_toB.png Graphic file (type png)
 <use imagenes/to_B/fig1_global_pie_toB.png>
-Package pdftex.def Info: imagenes/to_B/fig1_global_pie_toB.png  used on input line 561.
+Package pdftex.def Info: imagenes/to_B/fig1_global_pie_toB.png  used on input line 560.
 (pdftex.def)             Requested size: 426.79135pt x 186.61337pt.
  [48 <./imagenes/to_A/fig1_global_pie_toA.png> <./imagenes/to_B/fig1_global_pie_toB.png>] [49]) [50] [51]
 Cap\'{\i }tulo 5.
@@ -1842,13 +1829,13 @@ Overfull \hbox (2.00647pt too wide) in paragraph at lines 339--339
 
 
 Overfull \hbox (0.33667pt too wide) in paragraph at lines 345--352
-\T1/txr/m/n/12 to-co-los de co-mu-ni-ca-ción ba-sa-dos en los es-tán-da-res FIPA-Request [[][]24[][]] y FIPA-Query [[][]23[][]].
+\T1/txr/m/n/12 to-co-los de co-mu-ni-ca-ción ba-sa-dos en los es-tán-da-res FIPA-Request [[][]25[][]] y FIPA-Query [[][]24[][]].
  []
 
 [62]
 Package svg Info: Last page of `./svg-inkscape/consulta_de_descenso_svg-tex.pdf' is 1 on input line 382.
  (./svg-inkscape/consulta_de_descenso_svg-tex.pdf_tex
-<./svg-inkscape/consulta_de_descenso_svg-tex.pdf, id=1531, page=1, 362.10281pt x 535.2497pt>
+<./svg-inkscape/consulta_de_descenso_svg-tex.pdf, id=1535, page=1, 362.10281pt x 535.2497pt>
 File: ./svg-inkscape/consulta_de_descenso_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/consulta_de_descenso_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/consulta_de_descenso_svg-tex.pdf , page1 used on input line 56.
@@ -1866,7 +1853,7 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 410--410
 [64 <./svg-inkscape/consulta_de_descenso_svg-tex.pdf>]
 Package svg Info: Last page of `./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf' is 1 on input line 431.
  (./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf_tex
-<./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, id=1581, page=1, 362.10281pt x 535.2497pt>
+<./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, id=1585, page=1, 362.10281pt x 535.2497pt>
 File: ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf , page1 used on input line 56.
@@ -1884,7 +1871,7 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 457--457
 [66 <./svg-inkscape/diagrama_solicitud_de_descenso.drawio_svg-tex.pdf>]
 Package svg Info: Last page of `./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf' is 1 on input line 475.
  (./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf_tex
-<./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, id=1632, page=1, 362.10281pt x 550.30594pt>
+<./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, id=1636, page=1, 362.10281pt x 550.30594pt>
 File: ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf , page1 used on input line 56.
@@ -1902,7 +1889,7 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 502--502
 [68 <./svg-inkscape/notificacion_de_llegada.drawio_svg-tex.pdf>]
 Package svg Info: Last page of `./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf' is 1 on input line 523.
  (./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf_tex
-<./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, id=1678, page=1, 362.10281pt x 542.77782pt>
+<./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, id=1682, page=1, 362.10281pt x 542.77782pt>
 File: ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf , page1 used on input line 56.
@@ -1920,7 +1907,7 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 552--552
 [70 <./svg-inkscape/aviso_de_embarque.drawio_svg-tex.pdf>]
 Package svg Info: Last page of `./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf' is 1 on input line 571.
  (./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf_tex
-<./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, id=1725, page=1, 362.10281pt x 475.02469pt>
+<./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, id=1729, page=1, 362.10281pt x 475.02469pt>
 File: ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf , page1 used on input line 56.
@@ -1938,7 +1925,7 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 599--599
 [72 <./svg-inkscape/solicitud_de_embarque.drawio_svg-tex.pdf>] [73]
 Package svg Info: Last page of `./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf' is 1 on input line 624.
  (./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf_tex
-<./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, id=1784, page=1, 362.10281pt x 490.08093pt>
+<./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, id=1788, page=1, 362.10281pt x 490.08093pt>
 File: ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf , page1 used on input line 56.
@@ -1954,13 +1941,13 @@ Overfull \hbox (1.59996pt too wide) in paragraph at lines 651--651
  []
 
 [74 <./svg-inkscape/actualizacion_recuento.drawio_svg-tex.pdf>] [75] [76] [77]
-<imagenes/ilustrativa_linealidad.png, id=1847, 425.30894pt x 279.6849pt>
+<imagenes/ilustrativa_linealidad.png, id=1851, 425.30894pt x 279.6849pt>
 File: imagenes/ilustrativa_linealidad.png Graphic file (type png)
 <use imagenes/ilustrativa_linealidad.png>
 Package pdftex.def Info: imagenes/ilustrativa_linealidad.png  used on input line 768.
 (pdftex.def)             Requested size: 320.0935pt x 210.50572pt.
  [78 <./imagenes/ilustrativa_linealidad.png>]
-<imagenes/comparativa_tendencia.png, id=1860, 453.1329pt x 293.4162pt>
+<imagenes/comparativa_tendencia.png, id=1864, 453.1329pt x 293.4162pt>
 File: imagenes/comparativa_tendencia.png Graphic file (type png)
 <use imagenes/comparativa_tendencia.png>
 Package pdftex.def Info: imagenes/comparativa_tendencia.png  used on input line 821.
@@ -2058,7 +2045,7 @@ Overfull \hbox (2.00647pt too wide) in paragraph at lines 1276--1276
 [89] [90]
 Package svg Info: Last page of `./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf' is 1 on input line 1297.
  (./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf_tex
-<./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf, id=1943, page=1, 362.10281pt x 527.72156pt>
+<./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf, id=1947, page=1, 362.10281pt x 527.72156pt>
 File: ./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/consulta_llegada.drawio_svg-tex.pdf , page1 used on input line 56.
@@ -2088,157 +2075,157 @@ Cap\'{\i }tulo 6.
 (./chapter/section_results/results.tex [95
 
 ]
-<imagenes/simulations/general_results_simulations.png, id=2005, 1217.54875pt x 366.36874pt>
+<imagenes/simulations/general_results_simulations.png, id=2009, 1217.54875pt x 366.36874pt>
 File: imagenes/simulations/general_results_simulations.png Graphic file (type png)
 <use imagenes/simulations/general_results_simulations.png>
 Package pdftex.def Info: imagenes/simulations/general_results_simulations.png  used on input line 63.
 (pdftex.def)             Requested size: 320.0935pt x 96.31578pt.
  [96]
-<imagenes/simulations/route_general_simulations.png, id=2012, 1209.51875pt x 536.0025pt>
+<imagenes/simulations/route_general_simulations.png, id=2016, 1209.51875pt x 536.0025pt>
 File: imagenes/simulations/route_general_simulations.png Graphic file (type png)
 <use imagenes/simulations/route_general_simulations.png>
 Package pdftex.def Info: imagenes/simulations/route_general_simulations.png  used on input line 88.
 (pdftex.def)             Requested size: 320.0935pt x 141.85187pt.
  [97 <./imagenes/simulations/general_results_simulations.png>]
-<imagenes/simulations/occupation_per_timeslot.png, id=2020, 867.24pt x 361.35pt>
+<imagenes/simulations/occupation_per_timeslot.png, id=2024, 867.24pt x 361.35pt>
 File: imagenes/simulations/occupation_per_timeslot.png Graphic file (type png)
 <use imagenes/simulations/occupation_per_timeslot.png>
 Package pdftex.def Info: imagenes/simulations/occupation_per_timeslot.png  used on input line 102.
 (pdftex.def)             Requested size: 320.0935pt x 133.37209pt.
-<imagenes/simulations/kpi_stop_general.png, id=2021, 1222.5675pt x 304.13625pt>
+<imagenes/simulations/kpi_stop_general.png, id=2025, 1222.5675pt x 304.13625pt>
 File: imagenes/simulations/kpi_stop_general.png Graphic file (type png)
 <use imagenes/simulations/kpi_stop_general.png>
 Package pdftex.def Info: imagenes/simulations/kpi_stop_general.png  used on input line 110.
 (pdftex.def)             Requested size: 320.0935pt x 79.6258pt.
  [98 <./imagenes/simulations/route_general_simulations.png> <./imagenes/simulations/occupation_per_timeslot.png> <./imagenes/simulations/kpi_stop_general.png>]
-<imagenes/simulations/occupation_comparaison.png, id=2034, 867.24pt x 361.35pt>
+<imagenes/simulations/occupation_comparaison.png, id=2038, 867.24pt x 361.35pt>
 File: imagenes/simulations/occupation_comparaison.png Graphic file (type png)
 <use imagenes/simulations/occupation_comparaison.png>
 Package pdftex.def Info: imagenes/simulations/occupation_comparaison.png  used on input line 124.
 (pdftex.def)             Requested size: 320.0935pt x 133.37209pt.
  [99 <./imagenes/simulations/occupation_comparaison.png>]
-<imagenes/simulations/bus_schedule.png, id=2044, 832.10875pt x 651.43375pt>
+<imagenes/simulations/bus_schedule.png, id=2048, 832.10875pt x 651.43375pt>
 File: imagenes/simulations/bus_schedule.png Graphic file (type png)
 <use imagenes/simulations/bus_schedule.png>
 Package pdftex.def Info: imagenes/simulations/bus_schedule.png  used on input line 176.
 (pdftex.def)             Requested size: 320.0935pt x 250.58905pt.
  [100]
-<imagenes/simulations/kpi_bus_fisic.png, id=2053, 388.45125pt x 413.545pt>
+<imagenes/simulations/kpi_bus_fisic.png, id=2057, 388.45125pt x 413.545pt>
 File: imagenes/simulations/kpi_bus_fisic.png Graphic file (type png)
 <use imagenes/simulations/kpi_bus_fisic.png>
 Package pdftex.def Info: imagenes/simulations/kpi_bus_fisic.png  used on input line 192.
 (pdftex.def)             Requested size: 213.39568pt x 227.18541pt.
  [101 <./imagenes/simulations/bus_schedule.png>]
-<imagenes/simulations/evolution_route.png, id=2059, 867.24pt x 361.35pt>
+<imagenes/simulations/evolution_route.png, id=2063, 867.24pt x 361.35pt>
 File: imagenes/simulations/evolution_route.png Graphic file (type png)
 <use imagenes/simulations/evolution_route.png>
 Package pdftex.def Info: imagenes/simulations/evolution_route.png  used on input line 199.
 (pdftex.def)             Requested size: 320.0935pt x 133.37209pt.
  [102 <./imagenes/simulations/kpi_bus_fisic.png> <./imagenes/simulations/evolution_route.png>] [103] [104]
-<imagenes/simulations/general_results_SIMULATION.png, id=2084, 1219.55624pt x 368.37625pt>
+<imagenes/simulations/general_results_SIMULATION.png, id=2088, 1219.55624pt x 368.37625pt>
 File: imagenes/simulations/general_results_SIMULATION.png Graphic file (type png)
 <use imagenes/simulations/general_results_SIMULATION.png>
-Package pdftex.def Info: imagenes/simulations/general_results_SIMULATION.png  used on input line 296.
+Package pdftex.def Info: imagenes/simulations/general_results_SIMULATION.png  used on input line 301.
 (pdftex.def)             Requested size: 320.0935pt x 96.68616pt.
  [105 <./imagenes/simulations/general_results_SIMULATION.png>]
-<imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png, id=2096, 505.89pt x 505.89pt>
+<imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png, id=2100, 505.89pt x 505.89pt>
 File: imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png Graphic file (type png)
 <use imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png>
 Package pdftex.def Info: imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png  used on input line 333.
 (pdftex.def)             Requested size: 320.0935pt x 320.10184pt.
- [106 <./imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png>]
 <imagenes/simulations/bhatt_banda.png, id=2102, 542.025pt x 542.025pt>
 File: imagenes/simulations/bhatt_banda.png Graphic file (type png)
 <use imagenes/simulations/bhatt_banda.png>
 Package pdftex.def Info: imagenes/simulations/bhatt_banda.png  used on input line 350.
 (pdftex.def)             Requested size: 320.0935pt x 320.10625pt.
-<imagenes/simulations/dispersion_posicion_to_A.png, id=2106, 578.16pt x 397.485pt>
+ [106 <./imagenes/simulations/bhatt_sim_vs_esperado_ocupacion.png>]
+<imagenes/simulations/dispersion_posicion_to_A.png, id=2111, 578.16pt x 397.485pt>
 File: imagenes/simulations/dispersion_posicion_to_A.png Graphic file (type png)
 <use imagenes/simulations/dispersion_posicion_to_A.png>
 Package pdftex.def Info: imagenes/simulations/dispersion_posicion_to_A.png  used on input line 368.
 (pdftex.def)             Requested size: 320.0935pt x 220.06091pt.
  [107 <./imagenes/simulations/bhatt_banda.png>]
-<imagenes/simulations/dispersion_posicion_to_B.png, id=2112, 578.16pt x 397.485pt>
+<imagenes/simulations/dispersion_posicion_to_B.png, id=2117, 578.16pt x 397.485pt>
 File: imagenes/simulations/dispersion_posicion_to_B.png Graphic file (type png)
 <use imagenes/simulations/dispersion_posicion_to_B.png>
 Package pdftex.def Info: imagenes/simulations/dispersion_posicion_to_B.png  used on input line 375.
 (pdftex.def)             Requested size: 320.0935pt x 220.06091pt.
  [108 <./imagenes/simulations/dispersion_posicion_to_A.png> <./imagenes/simulations/dispersion_posicion_to_B.png>]
-<imagenes/simulations/ruta_cibeles_ocupacion.png, id=2124, 1221.56375pt x 637.38126pt>
+<imagenes/simulations/ruta_cibeles_ocupacion.png, id=2129, 1221.56375pt x 637.38126pt>
 File: imagenes/simulations/ruta_cibeles_ocupacion.png Graphic file (type png)
 <use imagenes/simulations/ruta_cibeles_ocupacion.png>
 Package pdftex.def Info: imagenes/simulations/ruta_cibeles_ocupacion.png  used on input line 432.
 (pdftex.def)             Requested size: 320.0935pt x 167.01845pt.
  [109]
-<imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png, id=2133, 505.89pt x 505.89pt>
+<imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png, id=2138, 505.89pt x 505.89pt>
 File: imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png Graphic file (type png)
 <use imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png>
 Package pdftex.def Info: imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png  used on input line 445.
 (pdftex.def)             Requested size: 320.0935pt x 320.10184pt.
  [110 <./imagenes/simulations/ruta_cibeles_ocupacion.png> <./imagenes/simulations/bhatt_sim_vs_esperado_tiempo.png>]
-<imagenes/simulations/autobus_simulacion.png, id=2141, 1210.5225pt x 854.19125pt>
+<imagenes/simulations/autobus_simulacion.png, id=2146, 1210.5225pt x 854.19125pt>
 File: imagenes/simulations/autobus_simulacion.png Graphic file (type png)
 <use imagenes/simulations/autobus_simulacion.png>
 Package pdftex.def Info: imagenes/simulations/autobus_simulacion.png  used on input line 459.
 (pdftex.def)             Requested size: 320.0935pt x 225.86432pt.
-<imagenes/simulations/autobus_franja_simulacion.png, id=2143, 1220.56pt x 859.21pt>
+<imagenes/simulations/autobus_franja_simulacion.png, id=2148, 1220.56pt x 859.21pt>
 File: imagenes/simulations/autobus_franja_simulacion.png Graphic file (type png)
 <use imagenes/simulations/autobus_franja_simulacion.png>
 Package pdftex.def Info: imagenes/simulations/autobus_franja_simulacion.png  used on input line 477.
 (pdftex.def)             Requested size: 320.0935pt x 225.32968pt.
  [111 <./imagenes/simulations/autobus_simulacion.png>]
-<imagenes/simulations/general_metrics_results_one.png, id=2151, 1221.56375pt x 368.37625pt>
+<imagenes/simulations/general_metrics_results_one.png, id=2156, 1221.56375pt x 368.37625pt>
 File: imagenes/simulations/general_metrics_results_one.png Graphic file (type png)
 <use imagenes/simulations/general_metrics_results_one.png>
-Package pdftex.def Info: imagenes/simulations/general_metrics_results_one.png  used on input line 499.
+Package pdftex.def Info: imagenes/simulations/general_metrics_results_one.png  used on input line 500.
 (pdftex.def)             Requested size: 320.0935pt x 96.52876pt.
  [112 <./imagenes/simulations/autobus_franja_simulacion.png>]
-<imagenes/simulations/nivel_ruta_uno.png, id=2158, 1218.5525pt x 635.37375pt>
+<imagenes/simulations/nivel_ruta_uno.png, id=2163, 1218.5525pt x 635.37375pt>
 File: imagenes/simulations/nivel_ruta_uno.png Graphic file (type png)
 <use imagenes/simulations/nivel_ruta_uno.png>
-Package pdftex.def Info: imagenes/simulations/nivel_ruta_uno.png  used on input line 520.
+Package pdftex.def Info: imagenes/simulations/nivel_ruta_uno.png  used on input line 519.
 (pdftex.def)             Requested size: 320.0935pt x 166.8996pt.
-<imagenes/simulations/parada_apilada.png, id=2159, 1223.57124pt x 624.3325pt>
+ [113 <./imagenes/simulations/general_metrics_results_one.png> <./imagenes/simulations/nivel_ruta_uno.png>]
+<imagenes/simulations/parada_apilada.png, id=2171, 1223.57124pt x 624.3325pt>
 File: imagenes/simulations/parada_apilada.png Graphic file (type png)
 <use imagenes/simulations/parada_apilada.png>
-Package pdftex.def Info: imagenes/simulations/parada_apilada.png  used on input line 529.
+Package pdftex.def Info: imagenes/simulations/parada_apilada.png  used on input line 532.
 (pdftex.def)             Requested size: 320.0935pt x 163.3229pt.
- [113 <./imagenes/simulations/general_metrics_results_one.png> <./imagenes/simulations/nivel_ruta_uno.png>]
-<imagenes/simulations/resultados_occ_uno.png, id=2166, 542.025pt x 542.025pt>
+<imagenes/simulations/resultados_occ_uno.png, id=2173, 542.025pt x 542.025pt>
 File: imagenes/simulations/resultados_occ_uno.png Graphic file (type png)
 <use imagenes/simulations/resultados_occ_uno.png>
-Package pdftex.def Info: imagenes/simulations/resultados_occ_uno.png  used on input line 547.
+Package pdftex.def Info: imagenes/simulations/resultados_occ_uno.png  used on input line 549.
 (pdftex.def)             Requested size: 320.0935pt x 320.10625pt.
  [114 <./imagenes/simulations/parada_apilada.png (PNG copy)>]
-<imagenes/simulations/fisical_one.png, id=2172, 1215.54124pt x 243.91125pt>
+<imagenes/simulations/fisical_one.png, id=2181, 1215.54124pt x 243.91125pt>
 File: imagenes/simulations/fisical_one.png Graphic file (type png)
 <use imagenes/simulations/fisical_one.png>
-Package pdftex.def Info: imagenes/simulations/fisical_one.png  used on input line 561.
+Package pdftex.def Info: imagenes/simulations/fisical_one.png  used on input line 567.
 (pdftex.def)             Requested size: 320.0935pt x 64.23048pt.
- [115 <./imagenes/simulations/resultados_occ_uno.png> <./imagenes/simulations/fisical_one.png>]
-<imagenes/simulations/cmp_cpu.png, id=2186, 722.7pt x 433.62pt>
+ [115 <./imagenes/simulations/resultados_occ_uno.png>]
+<imagenes/simulations/cmp_cpu.png, id=2193, 722.7pt x 433.62pt>
 File: imagenes/simulations/cmp_cpu.png Graphic file (type png)
 <use imagenes/simulations/cmp_cpu.png>
-Package pdftex.def Info: imagenes/simulations/cmp_cpu.png  used on input line 598.
+Package pdftex.def Info: imagenes/simulations/cmp_cpu.png  used on input line 599.
 (pdftex.def)             Requested size: 320.0935pt x 192.05714pt.
- [116]
-<imagenes/simulations/cmp_memoria.png, id=2193, 722.7pt x 433.62pt>
+ [116 <./imagenes/simulations/fisical_one.png>]
+<imagenes/simulations/cmp_memoria.png, id=2201, 722.7pt x 433.62pt>
 File: imagenes/simulations/cmp_memoria.png Graphic file (type png)
 <use imagenes/simulations/cmp_memoria.png>
-Package pdftex.def Info: imagenes/simulations/cmp_memoria.png  used on input line 605.
+Package pdftex.def Info: imagenes/simulations/cmp_memoria.png  used on input line 606.
 (pdftex.def)             Requested size: 320.0935pt x 192.05714pt.
-<imagenes/simulations/cmp_potencia_temperatura.png, id=2194, 722.7pt x 433.62pt>
+<imagenes/simulations/cmp_potencia_temperatura.png, id=2202, 722.7pt x 433.62pt>
 File: imagenes/simulations/cmp_potencia_temperatura.png Graphic file (type png)
 <use imagenes/simulations/cmp_potencia_temperatura.png>
-Package pdftex.def Info: imagenes/simulations/cmp_potencia_temperatura.png  used on input line 612.
+Package pdftex.def Info: imagenes/simulations/cmp_potencia_temperatura.png  used on input line 613.
 (pdftex.def)             Requested size: 320.0935pt x 192.05714pt.
  [117 <./imagenes/simulations/cmp_cpu.png> <./imagenes/simulations/cmp_memoria.png>]
-Overfull \hbox (1.99344pt too wide) in paragraph at lines 651--651
+Overfull \hbox (1.99344pt too wide) in paragraph at lines 652--652
  [][] 
  []
 
 
-Overfull \hbox (1.99344pt too wide) in paragraph at lines 651--651
+Overfull \hbox (1.99344pt too wide) in paragraph at lines 652--652
  [][] 
  []
 
@@ -2248,7 +2235,9 @@ Cap\'{\i }tulo 7.
 
 ] [121] [122]) [123]
 Cap\'{\i }tulo 8.
-(./chapter/section_budget/budget.tex
+(./chapter/section_budget/budget.tex [124
+
+]
 LaTeX Font Info:    Font shape `TS1/txr/b/n' in size <12> not available
 (Font)              Font shape `TS1/txr/bx/n' tried instead on input line 61.
 
@@ -2261,40 +2250,38 @@ Overfull \hbox (1.99342pt too wide) in paragraph at lines 61--61
  [][] 
  []
 
-[124
 
-]
-Overfull \hbox (4.64792pt too wide) in paragraph at lines 109--109
+Overfull \hbox (4.64792pt too wide) in paragraph at lines 114--114
  []|\T1/txr/bx/n/12 Dedicación| 
  []
 
 
-Overfull \hbox (2.79338pt too wide) in paragraph at lines 109--109
+Overfull \hbox (2.79338pt too wide) in paragraph at lines 114--114
  [][] 
  []
 
 
-Overfull \hbox (4.64792pt too wide) in paragraph at lines 109--109
+Overfull \hbox (4.64792pt too wide) in paragraph at lines 114--114
  []|\T1/txr/bx/n/12 Dedicación| 
  []
 
 
-Overfull \hbox (2.79338pt too wide) in paragraph at lines 109--109
+Overfull \hbox (2.79338pt too wide) in paragraph at lines 114--114
  [][] 
  []
 
 [125]
-Overfull \hbox (1.19997pt too wide) in paragraph at lines 166--166
+Overfull \hbox (1.19997pt too wide) in paragraph at lines 171--171
  [][] 
  []
 
 
-Overfull \hbox (1.19997pt too wide) in paragraph at lines 166--166
+Overfull \hbox (1.19997pt too wide) in paragraph at lines 171--171
  [][] 
  []
 
 [126] [127]
-Overfull \hbox (7.97823pt too wide) in paragraph at lines 221--230
+Overfull \hbox (7.97823pt too wide) in paragraph at lines 226--235
 []\T1/txr/m/n/12 Las di-men-sio-nes que el si-mu-la-dor re-pro-du-ce, se-ña-la-da-men-te la ocu-pa-ción de los vehícu-
  []
 
@@ -2307,19 +2294,24 @@ Cap\'{\i }tulo 10.
 (./chapter/section_ending/conclusion.tex [133
 
 ] [134]) [135]
-Package csquotes Info: Disabling multilingual quotes on input line 489.
+Package csquotes Info: Disabling multilingual quotes on input line 503.
 
 
 Package csquotes Warning: Quote style 'british/english' not defined.
-(csquotes)                Ignoring command on input line 489.
+(csquotes)                Ignoring command on input line 503.
 
 
-Overfull \hbox (1.37985pt too wide) in paragraph at lines 491--491
+Overfull \hbox (1.37985pt too wide) in paragraph at lines 505--505
 \T1/txr/m/n/12 li-te-ra-tu-re re-view,^^Q \T1/txr/m/it/12 Trans-por-ta-tion Re-search Part C: Emer-ging Tech-no-lo-gies\T1/txr/m/n/12 , vol. 19,
  []
 
 
-Overfull \hbox (1.42937pt too wide) in paragraph at lines 491--491
+Overfull \hbox (3.49881pt too wide) in paragraph at lines 505--505
+\T1/txr/m/it/12 2030 pa-ra el De-sa-rro-llo Sos-te-ni-ble\T1/txr/m/n/12 , Re-so-lu-ción A/-RE-S/70/1, apro-ba-da por la Asam-
+ []
+
+
+Overfull \hbox (1.42937pt too wide) in paragraph at lines 505--505
 []\T1/txr/m/n/12 R. A. Brooks, ^^P  In-te-lli-gen-ce Without Re-pre-sen-ta-tion,^^Q \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce\T1/txr/m/n/12 , vol. 47,
  []
 
@@ -2327,136 +2319,131 @@ Overfull \hbox (1.42937pt too wide) in paragraph at lines 491--491
 
 
 ]
-Overfull \hbox (14.67084pt too wide) in paragraph at lines 491--491
+Overfull \hbox (14.67084pt too wide) in paragraph at lines 505--505
 \T1/txr/m/n/12 ci-fi-ca-tion,^^Q Foun-da-tion for In-te-lli-gent Phy-si-cal Agents, FI-PA Spe-ci-fi-ca-tion SC00027H,
  []
 
 
-Overfull \hbox (32.67084pt too wide) in paragraph at lines 491--491
+Overfull \hbox (32.67084pt too wide) in paragraph at lines 505--505
 \T1/txr/m/n/12 Spe-ci-fi-ca-tion,^^Q Foun-da-tion for In-te-lli-gent Phy-si-cal Agents, FI-PA Spe-ci-fi-ca-tion SC00026H,
  []
 
 [137]
-Overfull \hbox (5.85698pt too wide) in paragraph at lines 491--491
+Overfull \hbox (5.85698pt too wide) in paragraph at lines 505--505
 \T1/txr/m/n/12 tro Li-ne 7,^^Q \T1/txr/m/it/12 Mo-de-lling\T1/txr/m/n/12 , vol. 7, n.[] 2, p. 58, 2026. \T1/txr/m/sc/12 doi\T1/txr/m/n/12 : [][]$\T1/txtt/m/n/12 10 . 3390 / modelling7020058$[][]\T1/txr/m/n/12 . 
  []
 
 [138]
-Overfull \hbox (2.62831pt too wide) in paragraph at lines 491--491
+Overfull \hbox (2.62831pt too wide) in paragraph at lines 505--505
 \T1/txr/m/n/12 lling,^^Q en \T1/txr/m/it/12 AIP Con-fe-ren-ce Pro-cee-dings\T1/txr/m/n/12 , vol. 2423, AIP Pu-blishing, 2021, p. 020 035.
  []
 
 
-Overfull \hbox (4.97697pt too wide) in paragraph at lines 491--491
+Overfull \hbox (4.97697pt too wide) in paragraph at lines 505--505
 \T1/txr/m/n/12 Con-trol Ac-tions to Im-pro-ve Bus-Service Re-gu-la-rity,^^Q en \T1/txr/m/it/12 Ar-ti-fi-cial In-te-lli-gen-ce. ECAI
  []
 
 
-Overfull \hbox (11.55956pt too wide) in paragraph at lines 491--491
+Overfull \hbox (11.55956pt too wide) in paragraph at lines 505--505
 \T1/txr/m/it/12 Workshops\T1/txr/m/n/12 , O. Ger-va-si et al., eds., ép. Lec-tu-re No-tes in Com-pu-ter Scien-ce, vol. 15898,
  []
 
 [139] [140]
-Overfull \hbox (4.26741pt too wide) in paragraph at lines 491--491
+Overfull \hbox (4.26741pt too wide) in paragraph at lines 505--505
 []\T1/txr/m/n/12 W. G. Co-chran, ^^P  So-me Methods for Strengthe-ning the Com-mon Chi-Squared Tests,^^Q
  []
 
 
-Overfull \hbox (12.66684pt too wide) in paragraph at lines 491--491
+Overfull \hbox (12.66684pt too wide) in paragraph at lines 505--505
 []\T1/txr/m/it/12 OMG Uni-fied Mo-de-ling Lan-gua-ge (OMG UML) Spe-ci-fi-ca-tion, Ver-sion 1.4\T1/txr/m/n/12 , formal/01-
  []
 
 
-Overfull \hbox (2.67517pt too wide) in paragraph at lines 491--491
+Overfull \hbox (2.67517pt too wide) in paragraph at lines 505--505
 []\T1/txr/m/n/12 L. De-vro-ye, \T1/txr/m/it/12 Non-Uniform Ran-dom Va-ria-te Ge-ne-ra-tion\T1/txr/m/n/12 . New York: Springer-Verlag,
  []
 
 [141]
-Overfull \hbox (57.07735pt too wide) in paragraph at lines 491--491
+Overfull \hbox (57.07735pt too wide) in paragraph at lines 505--505
 \T1/txr/m/n/12 po-ni-ble en: [][]$\T1/txtt/m/n/12 https : / / datos . crtm . es / datasets / 868df0e58fca47e79b942902dffd7da0$[][]
  []
 
-[142]
-Overfull \hbox (3.49881pt too wide) in paragraph at lines 491--491
-\T1/txr/m/it/12 2030 pa-ra el De-sa-rro-llo Sos-te-ni-ble\T1/txr/m/n/12 , Re-so-lu-ción A/-RE-S/70/1, apro-ba-da por la Asam-
- []
-
-[143]
+[142] [143]
 Anexo A.
 (./anex/anex_requirements/requirements.tex [144
 
 ] [145] [146] [147] [148] [149] [150] [151] [152] [153] [154] [155]
 LaTeX Font Info:    Font shape `T1/txr/b/it' in size <10.95> not available
-(Font)              Font shape `T1/txr/bx/it' tried instead on input line 394.
+(Font)              Font shape `T1/txr/bx/it' tried instead on input line 389.
  [156] [157]
-Overfull \hbox (4.37671pt too wide) in paragraph at lines 489--489
+Overfull \hbox (4.37671pt too wide) in paragraph at lines 484--484
  []|\T1/txr/bx/n/12 Método| 
  []
 
 
-Overfull \hbox (1.99992pt too wide) in paragraph at lines 489--489
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 484--484
  [][] 
  []
 
 
-Overfull \hbox (4.37671pt too wide) in paragraph at lines 489--489
+Overfull \hbox (4.37671pt too wide) in paragraph at lines 484--484
  []|\T1/txr/bx/n/12 Método| 
  []
 
 
-Overfull \hbox (1.99992pt too wide) in paragraph at lines 489--489
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 484--484
  [][] 
  []
 
 [158]
-Overfull \hbox (4.37671pt too wide) in paragraph at lines 528--528
+Overfull \hbox (4.37671pt too wide) in paragraph at lines 522--522
  []|\T1/txr/bx/n/12 Método| 
  []
 
 
-Overfull \hbox (1.99992pt too wide) in paragraph at lines 528--528
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 522--522
  [][] 
  []
 
 
-Overfull \hbox (4.37671pt too wide) in paragraph at lines 528--528
+Overfull \hbox (4.37671pt too wide) in paragraph at lines 522--522
  []|\T1/txr/bx/n/12 Método| 
  []
 
 
-Overfull \hbox (1.99992pt too wide) in paragraph at lines 528--528
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 522--522
  [][] 
  []
 
 [159]
-Overfull \hbox (4.37671pt too wide) in paragraph at lines 554--554
+Overfull \hbox (4.37671pt too wide) in paragraph at lines 548--548
  []|\T1/txr/bx/n/12 Método| 
  []
 
 
-Overfull \hbox (1.99992pt too wide) in paragraph at lines 554--554
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 548--548
  [][] 
  []
 
 
-Overfull \hbox (4.37671pt too wide) in paragraph at lines 554--554
+Overfull \hbox (4.37671pt too wide) in paragraph at lines 548--548
  []|\T1/txr/bx/n/12 Método| 
  []
 
 
-Overfull \hbox (1.99992pt too wide) in paragraph at lines 554--554
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 548--548
  [][] 
  []
 
 ) [160] [161]
 Anexo B.
 (./anex/anex_figures/operational.tex
-<imagenes/to_A/normality_stop_ALL.png, id=2516, 722.7pt x 578.16pt>
+<imagenes/to_A/normality_stop_ALL.png, id=2526, 722.7pt x 578.16pt>
 File: imagenes/to_A/normality_stop_ALL.png Graphic file (type png)
 <use imagenes/to_A/normality_stop_ALL.png>
 Package pdftex.def Info: imagenes/to_A/normality_stop_ALL.png  used on input line 7.
 (pdftex.def)             Requested size: 426.79135pt x 341.43785pt.
-<imagenes/to_A/normality_stop_individual.png, id=2517, 722.7pt x 578.16pt>
+<imagenes/to_A/normality_stop_individual.png, id=2527, 722.7pt x 578.16pt>
 File: imagenes/to_A/normality_stop_individual.png Graphic file (type png)
 <use imagenes/to_A/normality_stop_individual.png>
 Package pdftex.def Info: imagenes/to_A/normality_stop_individual.png  used on input line 14.
@@ -2464,13 +2451,13 @@ Package pdftex.def Info: imagenes/to_A/normality_stop_individual.png  used on in
  [162
 
  <./imagenes/to_A/normality_stop_ALL.png>]
-<imagenes/to_B/normality_stop_ALL.png, id=2524, 722.7pt x 578.16pt>
+<imagenes/to_B/normality_stop_ALL.png, id=2534, 722.7pt x 578.16pt>
 File: imagenes/to_B/normality_stop_ALL.png Graphic file (type png)
 <use imagenes/to_B/normality_stop_ALL.png>
 Package pdftex.def Info: imagenes/to_B/normality_stop_ALL.png  used on input line 21.
 (pdftex.def)             Requested size: 426.79135pt x 341.43785pt.
  [163 <./imagenes/to_A/normality_stop_individual.png>]
-<imagenes/to_B/normality_stop_individual.png, id=2530, 722.7pt x 578.16pt>
+<imagenes/to_B/normality_stop_individual.png, id=2540, 722.7pt x 578.16pt>
 File: imagenes/to_B/normality_stop_individual.png Graphic file (type png)
 <use imagenes/to_B/normality_stop_individual.png>
 Package pdftex.def Info: imagenes/to_B/normality_stop_individual.png  used on input line 28.
@@ -2489,23 +2476,23 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `memoria.out' has not changed.
-(rerunfilecheck)             Checksum: D9D8E4F3DED21B80D358732EE878774B;7108.
+(rerunfilecheck)             Checksum: 9455D3CA3480E7A358E3613C3E1DB2A4;7112.
 Package logreq Info: Writing requests to 'memoria.run.xml'.
 \openout1 = `memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 56497 strings out of 474222
- 1238068 string characters out of 5748734
- 2171565 words of memory out of 5000000
- 77180 multiletter control sequences out of 15000+600000
- 663026 words of font info for 191 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 99i,19n,117p,1718b,3966s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 56390 strings out of 476047
+ 1235783 string characters out of 5792076
+ 2164578 words of memory out of 5000000
+ 76848 multiletter control sequences out of 15000+600000
+ 666075 words of font info for 194 fonts, out of 8000000 for 9000
+ 85 hyphenation exceptions out of 8191
+ 99i,19n,117p,1713b,3966s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on memoria.pdf (187 pages, 8308955 bytes).
+Output written on memoria.pdf (187 pages, 8312488 bytes).
 PDF statistics:
- 2766 PDF objects out of 2984 (max. 8388607)
+ 2776 PDF objects out of 2984 (max. 8388607)
  548 named destinations out of 1000 (max. 500000)
  1002 words of extra memory for PDF output out of 10000 (max. 10000000)
 

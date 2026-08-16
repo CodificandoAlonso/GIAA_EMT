@@ -89,6 +89,26 @@
       \field{pages}{14561}
       \range{pages}{1}
     \endentry
+    \entry{onu_ods}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=fb36582c35e1238e15e3df5a7b4b3db5}{%
+           family={{Organización de las Naciones Unidas}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{fb36582c35e1238e15e3df5a7b4b3db5}
+      \strng{fullhash}{fb36582c35e1238e15e3df5a7b4b3db5}
+      \strng{bibnamehash}{fb36582c35e1238e15e3df5a7b4b3db5}
+      \strng{authorbibnamehash}{fb36582c35e1238e15e3df5a7b4b3db5}
+      \strng{authornamehash}{fb36582c35e1238e15e3df5a7b4b3db5}
+      \strng{authorfullhash}{fb36582c35e1238e15e3df5a7b4b3db5}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Resolución A/RES/70/1, aprobada por la Asamblea General el 25 de septiembre de 2015}
+      \field{title}{Transformar nuestro mundo: la Agenda 2030 para el Desarrollo Sostenible}
+      \field{year}{2015}
+    \endentry
     \entry{maes1993modeling}{article}{}
       \name{author}{1}{}{%
         {{hash=2f8f33c85296fc648721ff66ab814d0a}{%
@@ -106,8 +126,8 @@
       \strng{authorbibnamehash}{2f8f33c85296fc648721ff66ab814d0a}
       \strng{authornamehash}{2f8f33c85296fc648721ff66ab814d0a}
       \strng{authorfullhash}{2f8f33c85296fc648721ff66ab814d0a}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Artificial Life}
@@ -158,8 +178,8 @@
       \strng{editorbibnamehash}{8a8e3c2b98fb36c84a8c230aae0178a9}
       \strng{editornamehash}{8a8e3c2b98fb36c84a8c230aae0178a9}
       \strng{editorfullhash}{8a8e3c2b98fb36c84a8c230aae0178a9}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Agent Technology: Foundations, Applications, and Markets}
@@ -273,33 +293,6 @@
       \field{pages}{56\bibrangedash 70}
       \range{pages}{15}
     \endentry
-    \entry{brooks1986robust}{article}{}
-      \name{author}{1}{}{%
-        {{hash=c5572a6f2e05a08f36cab3bae8fdb643}{%
-           family={Brooks},
-           familyi={B\bibinitperiod},
-           given={Rodney\bibnamedelima A.},
-           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-      }
-      \strng{namehash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{fullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{bibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{authorbibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{authornamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \strng{authorfullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
-      \field{extraname}{1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Journal on Robotics and Automation}
-      \field{number}{1}
-      \field{title}{A Robust Layered Control System for a Mobile Robot}
-      \field{volume}{2}
-      \field{year}{1986}
-      \field{pages}{14\bibrangedash 23}
-      \range{pages}{10}
-    \endentry
     \entry{franklin1996agent}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=e3905352d4e0f537e5b25f72df123db7}{%
@@ -342,8 +335,8 @@
       \strng{editorbibnamehash}{8b92a16afd02c2749fb5de196aeba9ec}
       \strng{editornamehash}{5a092dc6799d29ea6bc4ce8518d5c414}
       \strng{editorfullhash}{8b92a16afd02c2749fb5de196aeba9ec}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Intelligent Agents {III} ({LNAI} Volume 1193)}
@@ -351,6 +344,33 @@
       \field{year}{1997}
       \field{pages}{21\bibrangedash 35}
       \range{pages}{15}
+    \endentry
+    \entry{brooks1986robust}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c5572a6f2e05a08f36cab3bae8fdb643}{%
+           family={Brooks},
+           familyi={B\bibinitperiod},
+           given={Rodney\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{fullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{bibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorbibnamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authornamehash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \strng{authorfullhash}{c5572a6f2e05a08f36cab3bae8fdb643}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal on Robotics and Automation}
+      \field{number}{1}
+      \field{title}{A Robust Layered Control System for a Mobile Robot}
+      \field{volume}{2}
+      \field{year}{1986}
+      \field{pages}{14\bibrangedash 23}
+      \range{pages}{10}
     \endentry
     \entry{bratman1987intention}{book}{}
       \name{author}{1}{}{%
@@ -693,13 +713,17 @@
       \strng{authornamehash}{9ea78c8bdcb65ac951c55622c18b20ec}
       \strng{authorfullhash}{9ea78c8bdcb65ac951c55622c18b20ec}
       \field{extraname}{1}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{FIPA Specification SC00061G}
       \field{title}{{FIPA ACL} Message Structure Specification}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{year}{2002}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb http://www.fipa.org/specs/fipa00061/
       \endverb
@@ -768,7 +792,11 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{FIPA Specification SC00037J}
       \field{title}{{FIPA} Communicative Act Library Specification}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{year}{2002}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb http://www.fipa.org/specs/fipa00037/
       \endverb
@@ -903,7 +931,11 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{Center for Connected Learning and Computer-Based Modeling, Northwestern University}
       \field{title}{{NetLogo}}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{year}{1999}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb http://ccl.northwestern.edu/netlogo/
       \endverb
@@ -984,8 +1016,8 @@
       \strng{authorbibnamehash}{a4a20978e20ffff5db674bb79bf72d7d}
       \strng{authornamehash}{44627bdb9e8e8573892ef0ff2fc381b8}
       \strng{authorfullhash}{a4a20978e20ffff5db674bb79bf72d7d}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Programming Multi-Agent Systems in {AgentSpeak} Using {Jason}}
@@ -1169,8 +1201,8 @@
       \strng{authornamehash}{4d52f59d2dfd78bc079116445c2eddc4}
       \strng{authorfullhash}{c941038ac18ab447fc1beb1892c89477}
       \field{extraname}{1}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Transportation Research Record: Journal of the Transportation Research Board}
@@ -1407,8 +1439,8 @@
       \strng{authorbibnamehash}{87a8980886bb32310dba800c5828ddf3}
       \strng{authornamehash}{8ab6404919ed9f4eadedaf8ecc550c11}
       \strng{authorfullhash}{87a8980886bb32310dba800c5828ddf3}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Case Studies on Transport Policy}
@@ -2298,7 +2330,11 @@
       \field{number}{FHWA-HRT-04-040}
       \field{title}{Traffic Analysis Toolbox Volume {III}: Guidelines for Applying Traffic Microsimulation Modeling Software}
       \field{type}{techreport}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{year}{2004}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://ops.fhwa.dot.gov/trafficanalysistools/tat_vol3/
       \endverb
@@ -2581,7 +2617,11 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{NIST/SEMATECH e-Handbook of Statistical Methods}
       \field{title}{Detection of Outliers}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{year}{2012}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm#Normality
       \endverb
@@ -2713,8 +2753,12 @@
       \field{journaltitle}{Sankhyā: The Indian Journal of Statistics (1933--1960)}
       \field{number}{4}
       \field{title}{On a Measure of Divergence between Two Multinomial Populations}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{volume}{7}
       \field{year}{1946}
+      \field{urldateera}{ce}
       \field{pages}{401\bibrangedash 406}
       \range{pages}{6}
       \verb{urlraw}
@@ -2995,6 +3039,562 @@
       \verb{doi}
       \verb 10.1111/j.2517-6161.1971.tb00855.x
       \endverb
+    \endentry
+    \entry{kailath1967divergence}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6082ac1a24c2837363f648b9699f0ed2}{%
+           family={Kailath},
+           familyi={K\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{fullhash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{bibnamehash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{authorbibnamehash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{authornamehash}{6082ac1a24c2837363f648b9699f0ed2}
+      \strng{authorfullhash}{6082ac1a24c2837363f648b9699f0ed2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Communication Technology}
+      \field{number}{1}
+      \field{title}{The Divergence and {Bhattacharyya} Distance Measures in Signal Selection}
+      \field{volume}{15}
+      \field{year}{1967}
+      \field{pages}{52\bibrangedash 60}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1109/TCOM.1967.1089532
+      \endverb
+    \endentry
+    \entry{welding1957instability}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a8c8e33e182b724c37edbcb32326fca4}{%
+           family={Welding},
+           familyi={W\bibinitperiod},
+           given={P.\bibnamedelimi I.},
+           giveni={P\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{fullhash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{bibnamehash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{authorbibnamehash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{authornamehash}{a8c8e33e182b724c37edbcb32326fca4}
+      \strng{authorfullhash}{a8c8e33e182b724c37edbcb32326fca4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Operational Research Quarterly}
+      \field{number}{3}
+      \field{title}{The Instability of a Close-Interval Service}
+      \field{volume}{8}
+      \field{year}{1957}
+      \field{pages}{133\bibrangedash 142}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1057/jors.1957.21
+      \endverb
+    \endentry
+    \entry{osuna1972control}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3a070031a3eb43fd13d3989a19d3fc11}{%
+           family={Osuna},
+           familyi={O\bibinitperiod},
+           given={E.\bibnamedelimi E.},
+           giveni={E\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=be68673b1840973a709b55b9ffbd740a}{%
+           family={Newell},
+           familyi={N\bibinitperiod},
+           given={G.\bibnamedelimi F.},
+           giveni={G\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{fullhash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{bibnamehash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{authorbibnamehash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{authornamehash}{3570e499c0dd673bda3ff1bf6c146718}
+      \strng{authorfullhash}{3570e499c0dd673bda3ff1bf6c146718}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Science}
+      \field{number}{1}
+      \field{title}{Control Strategies for an Idealized Public Transportation System}
+      \field{volume}{6}
+      \field{year}{1972}
+      \field{pages}{52\bibrangedash 72}
+      \range{pages}{21}
+      \verb{doi}
+      \verb 10.1287/trsc.6.1.52
+      \endverb
+    \endentry
+    \entry{david2010rapl}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=1492600c210ae9426c9007b4db29aec6}{%
+           family={David},
+           familyi={D\bibinitperiod},
+           given={Howard},
+           giveni={H\bibinitperiod}}}%
+        {{hash=ec799b466c71c40e5addc61d011d9480}{%
+           family={Gorbatov},
+           familyi={G\bibinitperiod},
+           given={Eugene},
+           giveni={E\bibinitperiod}}}%
+        {{hash=ffcb47bac3b09bd46ae1e94d8c25cc8e}{%
+           family={Hanebutte},
+           familyi={H\bibinitperiod},
+           given={Ulf\bibnamedelima R.},
+           giveni={U\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=8f4efad1c35155f90b7d01e8414c0a39}{%
+           family={Khanna},
+           familyi={K\bibinitperiod},
+           given={Rahul},
+           giveni={R\bibinitperiod}}}%
+        {{hash=db761620cfd0ceb6757896571b70adc9}{%
+           family={Le},
+           familyi={L\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{9ab3413d0ad767e43014c8579ce1dbef}
+      \strng{fullhash}{2c221c29b5e603ee7e85c44a02d23b10}
+      \strng{bibnamehash}{2c221c29b5e603ee7e85c44a02d23b10}
+      \strng{authorbibnamehash}{2c221c29b5e603ee7e85c44a02d23b10}
+      \strng{authornamehash}{9ab3413d0ad767e43014c8579ce1dbef}
+      \strng{authorfullhash}{2c221c29b5e603ee7e85c44a02d23b10}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 16th ACM/IEEE International Symposium on Low Power Electronics and Design (ISLPED'10)}
+      \field{title}{{RAPL}: Memory Power Estimation and Capping}
+      \field{year}{2010}
+      \field{pages}{189\bibrangedash 194}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1145/1840845.1840883
+      \endverb
+    \endentry
+    \entry{khan2018rapl}{article}{}
+      \name{author}{5}{}{%
+        {{hash=dfd96e728afd75fdc67528becf604698}{%
+           family={Khan},
+           familyi={K\bibinitperiod},
+           given={Kashif\bibnamedelima Nizam},
+           giveni={K\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=c7df419d12b179b28aa84519f349bebd}{%
+           family={Hirki},
+           familyi={H\bibinitperiod},
+           given={Mikael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fec3f3e113fd26542eb66b4fea6055ad}{%
+           family={Niemi},
+           familyi={N\bibinitperiod},
+           given={Tapio},
+           giveni={T\bibinitperiod}}}%
+        {{hash=2864a1913a743aff3fb290f702057dc6}{%
+           family={Nurminen},
+           familyi={N\bibinitperiod},
+           given={Jukka\bibnamedelima K.},
+           giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=04c0da3bb30ae2f61a845a5ed608170f}{%
+           family={Ou},
+           familyi={O\bibinitperiod},
+           given={Zhonghong},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{af6b3fcc3c9065344f4ebb87e0b2a45e}
+      \strng{fullhash}{eb8d543e84ba2f8417b0a4f0c8a6ef1d}
+      \strng{bibnamehash}{eb8d543e84ba2f8417b0a4f0c8a6ef1d}
+      \strng{authorbibnamehash}{eb8d543e84ba2f8417b0a4f0c8a6ef1d}
+      \strng{authornamehash}{af6b3fcc3c9065344f4ebb87e0b2a45e}
+      \strng{authorfullhash}{eb8d543e84ba2f8417b0a4f0c8a6ef1d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ACM Transactions on Modeling and Performance Evaluation of Computing Systems}
+      \field{number}{2}
+      \field{title}{{RAPL} in Action: Experiences in Using {RAPL} for Power Measurements}
+      \field{volume}{3}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 26}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.1145/3177754
+      \endverb
+    \endentry
+    \entry{crtm_gtfs}{online}{}
+      \name{author}{1}{}{%
+        {{hash=4468b23d50ee1e5f30d04110c4e2b45c}{%
+           family={{Consorcio Regional de Transportes de Madrid}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Portal de Datos Abiertos del Consorcio Regional de Transportes de Madrid}%
+      }
+      \strng{namehash}{4468b23d50ee1e5f30d04110c4e2b45c}
+      \strng{fullhash}{4468b23d50ee1e5f30d04110c4e2b45c}
+      \strng{bibnamehash}{4468b23d50ee1e5f30d04110c4e2b45c}
+      \strng{authorbibnamehash}{4468b23d50ee1e5f30d04110c4e2b45c}
+      \strng{authornamehash}{4468b23d50ee1e5f30d04110c4e2b45c}
+      \strng{authorfullhash}{4468b23d50ee1e5f30d04110c4e2b45c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{GTFS Red de EMT}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://datos.crtm.es/datasets/868df0e58fca47e79b942902dffd7da0
+      \endverb
+      \verb{url}
+      \verb https://datos.crtm.es/datasets/868df0e58fca47e79b942902dffd7da0
+      \endverb
+    \endentry
+    \entry{rgpd}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=584768e1bea5ebe983bb8f68913f73d1}{%
+           family={{Parlamento Europeo y Consejo de la Unión Europea}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{fullhash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{bibnamehash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{authorbibnamehash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{authornamehash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{authorfullhash}{584768e1bea5ebe983bb8f68913f73d1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Diario Oficial de la Unión Europea, L 119, de 4 de mayo de 2016}
+      \field{title}{Reglamento (UE) 2016/679, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos}
+      \field{year}{2016}
+    \endentry
+    \entry{lopdgdd}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=ffcaa79a49ffccd02ea8bab3b4f0e047}{%
+           family={{Jefatura del Estado}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{fullhash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{bibnamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authorbibnamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authornamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authorfullhash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Boletín Oficial del Estado, núm. 294, de 6 de diciembre de 2018}
+      \field{title}{Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales}
+      \field{year}{2018}
+    \endentry
+    \entry{gpl3}{online}{}
+      \name{author}{1}{}{%
+        {{hash=cb96118d65be9f05ad10bd5cfdaf0f6d}{%
+           family={{Free Software Foundation}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{cb96118d65be9f05ad10bd5cfdaf0f6d}
+      \strng{fullhash}{cb96118d65be9f05ad10bd5cfdaf0f6d}
+      \strng{bibnamehash}{cb96118d65be9f05ad10bd5cfdaf0f6d}
+      \strng{authorbibnamehash}{cb96118d65be9f05ad10bd5cfdaf0f6d}
+      \strng{authornamehash}{cb96118d65be9f05ad10bd5cfdaf0f6d}
+      \strng{authorfullhash}{cb96118d65be9f05ad10bd5cfdaf0f6d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{GNU General Public License, version 3}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2007}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.gnu.org/licenses/gpl-3.0.html
+      \endverb
+      \verb{url}
+      \verb https://www.gnu.org/licenses/gpl-3.0.html
+      \endverb
+    \endentry
+    \entry{bsd3}{online}{}
+      \name{author}{1}{}{%
+        {{hash=35d827e2a8f2127b88fab45ef43a4f09}{%
+           family={{Open Source Initiative}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{fullhash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{bibnamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authorbibnamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authornamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authorfullhash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The 3-Clause BSD License}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://opensource.org/license/bsd-3-clause
+      \endverb
+      \verb{url}
+      \verb https://opensource.org/license/bsd-3-clause
+      \endverb
+    \endentry
+    \entry{apache2}{online}{}
+      \name{author}{1}{}{%
+        {{hash=f57c55dac81a8285538aae51dacc9857}{%
+           family={{The Apache Software Foundation}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{fullhash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{bibnamehash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{authorbibnamehash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{authornamehash}{f57c55dac81a8285538aae51dacc9857}
+      \strng{authorfullhash}{f57c55dac81a8285538aae51dacc9857}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Apache License, Version 2.0}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2004}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.apache.org/licenses/LICENSE-2.0
+      \endverb
+      \verb{url}
+      \verb https://www.apache.org/licenses/LICENSE-2.0
+      \endverb
+    \endentry
+    \entry{mit}{online}{}
+      \name{author}{1}{}{%
+        {{hash=35d827e2a8f2127b88fab45ef43a4f09}{%
+           family={{Open Source Initiative}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{fullhash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{bibnamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authorbibnamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authornamehash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \strng{authorfullhash}{35d827e2a8f2127b88fab45ef43a4f09}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The MIT License}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://opensource.org/license/mit
+      \endverb
+      \verb{url}
+      \verb https://opensource.org/license/mit
+      \endverb
+    \endentry
+    \entry{lppl}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8064f3902d168b0348d9d93d2c7a2565}{%
+           family={{\LaTeX{} Project}},
+           familyi={_\bibinitperiod}}}%
+      }
+      \strng{namehash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{fullhash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{bibnamehash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{authorbibnamehash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{authornamehash}{8064f3902d168b0348d9d93d2c7a2565}
+      \strng{authorfullhash}{8064f3902d168b0348d9d93d2c7a2565}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The \LaTeX{} Project Public License, Version 1.3c}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.latex-project.org/lppl/lppl-1-3c/
+      \endverb
+      \verb{url}
+      \verb https://www.latex-project.org/lppl/lppl-1-3c/
+      \endverb
+    \endentry
+    \entry{ley37_2007}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=ffcaa79a49ffccd02ea8bab3b4f0e047}{%
+           family={{Jefatura del Estado}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{fullhash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{bibnamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authorbibnamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authornamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authorfullhash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Boletín Oficial del Estado, núm. 276, de 17 de noviembre de 2007. Modificada por el Real Decreto-ley 24/2021, de 2 de noviembre}
+      \field{title}{Ley 37/2007, de 16 de noviembre, sobre reutilización de la información del sector público}
+      \field{year}{2007}
+    \endentry
+    \entry{trlpi}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=a62b462428e545ae69003b1a302ad118}{%
+           family={{Ministerio de Cultura}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{a62b462428e545ae69003b1a302ad118}
+      \strng{fullhash}{a62b462428e545ae69003b1a302ad118}
+      \strng{bibnamehash}{a62b462428e545ae69003b1a302ad118}
+      \strng{authorbibnamehash}{a62b462428e545ae69003b1a302ad118}
+      \strng{authornamehash}{a62b462428e545ae69003b1a302ad118}
+      \strng{authorfullhash}{a62b462428e545ae69003b1a302ad118}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Boletín Oficial del Estado, núm. 97, de 22 de abril de 1996}
+      \field{title}{Real Decreto Legislativo 1/1996, de 12 de abril, por el que se aprueba el Texto Refundido de la Ley de Propiedad Intelectual}
+      \field{year}{1996}
+    \endentry
+    \entry{acm_ieee_ethics}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=5fda5a8317c61238bd1d594c9db1db17}{%
+           family={Gotterbarn},
+           familyi={G\bibinitperiod},
+           given={Don},
+           giveni={D\bibinitperiod}}}%
+        {{hash=9d6447f250d7ad083fe2684a2949ccd2}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Keith},
+           giveni={K\bibinitperiod}}}%
+        {{hash=272f04e08413f30b450f57da525455d0}{%
+           family={Rogerson},
+           familyi={R\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{organization}{2}{%
+        {ACM/IEEE-CS Joint Task Force on Software Engineering Ethics}%
+        {Professional Practices}%
+      }
+      \strng{namehash}{647599c3d4309147552ea8068d6f1901}
+      \strng{fullhash}{433425fd570cd8525dbb1551fa3cf6ae}
+      \strng{bibnamehash}{433425fd570cd8525dbb1551fa3cf6ae}
+      \strng{authorbibnamehash}{433425fd570cd8525dbb1551fa3cf6ae}
+      \strng{authornamehash}{647599c3d4309147552ea8068d6f1901}
+      \strng{authorfullhash}{433425fd570cd8525dbb1551fa3cf6ae}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Software Engineering Code of Ethics and Professional Practice, version 5.2}
+      \field{year}{1999}
+    \endentry
+    \entry{uc3m_retribuciones}{online}{}
+      \name{author}{1}{}{%
+        {{hash=32c724eed2850b2295291a9ce544f081}{%
+           family={{Universidad Carlos III de Madrid}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Servicio de Recursos Humanos y Organización, UC3M}%
+      }
+      \strng{namehash}{32c724eed2850b2295291a9ce544f081}
+      \strng{fullhash}{32c724eed2850b2295291a9ce544f081}
+      \strng{bibnamehash}{32c724eed2850b2295291a9ce544f081}
+      \strng{authorbibnamehash}{32c724eed2850b2295291a9ce544f081}
+      \strng{authornamehash}{32c724eed2850b2295291a9ce544f081}
+      \strng{authorfullhash}{32c724eed2850b2295291a9ce544f081}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Tablas retributivas del Personal Docente e Investigador}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.uc3m.es/conocenos/recursos-humanos/retribuciones
+      \endverb
+      \verb{url}
+      \verb https://www.uc3m.es/conocenos/recursos-humanos/retribuciones
+      \endverb
+    \endentry
+    \entry{ley27_2014}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=ffcaa79a49ffccd02ea8bab3b4f0e047}{%
+           family={{Jefatura del Estado}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{fullhash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{bibnamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authorbibnamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authornamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authorfullhash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \field{extraname}{3}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Boletín Oficial del Estado, núm. 288, de 28 de noviembre de 2014}
+      \field{title}{Ley 27/2014, de 27 de noviembre, del Impuesto sobre Sociedades}
+      \field{year}{2014}
+    \endentry
+    \entry{ley37_1992}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=ffcaa79a49ffccd02ea8bab3b4f0e047}{%
+           family={{Jefatura del Estado}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{fullhash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{bibnamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authorbibnamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authornamehash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \strng{authorfullhash}{ffcaa79a49ffccd02ea8bab3b4f0e047}
+      \field{extraname}{4}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Boletín Oficial del Estado, núm. 312, de 29 de diciembre de 1992}
+      \field{title}{Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido}
+      \field{year}{1992}
     \endentry
   \enddatalist
 \endrefsection

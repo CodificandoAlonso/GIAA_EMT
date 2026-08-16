@@ -39,7 +39,7 @@ con categoría de Profesor Titular de Universidad, ha ejercido la dirección té
 metodológica mediante un seguimiento continuado, estimado en 65 horas. El codirector, con
 categoría de Catedrático de Universidad, ha aportado supervisión de carácter puntual
 centrada en el encuadre del trabajo y en la revisión del enfoque general, estimada en 25
-horas.
+horas. La tabla \ref{tab:presupuesto-personal} presenta el coste asociado al personal.
 
 \begin{table}[H]
     \ttabbox[\linewidth]
@@ -53,7 +53,7 @@ Catedrático de Universidad & 39,20 € & 25 & 980,00 €\\
 \hline
 Titular de Universidad & 31,14 € & 65 & 2.024,10 €\\
 \hline
-Contrato formativo en alternancia & 12,54 € & 520 & 6.519,12 €\\
+Contrato formativo en alternancia & 12,5368 € & 520 & 6.519,12 €\\
 \hline
 \textbf{Total} & & \textbf{610} & \textbf{9.523,22 €}\\
 \hline
@@ -83,7 +83,8 @@ coste de adquisición y $D$ el porcentaje de dedicación al proyecto.
 El único elemento de \textit{hardware} imputable es el ordenador portátil empleado para
 el desarrollo y la ejecución de las simulaciones, cuyas características se detallan en la
 sección~\ref{section:usage_tools}. Su coste de adquisición fue de 719 €, precio que
-incorpora el descuento educativo aplicable a estudiantes universitarios.
+incorpora el descuento educativo aplicable a estudiantes universitarios. En la tabla \ref{tab:presupuesto-amortizacion}
+se expone el coste total asociado a los recursos materiales amortizados.
 
 \begin{table}[H]
     \ttabbox[\linewidth]
@@ -97,11 +98,15 @@ Ordenador portátil & 719,00 € & 8 & 48 & 100 \% & 119,83 €\\
 \hline
 GAMA & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
 \hline
+QGIS & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
+\hline
+Node.js & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
+\hline
 Python y bibliotecas científicas & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
 \hline
 Docker Engine & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
 \hline
-\LaTeX{} y Overleaf & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
+\LaTeX{}  & 0,00 € & 8 & --- & 100 \% & 0,00 €\\
 \hline
 \textbf{Total} & & & & & \textbf{119,83 €}\\
 \hline
@@ -132,7 +137,7 @@ investigación, en el cual la obtención de resultados satisfactorios no está g
 antemano. El beneficio industrial corresponde al margen que aplicaría una entidad que
 ejecutase el proyecto en régimen de prestación de servicios. Sobre la base imponible
 resultante se aplica el Impuesto sobre el Valor Añadido al tipo general vigente del
-21\,\%~\cite{ley37_1992}.
+21\,\%~\cite{ley37_1992}. A continuación, la tabla \ref{tab:presupuesto-total} presenta el coste total asociado al proyecto.
 
 \begin{table}[H]
     \ttabbox[\linewidth]
@@ -243,8 +248,8 @@ flota implicados durante el periodo de observación.
 
 No obstante, la simulación tampoco constituye una actividad ambientalmente neutra. Las
 mediciones recogidas en el apartado correspondiente de la sección~\ref{subsec:solution_comparative} muestran que la
-solución basada en agentes pasajero individuales requiere aproximadamente 4,32s veces más
-tiempo de CPU por réplica que la solución agregada, con un consumo energético
+solución basada en agentes pasajero individuales requiere aproximadamente 4,3 veces más
+tiempo de cómputo que la solución agregada, con un consumo energético
 proporcional. Dado que la validación ha exigido campañas de mil réplicas por
 configuración, la elección entre arquitecturas posee una dimensión ambiental que conviene
 hacer explícita, puesto que la solución individualizada resulta necesaria cuando el objeto de estudio

@@ -1,13 +1,12 @@
 En este capítulo se describe el proceso de análisis y procesado de los datos proporcionados por la EMT.\@
-Se ha dividido en tres etapas: \textbf{Limpieza y Preparación}, \textbf{Estudio y Gaussianidad} y 
-\textbf{Preparación para Simulador}.
+Se ha dividido en tres etapas: \textbf{Limpieza y preparación}, \textbf{Estudio y gaussianidad} y 
+\textbf{Preparación para simulador}.
 
 
 \section{Limpieza y preparación}
 Esta sección detalla los distintos procedimientos seguidos en una primera fase iniciada tras la recepción
 de los datos provenientes de la EMT.\@ Se distinguen dos tipos de datos principalmente:
-Datos Geoespaciales y Datos de Operación.
-
+datos geoespaciales y datos de operación.
 
 
 \subsection{Datos geoespaciales}
@@ -70,7 +69,7 @@ La línea presenta quince paradas en su sentido~\textit{Cibeles} y trece en el s
 Los datos referentes a la geolocalización de la ruta no son usados en la fase de análisis, al no requerir mayor estudio
  sobre ellos. Se vuelven a abordar en el capítulo~\ref{chapter:simulation_design}.
 
-\subsection{Datos de Operación}
+\subsection{Datos de operación}
 Los datos de operación representan la base empírica sobre la que se asienta el simulador.
 Su tratamiento supuso el inicio formal de la fase dos del proyecto \enquote{\textbf{Análisis y Parametrización}},
 comenzada una vez la EMT termina de preparar la base de datos en un servidor dedicado, incluyendo el pipeline 
@@ -93,7 +92,7 @@ de la tabla transaccional, identificada por el mismo \textit{TripId} y el códig
 \label{fig:relational_model}
 \end{figure}
 
-El resto de parámetros se especifican a continuación.
+El resto de parámetros se especifican a continuación mediante las tablas \ref{tab:params_master} y \ref{tab:params_transac}.
 
 \begin{table}[H]
 	\ttabbox[\FBwidth]
@@ -297,7 +296,7 @@ Este proceso de eliminación de datos anómalos afectó de media a una fila cada
 resultando en un porcentaje pequeño, pero que de no ser identificado, como ya se ha constatado, 
 resulta en inconsistencias en el análisis.
 
-\section{Estudio y Gaussianidad}\label{section:gauss_and_study}
+\section{Estudio y gaussianidad}\label{section:gauss_and_study}
 En esta sección se documentan las dos etapas que componen el análisis de los datos. Estas se pueden resumir en
 dos pilares fundamentales, estudiar la viabilidad de los datos operacionales, y preparar
 los parámetros específicos para su inyección al simulador.
@@ -482,7 +481,7 @@ de datos, como a la plantilla necesaria para que puedan ser incorporados en el s
 \subsubsection{Estudio y análisis de carga, descarga y tiempo entre paradas}
 Una vez validado el tratamiento de hipótesis de normalidad de la variable~\textit{Occupation} para su uso de forma comparativa,
 es necesario estudiar las distintas variables que sirven de parámetros de entrada al simulador. Para ello, se consideran dos 
-tipos de datos: \textbf{Intra-parada}, para datos referentes a cada una de las paradas e \textbf{Inter-parada},
+tipos de datos: \textbf{intra-parada}, para datos referentes a cada una de las paradas e \textbf{inter-parada},
 que incluye aquellos relativos a los tramos entre paradas.
 
 \medskip
@@ -505,7 +504,7 @@ En relación con las características propias de los parámetros a estudiar, se 
 previamente, estos no se asocian en su totalidad con distribuciones \textit{normales}, mostrando en algunos casos
 cercanía a valores nulos
 y prominentes colas derechas. Debido a esta casuística se escoge un enfoque basado en tres distribuciones candidatas:
-Distribución \textbf{Normal}, distribución \textbf{Geométrica} y distribución \textbf{Binomial Negativa}.
+Distribución \textbf{normal}, distribución \textbf{geométrica} y distribución \textbf{binomial negativa}.
 Se utiliza el criterio de información de Akaike (AIC)~\cite{akaike1974new} como medida de qué hipótesis no rechazada se 
 aproxima más a los datos a modelar.
 El enfoque seguido en este análisis consta de un primer cribado y eliminación de valores anómalos. Para ello, como se expone
@@ -564,9 +563,9 @@ la distribución \textit{geométrica}.
 \end{figure}
 
 \medskip
-\noindent\textbf{Datos Inter-parada}
+\noindent\textbf{Datos inter-parada}
 
-En contrapartida de los datos Intra-parada, los datos relativos a los tiempos entre las distintas paradas de la ruta si que 
+En contrapartida de los datos intra-parada, los datos relativos a los tiempos entre las distintas paradas de la ruta sí que 
 se muestran, en una fase inicial de visualización mediante histogramas, con indicios de resultar en hipótesis de normalidad
 no rechazadas. Por este motivo, se utiliza un enfoque similar al realizado para la viabilidad de datos operacionales, basado
 en hipótesis únicamente de normalidad, manteniendo el criterio desagregador de franja horaria escogido para la carga/descarga.

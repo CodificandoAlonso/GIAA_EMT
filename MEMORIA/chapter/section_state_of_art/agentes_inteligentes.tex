@@ -35,7 +35,7 @@ La reactividad se define como la capacidad de un agente de percibir su entorno y
 
 \item \textbf{Sociabilidad}:
 El término \textit{sociabilidad}, definido por la RAE como \enquote{cualidad de sociable}\footnote{Real Academia Española, \textit{Diccionario de la lengua española}, 23.ª ed. \url{https://dle.rae.es/sociabilidad}(accedido: 6 de mayo de 2026)}, remite al concepto de \textit{sociable}, que a su vez se define como \enquote{naturalmente inclinado al trato y relación con las personas o que gusta de ello}\footnote{Real Academia Española, \textit{Diccionario de la lengua española}, 23.ª ed. \url{https://dle.rae.es/sociable}(accedido: 6 de mayo de 2026)}.
-En el contexto de los sistemas multiagente, la sociabilidad se define como la capacidad de comunicación entre agentes mediante un lenguaje determinado\cite{Wooldridge1995}, y representa el habilitador de la cooperación entre agentes. Según \textcite{nwana1996software}, esta cooperación es la razón de ser de la construcción de sistemas con múltiples agentes. Existen diferentes formas de comunicación, explicadas en profundidad en la sección \ref{subsec:comunicacion}.
+En el contexto de los sistemas multi-agente, la sociabilidad se define como la capacidad de comunicación entre agentes mediante un lenguaje determinado\cite{Wooldridge1995}, y representa el habilitador de la cooperación entre agentes. Según \textcite{nwana1996software}, esta cooperación es la razón de ser de la construcción de sistemas con múltiples agentes. Existen diferentes formas de comunicación, explicadas en profundidad en la sección \ref{subsec:comunicacion}.
 
 
 \end{itemize}
@@ -113,13 +113,13 @@ En la justificación de la arquitectura de los agentes escogida, se tiene en cue
 
 \subsection{Contexto histórico y evolución}
 
-Este concepto de agente inteligente surge como derivado de la \textbf{Inteligencia Artificial Distribuida}. La IA distribuida, cuyo origen se remonta a los años 70/80, aparece en respuesta a la falta de socialidad de la ciencia cognitiva. Este nuevo paradigma de distribución del conocimiento trata de romper lo establecido hasta el momento y considerar el entorno como un escenario donde distintos elementos conviven y se relacionan \cite{werner1996logical}. 
+Este concepto de agente inteligente surge como derivado de la \textbf{inteligencia artificial distribuida} (\textbf{DAI}, por sus siglas en inglés). La IA distribuida, cuyo origen se remonta a los años 70/80, aparece en respuesta a la falta de socialidad de la ciencia cognitiva. Este nuevo paradigma de distribución del conocimiento trata de romper lo establecido hasta el momento y considerar el entorno como un escenario donde distintos elementos conviven y se relacionan \cite{werner1996logical}. 
 
 Ya en la década de los 90, el \enquote{agente inteligente} empieza a consolidarse. Se presentan arquitecturas como la \textbf{BDI} presentada por \textcite{bratman1987intention} y discutida anteriormente, y empiezan a aplicarse los agentes a soluciones reales, como la implementación de sistemas autónomos en líneas de producción de bobinas de acero, o la gestión del tráfico del tren bala en Japón \cite{parunak1996applications}.
 
-Durante los 2000, los sistemas Multi-Agente (o \textbf{MAS}) se establecen como el principal paradigma dentro de la Inteligencia artificial Distribuida, absorbiendo progresivamente la terminología y los objetivos de investigación que anteriormente se agrupaban bajo la denominación genérica de DAI \cite{wooldridge2009introduction}.
+Durante los 2000, los sistemas multi-agente (o \textbf{MAS}) se establecen como el principal paradigma dentro de la inteligencia artificial distribuida, absorbiendo progresivamente la terminología y los objetivos de investigación que anteriormente se agrupaban bajo la denominación genérica de DAI \cite{wooldridge2009introduction}.
 
-En la actualidad, la llegada de los LLM (Large Language Models) ha supuesto una revolución en el ámbito de la \textbf{Inteligencia Artificial}, y el campo de los \enquote{Agentes inteligentes} también se ha visto afectado. Un estudio realizado por \textcite{botti2025agentic}, expone cómo estos nuevos modelos de lenguaje han expandido el concepto de \textit{agente} al mundo y cómo eso ha generado una malinterpretación del término que se lleva discutiendo en la literatura todos estos años, comparando las distintas diferencias que existen entre el término clásico y la moda \enquote{Agéntica}. En el presente trabajo, el término \textit{agente} se emplea exclusivamente en su acepción clásica, conforme a las definiciones de \textcite{maes1993modeling} y \textcite{jennings1998applications} expuestas al inicio de esta sección.
+En la actualidad, la llegada de los LLM (Large Language Models) ha supuesto una revolución en el ámbito de la \textbf{inteligencia artificial}, y el campo de los \enquote{agentes inteligentes} también se ha visto afectado. Un estudio realizado por \textcite{botti2025agentic}, expone cómo estos nuevos modelos de lenguaje han expandido el concepto de \textit{agente} al mundo y cómo eso ha generado una malinterpretación del término que se lleva discutiendo en la literatura todos estos años, comparando las distintas diferencias que existen entre el término clásico y la moda \enquote{Agéntica}. En el presente trabajo, el término \textit{agente} se emplea exclusivamente en su acepción clásica, conforme a las definiciones de \textcite{maes1993modeling} y \textcite{jennings1998applications} expuestas al inicio de esta sección.
 
 
 
@@ -172,20 +172,20 @@ En la actualidad, la llegada de los LLM (Large Language Models) ha supuesto una 
 \label{subsec:comunicacion}
 Como ya se ha mencionado, uno de los conceptos clave de los agentes es el de sociabilidad, concepto que se presenta como habilitador necesario para la cooperación inter-agente. Es mandatorio establecer unos criterios para la correcta comunicación y entendimiento entre interlocutores. En respuesta a esto, a lo largo de la existencia de los agentes se han ido desarrollando unos estándares de comunicación para el correcto comportamiento de las comunicaciones.
 
-El primero surge en 1993, denominado \textbf{KQML} (\textit{Knowledge Query and Manipulation Language}) y desarrollado en el marco del programa \textit{Knowledge Sharing Effort} de DARPA a principios de la década de 1990~\cite{finin1994kqml}. KQML definía un formato de mensaje y un protocolo para el intercambio de conocimiento entre agentes, organizando cada mensaje en tres capas: contenido, comunicación y mensaje. Pese a su amplia adopción en la investigación inicial sobre sistemas multiagente, KQML presentaba limitaciones relevantes: la existencia de múltiples implementaciones incompatibles entre sí, y la ausencia de una semántica formal para sus performativos, cuyo significado se describía de forma informal~\cite{finin1994kqml}.
+El primero surge en 1993, denominado \textbf{KQML} (\textit{Knowledge Query and Manipulation Language}) y desarrollado en el marco del programa \textit{Knowledge Sharing Effort} de DARPA a principios de la década de 1990~\cite{finin1994kqml}. KQML definía un formato de mensaje y un protocolo para el intercambio de conocimiento entre agentes, organizando cada mensaje en tres capas: contenido, comunicación y mensaje. Pese a su amplia adopción en la investigación inicial sobre sistemas multi-agente, KQML presentaba limitaciones relevantes: la existencia de múltiples implementaciones incompatibles entre sí, y la ausencia de una semántica formal para sus performativos, cuyo significado se describía de forma informal~\cite{finin1994kqml}.
 
 En respuesta a estas limitaciones, en 1996 se fundó la \textit{Foundation for Intelligent Physical Agents} (\textbf{FIPA}), una organización dedicada a la creación de estándares de interoperabilidad para sistemas basados en agentes. FIPA publicó entre 1997 y 2002 un conjunto de especificaciones que incluyen un lenguaje de comunicación propio (\textbf{FIPA-ACL})~\cite{fipa2002acl}, una biblioteca de actos comunicativos con semántica formal basada en lógica modal BDI~\cite{fipa2002cal}, y un conjunto de protocolos de interacción que regulan la estructura de las conversaciones entre agentes como FIPA-Query~\cite{fipa2002query} y FIPA-Request~\cite{fipa2002request}. Estas especificaciones abordaron las principales debilidades de KQML, proporcionando una semántica formal, un conjunto estandarizado de performativos y protocolos de interacción predefinidos.
 
-En 2005, FIPA fue aceptada como comité de estándares del \textit{IEEE Computer Society}, bajo cuyo auspicio se mantienen actualmente las especificaciones. Si bien estas no constituyen estándares IEEE numerados en sentido formal, son consideradas  el estándar de facto para la comunicación entre agentes en sistemas multiagente. El estándar FIPA es el elegido para el desarrollo de las distintas interlocuciones entre los agentes. 
+En 2005, FIPA fue aceptada como comité de estándares del \textit{IEEE Computer Society}, bajo cuyo auspicio se mantienen actualmente las especificaciones. Si bien estas no constituyen estándares IEEE numerados en sentido formal, son consideradas  el estándar de facto para la comunicación entre agentes en sistemas multi-agente. El estándar FIPA es el elegido para el desarrollo de las distintas interlocuciones entre los agentes. 
 
-\subsection{Plataformas de Desarrollo}
+\subsection{Plataformas de desarrollo}
 El auge de los agentes supuso la creación de nuevos lenguajes y plataformas que permitieran la explotación de este nuevo paradigma.
 Múltiples soluciones han sido desarrolladas para satisfacer estas necesidades. Mayoritariamente surgieron entre finales de los 90 y principios de los 2000, cuando MAS se establece como estándar dentro de la DAI. Entre ellas se destacan JADE\cite{bellifemine2007jade}, NetLogo\cite{wilensky1999netlogo}, MASON\cite{luke2005mason}, Jason\cite{bordini2007jason} y GAMA\cite{taillandier2019gama}. En la tabla ~\ref{tab:comparativa_plataformas}, se muestra una comparativa de estas plataformas.
 
 \begin{table}[h]
 \centering
 \ttabbox[\textwidth]
-{\caption{Comparativa de plataformas de desarrollo de sistemas multiagente}\label{tab:comparativa_plataformas}}
+{\caption{Comparativa de plataformas de desarrollo de sistemas multi-agente}\label{tab:comparativa_plataformas}}
 {\small
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|c|c|c|c|c|}
@@ -225,7 +225,7 @@ Como elección se ha escogido GAMA\cite{taillandier2019gama}, una plataforma de 
 
 
 
-\subsection{Viabilidad de la solución utilizando Agentes Inteligentes}
+\subsection{Viabilidad de la solución utilizando agentes inteligentes}
 
 En el contexto del problema a resolver tratado a lo largo de este documento, resulta necesario validar que el dominio existente en el que se encuentra sea el adecuado basándose en las características formales discutidas a lo largo de este apartado. Concretamente, una de las principales características del problema se basa en la variación de oferta y demanda de pasajeros a lo largo de un conjunto de paradas durante un día concreto. Este entorno se presenta altamente \textbf{dinámico} y \textbf{complejo}, ya que existen multitud de factores que aleatorizan y varían el rango de soluciones, como la demanda variable dependiente de los cambios de hora. Por otra parte, el conocimiento relevante para el problema se encuentra \textbf{distribuido} entre múltiples puntos del sistema: la información sobre la demanda de pasajeros varía según la ubicación geográfica y la franja horaria, los tiempos de viaje dependen de tramos específicos del recorrido, y la disponibilidad operativa fluctúa de forma independiente en cada vehículo.
 

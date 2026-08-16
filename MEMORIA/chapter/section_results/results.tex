@@ -289,7 +289,12 @@ resultados similares para ambas.
 
 \subsubsection{Métricas generales y discusión de resultados}
 
-En cuanto a las métricas generales obtenidas, mostradas en la figura~\ref{fig:general_metrics_results}
+En cuanto a las métricas generales obtenidas, mostradas en la figura~\ref{fig:general_metrics_results},
+se observa que los valores de ocupación resultan congruentes con los esperados. Se presenta una \textbf{disminución} en torno a los
+tres puntos porcentuales en ambos sentidos, lo que equivale a 2,01 pasajeros sobre la capacidad total del vehículo, o a 0,13
+desviaciones estándar de la propia distribución de ocupación. Conviene precisar que dicho desplazamiento no constituye un
+desfase constante sino multiplicativo, ya que la regresión de la ocupación simulada frente a la esperada arroja una pendiente de
+0,901 con ordenada en el origen de +0,74, valor estadísticamente indistinguible de cero.
 
 \begin{figure}[H]
 \centering
@@ -298,11 +303,6 @@ En cuanto a las métricas generales obtenidas, mostradas en la figura~\ref{fig:g
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics_results}
 \end{figure}
 
-se observa que los valores de ocupación resultan congruentes con los esperados. Se presenta una \textbf{disminución} en torno a los
-tres puntos porcentuales en ambos sentidos, lo que equivale a 2,01 pasajeros sobre la capacidad total del vehículo, o a 0,13
-desviaciones estándar de la propia distribución de ocupación. Conviene precisar que dicho desplazamiento no constituye un
-desfase constante sino multiplicativo, ya que la regresión de la ocupación simulada frente a la esperada arroja una pendiente de
-0,901 con ordenada en el origen de +0,74, valor estadísticamente indistinguible de cero.
 
 El origen principal del sesgo se identifica en la oferta simulada. Una ejecución preliminar con 176 viajes, frente a
 los 163,1 que promedian los días laborables estudiados, arroja un sesgo negativo de 4,41 pasajeros; al ajustar el horario de
@@ -340,7 +340,7 @@ basado en el coeficiente una no equivalencia. Esto representa una realidad de la
 \textbf{existe una sobredispersión latente frente a los valores esperados}.
 
 
-Esto se ejemplifica en la siguiente figura, que muestra cómo, si se asumieran varianzas iguales y se proyecta sobre la
+Esto se ejemplifica en la figura \ref{fig:bhat_occ_comparative_with_shadow}, que muestra cómo, si se asumieran varianzas iguales y se proyecta sobre la
 figura previa la sombra que representa esa diferencia de $0,49\sigma$, existen hasta un \textbf{33}\% de distribuciones
 que con su valor de media dentro de esta banda, no alcanzan el umbral del coeficiente debido a la dispersión existente
 sobre los datos simulados.
@@ -491,8 +491,9 @@ los posibles puntos de divergencia con el fin de estudiar su igualdad.
 \subsubsection{Métricas a nivel general}
 
 En el contexto general los resultados se muestran bastante parecidos. Comparando las métricas obtenidas para la segunda
-solución (véase figura~\ref{fig:general_metrics_results}) con la primera (figura~\ref{fig:general_metrics_results_one})
-
+solución (véase figura~\ref{fig:general_metrics_results}) con la primera (figura~\ref{fig:general_metrics_results_one}),
+se observan unos resultados similares. Tanto el porcentaje medio como por sentido se presentan prácticamente iguales, salvo
+una variación de 0,3\% en sentido \textit{La Peseta}, que deriva en un porcentaje medio que difiere 0,2 de la referencia de la segunda solución.
 
 \begin{figure}[H]
 \centering
@@ -501,8 +502,6 @@ solución (véase figura~\ref{fig:general_metrics_results}) con la primera (figu
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:general_metrics_results_one}
 \end{figure}
 
-se observan unos resultados similares. Tanto el porcentaje medio como por sentido se presentan prácticamente iguales, salvo
-una variación de 0,3\% en sentido \textit{La Peseta}, que deriva en un porcentaje medio que difiere 0,2 de la referencia de la segunda solución.
 
 Con respecto al valor de la regularidad, se presenta equivalente (95,33 frente a 96,2), sugiriendo que ambos modelos capturan de la misma forma
 el tiempo de recorrido de las rutas, hecho lógico ya que como se presenta en el capítulo anterior, no existen diferencias en el tránsito de los 
@@ -522,7 +521,11 @@ su referente figura de la solución dos únicamente presenta un indicador de ale
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:nivel_ruta_uno}
 \end{figure}
 
-No obstante, al ampliar el contenido de ambas paradas
+No obstante, al ampliar el contenido de ambas paradas (representado en la figura \ref{fig:parada_apilada}) se detecta cómo el indicador común a ambas resulta el tiempo medio por pasajero, elevado para esta franja debido a que al ser la primera de la 
+operativa y representar una hora donde la mayoría de servicios de la ciudad no están activos y, por lo tanto, no existe mucha demanda operativa,
+la oferta de buses existente en esa franja genera tiempos de espera elevados. La diferencia fundamental entre ambas simulaciones radica en una 
+ligera variación del porcentaje de ocupación. Como el límite para la activación se encontraba en el \textbf{75\%}, esa sutil diferencia entre
+simulaciones genera que a nivel visual el indicador de alerta sea distinto.
 
 \begin{figure}[H]
 \centering
@@ -531,16 +534,15 @@ No obstante, al ampliar el contenido de ambas paradas
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:parada_apilada}
 \end{figure}
 
-se detecta cómo el indicador común a ambas resulta el tiempo medio por pasajero, elevado para esta franja debido a que al ser la primera de la 
-operativa y representar una hora donde la mayoría de servicios de la ciudad no están activos y, por lo tanto, no existe mucha demanda operativa,
-la oferta de buses existente en esa franja genera tiempos de espera elevados. La diferencia fundamental entre ambas simulaciones radica en una 
-ligera variación del porcentaje de ocupación. Como el límite para la activación se encontraba en el \textbf{75\%}, esa sutil diferencia entre
-simulaciones genera que a nivel visual el indicador de alerta sea distinto.
+
 
 El resto de escenarios y la casuística de la ruta se presentan similares, en relación con el comportamiento inherente de la propia ruta (mucha 
 demanda en las primeras horas de la mañana en sentido \textit{Cibeles} y mayor actividad por la tarde en sentido \textit{La Peseta}).
 
-Si se analizan también los porcentajes de equivalencia entre distribuciones de la simulación uno:
+Si se analizan también los porcentajes de equivalencia entre distribuciones de la simulación uno (véase figura \ref{fig:resultados_occ_uno}),
+se observa el mismo patrón identificado y discutido en la sección referente a la validación operativa, lo que efectivamente refuerza
+las conclusiones extraídas. Concretamente la diferencia media en la ocupación sobre las 437 combinaciones parada/franja evaluadas
+es de 0,37 pasajeros en valor absoluto, magnitud del mismo orden del error estándar esperado por el muestreo de réplicas (0,36).
 
 \begin{figure}[H]
 \centering
@@ -549,12 +551,16 @@ Si se analizan también los porcentajes de equivalencia entre distribuciones de 
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:resultados_occ_uno}
 \end{figure}
 
-Se observa el mismo patrón identificado y discutido en la sección referente a la validación operativa, lo que efectivamente refuerza
-las conclusiones extraídas. Concretamente la diferencia media en la ocupación sobre las 437 combinaciones parada/franja evaluadas
-es de 0,37 pasajeros en valor absoluto, magnitud del mismo orden del error estándar esperado por el muestreo de réplicas (0,36).
+
 
 \subsubsection{Métricas a nivel de autobús}
 Con respecto a los autobuses, si se aplica el filtrado por autobús físico, los resultados arrojan un supuesto interesante.
+En la figura \ref{fig:fisical_one} se observa cómo, a diferencia de la solución dos (véase figura~\ref{fig:autobus_simulacion}), existen menos unidades físicas 
+que presentan dos indicadores de alerta. Esto, no obstante, no hace más que ejemplificar las conclusiones extraídas en la sección
+anterior, y es que el retraso existente no representa una magnitud temporal elevada. En el caso de la solución uno, no se activan
+los indicadores de alerta correspondientes con \textit{\% de simulaciones con retraso} y \textit{tiempo medio de retraso} debido 
+a que en su mayoría, estos resultaban ser cercanos a los cinco minutos. Como dada la casuística en este caso, el retraso promedio
+de salida no alcanza los cinco minutos estipulados por el indicador, se encuentran casos donde no se activa el indicador de alerta.
 
 \begin{figure}[H]
 \centering
@@ -563,12 +569,7 @@ Con respecto a los autobuses, si se aplica el filtrado por autobús físico, los
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:fisical_one}
 \end{figure}
 
-Se observa cómo, a diferencia de la solución dos (véase figura~\ref{fig:autobus_simulacion}) existen menos unidades físicas 
-que presentan dos indicadores de alerta. Esto, no obstante, no hace más que ejemplificar las conclusiones extraídas en la sección
-anterior, y es que el retraso existente no representa una magnitud temporal elevada. En el caso de la solución uno, no se activan
-los indicadores de alerta correspondientes con \textit{\% de simulaciones con retraso} y \textit{tiempo medio de retraso} debido 
-a que en su mayoría, estos resultaban ser cercanos a los cinco minutos. Como dada la casuística en este caso, el retraso promedio
-de salida no alcanza los cinco minutos estipulados por el indicador, se encuentran casos donde no se activa el indicador de alerta.
+
 
 Misma casuística se produce filtrando por franja horaria, donde este desajuste de colores se debe a estas ligeras variaciones en 
 el tiempo medio de retraso.

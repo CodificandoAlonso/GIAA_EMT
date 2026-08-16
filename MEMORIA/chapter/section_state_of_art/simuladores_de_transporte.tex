@@ -43,7 +43,7 @@ en la literatura, junto con sus aportaciones y limitaciones en el ámbito del tr
     tiempos de espera.
     \item \textbf{Algoritmos evolutivos y metaheurísticas}
 
-    Este tipo de técnicas basadas en paradigmas de Inteligencia Artificial de inspiración biológica, 
+    Este tipo de técnicas basadas en paradigmas de inteligencia artificial de inspiración biológica, 
     se centran en la realización de 
     procesos iterativos que aplican operadores de selección, recombinación y perturbación de las soluciones
     inspirados en fenómenos naturales, utilizando funciones de coste (heurísticas) para converger hacia soluciones
@@ -60,7 +60,7 @@ en la literatura, junto con sus aportaciones y limitaciones en el ámbito del tr
     simular dos escenarios de tráfico.
     \item \textbf{Aprendizaje profundo por refuerzo}
     
-    Conjunto de técnicas basadas también en paradigmas de la Inteligencia Artificial. Consta de la mezcla del 
+    Conjunto de técnicas basadas también en paradigmas de la inteligencia artificial. Consta de la mezcla del 
     aprendizaje por refuerzo, sistema de aprendizaje iterativo que aprende en base a una política de actuación,
     recibiendo recompensas que guían la optimización en el largo plazo, con técnicas de \enquote{deep learning}
     (aprendizaje profundo), consistente en redes neuronales que permiten aprender estrategias de control adaptativas
@@ -101,7 +101,7 @@ técnica más adecuada para el problema planteado. Su capacidad de modelar
 entidades autónomas que operan en un entorno altamente cambiante y dinámico se alinean con el dominio de 
 aplicación del problema.
 
-\subsection{Sistemas Multi-Agente como simuladores}
+\subsection{Sistemas multi-agente como simuladores}
 En esta sección se expande el estudio sobre los distintos trabajos realizados en el ámbito de las simulaciones
 de transporte basadas en el paradigma de los \textit{agentes inteligentes} y los \textit{sistemas multi-agente}.
 
@@ -115,10 +115,8 @@ aplican sistemas multi-agente a la simulación de transporte, con especial atenc
 líneas de autobús.
 
 Primeramente, a nivel general,~\textcite{divassonj2025abm} expone una revisión de las distintas aportaciones basadas
-en \textit{agentes}. Documenta un uso creciente de estas herramientas desde 2015, alineandose con la adopción de los países
-de objetivos climáticos o de la \textit{Agenda 2030}~\footnote{\enquote{La Asamblea General adopta la Agenda 2030 para el 
-Desarrollo Sostenible}, 25 de septiembre de 2015. Disponible en: \url{https://www.un.org/sustainabledevelopment/es/2015/09/la-asamblea-general-adopta-la-agenda-2030-para-el-desarrollo-sostenible/}
-(accedido: 3 de junio de 2026)}. En relación a la caracterización del problema, la simulación de análisis de demanda
+en \textit{agentes}. Documenta un uso creciente de estas herramientas desde 2015, alineándose con la adopción de los países
+de objetivos climáticos o de la \textit{Agenda 2030} \cite{onu_ods}. En relación a la caracterización del problema, la simulación de análisis de demanda
 supone un \textbf{5,19\%} de las publicaciones, resultando mayoritario con un \textit{62,34\%} el estudio sobre estado
 de tráfico. Se expone por otra parte una comparativa entre las características de los datos utilizados.
 De forma relevante a este trabajo, que utiliza datos reales de operación de ruta de autobús, también resulta minoría sobre la
@@ -226,11 +224,11 @@ de las distribuciones de los datos estudiados. Para ello, se divide el contenido
 \enquote{\nameref{subsubsec:hyp_test}} y \enquote{\nameref{subsubsec:extreme_case}}. 
 
 
-\subsubsection{Test de Hipótesis}\label{subsubsec:hyp_test}
+\subsubsection{Test de hipótesis}\label{subsubsec:hyp_test}
 Los test de hipótesis suponen el principal método de validación de distribuciones empíricas. 
 Se han usado diferentes distribuciones conocidas a lo largo de este trabajo, como son la 
-distribución \textbf{Normal} o \textbf{Gaussiana}, la distribución \textbf{Binomial Negativa} 
-y la distribución \textbf{Geométrica}. Esta subsección expone cómo son estas distribuciones 
+distribución \textbf{normal} o \textbf{gaussiana}, la distribución \textbf{Binomial negativa} 
+y la distribución \textbf{geométrica}. Esta subsección expone cómo son estas distribuciones 
 y cuáles son los distintos test existentes para estas, discutiendo sobre la viabilidad de sus 
 aplicaciones. En los casos en que ninguna distribución candidata supere formalmente el test de 
 bondad de ajuste,~\textcite{burnham2002model} exponen que el Criterio de Información de 
@@ -244,7 +242,7 @@ modelado mediante las distintas distribuciones expuestas a continuación, se uti
 mínimo requerido.
 
 \medskip
-\noindent\textbf{Distribución Normal o Gaussiana}
+\noindent\textbf{Distribución normal o gaussiana}
 
 Posiblemente la más conocida, es una distribución característica por su simetría y su forma de \textit{campana}.
 En la figura~\ref{fig:gaussian} se muestra la típica forma que deriva de esta distribución.
@@ -324,7 +322,7 @@ De esta forma, no solo se obtiene información acerca de si la distribución tes
  sino de cuáles son las causas específicas que concretan el rechazo.
 
 \medskip
-\noindent\textbf{Distribución Binomial Negativa y Distribución Geométrica}
+\noindent\textbf{Distribución binomial negativa y distribución geométrica}
 
 Encapsuladas en un apartado debido a la particularidad de la distribución \textit{geométrica}, que resulta ser 
 un caso de aplicación concreto de la distribución \textit{binomial negativa}, y debido al uso conjunto que 
@@ -417,9 +415,6 @@ valor nulo--- y con los muestreadores implementados en el simulador.
 \end{figure}
 
 
-
-
-
 Dentro del caso de aplicación que concierne a este trabajo, estas distribuciones se han utilizado para 
 modelar los distintos valores de subida y bajada de pasajeros en una parada concreta. Bajo este tipo de 
 escenarios, una distribución de \textit{Poisson} resulta más factible en un principio, dado que esta modela 
@@ -463,7 +458,7 @@ concreto. Dentro del problema en cuestión, se busca encontrar qué \textit{outl
 distribuciones \textit{Normales}. En este caso, se definen tres posibilidades, el \enquote{Test de Grubbs},
 el \enquote{Test de Tietjen-Moore} y el \enquote{Generalized Extreme Studentized Deviate Test} (o ESD). ESD
 se presenta como el único de los tres que no necesita la especificación concreta de cuántos outliers existen 
-en un conjunto de datos (Grubbs establece \textbf{un único outlier}, mientras que Tiejten-Moore 
+en un conjunto de datos (Grubbs establece \textbf{un único outlier}, mientras que Tietjen-Moore 
 necesita el \textbf{número exacto}). Al buscar la utilización de test detectores de valores anómalos en 
 una fase de estudio de los datos, los dos primeros test se presentan incompatibles.
 El ESD es un test propuesto por Rosner en 1983~\cite{rosner1983}, derivado de la generalización del Test de Grubbs para 
@@ -501,7 +496,7 @@ p = 1 - \frac {\alpha} {2 \left ( n - i + 1 \right )}
 \end{equation}
 
 
-De todo esto obtenemos que el número de outliers es determinado según 
+De todo esto se obtiene que el número de outliers es determinado según 
 el máximo valor $i$ que cumpla que $R_i > \lambda_i$~\cite{nist2012outlier, rosner1983}.
 
 

@@ -250,13 +250,12 @@ comprobando su ajuste al protocolo estándar. Método: I}
 {EMT Madrid}
 {Cada autobús debe respetar una capacidad máxima de 80 pasajeros. Las solicitudes de embarque que excedan dicha
 capacidad deben rechazarse, permaneciendo la demanda no atendida en la parada y contabilizándose como pasajeros
-residuales. La atención de las solicitudes debe seguir una disciplina FIFO por orden de llegada a la parada.}
+residuales.}
 {La capacidad es una restricción física del vehículo real y los pasajeros residuales son un indicador de calidad de
-servicio de interés directo para el operador. La disciplina de atención determina qué demanda queda residual y con
-qué tiempo de espera acumulado, por lo que debe quedar fijada de forma explícita e idéntica en ambas representaciones.}
+servicio de interés directo para el operador.}
 {RD-01, RF-01}
-{Se verificaría mediante un escenario forzado de saturación, comprobando el tope de ocupación, el cómputo de
-residuales y el orden de atención de las solicitudes. Método: T}
+{Se verificaría mediante un escenario forzado de saturación, comprobando el tope de ocupación y el cómputo de
+residuales. Método: T}
 
 \requisito{RD-04}{Muestreo de las distribuciones de entrada}
 {Restricción de diseño}
@@ -265,17 +264,13 @@ residuales y el orden de atención de las solicitudes. Método: T}
 {Las subidas y bajadas de pasajeros y los tiempos de viaje entre paradas deben generarse muestreando las distribuciones
 estadísticas especificadas en los ficheros de parámetros de entrada, por parada, franja horaria y sentido. El
 simulador debe soportar el muestreo de las familias Normal, Binomial Negativa y Geométrica según el tipo indicado
-para cada combinación. Los valores muestreados deben truncarse al dominio admisible de la magnitud representada:
-los valores negativos se elevan a cero y el número de descensos queda acotado por la ocupación del vehículo en el
-instante de la parada.}
+para cada combinación.}
 {Traslada al mundo simulado la demanda caracterizada a partir de los datos reales conservando su variabilidad
 estocástica; el soporte de las tres familias es necesario porque los ficheros de parámetros pueden especificar
-cualquiera de ellas según la parada y la franja. El truncamiento al dominio admisible es condición de coherencia
-física del modelo, dado que las familias empleadas no están acotadas en el rango de la magnitud que representan.}
+cualquiera de ellas según la parada y la franja.}
 {RD-01}
 {Se verificaría mediante contraste estadístico entre las muestras generadas por el simulador y las distribuciones
-especificadas en los ficheros de entrada, sobre un número suficiente de réplicas, incluyendo la comprobación del
-efecto del truncamiento sobre las combinaciones de media reducida. Método: A}
+especificadas en los ficheros de entrada, sobre un número suficiente de réplicas. Método: A}
 
 \requisito{RD-05}{Tiempo de detención en parada}
 {Restricción de diseño}
@@ -504,11 +499,10 @@ RD-01 & Modelado multiagente de la línea E01 & Taxonomía de agentes y solució
 RD-02 & Comunicación mediante protocolos FIPA & Protocolos de comunicación de ambas soluciones,
     capítulo~\ref{chapter:simulation_design} & I\\
 \hline
-RD-03 & Capacidad máxima, pasajeros residuales y disciplina FIFO & Protocolo de embarque y gestión de rechazos,
+RD-03 & Capacidad máxima y pasajeros residuales & Protocolo de embarque y gestión de rechazos,
     secciones 5.2.1 y 5.3.1 & T\\
 \hline
-RD-04 & Muestreo y truncamiento de las distribuciones de entrada & Ajuste de distribuciones, sección 4.2; generación de
-    subidas y bajadas, sección 5.2.1 & A\\
+RD-04 & Muestreo de las distribuciones de entrada & Ajuste de distribuciones, sección 4.2 & A\\
 \hline
 RD-05 & Tiempo de detención en parada & Ciclo de parada del agente autobús, capítulo~\ref{chapter:simulation_design} & T\\
 \hline
