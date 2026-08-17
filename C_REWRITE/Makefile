@@ -30,7 +30,7 @@ LDLIBS      := -lm
 
 # Debug / optimization
 DEBUG_FLAGS := -g3 -O0
-RELEASE_FLAGS := -O3 -DNDEBUG
+RELEASE_FLAGS := -O3 -march=native -flto -DNDEBUG
 
 
 # ============================================================================
@@ -68,7 +68,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	@echo "  LD      $@"
-	$(CC) $(OBJECTS) -o $@ $(LDLIBS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $@ $(LDLIBS)
 
 
 # ============================================================================
