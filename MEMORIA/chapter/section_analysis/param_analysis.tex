@@ -24,7 +24,7 @@ debido a la ubicación de estos dentro de un fichero de extensión \enquote{CSV}
 mal formateados, presentando comillas simples \enquote{' '} en vez de comillas dobles 
 \enquote{\char`\"  "}, y juntando ambos sentidos de la ruta dentro de la misma celda.
 
-Para subsanar esto, se recurre a un script de \textit{Python} encargado de modificar las celdas 
+Para subsanar esto, se recurre a un \textit{script} de \textit{Python} encargado de modificar las celdas 
 correspondientes a los datos geo, separando en dos ficheros distintos según sentido y cambiando las 
 ocurrencias de comillas simples por dobles. Por facilidad, además, se ramifican según si se 
 corresponden con referencias a la trayectoria de la línea, o a instancias de paradas. 
@@ -36,15 +36,15 @@ las mismas.
 Como se especifica con anterioridad, aparte de la obtención y limpieza de los datos, para facilidad en la
 implementación, estos pasaron por un proceso de transformación a formato \textit{ESRI shapefile}.
 Para ello se usa la herramienta de código abierto \textbf{QGIS}. En la figura~\ref{fig:qgis_converted}
-se muestra como se visualizan los cuatro GeoJSON procesados y transformados a shapefile. Posteriormente,
-en la figura~\ref{fig:shapefile_gama} se muestran esos archivos shapefile ya dentro del
+se muestra como se visualizan los cuatro GeoJSON procesados y transformados a \textit{shapefile}. Posteriormente,
+en la figura~\ref{fig:shapefile_gama} se muestran esos archivos \textit{shapefile} ya dentro del
 entorno de trabajo de la plataforma de agentes GAMA.\@
 
 
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/qgis_capture_e01_converted.png}
-\caption{Visualización en QGIS del mapa geoespacial convertido a shapefile}
+\caption{Visualización en QGIS del mapa geoespacial convertido a \textit{shapefile}}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:qgis_converted}
 \end{figure}
 
@@ -52,7 +52,7 @@ entorno de trabajo de la plataforma de agentes GAMA.\@
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/gama_shapefiles.png}
-\caption{Visualización en GAMA de los shapefile transformados}
+\caption{Visualización en GAMA de los \textit{shapefile} transformados}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:shapefile_gama}
 \end{figure}
 
@@ -72,7 +72,7 @@ Los datos referentes a la geolocalización de la ruta no son usados en la fase d
 \subsection{Datos de operación}
 Los datos de operación representan la base empírica sobre la que se asienta el simulador.
 Su tratamiento supuso el inicio formal de la fase dos del proyecto \enquote{\textbf{Análisis y Parametrización}},
-comenzada una vez la EMT termina de preparar la base de datos en un servidor dedicado, incluyendo el pipeline 
+comenzada una vez la EMT termina de preparar la base de datos en un servidor dedicado, incluyendo el \textit{pipeline} 
 que alimenta diariamente los datos. Los geoespaciales por su parte, al ser de acceso público, se pueden tratar
 sin la necesidad de preparación por parte de la empresa, por lo que se empiezan a tratar
 dentro de la fase previa a la mencionada.
@@ -274,7 +274,7 @@ de nomenclatura en campos de  ambas tablas, en concreto ---\textit{IdExternal}, 
 \textit{EventTime} y \textit{TimeSlot}---.
 
 Como se ha mencionado, el análisis de los datos de operación se ha realizado con la herramienta
-\textbf{Jupyter Notebook}, usando kernel de \textit{Python}. Bajo este framework, para el 
+\textbf{Jupyter Notebook}, usando \textit{kernel} de \textit{Python}. Bajo este framework, para el 
 manejo de los volúmenes de datos se ha usado la librería \textit{pandas}, que ante duplicidad 
 en los nombres de los campos, al encontrar una segunda ocurrencia añade un \enquote{.1} al cuerpo de la columna.
 De esta forma, todos aquellos campos contenedores de un \enquote{.1} se corresponden con las referentes
@@ -379,7 +379,7 @@ tratamiento agregado (\textit{All}) o desagregado, ambas fragmentadas por franja
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/to_A/comparison_ALL_vs_individual.png}
-\caption{Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido Cibeles
+\caption{Comparación de hipótesis de normalidad y media de \textit{outliers} entre formas agregada y desagregada sentido Cibeles
 fragmentados por franja horaria.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:comparison_toA}
 \end{figure}
@@ -387,7 +387,7 @@ fragmentados por franja horaria.}
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/to_B/comparison_ALL_vs_individual.png}
-\caption{Comparación de hipótesis de normalidad y media de outliers entre formas agregada y desagregada sentido La Peseta
+\caption{Comparación de hipótesis de normalidad y media de \textit{outliers} entre formas agregada y desagregada sentido La Peseta
 fragmentados por franja horaria.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:comparison_toB}
 \end{figure}
@@ -396,7 +396,7 @@ En ambos sentidos se observa cómo hacia el final de la jornada, especialmente e
 porcentaje de rechazo. La explicación en este caso es clara, coincide con la hora que menor oferta de autobuses posee, por lo que un 
 menor número muestral de datos recogidos deriva en que datos extremos aumenten su peso en las distribuciones y se pierda
 generalidad, derivando en mayores hipótesis de normalidad rechazadas.
-Relativo a los outliers, pese a que el tratamiento agregado de los días presenta mayores hipótesis de normalidad no 
+Relativo a los \textit{outliers}, pese a que el tratamiento agregado de los días presenta mayores hipótesis de normalidad no 
 rechazadas, el número de valores anómalos detectados aumenta significativamente. No obstante, estos valores nunca
 superan el \textbf{1\%} relativo al valor muestral sobre el que se estudia, por lo que no se representan suficientemente
 significativos para considerarse una parte intrínseca de la muestra, sino valores anómalos que por la casuística aleatoria del 
@@ -418,10 +418,10 @@ La segunda es relativa al cálculo del valor de $occupation$, computado mediante
  mostrado en las figuras~\ref{fig:normality_toB_all} y~\ref{fig:normality_toB_deagregated}.
 
 
-Al combinar este análisis, tanto en segmentar según franja horaria como según parada, se genera un~\enquote{heatmap} donde
+Al combinar este análisis, tanto en segmentar según franja horaria como según parada, se genera un \textit{heatmap} donde
 se muestran los valores del porcentaje de hipótesis de normalidad para cada parada en cada franja horaria. Nótese que en el caso
 del agregado~\textit{All}, resulta en un caso binario: o la combinación parada-franja no rechaza la hipótesis, o sí lo hace,
-por lo que la paleta de colores del~\enquote{heatmap} en este caso no muestra más de dos colores. Las figuras
+por lo que la paleta de colores del \textit{heatmap} en este caso no muestra más de dos colores. Las figuras
 ~\ref{fig:heatmap_toA_all},~\ref{fig:heatmap_toA_deagregated},~\ref{fig:heatmap_toB_all} y~\ref{fig:heatmap_toB_deagregated}
 muestran estos mapas de calor para ambos sentidos de la ruta.
 
@@ -551,14 +551,14 @@ la distribución \textit{geométrica}.
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/to_A/fig1_global_pie_toA.png}
-\caption{Diagrama de tarta de las distribuciones elegidas para boards y dropoffs de pasajeros sentido Cibeles.}
+\caption{Diagrama de tarta de las distribuciones elegidas para \textit{boards} y \textit{dropoffs} de pasajeros sentido Cibeles.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:cake_toA}
 \end{figure}
 
 \begin{figure}[H]
  \centering
     \includegraphics[width=\textwidth]{imagenes/to_B/fig1_global_pie_toB.png}
-\caption{Diagrama de tarta de las distribuciones elegidas para boards y dropoffs de pasajeros sentido La Peseta.}
+\caption{Diagrama de tarta de las distribuciones elegidas para \textit{boards} y \textit{dropoffs} de pasajeros sentido La Peseta.}
 \par\vspace{4pt}{\footnotesize Fuente: elaboración propia.}\label{fig:cake_toB}
 \end{figure}
 
@@ -598,14 +598,14 @@ Se genera un fichero CSV por cada sentido existente de la línea a simular.
 \textbf{Parada} & \textbf{Franja} & \textbf{Tipo de dato} &
 \textbf{Distribución} & \textbf{Param1} & \textbf{Param2} \\
 \midrule
-82 & 5  & Board   & Binom.\ Negativa & 0,1401 & 0,1144 \\
-82 & 5  & DropOff & Binom.\ Negativa & 0,2178 & 0,6201 \\
-82 & 7  & Board   & Normal           & 7,1418 & 4,2352 \\
-82 & 7  & DropOff & Normal           & 12,661 & 5,0901 \\
-82 & 11 & Board   & Normal           & 3,1499 & 2,3351 \\
-82 & 15 & DropOff & Normal           & 9,1098 & 5,6768 \\
-82 & 20 & Board   & Geométrica       & 0,2562 & ---    \\
-82 & 20 & DropOff & Normal           & 9,3497 & 5,6877 \\
+82 & 5  & \textit{Board}   & Binom.\ Negativa & 0,1401 & 0,1144 \\
+82 & 5  & \textit{DropOff} & Binom.\ Negativa & 0,2178 & 0,6201 \\
+82 & 7  & \textit{Board}   & Normal           & 7,1418 & 4,2352 \\
+82 & 7  & \textit{DropOff} & Normal           & 12,661 & 5,0901 \\
+82 & 11 & \textit{Board}   & Normal           & 3,1499 & 2,3351 \\
+82 & 15 & \textit{DropOff} & Normal           & 9,1098 & 5,6768 \\
+82 & 20 & \textit{Board}   & Geométrica       & 0,2562 & ---    \\
+82 & 20 & \textit{DropOff} & Normal           & 9,3497 & 5,6877 \\
 \bottomrule
 \multicolumn{6}{l}{\small\textit{Fuente}: elaboración propia.}
 \end{tabular}}

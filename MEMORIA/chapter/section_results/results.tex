@@ -307,25 +307,25 @@ desfase constante sino multiplicativo, ya que la regresión de la ocupación sim
 El origen principal del sesgo se identifica en la oferta simulada. Una ejecución preliminar con 176 viajes, frente a
 los 163,1 que promedian los días laborables estudiados, arroja un sesgo negativo de 4,41 pasajeros; al ajustar el horario de
 expediciones a la oferta real observada, este se redujo a 2,01, confirmando el mecanismo previsto. La magnitud remanente
-resulta ya del orden del propio desbalance presente en los datos de partida, ya que los conteos operacionales registran un
+resulta del orden del propio desbalance presente en los datos de partida, ya que los conteos operacionales registran un
 4,4\% menos de bajadas que de subidas sobre el conjunto del periodo, discrepancia incompatible con la conservación de
 pasajeros de una línea cerrada y atribuible al sistema de conteo embarcado, que establece una cota inferior al grado de
 concordancia alcanzable.
 
 Como se expone en la sección relativa a la metodología y al estudio de viabilidad de datos operacionales (véase secciones
-~\ref{sec:kpi_extraction} y~\ref{section:operational} respectivamente), la comparativa entre los distintos valores
+\ref{sec:kpi_extraction} y \ref{section:operational} respectivamente), la comparativa entre los distintos valores
 de \textit{ocupación} para cada parada y franja horaria se realiza mediante métricas de Bhattacharyya~\cite{bhattacharyya1946divergence}.
 Concretamente, se utiliza el~\textbf{coeficiente de Bhattacharyya}, que mide el grado de solapamiento
-existente entre dos distribuciones gaussianas, inferido mediante la fórmula cerrada para el caso derivada por~\textcite{kailath1967divergence}.
+existente entre dos distribuciones gaussianas, inferido mediante la fórmula cerrada para el caso derivada por \textcite{kailath1967divergence}.
 El valor del coeficiente, expresado mediante un valor entre 0 (nada de solapamiento) y 1 (solapamiento completo),
 no mide en sí mismo si dos distribuciones son equivalentes, únicamente cuantifica
 el solapamiento de ambas. Por ello, se establece de forma conservadora una estricta frontera con valor de~\textbf{0,97} como
 límite inferior a igualar o superar para considerar dos distribuciones equivalentes. Esto, considerando que el coeficiente
 representa el producto de comparativa de varianzas y comparativa de niveles, equivale a que, ante varianzas iguales,
-~la diferencia en la media de las distribuciones no puede superar $0,49\sigma$.
+la diferencia en la media de las distribuciones no puede superar $0,49\sigma$.
 
 El resultado sobre la aplicación de esta comparativa para cada parada en cada franja horaria resulta en un discreto
-~\textbf{33,6}\% de distribuciones equivalentes. A continuación, en la figura~\ref{fig:bhat_occ_comparative} se proyecta
+\textbf{33,6}\% de distribuciones equivalentes. A continuación, en la figura~\ref{fig:bhat_occ_comparative} se proyecta
 el valor de las medias simuladas frente a las esperadas, caracterizando por colores verde y rojo su equivalencia.
 
 \begin{figure}[H]
@@ -355,10 +355,10 @@ sobre los datos simulados.
 El origen de este comportamiento reside en el muestreo independiente de las bajadas. La ocupación constituye una magnitud
 acumulada a lo largo del recorrido, de modo que las varianzas de embarque y apeo se componen parada a parada. En el sistema
 real dicha composición se encuentra atenuada por la covarianza negativa entre las bajadas de paradas consecutivas,
-~correlación que el modelo no reproduce al muestrear las bajadas de cada parada por separado.
+correlación que el modelo no reproduce al muestrear las bajadas de cada parada por separado.
 La varianza acumulada resulta en consecuencia superior a la observada, y el efecto se agrava conforme avanza el itinerario.
 
-Esto se expone en las figuras~\ref{fig:evolucion_de_dispersion_por_ruta_toA} y~\ref{fig:evolucion_de_dispersion_por_ruta_toB},
+Esto se expone en las figuras \ref{fig:evolucion_de_dispersion_por_ruta_toA} y \ref{fig:evolucion_de_dispersion_por_ruta_toB},
 en la que se observa cómo a medida que avanza la
 posición en la ruta, esa falta de covarianza negativa entre los valores de bajada aumenta la dispersión de las distribuciones
 de ocupación.
@@ -451,8 +451,8 @@ con la identidad.
 
 \subsubsection{Métricas a nivel de autobús}
 Por último, en relación a las métricas a nivel de autobús, filtrando por autobús físico a nivel visual puede resultar
-que estos no se presentan \enquote{óptimos}, al activarse en la mayoría de los casos dos indicadores de alerta~(véase
-~\ref{fig:autobus_simulacion})
+que estos no se presentan \enquote{óptimos}, al activarse en la mayoría de los casos dos indicadores de alerta (véase
+\ref{fig:autobus_simulacion}).
 
 \begin{figure}[H]
 \centering
@@ -658,10 +658,10 @@ memoria es equivalente en ambas soluciones, en torno a los 2 GiB por segundo, po
 volumen total de memoria liberada escala con la duración de la ejecución y no constituye una
 diferencia cualitativa entre ellas. En segundo lugar, el conjunto vivo tras las pausas de
 recolección resulta incluso inferior en la solución uno, lo que indica que los agentes
-\textit{pasajero} no incrementan la memoria residente: se crean, intervienen en el ciclo
+\textit{pasajero} no incrementan la memoria residente. Estos se crean, intervienen en el ciclo
 correspondiente y se destruyen sin sobrevivir a las sucesivas recolecciones. En tercer lugar,
 y de forma determinante, el tiempo de parada atribuible al recolector representa un
-0,95\,\% de la ventana de ejecución en la solución uno, magnitud que descarta la gestión
+0,95 \% de la ventana de ejecución en la solución uno, magnitud que descarta la gestión
 automática de memoria como causa del sobrecoste observado.
 
 De ambos análisis se obtiene que la solución uno no opera con mayor
@@ -669,5 +669,5 @@ intensidad, sino durante más tiempo realizando un volumen de trabajo superior. 
 sobrecoste se sitúa en la gestión del ciclo de vida de los agentes
 \textit{pasajero}, en su evaluación por parte del planificador y en el intercambio de
 mensajes asociado a los protocolos de comunicación, y no en la infraestructura de ejecución
-subyacente. El capítulo~\ref{chapter:future_works} discute las implicaciones de este
+subyacente. El capítulo \ref{chapter:future_works} discute las implicaciones de este
 resultado.

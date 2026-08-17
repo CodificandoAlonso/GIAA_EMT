@@ -13,9 +13,9 @@ Regional de Transportes de Madrid~\cite{crtm_gtfs}, y comprende la topología de
 la ubicación de las paradas y los horarios planificados.
 
 La segunda procede del acuerdo institucional que sustenta la Cátedra UC3M-EMT y opera a
-nivel de expedición y de estancia en parada. Se compone de dos tablas relacionadas: una que
+nivel de expedición y de estancia en parada. Se compone de dos tablas relacionadas. Una master que
 identifica cada expedición realizada, con su línea, sentido y marcas temporales asociadas,
-y otra que registra una entrada por cada detención del vehículo en una parada del
+y una transaccional que registra una entrada por cada detención del vehículo en una parada del
 recorrido, con los recuentos de embarque y descenso correspondientes.
 
 Ninguna de las dos fuentes incorpora datos de carácter personal en el sentido del artículo
@@ -27,12 +27,12 @@ contienen identificadores de viajero ni referencias a validaciones individuales,
 no resulta posible atribuir ninguna observación a una persona física identificada o
 identificable. Conforme al considerando 26 del propio Reglamento, la información que no
 permite tal identificación queda fuera del ámbito de aplicación de la norma, de modo que no
-ha sido necesario articular una base para el tratamiento ni adoptar las medidas que la norma
+ha sido necesario establecer una base para el tratamiento ni adoptar las medidas que la norma
 exige respecto de los datos personales. La misma consideración resulta aplicable a la Ley
 Orgánica 3/2018~\cite{lopdgdd}.
 
-Conviene precisar que la agregación por parada y franja horaria sobre la que se ajustan las
-distribuciones del modelo, descrita en el capítulo~\ref{chapter:param_analisys}, es una
+Resulta imperioso remarcar que la agregación por parada y franja horaria sobre la que se ajustan las
+distribuciones del modelo, descrita en el capítulo \ref{chapter:param_analisys}, es una
 decisión metodológica propia del análisis y no una medida de protección de datos. Los
 agentes \textit{pasajero} que intervienen en la simulación no se corresponden con personas
 reales, sino que se generan por muestreo a partir de dichas distribuciones, y el sistema no
@@ -120,7 +120,7 @@ Profesional de la Ingeniería del \textit{Software} de ACM e IEEE~\cite{acm_ieee
 Desde una perspectiva deontológica, la ingeniería informática no consiste únicamente en la
 resolución técnica de problemas, sino en la aplicación del conocimiento empírico para
 orientar la tecnología hacia el interés general. El simulador diseñado persigue un beneficio
-identificable en este sentido: proporcionar al operador una herramienta con la que analizar
+identificable en este sentido, el cual es proporcionar al operador una herramienta con la que analizar
 el comportamiento de una línea de servicio a partir de evidencia empírica, y no de supuestos
 no verificados.
 

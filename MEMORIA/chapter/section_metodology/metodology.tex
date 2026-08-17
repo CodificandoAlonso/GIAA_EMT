@@ -122,10 +122,10 @@ En esta sección se exponen las distintas herramientas utilizadas para la constr
 Usada en el desarrollo del sistema multi-agente, facilita la implementación del estándar de comunicaciones FIPA~\cite{fipa2002acl} y la inclusión de mapas geoespaciales gracias a su lenguaje propio~\textit{GAML}.
 
 \item \textbf{Jupyter Notebook}\footnote{\url{https://jupyter.org} (accedido: 9 de mayo de 2026).}:
-Herramienta usada con kernel de \textit{Python} para el análisis de los datos de operación de la línea a simular. Facilita la visualización de resultados, el análisis exploratorio de datos o la construcción de modelos estadísticos. Con  su estructura de celdas \enquote{markdown} y sus celdas de código, mejora la lectura y la explicabilidad de los procesos que se realizan en cada documento \enquote{ipynb} (formato de cuadernos Jupyter).
+Herramienta usada con kernel de \textit{Python} para el análisis de los datos de operación de la línea a simular. Facilita la visualización de resultados, el análisis exploratorio de datos o la construcción de modelos estadísticos. Con  su estructura de celdas \textit{markdown} y sus celdas de código, mejora la lectura y la explicabilidad de los procesos que se realizan en cada documento \enquote{ipynb} (formato de cuadernos Jupyter).
 
 \item \textbf{QGIS}\footnote{\url{https://qgis.org} (accedido: 9 de mayo de 2026).}:
-Necesaria para la conversión de GeoJSON (formato basado en JSON con especificación concreta de parámetros para la representación geográfica de los datos) a archivo ESRI shapefile (formato estándar de representación vectorial de datos geoespaciales). Usada para la carga en el simulador de los datos de la ruta y de la ubicación de las paradas.
+Necesaria para la conversión de GeoJSON (formato basado en JSON con especificación concreta de parámetros para la representación geográfica de los datos) a archivo \textit{ESRI shapefile} (formato estándar de representación vectorial de datos geoespaciales). Usada para la carga en el simulador de los datos de la ruta y de la ubicación de las paradas.
 
 \item \textbf{Node.js}\footnote{\url{https://nodejs.org} (accedido: 9 de mayo de 2026).}:
 Entorno de ejecución del lenguaje JavaScript. Utilizado para el despliegue de la herramienta en \textit{local}. Permite la creación de una arquitectura cliente/servidor que permita la conexión entre acciones o deseos del usuario en el navegador y su correspondiente cambio en la máquina anfitriona. Facilita la visualización de las simulaciones o el lanzamiento de nuevas.
@@ -147,14 +147,14 @@ del documento en formato PDF/A, requerido para el depósito institucional.
 
 Sobre las herramientas físicas utilizadas, se ha dispuesto de un portátil MSI Modern 15 C13M-273XES, 
 modelo con 16 núcleos lógicos, 32GB RAM DDR4 y almacenamiento NVMe. Esta información, junto a detalles sobre presupuesto, 
-se expanden en el capítulo~\ref{chapter:budget}, pero cabe ser destacada por su relación a las herramientas usadas 
+se expanden en el capítulo \ref{chapter:budget}, pero cabe ser destacada por su relación a las herramientas usadas 
 y su interés en la interpretación a nivel de tiempo en la fase de \textbf{Diseño
 e implementación}, así como en la relativa a \textbf{Extracción de indicadores y visualización}.
 
 Todo el desarrollo del trabajo se ha realizado sobre el sistema operativo Ubuntu 24.04 LTS, distribución 
 de Linux basada en Debian. Esta elección de Sistema Operativo, sumado al conjunto de herramientas utilizadas,
- constituye un sistema de \textbf{código abierto} en su totalidad. Esto permite un sistema transparente y reproducible, 
- sin dependencia de licencias comerciales.
+constituye un sistema de \textbf{código abierto} en su totalidad. Esto permite un sistema transparente y reproducible, 
+sin dependencia de licencias comerciales.
 
  \section{Extracción de KPIs}\label{sec:kpi_extraction}
  Una de las fases más importantes del trabajo se constituye sobre cómo se evalúan los distintos resultados obtenidos
@@ -167,11 +167,11 @@ de Linux basada en Debian. Esta elección de Sistema Operativo, sumado al conjun
 \subsection{Métricas a nivel general} 
 Estos indicadores tratan de reflejar en un ámbito global, a modo de primera impresión, cuáles son los resultados
 de la simulación realizada. Se centran en condensar en porcentajes la media de los valores más relevantes que se pretende
-medir. Entre ellos destaca el \textbf{porcentaje medio de ocupación de los autobuses}, tanto global como fragmentado 
-por sentido. Este porcentaje se realiza sobre una cota máxima definida por la EMT y fijada como estándar.
- el \textbf{tiempo medio de espera por pasajero}, agregado sobre el total de pasajeros a lo largo de las
- distintas iteraciones de \textit{Monte Carlo}, o el valor medio de \textbf{regularidad}, también calculado sobre el 
- total de iteraciones.
+medir. Concretamente se extrae el \textbf{porcentaje medio de ocupación de los autobuses}, tanto global como fragmentado 
+por sentido, donde este porcentaje se realiza sobre una cota máxima definida por la EMT y fijada como estándar;
+el \textbf{tiempo medio de espera por pasajero}, agregado sobre el total de pasajeros a lo largo de las
+distintas iteraciones de \textit{Monte Carlo}; o el valor medio de \textbf{regularidad}, también calculado sobre el 
+total de réplicas.
 
 Esta regularidad representa un valor interno de la compañía municipal. Consiste en la medición y comparación
 de los tiempos realizados por los distintos autobuses en el tramo correspondido entre la segunda y la penúltima 

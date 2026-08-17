@@ -457,18 +457,18 @@ Según la respuesta a estas preguntas se puede reducir el número de modelos que
 concreto. Dentro del problema en cuestión, se busca encontrar qué \textit{outliers} pueden existir en 
 distribuciones \textit{Normales}. En este caso, se definen tres posibilidades, el \enquote{Test de Grubbs},
 el \enquote{Test de Tietjen-Moore} y el \enquote{Generalized Extreme Studentized Deviate Test} (o ESD). ESD
-se presenta como el único de los tres que no necesita la especificación concreta de cuántos outliers existen 
-en un conjunto de datos (Grubbs establece \textbf{un único outlier}, mientras que Tietjen-Moore 
+se presenta como el único de los tres que no necesita la especificación concreta de cuántos \textit{outliers} existen 
+en un conjunto de datos (Grubbs establece \textbf{un único \textit{outlier}}, mientras que Tietjen-Moore 
 necesita el \textbf{número exacto}). Al buscar la utilización de test detectores de valores anómalos en 
 una fase de estudio de los datos, los dos primeros test se presentan incompatibles.
 El ESD es un test propuesto por Rosner en 1983~\cite{rosner1983}, derivado de la generalización del Test de Grubbs para 
-detección de múltiples outliers, y que opera sobre una distribución \textbf{aproximadamente normal}.
+detección de múltiples \textit{outliers}, y que opera sobre una distribución \textbf{aproximadamente normal}.
 Recibe como único parámetro $r$, un límite superior utilizado para el planteamiento de la
 hipótesis alternativa. Las hipótesis \(H_0\) y \(H_a\) son:
 \[
 \begin{aligned}
-H_0 &: \text{No hay outliers} \\
-H_a &: \text{Hay hasta } r \text{ outliers}
+H_0 &: \text{No hay \textit{outliers}} \\
+H_a &: \text{Hay hasta } r~\textit{outliers}
 \end{aligned}
 \]
 Posteriormente, se sigue un proceso iterativo, en el cual se computa la siguiente fórmula para cada 
@@ -496,7 +496,7 @@ p = 1 - \frac {\alpha} {2 \left ( n - i + 1 \right )}
 \end{equation}
 
 
-De todo esto se obtiene que el número de outliers es determinado según 
+De todo esto se obtiene que el número de \textit{outliers} es determinado según 
 el máximo valor $i$ que cumpla que $R_i > \lambda_i$~\cite{nist2012outlier, rosner1983}.
 
 
@@ -517,7 +517,7 @@ gráfico de los datos, en aquellos escenarios donde la posible normalidad repres
 En casos expandidos con múltiples validaciones, se ha utilizado de una forma acotada y considerada.
 Bajo tamaños muestrales que rondan las 400 muestras, se ha implementado este test bajo especificación de una cota
 no superior al \textbf{1\%} del total de los datos, lo que representativamente supone una medida de hasta 4
-outliers posibles en la distribución. Este valor permite representar un margen lo suficientemente pequeño como 
+\textit{outliers} posibles en la distribución. Este valor permite representar un margen lo suficientemente pequeño como 
 para poder ser utilizado como límite superior en la hipótesis alternativa del test sin dañar el comportamiento
 genuino de los datos~\cite{wilcox2012}.
 

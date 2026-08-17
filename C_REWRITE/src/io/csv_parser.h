@@ -53,6 +53,12 @@ typedef struct input_data_matrix{
     input_data_stop route_stops_b[MAX_DIRECTION_LEN];
 } input_data_matrix;
 
+/**
+ * @brief Auxiliar function that receives a static 256b char pointer and resolves the content giving back a struct
+ * of type input_data_stop_row
+ */
+input_data_stop_row clean_inline_row(char *inline_data);
+
 
 
 const input_data_matrix *load_and_map_route_data_from_csv(char *route_direction_a, char *route_direction_b);
@@ -81,5 +87,3 @@ const size_t stop_mapper_toB(u16 stopcode, input_data_matrix *matrix);
  ******************************************************************************************************************
  ******************************************************************************************************************
  */
-
-
