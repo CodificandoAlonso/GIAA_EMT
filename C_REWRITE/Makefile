@@ -1,4 +1,23 @@
 # ============================================================================
+# ENVIRONMENT
+# ============================================================================
+
+
+ENV ?= development
+
+ENV_FILE := .env-$(ENV)
+
+ifeq ($(ENV),development)
+    ENV_CFLAGS := -DENV_DEVELOPMENT
+else ifeq ($(ENV),production)
+    ENV_CFLAGS := -DENV_PRODUCTION
+else
+    $(error Unknown environment: $(ENV))
+endif
+
+
+
+# ============================================================================
 # Project configuration
 # ============================================================================
 
@@ -20,7 +39,8 @@ CFLAGS      := -std=$(CSTD) \
                -Werror=implicit-function-declaration \
                -MMD \
                -MP \
-			   -pthread
+			   -pthread \
+			   $(ENV_CFLAGS)
 
 # Include directories
 CPPFLAGS    := -Isrc
@@ -31,6 +51,16 @@ LDLIBS      := -lm
 # Debug / optimization
 DEBUG_FLAGS := -g3 -O0
 RELEASE_FLAGS := -O3 -march=native -flto -DNDEBUG
+SANITIZER_FLAGS := -g3 -O1 \
+                   -fsanitize=address,undefined \
+                   -fno-omit-frame-pointer
+
+
+
+
+
+
+
 
 
 # ============================================================================
@@ -95,6 +125,10 @@ release: CFLAGS += $(RELEASE_FLAGS)
 release: clean
 release: $(TARGET)
 
+.PHONY: sanitize
+sanitize: CFLAGS += $(SANITIZER_FLAGS)
+sanitize: clean
+sanitize: $(TARGET)
 
 # ============================================================================
 # Run
@@ -137,5 +171,6 @@ help:
 	@echo "  make debug    Build with debugging symbols and no optimization"
 	@echo "  make release  Build optimized release version"
 	@echo "  make run      Build and run the simulation"
+	@echo "  make sanitize Build with AddressSanitizer and UBSan"
 	@echo "  make clean    Remove build files and executable"
 	@echo "  make rebuild  Clean and rebuild everything"

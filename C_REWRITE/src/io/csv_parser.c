@@ -151,7 +151,7 @@ const input_data_matrix *load_and_map_route_data_from_csv(const char *route_dire
         if (index_stop == SIZE_MAX) {
             return NULL;
         }
-            matrix->route_stops_a[index_stop].stop_distributions[2* (new_row.time_slot - 5) + new_row.type] = new_row;
+            matrix->route_stops_a[index_stop].stop_distributions[(byte)2* (new_row.time_slot - (byte)5) + (byte)new_row.type] = new_row;
         }
     }
     fclose(fd_toA);
@@ -175,7 +175,7 @@ const input_data_matrix *load_and_map_route_data_from_csv(const char *route_dire
             if (index_stop == SIZE_MAX) {
             return NULL;
             }
-            matrix->route_stops_b[index_stop].stop_distributions[2* (new_row.time_slot - 5) + new_row.type] = new_row;
+            matrix->route_stops_b[index_stop].stop_distributions[(byte)2* (new_row.time_slot - (byte)5) + (byte)new_row.type] = new_row;
         }
     }
 

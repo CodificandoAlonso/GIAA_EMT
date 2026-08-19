@@ -32,6 +32,11 @@ typedef enum {
 } data_type;
 
 
+typedef enum {
+    CIBELES = 0,
+    LA_PESETA = 1
+} direction;
+
 /**
  * @brief Represents one parsed row of the input CSV.
  *
@@ -198,7 +203,7 @@ get_distribution_per_timeslot_toA(
     }
 
     return &matrix->route_stops_a[index]
-        .stop_distributions[2 * (timeslot - 5) + type];
+        .stop_distributions[(byte)2 * (timeslot - (byte)5) + (byte)type];
 }
 
 
@@ -229,7 +234,7 @@ get_distribution_per_timeslot_toB(
     return NULL;
     }
     return &matrix->route_stops_b[index]
-        .stop_distributions[2 * (timeslot - 5) + type];
+        .stop_distributions[(byte)2 * (timeslot - (byte)5) + (byte)type];
 }
 
 
@@ -292,3 +297,4 @@ get_stop_data_toB(
  ******************************************************************************************************************
  ******************************************************************************************************************
  */
+

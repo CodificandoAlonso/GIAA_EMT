@@ -20,7 +20,7 @@ Gemfile.lock
 WEB_DEVEL/node_modules
 *.o
 *.d
-
+*.env*
 .claude
 
 .vscode
