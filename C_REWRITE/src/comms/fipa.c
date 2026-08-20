@@ -107,6 +107,7 @@ void send_message(message *msg){
             inbox_push(&msg->receiver->informs, msg);
             break;
     }
+    free(msg);
 }
 
 
@@ -165,4 +166,5 @@ void destroy_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n){
 
 void cleanup_message(message *message){
     free(message->payload);
+    message->payload = NULL;
 }

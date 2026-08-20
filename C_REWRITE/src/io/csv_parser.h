@@ -32,11 +32,6 @@ typedef enum {
 } data_type;
 
 
-typedef enum {
-    CIBELES = 0,
-    LA_PESETA = 1
-} direction;
-
 /**
  * @brief Represents one parsed row of the input CSV.
  *
@@ -105,7 +100,6 @@ load_and_map_route_data_from_csv(
     const char *route_direction_a,
     const char *route_direction_b
 );
-
 
 
 
@@ -298,3 +292,32 @@ get_stop_data_toB(
  ******************************************************************************************************************
  */
 
+
+
+ typedef struct results_row{
+    u16 sim_identifier;
+    u16 bus_code;
+    byte travels_completed;
+    u16 stopcode;
+    direction direction;
+    byte timeslot;
+    byte departure_timeslot;
+    byte boards;
+    byte residual_boards;
+    byte dropoffs;
+    byte occupation;
+    u32 time_travelled;
+}results_row;
+
+typedef struct anomaly_row{
+    u16 sim_identifier;
+    u16 bus_code;
+    byte travels_completed;
+    direction direction;
+    u16 stopcode;
+    byte timeslot;
+    char *event_type;
+    u32 current_time;
+    u32 expected_departure;
+    byte minutes_of_delay;
+}anomaly_row;

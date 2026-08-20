@@ -11,7 +11,7 @@
 
 #define MAX_OCCUPANCY 80
 
-typedef struct simulation_params simulation_params;
+typedef struct global_simulation_parameters global_simulation_parameters;
 
 
 
@@ -22,6 +22,7 @@ typedef enum {
     waiting_headway = 2
 } BUS_STATE;
 
+
 typedef enum {
     arrived = 0,
     waiting_stop_answer = 1,
@@ -30,20 +31,15 @@ typedef enum {
 } BUS_STOPPED_STATE;
 
 static const MESSAGE_TYPE BUS_MESSAGE_TYPES[] = {
-    request,
-    query,
     agree,
     inform
 };
 
-#define BUS_INBOXES_NUMBER 4
+#define BUS_INBOXES_NUMBER 2
 
 
-//todo, maybe put this into the json_parser.h
-typedef struct headway_times{
-    u32 departure_time;
-    direction bus_direction;
-} headway_times;
+
+
 
 
 typedef struct bus {
@@ -52,10 +48,9 @@ typedef struct bus {
     Agent agent;
 
     //stopcode for referencing itself
-    u16 stop;
+    u16 bus_code;
 
-    //For debugging. Later on can be erased
-    char *stop_name;
+    u16 stop;
 
     //enum to know whether its moving towards
     direction bus_direction;
@@ -81,14 +76,10 @@ typedef struct bus {
     //variable to know how many passengers are in a stop.
     byte occupation;
 
-    //in each stop save scope of how many passengers board
-    byte boards;
 
-    //in each stop save scope of how many passengers dropped off
-    byte dropoffs;
+    //global time when the bus will leave the stop
+    u32 extra_time_awaital;
 
-    //in each stop save scope of how many passengers werent able to dropoff.
-    byte residual_boards;
 
     //variable to define the maximum bus capacity.
     byte max_occupancy;
@@ -103,21 +94,61 @@ typedef struct bus {
     //state from moving to stopped
     u32 expected_navigation_arrival;
 
+    //variable to save how much time the bus travels between specifi stops
+    u32 time_travelled;
+
     //variable scope for being able to know at which TimeSlot the bus starts
     //headway
     byte departure_timeslot;
-    
+
+    size_t results_idx;
+    results_row *buffer_results;
+
+
+    size_t anomalies_idx;
+    anomaly_row *buffer_anomalies;
+
+
 } bus;
 
 
-bus *create_bus(u16 stop_code, direction direction,
+bus *create_bus(u16 bus_code, u16 stop_code, direction direction,
                 headway_times *headway_departures, byte travels_scheduled);
 
 
 void startup_bus_agent(void *self);
 
 
-void update_bus_in_sim(void *self, void *sim_params);
+/**
+ * @brief auxiliary function to, given a bus and board/dropoffs value, update the value
+ * of the occupancy based on the params and return the number of passengers not able
+ * to actually board.
+ * @param bus the bus reference to work with
+ * @param boards number of passengers willing to be boarded
+ * @param dropoffs number of passengers that will be dropped out of the bus
+ * @return number of residual_boards not able to board due to occupancy constraints.
+ */
+byte update_bus_occupancy(bus *bus, byte boards, byte dropoffs);
+
+
+void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte residual_boards,
+                      global_simulation_parameters *sim_params);
+
+/**
+ * @brief auxiliary function to, when the infer of boarding disboarding porcess
+ * is finished, comms back to the stop to indicate how many factual passengers
+ * actually boarded.
+ * @param bus bus reference.
+ * @param expected_boards the total number of passebngers at the stop initially
+ * @param unable_boards the number of passengers not able to board. If zero
+ * the answer back is expected boards
+ */
+void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards);
+
+
+
+
+void update_bus_in_sim(void *self, global_simulation_parameters *sim_params);
 
 
 void cleanup_bus(void *self);

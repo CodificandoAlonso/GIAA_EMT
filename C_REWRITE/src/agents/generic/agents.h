@@ -9,10 +9,10 @@
 
 
 
-
 typedef enum MESSAGE_TYPE MESSAGE_TYPE;
 typedef struct inbox inbox;
 
+typedef struct global_simulation_parameters global_simulation_parameters;
 
 
 /**
@@ -35,7 +35,7 @@ typedef struct Agent {
     size_t inboxes_numbers;
 
     void (* startup_agent) (void *self);
-    void (*update_in_sim) (void *self, void *sim_params);
+    void (*update_in_sim) (void *self, global_simulation_parameters *sim_params);
     void (*cleanup) (void *self);
     
 } Agent;
