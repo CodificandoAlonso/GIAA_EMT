@@ -10,6 +10,11 @@
 typedef struct Agent Agent;
 
 
+typedef struct char_and_num {
+    byte passengers_boarded;
+    char *message;
+}char_and_num;
+
 
 
 
@@ -110,4 +115,6 @@ void destroy_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n);
  * agent obtain the required abstraction of not knowing how its handle.
  * The idea is that the ownership of the pointer relies on the agent *receiver.
  */
-void cleanup_message(message *message);
+void cleanup_message(message * cleanup_message);
+
+void cleanup_char_and_num_message(message * cleanup_message);

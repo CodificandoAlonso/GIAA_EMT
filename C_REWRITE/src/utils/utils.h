@@ -22,4 +22,12 @@ typedef struct headway_times{
     direction bus_direction;
 } headway_times;
 
-char *extract_data_range (char *buffer, size_t start, size_t end);
+
+
+char *extract_data_range(char *buffer, size_t start, size_t end);
+
+
+u16 char_to_u16(const char *input, size_t n);
+
+
+u32 timechar_to_u32_seconds(const char *input, size_t n);

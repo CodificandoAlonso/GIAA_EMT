@@ -321,3 +321,14 @@ typedef struct anomaly_row{
     u32 expected_departure;
     byte minutes_of_delay;
 }anomaly_row;
+
+
+typedef struct passengers_row {
+    u16 sim_identifier;
+    u16 bus_code;
+    byte travels_completed;
+    u16 stopcode;
+    byte timeslot;
+    u32 current_time;
+    u32 *generation_times;
+}passengers_row;

@@ -9,7 +9,7 @@
 
 
 bus *create_bus(u16 bus_code, u16 stop_code, direction direction,
-                headway_times *headway_departures, byte travels_scheduled)
+                const headway_times *headway_departures, byte travels_scheduled)
     {
         bus *bus = calloc(1, sizeof(*bus));
 
@@ -17,6 +17,7 @@ bus *create_bus(u16 bus_code, u16 stop_code, direction direction,
             return NULL;
         }
 
+        bus->bus_code = bus_code;
         bus->stop = stop_code;
         bus->bus_direction = direction;
         bus->headway_times = headway_departures;
@@ -69,7 +70,7 @@ byte update_bus_occupancy(bus *bus, byte boards, byte dropoffs){
 
 
 void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte residual_boards,
-                      global_simulation_parameters *sim_params){
+                      const global_simulation_parameters *sim_params){
     bus->buffer_results[bus->results_idx] = (results_row){
         sim_params->simulation_id,
         bus->bus_code,
@@ -93,7 +94,7 @@ void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards){
 }
 
 
-void update_bus_in_sim(void *self, global_simulation_parameters *sim_params){
+void update_bus_in_sim(void *self, const global_simulation_parameters *sim_params){
     bus *bus = self;
 
     switch (bus->state){

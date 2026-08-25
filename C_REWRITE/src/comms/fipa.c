@@ -164,7 +164,15 @@ void destroy_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n){
 
 
 
-void cleanup_message(message *message){
-    free(message->payload);
-    message->payload = NULL;
+void cleanup_message(message *cleanup_message){
+    free(cleanup_message->payload);
+    cleanup_message->payload = NULL;
+}
+
+
+void cleanup_char_and_num_message(message *cleanup_message){
+    char_and_num *data_to_clean = cleanup_message->payload;
+    free(data_to_clean->message);
+    free(cleanup_message->payload);
+    cleanup_message->payload = NULL;
 }

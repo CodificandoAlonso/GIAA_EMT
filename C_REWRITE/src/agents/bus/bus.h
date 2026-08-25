@@ -39,9 +39,6 @@ static const MESSAGE_TYPE BUS_MESSAGE_TYPES[] = {
 
 
 
-
-
-
 typedef struct bus {
 
     //Inherit general agent capacities
@@ -61,7 +58,7 @@ typedef struct bus {
 
     //array of fixed headway times for the expected departures from the bus
     //and the direction they face
-    headway_times *headway_times;
+    const headway_times *headway_times;
 
     //Inside state of the bus. Obtained via the bachelor thesis documentation about
     //simulation modeling
@@ -113,7 +110,7 @@ typedef struct bus {
 
 
 bus *create_bus(u16 bus_code, u16 stop_code, direction direction,
-                headway_times *headway_departures, byte travels_scheduled);
+                const headway_times *headway_departures, byte travels_scheduled);
 
 
 void startup_bus_agent(void *self);

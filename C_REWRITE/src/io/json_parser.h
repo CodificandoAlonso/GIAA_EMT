@@ -5,14 +5,16 @@
 
 typedef struct data_bus{
     u16 bus_code;
-    u16 initial_stop_code;
+    direction initial_direction;
     headway_times *headway_bus_times;
+    size_t headways_length;
 }data_bus;
 
 
 
 typedef struct input_data_buses{
     data_bus *input_buses;
+    size_t number_of_buses;
 }input_data_buses;
 
 
