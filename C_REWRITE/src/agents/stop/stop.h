@@ -100,7 +100,7 @@ void startup_stop_agent(void *self);
  * @brief auxiliar function that modifies the u32* array to crop
  * the passengers that left the stop.
  */
-u32 *crop_time_of_passengers(stop *stop, size_t len_to_crop);
+void crop_time_of_passengers(stop *stop, size_t len_to_crop);
 
 
 
@@ -113,7 +113,7 @@ u32 *crop_time_of_passengers(stop *stop, size_t len_to_crop);
  * @param sim_params reference to the global simulation parameters. needed to know the
  * general simulation time
  */
-void process_and_save_passengers_row(stop *stop, u16 factual_boards, u16 bus_code, const global_simulation_parameters *sim_params);
+void process_and_save_passengers_row(stop *stop, byte factual_boards, u16 bus_code, byte travels_completed, const global_simulation_parameters *sim_params);
 
 
 
@@ -128,6 +128,9 @@ void process_and_save_passengers_row(stop *stop, u16 factual_boards, u16 bus_cod
  */
 void update_stop_in_sim(void *self, const global_simulation_parameters *sim_params);
 
+
+
+void reset_stop(void *self);
 
 
 /**

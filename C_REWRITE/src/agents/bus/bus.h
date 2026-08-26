@@ -129,7 +129,7 @@ byte update_bus_occupancy(bus *bus, byte boards, byte dropoffs);
 
 
 void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte residual_boards,
-                      global_simulation_parameters *sim_params);
+                      const global_simulation_parameters *sim_params);
 
 /**
  * @brief auxiliary function to, when the infer of boarding disboarding porcess
@@ -145,7 +145,9 @@ void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards);
 
 
 
-void update_bus_in_sim(void *self, global_simulation_parameters *sim_params);
+void update_bus_in_sim(void *self, const global_simulation_parameters *sim_params);
 
+
+void reset_bus(void *self);
 
 void cleanup_bus(void *self);

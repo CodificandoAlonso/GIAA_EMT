@@ -24,6 +24,7 @@ stop *create_stop(u16 stop_code){
     new_stop->agent.startup_agent = startup_stop_agent;
     new_stop->agent.update_in_sim = update_stop_in_sim;
     new_stop->agent.cleanup = cleanup_stop;
+    new_stop->agent.reset_agent = reset_stop;
     new_stop->passengers_idx = 0;
     new_stop->agent.startup_agent(new_stop);
     return new_stop;
@@ -60,43 +61,30 @@ void startup_stop_agent(void *self){
 
 
 
-u32 *crop_time_of_passengers(stop *stop, size_t len_to_crop){
+void crop_time_of_passengers(stop *stop, size_t len_to_crop){
 
-
-    //Uopdate this piece of code. Not optimal yet. This type of code HAS to be optimal
 
     if (len_to_crop == stop->number_of_passengers){
-        u32 *new_passengers_time_array = malloc(sizeof(u32)*BASE_PASSENGERS_MAX_SIZE);
-        if (!new_passengers_time_array){
-            perror("Error allocating new memory for passengers not in stop\n");
-            exit(-3);
-        }
-        //free old memory
-        free(stop->passengers_time_of_creation);
         stop->number_of_passengers = 0;
-        return new_passengers_time_array;
-    }
-    u32 *new_passengers_time_array = malloc(sizeof(u32)* (stop->number_of_passengers - len_to_crop));
-
-    if (!new_passengers_time_array){
-        perror("Error allocating new memory for passengers not in stop\n");
-        exit(-3);
+        return;
     }
 
     // 'crop' the first len_to_crop elements as they left the stop. That implies copy from len to crop to passengers
-    // to the new array;
-    size_t i = 0;
-    for (size_t idx = len_to_crop; idx < stop->number_of_passengers; idx ++){
-        new_passengers_time_array[i++] = stop->passengers_time_of_creation[idx];
-    }
-    free(stop->passengers_time_of_creation);
-    stop->number_of_passengers -= (u16)len_to_crop;
-    return new_passengers_time_array;
+    // to the init of the array;
+    size_t remaining = stop->number_of_passengers - len_to_crop;
+
+    memmove(stop->passengers_time_of_creation, stop->passengers_time_of_creation + len_to_crop,
+                sizeof(u32) * remaining);
+
+    stop->number_of_passengers -= len_to_crop;
 }
 
-void process_and_save_passengers_row(stop *stop, u16 factual_boards, u16 bus_code, byte travels_completed, const global_simulation_parameters *sim_params){
+void process_and_save_passengers_row(stop *stop, byte factual_boards, u16 bus_code, byte travels_completed, const global_simulation_parameters *sim_params){
 
-    if (factual_boards > (size_t)stop->number_of_passengers){
+    if (factual_boards == 0) {
+    return;
+    }
+    if ((u16)factual_boards > stop->number_of_passengers){
         perror("Error at passengers comparaison. Factual boards cannot be bigger than passengers \
             on stop\n");
         exit(-8);
@@ -127,8 +115,9 @@ void process_and_save_passengers_row(stop *stop, u16 factual_boards, u16 bus_cod
     }
     memcpy(new_pass_row.generation_times, stop->passengers_time_of_creation, sizeof(u32)*factual_boards);
 
-    stop->passengers_time_of_creation = crop_time_of_passengers(stop, factual_boards);
-
+    crop_time_of_passengers(stop, factual_boards);
+    
+    stop->buffer_passengers[stop->passengers_idx++] = new_pass_row;
 }
 
 
@@ -184,7 +173,15 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
 
                         //tmp
                         u16 boards = 0, dropoffs = 0;
-                        u16 payload[2] = {boards,dropoffs};
+
+                        u16 *payload = malloc(sizeof(u16)*2);
+
+                        if (!payload){
+                            perror("error allocating memory for payload stop-bus answer inform\n");
+                            exit(-3);
+                        }
+                        payload[0] = boards;
+                        payload[1] = dropoffs;
                         answer_back_inform_message->payload = (void *)payload;           
                         send_message(answer_back_inform_message);
 
@@ -207,7 +204,9 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
                             (char *)req_message->payload);
                             exit(-4);
                         }
-                        u16 factual_boards = payload->passengers_boarded;
+                        byte factual_boards = payload->passengers_boarded;
+                        byte travels_completed = payload->travels_completed;
+                        u16 bus_code = payload->bus_code;
 
                         cleanup_char_and_num_message(req_message);
 
@@ -227,13 +226,14 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
 
                         //Compare factual_boards with passengers in stop. Save the passengers_buffer
                         //info with the necesarry info associated and change state to passegners_custody
-                        process_and_save_passengers_row(stop, factual_boards, sim_params);
+                        process_and_save_passengers_row(stop, factual_boards,bus_code, travels_completed,
+                         sim_params);
 
                         answer_back_inform_message->message_type = inform;
                         answer_back_inform_message->protocol_type = QUERY_REF;
                         answer_back_inform_message->sender = &stop->agent;
                         answer_back_inform_message->receiver = req_message->receiver;
-                        answer_back_agree_message->payload = (void *)"Done";
+                        answer_back_inform_message->payload = (void *)"Done";
 
                         send_message(answer_back_inform_message);
                         stop->stop_state = passengers_custody;
@@ -248,5 +248,9 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
     }
 }
 
+
+void reset_stop(void *self){
+
+}
 
 void cleanup_stop(void *self){}

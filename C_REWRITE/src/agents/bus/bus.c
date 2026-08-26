@@ -26,6 +26,7 @@ bus *create_bus(u16 bus_code, u16 stop_code, direction direction,
         bus->agent.startup_agent = startup_bus_agent;
         bus->agent.update_in_sim = update_bus_in_sim;
         bus->agent.cleanup = cleanup_bus;
+        bus->agent.reset_agent = reset_bus;
         bus->results_idx = 0;
         bus->agent.startup_agent(bus);
         return bus;
@@ -243,6 +244,13 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
             }
         }
     }
+}
+
+
+
+
+void reset_bus(void *self){
+
 }
 
 void cleanup_bus(void *self){

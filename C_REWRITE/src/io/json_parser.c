@@ -154,7 +154,6 @@ const input_data_buses *load_input_from_json(char *filename){
                     //If enters here. Json ended. So. All the information is saved in a temporal input
                     //data buses with max_bus_numbers length of .input_buses. So, for the final
                     //path here just breaks. The next iter will be outside the for loop
-                    printf("DEBUG: Final json achieved with %u number of buses read\n",number_of_buses);
                     scope --;
                     break;
                 }
@@ -207,6 +206,12 @@ const input_data_buses *load_input_from_json(char *filename){
                     temporal_input_buses.input_buses[number_of_buses].initial_direction = 
                                                                 temporal_headways_array[0].bus_direction;
                     
+                    if (temporal_headways_array[0].bus_direction == CIBELES){
+                        temporal_input_buses.input_buses[number_of_buses].stop_code = 2646;
+                    }else{
+                        temporal_input_buses.input_buses[number_of_buses].stop_code = 5727;
+                    }
+                                                                
                     headway_times *temporal_new_chunk = realloc(temporal_headways_array,
                                             sizeof(headway_times) *temporal_headway_length);
                     

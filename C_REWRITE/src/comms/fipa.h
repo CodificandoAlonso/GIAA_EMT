@@ -12,6 +12,8 @@ typedef struct Agent Agent;
 
 typedef struct char_and_num {
     byte passengers_boarded;
+    byte travels_completed;
+    u16 bus_code;
     char *message;
 }char_and_num;
 

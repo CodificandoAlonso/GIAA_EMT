@@ -2,10 +2,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+
 #include "math/random/RNG.h"
 #include "utils/utils.h"
 #include "io/csv_parser.h"
 #include "io/txt_parser.h"
+#include "io/json_parser.h"
 #include "agents/generic/agents.h"
 #include "agents/bus/bus.h"
 #include "agents/stop/stop.h"
@@ -17,12 +19,18 @@
 typedef struct simulation_variables{
     RNG *random_generator;
     u16 simulation_id;
+    size_t buses_size;
+    size_t stops_size;
+    bus *buses;
+    stop *stops;
+
 }simulation_variables;
 
 
 typedef struct global_inmutable_params{
     const input_data_matrix *const stops_data_distributions;
     const stops_list *const stops_list_data;
+    const input_data_buses *const input_data_buses;
 }global_inmutable_params;
 
 
@@ -64,9 +72,17 @@ void update_time(global_simulation_parameters *sim_params);
 
 
 
+void *start_simulation();
 
 
 
+/**
+ * @brief function called before starting up the monte carlo replicas
+ * in order to create and startup the necesary agents for the sims.
+ * Also startup the rng seed generator
+ */
+simulation_variables *startup_thread_parameters(const global_inmutable_params * global_params,u64 seed,
+                          u64 stream);
 
 void *run_simulation_thread(simulation_variables *simulation_init_variables, 
                             const global_inmutable_params * global_params);

@@ -36,6 +36,7 @@ typedef struct Agent {
 
     void (* startup_agent) (void *self);
     void (*update_in_sim) (void *self, const global_simulation_parameters *sim_params);
+    void (*reset_agent) (void *self);
     void (*cleanup) (void *self);
     
 } Agent;
