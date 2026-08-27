@@ -23,6 +23,8 @@ typedef struct simulation_variables{
     size_t stops_size;
     bus *buses;
     stop *stops;
+    stop **stops_toA;
+    stop **stops_toB;
 
 }simulation_variables;
 
@@ -31,6 +33,7 @@ typedef struct global_inmutable_params{
     const input_data_matrix *const stops_data_distributions;
     const stops_list *const stops_list_data;
     const input_data_buses *const input_data_buses;
+    const input_times_matrix *const stops_times_distributions;
 }global_inmutable_params;
 
 
@@ -39,29 +42,33 @@ typedef struct global_simulation_parameters{
 
     u16 simulation_id;
 
+    RNG *random_generator;
 
     u32 global_clock;
 
-
     u32 step;
-
 
     byte timeslot;
 
+    size_t buses_size;
 
-    u32 elapsed_time_per_passenger;
+    size_t stops_size;
 
+    bus *buses;
 
-    bus *simulation_buses;
+    stop *stops;
 
+    stop **stops_toA;
 
-    stop *simulation_stops[2];
+    stop **stops_toB;
 
 
 }global_simulation_parameters;
 
 
 
+void update_globals(global_simulation_parameters *sim_params,
+const global_inmutable_params * global_params);
 
 /**
  * @brief Auxiliary simulation.h function to update the timeslot variable based
@@ -72,9 +79,11 @@ void update_time(global_simulation_parameters *sim_params);
 
 
 
-void *start_simulation();
+void start_simulation(global_simulation_parameters *simulation_variables, 
+const global_inmutable_params * global_params);
 
 
+void restart_agents(simulation_variables *simulation_variables);
 
 /**
  * @brief function called before starting up the monte carlo replicas

@@ -10,23 +10,18 @@
 
 
 
-stop *create_stop(u16 stop_code){
+stop create_stop(u16 stop_code){
 
-    stop *new_stop = calloc(1,sizeof(stop));
+    stop new_stop = {0};
 
-    if (!new_stop){
-        perror("Error allocating memory for new stop agent\n");
-        exit(-3);
-    }
+    new_stop.stop_code = stop_code;
 
-    new_stop->stop_code = stop_code;
-
-    new_stop->agent.startup_agent = startup_stop_agent;
-    new_stop->agent.update_in_sim = update_stop_in_sim;
-    new_stop->agent.cleanup = cleanup_stop;
-    new_stop->agent.reset_agent = reset_stop;
-    new_stop->passengers_idx = 0;
-    new_stop->agent.startup_agent(new_stop);
+    new_stop.agent.startup_agent = startup_stop_agent;
+    new_stop.agent.update_in_sim = update_stop_in_sim;
+    new_stop.agent.cleanup = cleanup_stop;
+    new_stop.agent.reset_agent = reset_stop;
+    new_stop.passengers_idx = 0;
+    new_stop.agent.startup_agent(&new_stop);
     return new_stop;
 }
 
@@ -130,7 +125,6 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
     switch (stop->stop_state){
 
         case passengers_custody:{
-
             //This case is globally updated. The reason why, is that the stop agent itself
             //cannot be the one dictating when the passengers are generated inself. It actually
             //comes from an environmental update, dictate by the world.
@@ -253,4 +247,8 @@ void reset_stop(void *self){
 
 }
 
-void cleanup_stop(void *self){}
+
+
+void cleanup_stop(void *self){
+
+}

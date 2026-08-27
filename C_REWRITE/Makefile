@@ -2,9 +2,7 @@
 # ENVIRONMENT
 # ============================================================================
 
-
 ENV ?= development
-
 ENV_FILE := .env-$(ENV)
 
 ifeq ($(ENV),development)
@@ -14,6 +12,16 @@ else ifeq ($(ENV),production)
 else
     $(error Unknown environment: $(ENV))
 endif
+
+include $(ENV_FILE)
+
+ENV_CFLAGS += \
+    -DCSV_DISTRIBUTION_A=\"$(CSV_DISTRIBUTION_A)\" \
+    -DCSV_DISTRIBUTION_B=\"$(CSV_DISTRIBUTION_B)\" \
+    -DCSV_TIMES_A=\"$(CSV_TIMES_A)\" \
+    -DCSV_TIMES_B=\"$(CSV_TIMES_B)\" \
+    -DBUSES_JSON=\"$(BUSES_JSON)\" \
+    -DSTOPS_TXT=\"$(STOPS_TXT)\"
 
 
 

@@ -98,6 +98,9 @@ typedef struct bus {
     //headway
     byte departure_timeslot;
 
+    //bool variable to know if it has ended service
+    bool ending_service;
+
     size_t results_idx;
     results_row *buffer_results;
 
@@ -109,7 +112,7 @@ typedef struct bus {
 } bus;
 
 
-bus *create_bus(u16 bus_code, u16 stop_code, direction direction,
+bus create_bus(u16 bus_code, u16 stop_code, direction direction,
                 const headway_times *headway_departures, byte travels_scheduled);
 
 

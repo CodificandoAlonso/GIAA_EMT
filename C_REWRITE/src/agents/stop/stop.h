@@ -84,7 +84,7 @@ typedef struct stop{
  * returns the full agent with its inboxes and stuff initialized
  * @param stop_code u16 identifier of the stop
  */
-stop *create_stop(u16 stop_code);
+stop create_stop(u16 stop_code);
 
 
 

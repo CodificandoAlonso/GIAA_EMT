@@ -8,27 +8,24 @@
 #include<math.h>
 
 
-bus *create_bus(u16 bus_code, u16 stop_code, direction direction,
+bus create_bus(u16 bus_code, u16 stop_code, direction direction,
                 const headway_times *headway_departures, byte travels_scheduled)
     {
-        bus *bus = calloc(1, sizeof(*bus));
+        bus bus = {0};
 
-        if (!bus) {
-            return NULL;
-        }
+        bus.bus_code = bus_code;
+        bus.stop = stop_code;
+        bus.bus_direction = direction;
+        bus.headway_times = headway_departures;
+        bus.travels_scheduled = travels_scheduled;
 
-        bus->bus_code = bus_code;
-        bus->stop = stop_code;
-        bus->bus_direction = direction;
-        bus->headway_times = headway_departures;
-        bus->travels_scheduled = travels_scheduled;
-
-        bus->agent.startup_agent = startup_bus_agent;
-        bus->agent.update_in_sim = update_bus_in_sim;
-        bus->agent.cleanup = cleanup_bus;
-        bus->agent.reset_agent = reset_bus;
-        bus->results_idx = 0;
-        bus->agent.startup_agent(bus);
+        bus.agent.startup_agent = startup_bus_agent;
+        bus.agent.update_in_sim = update_bus_in_sim;
+        bus.agent.cleanup = cleanup_bus;
+        bus.agent.reset_agent = reset_bus;
+        bus.results_idx = 0;
+        bus.ending_service = false;
+        bus.agent.startup_agent(&bus);
         return bus;
     }
 
