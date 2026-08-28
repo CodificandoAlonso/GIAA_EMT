@@ -1,14 +1,63 @@
 #include "engine/simulation.h"
+#include "math/math_utils.h"
 #include<stdbool.h>
 
 
 
 
 
+void generate_passengers_in_stops(global_simulation_parameters *sim_params){
+
+
+}
+
+
+void start_random_gen_arrays(global_simulation_parameters *sim_params,
+const global_inmutable_params * global_params){
+
+    //as its start, we assume Init ts 5 and next 6.
+
+    //Wyhat whe need to do. For each stop, take for boardings only. Take tjhe 5th ts and obtain a rand. And for 
+    //Ts6 same. then apply luinear conservative reconstrtuction and save tuat in the double.
+    size_t size_toA = global_params->stops_list_data->size_toA;
+    for (size_t i = 0; i <global_params->stops_list_data->size_toA; i++ ){
+        double actual_param = global_params->stops_data_distributions->route_stops_a[
+            global_params->stops_list_data->stopcodes_toA[i]].stop_distributions[0].distro.random(
+                &global_params->stops_data_distributions->route_stops_a[global_params->stops_list_data->stopcodes_toA
+                    [i]].stop_distributions[0].distro, sim_params->random_generator);
+
+        double next_param = global_params->stops_data_distributions->route_stops_a[
+            global_params->stops_list_data->stopcodes_toA[i]].stop_distributions[2].distro.random(
+                &global_params->stops_data_distributions->route_stops_a[global_params->stops_list_data->stopcodes_toA
+                    [i]].stop_distributions[2].distro, sim_params->random_generator);
+                    
+        sim_params->ramdon_gen_params[i] = 
+        (distribution_chosen_params){
+            .actual_value =actual_param,
+            .next_value=next_param};
+
+        linear_conservative_reconstruction(sim_params->array_passengers_gen[i],
+            actual_param, next_param, sim_params->step);
+    }
+}
+
+
+void update_random_gen_arrays(global_simulation_parameters *sim_params,
+const global_inmutable_params * global_params){}
+
 void update_globals(global_simulation_parameters *sim_params,
 const global_inmutable_params * global_params){
 
+    //First, it needs to check if its TS:00, that means a change in TimeSlot and an update
+    //on the arrays for passengers generation.
+    if (sim_params->global_clock % 3600 == 0){
 
+        //Case 1. the sim just got started, that means global clock // 3600 == 5.
+        if (sim_params->global_clock / 3600 == 5){
+
+            //Here it should start the arrays. For that purpose
+        }
+    }
     
 }
 
@@ -87,6 +136,10 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
 
     thread_sim_vars->random_generator = random_generator;
 
+
+    //SUPER ULTRA MEGA HARDCODDED THIS CANNOT HAPPEN
+    thread_sim_vars->step = 2;
+
     //startup bus agents.
 
     //allocating memory
@@ -119,6 +172,8 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
     global_params->stops_list_data->size_toA +
     global_params->stops_list_data->size_toB -
     2;
+
+
     //allocating memory
     stop *stops = malloc(sizeof(stop)*number_of_stops);
 
@@ -147,6 +202,32 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
 
     thread_sim_vars->stops_toB = stops_toB;
 
+
+    double **array_passengers = malloc(sizeof( double *)*number_of_stops);
+
+    if (!array_passengers){
+        perror("Error allocating emmory for array of generation data\n");
+        exit(-3);
+    }   
+    thread_sim_vars->array_passengers_gen = array_passengers;
+
+    for (size_t i = 0; i< number_of_stops; i++){
+        double *array = malloc(sizeof(double)*(3600/thread_sim_vars->step));
+
+        if (!array){
+            perror("Error allocating emmory for concrete array of generation data\n");
+            exit(-3); 
+        }
+        thread_sim_vars->array_passengers_gen[i] = array;
+    }
+
+
+    distribution_chosen_params *random_gen_params = calloc(number_of_stops, sizeof(distribution_chosen_params));
+
+    if(!random_gen_params){
+        perror("ERror allocating space for the choosen generation parameters\n");
+        exit(-3);
+    }
 
     //create agents out of the txt parsed file
 
@@ -229,6 +310,8 @@ const global_inmutable_params * global_params){
     sim_params->step = 2;
 
     sim_params->random_generator = simulation_init_variables->random_generator;
+
+    sim_params->array_passengers_gen = simulation_init_variables->array_passengers_gen;
 
     //agents
     sim_params->buses_size = simulation_init_variables->buses_size;

@@ -13,16 +13,22 @@
 #include "agents/stop/stop.h"
 #include "agents/passenger/passenger.h"
 
-
+typedef struct distribution_chosen_params {
+    double actual_value;
+    double next_value;
+}distribution_chosen_params;
 
 
 typedef struct simulation_variables{
     RNG *random_generator;
     u16 simulation_id;
+    u32 step;
     size_t buses_size;
     size_t stops_size;
     bus *buses;
     stop *stops;
+    double **array_passengers_gen;
+    distribution_chosen_params *ramdon_gen_params;
     stop **stops_toA;
     stop **stops_toB;
 
@@ -58,13 +64,25 @@ typedef struct global_simulation_parameters{
 
     stop *stops;
 
+    double **array_passengers_gen;
+
+    distribution_chosen_params *ramdon_gen_params;
+
     stop **stops_toA;
 
     stop **stops_toB;
 
-
 }global_simulation_parameters;
 
+
+
+void generate_passengers_in_stops(global_simulation_parameters *sim_params);
+
+void start_random_gen_arrays(global_simulation_parameters *sim_params,
+const global_inmutable_params * global_params);
+
+void update_random_gen_arrays(global_simulation_parameters *sim_params,
+const global_inmutable_params * global_params);
 
 
 void update_globals(global_simulation_parameters *sim_params,
