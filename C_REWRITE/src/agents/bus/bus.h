@@ -8,6 +8,7 @@
 #include "agents/generic/agents.h"
 #include "io/csv_parser.h"
 #include "utils/utils.h"
+#include "agents/stop/stop.h"
 
 #define MAX_OCCUPANCY 80
 
@@ -27,7 +28,7 @@ typedef enum {
     arrived = 0,
     waiting_stop_answer = 1,
     waiting_stop_validation = 2,
-    wait_extra_time = 3,
+    wait_extra_time = 3
 } BUS_STOPPED_STATE;
 
 static const MESSAGE_TYPE BUS_MESSAGE_TYPES[] = {
@@ -48,6 +49,8 @@ typedef struct bus {
     u16 bus_code;
 
     u16 stop;
+
+    stop *stop_reached;
 
     //enum to know whether its moving towards
     direction bus_direction;
@@ -104,7 +107,7 @@ typedef struct bus {
     size_t results_idx;
     results_row *buffer_results;
 
-
+    size_t anomalies_allocated;
     size_t anomalies_idx;
     anomaly_row *buffer_anomalies;
 
@@ -134,6 +137,12 @@ byte update_bus_occupancy(bus *bus, byte boards, byte dropoffs);
 void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte residual_boards,
                       const global_simulation_parameters *sim_params);
 
+
+void save_last_row(bus *bus, const global_simulation_parameters *sim_params);
+
+
+void save_anomaly_row(bus *bus, u32 delay, const global_simulation_parameters *sim_params);
+
 /**
  * @brief auxiliary function to, when the infer of boarding disboarding porcess
  * is finished, comms back to the stop to indicate how many factual passengers
@@ -145,7 +154,7 @@ void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte r
  */
 void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards);
 
-
+void ending_bus_service(bus *bus, const global_simulation_parameters *sim_params);
 
 
 void update_bus_in_sim(void *self, const global_simulation_parameters *sim_params);

@@ -28,7 +28,7 @@ typedef struct simulation_variables{
     bus *buses;
     stop *stops;
     double **array_passengers_gen;
-    distribution_chosen_params *ramdon_gen_params;
+    distribution_chosen_params *random_gen_params;
     stop **stops_toA;
     stop **stops_toB;
 
@@ -50,6 +50,8 @@ typedef struct global_simulation_parameters{
 
     RNG *random_generator;
 
+    const global_inmutable_params *global_params;
+
     u32 global_clock;
 
     u32 step;
@@ -66,27 +68,36 @@ typedef struct global_simulation_parameters{
 
     double **array_passengers_gen;
 
-    distribution_chosen_params *ramdon_gen_params;
+    distribution_chosen_params *random_gen_params;
 
     stop **stops_toA;
 
     stop **stops_toB;
 
+    u32 (*return_next_time_to_stop) (u16 stop,
+         global_simulation_parameters*sim_params, direction direction);
+
+    u16 (*infer_dropoffs) (u16 stop,
+         global_simulation_parameters *sim_params);
 }global_simulation_parameters;
 
 
 
+u16 infer_dropoffs(u16 stop, 
+global_simulation_parameters *sim_params);
+
+
+u32 return_next_time_to_stop(u16 stop, 
+global_simulation_parameters *sim_params, direction direction);
+
 void generate_passengers_in_stops(global_simulation_parameters *sim_params);
 
-void start_random_gen_arrays(global_simulation_parameters *sim_params,
-const global_inmutable_params * global_params);
+void start_pass_gen_arrays(global_simulation_parameters *sim_params);
 
-void update_random_gen_arrays(global_simulation_parameters *sim_params,
-const global_inmutable_params * global_params);
+void update_pass_gen_arrays(global_simulation_parameters *sim_params);
 
 
-void update_globals(global_simulation_parameters *sim_params,
-const global_inmutable_params * global_params);
+void update_globals(global_simulation_parameters *sim_params);
 
 /**
  * @brief Auxiliary simulation.h function to update the timeslot variable based
@@ -97,8 +108,7 @@ void update_time(global_simulation_parameters *sim_params);
 
 
 
-void start_simulation(global_simulation_parameters *simulation_variables, 
-const global_inmutable_params * global_params);
+void start_simulation(global_simulation_parameters *simulation_variables);
 
 
 void restart_agents(simulation_variables *simulation_variables);
@@ -113,5 +123,3 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
 
 void *run_simulation_thread(simulation_variables *simulation_init_variables, 
                             const global_inmutable_params * global_params);
-
-

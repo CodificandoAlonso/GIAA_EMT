@@ -111,6 +111,14 @@ void destroy_specific_inbox(inbox *ib);
 void destroy_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n);
 
 
+void reset_specific_inbox(inbox *ib);
+
+
+void reset_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n);
+
+
+
+
 /**
  * @brief Once read the relevant content from a message, this function
  * cleans up the memory allocated for the payload for each message, so each

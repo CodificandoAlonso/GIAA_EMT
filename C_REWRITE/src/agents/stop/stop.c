@@ -37,6 +37,7 @@ void startup_stop_agent(void *self){
         exit(-3);
     }
     stop->passengers_time_of_creation = passengers_timearray;
+    stop->allocation_len_passengers = BASE_PASSENGERS_MAX_SIZE;
 
     passengers_row *buffer_passengers = malloc(sizeof(passengers_row) *BASE_PASSENGERS_BUFFER_MAX_SIZE);
     if (!buffer_passengers){
@@ -147,6 +148,7 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
 
                         //Infer dropoffs. It invoices a global action handler from the sim, because
                         //the drpoff knowledge cannot be into the agent own's beliefs or knowkledge.
+                        u16 dropoffs = sim_params->infer_dropoffs(stop->stop_code, sim_params);
 
                         message *answer_back_agree_message = calloc(1, sizeof(message));
                         message *answer_back_inform_message = calloc(1, sizeof(message));
@@ -166,7 +168,7 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
                         answer_back_inform_message->receiver = query_message->receiver;
 
                         //tmp
-                        u16 boards = 0, dropoffs = 0;
+                        
 
                         u16 *payload = malloc(sizeof(u16)*2);
 
@@ -174,7 +176,7 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
                             perror("error allocating memory for payload stop-bus answer inform\n");
                             exit(-3);
                         }
-                        payload[0] = boards;
+                        payload[0] = stop->number_of_passengers;
                         payload[1] = dropoffs;
                         answer_back_inform_message->payload = (void *)payload;           
                         send_message(answer_back_inform_message);
@@ -244,11 +246,31 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
 
 
 void reset_stop(void *self){
+    stop *stop = self;
+    reset_inbox(&stop->agent, STOP_MESSAGE_TYPES, STOP_INBOXES_NUMBER);
 
+    stop->number_of_passengers = 0;
+    stop->passengers_generating = 0.0;
+    stop->stop_state = passengers_custody;
+    stop->passengers_idx = 0;
+    
 }
 
 
 
 void cleanup_stop(void *self){
+    //Needs to, cleanup all stuff that relies on the stop agent. That means.
+
+    //Cleanup the inboxes mem allocation.
+    stop *stop = self;
+    destroy_inbox(&stop->agent, STOP_MESSAGE_TYPES, STOP_INBOXES_NUMBER);
+    
+    free(stop->passengers_time_of_creation);
+    stop->passengers_time_of_creation = NULL;
+
+
+
+    free(stop->buffer_passengers);
+    stop->buffer_passengers = NULL;
 
 }

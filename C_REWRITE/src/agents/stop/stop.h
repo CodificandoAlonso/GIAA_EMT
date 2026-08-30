@@ -53,6 +53,8 @@ typedef struct stop{
 
     u16 number_of_passengers;
 
+    double passengers_generating;
+    
     //Value to know how much the u32 array time_in_stop_per_passenger is allocated.
     size_t allocation_len_passengers;
 

@@ -162,6 +162,35 @@ void destroy_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n){
 }
 
 
+void reset_specific_inbox(inbox *ib){
+    ib->capacity = 0;
+    ib->head = 0;
+}
+
+
+
+void reset_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n){
+    for (size_t i=0; i < n; i++){
+        switch (message_types[i]){
+            case request:
+                reset_specific_inbox(&agent->requests);
+                break;
+            case query:
+                reset_specific_inbox(&agent->queries);
+                break;
+            case agree:
+                reset_specific_inbox(&agent->agrees);
+                break;
+            case refuse:
+                reset_specific_inbox(&agent->refuses);
+                break;
+            case inform:
+                reset_specific_inbox(&agent->informs);
+                break;
+        }
+    }
+}
+
 
 
 void cleanup_message(message *cleanup_message){

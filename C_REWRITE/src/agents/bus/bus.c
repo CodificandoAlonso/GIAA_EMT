@@ -18,12 +18,12 @@ bus create_bus(u16 bus_code, u16 stop_code, direction direction,
         bus.bus_direction = direction;
         bus.headway_times = headway_departures;
         bus.travels_scheduled = travels_scheduled;
-
         bus.agent.startup_agent = startup_bus_agent;
         bus.agent.update_in_sim = update_bus_in_sim;
         bus.agent.cleanup = cleanup_bus;
         bus.agent.reset_agent = reset_bus;
         bus.results_idx = 0;
+        bus.anomalies_idx = 0;
         bus.ending_service = false;
         bus.agent.startup_agent(&bus);
         return bus;
@@ -69,6 +69,7 @@ byte update_bus_occupancy(bus *bus, byte boards, byte dropoffs){
 
 void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte residual_boards,
                       const global_simulation_parameters *sim_params){
+
     bus->buffer_results[bus->results_idx] = (results_row){
         sim_params->simulation_id,
         bus->bus_code,
@@ -78,8 +79,8 @@ void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte r
         sim_params->timeslot,
         bus->departure_timeslot,
         (pass_to_board - residual_boards),
-        pass_to_dropoff,
         residual_boards,
+        pass_to_dropoff,
         bus->occupation,
         bus->time_travelled
     };
@@ -87,10 +88,88 @@ void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte r
 }
 
 
-void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards){
+void save_last_row(bus *bus, const global_simulation_parameters *sim_params){
+    bus->buffer_results[bus->results_idx] = (results_row){
+        sim_params->simulation_id,
+        bus->bus_code,
+        bus->travels_completed,
+        bus->stop,
+        bus->bus_direction,
+        sim_params->timeslot,
+        bus->departure_timeslot,
+        0,
+        0,
+        bus->occupation,
+        0,
+        bus->time_travelled
+    };
+    bus->results_idx ++;
+}
+
+
+void save_anomaly_row(bus *bus, u32 delay, const global_simulation_parameters *sim_params){
+
+
+
+    //check if needs reallocation.
+    if (bus->anomalies_idx == bus->anomalies_allocated){
+        bus->anomalies_allocated *= 2;
+        anomaly_row *new_anomalies = realloc(bus->buffer_anomalies,
+             sizeof(anomaly_row) * bus->anomalies_allocated);
+        
+        if (!new_anomalies){
+            perror("Erorr reallocating memory for anomalies row\n");
+            exit(-3);
+        }
+        bus->buffer_anomalies = new_anomalies;
+    }
+    bus->buffer_anomalies[bus->anomalies_idx++] = (anomaly_row){
+        .sim_identifier = sim_params->simulation_id,
+        .bus_code = bus->bus_code,
+        .travels_completed = bus->travels_completed,
+        .direction = bus->bus_direction,
+        .stopcode = bus->stop,
+        .timeslot = sim_params->timeslot,
+        .event_type = "DELAY",
+        .current_time = sim_params->global_clock,
+        .expected_departure = bus->headway_times[bus->travels_completed].departure_time,
+        .minutes_of_delay = (byte)delay
+    };
 
 }
 
+
+void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards){
+    message *new_message = malloc(sizeof(message));
+
+    if (!new_message){
+        perror("Error allocating memory for new message\n");
+        exit(-3);
+    }
+
+    char_and_num *payload = malloc(sizeof(char_and_num));
+
+    payload->bus_code = bus->bus_code;
+    payload->message = "Update passengers. I boarded";
+    payload->passengers_boarded = expected_boards - unable_boards;
+    payload->travels_completed = bus->travels_completed;
+
+    new_message->sender = &bus->agent;
+    new_message->message_type = request;
+    new_message->protocol_type = REQUEST;
+    new_message->receiver = &bus->stop_reached->agent;
+    new_message->payload = (void *)payload;
+
+    send_message(new_message);
+}
+
+
+
+
+void ending_bus_service(bus *bus, const global_simulation_parameters *sim_params){
+
+
+}
 
 void update_bus_in_sim(void *self, const global_simulation_parameters *sim_params){
     bus *bus = self;
@@ -106,24 +185,79 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                 bus->state = moving;
                 bus->expected_navigation_arrival = sim_params->global_clock;
 
-                //Here should infer the specific mean time between stops via random
-                //param of the distribution specified.
             }
         }
 
         case moving: {
             if (sim_params->global_clock >= bus->expected_navigation_arrival){
+
+                //First, Check if last stop of the direction's route. If so, handle it :).
+                if (bus->bus_direction == CIBELES){
+                    if (bus->stops_reached == sim_params->global_params->stops_list_data->size_toA - 1){
+                        //Process the shift change.
+                        if (bus->travels_completed +1 == bus->travels_scheduled){
+                            save_last_row(bus, sim_params);
+                            bus->ending_service = true;
+
+                            //call the ending_bus_function.
+                            ending_bus_service(bus, sim_params);
+                            break;
+                        }
+
+                        save_last_row(bus, sim_params);
+                        bus->occupation = 0;
+                        bus->stops_reached = 0;
+                        bus->travels_completed ++;
+                        //update headway start.
+                        bus->bus_direction = bus->headway_times[bus->travels_completed].bus_direction;
+                        if (bus->bus_direction == CIBELES){
+                            bus->stop = sim_params->global_params->stops_list_data->stopcodes_toA[0];
+                        } else{
+                            bus->stop = sim_params->global_params->stops_list_data->stopcodes_toB[0];
+                        }
+
+                        bus->state = waiting_headway;
+                        //Check if the bus is delayed. If so, save_anomaly_row.
+
+                        if (bus->headway_times[bus->travels_completed].departure_time < sim_params->global_clock){
+                            //Calculate the delay in seconds;
+                            u32 delay = sim_params->global_clock -
+                            bus->headway_times[bus->travels_completed].departure_time;
+                            save_anomaly_row(bus, delay, sim_params);
+                        }
+                        break;
+                    }
+                } else{
+                    if (bus->stops_reached == sim_params->global_params->stops_list_data->size_toB -1){
+                        if (bus->travels_completed +1 == bus->travels_scheduled){
+                            save_last_row(bus, sim_params);
+                            bus->ending_service = true;
+                            ending_bus_service(bus, sim_params);
+                            break;
+                        }
+
+                        save_last_row(bus, sim_params);
+                        bus->occupation = 0;
+                        bus->stops_reached = 0;
+                        bus->travels_completed ++;
+                        //update headway start.
+                        bus->bus_direction = bus->headway_times[bus->travels_completed].bus_direction;
+                        bus->state = waiting_headway;
+
+                        //Check if the bus is delayed. If so, save_anomaly_row.
+
+                        if (bus->headway_times[bus->travels_completed].departure_time < sim_params->global_clock){
+                            //Calculate the delay in seconds;
+                            u32 delay = sim_params->global_clock -
+                            bus->headway_times[bus->travels_completed].departure_time;
+                            save_anomaly_row(bus, delay, sim_params);
+                        }
+                        break;
+                    }
+                }
+
                 bus->state = stopped;
-                bus->stopped_state = arrived;
-
-                /*
-                 *here should see if here is when advancing stops reachjed counter, or is it done
-                 * after finishing the comms with the stop. Prob after. Should see also
-                 * how stops are stored. So, with all those stuff, starts the communications with it.
-                 * Also, todo: later on, check the dying-condition for finished shifts.
-                 */
-
-                
+                bus->stopped_state = arrived;    
                 
                 //No break for intentional fall through to stopped
             }else{
@@ -136,9 +270,27 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
             switch(bus->stopped_state){
                 case arrived: {
                     //Starts comms with stop agent. 
-                                       
-                    
-                    
+                    if (bus->bus_direction == CIBELES){
+                        bus->stop_reached = sim_params->stops_toA[bus->stops_reached];
+                    }else{
+                        bus->stop_reached = sim_params->stops_toB[bus->stops_reached];
+                    }
+
+
+                    message *new_message = malloc(sizeof(message));
+
+                    if (!new_message){
+                        perror("Error allocating memory for new message\n");
+                        exit(-3);
+                    }
+                    new_message->sender = &bus->agent;
+                    new_message->message_type = request;
+                    new_message->protocol_type = REQUEST;
+                    new_message->receiver = &bus->stop_reached->agent;
+                    new_message->payload = (void *)"Bus arrived to stop";
+
+                    send_message(new_message);
+
                     //Move to waiting_stop_answer
                     bus->stopped_state = waiting_stop_answer;
                     
@@ -227,17 +379,28 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                 case wait_extra_time:{
                     if (sim_params->global_clock >= bus->extra_time_awaital){
                         /*
-                         * Once here, before moving and breaking, this should check and update if last stop,
-                         if last shift, and so, so the bus can execute ending code or not.
+                         * Once here, before moving and breaking, it should infer the next stop's arrival time.
                         */
+                        
+                        bus->expected_navigation_arrival = 
+                        sim_params->return_next_time_to_stop(bus->stop_reached->stop_code,
+                            sim_params, bus->bus_direction);
 
+                        bus->time_travelled = bus->expected_navigation_arrival - sim_params->global_clock;
+                        
+                        bus->stops_reached ++;
 
-
+                        if (bus->bus_direction == CIBELES){
+                            bus->stop = sim_params->global_params->stops_list_data->stopcodes_toA[bus->stops_reached];
+                        } else{
+                            bus->stop = sim_params->global_params->stops_list_data->stopcodes_toB[bus->stops_reached];
+                        }
 
                         bus->state = moving;
                         break;
                     }
-                }
+                }     
+
             }
         }
     }
@@ -248,10 +411,48 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
 
 void reset_bus(void *self){
 
+    bus *bus = self;
+
+    bus->state = waiting_headway;
+
+    bus->stopped_state = arrived;
+
+    reset_inbox(&bus->agent, BUS_MESSAGE_TYPES, BUS_INBOXES_NUMBER);
+
+    bus->occupation = 0;
+    bus->anomalies_idx = 0;
+    bus->results_idx = 0;
+
+    bus->stops_reached = 0;
+
+    bus->travels_completed = 0;
+
+    bus->ending_service = false;
+
+    bus->stop_reached = NULL;
+    bus->expected_navigation_arrival = 0;
+    bus->departure_timeslot = 0;
+    bus->time_travelled = 0;
+    bus->extra_time_awaital = 0;
 }
 
 void cleanup_bus(void *self){
 
+    //Needs to, cleanup all stuff that relies on the bus agent. That means.
+
+    //Cleanup the inboxes mem allocation.
+    bus *bus = self;
+    destroy_inbox(&bus->agent, BUS_MESSAGE_TYPES, BUS_INBOXES_NUMBER);
     
+    bus->stop_reached = NULL;
+
+    bus->headway_times = NULL;
+
+
+    free(bus->buffer_anomalies);
+    bus->buffer_anomalies = NULL;
+
+    free(bus->buffer_results);
+    bus->buffer_results = NULL;
 }
 

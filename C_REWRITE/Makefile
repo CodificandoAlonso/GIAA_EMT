@@ -48,6 +48,7 @@ CFLAGS      := -std=$(CSTD) \
                -MMD \
                -MP \
 			   -pthread \
+               -fdiagnostics-color=always \
 			   $(ENV_CFLAGS)
 
 # Include directories
