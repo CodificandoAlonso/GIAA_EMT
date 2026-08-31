@@ -39,13 +39,6 @@ void startup_stop_agent(void *self){
     stop->passengers_time_of_creation = passengers_timearray;
     stop->allocation_len_passengers = BASE_PASSENGERS_MAX_SIZE;
 
-    passengers_row *buffer_passengers = malloc(sizeof(passengers_row) *BASE_PASSENGERS_BUFFER_MAX_SIZE);
-    if (!buffer_passengers){
-        fprintf(stderr, "Error at stop %u startup allocating memory for passengers buffer log\n", stop->stop_code);
-        exit(-3);
-    }
-
-    stop->buffer_passengers = buffer_passengers;
     stop->max_allocated_buffer_size = BASE_PASSENGERS_BUFFER_MAX_SIZE;
 
     stop->agent.message_types = STOP_MESSAGE_TYPES;
@@ -75,7 +68,8 @@ void crop_time_of_passengers(stop *stop, size_t len_to_crop){
     stop->number_of_passengers -= len_to_crop;
 }
 
-void process_and_save_passengers_row(stop *stop, byte factual_boards, u16 bus_code, byte travels_completed, const global_simulation_parameters *sim_params){
+void process_and_save_passengers_row(stop *stop, byte factual_boards, u16 bus_code,
+     byte travels_completed, const sim_context  *sim_params){
 
     if (factual_boards == 0) {
     return;
@@ -103,12 +97,9 @@ void process_and_save_passengers_row(stop *stop, byte factual_boards, u16 bus_co
     .stopcode = stop->stop_code,
     .timeslot = sim_params->timeslot,
     .current_time = sim_params->global_clock,
-    .generation_times = malloc(sizeof(u32) * factual_boards)
+    .n_generation_times = factual_boards
     };
-    if (!new_pass_row.generation_times) {
-    perror("Error allocating generation times");
-    exit(-3);
-    }
+
     memcpy(new_pass_row.generation_times, stop->passengers_time_of_creation, sizeof(u32)*factual_boards);
 
     crop_time_of_passengers(stop, factual_boards);
@@ -119,7 +110,7 @@ void process_and_save_passengers_row(stop *stop, byte factual_boards, u16 bus_co
 
 
 
-void update_stop_in_sim(void *self, const global_simulation_parameters *sim_params){
+void update_stop_in_sim(void *self, const sim_context  *sim_params){
 
     stop *stop = self;
 
@@ -129,7 +120,16 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
             //This case is globally updated. The reason why, is that the stop agent itself
             //cannot be the one dictating when the passengers are generated inself. It actually
             //comes from an environmental update, dictate by the world.
-            break;
+
+            if (stop->agent.queries.size > 0) {
+                stop->stop_state = interaction_with_bus;
+                stop->interaction_state = initial_conversation;
+            }else {break;}
+            // } else if (stop->agent.requests.size > 0) {
+            //     stop->stop_state = interaction_with_bus;
+            //     stop->interaction_state = last_conversation;
+            // } else break;
+
         }
         case interaction_with_bus:{
             switch (stop->interaction_state){
@@ -148,7 +148,7 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
 
                         //Infer dropoffs. It invoices a global action handler from the sim, because
                         //the drpoff knowledge cannot be into the agent own's beliefs or knowkledge.
-                        u16 dropoffs = sim_params->infer_dropoffs(stop->stop_code, sim_params);
+                        u16 dropoffs = infer_dropoffs(stop->stop_code, sim_params);
 
                         message *answer_back_agree_message = calloc(1, sizeof(message));
                         message *answer_back_inform_message = calloc(1, sizeof(message));
@@ -156,19 +156,18 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
                         answer_back_agree_message->message_type = agree;
                         answer_back_agree_message->protocol_type = QUERY_REF;
                         answer_back_agree_message->sender = &stop->agent;
-                        answer_back_agree_message->receiver = query_message->receiver;
+                        answer_back_agree_message->receiver = query_message->sender;
                         answer_back_agree_message->payload = (void *)"Here is the passengers information";
-                        
+                        answer_back_agree_message->payload_owned = false;
+
                         send_message(answer_back_agree_message);
 
 
                         answer_back_inform_message->message_type = inform;
                         answer_back_inform_message->protocol_type = QUERY_REF;
                         answer_back_inform_message->sender = &stop->agent;
-                        answer_back_inform_message->receiver = query_message->receiver;
+                        answer_back_inform_message->receiver = query_message->sender;
 
-                        //tmp
-                        
 
                         u16 *payload = malloc(sizeof(u16)*2);
 
@@ -178,9 +177,11 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
                         }
                         payload[0] = stop->number_of_passengers;
                         payload[1] = dropoffs;
-                        answer_back_inform_message->payload = (void *)payload;           
+                        answer_back_inform_message->payload = (void *)payload;
+                        answer_back_inform_message->payload_owned = true;      
                         send_message(answer_back_inform_message);
 
+                        stop->interaction_state = last_conversation;
                         break;
                     }else{
                         break;
@@ -214,9 +215,9 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
                         answer_back_agree_message->message_type = agree;
                         answer_back_agree_message->protocol_type = QUERY_REF;
                         answer_back_agree_message->sender = &stop->agent;
-                        answer_back_agree_message->receiver = req_message->receiver;
+                        answer_back_agree_message->receiver = req_message->sender;
                         answer_back_agree_message->payload = (void *)"Ok";
-                        
+                        answer_back_agree_message->payload_owned = false;
                         send_message(answer_back_agree_message);
 
 
@@ -228,8 +229,9 @@ void update_stop_in_sim(void *self, const global_simulation_parameters *sim_para
                         answer_back_inform_message->message_type = inform;
                         answer_back_inform_message->protocol_type = QUERY_REF;
                         answer_back_inform_message->sender = &stop->agent;
-                        answer_back_inform_message->receiver = req_message->receiver;
+                        answer_back_inform_message->receiver = req_message->sender;
                         answer_back_inform_message->payload = (void *)"Done";
+                        answer_back_inform_message->payload_owned = false;
 
                         send_message(answer_back_inform_message);
                         stop->stop_state = passengers_custody;
@@ -253,7 +255,16 @@ void reset_stop(void *self){
     stop->passengers_generating = 0.0;
     stop->stop_state = passengers_custody;
     stop->passengers_idx = 0;
-    
+
+    //malloc memory for buffer paswsengers again.
+    passengers_row *buffer_passengers = malloc(sizeof(passengers_row) *stop->max_allocated_buffer_size);
+    if (!buffer_passengers){
+        fprintf(stderr, "Error at stop %u startup allocating memory for passengers buffer log\n", stop->stop_code);
+        exit(-3);
+    }
+
+    stop->buffer_passengers = buffer_passengers;
+
 }
 
 
@@ -268,9 +279,6 @@ void cleanup_stop(void *self){
     free(stop->passengers_time_of_creation);
     stop->passengers_time_of_creation = NULL;
 
-
-
-    free(stop->buffer_passengers);
-    stop->buffer_passengers = NULL;
-
+    // free(stop->buffer_passengers);
+    // stop->buffer_passengers = NULL;
 }

@@ -2,7 +2,9 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<utils/utils.h>
+#include<stdbool.h>
+
+#include"utils/utils.h"
 
 #define INIT_CAPACITY 8
 
@@ -43,6 +45,7 @@ typedef struct message {
     PROTOCOL_TYPE protocol_type;
     MESSAGE_TYPE message_type;
     void *payload;
+    bool  payload_owned;   /* true = malloc'd, cleanup frees it */
 }message;
 
 

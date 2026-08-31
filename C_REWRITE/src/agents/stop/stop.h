@@ -14,9 +14,9 @@
 typedef struct global_simulation_parameters global_simulation_parameters;
 
 
-#define BASE_PASSENGERS_MAX_SIZE 32
+#define BASE_PASSENGERS_MAX_SIZE 512
 
-#define BASE_PASSENGERS_BUFFER_MAX_SIZE 32
+#define BASE_PASSENGERS_BUFFER_MAX_SIZE 512
 
 
 typedef enum {
@@ -115,7 +115,9 @@ void crop_time_of_passengers(stop *stop, size_t len_to_crop);
  * @param sim_params reference to the global simulation parameters. needed to know the
  * general simulation time
  */
-void process_and_save_passengers_row(stop *stop, byte factual_boards, u16 bus_code, byte travels_completed, const global_simulation_parameters *sim_params);
+void process_and_save_passengers_row(stop *stop, byte factual_boards,
+u16 bus_code, byte travels_completed, 
+const sim_context  *sim_params);
 
 
 
@@ -128,7 +130,7 @@ void process_and_save_passengers_row(stop *stop, byte factual_boards, u16 bus_co
  * agent update_in_sim definition
  * @param sim_params reference to the global simulation params for knowuin
  */
-void update_stop_in_sim(void *self, const global_simulation_parameters *sim_params);
+void update_stop_in_sim(void *self, const sim_context  *sim_params);
 
 
 

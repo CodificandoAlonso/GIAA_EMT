@@ -14,6 +14,9 @@
 
 typedef struct global_simulation_parameters global_simulation_parameters;
 
+#define BASE_BUFFER_RESULTS_SIZE 512
+
+#define BASE_BUFFER_ANOMALIES_SIZE 512
 
 
 
@@ -104,6 +107,8 @@ typedef struct bus {
     //bool variable to know if it has ended service
     bool ending_service;
 
+    size_t results_allocated;
+
     size_t results_idx;
     results_row *buffer_results;
 
@@ -131,17 +136,17 @@ void startup_bus_agent(void *self);
  * @param dropoffs number of passengers that will be dropped out of the bus
  * @return number of residual_boards not able to board due to occupancy constraints.
  */
-byte update_bus_occupancy(bus *bus, byte boards, byte dropoffs);
+u16 update_bus_occupancy(bus *bus, u16 boards, u16 dropoffs);
 
 
-void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte residual_boards,
-                      const global_simulation_parameters *sim_params);
+void save_results_row(bus *bus, u16 pass_to_board, u16 pass_to_dropoff, u16 residual_boards,
+                      const sim_context *sim_params);
 
 
-void save_last_row(bus *bus, const global_simulation_parameters *sim_params);
+void save_last_row(bus *bus, const sim_context *sim_params);
 
 
-void save_anomaly_row(bus *bus, u32 delay, const global_simulation_parameters *sim_params);
+void save_anomaly_row(bus *bus, u32 delay, const sim_context *sim_params);
 
 /**
  * @brief auxiliary function to, when the infer of boarding disboarding porcess
@@ -152,12 +157,18 @@ void save_anomaly_row(bus *bus, u32 delay, const global_simulation_parameters *s
  * @param unable_boards the number of passengers not able to board. If zero
  * the answer back is expected boards
  */
-void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards);
-
-void ending_bus_service(bus *bus, const global_simulation_parameters *sim_params);
+void request_to_update_stop(bus *bus, u16 expected_boards, u16 unable_boards);
 
 
-void update_bus_in_sim(void *self, const global_simulation_parameters *sim_params);
+void process_extra_time_at_stop(bus *bus, u16 boards,
+     u16 dropoffs, const sim_context *sim_params);
+
+
+
+void ending_bus_service(bus *bus, const sim_context *sim_params);
+
+
+void update_bus_in_sim(void *self, const sim_context *sim_params);
 
 
 void reset_bus(void *self);

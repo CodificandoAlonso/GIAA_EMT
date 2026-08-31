@@ -1,4 +1,5 @@
 #pragma once
+#include <inttypes.h>
 
 #include <stdint.h>
 
@@ -452,9 +453,9 @@ get_distribution_per_timeslot_times_toB(
     direction direction;
     byte timeslot;
     byte departure_timeslot;
-    byte boards;
-    byte residual_boards;
-    byte dropoffs;
+    u16 boards;
+    u16 residual_boards;
+    u16 dropoffs;
     byte occupation;
     u32 time_travelled;
 }results_row;
@@ -480,5 +481,15 @@ typedef struct passengers_row {
     u16 stopcode;
     byte timeslot;
     u32 current_time;
-    u32 *generation_times;
+    u32 generation_times[MAX_OCCUPANCY];
+    size_t n_generation_times;
 }passengers_row;
+
+
+
+
+void write_results(FILE *out, const void *v, size_t n);
+
+void write_anomalies(FILE *out, const void *v, size_t n);
+
+void write_passengers(FILE *out, const void *v, size_t n);

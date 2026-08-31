@@ -4,10 +4,10 @@
 
 
 
-u16 infer_dropoffs(u16 stop, global_simulation_parameters *sim_params){
+u16 infer_dropoffs(u16 stop, sim_context *sim_params){
 
     if (stop == 2646 || stop == 5727) {
-        return MAX_OCCUPANCY;
+        return 0;
     }
 
     const input_data_stop_row *distro;
@@ -50,7 +50,7 @@ u16 infer_dropoffs(u16 stop, global_simulation_parameters *sim_params){
 
 
 
-u32 return_next_time_to_stop(u16 stop, global_simulation_parameters *sim_params, direction direction){
+u32 return_next_time_to_stop(u16 stop, sim_context *sim_params, direction direction){
 
     //Need to obtain the double value coresponding to the combo stop
     //and sim_params->timeslot. then, use
@@ -86,12 +86,15 @@ u32 return_next_time_to_stop(u16 stop, global_simulation_parameters *sim_params,
         sim_params->random_generator
     );
 
+    if (time < 0){
+        time = sim_params->step*2;
+    }
     return sim_params->global_clock + (u32)round(time);
 }
 
 
 
-void generate_passengers_in_stops(global_simulation_parameters *sim_params){
+void generate_passengers_in_stops(sim_context *sim_params){
 
     //Calculate index to access. Should be the remainder of the operation
     // global_clock % 3600
@@ -138,7 +141,7 @@ void generate_passengers_in_stops(global_simulation_parameters *sim_params){
                 stop_agent->passengers_time_of_creation = new_arr;
             }
 
-            for (int i = 0; i < passengers_in_int; i++){
+            for (int n = 0; n < passengers_in_int; n++){
                 stop_agent->passengers_time_of_creation[stop_agent->number_of_passengers++] = sim_params->global_clock;
             }
             stop_agent->passengers_generating -= (double)passengers_in_int;
@@ -148,7 +151,7 @@ void generate_passengers_in_stops(global_simulation_parameters *sim_params){
 }
 
 
-void start_pass_gen_arrays(global_simulation_parameters *sim_params){
+void start_pass_gen_arrays(sim_context *sim_params){
 
     //as its start, we assume Init ts 5 and next 6.
 
@@ -211,7 +214,7 @@ void start_pass_gen_arrays(global_simulation_parameters *sim_params){
 }
 
 
-void update_pass_gen_arrays(global_simulation_parameters *sim_params){
+void update_pass_gen_arrays(sim_context *sim_params){
 
 
     //The formula for the choosen value will be, accesing index 2*((TS +1) - 5).
@@ -227,12 +230,17 @@ void update_pass_gen_arrays(global_simulation_parameters *sim_params){
             sim_params->stops);
 
             double actual_param = sim_params->random_gen_params[agent_idx].next_value;
-
-            double next_param = sim_params->global_params->stops_data_distributions->route_stops_a[i]
-            .stop_distributions[2*((sim_params->timeslot +1) - 5)].distro.random(
+            
+            size_t nx = (size_t)2 * ((size_t)sim_params->timeslot + 1 - 5);
+            double next_param;
+            if (nx >= N_STOP_DATA) next_param = 0;
+            else {
+            next_param = sim_params->global_params->stops_data_distributions->route_stops_a[i]
+            .stop_distributions[nx].distro.random(
                     &sim_params->global_params->stops_data_distributions->route_stops_a[i].
-                    stop_distributions[2*((sim_params->timeslot +1) - 5)].distro,
+                    stop_distributions[nx].distro,
                      sim_params->random_generator);
+            }
             
 
             sim_params->random_gen_params[agent_idx] = 
@@ -254,11 +262,16 @@ void update_pass_gen_arrays(global_simulation_parameters *sim_params){
 
             double actual_param = sim_params->random_gen_params[agent_idx].next_value;
 
-            double next_param = sim_params->global_params->stops_data_distributions->route_stops_b[i]
-            .stop_distributions[2*((sim_params->timeslot +1) - 5)].distro.random(
+            size_t nx = (size_t)2 * ((size_t)sim_params->timeslot + 1 - 5);
+            double next_param;
+            if (nx >= N_STOP_DATA) next_param = 0;
+            else {
+            next_param = sim_params->global_params->stops_data_distributions->route_stops_b[i]
+            .stop_distributions[nx].distro.random(
                     &sim_params->global_params->stops_data_distributions->route_stops_b[i].
-                    stop_distributions[2*((sim_params->timeslot +1) - 5)].distro, 
-                    sim_params->random_generator);
+                    stop_distributions[nx].distro,
+                     sim_params->random_generator);
+            }
             
 
             sim_params->random_gen_params[agent_idx] = 
@@ -273,7 +286,7 @@ void update_pass_gen_arrays(global_simulation_parameters *sim_params){
 
 }
 
-void update_globals(global_simulation_parameters *sim_params){
+void update_globals(sim_context *sim_params){
 
     //First, it needs to check if its TS:00, that means a change in TimeSlot and an update
     //on the arrays for passengers generation.
@@ -283,7 +296,8 @@ void update_globals(global_simulation_parameters *sim_params){
             //Here it should start the arrays. This is done by start_pass_gen_arrays
             start_pass_gen_arrays(sim_params);
         }else{
-            sim_params->timeslot ++;
+            if (sim_params->timeslot < 23)
+                sim_params->timeslot ++;
             update_pass_gen_arrays(sim_params);
         }
     }
@@ -295,14 +309,14 @@ void update_globals(global_simulation_parameters *sim_params){
 
 
 
-void update_time(global_simulation_parameters *sim_params){
+void update_time(sim_context *sim_params){
     sim_params->global_clock+= sim_params->step;
 }
 
 
 
 
-void start_simulation(global_simulation_parameters *simulation_variables){
+void start_simulation(sim_context *simulation_variables){
 
     bool ending = false;
 
@@ -313,7 +327,15 @@ void start_simulation(global_simulation_parameters *simulation_variables){
     for (size_t n = 0; n < simulation_variables->buses_size; n ++){
         if (!simulation_variables->buses[n].ending_service){ending=false;break;}
     }
-    if (ending){break;}
+    if (ending){
+
+        //Before breaking, put all the stop's info into the buffer.
+         for (size_t n = 0; n < simulation_variables->stops_size; n ++){
+            push_passengers(simulation_variables->writter,simulation_variables->stops[n].buffer_passengers,
+                simulation_variables->stops[n].passengers_idx);
+         }
+        break;
+    }
 
     //update globals
     update_globals(simulation_variables);
@@ -350,15 +372,10 @@ void start_simulation(global_simulation_parameters *simulation_variables){
 
 
 
-simulation_variables *startup_thread_parameters(const global_inmutable_params * global_params,u64 seed,
+sim_context startup_thread_parameters(const global_inmutable_params *global_params,u64 seed,
                           u64 stream){
 
-    simulation_variables *thread_sim_vars = calloc(1, sizeof(simulation_variables));
-
-    if (!thread_sim_vars){
-        perror("Error allocating memory for thread sim params\n");
-        exit(-3);
-    }
+    sim_context thread_sim_vars = {0};
 
     RNG *random_generator = RNG_init(seed, stream);
 
@@ -367,11 +384,11 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
         exit(-3);
     }
 
-    thread_sim_vars->random_generator = random_generator;
+    thread_sim_vars.random_generator = random_generator;
 
+    thread_sim_vars.global_params = global_params;  
 
-    //SUPER ULTRA MEGA HARDCODDED THIS CANNOT HAPPEN
-    thread_sim_vars->step = 2;
+    thread_sim_vars.step = STEP;
 
     //startup bus agents.
 
@@ -382,15 +399,15 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
         perror("Error allocating memory for buses creation\n");
         exit(-3);
     }
-    thread_sim_vars->buses = buses;
+    thread_sim_vars.buses = buses;
 
     //j i c
-    thread_sim_vars->buses_size = 0;
-    thread_sim_vars->stops_size = 0;
+    thread_sim_vars.buses_size = 0;
+    thread_sim_vars.stops_size = 0;
 
     for (size_t n = 0; n < global_params->input_data_buses->number_of_buses; n ++){
 
-        thread_sim_vars->buses[thread_sim_vars->buses_size++] = create_bus(
+        thread_sim_vars.buses[thread_sim_vars.buses_size++] = create_bus(
             global_params->input_data_buses->input_buses[n].bus_code,
             global_params->input_data_buses->input_buses[n].stop_code,
             global_params->input_data_buses->input_buses[n].initial_direction,
@@ -414,7 +431,7 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
         perror("Error allocating memory for stops agents\n");
         exit(-3);
     }
-    thread_sim_vars->stops = stops;
+    thread_sim_vars.stops = stops;
     
 
     stop **stops_toA = malloc(sizeof(stop *)*global_params->stops_list_data->size_toA);
@@ -424,7 +441,7 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
         exit(-3);
     }
 
-    thread_sim_vars->stops_toA = stops_toA;
+    thread_sim_vars.stops_toA = stops_toA;
 
     stop **stops_toB = malloc(sizeof(stop *)*global_params->stops_list_data->size_toB);
 
@@ -433,7 +450,7 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
         exit(-3);
     }
 
-    thread_sim_vars->stops_toB = stops_toB;
+    thread_sim_vars.stops_toB = stops_toB;
 
 
     double **array_passengers = malloc(sizeof( double *)*number_of_stops);
@@ -442,16 +459,16 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
         perror("Error allocating emmory for array of generation data\n");
         exit(-3);
     }   
-    thread_sim_vars->array_passengers_gen = array_passengers;
+    thread_sim_vars.array_passengers_gen = array_passengers;
 
     for (size_t i = 0; i< number_of_stops; i++){
-        double *array = malloc(sizeof(double)*(3600/thread_sim_vars->step));
+        double *array = malloc(sizeof(double)*(3600/thread_sim_vars.step));
 
         if (!array){
             perror("Error allocating emmory for concrete array of generation data\n");
             exit(-3); 
         }
-        thread_sim_vars->array_passengers_gen[i] = array;
+        thread_sim_vars.array_passengers_gen[i] = array;
     }
 
 
@@ -461,6 +478,7 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
         perror("ERror allocating space for the choosen generation parameters\n");
         exit(-3);
     }
+    thread_sim_vars.random_gen_params = random_gen_params;
 
     //create agents out of the txt parsed file
 
@@ -468,12 +486,12 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
     for (size_t idx = 0; idx < global_params->stops_list_data->size_toA; idx ++){
 
         //Create the agent and save in the general stop array
-        thread_sim_vars->stops[thread_sim_vars->stops_size] =create_stop(
+        thread_sim_vars.stops[thread_sim_vars.stops_size] =create_stop(
             global_params->stops_list_data->stopcodes_toA[idx]);
         
         size_t mapped_idx = stop_mapper_toA(global_params->stops_list_data->stopcodes_toA[idx]);
 
-        stops_toA[mapped_idx] = &thread_sim_vars->stops[thread_sim_vars->stops_size ++];
+        stops_toA[mapped_idx] = &thread_sim_vars.stops[thread_sim_vars.stops_size ++];
     }
 
     //for toB agents, we need to make a distinction, as stop agents for 5727 and 2646 are already
@@ -483,23 +501,25 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
     size_t idx_5727_toA = stop_mapper_toA(5727);
     size_t idx_5727_toB = stop_mapper_toB(5727);
 
-    stops_toB[idx_2646_toB] = thread_sim_vars->stops_toA[idx_2646_toA];
-    stops_toB[idx_5727_toB] = thread_sim_vars->stops_toA[idx_5727_toA];
+    stops_toB[idx_2646_toB] = thread_sim_vars.stops_toA[idx_2646_toA];
+    stops_toB[idx_5727_toB] = thread_sim_vars.stops_toA[idx_5727_toA];
 
 
     //Loop' the rest
     for (size_t idx = 0; idx < global_params->stops_list_data->size_toB; idx ++){
         
-        if (global_params->stops_list_data->stopcodes_toB[idx] != 2646 && global_params->stops_list_data->stopcodes_toB[idx] != 5727){
+        if (global_params->stops_list_data->stopcodes_toB[idx]
+             != 2646 && global_params->stops_list_data->stopcodes_toB[idx] != 5727){
             
             //Create the agent and save in the general stop array
-            thread_sim_vars->stops[thread_sim_vars->stops_size] =create_stop(
+            thread_sim_vars.stops[thread_sim_vars.stops_size] =create_stop(
                 global_params->stops_list_data->stopcodes_toB[idx]);
             
 
-            size_t mapped_idx = stop_mapper_toB(global_params->stops_list_data->stopcodes_toB[idx]);
+            size_t mapped_idx = stop_mapper_toB(
+                global_params->stops_list_data->stopcodes_toB[idx]);
 
-            stops_toB[mapped_idx] = &thread_sim_vars->stops[thread_sim_vars->stops_size++];
+            stops_toB[mapped_idx] = &thread_sim_vars.stops[thread_sim_vars.stops_size++];
         }
     }
 
@@ -508,57 +528,82 @@ simulation_variables *startup_thread_parameters(const global_inmutable_params * 
 
 
 
-void restart_agents(simulation_variables *simulation_variables){
+void restart_agents(sim_context *simulation_variables){
+  
+    for (size_t n = 0; n < simulation_variables->buses_size; n ++){
+        simulation_variables->buses[n].agent.reset_agent((void *)&simulation_variables->buses[n]);
+    }
+
+    //update stops
+    for (size_t n = 0; n < simulation_variables->stops_size; n ++){
+        simulation_variables->stops[n].agent.reset_agent((void *)&simulation_variables->stops[n]);
+    }
+
+    simulation_variables->global_clock = timechar_to_u32_seconds("05:00", 5);
+
+    simulation_variables->timeslot = 5;
+
+
+    memset(simulation_variables->random_gen_params, 0,
+       simulation_variables->stops_size * sizeof *simulation_variables->random_gen_params);
 
 }
 
-void *run_simulation_thread(simulation_variables *simulation_init_variables, 
-const global_inmutable_params * global_params){
+void delete_agents(sim_context *simulation_variables){
+
+    for (size_t n = 0; n < simulation_variables->buses_size; n ++){
+        simulation_variables->buses[n].agent.cleanup((void *)&simulation_variables->buses[n]);
+
+    }
+    free(simulation_variables->buses);
+
+    //update stops
+    for (size_t n = 0; n < simulation_variables->stops_size; n ++){
+        simulation_variables->stops[n].agent.cleanup((void *)&simulation_variables->stops[n]);
+    }
+    free(simulation_variables->stops);
+    free(simulation_variables->stops_toA);
+    free(simulation_variables->stops_toB);
+
+
+    for (size_t i = 0; i< simulation_variables->stops_size; i ++){
+        free(simulation_variables->array_passengers_gen[i]);
+    }
+    free(simulation_variables->array_passengers_gen);
+
+    free(simulation_variables->random_gen_params);
+
+    RNG_destroy(simulation_variables->random_generator);
+}
 
 
 
-    //if agents are already created, call restart agents, if not, init them
-    if (simulation_init_variables->buses_size > 0 && simulation_init_variables->stops_size > 0){
-        restart_agents(simulation_init_variables);
+
+
+void *replica_worker(void *arg) {
+    sim_context *a = arg;
+    for (;;) {
+        size_t id = atomic_fetch_add_explicit(a->next_sim, 1, memory_order_relaxed);
+        if (id >= N_SIMS) break;    /* no work left → exit */
+
+        run_simulation_thread(a, (u16)id);
     }
 
+    //remove agents.
+    delete_agents(a);
 
-    //start the global simulation parameters.
-    global_simulation_parameters *sim_params = malloc(sizeof(global_simulation_parameters));
-
-    if(!sim_params){
-        perror("Error allocating memory for global simulation parameters\n");
-        exit(-3);
-    }
-
-    //params
-
-    sim_params->global_params = global_params;
+    return NULL;
+}
 
 
-    sim_params->return_next_time_to_stop = return_next_time_to_stop;
 
-    sim_params->simulation_id = simulation_init_variables->simulation_id;
+void run_simulation_thread(sim_context *simulation_init_variables, u16 id){
 
-    sim_params->global_clock = timechar_to_u32_seconds("05:00", 5);
+    restart_agents(simulation_init_variables);
 
-    sim_params->timeslot = 5;
 
-    //RN HARDCODDED. SHOULD BE .ENVED
-    sim_params->step = 2;
 
-    sim_params->random_generator = simulation_init_variables->random_generator;
-
-    sim_params->array_passengers_gen = simulation_init_variables->array_passengers_gen;
-
-    //agents
-    sim_params->buses_size = simulation_init_variables->buses_size;
-    sim_params->buses = simulation_init_variables->buses;
-    sim_params->stops_size = simulation_init_variables->stops_size;
-    sim_params->stops = simulation_init_variables->stops;
-    sim_params->stops_toA = simulation_init_variables->stops_toA;
-    sim_params->stops_toB = simulation_init_variables->stops_toB;
-
+    simulation_init_variables->simulation_id = id;
 
 
     //Once the global params are set, with all the agents initialized, this is simply 2 function calls and
@@ -566,8 +611,6 @@ const global_inmutable_params * global_params){
 
     //All of this is done by run_smiulation thread. Once finished, it must specify to montecarlo that the thread
     //has finished so it can rerun again.
-    start_simulation(sim_params);
+    start_simulation(simulation_init_variables);
 
-    //Indicate montecarlo.c that it has ended
-    return 0;
 }

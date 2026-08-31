@@ -2,6 +2,7 @@
 #include "utils/utils.h"
 #include "agents/generic/agents.h"
 #include "engine/simulation.h"
+#include "math/math_utils.h"
 #include<stdio.h>
 #include<stdlib.h>
 #include <string.h>
@@ -25,6 +26,10 @@ bus create_bus(u16 bus_code, u16 stop_code, direction direction,
         bus.results_idx = 0;
         bus.anomalies_idx = 0;
         bus.ending_service = false;
+
+        bus.anomalies_allocated = BASE_BUFFER_ANOMALIES_SIZE;
+        bus.results_allocated = BASE_BUFFER_RESULTS_SIZE;
+
         bus.agent.startup_agent(&bus);
         return bus;
     }
@@ -47,7 +52,7 @@ void startup_bus_agent(void *self){
 
 
 
-byte update_bus_occupancy(bus *bus, byte boards, byte dropoffs){
+u16 update_bus_occupancy(bus *bus, u16 boards, u16 dropoffs){
 
     //first apply droppoffs.
     if (dropoffs > bus->occupation)
@@ -67,9 +72,21 @@ byte update_bus_occupancy(bus *bus, byte boards, byte dropoffs){
 }
 
 
-void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte residual_boards,
-                      const global_simulation_parameters *sim_params){
-
+void save_results_row(bus *bus, u16 pass_to_board, u16 pass_to_dropoff, u16 residual_boards,
+                      const sim_context *sim_params){
+    
+    if (bus->results_idx == bus->results_allocated){
+        //realloc twice.
+        results_row *realloc_res = realloc(bus->buffer_results, bus->results_allocated*2*sizeof(results_row));
+        if (!realloc_res){
+            perror("Error reallocating memory for results realloqued\n");
+            exit(-3);
+        }
+        bus->results_allocated *= 2;
+        bus->buffer_results = realloc_res;
+    }
+    
+                        
     bus->buffer_results[bus->results_idx] = (results_row){
         sim_params->simulation_id,
         bus->bus_code,
@@ -88,7 +105,18 @@ void save_results_row(bus *bus, byte pass_to_board, byte pass_to_dropoff, byte r
 }
 
 
-void save_last_row(bus *bus, const global_simulation_parameters *sim_params){
+void save_last_row(bus *bus, const sim_context *sim_params){
+
+    if (bus->results_idx == bus->results_allocated){
+        //realloc twice.
+        results_row *realloc_res = realloc(bus->buffer_results, bus->results_allocated*2*sizeof(results_row));
+        if (!realloc_res){
+            perror("Error reallocating memory for results realloqued\n");
+            exit(-3);
+        }
+        bus->results_allocated *= 2;
+        bus->buffer_results = realloc_res;
+    }
     bus->buffer_results[bus->results_idx] = (results_row){
         sim_params->simulation_id,
         bus->bus_code,
@@ -107,9 +135,7 @@ void save_last_row(bus *bus, const global_simulation_parameters *sim_params){
 }
 
 
-void save_anomaly_row(bus *bus, u32 delay, const global_simulation_parameters *sim_params){
-
-
+void save_anomaly_row(bus *bus, u32 delay, const sim_context *sim_params){
 
     //check if needs reallocation.
     if (bus->anomalies_idx == bus->anomalies_allocated){
@@ -139,7 +165,7 @@ void save_anomaly_row(bus *bus, u32 delay, const global_simulation_parameters *s
 }
 
 
-void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards){
+void request_to_update_stop(bus *bus, u16 expected_boards, u16 unable_boards){
     message *new_message = malloc(sizeof(message));
 
     if (!new_message){
@@ -159,19 +185,46 @@ void request_to_update_stop(bus *bus, byte expected_boards, byte unable_boards){
     new_message->protocol_type = REQUEST;
     new_message->receiver = &bus->stop_reached->agent;
     new_message->payload = (void *)payload;
-
+    new_message->payload_owned = true;
     send_message(new_message);
 }
 
 
 
+void process_extra_time_at_stop(bus *bus, u16 boards,
+     u16 dropoffs, const sim_context *sim_params){
 
-void ending_bus_service(bus *bus, const global_simulation_parameters *sim_params){
+    //Simply. the boarding and dropoff process are consider parallel.
 
+    //The extra time should be processed if, counting max number of cycles the bus
+    //takes to process all the info at stop. Counting from when it arrives.
+    //at cycle 0 starts comms with stop. Expected in cycle 1 have first answer.
+    //At cycle 2 having second answer. That means 2 cycles. The system should
+    //first take a time_per_passenger, def will be 5s and process the
+    //First the max between boards and dropoffs. Then, the max between 
+    //That value *time_per_passenger and 2*STEP. Define the bus->extra_time_in_stop
+    //as the time the bus is "allowed" to leave the stop.
 
+    byte max_val = max(boards, dropoffs);
+    
+    u32 extra_time = (u32)(max_val* TIME_PER_PASSENGER);
+
+    if (extra_time  > 2*sim_params->step){
+        bus->extra_time_awaital = sim_params->global_clock + extra_time;
+    }else{
+        bus->extra_time_awaital = sim_params->global_clock;
+    }
 }
 
-void update_bus_in_sim(void *self, const global_simulation_parameters *sim_params){
+
+void ending_bus_service(bus *bus, const sim_context *sim_params){
+
+    //When ending, just put its results info and anomalies info into the buffer, and thats it.
+    push_results(sim_params->writter, bus->buffer_results, bus->results_idx);
+    push_anomalies(sim_params->writter, bus->buffer_anomalies, bus->anomalies_idx);
+}
+
+void update_bus_in_sim(void *self, const sim_context *sim_params){
     bus *bus = self;
 
     switch (bus->state){
@@ -185,7 +238,7 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                 bus->state = moving;
                 bus->expected_navigation_arrival = sim_params->global_clock;
 
-            }
+            } else {break;}
         }
 
         case moving: {
@@ -243,6 +296,7 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                         //update headway start.
                         bus->bus_direction = bus->headway_times[bus->travels_completed].bus_direction;
                         bus->state = waiting_headway;
+                        bus->time_travelled = 0;
 
                         //Check if the bus is delayed. If so, save_anomaly_row.
 
@@ -284,11 +338,11 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                         exit(-3);
                     }
                     new_message->sender = &bus->agent;
-                    new_message->message_type = request;
-                    new_message->protocol_type = REQUEST;
+                    new_message->message_type = query;
+                    new_message->protocol_type = QUERY_IF;
                     new_message->receiver = &bus->stop_reached->agent;
                     new_message->payload = (void *)"Bus arrived to stop";
-
+                    new_message->payload_owned = false;
                     send_message(new_message);
 
                     //Move to waiting_stop_answer
@@ -318,17 +372,24 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                                 //If both messages received, means the comm works. Process boards
                                 //and dropoffs information and update state
 
-                                byte pass_to_board = ((byte *)inform_stop->payload)[0];
-                                byte pass_to_dropoff = ((byte *)inform_stop->payload)[1];
+                                const u16 *p = inform_stop->payload;
+                                u16 pass_to_board   = p[0];
+                                u16 pass_to_dropoff = p[1];
                                 cleanup_message(inform_stop);
-                                byte residual_boards = update_bus_occupancy(bus,
+                                u16 residual_boards = update_bus_occupancy(bus,
                                                     pass_to_board, pass_to_dropoff);
                                 save_results_row(bus, pass_to_board, pass_to_dropoff, residual_boards,
                                                     sim_params);
                                 
                                 request_to_update_stop(bus, pass_to_board, residual_boards);
                                 bus->stopped_state = waiting_stop_validation;
+                                
+                                //infer the extra time based on the number of boards and driopoffs.
+                                process_extra_time_at_stop(bus, 
+                                    pass_to_board - residual_boards, pass_to_dropoff,
+                                    sim_params);
 
+                                
                             }else{
                                 perror("Error in bus->stop request passengers communication\n");
                                 exit(-2);
@@ -357,6 +418,7 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                                 if (strcmp((const char *)inform_message->payload, "Done") == 0){
                                     cleanup_message(inform_message);
                                     bus->stopped_state = wait_extra_time;
+                                    
                                 }else{
                                     fprintf(stderr, "Unknown message %s\n", (char *)inform_message->payload);
                                     free(inform_message->payload);
@@ -366,6 +428,7 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                                perror("Error in bus->stop request update passengers info communication\n");
                                exit(-2); 
                             }
+                            
                         }
                     }else{
                         //if no message yet, weird but can happen. exit and no checjk of wait extra time
@@ -383,7 +446,7 @@ void update_bus_in_sim(void *self, const global_simulation_parameters *sim_param
                         */
                         
                         bus->expected_navigation_arrival = 
-                        sim_params->return_next_time_to_stop(bus->stop_reached->stop_code,
+                        return_next_time_to_stop(bus->stop_reached->stop_code,
                             sim_params, bus->bus_direction);
 
                         bus->time_travelled = bus->expected_navigation_arrival - sim_params->global_clock;
@@ -420,8 +483,37 @@ void reset_bus(void *self){
     reset_inbox(&bus->agent, BUS_MESSAGE_TYPES, BUS_INBOXES_NUMBER);
 
     bus->occupation = 0;
+
     bus->anomalies_idx = 0;
     bus->results_idx = 0;
+
+    //qallocate new mem.
+
+    //jit.
+    bus->buffer_results = NULL;
+    bus->buffer_anomalies = NULL;
+
+    //allocate memory for both results array and anomalies one.
+    results_row *reserverd_results = malloc(sizeof(results_row)* bus->results_allocated);
+
+    if (!reserverd_results){
+        perror("Error allocating mem for results buffer in bus agent creation\n");
+        exit(-3);
+    }
+
+    anomaly_row *reserverd_anomalies = malloc(sizeof(anomaly_row)* bus->anomalies_allocated);
+
+    if (!reserverd_anomalies){
+        perror("Error allocating mem for anomalies buffer in bus agent creation\n");
+        exit(-3);
+    }
+
+    bus->buffer_anomalies = reserverd_anomalies;
+    bus->buffer_results = reserverd_results;
+
+
+
+
 
     bus->stops_reached = 0;
 
@@ -436,6 +528,9 @@ void reset_bus(void *self){
     bus->extra_time_awaital = 0;
 }
 
+
+
+
 void cleanup_bus(void *self){
 
     //Needs to, cleanup all stuff that relies on the bus agent. That means.
@@ -449,10 +544,10 @@ void cleanup_bus(void *self){
     bus->headway_times = NULL;
 
 
-    free(bus->buffer_anomalies);
-    bus->buffer_anomalies = NULL;
+    // free(bus->buffer_anomalies);
+    // bus->buffer_anomalies = NULL;
 
-    free(bus->buffer_results);
-    bus->buffer_results = NULL;
+    // free(bus->buffer_results);
+    // bus->buffer_results = NULL;
 }
 

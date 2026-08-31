@@ -205,20 +205,26 @@ input_data_times clean_inline_times_row(char *inline_data){
 
     u16 stop_code = 0;
     
+    bool stop_copied = false;
     //if we consider a maximum of 16 bytes for the XXXX-YYYY stop-stop combo.
     for (size_t i = 0; i < 16; i++) {
 
         if (inline_data[i] == '-') {
+            stop_copied = true;
+            
+        }else{stop_parsing_counter++;}
+
+        if (inline_data[i] == ','){
             break;
         }
 
-        if (inline_data[i] >= '0' && inline_data[i] <= '9') {
+        if (inline_data[i] >= '0' && inline_data[i] <= '9' && !stop_copied) {
             stop_code = stop_code * 10 +
                         (u16)(inline_data[i] - '0');
         }
     }
 
-    size_t starting_point = stop_parsing_counter + 1;
+    size_t starting_point = stop_parsing_counter +1;
 
     size_t copied_bytes = 0;
 
@@ -239,8 +245,8 @@ input_data_times clean_inline_times_row(char *inline_data){
     aux_row.time_slot = timeslot;
 
     //auxiliar for the params of the struct
-    double param1, param2 = 0.0;
-    for (size_t i=stop_parsing_counter; i< 1024; i++){
+    double param1 = 0.0, param2 = 0.0;
+    for (size_t i=starting_point; i< 1024; i++){
 
         if (inline_data[i] == ',' || inline_data[i] == '\0' || inline_data[i] == '\n'){
             //need to figure out which param are we. For that, we check the odd t/f. if odd F, we are in mean. If odd T we are in std and save
@@ -361,4 +367,38 @@ const char *route_direction_b){
 
     return matrix;
 
+}
+
+
+
+
+void write_results(FILE *out, const void *v, size_t n) {
+    const results_row *r = v;
+    for (size_t i = 0; i < n; i++)
+        fprintf(out, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%" PRIu32 "\n",
+            r[i].sim_identifier, r[i].bus_code, r[i].travels_completed,
+            r[i].stopcode, (int)r[i].direction, r[i].timeslot,
+            r[i].departure_timeslot, r[i].boards, r[i].residual_boards,
+            r[i].dropoffs, r[i].occupation, r[i].time_travelled);
+}
+
+void write_anomalies(FILE *out, const void *v, size_t n) {
+    const anomaly_row *r = v;
+    for (size_t i = 0; i < n; i++)
+        fprintf(out, "%d,%d,%d,%d,%d,%d,DELAY,%" PRIu32 ",%" PRIu32 ",%d\n",
+            r[i].sim_identifier, r[i].bus_code, r[i].travels_completed,
+            (int)r[i].direction, r[i].stopcode, r[i].timeslot,
+            r[i].current_time, r[i].expected_departure, r[i].minutes_of_delay);
+}
+
+void write_passengers(FILE *out, const void *v, size_t n) {
+    const passengers_row *r = v;
+    for (size_t i = 0; i < n; i++) {
+        fprintf(out, "%d,%d,%d,%d,%d,%" PRIu32 ",\"",
+            r[i].sim_identifier, r[i].bus_code, r[i].travels_completed,
+            r[i].stopcode, r[i].timeslot, r[i].current_time);
+        for (size_t k = 0; k < r[i].n_generation_times; k++)
+            fprintf(out, k ? " %" PRIu32 : "%" PRIu32, r[i].generation_times[k]);
+        fputs("\"\n", out);
+    }
 }

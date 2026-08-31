@@ -3,61 +3,67 @@
 #include <inttypes.h>
 
 #include "math/math_utils.h"
+#include "config/config.h"
+#include "io/csv_parser.h"
+#include "io/json_parser.h"
+#include "io/txt_parser.h"
+#include "engine/simulation.h"
+#include "engine/monte_carlo.h"
+
+
+
+
 
 int main(void)
 {
-    double value_first_tram = 33.45;
-    double value_second_tram = 200.0;
-    u32 step = 2;
+    
 
-    size_t tram_parts = 3600 / step;
 
-    printf("========================================\n");
-    printf("Linear Conservative Reconstruction Test\n");
-    printf("========================================\n");
+    //construct the inputs as parsed by the data.
 
-    printf("First tram value  : %.2f\n", value_first_tram);
-    printf("Second tram value : %.2f\n", value_second_tram);
-    printf("Step              : %" PRIu32 " seconds\n", step);
-    printf("Number of parts   : %zu\n\n", tram_parts);
+    //distribution data as an input_data_matrix
+    const input_data_matrix *const stops_data_distributions =
+    load_and_map_route_data_from_csv(CSV_DISTRIBUTION_A,
+                                    CSV_DISTRIBUTION_B);
 
-    /*
-     * Allocate the output array on the heap.
-     */
-    double *linear_arr = malloc(sizeof(double) * tram_parts);
+    //stop list from the ttx as a stops_list
+    const stops_list *const stops_list_data = load_stops(STOPS_TXT);
 
-    if (linear_arr == NULL) {
-        perror("Error allocating linear_arr");
-        return EXIT_FAILURE;
+    //input buses as a json
+    const input_data_buses *const input_buses = load_input_from_json(
+        BUSES_JSON);
+
+    //times between stops as a input_times_matrix.
+    const input_times_matrix *const stops_times_distributions = 
+    load_and_map_route_times_from_csv(CSV_TIMES_A, CSV_TIMES_B);
+
+    const global_inmutable_params global_input_params =
+    (global_inmutable_params){
+        .stops_data_distributions = stops_data_distributions,
+        .stops_list_data = stops_list_data,
+        .input_data_buses = input_buses,
+        .stops_times_distributions = stops_times_distributions
+    };
+
+     if (config_ensure_outdir(OUT_DIR) < 0){
+        perror("Error creating output results csv file\n");
+        exit(-1);
     }
 
-    /*
-     * Fill the allocated array.
-     */
-    linear_conservative_reconstruction(
-        linear_arr,
-        value_first_tram,
-        value_second_tram,
-        step
-    );
+    run_monte_carlo_replicas(&global_input_params);
 
-    /*
-     * Print the reconstructed values.
-     */
-    printf("Reconstructed values:\n");
+    free((void *)stops_data_distributions);
 
-    for (size_t i = 0; i < tram_parts; ++i) {
-        printf(
-            "  [%zu] = %.10f\n",
-            i,
-            linear_arr[i]
-        );
+    free(global_input_params.stops_list_data->stopcodes_toA);
+    free(global_input_params.stops_list_data->stopcodes_toB);
+
+    free((void *)stops_list_data);
+
+    for (size_t i = 0; i < input_buses->number_of_buses; i++){
+        free(input_buses->input_buses[i].headway_bus_times);
     }
-
-    /*
-     * Cleanup.
-     */
-    free(linear_arr);
-
-    return EXIT_SUCCESS;
+    free(input_buses->input_buses);
+    free((void *)input_buses);
+    free((void *)stops_times_distributions);
+    return 0;
 }

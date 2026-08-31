@@ -134,6 +134,7 @@ void handle_specific_inbox_expansion (inbox *ib){
 void destroy_specific_inbox(inbox *ib){
     free(ib->messages);
     ib->size = 0;
+    ib->messages = NULL;
     ib->capacity = 0;
     ib->head = 0;
 }
@@ -163,8 +164,8 @@ void destroy_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n){
 
 
 void reset_specific_inbox(inbox *ib){
-    ib->capacity = 0;
     ib->head = 0;
+    ib->size = 0;
 }
 
 
@@ -194,14 +195,14 @@ void reset_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n){
 
 
 void cleanup_message(message *cleanup_message){
-    free(cleanup_message->payload);
+    if (cleanup_message->payload_owned)free(cleanup_message->payload);
+    
     cleanup_message->payload = NULL;
 }
 
 
 void cleanup_char_and_num_message(message *cleanup_message){
     char_and_num *data_to_clean = cleanup_message->payload;
-    free(data_to_clean->message);
     free(cleanup_message->payload);
     cleanup_message->payload = NULL;
 }
