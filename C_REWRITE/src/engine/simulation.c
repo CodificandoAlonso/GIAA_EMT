@@ -42,10 +42,15 @@ u16 infer_dropoffs(u16 stop, sim_context *sim_params){
         exit(-1);
     }
 
-    return (u16)distro->distro.random(
+    u16 ret_val = distro->distro.random(
         &distro->distro,
         sim_params->random_generator
     );
+
+    if (ret_val < 0.0) ret_val = 0.0;
+    if (ret_val > MAX_OCCUPANCY) ret_val = MAX_OCCUPANCY;
+
+    return ret_val;
 }
 
 
