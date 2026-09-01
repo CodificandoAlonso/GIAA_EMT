@@ -23,6 +23,8 @@ WEB_DEVEL/node_modules
 *.env*
 .claude
 
+perf.data
+
 .vscode
 
 DATOS/.venv
@@ -33,7 +35,6 @@ DATOS/src/__pycache__
 
 GAMA/src/TEST_MOBILITY/logs/*
 
-WEB_DEVEL/data/logs/*
 
 GTFS
 

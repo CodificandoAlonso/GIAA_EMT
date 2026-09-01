@@ -110,11 +110,11 @@ int init_worker_workspace(worker_thread_params *w,
     pthread_cond_init(&w->wcond, NULL);
 
     if (outq_init(&w->results, cap_results, OUTPUT_RESULTS,
-                write_results, "sim,bus,trip,stop,dir,slot,dep_slot,boards,residual,dropoffs,occup,travel_time\n") != 0) goto fail0;
+                write_results, "simulation_id,bus_code,travels_completed,stop_num,direction,current_time,timeslot,departure_timeslot,boards,residual_boards,dropoffs,occupation,time_between_stops\n") != 0) goto fail0;
     if (outq_init(&w->passengers, cap_passengers, OUTPUT_PASSENGERS,
-                write_passengers, "sim,bus,trip,stop,slot,time,generation_times\n") != 0) goto fail1;
+                write_passengers,"simulation_id,bus_code,travels_completed,stop_num,timeslot,current_time,list_passengers_time\n") != 0) goto fail1;
     if (outq_init(&w->anomalies, cap_anomalies, OUTPUT_ANOMALIES,
-                write_anomalies, "sim,bus,trip,dir,stop,slot,event,time,expected_dep,delay_min\n") != 0) goto fail2;
+                write_anomalies, "simulation_id,bus_code,travels_completed,stop_num,direction,timeslot,event_code,time_event,param_event_1,param_event_2\n") != 0) goto fail2;
 
     if (pthread_create(&w->writer_tid, NULL, writer_thread_main, w) != 0) goto fail3;
     return 0;

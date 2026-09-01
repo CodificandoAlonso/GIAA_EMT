@@ -451,6 +451,7 @@ get_distribution_per_timeslot_times_toB(
     byte travels_completed;
     u16 stopcode;
     direction direction;
+    u32 current_time;
     byte timeslot;
     byte departure_timeslot;
     u16 boards;

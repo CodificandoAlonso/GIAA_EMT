@@ -1,0 +1,25 @@
+[2026-09-01T09:00:43.579+0000][0.002s][info] CardTable entry size: 512
+[2026-09-01T09:00:43.580+0000][0.002s][info] Using G1
+[2026-09-01T09:00:43.581+0000][0.003s][info] Version: 21.0.12+8-1-24.04-Ubuntu (release)
+[2026-09-01T09:00:43.581+0000][0.003s][info] CPUs: 16 total, 12 available
+[2026-09-01T09:00:43.581+0000][0.003s][info] Memory: 14336M
+[2026-09-01T09:00:43.581+0000][0.003s][info] Large Page Support: Disabled
+[2026-09-01T09:00:43.581+0000][0.003s][info] NUMA Support: Disabled
+[2026-09-01T09:00:43.581+0000][0.003s][info] Compressed Oops: Enabled (Zero based)
+[2026-09-01T09:00:43.581+0000][0.003s][info] Heap Region Size: 2M
+[2026-09-01T09:00:43.581+0000][0.003s][info] Heap Min Capacity: 8M
+[2026-09-01T09:00:43.581+0000][0.003s][info] Heap Initial Capacity: 224M
+[2026-09-01T09:00:43.581+0000][0.003s][info] Heap Max Capacity: 3584M
+[2026-09-01T09:00:43.581+0000][0.003s][info] Pre-touch: Disabled
+[2026-09-01T09:00:43.581+0000][0.003s][info] Parallel Workers: 10
+[2026-09-01T09:00:43.581+0000][0.003s][info] Concurrent Workers: 3
+[2026-09-01T09:00:43.581+0000][0.003s][info] Concurrent Refinement Workers: 10
+[2026-09-01T09:00:43.581+0000][0.003s][info] Periodic GC: Disabled
+[2026-09-01T09:00:43.586+0000][0.009s][info] CDS archive(s) mapped at: [0x00007ffacf000000-0x00007ffacfc9c000-0x00007ffacfc9c000), size 13221888, SharedBaseAddress: 0x00007ffacf000000, ArchiveRelocationMode: 1.
+[2026-09-01T09:00:43.586+0000][0.009s][info] Compressed class space mapped at: 0x00007ffad0000000-0x00007ffb10000000, reserved size: 1073741824
+[2026-09-01T09:00:43.586+0000][0.009s][info] Narrow klass base: 0x00007ffacf000000, Narrow klass shift: 0, Narrow klass range: 0x100000000
+[2026-09-01T09:00:43.595+0000][0.018s][info] Heap
+[2026-09-01T09:00:43.595+0000][0.018s][info]  garbage-first heap   total 231424K, used 2876K [0x0000000720000000, 0x0000000800000000)
+[2026-09-01T09:00:43.595+0000][0.018s][info]   region size 2048K, 1 young (2048K), 0 survivors (0K)
+[2026-09-01T09:00:43.595+0000][0.018s][info]  Metaspace       used 53K, committed 128K, reserved 1114112K
+[2026-09-01T09:00:43.595+0000][0.018s][info]   class space    used 3K, committed 64K, reserved 1048576K

@@ -375,9 +375,9 @@ const char *route_direction_b){
 void write_results(FILE *out, const void *v, size_t n) {
     const results_row *r = v;
     for (size_t i = 0; i < n; i++)
-        fprintf(out, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%" PRIu32 "\n",
+        fprintf(out, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%" PRIu32 "\n",
             r[i].sim_identifier, r[i].bus_code, r[i].travels_completed,
-            r[i].stopcode, (int)r[i].direction, r[i].timeslot,
+            r[i].stopcode, (int)r[i].direction, r[i].current_time, r[i].timeslot,
             r[i].departure_timeslot, r[i].boards, r[i].residual_boards,
             r[i].dropoffs, r[i].occupation, r[i].time_travelled);
 }

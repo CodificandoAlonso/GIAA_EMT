@@ -1,0 +1,168 @@
+[2026-09-01 09:00:23] [0;34m[INFO][0m ==========================================
+[2026-09-01 09:00:23] [0;34m[INFO][0m   GAMA BATCH SIMULATION PREPARATION
+[2026-09-01 09:00:23] [0;34m[INFO][0m ==========================================
+[2026-09-01 09:00:23] [0;34m[INFO][0m Batch experiment: batch_1000
+[2026-09-01 09:00:23] [0;34m[INFO][0m HPC cores: 16
+[2026-09-01 09:00:23] [0;34m[INFO][0m Source project: ../../GAMA/src/TEST_MOBILITY
+[2026-09-01 09:00:23] [0;34m[INFO][0m Simulation directory: ../data/logs/SIMULATION_20260901_090023
+[2026-09-01 09:00:23] [0;34m[INFO][0m --- Phase 1: Pre-cleanup ---
+[2026-09-01 09:00:23] [0;34m[INFO][0m Removing previous symlinks from original project...
+[2026-09-01 09:00:23] [0;34m[INFO][0m Removing previous GAMA workspace directories...
+[2026-09-01 09:00:23] [0;32m[SUCCESS][0m Pre-cleanup completed in 0s
+[2026-09-01 09:00:23] [0;34m[INFO][0m --- Phase 2: Project Snapshot ---
+[2026-09-01 09:00:23] [0;34m[INFO][0m Copying full GAMA project to simulation directory...
+[2026-09-01 09:00:23] [0;32m[SUCCESS][0m Project snapshot created in 0s
+[2026-09-01 09:00:23] [0;34m[INFO][0m Copied model path: ../data/logs/SIMULATION_20260901_090023/TEST_MOBILITY/models/mobility_performance.gaml
+[2026-09-01 09:00:23] [0;34m[INFO][0m Inputs can be modified at: ../data/logs/SIMULATION_20260901_090023/TEST_MOBILITY/includes/
+[2026-09-01 09:00:43] [0;34m[INFO][0m ==========================================
+[2026-09-01 09:00:43] [0;34m[INFO][0m   GAMA BATCH EXECUTION PIPELINE
+[2026-09-01 09:00:43] [0;34m[INFO][0m ==========================================
+[2026-09-01 09:00:43] [0;34m[INFO][0m Batch experiment: batch_1000
+[2026-09-01 09:00:43] [0;34m[INFO][0m HPC cores: 12
+[2026-09-01 09:00:43] [0;34m[INFO][0m JVM heap: 11264m
+[2026-09-01 09:00:43] [0;34m[INFO][0m Source project: 
+[2026-09-01 09:00:43] [0;34m[INFO][0m Simulation directory: ../data/logs/SIMULATION_20260901_090023
+[2026-09-01 09:00:43] [0;34m[INFO][0m --- Phase 1: Batch Execution ---
+[2026-09-01 09:00:43] [0;34m[INFO][0m Starting GAMA headless batch execution against copied project...
+[2026-09-01 09:00:43] [0;34m[INFO][0m Resource monitor started (PID 123) -> ../data/logs/SIMULATION_20260901_090023/MONITOR
+******************************************************************
+* GAMA version 2025.6.4                                         *
+* http://gama-platform.org                                       *
+* (c) 2007-2025 UMI 209 UMMISCO IRD/SU & Partners                *
+******************************************************************
+Picked up JAVA_TOOL_OPTIONS: -Denable_debug=false -Denable_logging=false -XX:+UseG1GC -Xlog:gc*:file=../data/logs/SIMULATION_20260901_090023/MONITOR/gc.log:time,uptime,level:filecount=1,filesize=100m
+> FLAG  : enable_debug                                  set to________ true
+> FLAG  : enable_logging                                set to________ true
+> FLAG  : use_global_preference_store                   set to________ true
+> JAI   : ImageIO extensions                            loaded for____ BTF|TF8|TIF|TIFF|arx|asc|bmp|btf|gif|jp2|jpeg|jpg|pbm|pgm|png|ppm|tf8|tif|tiff|wbmp
+> GAMA  : version 2025.6.4                              loading on____ Linux 7.1.9-arch1-2, processor amd64, JDK OpenJDK 64-Bit Server VM Ubuntu version 21.0.12+8-1-24.04-Ubuntu
+Sep 01, 2026 9:00:45 AM java.util.prefs.FileSystemPreferences$1 run
+INFO: Created user preferences directory.
+> GAMA  : Plugin gama.core                              loaded in_____ 406ms
+> GAMA  : Plugin gama.extension.bdi                     loaded in_____ 31ms
+> GAMA  : Plugin gama.extension.database                loaded in_____ 39ms
+> GAMA  : Plugin gama.extension.fipa                    loaded in_____ 4ms
+> GAMA  : Snapshot services                             inactive______ (headless mode)
+> GAMA  : Plugin gama.extension.image                   loaded in_____ 12ms
+> GAMA  : Plugin gama.extension.maths                   loaded in_____ 26ms
+> GAMA  : Plugin gama.extension.network                 loaded in_____ 2ms
+> GAMA  : Plugin gama.extension.pedestrian              loaded in_____ 7ms
+> GAMA  : Plugin gama.extension.physics                 loaded in_____ 4ms
+> GAMA  : Plugin gama.extension.serialize               loaded in_____ 3ms
+> GAMA  : Plugin gama.extension.stats                   loaded in_____ 9ms
+> GAMA  : Plugin gama.extension.traffic                 loaded in_____ 10ms
+> GAMA  : Plugin gama.headless                          loaded in_____ 1ms
+> GAML  : Initializing parser                           done in_______ 72ms
+> GAMA  : Plugin gaml.compiler                          loaded in_____ 74ms
+> GAMA  : Loading extensions to 'create'                done in_______ 2ms
+> GAMA  : Loading extensions to 'save'                  done in_______ 35ms
+> GAMA  : Loading extensions to 'draw'                  done in_______ 1ms
+> GAMA  : Loading extensions to 'event'                 done in_______ 1ms
+> GAMA  : Gathering built-in models                     done in_______ 0ms
+> GAMA  : Loading constants                             done in_______ 60ms
+> GAML  : Plugins with language additions               loaded in_____ 758ms
+GAMA configuring and loading...
+> GAML  : Artifacts                                     built in______ 19ms
+[2026-09-01 09:33:26] [0;34m[INFO][0m Stopping resource monitor...
+[monitor_resources] summary -> ../data/logs/SIMULATION_20260901_090023/MONITOR/monitor_summary.json
+[2026-09-01 09:33:27] [0;32m[SUCCESS][0m Batch execution completed in 32m 44s
+[2026-09-01 09:33:27] [0;34m[INFO][0m --- Phase 4: Extract & Cleanup ---
+[2026-09-01 09:33:27] [0;34m[INFO][0m Extracting results, events, and inputs...
+[2026-09-01 09:33:27] [0;34m[INFO][0m Removing copied GAMA project files...
+[2026-09-01 09:33:27] [0;34m[INFO][0m Removing GAMA workspace directories...
+[2026-09-01 09:33:27] [0;32m[SUCCESS][0m Extract & cleanup completed in 0s
+[2026-09-01 09:33:27] [0;34m[INFO][0m --- Phase 5: Results Validation ---
+[2026-09-01 09:33:27] [0;34m[INFO][0m Result CSV files generated: 1000
+[2026-09-01 09:33:27] [0;34m[INFO][0m Event CSV files generated: 1000
+[2026-09-01 09:33:27] [0;34m[INFO][0m Passenger CSV files generated: 1000
+[2026-09-01 09:33:27] [0;34m[INFO][0m Total results size: 129M
+[2026-09-01 09:33:27] [0;32m[SUCCESS][0m Resource monitor summary present
+[2026-09-01 09:33:27] [0;34m[INFO][0m --- Phase 6: Data Extraction & Analysis ---
+[2026-09-01 09:33:28] [0;34m[INFO][0m All Python dependencies satisfied
+[2026-09-01 09:33:28] [0;34m[INFO][0m Running data_extractor.py (1000 simulations, plots + JSON output)...
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:734: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:734: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:734: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:734: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:734: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+/app/WEB_DEVEL/bash_scripts/data_extractor.py:819: RuntimeWarning: Mean of empty slice
+  mean_time_awaital_passenger_timeslotted = np.nanmean(
+
+=== Equivalencia de distribuciones (Bhattacharyya >= 0.97) ===
+  paradas fuera de la comparacion: [2646, 5727]
+  ocupacion   155/ 437 =   35.47%   (no evaluables: 0, coeff medio: 0.9163803196655179)
+             sesgo medio -2.343 (-0.16 sigma), 61.8% de celdas por debajo
+  tiempo      457/ 459 =   99.56%   (no evaluables: 16, coeff medio: 0.9986187014841464)
+             sesgo medio +1.479 (+0.04 sigma), 18.1% de celdas por debajo
+  conjunto    612/ 896 =   68.30%   (no evaluables: 16, coeff medio: 0.958509133565909)
+[2026-09-01 09:39:17] [0;32m[SUCCESS][0m Data extraction completed in 5m 50s
+[2026-09-01 09:39:17] [0;34m[INFO][0m Generated 1095 plots and 5 JSON files
+[2026-09-01 09:39:17] [0;34m[INFO][0m Final simulation directory structure:
+[2026-09-01 09:39:17] [0;34m[INFO][0m   ../data/logs/SIMULATION_20260901_090023/
+[2026-09-01 09:39:17] [0;34m[INFO][0m   ├── RESULTS/          (simulation output CSVs)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   ├── EVENTS/           (event logs)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   ├── PASSENGERS/       (passenger wait-time logs)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   ├── MONITOR/          (resource timeseries, summary, GC log)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   ├── PLOTS/
+[2026-09-01 09:39:17] [0;34m[INFO][0m   │   ├── to_A/         (occupation & time distribution plots)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   │   ├── to_B/         (occupation & time distribution plots)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   │   ├── general/      (aggregate occupation plots)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   │   ├── monitoring/   (CPU, memory, power & progress plots)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   │   ├── buses/        (per-bus per-trip plots + general_info.json)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   │   └── json_output_general_info.json
+[2026-09-01 09:39:17] [0;34m[INFO][0m   ├── includes/         (frozen simulation parameters)
+[2026-09-01 09:39:17] [0;34m[INFO][0m   └── log_result_*.log  (pipeline log)
+==========================================
+     EXECUTION SUMMARY
+==========================================
+
+1. Pre-cleanup:                     n/a (prepare_simulation.sh)
+
+2. Project snapshot:                n/a (prepare_simulation.sh)
+
+3. Batch execution:                 32m 44s
+   - Exit code:                     0
+   - Result files:                  1000
+   - Total size:                    129M
+   - HPC cores:                     12
+   - JVM heap:                      11264m
+   - Monitor summary:               yes
+
+4. Extract & cleanup:               0s
+
+5. Data extraction & analysis:      5m 50s
+   - Exit code:                     0
+   - Plots generated:               1095
+   - JSON files generated:          5
+
+------------------------------------------
+TOTAL PIPELINE TIME:                38m 34s
+==========================================
+
+Simulation: ../data/logs/SIMULATION_20260901_090023
+Log file: ../data/logs/SIMULATION_20260901_090023/log_result_20260901_090023.log
+
+[2026-09-01 09:39:17] [0;32m[SUCCESS][0m === Pipeline finished ===
