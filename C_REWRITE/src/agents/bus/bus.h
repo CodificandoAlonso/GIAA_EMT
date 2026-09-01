@@ -9,6 +9,7 @@
 #include "io/csv_parser.h"
 #include "utils/utils.h"
 #include "agents/stop/stop.h"
+#include "config/config.h"
 
 #define MAX_OCCUPANCY 80
 
@@ -51,7 +52,10 @@ typedef struct bus {
     //stopcode for referencing itself
     u16 bus_code;
 
+
     u16 stop;
+
+    u16 initial_stop;
 
     stop *stop_reached;
 
@@ -136,7 +140,7 @@ void startup_bus_agent(void *self);
  * @param dropoffs number of passengers that will be dropped out of the bus
  * @return number of residual_boards not able to board due to occupancy constraints.
  */
-u16 update_bus_occupancy(bus *bus, u16 boards, u16 dropoffs);
+u16 update_bus_occupancy(bus *bus, u16 boards, u16 *dropoffs);
 
 
 void save_results_row(bus *bus, u16 pass_to_board, u16 pass_to_dropoff, u16 residual_boards,

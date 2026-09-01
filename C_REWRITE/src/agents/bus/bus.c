@@ -3,6 +3,8 @@
 #include "agents/generic/agents.h"
 #include "engine/simulation.h"
 #include "math/math_utils.h"
+#include "config/config.h"
+
 #include<stdio.h>
 #include<stdlib.h>
 #include <string.h>
@@ -16,6 +18,7 @@ bus create_bus(u16 bus_code, u16 stop_code, direction direction,
 
         bus.bus_code = bus_code;
         bus.stop = stop_code;
+        bus.initial_stop = stop_code;
         bus.bus_direction = direction;
         bus.headway_times = headway_departures;
         bus.travels_scheduled = travels_scheduled;
@@ -52,14 +55,15 @@ void startup_bus_agent(void *self){
 
 
 
-u16 update_bus_occupancy(bus *bus, u16 boards, u16 dropoffs){
+u16 update_bus_occupancy(bus *bus, u16 boards, u16 *dropoffs){
 
     //first apply droppoffs.
-    if (dropoffs > bus->occupation)
+    if (*dropoffs > bus->occupation){
+        *dropoffs = bus->occupation;
         bus->occupation = 0;
-    else
-        bus->occupation -= dropoffs;
-
+    }else{
+        bus->occupation -= *dropoffs;
+    }
     //now, apply boards.
 
     if ((boards + bus->occupation) > bus->max_occupancy ){
@@ -272,6 +276,8 @@ void update_bus_in_sim(void *self, const sim_context *sim_params){
                         }
 
                         bus->state = waiting_headway;
+
+                        bus->time_travelled = 0;
                         //Check if the bus is delayed. If so, save_anomaly_row.
 
                         if (bus->headway_times[bus->travels_completed].departure_time < sim_params->global_clock){
@@ -297,6 +303,12 @@ void update_bus_in_sim(void *self, const sim_context *sim_params){
                         bus->travels_completed ++;
                         //update headway start.
                         bus->bus_direction = bus->headway_times[bus->travels_completed].bus_direction;
+                        if (bus->bus_direction == CIBELES){
+                            bus->stop = sim_params->global_params->stops_list_data->stopcodes_toA[0];
+                        } else{
+                            bus->stop = sim_params->global_params->stops_list_data->stopcodes_toB[0];
+                        }
+
                         bus->state = waiting_headway;
                         bus->time_travelled = 0;
 
@@ -379,7 +391,7 @@ void update_bus_in_sim(void *self, const sim_context *sim_params){
                                 u16 pass_to_dropoff = p[1];
                                 cleanup_message(inform_stop);
                                 u16 residual_boards = update_bus_occupancy(bus,
-                                                    pass_to_board, pass_to_dropoff);
+                                                    pass_to_board, &pass_to_dropoff);
                                 save_results_row(bus, pass_to_board, pass_to_dropoff, residual_boards,
                                                     sim_params);
                                 
@@ -488,6 +500,10 @@ void reset_bus(void *self){
 
     bus->anomalies_idx = 0;
     bus->results_idx = 0;
+
+    bus->stop = bus->initial_stop;
+
+    bus->bus_direction = bus->headway_times[0].bus_direction;
 
     //qallocate new mem.
 

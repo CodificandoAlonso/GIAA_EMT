@@ -182,6 +182,69 @@ joint_dataframe_passengers["list_passengers_time"] = (
     joint_dataframe_passengers["list_passengers_time"].apply(parse_time_list)
 )
 
+joint_dataframe_passengers["current_time"] = pd.to_numeric(
+    joint_dataframe_passengers["current_time"], errors="coerce")
+
+
+# ---------------------------------------------------------------------------
+# Tiempo de espera por pasajero.
+#
+# GAMA escribia en 'list_passengers_time' la espera ya calculada. La
+# simulacion en C escribe el instante de CREACION de cada pasajero
+# (global_clock cuando se genero), de modo que sus valores son marcas de
+# reloj absolutas (~20000-85000 s) y no esperas.
+#
+# La espera es current_time - instante_de_creacion. Se detecta cual de los
+# dos formatos viene comparando la magnitud de los valores con la hora de
+# boarding de su propia fila: si el maximo de la lista es del orden del
+# reloj, son marcas absolutas y hay que restar.
+#
+# La cola de pasajeros es FIFO y se recorta por delante, asi que el primer
+# elemento es el que mas ha esperado: las esperas resultantes deben salir
+# ordenadas de mayor a menor y no negativas.
+# ---------------------------------------------------------------------------
+def _looks_absolute(df, sample=2000):
+    """True si 'list_passengers_time' contiene marcas de reloj absolutas."""
+    n_abs = n_rel = 0
+    for ct, lst in zip(df["current_time"].head(sample),
+                       df["list_passengers_time"].head(sample)):
+        if not lst or not np.isfinite(ct):
+            continue
+        # Una marca absoluta es cercana a current_time; una espera es mucho
+        # menor. El umbral de la mitad del reloj separa ambos casos con
+        # holgura (esperas de horas no existen en una linea de autobus).
+        if max(lst) > ct * 0.5:
+            n_abs += 1
+        else:
+            n_rel += 1
+    return n_abs > n_rel
+
+
+def _to_waits(ct, lst):
+    if not lst or not np.isfinite(ct):
+        return []
+    return [int(ct) - int(g) for g in lst]
+
+
+if len(joint_dataframe_passengers) and _looks_absolute(joint_dataframe_passengers):
+    print("  'list_passengers_time' contiene instantes de creacion: "
+          "se convierte a espera (current_time - creacion)")
+    joint_dataframe_passengers["list_passengers_time"] = [
+        _to_waits(ct, lst)
+        for ct, lst in zip(joint_dataframe_passengers["current_time"],
+                           joint_dataframe_passengers["list_passengers_time"])
+    ]
+
+    _neg = sum(1 for lst in joint_dataframe_passengers["list_passengers_time"]
+               for t in lst if t < 0)
+    if _neg:
+        print(f"  aviso: {_neg} esperas negativas — hay pasajeros con instante"
+              f" de creacion posterior al embarque")
+        joint_dataframe_passengers["list_passengers_time"] = [
+            [t for t in lst if t >= 0]
+            for lst in joint_dataframe_passengers["list_passengers_time"]
+        ]
+
 
 # --- columnas numericas: cualquier celda vacia o ilegible pasa a NaN ------
 # Sin esto, una sola celda vacia contamina np.std (devuelve NaN), el guardia

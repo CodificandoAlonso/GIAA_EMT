@@ -1,5 +1,7 @@
 #include "engine/simulation.h"
 #include "math/math_utils.h"
+#include "config/config.h"
+
 #include<stdbool.h>
 
 
@@ -42,7 +44,7 @@ u16 infer_dropoffs(u16 stop, sim_context *sim_params){
         exit(-1);
     }
 
-    u16 ret_val = distro->distro.random(
+    double ret_val = distro->distro.random(
         &distro->distro,
         sim_params->random_generator
     );
@@ -50,7 +52,7 @@ u16 infer_dropoffs(u16 stop, sim_context *sim_params){
     if (ret_val < 0.0) ret_val = 0.0;
     if (ret_val > MAX_OCCUPANCY) ret_val = MAX_OCCUPANCY;
 
-    return ret_val;
+    return (u16)ret_val;
 }
 
 
@@ -71,11 +73,23 @@ u32 return_next_time_to_stop(u16 stop, sim_context *sim_params, direction direct
             sim_params->timeslot
         );
     } else {
+
+
+        //particular case. If TS == 5, distributions toB have mean and std == 0. in that case, pick the 6th distro.
+
+        if (sim_params->timeslot == 5){
+            distribution = get_distribution_per_timeslot_times_toB(
+            sim_params->global_params->stops_times_distributions,
+            stop,
+            sim_params->timeslot +1
+        );
+        } else{
         distribution = get_distribution_per_timeslot_times_toB(
             sim_params->global_params->stops_times_distributions,
             stop,
             sim_params->timeslot
         );
+    }
     }
 
     if (distribution == NULL) {
@@ -467,7 +481,7 @@ sim_context startup_thread_parameters(const global_inmutable_params *global_para
     thread_sim_vars.array_passengers_gen = array_passengers;
 
     for (size_t i = 0; i< number_of_stops; i++){
-        double *array = malloc(sizeof(double)*(3600/thread_sim_vars.step));
+        double *array = calloc((3600/thread_sim_vars.step), sizeof(double));
 
         if (!array){
             perror("Error allocating emmory for concrete array of generation data\n");
