@@ -2,6 +2,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\tolerance=2000
+\emergencystretch=3em
+\hbadness=10000
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{pgfplots}
@@ -10,7 +15,23 @@
 
 \newcommand{\cif}[1]{{\Large\bfseries\color{uc3mblue}#1}}
 \newcommand{\eti}[1]{{\scriptsize\color{black!70}#1}}
+\newcommand{\kpibox}[1]{%
+  \parbox[c][3.0cm][c]{\linewidth}{\centering
+    \fbox{\includegraphics[width=4.0cm, height=2.7cm, keepaspectratio]{#1}}}}
 
+\newcommand{\shot}[1]{%
+  \fbox{\includegraphics[width=12.6cm, height=5.4cm, keepaspectratio]{#1}}}
+\makeatletter
+\gdef\maincount{0}
+\newcommand{\guardacuenta}{%
+  \immediate\write\@auxout{\string\gdef\string\maincount{\the\c@framenumber}}}
+\makeatother
+
+\setbeamertemplate{footline}{%
+\vspace{-2em}%
+\ifnum\thepage>1\relax
+  \hfill\color{uc3mblue}\insertframenumber/\maincount\hspace{1em}\vspace{0.5em}
+\fi}
 
 % Permite overlays dentro de TikZ (visible on=<2->)
 \tikzset{
@@ -22,6 +43,12 @@
 \pgfplotsset{compat=1.18}
 
 \usetheme{uc3m}
+
+\setbeamertemplate{footline}{%
+\vspace{-2em}%
+\ifnum\thepage>1\relax
+  \hfill\color{uc3mblue}\insertframenumber/\maincount\hspace{1em}\vspace{0.5em}
+\fi}
 
 \title{Sistema multiagente de simulación de autobuses para la evaluación de la dotación programada mediante KPIs}
 \date{\today}
@@ -169,7 +196,7 @@
     en un entorno dinámico.};
   \node[cel, right=1.4cm of i] (d) {\textbf{\color{uc3mblue}Hueco}\\[0.5em]
     La literatura se parametriza sobre GTFS \textbf{sintético}.
-    Aquí, \textbf{datos reales} de operación.};
+    El presente trabajo usa \textbf{datos reales} de operación.};
 
   \draw[uc3mgray, line width=1pt]
     ($(i.north east)!0.5!(d.north west)$) -- ($(i.south east)!0.5!(d.south west)$);
@@ -329,11 +356,111 @@ cognitivos individuales exige información no disponible en los datos de operaci
 % ======================================================================
 \section{Validación}
 \begin{frame}[plain,noframenumbering]\sectionpage\end{frame}
+\begin{frame}[t]{La herramienta - Visualización de KPIs}
+\framesubtitle{Nivel general}
+\vspace{0.6em}
+\centering
+\shot{images/general_results_simulations.png}
 
-\begin{frame}{Ajuste global}{Validación (1/2)}
+\vspace{0.7em}
+{\footnotesize\color{black!65}Siete indicadores agregados sobre las mil réplicas
+de la simulación.
+
+(Resultados ilustrativos, no correspondientes con la validación)}
 \end{frame}
 
-\begin{frame}{Estructura del error}{Validación (2/2)}
+\begin{frame}[t]{La herramienta - Visualización de KPIs}
+\framesubtitle{Nivel de ruta}
+\vspace{0.6em}
+\centering
+\shot{images/route_general_simulations.png}
+
+\vspace{0.7em}
+{\footnotesize\color{black!65}Cada parada o tramo se colorea según su
+\textbf{nivel de alerta}, de normal a crítico.
+
+(Resultados ilustrativos, no correspondientes con la validación)}
+\end{frame}
+
+\begin{frame}[t]{La herramienta - Visualización de KPIs}
+\framesubtitle{Nivel de autobús}
+\vspace{0.6em}
+\centering
+\shot{images/autobus_simulacion.png}
+
+\vspace{0.7em}
+{\footnotesize\color{black!65}Expedición a expedición: ocupación, retraso de
+salida y regularidad, con su nivel de alerta.
+
+(Resultados ilustrativos, no correspondientes con la validación)}
+\end{frame}
+
+\begin{frame}[t]{Validación operativa}
+\framesubtitle{Comparación de ocupación (1/2)}
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.46\textwidth}
+  \centering
+  \includegraphics[trim=46 46 42 46, clip, width=\linewidth]%
+  {images/validacion_regresion_ocupacion.png}
+\end{column}
+\begin{column}{0.50\textwidth}
+  \vspace{0.6em}
+  {\footnotesize
+  \begin{tabular}{@{}lrr@{}}
+  \toprule
+   & \textbf{Esperado} & \textbf{Simulado} \\
+  \midrule
+  Ocupación general      & 31,9\,\% & 29,4\,\% \\
+  \quad Sentido Cibeles  & 33,9\,\% & 30,8\,\% \\
+  \quad Sentido La Peseta& 30,0\,\% & 27,6\,\% \\
+  \midrule
+  Autobuses físicos      & 11,4 & 12 \\
+  Viajes ejecutados      & 163,1 & 163 \\
+  \bottomrule
+  \end{tabular}}
+
+  \vspace{1.2em}
+  \begin{tikzpicture}
+  \node[fill=uc3mblue, rounded corners=3pt, drop shadow={opacity=0.25},
+        text width=5.6cm, inner sep=9pt, align=center] {%
+    \color{white}\bfseries\small Sesgo medio $-2{,}01$ pasajeros\\[0.2em]
+    \color{white}\mdseries\scriptsize equivalente a $0{,}13\,\sigma$};
+  \end{tikzpicture}
+
+  \vspace{0.7em}
+  {\scriptsize\color{black!65}Pendiente $0{,}901$ con ordenada prácticamente cero.}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[t]{Estructura del error}
+\framesubtitle{Validación (2/2)}
+\vspace{0.4em}
+\begin{columns}[T]
+\begin{column}{0.42\textwidth}
+  \centering
+  \includegraphics[trim=46 46 42 43, clip, height=4.6cm]{images/bhatt_banda.png}\\[0.2em]
+  {\scriptsize\color{black!65}Equivalencia con umbral $0{,}97$}
+\end{column}
+\begin{column}{0.55\textwidth}
+  \centering
+  \includegraphics[trim=47 53 42 47, clip, height=4.0cm]%
+    {images/dispersion_posicion_to_A.png}\\[0.4em]
+  \begin{tikzpicture}
+  \node[fill=uc3mblue, rounded corners=3pt, drop shadow={opacity=0.25},
+        text width=7.0cm, inner sep=8pt, align=center] {%
+    \color{white}\scriptsize Un \textbf{33\,\%} de las distribuciones tienen la
+    media dentro de banda y se rechazan \textbf{solo por dispersión}};
+  \end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.6em}
+\centering
+{\scriptsize\color{black!65}Las bajadas se muestrean de forma independiente por
+parada. Sin covarianza negativa, la varianza se acumula a lo largo del recorrido.}
 \end{frame}
 
 % ======================================================================
@@ -371,11 +498,14 @@ cognitivos individuales exige información no disponible en los datos de operaci
 \end{tikzpicture}
 \end{frame}
 
-% ======================================================================
+
+\guardacuenta
+
 \appendix
 \setcounter{framenumber}{0}
 \setbeamertemplate{footline}{%
 \vspace{-2em}\hfill\color{uc3mblue}\Roman{framenumber}\hspace{1em}\vspace{0.5em}}
+% ======================================================================
 
 \begin{frame}{Distribuciones ajustadas y selección por AIC}
 \end{frame}
