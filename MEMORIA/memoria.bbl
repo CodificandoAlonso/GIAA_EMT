@@ -1537,14 +1537,17 @@
       \endverb
     \endentry
     \entry{AriasNava2026DataDriven}{article}{}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{2}{}{%
+      \name{author}{3}{}{%
         {{hash=36d4c07b09dd06814e7c4940711de25e}{%
            family={Arias\bibnamedelima Nava},
            familyi={A\bibinitperiod\bibinitdelim N\bibinitperiod},
            given={Elias\bibnamedelima Heriberto},
            giveni={E\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=e1a74e322b93f88b125da470a8d102ce}{%
+           family={Sullivan},
+           familyi={S\bibinitperiod},
+           given={Brendan\bibnamedelima Patrick},
+           giveni={B\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
         {{hash=1e67fe73c0f30582bfbcb3bfc143feae}{%
            family={Moncayo-Martínez},
            familyi={M\bibinithyphendelim M\bibinitperiod},
@@ -1554,14 +1557,14 @@
       \list{publisher}{1}{%
         {MDPI}%
       }
-      \strng{namehash}{a956274326fc8205c9f8dcdcbd89f37a}
-      \strng{fullhash}{a956274326fc8205c9f8dcdcbd89f37a}
-      \strng{fullhashraw}{a956274326fc8205c9f8dcdcbd89f37a}
-      \strng{bibnamehash}{a956274326fc8205c9f8dcdcbd89f37a}
-      \strng{authorbibnamehash}{a956274326fc8205c9f8dcdcbd89f37a}
-      \strng{authornamehash}{a956274326fc8205c9f8dcdcbd89f37a}
-      \strng{authorfullhash}{a956274326fc8205c9f8dcdcbd89f37a}
-      \strng{authorfullhashraw}{a956274326fc8205c9f8dcdcbd89f37a}
+      \strng{namehash}{eae722d0fb2b9ac893db7b0d1c419251}
+      \strng{fullhash}{7a77e6a4aa295a320217202c1cc1a9f0}
+      \strng{fullhashraw}{7a77e6a4aa295a320217202c1cc1a9f0}
+      \strng{bibnamehash}{7a77e6a4aa295a320217202c1cc1a9f0}
+      \strng{authorbibnamehash}{7a77e6a4aa295a320217202c1cc1a9f0}
+      \strng{authornamehash}{eae722d0fb2b9ac893db7b0d1c419251}
+      \strng{authorfullhash}{7a77e6a4aa295a320217202c1cc1a9f0}
+      \strng{authorfullhashraw}{7a77e6a4aa295a320217202c1cc1a9f0}
       \field{sortinit}{7}
       \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
@@ -3454,6 +3457,7 @@
       \strng{authornamehash}{584768e1bea5ebe983bb8f68913f73d1}
       \strng{authorfullhash}{584768e1bea5ebe983bb8f68913f73d1}
       \strng{authorfullhashraw}{584768e1bea5ebe983bb8f68913f73d1}
+      \field{extraname}{1}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -3683,6 +3687,73 @@
       \field{note}{Boletín Oficial del Estado, núm. 97, de 22 de abril de 1996}
       \field{title}{Real Decreto Legislativo 1/1996, de 12 de abril, por el que se aprueba el Texto Refundido de la Ley de Propiedad Intelectual}
       \field{year}{1996}
+    \endentry
+    \entry{ria2024}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=584768e1bea5ebe983bb8f68913f73d1}{%
+           family={{Parlamento Europeo y Consejo de la Unión Europea}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{fullhash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{fullhashraw}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{bibnamehash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{authorbibnamehash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{authornamehash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{authorfullhash}{584768e1bea5ebe983bb8f68913f73d1}
+      \strng{authorfullhashraw}{584768e1bea5ebe983bb8f68913f73d1}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Diario Oficial de la Unión Europea, L, de 12 de julio de 2024}
+      \field{title}{Reglamento (UE) 2024/1689, de 13 de junio de 2024, por el que se establecen normas armonizadas en materia de inteligencia artificial (Reglamento de Inteligencia Artificial)}
+      \field{year}{2024}
+    \endentry
+    \entry{proyectoLOIA2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=712260b91e041d505c60b44a5110202d}{%
+           family={{Cortes Generales}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{712260b91e041d505c60b44a5110202d}
+      \strng{fullhash}{712260b91e041d505c60b44a5110202d}
+      \strng{fullhashraw}{712260b91e041d505c60b44a5110202d}
+      \strng{bibnamehash}{712260b91e041d505c60b44a5110202d}
+      \strng{authorbibnamehash}{712260b91e041d505c60b44a5110202d}
+      \strng{authornamehash}{712260b91e041d505c60b44a5110202d}
+      \strng{authorfullhash}{712260b91e041d505c60b44a5110202d}
+      \strng{authorfullhashraw}{712260b91e041d505c60b44a5110202d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Boletín Oficial de las Cortes Generales, Congreso de los Diputados, serie A, núm. 97-1, de 12 de junio de 2026}
+      \field{title}{Proyecto de Ley Orgánica para el buen uso y la gobernanza de la inteligencia artificial}
+      \field{year}{2026}
+    \endentry
+    \entry{rd729_2023}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=766a123c6f5ae3fbd232741f2661a34b}{%
+           family={{Ministerio de Asuntos Económicos y Transformación Digital}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{766a123c6f5ae3fbd232741f2661a34b}
+      \strng{fullhash}{766a123c6f5ae3fbd232741f2661a34b}
+      \strng{fullhashraw}{766a123c6f5ae3fbd232741f2661a34b}
+      \strng{bibnamehash}{766a123c6f5ae3fbd232741f2661a34b}
+      \strng{authorbibnamehash}{766a123c6f5ae3fbd232741f2661a34b}
+      \strng{authornamehash}{766a123c6f5ae3fbd232741f2661a34b}
+      \strng{authorfullhash}{766a123c6f5ae3fbd232741f2661a34b}
+      \strng{authorfullhashraw}{766a123c6f5ae3fbd232741f2661a34b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Boletín Oficial del Estado, núm. 202, de 24 de agosto de 2023}
+      \field{title}{Real Decreto 729/2023, de 22 de agosto, por el que se aprueba el Estatuto de la Agencia Española de Supervisión de Inteligencia Artificial}
+      \field{year}{2023}
     \endentry
     \entry{acm_ieee_ethics}{misc}{}{}
       \name{author}{3}{}{%

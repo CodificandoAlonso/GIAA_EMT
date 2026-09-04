@@ -70,7 +70,7 @@ al total de viajes realizados. Dichos valores no resultan de métricas operativa
 escenarios asociados a la variabilidad de estos campos.
 
 \subsection{Métricas a nivel de ruta}
-En relación al nivel de ruta, estos cubren tanto métricas asociadas a cada parada, como métricas asociadas al tramo 
+En relación al nivel de ruta, estos indicadores cubren tanto métricas asociadas a cada parada, como métricas asociadas al tramo 
 entre paradas. Esta familia de indicadores presenta tanto valores agregados a lo largo del día, como desagregados
 por franja horaria.
 
@@ -78,7 +78,7 @@ La presentación de estos indicadores se realiza de forma interactiva. Se genera
 bidimensional basado en los archivos de tipo~\textit{SHAPEFILE} expuestos en la sección referente al análisis de
 datos. Este mapa interactivo permite la selección de la parada/tramo correspondiente, y la información relativa a sus
 KPIs se muestra debajo del mapa. De esta forma se tiene un filtrado a dos escalas: la primera resulta de aplicar el 
-filtro \textit{general (agregado)}/ \textit{franja horaria} y la segunda resulta de seleccionar una parada/tramo concreto.
+filtro \textit{general (agregado)}/ \textit{franja horaria} y la segunda resulta de seleccionar una \textit{parada/tramo} concreto.
 
 La figura~\ref{fig:route_metrics_general} muestra cómo se visualiza este mapa para cada sentido dentro de la interfaz y 
 cómo se genera el filtro a dos niveles.
@@ -249,7 +249,7 @@ con la establecida de referencia para un día real de servicio.
 Se pretende validar dos premisas clave. La primera es obtener un resultado que sea congruente con los datos estudiados
 de~\enquote{normalidad}~(con normalidad refiriéndose a la no existencia de anomalías reseñables para un día laborable), y
 sin que exista ningún punto donde haya signos de alerta extrema, ni a nivel de ruta ni a nivel de autobús.
-La segunda premisa es, ejecutando esta simulación para ambas soluciones existentes, que estas sean equivalentes en los resultados obtenidos,
+La segunda premisa es, ejecutando esta simulación para ambas soluciones existentes, que éstas sean equivalentes en los resultados obtenidos,
 lo cual validaría lo presentado en el capítulo anterior, donde se especificaba que ambas opciones deben obtener KPIs similares,
 al no cambiar el fondo de la ejecución, solo la forma.
 
@@ -523,7 +523,7 @@ su referente figura de la solución dos únicamente presenta un indicador de ale
 
 No obstante, al ampliar el contenido de ambas paradas (representado en la figura \ref{fig:parada_apilada}) se detecta cómo el indicador común a ambas resulta el tiempo medio por pasajero, elevado para esta franja debido a que al ser la primera de la 
 operativa y representar una hora donde la mayoría de servicios de la ciudad no están activos y, por lo tanto, no existe mucha demanda operativa,
-la oferta de buses existente en esa franja genera tiempos de espera elevados. La diferencia fundamental entre ambas simulaciones radica en una 
+la oferta de autobuses existente en esa franja genera tiempos de espera elevados. La diferencia fundamental entre ambas simulaciones radica en una 
 ligera variación del porcentaje de ocupación. Como el límite para la activación se encontraba en el \textbf{75\%}, esa sutil diferencia entre
 simulaciones genera que a nivel visual el indicador de alerta sea distinto.
 

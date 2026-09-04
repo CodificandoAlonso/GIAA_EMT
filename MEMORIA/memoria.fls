@@ -1,7 +1,7 @@
 PWD /home/hector/Desktop/CATEDRA/GIAA_EMT/MEMORIA
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/hector/Desktop/CATEDRA/GIAA_EMT/MEMORIA/memoria.tex
+INPUT memoria.tex
 OUTPUT memoria.log
 INPUT /usr/share/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/share/texmf-dist/tex/latex/base/report.cls
