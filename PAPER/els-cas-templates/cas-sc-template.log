@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.8.18)  1 SEP 2026 18:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.8.18)  6 SEP 2026 20:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -557,6 +557,18 @@ File: t1stix.fd 2015/04/17 v1.1.2-latex STIX T1 font definitions
 
 LaTeX Warning: Label `' multiply defined.
 
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
 )
 \openout1 = `cas-sc-template.aux'.
 
@@ -716,7 +728,7 @@ Package hyperref Warning: Ignoring empty anchor on input line 163.
 
 Package hyperref Warning: Ignoring empty anchor on input line 163.
 
-<thumbnails/cas-email.jpeg, id=11, 225.84375pt x 225.84375pt>
+<thumbnails/cas-email.jpeg, id=12, 225.84375pt x 225.84375pt>
 File: thumbnails/cas-email.jpeg Graphic file (type jpg)
 <use thumbnails/cas-email.jpeg>
 Package pdftex.def Info: thumbnails/cas-email.jpeg  used on input line 163.
@@ -724,7 +736,7 @@ Package pdftex.def Info: thumbnails/cas-email.jpeg  used on input line 163.
 
 Package hyperref Warning: Ignoring empty anchor on input line 163.
 
-<thumbnails/cas-url.jpeg, id=12, 225.84375pt x 225.84375pt>
+<thumbnails/cas-url.jpeg, id=13, 225.84375pt x 225.84375pt>
 File: thumbnails/cas-url.jpeg Graphic file (type jpg)
 <use thumbnails/cas-url.jpeg>
 Package pdftex.def Info: thumbnails/cas-url.jpeg  used on input line 163.
@@ -735,19 +747,9 @@ Package hyperref Warning: Ignoring empty anchor on input line 163.
 
 Package hyperref Warning: Ignoring empty anchor on input line 163.
 
-[1{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./thumbnails/cas-email.jpeg> <./thumbnails/cas-url.jpeg>] (./cas-sc-template.bbl
-Underfull \hbox (badness 10000) has occurred while \output is active
-$[]$
- []
+[1{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./thumbnails/cas-email.jpeg> <./thumbnails/cas-url.jpeg>] (./cas-sc-template.bbl [2
 
-[2
-
-])
-Underfull \hbox (badness 10000) has occurred while \output is active
-$[]$
- []
-
-[3] (./cas-sc-template.aux)
+]) [3] (./cas-sc-template.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -760,18 +762,18 @@ Package rerunfilecheck Info: File `cas-sc-template.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 16541 strings out of 468848
- 245092 string characters out of 5452633
- 660378 words of memory out of 5000000
+ 16545 strings out of 468848
+ 245128 string characters out of 5452633
+ 661378 words of memory out of 5000000
  44936 multiletter control sequences out of 15000+600000
  726830 words of font info for 173 fonts, out of 8000000 for 9000
  376 hyphenation exceptions out of 8191
  90i,9n,98p,344b,644s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/share/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/share/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb>
-Output written on cas-sc-template.pdf (4 pages, 200100 bytes).
+Output written on cas-sc-template.pdf (4 pages, 209484 bytes).
 PDF statistics:
- 124 PDF objects out of 1000 (max. 8388607)
- 98 compressed objects within 1 object stream
- 43 named destinations out of 1000 (max. 500000)
+ 129 PDF objects out of 1000 (max. 8388607)
+ 102 compressed objects within 2 object streams
+ 47 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
