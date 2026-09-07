@@ -139,6 +139,18 @@
 % Here goes the abstract
 \begin{abstract}
 Here goes the abstract \nocite{*}%% Remove this line from your manuscript.
+Lo pongo aqui no se muy bien por que. Creo que el enfoque adecuado para el paper debe ser el de,
+especificar que en casos donde los datos se presenten únicamente en forma de nº de carga y nº de
+descarga, mientras que la solucion general suele ser el representar al pasajero como agente
+e inferir su deseo mediante una OD matrix, al tener estas restricciones de datos junto 
+a que el objetivo no es analizar el comportamiento de los pasajeros, sino teniendo en cuenta el 
+número de pasajeros, analizar cómo se comportan los autobuses, un enfoque que no use OD, que se 
+suele estimar por IPF (con busqueda de maxima entropia y que DEPENDE MUCHO de la matriz semilla
+inicial, normalmente obtenida de encuestas o datos de tarjeta), se propone un enfoque donde la 
+carga y descarga se infiere de forma independiente. Esto se suma a, debido a que no se busca
+estudiar el comportamiento particular de pasajeros concretos, se puede reducir la granularidad
+al cargarnos el agente concreto, al no requerir de procesos coginitivos en él que alteren el
+comportamiento.
 \end{abstract}
 
 % Use if graphical abstract is present
@@ -165,11 +177,132 @@ Here goes the abstract \nocite{*}%% Remove this line from your manuscript.
 % Main text
 \section{Introduction}\label{}
 
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
 \section{State of the Art}\label{}
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
 
 \section{Proposed solutions: two different approaches}\label{}
 
-\section{Implementation and simulation parameters}\label{}
+\subsection{Agents and protocols}
+
+\section{Implementations and results}\label{}
+
+Both proposed architectures run in the dedicated agent platform GAMA \textbf{Cita} %\cite{taillandier2019gama}
+. The election is based on both the use of dedicated FIPA inboxing, allowing implementation-defined
+conversations, and a headless batch mode that improves performance on the simulations.
+
+\subsection{Simulation parameters}
+For the simulation characterization, the layout of the route Express 01 has been used.
+The route specs are presented in table \ref{tbl_route_specs}.
+
+
+
+\begin{table}%[]
+\caption{Specifications of route Express 01}\label{tbl_route_specs}
+\begin{tabular*}{\tblwidth}{@{}LL@{}}
+\toprule
+  Parameter & Value \\ % Table header row
+\midrule
+  Directions & 2 \\
+
+  Direction label 1 & Cibeles \\
+
+  Direction label 2 & La Peseta \\
+
+  Cibeles number of stops & 15 \\
+
+  La Peseta number of stops & 12 \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+
+The specific parameterization used for the simulation is shown in table \ref{tbl_sim_params}.
+The field \texttt{Extra dwell time per passenger} is used with both a premise and a comparasion.
+
+First, it assumes that the boarding and alightment processes runs in parallel, as in regular bus
+operations the processes runs in different doors.
+
+Secondly, the dwell extra time ($E$) will be the result of the following equation:
+
+\begin{equation}\label{eq:dwell}
+E = \max\bigl( \max(b,\, a)\, t_p,\; E_{\min} \bigr)
+\end{equation}
+
+\noindent where $b$ and $a$ are the numbers of boarding and alighting
+passengers at the stop, $t_p$ is the extra dwell time per passenger, and
+$E_{\min}$ is the minimum dwell imposed by the interaction protocol.
+
+\begin{table}%[]
+\caption{Fixed simulation parameters}\label{tbl_sim_params}
+\begin{tabular*}{\tblwidth}{@{}LL@{}}
+\toprule
+  Parameter & Value \\ % Table header row
+\midrule
+ Line & E01 (Cibeles-La Peseta) \\
+ Total physical buses & 12 \\
+ Total trips & 163 \\
+ Initial TimeSlot & 5 \\
+ Extra dwell time per passenger & 5 \\
+ Simulation time step & 2 \\
+
+\bottomrule
+\end{tabular*}
+\end{table}
+
+As measurement for converging randominess, the Monte Carlo method is implemented, specifying 1000 replicas
+per simulation.
+
+
+\subsection{Results}
+
+
 
 \section{Conclusions}\label{}
 % Numbered list
@@ -198,27 +331,33 @@ Here goes the abstract \nocite{*}%% Remove this line from your manuscript.
 \clearpage %%Remove this from your manuscript
 
 
-% Figure
-\begin{figure}%[]
-  \centering
-%    \includegraphics{}
-    \caption{}\label{fig1}
-\end{figure}
+% % Figure
+% \begin{figure}%[]
+%   \centering
+% %    \includegraphics{}
+%     \caption{}\label{fig1}
+% \end{figure}
 
 
-\begin{table}%[]
-\caption{}\label{tbl1}
-\begin{tabular*}{\tblwidth}{@{}LL@{}}
-\toprule
-  &  \\ % Table header row
-\midrule
- & \\
- & \\
- & \\
- & \\
-\bottomrule
-\end{tabular*}
-\end{table}
+% \begin{table}%[]
+% \caption{}\label{tbl1}
+% \begin{tabular*}{\tblwidth}{@{}LL@{}}
+% \toprule
+%   &  \\ % Table header row
+% \midrule
+%  & \\
+%  & \\
+%  & \\
+%  & \\
+% \bottomrule
+% \end{tabular*}
+% \end{table}
+
+
+
+
+
+
 
 % Uncomment and use as the case may be
 %\begin{theorem} 
