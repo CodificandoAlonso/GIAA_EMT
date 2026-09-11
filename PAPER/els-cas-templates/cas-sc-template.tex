@@ -24,9 +24,10 @@
 
 %\documentclass[a4paper,fleqn,longmktitle]{cas-sc}
 
-%\usepackage[numbers]{natbib}
+\usepackage[numbers,sort&compress]{natbib}
+
 %\usepackage[authoryear]{natbib}
-\usepackage[authoryear,longnamesfirst]{natbib}
+%\usepackage[authoryear,longnamesfirst]{natbib}
 
 %%%Author macros
 \def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
@@ -96,14 +97,14 @@
 \credit{}
 
 % Address/affiliation
-\affiliation[1]{organization={},
-            addressline={}, 
-            city={},
+% Address/affiliation
+\affiliation[1]{organization={Computer Science Department, Universidad Carlos III de Madrid},
+            addressline={Av. Gregorio Peces-Barba Martínez 22}, 
+            city={Colmenarejo},
 %          citysep={}, % Uncomment if no comma needed between city and postcode
-            postcode={}, 
-            state={},
-            country={}}
-
+            postcode={28270}, 
+            state={Madrid},
+            country={Spain}}
 \author[2]{}%[]
 
 % Footnote of the second author
@@ -119,13 +120,13 @@
 \credit{}
 
 % Address/affiliation
-\affiliation[2]{organization={},
-            addressline={}, 
-            city={},
-%          citysep={}, % Uncomment if no comma needed between city and postcode
-            postcode={}, 
-            state={},
-            country={}}
+% \affiliation[2]{organization={},
+%             addressline={}, 
+%             city={},
+% %          citysep={}, % Uncomment if no comma needed between city and postcode
+%             postcode={}, 
+%             state={},
+%             country={}}
 
 % Corresponding author text
 \cortext[1]{Corresponding author}
@@ -138,7 +139,8 @@
 
 % Here goes the abstract
 \begin{abstract}
-Here goes the abstract \nocite{*}%% Remove this line from your manuscript.
+Here goes the abstract%% Remove this line from your manuscript.
+
 Lo pongo aqui no se muy bien por que. Creo que el enfoque adecuado para el paper debe ser el de,
 especificar que en casos donde los datos se presenten únicamente en forma de nº de carga y nº de
 descarga, mientras que la solucion general suele ser el representar al pasajero como agente
@@ -175,7 +177,83 @@ comportamiento.
 \maketitle
 
 % Main text
-\section{Introduction}\label{}
+\section{Introduction and literature review}\label{}
+
+Public transport offer analysis can result a very complicated task for governmental entities.
+If the analysis is performed over real data recovered from trips across days, multiple month data window
+with same configuration is required in order to obtain statistically accurate results. The binding constraint
+in this case, however, is not the volume of the data stored, but rather the dependency 
+a small change in offer configuration can shift the data results towards inconsistencies due to that derivative.
+For this specific problem,
+multiple entities relies on simulation techniques for the purpose of testing out new possible configurations
+against the known demand characterization, a field with a strong stochastic behaviour. 
+Cases like \cite{manser2020designing,sun2021transitgym,talusan2025dispatch} present different simulation
+techniques applied in the public transport domain.
+
+This work presents two modelling solutions based on the MAS paradigm.
+Using the multi agent paradigm in the transport simulation field is a well known and implemented technique
+that has increase among the last years \cite{huang2022overview}.
+
+
+Some of them take advantage of the cognitive contribution that the use of certain paradigms, like BDI
+(Belief Desire Intention) brings, whilst the use of more data driven agents that characterizes
+themselves as reactive are less used on this field. Nontheless, the transport simulation problems 
+are indeed a type of problem with a strong variable and dynamic environment, so the use of the ABM
+is appropiate regardless of the agent taxonomy itself. This disctintion is given depending on 
+the scope the simulation is aiming and the set of data avaliable.
+
+At a microscopic level, the BDI can represent individual behaviour 
+
+
+In a mesoscopic scope, that 
+
+This work focus its scope over the bus capacity of demand absortion, so the mesoscopic approach seems to
+suit better, specially considering the computational cost it inquires the indiscrecionary granularity augment.
+However, a mixed scope can be considered in one of the two proposed solutions, as it models passengers
+as agents. In this case, the context will still be mesoscopic, due to the fact that the agent itself is not
+being modelled with a specific BDI architecture, but its just been used as a statistical count for bus
+capacity.
+
+
+(Aqui el posicionamiento del trabajo dentro del SOTA y su "aportacion" (el modelado del sistema))
+
+
+Tendré que hablar de que el enfoque de la simulacion es una mezcla entre mesoscopico y microscopico.
+Al fin y al cabo es demostrar que para el objetivo de análisis a nivel vehicular de un autobus,
+ambos son enfoques validos mediante el modelado que excluye el nivel cognitivo de la entidad
+pasajero, convirtiendolo meramente en un valor agregado a la carga del autobus, pero manteniendo
+la fidelidad estadística con los datos observables por la EMT.
+
+
+\textit{P3 — MAS dentro de la simulación de transporte. Aquí entra tu micro/meso, pero como marco heredado,
+ no como aportación. Establece los tres niveles clásicos —macroscópico agregado, mesoscópico por paquetes, 
+ microscópico por individuo— y sitúa el MAS en el microscópico. Cita MATSim y BusMezzo como los 
+ representantes. Este párrafo existe para montar el siguiente.
+P4 — La dependencia oculta del enfoque microscópico. El párrafo bisagra, y el que más te va a costar. 
+El argumento: modelar al pasajero como agente exige darle un destino, y el destino no está en los datos APC. 
+La literatura resuelve eso estimando matrices OD —IPF con matriz semilla, formulaciones bayesianas— y cada 
+método arrastra sus supuestos. Aquí citas la literatura OD (IPF-null, Ji et al., el bayesiano de 2024). La 
+frase clave: la granularidad del modelo está acoplada a un problema de estimación que el objetivo analítico
+ no necesariamente requiere.
+P5 — El hueco. Cuando el objetivo es el comportamiento del vehículo y no el itinerario del viajero, 
+reconstruir
+ la OD es resolver un problema más difícil que el planteado. Y no existe en la literatura un criterio, 
+ medible sobre datos, para decidir hasta dónde llega la agencia que puedes conceder. Parunak et al.
+  (1998) dan la versión cualitativa; la multi-level ABM aborda la agregación como aproximación, no como 
+  equivalencia.
+P6 — La aportación. Tres frases, una por pieza, y en este orden:
+El criterio: el nivel de agencia admisible está acotado por la granularidad de los datos de calibración; 
+por encima de esa cota el comportamiento del agente es infalsable.
+La consecuencia de diseño: dos arquitecturas idénticas en distribución por construcción, una con pasajero 
+reificado y otra con demanda agregada en la parada, que permiten aislar el coste de la reificación sin 
+confundirlo con una aproximación.
+La validación: equivalencia distribucional contra datos reales de EMT por parada y franja, con 
+caracterización explícita de dónde y por qué mecanismo falla el modelo.
+P7 — Estructura del documento. Dos frase}
+
+
+
+
 
 a
 
@@ -203,7 +281,6 @@ a
 
 a
 
-\section{State of the Art}\label{}
 a
 
 a
@@ -229,45 +306,57 @@ a
 
 \section{Proposed solutions: two different approaches}\label{}
 
+As for the purpose of this work, no cognitive reasoning is represented neither for the bus nor the passenger.
+Thus, the emergent intelligence comes from the interaction between agents and environment, as per
+\citet{brooks1991representation}, that emergent behaviour guarantees an agency right itself.
+
 \subsection{Agents and protocols}
+In the two proposed implementations, three agents are defined:
+
+\begin{itemize}
+  \item bus
+  \item stop
+  \item Passenger
+\end{itemize}
 
 \section{Implementations and results}\label{}
 
-Both proposed architectures run in the dedicated agent platform GAMA \textbf{Cita} %\cite{taillandier2019gama}
-. The election is based on both the use of dedicated FIPA inboxing, allowing implementation-defined
-conversations, and a headless batch mode that improves performance on the simulations.
+Both proposed architectures run in the dedicated agent platform GAMA \cite{taillandier2019gama}.
+The election is based on both the inclusion of FIPA inboxing, allowing implementation-defined
+conversations, and a headless batch mode that improves performance across runs.
 
 \subsection{Simulation parameters}
-For the simulation characterization, the layout of the route Express 01 has been used.
-The route specs are presented in table \ref{tbl_route_specs}.
+For the simulation characterization, the layout of route Express 01 is used. The route
+operates in two directions, labelled Cibeles and La Peseta, with 15 and 12 stops
+respectively.
 
 
+The specific parameterization used is shown in table \ref{tbl_sim_params}.
 
 \begin{table}%[]
-\caption{Specifications of route Express 01}\label{tbl_route_specs}
+\caption{Simulation parameters}\label{tbl_sim_params}
 \begin{tabular*}{\tblwidth}{@{}LL@{}}
 \toprule
   Parameter & Value \\ % Table header row
 \midrule
-  Directions & 2 \\
+ Line & E01 (Cibeles-La Peseta) \\
+ Total physical buses & 12 buses\\
+ Total trips & 163 trips\\
+ Initial TimeSlot & 5 \\
+ Extra dwell time per passenger & 5 seconds \\
+ Simulation time step & 2 seconds \\
+ Minimum protocol dwell ($E_{\min}$) & 4 * Simulation time step \\
+ Monte Carlo replicas & 1000 \\
 
-  Direction label 1 & Cibeles \\
-
-  Direction label 2 & La Peseta \\
-
-  Cibeles number of stops & 15 \\
-
-  La Peseta number of stops & 12 \\
 \bottomrule
 \end{tabular*}
 \end{table}
 
+Before the results are presented, some specifications about the simulations itself are introduced.
+The field \texttt{Extra dwell time per passenger} is used with both a premise and a comparison.
 
-The specific parameterization used for the simulation is shown in table \ref{tbl_sim_params}.
-The field \texttt{Extra dwell time per passenger} is used with both a premise and a comparasion.
-
-First, it assumes that the boarding and alightment processes runs in parallel, as in regular bus
-operations the processes runs in different doors.
+First, it assumes that the boarding and alighting processes happen in parallel, as in regular bus
+operations those occur in different physical doors.
 
 Secondly, the dwell extra time ($E$) will be the result of the following equation:
 
@@ -279,25 +368,7 @@ E = \max\bigl( \max(b,\, a)\, t_p,\; E_{\min} \bigr)
 passengers at the stop, $t_p$ is the extra dwell time per passenger, and
 $E_{\min}$ is the minimum dwell imposed by the interaction protocol.
 
-\begin{table}%[]
-\caption{Fixed simulation parameters}\label{tbl_sim_params}
-\begin{tabular*}{\tblwidth}{@{}LL@{}}
-\toprule
-  Parameter & Value \\ % Table header row
-\midrule
- Line & E01 (Cibeles-La Peseta) \\
- Total physical buses & 12 \\
- Total trips & 163 \\
- Initial TimeSlot & 5 \\
- Extra dwell time per passenger & 5 \\
- Simulation time step & 2 \\
-
-\bottomrule
-\end{tabular*}
-\end{table}
-
-As measurement for converging randominess, the Monte Carlo method is implemented, specifying 1000 replicas
-per simulation.
+In relation to the necesary input files required to run the simulation, 
 
 
 \subsection{Results}
@@ -377,8 +448,8 @@ per simulation.
 \printcredits
 
 %% Loading bibliography style file
-%\bibliographystyle{model1-num-names}
-\bibliographystyle{cas-model2-names}
+\bibliographystyle{elsarticle-num-names}
+%\bibliographystyle{cas-model2-names}
 
 % Loading bibliography database
 \bibliography{cas-refs}

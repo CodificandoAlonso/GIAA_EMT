@@ -463,30 +463,150 @@ salida y regularidad, con su nivel de alerta.
 parada. Sin covarianza negativa, la varianza se acumula a lo largo del recorrido.}
 \end{frame}
 
+\begin{frame}[t]{Validación operativa}
+\framesubtitle{Resto de indicadores}
+\vspace{0.8em}
+\centering
+{\scriptsize
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{@{}l l l >{\raggedright\arraybackslash}p{5.0cm}@{}}
+\toprule
+\textbf{Indicador} & \textbf{Simulado} & \textbf{Referencia} & \textbf{Lectura} \\
+\midrule
+Tiempo medio de espera & 09:43 & cota analítica 07:00 &
+  Por encima de la cota, congruente en orden de magnitud \\
+Tiempo entre paradas & $\approx$ identidad & medias esperadas &
+  Coincidencia práctica total\\
+Alertas a nivel de ruta & franjas 5--8 h & hora punta real &
+  Sentido Cibeles; coincide con el patrón conocido de la línea \\
+Alertas a nivel de autobús & retrasos de salida & --- &
+  Sin saturación: la oferta programada absorbe la demanda \\
+\bottomrule
+\end{tabular}}
+
+\end{frame}
+
 % ======================================================================
 \section{Comparación de alternativas}
 \begin{frame}[plain,noframenumbering]\sectionpage\end{frame}
 
-\begin{frame}{Metodología de medida}
+\begin{frame}[t]{Equivalencia de resultados}
+\vfill
+\centering
+{\footnotesize
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+ & \textbf{Solución 1} & \textbf{Solución 2} & \textbf{Diferencia} \\
+\midrule
+Ocupación general      & 29,1\,\% & 29,4\,\% & 0,3 pp \\
+Tiempo medio de espera & 09:14 & 09:43 & 29 s \\
+Índice de regularidad  & 95,33 & 96,20 & 0,87 \\
+\bottomrule
+\end{tabular}}
+
+\vspace{1.6em}
+\begin{tikzpicture}
+  \node[fill=uc3mblue, rounded corners=3pt, drop shadow={opacity=0.25},
+        text width=10.4cm, inner sep=12pt, align=center] {%
+    \color{white}\bfseries Diferencia media de 0,37 pasajeros sobre 437
+    combinaciones de parada y franja\\[0.4em]};
+\end{tikzpicture}
+
+\vspace{1em}
+{\footnotesize\color{black!65}La discrepancia entre arquitecturas es
+indistinguible del ruido del muestreo.}
+\vfill
 \end{frame}
 
-\begin{frame}{Coste de la capa de agentes}
-\end{frame}
+\begin{frame}[t]{Coste de ejecución}
+\vspace{0.4em}
+\begin{columns}[T]
+\begin{column}{0.56\textwidth}
+  \centering
+  \includegraphics[trim=20 15 15 10, clip, width=\linewidth]{images/cmp_cpu.png}\\[0.3em]
+  {\scriptsize\color{black!65}Utilización de CPU frente al tiempo}
+\end{column}
+\begin{column}{0.40\textwidth}
+  \vspace{0.3em}
+  \begin{tikzpicture}
+  \node[fill=uc3mblue, rounded corners=3pt, drop shadow={opacity=0.25},
+        text width=4.4cm, inner sep=10pt, align=center] {%
+    \color{white}\bfseries\large 4,32$\times$\\[0.3em]
+    \color{white}\mdseries\scriptsize razón entre ventanas de ejecución};
+  \end{tikzpicture}
 
-\begin{frame}{Descarte de causas alternativas}
+  \vspace{1em}
+  {\scriptsize
+  \textbf{\color{uc3mblue}Descartado}\\[0.5em]
+  \textbullet\ \ Energía, potencia y temperatura\\[0.4em]
+  \textbullet\ \ Recolección de basura (0,95\,\%)\\[0.4em]
+  \textbullet\ \ Saturación de hilos\\[0.9em]
+  \textbf{\color{uc3mblue}Origen}\\[0.5em]
+  Ciclo de vida de los agentes pasajero y mensajería de los protocolos.}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\centering
+{\scriptsize\color{black!65}Misma intensidad de cómputo, mayor duración.}
 \end{frame}
 
 % ======================================================================
 \section{Conclusiones}
 \begin{frame}[plain,noframenumbering]\sectionpage\end{frame}
 
-\begin{frame}{Limitaciones}
+\begin{frame}[t]{Conclusiones}
+\vfill
+\centering
+\begin{tikzpicture}[
+  sec/.style={draw=uc3mblue, line width=0.9pt, rounded corners=3pt,
+              text width=3.2cm, minimum height=2.0cm, inner sep=8pt,
+              align=center, font=\scriptsize}]
+
+  \node[sec] (b) at (0,0) {\textbf{Arquitecturas equivalentes}\\[0.4em]
+        0,37 frente a 0,36 de error estándar};
+  \node[sec, left=0.55cm of b]  (a) {\textbf{Datos caracterizados}\\[0.4em]
+        Distribuciones ajustadas estadisticamente para ocupación, subidas y bajadas};
+  \node[sec, right=0.55cm of b] (c) {\textbf{Herramienta entregada}\\[0.4em]
+        ejecución y visualización de KPIs};
+
+  \node[fill=uc3mblue, rounded corners=3pt, drop shadow={opacity=0.25},
+        text width=10.4cm, inner sep=12pt, align=center,
+        above=1.5cm of b] (main) {%
+    \color{white}\small\bfseries El sistema reproduce la operativa de la línea
+    en días laborables, con un sesgo caracterizado de 2 pasajeros y una
+    sobredispersión de origen identificado.};
+
+  \coordinate (m) at ($(main.south)!0.5!(b.north)$);
+  \draw[uc3mblue, line width=0.8pt] (main.south) -- (m);
+  \foreach \n in {a,b,c} \draw[uc3mblue, line width=0.8pt] (m) -| (\n.north);
+\end{tikzpicture}
+\vfill
 \end{frame}
 
-\begin{frame}{Conclusiones}
-\end{frame}
+\begin{frame}[t]{Limitaciones y líneas futuras}
+\vspace{0.9em}
+\centering
+{\scriptsize
+\renewcommand{\arraystretch}{3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.6cm} c
+                  >{\raggedright\arraybackslash}p{5.6cm}@{}}
+\toprule
+\textbf{Limitación} & & \textbf{Línea futura} \\
+\midrule
+Bajadas muestreadas de forma independiente por parada &
+$\longrightarrow$ &
+Modelar el descenso como proporción de la ocupación a bordo \\
+Ocho meses de datos, sin ciclo anual completo &
+$\longrightarrow$ &
+Ampliar la cobertura para separar la componente estacional \\
+Plataforma híbrida entre compilado e interpretado &
+$\longrightarrow$ &
+Migrar el motor a un lenguaje compilado \\
+\bottomrule
+\end{tabular}}
 
-\begin{frame}{Líneas futuras}
+
 \end{frame}
 
 % ======================================================================

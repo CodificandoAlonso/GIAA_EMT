@@ -1,47 +1,47 @@
 This is BibTeX, Version 0.99e (TeX Live 2026/Arch Linux)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: cas-sc-template.aux
-The style file: cas-model2-names.bst
+The style file: elsarticle-num-names.bst
 Database file #1: cas-refs.bib
 Reallocated singl_function (elt_size=8) to 100 items from 50.
-You've used 1 entry,
-            2990 wiz_defined-function locations,
-            741 strings with 6605 characters,
-and the built_in function-call counts, 1042 in all, are:
-= -- 67
-> -- 66
-< -- 0
-+ -- 25
-- -- 24
-* -- 132
-:= -- 158
-add.period$ -- 4
-call.type$ -- 1
-change.case$ -- 13
-chr.to.int$ -- 1
-cite$ -- 1
-duplicate$ -- 61
-empty$ -- 57
-format.name$ -- 27
-if$ -- 176
+You've used 6 entries,
+            2918 wiz_defined-function locations,
+            663 strings with 6634 characters,
+and the built_in function-call counts, 5033 in all, are:
+= -- 334
+> -- 297
+< -- 2
++ -- 115
+- -- 105
+* -- 638
+:= -- 733
+add.period$ -- 8
+call.type$ -- 6
+change.case$ -- 65
+chr.to.int$ -- 6
+cite$ -- 6
+duplicate$ -- 333
+empty$ -- 310
+format.name$ -- 121
+if$ -- 896
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 15
-newline$ -- 21
-num.names$ -- 4
-pop$ -- 21
+missing$ -- 75
+newline$ -- 45
+num.names$ -- 24
+pop$ -- 122
 preamble$ -- 1
-purify$ -- 12
+purify$ -- 65
 quote$ -- 0
-skip$ -- 15
+skip$ -- 75
 stack$ -- 0
-substring$ -- 36
-swap$ -- 58
-text.length$ -- 0
+substring$ -- 187
+swap$ -- 284
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 9
+type$ -- 54
 warning$ -- 0
-while$ -- 5
+while$ -- 28
 width$ -- 0
-write$ -- 30
+write$ -- 95
