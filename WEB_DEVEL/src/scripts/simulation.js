@@ -81,6 +81,7 @@ const ALERT_THRESHOLDS = {
 const MODEL_LABELS = {
   with_agents:    'Con agentes pasajero',
   without_agents: 'Sin agentes pasajero',
+  c_engine:       'Motor en C',
 };
 
 // Returns 0..1: fraction of anomaly flags triggered for one trip's metrics

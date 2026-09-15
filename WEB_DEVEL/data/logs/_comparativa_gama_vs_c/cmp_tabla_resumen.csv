@@ -1,0 +1,3 @@
+label,duracion_s,duracion_min,replicas,muestras,cpu_time_s,cpu_time_h,cpu_user_s,cpu_system_s,cpu_s_por_replica,cpu_pct_core_media,cpu_pct_core_max,cpu_pct_alloc_media,replicas_por_hora,s_pared_por_replica,ram_pico_gib,io_lectura_mib,io_escritura_mib,cores,afinidad_n
+gama,1964.0,32.7,996,982,12427.687,3.452,12225.871,201.816,12.4776,632.77,729.0,52.73,1825.66,1.972,4.081,0.0,326.8,12,12
+c_engine,1.9,0.0,0,20,12.51,0.003,12.182,0.328,,658.26,1205.21,54.86,,,8.37,0.0,0.0,12,12

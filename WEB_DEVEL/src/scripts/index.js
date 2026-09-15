@@ -13,6 +13,7 @@ function toast(msg, type = 'info') {
 const MODEL_LABELS = {
   with_agents:    'Con agentes pasajero',
   without_agents: 'Sin agentes pasajero',
+  c_engine:       'Motor en C',
 };
 
 function formatNum(n) {
@@ -237,12 +238,15 @@ function applySimProgress(sims) {
     if (metaValues[2]) metaValues[2].textContent = status;
 
 
-    if (metaValues[1].textContent != 'Esperando Gr\u00e1ficas'){
+        // metaValues: [0] nº repeticiones, [1] Solución, [2] Estado.
+    // El estado es [2]; comparar contra [1] leia la etiqueta del modelo,
+    // que nunca es 'Esperando Graficas', de modo que el guardia no saltaba.
+    if (metaValues[2]?.textContent != 'Esperando Gr\u00e1ficas'){
     bar.style.width = `${percentage}%`;
     }
 
     // When a sim reaches 100%, fade the bar out after a moment
-    if (runCount >= 1000 && metaValues[1].textContent != 'Esperando Gr\u00e1ficas') {
+    if (runCount >= 1000 && metaValues[2]?.textContent != 'Esperando Gr\u00e1ficas') {
       bar.style.width = '100%';
       setTimeout(() => {
         bar.style.opacity = '0';
@@ -264,8 +268,10 @@ function endsimprocess(id) {
   }
   bar.style.width = `100%`;
   const metaValues = card.querySelectorAll('.meta-value');
-  if (metaValues[0]) metaValues[0].textContent = formatNum(1000);
-  if (metaValues[1]) metaValues[1].textContent = "Completada";
+ 
+    if (metaValues[0]) metaValues[0].textContent = formatNum(1000);
+  // [1] es la Solución; escribir ahi borraba el nombre del modelo.
+  if (metaValues[2]) metaValues[2].textContent = "Completada";
 
   setTimeout(() => {
       bar.style.opacity = '0';

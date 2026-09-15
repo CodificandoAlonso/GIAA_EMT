@@ -1,0 +1,64 @@
+{
+  "duration_s": 120.001,
+  "samples": 61,
+  "interval_s": 2.0,
+  "t0_mono": 16905.252912865,
+  "t0_wall": 1789475287.2385292,
+  "domains": {
+    "package-0": {
+      "energy_j": 1103.139,
+      "energy_wh": 0.306428,
+      "mean_power_w": 9.193,
+      "peak_power_w": 11.086,
+      "counter_alive": true
+    },
+    "package-0-core": {
+      "energy_j": 566.274,
+      "energy_wh": 0.157298,
+      "mean_power_w": 4.719,
+      "peak_power_w": 6.254,
+      "counter_alive": true
+    },
+    "package-0-uncore": {
+      "energy_j": 25.88,
+      "energy_wh": 0.007189,
+      "mean_power_w": 0.216,
+      "peak_power_w": 0.422,
+      "counter_alive": true
+    },
+    "psys": {
+      "energy_j": 3097.45,
+      "energy_wh": 0.860403,
+      "mean_power_w": 25.812,
+      "peak_power_w": 30.246,
+      "counter_alive": true
+    }
+  },
+  "peak_pkg_temp_c": 71.0,
+  "constraints_end": {
+    "package-0:long_term_w": 45.0,
+    "package-0:short_term_w": 60.0,
+    "package-0-core:long_term_w": 0.0,
+    "package-0-uncore:long_term_w": 0.0,
+    "psys:long_term_w": 0.0,
+    "psys:short_term_w": 0.0
+  },
+  "host": {
+    "cpu_model": "13th Gen Intel(R) Core(TM) i7-13620H",
+    "cpu_count": 16,
+    "mem_total_gb": 31.05,
+    "kernel": "7.1.9-arch1-2",
+    "scaling_governor": "powersave",
+    "no_turbo": 0
+  },
+  "timeseries": "WEB_DEVEL/data/logs/_energy/energy_timeseries.csv",
+  "mode": "baseline",
+  "constraints_start": {
+    "package-0:long_term_w": 45.0,
+    "package-0:short_term_w": 60.0,
+    "package-0-core:long_term_w": 0.0,
+    "package-0-uncore:long_term_w": 0.0,
+    "psys:long_term_w": 0.0,
+    "psys:short_term_w": 0.0
+  }
+}

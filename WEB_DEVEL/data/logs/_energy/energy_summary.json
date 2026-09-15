@@ -1,0 +1,79 @@
+{
+  "duration_s": 62.0,
+  "samples": 31,
+  "interval_s": 2.0,
+  "t0_mono": 17053.223020148,
+  "t0_wall": 1789475435.2086365,
+  "domains": {
+    "package-0": {
+      "energy_j": 1471.141,
+      "energy_wh": 0.40865,
+      "mean_power_w": 23.728,
+      "peak_power_w": 37.809,
+      "counter_alive": true,
+      "p_idle_w": 9.193,
+      "energy_attributable_j": 901.175,
+      "energy_attributable_wh": 0.250326
+    },
+    "package-0-core": {
+      "energy_j": 1141.279,
+      "energy_wh": 0.317022,
+      "mean_power_w": 18.408,
+      "peak_power_w": 31.829,
+      "counter_alive": true,
+      "p_idle_w": 4.719,
+      "energy_attributable_j": 848.701,
+      "energy_attributable_wh": 0.23575
+    },
+    "package-0-uncore": {
+      "energy_j": 25.084,
+      "energy_wh": 0.006968,
+      "mean_power_w": 0.405,
+      "peak_power_w": 1.0,
+      "counter_alive": true,
+      "p_idle_w": 0.216,
+      "energy_attributable_j": 11.692,
+      "energy_attributable_wh": 0.003248
+    },
+    "psys": {
+      "energy_j": 2866.458,
+      "energy_wh": 0.796238,
+      "mean_power_w": 46.233,
+      "peak_power_w": 65.237,
+      "counter_alive": true,
+      "p_idle_w": 25.812,
+      "energy_attributable_j": 1266.114,
+      "energy_attributable_wh": 0.351698
+    }
+  },
+  "peak_pkg_temp_c": 84.0,
+  "constraints_end": {
+    "package-0:long_term_w": 45.0,
+    "package-0:short_term_w": 60.0,
+    "package-0-core:long_term_w": 0.0,
+    "package-0-uncore:long_term_w": 0.0,
+    "psys:long_term_w": 0.0,
+    "psys:short_term_w": 0.0
+  },
+  "host": {
+    "cpu_model": "13th Gen Intel(R) Core(TM) i7-13620H",
+    "cpu_count": 16,
+    "mem_total_gb": 31.05,
+    "kernel": "7.1.9-arch1-2",
+    "scaling_governor": "powersave",
+    "no_turbo": 0
+  },
+  "timeseries": "WEB_DEVEL/data/logs/_energy/energy_timeseries.csv",
+  "mode": "run",
+  "label": "c_engine",
+  "constraints_start": {
+    "package-0:long_term_w": 45.0,
+    "package-0:short_term_w": 60.0,
+    "package-0-core:long_term_w": 0.0,
+    "package-0-uncore:long_term_w": 0.0,
+    "psys:long_term_w": 0.0,
+    "psys:short_term_w": 0.0
+  },
+  "constraints_drift": false,
+  "baseline_file": "WEB_DEVEL/data/logs/_energy/baseline.json"
+}

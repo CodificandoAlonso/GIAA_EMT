@@ -23,11 +23,13 @@ RUN apt update && apt install -y \
 
 WORKDIR /app
 
-RUN mkdir ./WEB_DEVEL && mkdir ./GAMA
+RUN mkdir ./WEB_DEVEL && mkdir ./GAMA && mkdir ./C_REWRITE
 
 COPY WEB_DEVEL ./WEB_DEVEL
 
 COPY GAMA ./GAMA
+
+COPY C_REWRITE ./C_REWRITE
 
 
 RUN python3 -m venv /opt/venv
@@ -39,6 +41,14 @@ RUN pip install --no-cache-dir -r /app/WEB_DEVEL/bash_scripts/requirements.txt
 WORKDIR /app/WEB_DEVEL
 
 RUN npm ci --omit=dev
+
+WORKDIR /app/C_REWRITE
+
+RUN make clean && make release
+
+ENV EMT_C_BIN=/app/C_REWRITE/simulation \
+    EMT_C_DATA_REF=/app/C_REWRITE/data
+
 
 WORKDIR /opt
 

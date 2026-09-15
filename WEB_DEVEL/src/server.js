@@ -15,11 +15,13 @@ const PAGES_DIR = path.join(__dirname, 'pages');
 const IMGS_DIR = path.join(__dirname,'..', 'img');
 
 
-const GAMA_MODELS = {
-  with_agents:    'modelpassengersfinal_with_passenger_agents.gaml',
-  without_agents: 'mobility_performance.gaml',
+const ENGINES = {
+  with_agents:    { type: 'gama', model: 'modelpassengersfinal_with_passenger_agents.gaml' },
+  without_agents: { type: 'gama', model: 'mobility_performance.gaml' },
+  c_engine:       { type: 'c' },
 };
 const DEFAULT_MODEL_KEY = 'without_agents';
+const engineFor = (key) => ENGINES[key] || ENGINES[DEFAULT_MODEL_KEY];
 
 
 app.use(express.json({ limit: '100mb' }));
@@ -56,6 +58,22 @@ function resolveInputsPath(simPath) {
   if (fs.existsSync(oldLayout)) return oldLayout;
   return null;
 }
+
+function replicaProgress(simPath, engineType) {
+  if (engineType === 'c') {
+    const done = fs.existsSync(path.join(simPath, '.done'));
+    return { runCount: done ? 1000 : 0, percentage: done ? 100 : 0 };
+  }
+  const activePath    = path.join(simPath, 'TEST_MOBILITY', 'logs', 'RESULTS');
+  const completedPath = path.join(simPath, 'RESULTS');
+  const resultsPath   = fs.existsSync(activePath) ? activePath : completedPath;
+  let runCount = 0;
+  try {
+    runCount = fs.readdirSync(resultsPath).filter(f => f.endsWith('.csv')).length;
+  } catch (_) {}
+  return { runCount, percentage: Math.min(100, Math.round(runCount / 10)) };
+}
+
 
 // Parse description.txt: `title "..."`, `description "..."`, `line "..."`
 function parseDescription(simPath) {
@@ -94,9 +112,7 @@ app.get('/api/simulations', (req, res) => {
         const chartsPath = path.join(simPath, 'PLOTS');
         let status = 'En progreso';
         let runCount = 0;
-        try {
-          runCount = fs.readdirSync(resultsPath).filter(f => f.endsWith('.csv')).length;
-        } catch (_) {}
+        runCount = replicaProgress(simPath, engineFor(parseDescription(simPath).model).type).runCount;
 
         const hasCharts = fs.existsSync(chartsPath) && fs.readdirSync(chartsPath).some(f => f.endsWith('.json'));
 
@@ -143,9 +159,7 @@ app.get('/api/simulations/:id', (req, res) => {
 
   // Count runs
   let runCount = 0;
-  try {
-    runCount = fs.readdirSync(resultsPath).filter(f => f.endsWith('.csv')).length;
-  } catch (_) {}
+  runCount = replicaProgress(simPath, engineFor(parseDescription(simPath).model).type).runCount;
 
   // List chart images
   let charts = [];
@@ -363,7 +377,7 @@ app.post('/api/simulations/:id/run', (req, res) => {
   // Resolve the chosen GAML model from description.txt against the allowlist and
   // hand it to the bash scripts via GAMA_MODEL_NAME.
   const { model: modelKey } = parseDescription(path.join(DATA_DIR, id));
-  const modelFile = GAMA_MODELS[modelKey] || GAMA_MODELS[DEFAULT_MODEL_KEY];
+  const modelFile = engineFor(modelKey).model || '';
 
   const proc = spawn('bash', [scriptPath], {
     cwd: bashScriptsDir,
@@ -567,17 +581,10 @@ function getInProgressSimulations() {
         const simPath = path.join(DATA_DIR, id);
 
         // Try active-run path first, fall back to post-cleanup path
-        const activePath    = path.join(simPath, 'TEST_MOBILITY', 'logs', 'RESULTS');
-        const completedPath = path.join(simPath, 'RESULTS');
-        const resultsPath   = fs.existsSync(activePath) ? activePath : completedPath;
-        const chartsPath    = path.join(simPath, 'PLOTS');
+        const chartsPath = path.join(simPath, 'PLOTS');
+        const engineType = engineFor(parseDescription(simPath).model).type;
+        const { runCount, percentage } = replicaProgress(simPath, engineType);
 
-        let runCount = 0;
-        try {
-          runCount = fs.readdirSync(resultsPath).filter(f => f.endsWith('.csv')).length;
-        } catch (_) {}
-
-        const percentage = Math.min(100, Math.round(runCount / 10)); // 1000 total
         let status = '';
         if (runCount >= 1000){
           const hasCharts = fs.existsSync(chartsPath) && fs.readdirSync(chartsPath).some(f => f.endsWith('.json'));

@@ -19,3 +19,11 @@ WEB_DEVEL/node_modules/
 
 # Docs
 docs/
+
+
+# C engine build artefacts (must be rebuilt inside the image)
+C_REWRITE/build/
+C_REWRITE/simulation
+
+# C engine test outputs (~190 MB, regenerated per simulation)
+C_REWRITE/data/outputs/

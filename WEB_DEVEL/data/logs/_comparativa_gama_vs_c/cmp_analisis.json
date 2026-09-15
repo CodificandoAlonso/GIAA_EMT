@@ -1,0 +1,50 @@
+{
+  "reference": "gama",
+  "runs": [
+    {
+      "label": "gama",
+      "duracion_s": 1964.0,
+      "duracion_min": 32.7,
+      "replicas": 996,
+      "muestras": 982,
+      "cpu_time_s": 12427.687,
+      "cpu_time_h": 3.452,
+      "cpu_user_s": 12225.871,
+      "cpu_system_s": 201.816,
+      "cpu_s_por_replica": 12.4776,
+      "cpu_pct_core_media": 632.77,
+      "cpu_pct_core_max": 729.0,
+      "cpu_pct_alloc_media": 52.73,
+      "replicas_por_hora": 1825.66,
+      "s_pared_por_replica": 1.972,
+      "ram_pico_gib": 4.081,
+      "io_lectura_mib": 0.0,
+      "io_escritura_mib": 326.8,
+      "cores": 12,
+      "afinidad_n": 12
+    },
+    {
+      "label": "c_engine",
+      "duracion_s": 1.9,
+      "duracion_min": 0.0,
+      "replicas": 0,
+      "muestras": 20,
+      "cpu_time_s": 12.51,
+      "cpu_time_h": 0.003,
+      "cpu_user_s": 12.182,
+      "cpu_system_s": 0.328,
+      "cpu_s_por_replica": null,
+      "cpu_pct_core_media": 658.26,
+      "cpu_pct_core_max": 1205.21,
+      "cpu_pct_alloc_media": 54.86,
+      "replicas_por_hora": null,
+      "s_pared_por_replica": null,
+      "ram_pico_gib": 8.37,
+      "io_lectura_mib": 0.0,
+      "io_escritura_mib": 0.0,
+      "cores": 12,
+      "afinidad_n": 12
+    }
+  ],
+  "domain": "package-0-core"
+}
