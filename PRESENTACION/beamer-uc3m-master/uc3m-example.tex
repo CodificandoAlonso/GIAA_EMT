@@ -11,6 +11,7 @@
 \usepackage{siunitx}
 \usepackage{pgfplots}
 \usepackage{enumitem}
+\usepackage{adjustbox}
 \usetikzlibrary{arrows.meta, positioning, shadows, calc}
 
 \newcommand{\cif}[1]{{\Large\bfseries\color{uc3mblue}#1}}
@@ -26,6 +27,20 @@
 \newcommand{\guardacuenta}{%
   \immediate\write\@auxout{\string\gdef\string\maincount{\the\c@framenumber}}}
 \makeatother
+% #1: solución · #2: nombre del protocolo · #3: familia FIPA · #4: fichero
+% [#1]: nota opcional · #2: solución · #3: protocolo · #4: familia FIPA · #5: fichero
+\newcommand{\fichafipa}[5][]{%
+\begin{frame}[t]{Fichas completas de los protocolos FIPA}
+\framesubtitle{#2 · \textit{#3} (FIPA-#4)}
+\vspace{-0.6em}
+\centering
+\includegraphics[width=\linewidth, height=7.1cm, keepaspectratio]%
+  {images/#5}
+\if\relax\detokenize{#1}\relax\else
+  \par\vspace{0.2em}{\scriptsize\color{black!65}#1}
+\fi
+\end{frame}}
+
 
 \renewcommand{\tiny}{\fontsize{7}{8.5}\selectfont}
 
@@ -151,7 +166,7 @@
   \node[dato] (a) {\cif{Una única ruta}\\[0.5em]
         \eti{Express 01, en sus dos sentidos}};
   \node[dato, right=1.6cm of a] (b) {\cif{Días laborables}\\[0.5em]
-        \eti{Sin gratuidad}};
+        \eti{Excluyendo gratuitos}};
   \draw[uc3mgray, line width=1pt]
     ([xshift=0.8cm]a.north east) -- ([xshift=0.8cm]a.south east);
 \end{tikzpicture}
@@ -439,6 +454,7 @@ Viajes ejecutados       & 163,1 & 163 \\
 \vfill
 \end{frame}
 
+
 \begin{frame}[t]{Validación operativa}
 \framesubtitle{Comparación de ocupación (2/3)}
 \vspace{-0.4em}
@@ -548,36 +564,37 @@ indistinguible del ruido del muestreo.}
 \end{frame}
 
 \begin{frame}[t]{Coste de ejecución}
-\vspace{0.4em}
-\begin{columns}[T]
-\begin{column}{0.56\textwidth}
+\vspace{-0.2em}
+\centering
+\adjincludegraphics[trim={0 0 0 {.5\height}}, clip,
+  width=0.92\linewidth, height=3.9cm, keepaspectratio]{images/cmp_cpu.png}\\[0.1em]
+{\scriptsize\color{black!65}Utilización de CPU frente al progreso de la simulación:
+\textbf{misma intensidad de cómputo}}
+
+\vspace{0.6em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.34\textwidth}
   \centering
-  \includegraphics[trim=20 15 15 10, clip, width=\linewidth]{images/cmp_cpu.png}\\[0.3em]
-  {\scriptsize\color{black!65}Utilización de CPU frente al tiempo}
-\end{column}
-\begin{column}{0.40\textwidth}
-  \vspace{0.3em}
   \begin{tikzpicture}
   \node[fill=uc3mblue, rounded corners=3pt, drop shadow={opacity=0.25},
-        text width=4.4cm, inner sep=10pt, align=center] {%
+        text width=3.4cm, inner sep=9pt, align=center] {%
     \color{white}\bfseries\large 4,32$\times$\\[0.3em]
     \color{white}\mdseries\scriptsize razón entre ventanas de ejecución};
   \end{tikzpicture}
-
-  \vspace{1em}
+\end{column}
+\begin{column}{0.31\textwidth}
   {\scriptsize
-  \textbf{\color{uc3mblue}Descartado}\\[0.5em]
-  \textbullet\ \ Energía, potencia y temperatura\\[0.4em]
-  \textbullet\ \ Recolección de basura (0,95\,\%)\\[0.4em]
-  \textbullet\ \ Saturación de hilos\\[0.9em]
-  \textbf{\color{uc3mblue}Origen}\\[0.5em]
+  \textbf{\color{uc3mblue}Descartado}\\[0.4em]
+  \textbullet\ \ Energía, potencia y temperatura\\[0.3em]
+  \textbullet\ \ Recolección de basura (0,95\,\%)\\[0.3em]
+  \textbullet\ \ Saturación de hilos}
+\end{column}
+\begin{column}{0.31\textwidth}
+  {\scriptsize
+  \textbf{\color{uc3mblue}Origen}\\[0.4em]
   Ciclo de vida de los agentes pasajero y mensajería de los protocolos.}
 \end{column}
 \end{columns}
-
-\vspace{0.5em}
-\centering
-{\scriptsize\color{black!65}Misma intensidad de cómputo, mayor duración.}
 \end{frame}
 
 % ======================================================================
@@ -656,31 +673,140 @@ Migrar el motor a un lenguaje compilado \\
 \vspace{-2em}\hfill\color{uc3mblue}\Roman{framenumber}\hspace{1em}\vspace{0.5em}}
 % ======================================================================
 
-\begin{frame}{Distribuciones ajustadas y selección por AIC}
+\begin{frame}[t]{Distribuciones ajustadas y selección por AIC}
+\framesubtitle{Sentido \textit{Cibeles}}
+\vspace{-0.3em}
+\centering
+\includegraphics[width=\linewidth, height=5.9cm, keepaspectratio]%
+  {images/to_A/fig1_global_pie_toA.png}
+
+\vspace{0.3em}
+{\scriptsize\color{black!65}Candidatas: normal, geométrica y binomial negativa.
+Si ninguna supera el contraste de bondad de ajuste, se retiene la de menor AIC.}
 \end{frame}
 
-\begin{frame}{Depuración de datos: efecto de la MAD}
+\begin{frame}[t]{Distribuciones ajustadas y selección por AIC}
+\framesubtitle{Sentido \textit{La Peseta}}
+\vspace{-0.3em}
+\centering
+\includegraphics[width=\linewidth, height=5.9cm, keepaspectratio]%
+  {images/to_B/fig1_global_pie_toB.png}
+
+\vspace{0.3em}
+{\scriptsize\color{black!65}Candidatas: normal, geométrica y binomial negativa.
+Si ninguna supera el contraste de bondad de ajuste, se retiene la de menor AIC.}
 \end{frame}
 
-\begin{frame}{Fichas completas de los protocolos FIPA}
+
+% --- Solución 1 ---
+\fichafipa{Solución 1}{Consulta de descenso}{Query}%
+  {consulta_de_descenso_svg-tex.pdf}
+\fichafipa{Solución 1}{Solicitud de descenso}{Request}%
+  {diagrama_solicitud_de_descenso.drawio_svg-tex.pdf}
+\fichafipa{Solución 1}{Notificación de llegada}{Request}%
+  {notificacion_de_llegada.drawio_svg-tex.pdf}
+\fichafipa{Solución 1}{Aviso de embarque}{Request}%
+  {aviso_de_embarque.drawio_svg-tex.pdf}
+\fichafipa{Solución 1}{Solicitud de embarque}{Request}%
+  {solicitud_de_embarque.drawio_svg-tex.pdf}
+\fichafipa{Solución 1}{Actualización de recuento}{Request}%
+  {actualizacion_recuento.drawio_svg-tex.pdf}
+
+% --- Solución 2 ---
+\fichafipa{Solución 2}{Consulta tras llegada}{Query}%
+  {consulta_llegada.drawio_svg-tex.pdf}
+\fichafipa[Diagrama equivalente al de la Solución 1; difiere el contenido
+  transmitido en cada mensaje.]{Solución 2}{Actualización de recuento}{Request}%
+  {actualizacion_recuento.drawio_svg-tex.pdf}
+
+
+
+\begin{frame}[t]{Análisis de descarte del sobrecoste}
+\framesubtitle{Energía, potencia y temperatura}
+\vspace{-0.3em}
+\centering
+\includegraphics[width=\linewidth, height=6.2cm, keepaspectratio]%
+  {images/cmp_potencia_temperatura.png}
+
+\vspace{0.3em}
+{\scriptsize\color{black!65}Ambas soluciones operan con perfiles equivalentes:
+el sobrecoste no procede de una limitación térmica ni energética del equipo.}
 \end{frame}
 
-\begin{frame}{Validación por parada}
+\begin{frame}[t]{Análisis de descarte del sobrecoste}
+\framesubtitle{Memoria y recolección de basura}
+\vspace{-0.3em}
+\centering
+\includegraphics[width=\linewidth, height=6.2cm, keepaspectratio]%
+  {images/cmp_memoria.png}
+
+\vspace{0.3em}
+{\scriptsize\color{black!65}Ambas soluciones usan magnitudes de memoria equivalentes.}
 \end{frame}
 
-\begin{frame}{Análisis de descarte del sobrecoste}
-\end{frame}
+\begin{frame}[t]{Planificación y presupuesto}
+\framesubtitle{Presupuesto}
+\vspace{0.2em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.52\textwidth}
+  \centering
+  {\scriptsize\textbf{\color{uc3mblue}Costes de personal}}\\[0.4em]
+  {\scriptsize
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.9cm}rrr@{}}
+  \toprule
+  \textbf{Categoría} & \textbf{€/h} & \textbf{Horas} & \textbf{Total} \\
+  \midrule
+  Catedrático de Universidad        & 39,20 & 25  & 980,00 € \\
+  Titular de Universidad            & 31,14 & 65  & 2.024,10 € \\
+  Contrato formativo en alternancia & 12,54 & 520 & 6.519,12 € \\
+  \midrule
+  \textbf{Total} & & \textbf{610} & \textbf{9.523,22 €} \\
+  \bottomrule
+  \end{tabular}}
 
-\begin{frame}{Tránsitos degenerados y suelo temporal}
-\end{frame}
+  \vspace{1.0em}
+  {\tiny\color{black!65}
+  \begin{tabular}{@{}l@{\hspace{0.6em}}l@{}}
+  Jornada de referencia & 1.642 h/año \\
+  Cargas sociales & 24,64\,\% (autor) y 32\,\% (PDI) \\
+  Amortización & 48 meses, coeficiente del 25\,\% anual \\
+  \end{tabular}}
+\end{column}
 
-\begin{frame}{Entorno de ejecución y reproducibilidad}
-\end{frame}
+\begin{column}{0.44\textwidth}
+  \centering
+  {\scriptsize\textbf{\color{uc3mblue}Presupuesto total}}\\[0.4em]
+  {\scriptsize
+  \begin{tabular}{@{}lr@{}}
+  \toprule
+  \textbf{Concepto} & \textbf{Importe} \\
+  \midrule
+  Costes de personal            & 9.523,22 € \\
+  Amortización de equipos       & 119,83 € \\
+  Otros costes directos         & 165,00 € \\
+  \midrule
+  \textbf{Costes directos}      & \textbf{9.808,05 €} \\
+  Costes indirectos (15\,\%)    & 1.471,21 € \\
+  Riesgo (10\,\%)               & 1.127,93 € \\
+  Beneficio industrial (6\,\%)  & 744,43 € \\
+  \midrule
+  \textbf{Base imponible}       & \textbf{13.151,62 €} \\
+  IVA (21\,\%)                  & 2.761,84 € \\
+  \midrule
+  \textbf{Total}                & \textbf{15.913,46 €} \\
+  \bottomrule
+  \end{tabular}}
+\end{column}
+\end{columns}
 
-\begin{frame}{Planificación y presupuesto}
-\end{frame}
-
-\begin{frame}{Marco regulador y entorno socioeconómico}
+\vspace{0.7em}
+\centering
+\begin{tikzpicture}
+\node[fill=uc3mblue, rounded corners=3pt, drop shadow={opacity=0.25},
+      text width=10.5cm, inner sep=7pt, align=center] {%
+  \color{white}\footnotesize El personal representa el \textbf{97,1\,\%} de los
+  costes directos: todo el \textit{software} empleado es libre o de código abierto};
+\end{tikzpicture}
 \end{frame}
 
 \end{document}
