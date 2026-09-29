@@ -1,0 +1,1069 @@
+{
+    "Occupation_toA": 29.011872967479675,
+    "Occupation_toB": 25.99687628600823,
+    "Occupation": 27.68100249772934,
+    "Logical_Buses": 12,
+    "Total_Trips": 163,
+    "Mean_await_passengers": 502.0997271304512,
+    "Regularity_value": 93.73695747155878,
+    "Bhattacharyya": {
+        "umbral": 0.97,
+        "paradas_excluidas_de_la_comparacion": [
+            2646,
+            5727
+        ],
+        "tramos_excluidos": false,
+        "general": {
+            "ocupacion": {
+                "celdas": 437,
+                "evaluadas": 437,
+                "no_evaluables": 0,
+                "fusionables": 283,
+                "pct_fusionables": 64.75972540045767,
+                "pct_fusionables_sobre_total": 64.75972540045767,
+                "coeff_medio": 0.9590713536316016,
+                "coeff_mediana": 0.9841939661803818,
+                "coeff_min": 0.49163185339251664,
+                "sesgo_medio": -3.4423189797814238,
+                "sesgo_medio_sigmas": -0.2909441788873046,
+                "pct_celdas_por_debajo": 82.83752860411899
+            },
+            "tiempo": {
+                "celdas": 475,
+                "evaluadas": 464,
+                "no_evaluables": 11,
+                "fusionables": 463,
+                "pct_fusionables": 99.78448275862068,
+                "pct_fusionables_sobre_total": 97.47368421052632,
+                "coeff_medio": 0.9994085621217611,
+                "coeff_mediana": 0.9999076347953445,
+                "coeff_min": 0.9692388103724495,
+                "sesgo_medio": 0.1834346035856212,
+                "sesgo_medio_sigmas": 0.003933515364448873,
+                "pct_celdas_por_debajo": 49.137931034482754
+            },
+            "conjunto": {
+                "celdas": 912,
+                "evaluadas": 901,
+                "no_evaluables": 11,
+                "fusionables": 746,
+                "pct_fusionables": 82.7968923418424,
+                "pct_fusionables_sobre_total": 81.79824561403508,
+                "coeff_medio": 0.9798443444633819,
+                "coeff_mediana": 0.9990856804714761,
+                "coeff_min": 0.49163185339251664
+            }
+        },
+        "por_direccion": {
+            "ocupacion": {
+                "to_A": {
+                    "celdas": 247,
+                    "evaluadas": 247,
+                    "no_evaluables": 0,
+                    "fusionables": 148,
+                    "pct_fusionables": 59.91902834008097,
+                    "pct_fusionables_sobre_total": 59.91902834008097,
+                    "coeff_medio": 0.9623325514440157,
+                    "coeff_mediana": 0.9798836889724423,
+                    "coeff_min": 0.7073438786248155
+                },
+                "to_B": {
+                    "celdas": 190,
+                    "evaluadas": 190,
+                    "no_evaluables": 0,
+                    "fusionables": 135,
+                    "pct_fusionables": 71.05263157894737,
+                    "pct_fusionables_sobre_total": 71.05263157894737,
+                    "coeff_medio": 0.9548317964754632,
+                    "coeff_mediana": 0.9888202137686717,
+                    "coeff_min": 0.49163185339251664
+                }
+            },
+            "tiempo": {
+                "to_A": {
+                    "celdas": 266,
+                    "evaluadas": 266,
+                    "no_evaluables": 0,
+                    "fusionables": 265,
+                    "pct_fusionables": 99.62406015037594,
+                    "pct_fusionables_sobre_total": 99.62406015037594,
+                    "coeff_medio": 0.9993971617199127,
+                    "coeff_mediana": 0.9999076347953445,
+                    "coeff_min": 0.9692388103724495
+                },
+                "to_B": {
+                    "celdas": 209,
+                    "evaluadas": 198,
+                    "no_evaluables": 11,
+                    "fusionables": 198,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9994238778131336,
+                    "coeff_mediana": 0.9999074988383627,
+                    "coeff_min": 0.9820781908405604
+                }
+            }
+        },
+        "por_elemento": {
+            "ocupacion": {
+                "1167": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 12,
+                    "pct_fusionables": 63.1578947368421,
+                    "pct_fusionables_sobre_total": 63.1578947368421,
+                    "coeff_medio": 0.9390575333672194,
+                    "coeff_mediana": 0.9838392988892661,
+                    "coeff_min": 0.507334307049463
+                },
+                "1929": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 13,
+                    "pct_fusionables": 68.42105263157895,
+                    "pct_fusionables_sobre_total": 68.42105263157895,
+                    "coeff_medio": 0.9680969942978553,
+                    "coeff_mediana": 0.9762937552844715,
+                    "coeff_min": 0.7743289042659823
+                },
+                "2535": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 12,
+                    "pct_fusionables": 63.1578947368421,
+                    "pct_fusionables_sobre_total": 63.1578947368421,
+                    "coeff_medio": 0.9679639723536049,
+                    "coeff_mediana": 0.9744214061411376,
+                    "coeff_min": 0.780039082938376
+                },
+                "2538": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 12,
+                    "pct_fusionables": 63.1578947368421,
+                    "pct_fusionables_sobre_total": 63.1578947368421,
+                    "coeff_medio": 0.9385605917692511,
+                    "coeff_mediana": 0.9863747845485403,
+                    "coeff_min": 0.49163185339251664
+                },
+                "2539": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 12,
+                    "pct_fusionables": 63.1578947368421,
+                    "pct_fusionables_sobre_total": 63.1578947368421,
+                    "coeff_medio": 0.9676631488927898,
+                    "coeff_mediana": 0.9740834474822275,
+                    "coeff_min": 0.7746936467609861
+                },
+                "2964": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 15,
+                    "pct_fusionables": 78.94736842105263,
+                    "pct_fusionables_sobre_total": 78.94736842105263,
+                    "coeff_medio": 0.9566126291978531,
+                    "coeff_mediana": 0.9932993362504549,
+                    "coeff_min": 0.6445248635560227
+                },
+                "3903": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 11,
+                    "pct_fusionables": 57.89473684210526,
+                    "pct_fusionables_sobre_total": 57.89473684210526,
+                    "coeff_medio": 0.9650535653404148,
+                    "coeff_mediana": 0.9799809275266633,
+                    "coeff_min": 0.779909196542082
+                },
+                "3929": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 14,
+                    "pct_fusionables": 73.6842105263158,
+                    "pct_fusionables_sobre_total": 73.6842105263158,
+                    "coeff_medio": 0.9597154575238346,
+                    "coeff_mediana": 0.9911093466410247,
+                    "coeff_min": 0.7311730071959744
+                },
+                "3990": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 14,
+                    "pct_fusionables": 73.6842105263158,
+                    "pct_fusionables_sobre_total": 73.6842105263158,
+                    "coeff_medio": 0.9650560444641036,
+                    "coeff_mediana": 0.9929763191193903,
+                    "coeff_min": 0.7835552119411573
+                },
+                "3991": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 11,
+                    "pct_fusionables": 57.89473684210526,
+                    "pct_fusionables_sobre_total": 57.89473684210526,
+                    "coeff_medio": 0.9604319520501735,
+                    "coeff_mediana": 0.9725810293534437,
+                    "coeff_min": 0.7652102455216712
+                },
+                "3994": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 13,
+                    "pct_fusionables": 68.42105263157895,
+                    "pct_fusionables_sobre_total": 68.42105263157895,
+                    "coeff_medio": 0.9584400604718147,
+                    "coeff_mediana": 0.9863306824723116,
+                    "coeff_min": 0.7042110797777099
+                },
+                "3995": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 10,
+                    "pct_fusionables": 52.63157894736842,
+                    "pct_fusionables_sobre_total": 52.63157894736842,
+                    "coeff_medio": 0.9565627798500396,
+                    "coeff_mediana": 0.9706524381391871,
+                    "coeff_min": 0.78094625898369
+                },
+                "4032": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 12,
+                    "pct_fusionables": 63.1578947368421,
+                    "pct_fusionables_sobre_total": 63.1578947368421,
+                    "coeff_medio": 0.9678702350399763,
+                    "coeff_mediana": 0.9839647924921036,
+                    "coeff_min": 0.7699807680352987
+                },
+                "4090": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 12,
+                    "pct_fusionables": 63.1578947368421,
+                    "pct_fusionables_sobre_total": 63.1578947368421,
+                    "coeff_medio": 0.9544185939970395,
+                    "coeff_mediana": 0.9776494893775841,
+                    "coeff_min": 0.7073438786248155
+                },
+                "4187": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 14,
+                    "pct_fusionables": 73.6842105263158,
+                    "pct_fusionables_sobre_total": 73.6842105263158,
+                    "coeff_medio": 0.9609957362549992,
+                    "coeff_mediana": 0.9955955767360328,
+                    "coeff_min": 0.7525694317995755
+                },
+                "4188": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 10,
+                    "pct_fusionables": 52.63157894736842,
+                    "pct_fusionables_sobre_total": 52.63157894736842,
+                    "coeff_medio": 0.9589984736346323,
+                    "coeff_mediana": 0.982318048846967,
+                    "coeff_min": 0.8194261766770021
+                },
+                "5360": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 11,
+                    "pct_fusionables": 57.89473684210526,
+                    "pct_fusionables_sobre_total": 57.89473684210526,
+                    "coeff_medio": 0.9643671336360274,
+                    "coeff_mediana": 0.9845886569687927,
+                    "coeff_min": 0.7526732365627687
+                },
+                "562": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 13,
+                    "pct_fusionables": 68.42105263157895,
+                    "pct_fusionables_sobre_total": 68.42105263157895,
+                    "coeff_medio": 0.9600552320352754,
+                    "coeff_mediana": 0.9792471958986327,
+                    "coeff_min": 0.8006951682079849
+                },
+                "5938": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 13,
+                    "pct_fusionables": 68.42105263157895,
+                    "pct_fusionables_sobre_total": 68.42105263157895,
+                    "coeff_medio": 0.9588206223014814,
+                    "coeff_mediana": 0.9843903748873444,
+                    "coeff_min": 0.7524280239392104
+                },
+                "5939": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 10,
+                    "pct_fusionables": 52.63157894736842,
+                    "pct_fusionables_sobre_total": 52.63157894736842,
+                    "coeff_medio": 0.9586913500352343,
+                    "coeff_mediana": 0.9817290403834205,
+                    "coeff_min": 0.8006856215288422
+                },
+                "649": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 14,
+                    "pct_fusionables": 73.6842105263158,
+                    "pct_fusionables_sobre_total": 73.6842105263158,
+                    "coeff_medio": 0.9522562201639142,
+                    "coeff_mediana": 0.9890147855118641,
+                    "coeff_min": 0.6588076582868068
+                },
+                "81": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 14,
+                    "pct_fusionables": 73.6842105263158,
+                    "pct_fusionables_sobre_total": 73.6842105263158,
+                    "coeff_medio": 0.9588030692401603,
+                    "coeff_mediana": 0.9927409379195025,
+                    "coeff_min": 0.6887890585510134
+                },
+                "82": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 11,
+                    "pct_fusionables": 57.89473684210526,
+                    "pct_fusionables_sobre_total": 57.89473684210526,
+                    "coeff_medio": 0.9601497376091398,
+                    "coeff_mediana": 0.9802052103108247,
+                    "coeff_min": 0.7993741625668705
+                }
+            },
+            "tiempo": {
+                "1167-2538": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9996863817281947,
+                    "coeff_mediana": 0.9997851362716326,
+                    "coeff_min": 0.9987983192287474
+                },
+                "1929-4032": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.999785680601296,
+                    "coeff_mediana": 0.9999075110669837,
+                    "coeff_min": 0.9986049631379719
+                },
+                "2535-1929": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9997544033641802,
+                    "coeff_mediana": 0.9999540027458398,
+                    "coeff_min": 0.997400470484575
+                },
+                "2538-3929": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9995250700694842,
+                    "coeff_mediana": 0.9998834207043144,
+                    "coeff_min": 0.9964341541623106
+                },
+                "2539-2535": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9980027327657932,
+                    "coeff_mediana": 0.9996833998389798,
+                    "coeff_min": 0.9736132425948518
+                },
+                "2646-562": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.997974963838372,
+                    "coeff_mediana": 0.9988107843694379,
+                    "coeff_min": 0.988532415648122
+                },
+                "2964-649": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9998730794947641,
+                    "coeff_mediana": 0.9999394019221008,
+                    "coeff_min": 0.999324575866114
+                },
+                "3903-2539": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9996457571166474,
+                    "coeff_mediana": 0.9998402522853553,
+                    "coeff_min": 0.9979814279612867
+                },
+                "3929-3990": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9998670477793827,
+                    "coeff_mediana": 0.9999415913756552,
+                    "coeff_min": 0.9991425807852754
+                },
+                "3990-3994": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9999124427811061,
+                    "coeff_mediana": 0.9999333678264477,
+                    "coeff_min": 0.9997110926382703
+                },
+                "3991-3903": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9998957876773406,
+                    "coeff_mediana": 0.9999495424880555,
+                    "coeff_min": 0.9995021976407199
+                },
+                "3994-5938": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9998838757092412,
+                    "coeff_mediana": 0.9999251725690926,
+                    "coeff_min": 0.9996253173917349
+                },
+                "3995-3991": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9998696944344363,
+                    "coeff_mediana": 0.9999079749317672,
+                    "coeff_min": 0.9995718886732763
+                },
+                "4032-5360": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9997050561992464,
+                    "coeff_mediana": 0.9999041133911658,
+                    "coeff_min": 0.9973790832561079
+                },
+                "4090-4188": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9998776095740641,
+                    "coeff_mediana": 0.9999326966431292,
+                    "coeff_min": 0.9994359053680958
+                },
+                "4187-2964": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9998971010207109,
+                    "coeff_mediana": 0.9999154591752886,
+                    "coeff_min": 0.9996965231884593
+                },
+                "4188-5939": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 18,
+                    "pct_fusionables": 94.73684210526316,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9982729438614313,
+                    "coeff_mediana": 0.9999006994419269,
+                    "coeff_min": 0.9692388103724495
+                },
+                "5360-82": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9997566314389343,
+                    "coeff_mediana": 0.999940054701666,
+                    "coeff_min": 0.9971656947576134
+                },
+                "562-4090": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9998901421344031,
+                    "coeff_mediana": 0.9999157659755474,
+                    "coeff_min": 0.9997030941205419
+                },
+                "5727-81": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9974715025142403,
+                    "coeff_mediana": 0.998862793788312,
+                    "coeff_min": 0.9820781908405604
+                },
+                "5938-4187": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9998445628006001,
+                    "coeff_mediana": 0.9998671272268532,
+                    "coeff_min": 0.9995607488641958
+                },
+                "5939-3995": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9999344469818355,
+                    "coeff_mediana": 0.9999541482520142,
+                    "coeff_min": 0.999772315725658
+                },
+                "649-2646": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9977924918418507,
+                    "coeff_mediana": 0.999902757876513,
+                    "coeff_min": 0.9862151411386191
+                },
+                "81-1167": {
+                    "celdas": 19,
+                    "evaluadas": 18,
+                    "no_evaluables": 1,
+                    "fusionables": 18,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 94.73684210526316,
+                    "coeff_medio": 0.9999091002048937,
+                    "coeff_mediana": 0.9999412065612676,
+                    "coeff_min": 0.9997006918744433
+                },
+                "82-5727": {
+                    "celdas": 19,
+                    "evaluadas": 19,
+                    "no_evaluables": 0,
+                    "fusionables": 19,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9991944140907941,
+                    "coeff_mediana": 0.9998654590447296,
+                    "coeff_min": 0.992393409849212
+                }
+            }
+        },
+        "por_franja": {
+            "ocupacion": {
+                "5": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 4,
+                    "pct_fusionables": 17.391304347826086,
+                    "pct_fusionables_sobre_total": 17.391304347826086,
+                    "coeff_medio": 0.8101935686012302,
+                    "coeff_mediana": 0.8345186017997634,
+                    "coeff_min": 0.49163185339251664
+                },
+                "6": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 17,
+                    "pct_fusionables": 73.91304347826087,
+                    "pct_fusionables_sobre_total": 73.91304347826087,
+                    "coeff_medio": 0.9795184725387461,
+                    "coeff_mediana": 0.9843903748873444,
+                    "coeff_min": 0.9398121461729471
+                },
+                "7": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 20,
+                    "pct_fusionables": 86.95652173913044,
+                    "pct_fusionables_sobre_total": 86.95652173913044,
+                    "coeff_medio": 0.9857255511546883,
+                    "coeff_mediana": 0.9866614593383161,
+                    "coeff_min": 0.9672769954202406
+                },
+                "8": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 21,
+                    "pct_fusionables": 91.30434782608695,
+                    "pct_fusionables_sobre_total": 91.30434782608695,
+                    "coeff_medio": 0.990891895154912,
+                    "coeff_mediana": 0.9965848567041609,
+                    "coeff_min": 0.9401697817422299
+                },
+                "9": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 1,
+                    "pct_fusionables": 4.3478260869565215,
+                    "pct_fusionables_sobre_total": 4.3478260869565215,
+                    "coeff_medio": 0.9422661372682584,
+                    "coeff_mediana": 0.9406011380366326,
+                    "coeff_min": 0.914660664221526
+                },
+                "10": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 23,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.991826916578165,
+                    "coeff_mediana": 0.9932502575094463,
+                    "coeff_min": 0.9781421228098903
+                },
+                "11": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 20,
+                    "pct_fusionables": 86.95652173913044,
+                    "pct_fusionables_sobre_total": 86.95652173913044,
+                    "coeff_medio": 0.9803067484076299,
+                    "coeff_mediana": 0.9848907540783977,
+                    "coeff_min": 0.939333535094105
+                },
+                "12": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 23,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9952252330459658,
+                    "coeff_mediana": 0.9972629965596815,
+                    "coeff_min": 0.9830536330441734
+                },
+                "13": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 23,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9932801941969679,
+                    "coeff_mediana": 0.99734559753951,
+                    "coeff_min": 0.9778647801922637
+                },
+                "14": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 23,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9938022059814154,
+                    "coeff_mediana": 0.9946449619508002,
+                    "coeff_min": 0.984762415144243
+                },
+                "15": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 23,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9895720742438554,
+                    "coeff_mediana": 0.9882824819596794,
+                    "coeff_min": 0.9802052103108247
+                },
+                "16": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 23,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9948771175190254,
+                    "coeff_mediana": 0.9956719812496228,
+                    "coeff_min": 0.9866852183812712
+                },
+                "17": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 22,
+                    "pct_fusionables": 95.65217391304348,
+                    "pct_fusionables_sobre_total": 95.65217391304348,
+                    "coeff_medio": 0.9920044479210337,
+                    "coeff_mediana": 0.9952454905082349,
+                    "coeff_min": 0.9654801647299653
+                },
+                "18": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 13,
+                    "pct_fusionables": 56.52173913043478,
+                    "pct_fusionables_sobre_total": 56.52173913043478,
+                    "coeff_medio": 0.9726815924718913,
+                    "coeff_mediana": 0.9718067144584378,
+                    "coeff_min": 0.9541612015658106
+                },
+                "19": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 9,
+                    "pct_fusionables": 39.130434782608695,
+                    "pct_fusionables_sobre_total": 39.130434782608695,
+                    "coeff_medio": 0.9649093849931959,
+                    "coeff_mediana": 0.958028430871481,
+                    "coeff_min": 0.9350465182170998
+                },
+                "20": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 6,
+                    "pct_fusionables": 26.08695652173913,
+                    "pct_fusionables_sobre_total": 26.08695652173913,
+                    "coeff_medio": 0.9671536531242918,
+                    "coeff_mediana": 0.9672813665565767,
+                    "coeff_min": 0.9348727349925188
+                },
+                "21": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 0,
+                    "pct_fusionables": 0.0,
+                    "pct_fusionables_sobre_total": 0.0,
+                    "coeff_medio": 0.9342364014584593,
+                    "coeff_mediana": 0.9341672539765947,
+                    "coeff_min": 0.907434269806831
+                },
+                "22": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 12,
+                    "pct_fusionables": 52.17391304347826,
+                    "pct_fusionables_sobre_total": 52.17391304347826,
+                    "coeff_medio": 0.9723584495299636,
+                    "coeff_mediana": 0.9701709447638791,
+                    "coeff_min": 0.950509166979763
+                },
+                "23": {
+                    "celdas": 23,
+                    "evaluadas": 23,
+                    "no_evaluables": 0,
+                    "fusionables": 0,
+                    "pct_fusionables": 0.0,
+                    "pct_fusionables_sobre_total": 0.0,
+                    "coeff_medio": 0.7715256748107341,
+                    "coeff_mediana": 0.7746936467609861,
+                    "coeff_min": 0.7073438786248155
+                }
+            },
+            "tiempo": {
+                "5": {
+                    "celdas": 25,
+                    "evaluadas": 14,
+                    "no_evaluables": 11,
+                    "fusionables": 14,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 56.0,
+                    "coeff_medio": 0.9984042696441328,
+                    "coeff_mediana": 0.9994517496679354,
+                    "coeff_min": 0.9943587678879683
+                },
+                "6": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9996839469325791,
+                    "coeff_mediana": 0.9998618295877394,
+                    "coeff_min": 0.9976398150320142
+                },
+                "7": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9997874044371771,
+                    "coeff_mediana": 0.9999039101161262,
+                    "coeff_min": 0.99927256391513
+                },
+                "8": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9996747367773614,
+                    "coeff_mediana": 0.9999473943612328,
+                    "coeff_min": 0.9971982394573755
+                },
+                "9": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9995775078901281,
+                    "coeff_mediana": 0.9999084113276927,
+                    "coeff_min": 0.9968196579924932
+                },
+                "10": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9977866716199855,
+                    "coeff_mediana": 0.9999006415222832,
+                    "coeff_min": 0.9736132425948518
+                },
+                "11": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9996665823028761,
+                    "coeff_mediana": 0.9999264372117005,
+                    "coeff_min": 0.9972665772039837
+                },
+                "12": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9999321030096913,
+                    "coeff_mediana": 0.9999711919408506,
+                    "coeff_min": 0.9997413888800998
+                },
+                "13": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9998012468940215,
+                    "coeff_mediana": 0.9999237458022794,
+                    "coeff_min": 0.9984799266223264
+                },
+                "14": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9997790232685091,
+                    "coeff_mediana": 0.9999211325018402,
+                    "coeff_min": 0.9978167232737722
+                },
+                "15": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9993684571773684,
+                    "coeff_mediana": 0.9999350329644318,
+                    "coeff_min": 0.9862151411386191
+                },
+                "16": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9996455355423489,
+                    "coeff_mediana": 0.999938863210497,
+                    "coeff_min": 0.9960489423193524
+                },
+                "17": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9996835350703226,
+                    "coeff_mediana": 0.999924962193862,
+                    "coeff_min": 0.9949470061795861
+                },
+                "18": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9994531369657939,
+                    "coeff_mediana": 0.9999533602089403,
+                    "coeff_min": 0.98878377488624
+                },
+                "19": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9995537307753444,
+                    "coeff_mediana": 0.9999153121737535,
+                    "coeff_min": 0.9930896654318602
+                },
+                "20": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9994723043395597,
+                    "coeff_mediana": 0.9999127878669261,
+                    "coeff_min": 0.992393409849212
+                },
+                "21": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9993975068334855,
+                    "coeff_mediana": 0.9998507266346616,
+                    "coeff_min": 0.9933122541474273
+                },
+                "22": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 25,
+                    "pct_fusionables": 100.0,
+                    "pct_fusionables_sobre_total": 100.0,
+                    "coeff_medio": 0.9995522770479662,
+                    "coeff_mediana": 0.9998203465766963,
+                    "coeff_min": 0.9964341541623106
+                },
+                "23": {
+                    "celdas": 25,
+                    "evaluadas": 25,
+                    "no_evaluables": 0,
+                    "fusionables": 24,
+                    "pct_fusionables": 96.0,
+                    "pct_fusionables_sobre_total": 96.0,
+                    "coeff_medio": 0.9981008150946536,
+                    "coeff_mediana": 0.9998382810413378,
+                    "coeff_min": 0.9692388103724495
+                }
+            }
+        }
+    },
+    "Pct_equivalentes_ocupacion": 64.75972540045767,
+    "Pct_equivalentes_tiempo": 99.78448275862068,
+    "Pct_equivalentes_conjunto": 82.7968923418424
+}

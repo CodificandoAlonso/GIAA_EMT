@@ -206,3 +206,9 @@ void cleanup_char_and_num_message(message *cleanup_message){
     free(cleanup_message->payload);
     cleanup_message->payload = NULL;
 }
+
+void cleanup_char_and_occ_message(message *cleanup_message){
+    char_and_occ *data_to_clean = cleanup_message->payload;
+    free(cleanup_message->payload);
+    cleanup_message->payload = NULL;
+}

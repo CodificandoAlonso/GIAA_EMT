@@ -21,6 +21,11 @@ typedef struct char_and_num {
 
 
 
+typedef struct char_and_occ {
+    u32 occupation;
+    char *message;
+}char_and_occ;
+
 
 typedef enum PROTOCOL_TYPE {
     REQUEST = 0,
@@ -131,3 +136,6 @@ void reset_inbox(Agent *agent, MESSAGE_TYPE *message_types, size_t n);
 void cleanup_message(message * cleanup_message);
 
 void cleanup_char_and_num_message(message * cleanup_message);
+
+
+void cleanup_char_and_occ_message(message *cleanup_message);

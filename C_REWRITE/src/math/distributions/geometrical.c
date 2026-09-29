@@ -9,7 +9,15 @@
  * @param random_gen pointer to a RNG structure that contains the random generator methods.
  * @return The double value sampled.
  */
-double sample_geometrical(distribution *geometrical_distribution, RNG *random_gen){
+double sample_geometrical(void *parameters){
+
+
+    distribution_sampling_parameters *geometrical_params = parameters;
+
+    distribution *geometrical_distribution = geometrical_params->self;
+
+    RNG *random_gen = geometrical_params->random_gen;
+
 
     uint32_t new_gen = pcg32_random_r(random_gen);
 

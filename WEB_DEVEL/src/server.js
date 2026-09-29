@@ -54,7 +54,7 @@ app.get('/favicon.ico', (req, res) => {
 function resolveInputsPath(simPath) {
   const newLayout = path.join(simPath, 'TEST_MOBILITY', 'includes', 'INPUTS');
   if (fs.existsSync(newLayout)) return newLayout;
-  const oldLayout = path.join(simPath, 'includes', 'INPUTS');
+  const oldLayout = path.join(simPath, 'includes',);
   if (fs.existsSync(oldLayout)) return oldLayout;
   return null;
 }
@@ -214,6 +214,11 @@ app.get('/api/simulations/:id/geodata', (req, res) => {
       .map(e => e.name)
       .sort();
   }
+
+
+  // It should parse it from the description.txt
+
+
 
   const GEODATA_BASE = path.join(__dirname, '..', 'data', 'known_data', 'geodata');
 

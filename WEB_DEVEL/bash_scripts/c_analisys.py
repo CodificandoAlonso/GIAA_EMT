@@ -1009,7 +1009,7 @@ for stopcode in stops_list_toB:
 print("Procesando autobuses...")
 unique_bus = joint_dataframe_results["bus_code"].unique()
 
-input_json_route = f"{os.getcwd()}/{sim_dir}/includes/INPUTS/final_input.json"
+input_json_route = f"{os.getcwd()}/{sim_dir}/final_input.json"
 with open(input_json_route, "r") as f:
     input_json = json.load(f)
 
@@ -1048,6 +1048,8 @@ for bus in unique_bus:
             ).mean()
         else:
             mean_delay_in_minutes_per_trip = float("nan")
+
+        print(bus, trip, len(input_json[str(bus)]))
 
         data_inputs = input_json[str(bus)][trip]
 

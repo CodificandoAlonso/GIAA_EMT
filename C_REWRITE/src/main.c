@@ -23,8 +23,10 @@ int main(void)
 
     //distribution data as an input_data_matrix
     const input_data_matrix *const stops_data_distributions =
-    load_and_map_route_data_from_csv(CSV_DISTRIBUTION_A,
-                                    CSV_DISTRIBUTION_B);
+    load_and_map_route_data_from_csv(CSV_DISTRIBUTION_BOARDS_A,
+                                    CSV_DISTRIBUTION_BOARDS_B,
+                                    CSV_DISTRIBUTION_DROPOFFS_A,
+                                    CSV_DISTRIBUTION_DROPOFFS_B);
 
     //stop list from the ttx as a stops_list
     const stops_list *const stops_list_data = load_stops(STOPS_TXT);

@@ -31,10 +31,17 @@
  * @return The sampled uint32 value.
  */
 double sample_negbin(
-    distribution *negbin_distribution,
-    RNG *random_gen
+    void *parameters
 )
 {
+
+
+    distribution_sampling_parameters *negbin_parameters = parameters;
+
+    distribution *negbin_distribution = negbin_parameters->self;
+
+    RNG *random_gen = negbin_parameters->random_gen;
+
     double r = negbin_distribution->value1;
     double p = negbin_distribution->value2;
 

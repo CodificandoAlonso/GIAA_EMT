@@ -16,8 +16,10 @@ endif
 include $(ENV_FILE)
 
 ENV_CFLAGS += \
-    -DCSV_DISTRIBUTION_A=\"$(CSV_DISTRIBUTION_A)\" \
-    -DCSV_DISTRIBUTION_B=\"$(CSV_DISTRIBUTION_B)\" \
+    -DCSV_DISTRIBUTION_BOARDS_A=\"$(CSV_DISTRIBUTION_BOARDS_A)\" \
+    -DCSV_DISTRIBUTION_BOARDS_B=\"$(CSV_DISTRIBUTION_BOARDS_B)\" \
+    -DCSV_DISTRIBUTION_DROPOFFS_A=\"$(CSV_DISTRIBUTION_DROPOFFS_A)\" \
+    -DCSV_DISTRIBUTION_DROPOFFS_B=\"$(CSV_DISTRIBUTION_DROPOFFS_B)\" \
     -DCSV_TIMES_A=\"$(CSV_TIMES_A)\" \
     -DCSV_TIMES_B=\"$(CSV_TIMES_B)\" \
     -DBUSES_JSON=\"$(BUSES_JSON)\" \
@@ -78,13 +80,6 @@ RELEASE_FLAGS := -O3 -march=native -flto -DNDEBUG
 SANITIZER_FLAGS := -g3 -O1 \
                    -fsanitize=address,undefined \
                    -fno-omit-frame-pointer
-
-
-
-
-
-
-
 
 
 # ============================================================================

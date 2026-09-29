@@ -4,6 +4,7 @@
 #include<math.h>
 
 #include "agents/stop/stop.h"
+#include "comms/fipa.h"
 #include "utils/utils.h"
 #include "agents/generic/agents.h"
 #include "engine/simulation.h"
@@ -139,17 +140,20 @@ void update_stop_in_sim(void *self, const sim_context  *sim_params){
                             &stop->agent.queries
                     );
                     if (query_message){
-                        if (strcmp((char *)query_message->payload, "Bus arrived to stop") != 0){
+                        char_and_occ *payload_recv = (char_and_occ *)query_message->payload;
+
+                        if (strcmp(payload_recv->message, "Bus arrived to stop") != 0){
                             fprintf(stderr,"Performative unknown message %s in query stop mailbox\n",
                             (char *)query_message->payload);
                             exit(-4);
                         }
-                        cleanup_message(query_message);
+                        u32 bus_occupation = payload_recv->occupation;
+                        cleanup_char_and_occ_message(query_message);
 
                         //Infer dropoffs. It invoices a global action handler from the sim, because
                         //the drpoff knowledge cannot be into the agent own's beliefs or knowkledge.
-                        u16 dropoffs = infer_dropoffs(stop->stop_code, sim_params);
-
+                        u16 dropoffs = infer_dropoffs(stop->stop_code, sim_params, bus_occupation);
+                        
                         message *answer_back_agree_message = calloc(1, sizeof(message));
                         message *answer_back_inform_message = calloc(1, sizeof(message));
 

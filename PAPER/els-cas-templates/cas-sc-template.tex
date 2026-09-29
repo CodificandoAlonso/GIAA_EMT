@@ -189,21 +189,12 @@ real deployement.
 Cases like \cite{manser2020designing,sun2021transitgym,talusan2025dispatch} present different simulation
 techniques applied in the public transport domain.
 
-
-against the known demand characterization, a field with a strong stochastic behaviour. 
-
-
 This work presents two modelling solutions based on the MAS paradigm.
 Using the multi agent paradigm in the transport simulation field is a well known and implemented technique
 that has increase among the last years \cite{huang2022overview}.
 
-
 Some of them take advantage of the cognitive contribution that the use of certain paradigms, like BDI
 (Belief Desire Intention) brings.
-
-whilst the use of more data driven agents that characterizes
-themselves as reactive are less used on this field.
-
 
 Nontheless, the transport simulation problems 
 are indeed a type of problem with a strong variable and dynamic environment, so the use of the ABM
@@ -215,12 +206,6 @@ At a microscopic level, the BDI can represent individual behaviour
 
 In a mesoscopic scope, that 
 
-This work focus its scope over the bus capacity of demand absortion, so the mesoscopic approach seems to
-suit better, specially considering the computational cost it inquires the indiscrecionary granularity augment.
-However, a mixed scope can be considered in one of the two proposed solutions, as it models passengers
-as agents. In this case, the context will still be mesoscopic, due to the fact that the agent itself is not
-being modelled with a specific BDI architecture, but its just been used as a statistical count for bus
-capacity.
 
 
 (Aqui el posicionamiento del trabajo dentro del SOTA y su "aportacion" (el modelado del sistema))
@@ -231,6 +216,16 @@ Al fin y al cabo es demostrar que para el objetivo de análisis a nivel vehicula
 ambos son enfoques validos mediante el modelado que excluye el nivel cognitivo de la entidad
 pasajero, convirtiendolo meramente en un valor agregado a la carga del autobus, pero manteniendo
 la fidelidad estadística con los datos observables por la EMT.
+
+
+This work focus its scope over the bus capacity of demand absortion, so the mesoscopic approach seems to
+suit better, specially considering the computational cost it inquires the indiscrecionary granularity augment.
+However, a mixed scope can be considered in one of the two proposed solutions, as it models passengers
+as agents. In this case, the context will still be mesoscopic, due to the fact that the agent itself is not
+being modelled with a specific BDI architecture, but its just been used as a statistical count for bus
+capacity.
+
+
 
 
 \textit{P3 — MAS dentro de la simulación de transporte. Aquí entra tu micro/meso, pero como marco heredado,

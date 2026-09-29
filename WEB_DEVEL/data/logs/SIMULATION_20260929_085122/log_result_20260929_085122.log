@@ -1,0 +1,16 @@
+[2026-09-29 08:51:22] [0;34m[INFO][0m ==========================================
+[2026-09-29 08:51:22] [0;34m[INFO][0m   GAMA BATCH SIMULATION PREPARATION
+[2026-09-29 08:51:22] [0;34m[INFO][0m ==========================================
+[2026-09-29 08:51:22] [0;34m[INFO][0m Batch experiment: batch_1000
+[2026-09-29 08:51:22] [0;34m[INFO][0m HPC cores: 16
+[2026-09-29 08:51:22] [0;34m[INFO][0m Source project: ../../GAMA/src/TEST_MOBILITY
+[2026-09-29 08:51:22] [0;34m[INFO][0m Simulation directory: ../data/logs/SIMULATION_20260929_085122
+[2026-09-29 08:51:22] [0;34m[INFO][0m --- Phase 1: Pre-cleanup ---
+[2026-09-29 08:51:22] [0;34m[INFO][0m Removing previous symlinks from original project...
+[2026-09-29 08:51:22] [0;34m[INFO][0m Removing previous GAMA workspace directories...
+[2026-09-29 08:51:22] [0;32m[SUCCESS][0m Pre-cleanup completed in 0s
+[2026-09-29 08:51:22] [0;34m[INFO][0m --- Phase 2: Project Snapshot ---
+[2026-09-29 08:51:22] [0;34m[INFO][0m Copying full GAMA project to simulation directory...
+[2026-09-29 08:51:22] [0;32m[SUCCESS][0m Project snapshot created in 0s
+[2026-09-29 08:51:22] [0;34m[INFO][0m Copied model path: ../data/logs/SIMULATION_20260929_085122/TEST_MOBILITY/models/mobility_performance.gaml
+[2026-09-29 08:51:22] [0;34m[INFO][0m Inputs can be modified at: ../data/logs/SIMULATION_20260929_085122/TEST_MOBILITY/includes/

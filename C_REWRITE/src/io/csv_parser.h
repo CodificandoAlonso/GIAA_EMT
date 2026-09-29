@@ -71,14 +71,26 @@ typedef struct input_data_matrix {
 
 
 /**
- * @brief Parses a single CSV line into an input_data_stop_row structure.
+ * @brief Parses a single CSV Boards line into an input_data_stop_row structure.
  *
  * @param inline_data Null-terminated string containing one CSV row.
  *
- * @return Parsed input_data_stop_row containing the stop code, time slot,
- *         passenger flow type and distribution parameters.
+ * @return Parsed input_data_stop_row containing the stop code, time slot
+           and distribution parameters.
  */
-input_data_stop_row clean_inline_row(char *inline_data);
+input_data_stop_row clean_inline_row_boards(char *inline_data);
+
+
+/**
+ * @brief Parses a single CSV dropoffs line into an input_data_stop_row structure.
+ *
+ * @param inline_data Null-terminated string containing one CSV row.
+ *
+ * @return Parsed input_data_stop_row containing the stop code, time slot
+ *         and distribution parameters.
+ */
+input_data_stop_row clean_inline_row_dropoffs(char *inline_data);
+
 
 
 /**
@@ -98,8 +110,10 @@ input_data_stop_row clean_inline_row(char *inline_data);
  */
 const input_data_matrix *
 load_and_map_route_data_from_csv(
-    const char *route_direction_a,
-    const char *route_direction_b
+    const char *route_boards_a,
+    const char *route_boards_b,
+    const char *route_dropoffs_a,
+    const char *route_dropoffs_b
 );
 
 

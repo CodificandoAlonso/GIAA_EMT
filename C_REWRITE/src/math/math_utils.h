@@ -18,6 +18,12 @@ static const double PI    = 3.14159265358979323846;
        __typeof__ (b) _b = (b); \
      _a > _b ? _a : _b; })
 
+ #define min(a,b) \
+   ({ __typeof__ (a) _a = (a); \
+       __typeof__ (b) _b = (b); \
+     _a < _b ? _a : _b; })
+
+
 
 
 void linear_conservative_reconstruction(double *linear_arr,

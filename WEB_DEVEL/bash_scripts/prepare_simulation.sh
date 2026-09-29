@@ -17,14 +17,19 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+#DATA DIR
+DATA_DIR="../../BASE_DATA"
 
-
-
+#GAMA
 GAMA_SRC="/opt/gama-platform/headless/"
 GAMA_PROJECT="../../GAMA/src/TEST_MOBILITY"
 MODEL_NAME="mobility_performance.gaml"
 BATCH_NAME="batch_1000"
-HPC_CORES=16
+GAMA_HPC_CORES=12
+
+#C
+C_PROJECT="../../C_REWRITE"
+C_HPC_CORES=5
 
 # ----------------------------- Directories --------------------------------
 
@@ -123,6 +128,25 @@ log_info "Copying full GAMA project to simulation directory..."
 # Copy the entire GAMA project into the simulation directory
 cp -r "$GAMA_PROJECT" "$BASE_DIR/TEST_MOBILITY"
 
+#WE ARE GONNA REMOVE THE DATA FROM TEST_MOBILITY
+rm "$BASE_DIR/TEST_MOBILITY/includes/INPUTS/*"
+
+log_info "--- Phase 2.2: Copying C DIR Inside the sim directory ---"
+
+cp -r "$C_PROJECT" "$BASE_DIR/C_REWRITE"
+
+#WE ARE GONNA REMOVE THE DATA FROM C_REWRITE
+rm "$BASE_DIR/C_REWRITE/data/*"
+
+#NOW, FOR BOTH FILES
+
+for f in $DATA_DIR; do
+    filename="$f"
+    echo "copying $filename to C's and GAMA's data folders"
+    cp -r $filename "$BASE_DIR/C_REWRITE/data/"
+    cp -r $filename "$BASE_DIR/TEST_MOBILITY/includes/INPUTS/"
+done
+
 # Create output directories inside the copied project
 mkdir -p "$BASE_DIR/TEST_MOBILITY/logs/RESULTS"
 mkdir -p "$BASE_DIR/TEST_MOBILITY/logs/EVENTS"
@@ -136,6 +160,5 @@ SNAPSHOT_TIME=$((SNAPSHOT_END - SNAPSHOT_START))
 log_success "Project snapshot created in $(format_time $SNAPSHOT_TIME)"
 log_info "Copied model path: $SIM_MODEL_PATH"
 log_info "Inputs can be modified at: $BASE_DIR/TEST_MOBILITY/includes/"
-
 
 echo "$BASE_DIR" > ./.last_simulation

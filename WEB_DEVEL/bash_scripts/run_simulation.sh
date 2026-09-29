@@ -41,7 +41,9 @@ SIM_MODEL_PATH="${BASE_DIR}/TEST_MOBILITY/models/${MODEL_NAME}"
 # [MOD] 16 -> 12: debe coincidir con el numero de CPUs del cpuset del
 # contenedor (0-11 = los 12 hilos logicos de los 6 P-cores). Con 16 hilos
 # contra 12 CPUs habria throttling CFS y varianza no determinista.
-HPC_CORES=12
+GAMA_HPC_CORES=12
+
+C_HPC_CORES=5
 
 # [MOD] Heap: 16384m excedia el limite de 14G del contenedor. La JVM ignora
 # el cgroup cuando -Xmx es explicito, asi que el kernel habria matado el
@@ -74,7 +76,7 @@ MONITOR_INTERVAL_C="${EMT_MONITOR_INTERVAL_C:-0.1}"
 # y los CSV de Bhattacharyya.
 export SIM_PLOTS="${SIM_PLOTS:-all}"
 export SIM_PLOT_DPI="${SIM_PLOT_DPI:-300}"
-export SIM_WORKERS="${SIM_WORKERS:-$HPC_CORES}"
+export SIM_WORKERS="${SIM_WORKERS:-$C_HPC_CORES}"
 
 # 'model' en description.txt -> motor. Cualquier valor que no sea c_engine
 # (incluida su ausencia) cae en GAMA, que es el comportamiento previo.
@@ -148,7 +150,14 @@ log_info "=========================================="
 log_info "  SIMULATION EXECUTION PIPELINE"
 log_info "=========================================="
 log_info "Engine: $ENGINE (model key: ${ENGINE_KEY:-<unset>})"
-log_info "HPC cores: $HPC_CORES"
+
+if [ "$ENGINE_KEY"  -eq "c_engine" ]; then
+    log_info "HPC cores: $C_HPC_CORES"
+else
+    log_info "HPC cores: $GAMA_HPC_CORES"
+fi
+
+
 log_info "Simulation directory: $BASE_DIR"
 
 # ------------------- FASE 1: EJECUCIÓN ----------------------------------
@@ -260,7 +269,7 @@ else
         exit 1
     fi
 
-    C_INPUTS="$BASE_DIR/TEST_MOBILITY/includes/INPUTS"
+    C_INPUTS="$BASE_DIR/C_REWRITE/data"
     if [ ! -d "$C_INPUTS" ]; then
         log_error "Inputs not found at $C_INPUTS. Was the simulation prepared?"
         exit 1
@@ -270,6 +279,7 @@ else
 
     for f in input_data_E01_toA.csv input_data_E01_toB.csv \
              input_times_stops_toA.csv input_times_stops_toB.csv \
+             alighting_params_toA.csv alighting_params_toB.csv \
              final_input.json; do
         if [ ! -f "$C_INPUTS/$f" ]; then
             log_error "Missing input file: $C_INPUTS/$f"
@@ -277,6 +287,7 @@ else
         fi
         cp "$C_INPUTS/$f" "$BASE_DIR/data/$f"
     done
+
 
     # input_stops.txt no lo gestiona la interfaz: es fijo por linea y se
     # toma de la copia de referencia que va dentro de la imagen.
@@ -367,14 +378,23 @@ mkdir -p "$BASE_DIR/PLOTS/to_B/stops"
 mkdir -p "$BASE_DIR/PLOTS/to_B/times"
 mkdir -p "$BASE_DIR/PLOTS/general"
 mkdir -p "$BASE_DIR/PLOTS/buses"
+
 # [MOD] Subdirectorio para las figuras de monitorizacion
 mkdir -p "$BASE_DIR/PLOTS/monitoring"
 
+if [ "$ENGINE" = "gama" ]; then
 # Keep the inputs that drove this simulation
 mv "$BASE_DIR/TEST_MOBILITY/includes"     "$BASE_DIR/includes"
+else
+mv "$BASE_DIR/C_REWRITE/data" "$BASE_DIR/includes"
+fi
+
 
 log_info "Removing copied GAMA project files..."
 rm -rf "$BASE_DIR/TEST_MOBILITY"
+
+log_info "Removing copied C proyect files..."
+rm -rf "$BASE_DIR/C_REWRITE"
 
 if [ "$ENGINE" = "c" ]; then
     # Los CSV ya se han movido; data/ solo contiene copias de las entradas,

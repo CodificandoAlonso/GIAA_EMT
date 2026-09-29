@@ -8,7 +8,13 @@
  * @param random_gen pointer to a RNG structure that contains the random generator methods.
  * @return The double value sampled.
  */
-double sample_normal(distribution *normal_distribution, RNG *random_gen){
+double sample_normal(void *parameters){
+
+    distribution_sampling_parameters *normal_params = parameters;
+
+    distribution *normal_distribution = normal_params->self;
+
+    RNG *random_gen = normal_params->random_gen;
 
     uint32_t new_gen = pcg32_random_r(random_gen);
 

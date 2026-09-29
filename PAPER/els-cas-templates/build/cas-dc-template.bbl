@@ -1,0 +1,86 @@
+\begin{thebibliography}{7}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Brooks(1991)}]{brooks1991representation}
+\bibinfo{author}{Brooks, R.A.}, \bibinfo{year}{1991}.
+\newblock \bibinfo{title}{Intelligence without representation}.
+\newblock \bibinfo{journal}{Artificial Intelligence} \bibinfo{volume}{47},
+  \bibinfo{pages}{139--159}.
+%Type = Article
+\bibitem[{Huang et~al.(2022)Huang, Cui, Zhang, Tong, Shi and
+  Liu}]{huang2022overview}
+\bibinfo{author}{Huang, J.}, \bibinfo{author}{Cui, Y.}, \bibinfo{author}{Zhang,
+  L.}, \bibinfo{author}{Tong, W.}, \bibinfo{author}{Shi, Y.},
+  \bibinfo{author}{Liu, Z.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{An overview of agent-based models for transport
+  simulation and analysis}.
+\newblock \bibinfo{journal}{Journal of Advanced Transportation}
+  \bibinfo{volume}{2022}, \bibinfo{pages}{1252534}.
+\newblock \DOIprefix\doi{10.1155/2022/1252534}.
+%Type = Article
+\bibitem[{Manser et~al.(2020)Manser, Becker, H\"{o}rl and
+  Axhausen}]{manser2020designing}
+\bibinfo{author}{Manser, P.}, \bibinfo{author}{Becker, H.},
+  \bibinfo{author}{H\"{o}rl, S.}, \bibinfo{author}{Axhausen, K.W.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Designing a large-scale public transport network
+  using agent-based microsimulation}.
+\newblock \bibinfo{journal}{Transportation Research Part A: Policy and
+  Practice} \bibinfo{volume}{137}, \bibinfo{pages}{1--15}.
+%Type = Article
+\bibitem[{Marques and Pitombo(2022)}]{marques2022transit}
+\bibinfo{author}{Marques, S.d.F.}, \bibinfo{author}{Pitombo, C.S.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Transit ridership modeling at the bus stop level:
+  Comparison of approaches focusing on count and spatially dependent data}.
+\newblock \bibinfo{journal}{Applied Spatial Analysis and Policy}
+  \bibinfo{volume}{15}, \bibinfo{pages}{1173--1201}.
+\newblock \DOIprefix\doi{10.1007/s12061-022-09482-y}.
+%Type = Inproceedings
+\bibitem[{Sun et~al.(2021)Sun, Gui, Neema, Chen, Ugirumurera, Severino,
+  Pugliese, Laszka and Dubey}]{sun2021transitgym}
+\bibinfo{author}{Sun, R.}, \bibinfo{author}{Gui, R.}, \bibinfo{author}{Neema,
+  H.}, \bibinfo{author}{Chen, Y.}, \bibinfo{author}{Ugirumurera, J.},
+  \bibinfo{author}{Severino, J.}, \bibinfo{author}{Pugliese, P.},
+  \bibinfo{author}{Laszka, A.}, \bibinfo{author}{Dubey, A.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{{TRANSIT-GYM}: A simulation and evaluation engine for
+  analysis of bus transit systems}, in: \bibinfo{booktitle}{2021 IEEE
+  International Conference on Smart Computing (SMARTCOMP)}, pp.
+  \bibinfo{pages}{69--76}.
+%Type = Article
+\bibitem[{Taillandier et~al.(2019)Taillandier, Gaudou, Grignard, Huynh,
+  Marilleau, Caillou, Philippon and Drogoul}]{taillandier2019gama}
+\bibinfo{author}{Taillandier, P.}, \bibinfo{author}{Gaudou, B.},
+  \bibinfo{author}{Grignard, A.}, \bibinfo{author}{Huynh, Q.N.},
+  \bibinfo{author}{Marilleau, N.}, \bibinfo{author}{Caillou, P.},
+  \bibinfo{author}{Philippon, D.}, \bibinfo{author}{Drogoul, A.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Building, composing and experimenting complex spatial
+  models with the {GAMA} platform}.
+\newblock \bibinfo{journal}{GeoInformatica} \bibinfo{volume}{23},
+  \bibinfo{pages}{299--322}.
+\newblock \DOIprefix\doi{10.1007/s10707-018-00339-6}.
+%Type = Article
+\bibitem[{Talusan et~al.(2025)Talusan, Han, Rogers, Mukhopadhyay, Laszka,
+  Freudberg and Dubey}]{talusan2025dispatch}
+\bibinfo{author}{Talusan, J.P.}, \bibinfo{author}{Han, C.},
+  \bibinfo{author}{Rogers, D.}, \bibinfo{author}{Mukhopadhyay, A.},
+  \bibinfo{author}{Laszka, A.}, \bibinfo{author}{Freudberg, D.},
+  \bibinfo{author}{Dubey, A.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{An end-to-end solution for public transit stationing
+  and dispatch problem}.
+\newblock \bibinfo{journal}{ACM Transactions on Cyber-Physical Systems} .
+
+\end{thebibliography}

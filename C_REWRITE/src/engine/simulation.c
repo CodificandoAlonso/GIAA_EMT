@@ -1,4 +1,5 @@
 #include "engine/simulation.h"
+#include "math/distributions/generic/generic_distro.h"
 #include "math/math_utils.h"
 #include "config/config.h"
 
@@ -6,7 +7,7 @@
 
 
 
-u16 infer_dropoffs(u16 stop, sim_context *sim_params){
+u16 infer_dropoffs(u16 stop, sim_context *sim_params, u32 occupation){
 
     if (stop == 2646 || stop == 5727) {
         return 0;
@@ -44,9 +45,10 @@ u16 infer_dropoffs(u16 stop, sim_context *sim_params){
         exit(-1);
     }
 
-    double ret_val = distro->distro.random(
+    double ret_val = distro->distro.random( &(distribution_sampling_parameters){
         &distro->distro,
-        sim_params->random_generator
+        sim_params->random_generator,
+        occupation}
     );
 
     if (ret_val < 0.0) ret_val = 0.0;
@@ -101,8 +103,8 @@ u32 return_next_time_to_stop(u16 stop, sim_context *sim_params, direction direct
     }
 
     double time = distribution->distro.random(
-        &distribution->distro,
-        sim_params->random_generator
+        &(distribution_sampling_parameters){&distribution->distro,
+        sim_params->random_generator, 0}
     );
 
     if (time < 0){
@@ -182,13 +184,13 @@ void start_pass_gen_arrays(sim_context *sim_params){
         if (sim_params->global_params->stops_list_data->stopcodes_toA[i] != 5727){
             double actual_param = sim_params->global_params->stops_data_distributions->route_stops_a[i]
             .stop_distributions[0].distro.random(
-                    &sim_params->global_params->stops_data_distributions->route_stops_a[i]
-                    .stop_distributions[0].distro, sim_params->random_generator);
+                    &(distribution_sampling_parameters) {&sim_params->global_params->stops_data_distributions->route_stops_a[i]
+                    .stop_distributions[0].distro, sim_params->random_generator, 0});
 
             double next_param = sim_params->global_params->stops_data_distributions->route_stops_a[i]
             .stop_distributions[2].distro.random(
-                    &sim_params->global_params->stops_data_distributions->route_stops_a[i].
-                    stop_distributions[2].distro, sim_params->random_generator);
+                   &(distribution_sampling_parameters) { &sim_params->global_params->stops_data_distributions->route_stops_a[i].
+                    stop_distributions[2].distro, sim_params->random_generator, 0});
             
 
             size_t agent_idx = (size_t)(sim_params->stops_toA[i] -
@@ -210,13 +212,13 @@ void start_pass_gen_arrays(sim_context *sim_params){
 
             double actual_param = sim_params->global_params->stops_data_distributions->route_stops_b[i]
             .stop_distributions[0].distro.random(
-                    &sim_params->global_params->stops_data_distributions->route_stops_b[i]
-                    .stop_distributions[0].distro, sim_params->random_generator);
+                    &(distribution_sampling_parameters) {&sim_params->global_params->stops_data_distributions->route_stops_b[i]
+                    .stop_distributions[0].distro, sim_params->random_generator, 0});
 
             double next_param = sim_params->global_params->stops_data_distributions->route_stops_b[i]
             .stop_distributions[2].distro.random(
-                    &sim_params->global_params->stops_data_distributions->route_stops_b[i].
-                    stop_distributions[2].distro, sim_params->random_generator);
+                    &(distribution_sampling_parameters) {&sim_params->global_params->stops_data_distributions->route_stops_b[i].
+                    stop_distributions[2].distro, sim_params->random_generator, 0});
 
             size_t agent_idx = (size_t)(sim_params->stops_toB[i] -
             sim_params->stops);
@@ -256,9 +258,9 @@ void update_pass_gen_arrays(sim_context *sim_params){
             else {
             next_param = sim_params->global_params->stops_data_distributions->route_stops_a[i]
             .stop_distributions[nx].distro.random(
-                    &sim_params->global_params->stops_data_distributions->route_stops_a[i].
+                    &(distribution_sampling_parameters ){&sim_params->global_params->stops_data_distributions->route_stops_a[i].
                     stop_distributions[nx].distro,
-                     sim_params->random_generator);
+                     sim_params->random_generator, 0});
             }
             
 
@@ -287,9 +289,9 @@ void update_pass_gen_arrays(sim_context *sim_params){
             else {
             next_param = sim_params->global_params->stops_data_distributions->route_stops_b[i]
             .stop_distributions[nx].distro.random(
-                    &sim_params->global_params->stops_data_distributions->route_stops_b[i].
+                    &( distribution_sampling_parameters) {&sim_params->global_params->stops_data_distributions->route_stops_b[i].
                     stop_distributions[nx].distro,
-                     sim_params->random_generator);
+                     sim_params->random_generator, 0});
             }
             
 

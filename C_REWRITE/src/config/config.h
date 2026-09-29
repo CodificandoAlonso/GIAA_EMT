@@ -3,7 +3,8 @@
 /* All values come from -D flags emitted by the Makefile (ENV_CFLAGS).
  * Building outside the Makefile is a hard error by design. */
 
-#if !defined(CSV_DISTRIBUTION_A) || !defined(CSV_DISTRIBUTION_B) || \
+#if !defined(CSV_DISTRIBUTION_BOARDS_A) || !defined(CSV_DISTRIBUTION_BOARDS_B) || \
+    !defined(CSV_DISTRIBUTION_DROPOFFS_A) || !defined(CSV_DISTRIBUTION_DROPOFFS_B) || \
     !defined(CSV_TIMES_A)        || !defined(CSV_TIMES_B)        || \
     !defined(BUSES_JSON)         || !defined(STOPS_TXT)          || \
     !defined(OUTPUT_RESULTS)     || !defined(OUTPUT_PASSENGERS)  || \
@@ -19,8 +20,10 @@
 #include <stddef.h>
 
 /* ---- paths ---- */
-#define PATH_DISTRIBUTION_A  CSV_DISTRIBUTION_A
-#define PATH_DISTRIBUTION_B  CSV_DISTRIBUTION_B
+#define PATH_DISTRIBUTION_BOARDS_A  CSV_DISTRIBUTION_BOARDS_A
+#define PATH_DISTRIBUTION_BOARDS_B CSV_DISTRIBUTION_BOARDS_B
+#define PATH_DISTRIBUTION_DROPOFFS_A  CSV_DISTRIBUTION_DROPOFFS_A
+#define PATH_DISTRIBUTION_DROPOFFS_B CSV_DISTRIBUTION_DROPOFFS_B
 #define PATH_TIMES_A         CSV_TIMES_A
 #define PATH_TIMES_B         CSV_TIMES_B
 #define PATH_BUSES_JSON      BUSES_JSON

@@ -56,7 +56,7 @@ typedef struct sim_context {
 
 
 u16 infer_dropoffs(u16 stop, 
-sim_context *sim_params);
+sim_context *sim_params, u32 occupation);
 
 
 u32 return_next_time_to_stop(u16 stop, 

@@ -1,4 +1,5 @@
 #include "agents/bus/bus.h"
+#include "comms/fipa.h"
 #include "utils/utils.h"
 #include "agents/generic/agents.h"
 #include "engine/simulation.h"
@@ -355,8 +356,14 @@ void update_bus_in_sim(void *self, const sim_context *sim_params){
                     new_message->message_type = query;
                     new_message->protocol_type = QUERY_IF;
                     new_message->receiver = &bus->stop_reached->agent;
-                    new_message->payload = (void *)"Bus arrived to stop";
-                    new_message->payload_owned = false;
+
+                    char_and_occ *payload = malloc(sizeof(char_and_occ));
+
+                    payload->occupation =bus->occupation;
+                    payload->message = "Bus arrived to stop";
+
+                    new_message->payload = payload;
+                    new_message->payload_owned = true;
                     send_message(new_message);
 
                     //Move to waiting_stop_answer

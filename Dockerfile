@@ -31,6 +31,8 @@ COPY GAMA ./GAMA
 
 COPY C_REWRITE ./C_REWRITE
 
+COPY BASE_DATA ./BASE_DATA
+
 
 RUN python3 -m venv /opt/venv
 
