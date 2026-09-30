@@ -1,3 +1,12 @@
+## THIS DOCKER CMPOSE IS BUILT FOR MY HOME LAB. 2 CORES, SO SAD
+## THE MEMORY IS LIMITED SO NO GAMA SIMS HERE EVEN THOUGHT THEY MIGHT USE AS MUCH
+## AS 5 GB (yikes)
+
+
+
+
+
+
 services:
 
   app:
@@ -7,7 +16,7 @@ services:
     container_name: emt_app
 
     ports:
-      - 3000:3000
+      - "127.0.0.1:3001:3000"
 
     volumes:
       - ./WEB_DEVEL/data/logs:/app/WEB_DEVEL/data/logs
@@ -34,13 +43,8 @@ services:
     # Sustituye a 'cpus: 12', que era cuota CFS (ancho de banda) y no
     # fijaba en que CPUs se ejecuta nada.
     # ------------------------------------------------------------------
-    cpuset: "0-11"
-
     deploy:
       resources:
         limits:
-          # El heap de la JVM (-m 11264m en run_simulation.sh) debe caber
-          # aqui junto al off-heap y al servidor Node. La JVM ignora el
-          # cgroup cuando -Xmx es explicito, asi que la coherencia entre
-          # ambos valores es responsabilidad nuestra, no del runtime.
-          memory: "14G"
+          cpus: "1.5"
+          memory: "1G"
