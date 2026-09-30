@@ -16,8 +16,14 @@ const MODEL_LABELS = {
   c_engine:       'Motor en C',
 };
 
-const STATUS_ERROR = 'Error';
-const STATUS_DONE  = 'Completada';
+const STATUS_ERROR    = 'Error';
+const STATUS_DONE     = 'Completada';
+const STATUS_QUEUED   = 'En cola';
+const STATUS_PREPARED = 'Preparada';
+
+function statusText(status, position) {
+  return status === STATUS_QUEUED && position ? `${status} (#${position})` : status;
+}
 
 function escHtml(str) {
   return String(str ?? '')
@@ -97,7 +103,7 @@ function renderCard(sim) {
   `;
 
   // Render initial progress bar for in-progress simulations
-  if (sim.status !== STATUS_DONE && !isError) {
+  if (![STATUS_DONE, STATUS_PREPARED, STATUS_QUEUED].includes(sim.status) && !isError) {
     const bar = document.createElement('div');
     bar.className = 'sim-progress-bar';
     bar.style.width = `${Math.min(100, Math.round(sim.runCount / 10))}%`;
@@ -241,9 +247,17 @@ function showCompletionBanner(id, title) {
 // ---- WebSocket: live simulation progress ----
 
 function applySimProgress(sims) {
-  sims.forEach(({ id, runCount, percentage, status }) => {
+  sims.forEach(({ id, runCount, percentage, status, position }) => {
     const card = document.querySelector(`[data-sim-id="${id}"]`);
     if (!card) return;
+
+    // Queued runs have not started: no progress bar yet
+    if (status === STATUS_QUEUED) {
+      const metaValues = card.querySelectorAll('.meta-value');
+      if (metaValues[2]) metaValues[2].textContent = statusText(status, position);
+      card.querySelector('.sim-progress-bar')?.remove();
+      return;
+    }
 
     // Create or update the progress bar element
     let bar = card.querySelector('.sim-progress-bar');
@@ -257,7 +271,7 @@ function applySimProgress(sims) {
     // Update run count and status text in the meta rows
     const metaValues = card.querySelectorAll('.meta-value');
     if (metaValues[0]) metaValues[0].textContent = formatNum(runCount);
-    if (metaValues[2]) metaValues[2].textContent = status;
+    if (metaValues[2]) metaValues[2].textContent = statusText(status, position);
 
 
         // metaValues: [0] nº repeticiones, [1] Solución, [2] Estado.
@@ -331,8 +345,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSimulations();
   });
 
-  socket.on('new_sim_launched', ({ id, title }) => {
-    toast(`Nueva simulación creada: ${title || id}`, 'info');
+  socket.on('new_sim_launched', ({ id, title, queued }) => {
+    toast(queued ? `Simulación en cola: ${title || id}` : `Simulación lanzada: ${title || id}`, 'info');
     loadSimulations();
   });
 

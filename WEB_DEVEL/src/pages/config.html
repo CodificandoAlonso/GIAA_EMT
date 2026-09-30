@@ -52,6 +52,14 @@
       </select>
     </div>
     <div class="config-field">
+      <label for="input-exclusive">Ejecución</label>
+      <select id="input-exclusive"
+              title="Exclusiva: espera a que no haya otras simulaciones en marcha y no deja arrancar ninguna mientras dura. Úsala para medir recursos/energía.">
+        <option value="no">Compartida</option>
+        <option value="yes">Exclusiva (medición de energía)</option>
+      </select>
+    </div>
+    <div class="config-field">
       <label for="input-seed">Semilla para reproducibilidad</label>
       <input type="text" id="input-seed" inputmode="numeric" maxlength="20"
              placeholder="Vacío = se genera automáticamente"

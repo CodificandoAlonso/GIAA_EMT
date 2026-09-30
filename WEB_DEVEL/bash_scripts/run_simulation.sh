@@ -23,6 +23,15 @@
 # Author: Héctor Álvarez Marcos
 # ==========================================================================
 
+# Usage: run_simulation.sh [SIMULATION_DIR]
+#   The web server always passes the simulation directory, so several runs
+#   can coexist. Without it the directory is read from .last_simulation
+#   (manual use from the command line).
+
+# Relative paths (.last_simulation, ../data/known_data used by the analysis
+# scripts) are resolved against this script's directory.
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+
 # ----------------------------- Settings ------------------------------
 
 # Colors
@@ -32,7 +41,20 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-BASE_DIR=$(cat ./.last_simulation)
+BASE_DIR="${1:-$(cat ./.last_simulation 2>/dev/null)}"
+if [ -z "$BASE_DIR" ] || [ ! -d "$BASE_DIR" ]; then
+    echo "Simulation directory not found: '${BASE_DIR}'" >&2
+    exit 2
+fi
+# Absolute from here on: the GAMA run changes directory (see WORK_DIR).
+BASE_DIR="$(cd "$BASE_DIR" && pwd)"
+# Read by the analysis scripts instead of .last_simulation.
+export SIM_DIR="$BASE_DIR"
+
+# Per-run working directory. gama-headless.sh creates its .workspaceN folders
+# in the current directory; keeping them here means cleaning them up can
+# never touch a simulation running in parallel.
+WORK_DIR="${BASE_DIR}/.work"
 GAMA_SRC="/opt/headless/"
 MODEL_NAME="${GAMA_MODEL_NAME:-mobility_performance.gaml}"
 BATCH_NAME="batch_1000"
@@ -173,11 +195,16 @@ cleanup_on_exit() {
     fi
     log_warning "TRYING TO TERMINATE SIMULATION PROCESS... ${SIM_PID:-}"
     kill -9 ${SIM_PID:-} 2>/dev/null
-    rm -rf ./.workspace*
+    rm -rf "$WORK_DIR"
     log_info "Cleanup done after interruption"
     exit 1
 }
 trap cleanup_on_exit SIGINT SIGTERM
+
+# .pid lets the server tell a live run from one that died with it (e.g. a
+# container restart) and so should be reported as an error.
+echo $$ > "$BASE_DIR/.pid"
+trap 'rm -f "$BASE_DIR/.pid"' EXIT
 
 # ========================== BEGIN ===========================
 
@@ -196,6 +223,12 @@ if [ -n "${SEED_GENERATED:-}" ]; then
     log_warning "No valid seed in description.txt, generated one"
 fi
 log_info "MASTER_SEED: $MASTER_SEED"
+if [ -n "${EMT_CONCURRENT_RUNS:-}" ]; then
+    log_info "Concurrent runs at start: $EMT_CONCURRENT_RUNS (exclusive: ${EMT_EXCLUSIVE:-no})"
+    if [ "$EMT_CONCURRENT_RUNS" -gt 1 ]; then
+        log_warning "Other runs share the container: resource/energy metrics of this run are not isolated"
+    fi
+fi
 
 
 log_info "Simulation directory: $BASE_DIR"
@@ -229,7 +262,8 @@ if [ "$ENGINE" = "gama" ]; then
     export JAVA_TOOL_OPTIONS="-Denable_debug=false -Denable_logging=false -XX:+UseG1GC -Xlog:gc*:file=${MONITOR_DIR}/gc.log:time,uptime,level:filecount=1,filesize=100m"
 
     #-m heap and HPC_CORES "threads" which parallelyzes the simulations
-    "${GAMA_SRC}gama-headless.sh" -m $JAVA_HEAP -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" \
+    mkdir -p "$WORK_DIR"
+    ( cd "$WORK_DIR" && exec "${GAMA_SRC}gama-headless.sh" -m $JAVA_HEAP -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" ) \
     >> "$LOG_FILE" 2>&1 &
 
     SIM_PID=$!
@@ -445,7 +479,7 @@ if [ "$ENGINE" = "c" ]; then
 fi
 
 log_info "Removing GAMA workspace directories..."
-rm -rf ./.workspace*
+rm -rf "$WORK_DIR"
 
 POST_CLEANUP_END=$(date +%s)
 POST_CLEANUP_TIME=$((POST_CLEANUP_END - POST_CLEANUP_START))
@@ -511,8 +545,9 @@ EXTRACTION_START=$(date +%s)
 
 log_info "--- Phase 6: Data Extraction & Analysis ---"
 
-# El script de analisis resuelve .last_simulation y todas las rutas
-# relativas con os.getcwd(), asi que debe invocarse desde este directorio.
+# El script de analisis lee la simulacion de SIM_DIR y resuelve el resto de
+# rutas relativas con os.getcwd(), asi que debe invocarse desde este directorio
+# (el cd del principio lo garantiza).
 # [MOD] SCRIPT_DIR ya definido en el bloque de settings.
 
 # --- Dependency check ---

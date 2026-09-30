@@ -8,8 +8,14 @@ import json
 import ast
 from scipy.stats import norm
 
-with open(f"{os.getcwd()}/.last_simulation", "r") as f:
-    sim_dir = f.read().strip()
+# SIM_DIR (exported by run_simulation.sh) names the simulation to analyse;
+# .last_simulation is only a fallback for running this script by hand.
+sim_dir = os.environ.get("SIM_DIR")
+if not sim_dir:
+    with open(f"{os.getcwd()}/.last_simulation", "r") as f:
+        sim_dir = f.read().strip()
+# Every path below is built as f"{os.getcwd()}/{sim_dir}/...".
+sim_dir = os.path.relpath(sim_dir, os.getcwd())
 
 
 

@@ -110,6 +110,7 @@ async function loadInputs() {
     if (data.description.line)        document.getElementById('input-line').value         = data.description.line;
     if (data.description.model)       document.getElementById('input-model').value = data.description.model || 'without_agents';
     if (data.description.seed)        document.getElementById('input-seed').value = data.description.seed;
+    document.getElementById('input-exclusive').value = data.description.exclusive ? 'yes' : 'no';
   }
 
   // Load direction names from general_info for the selected line
@@ -126,6 +127,7 @@ async function saveInputs() {
     line:        document.getElementById('input-line').value,
     model:       document.getElementById('input-model').value,
     seed:        document.getElementById('input-seed').value.trim(),
+    exclusive:   document.getElementById('input-exclusive').value === 'yes',
   };
 
   if (description.seed && !/^\d{1,20}$/.test(description.seed)) {
@@ -174,7 +176,9 @@ async function handleRun() {
       toast(data.error || 'Error al lanzar la simulación', 'error');
       return;
     }
-    toast('Simulación lanzada en segundo plano', 'success');
+    toast(data.queued
+      ? `Simulación en cola (posición ${data.position}): arrancará cuando haya hueco`
+      : 'Simulación lanzada en segundo plano', 'success');
     setTimeout(() => { window.location.href = '/'; }, 2000);
   } catch (err) {
     toast('Error: ' + err.message, 'error');
