@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const { execFile, spawn } = require('child_process');
 const { Server } = require('socket.io');
+const crypto = require('crypto');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -50,13 +51,70 @@ app.get('/favicon.ico', (req, res) => {
 
 
 
-// Resolve the INPUTS directory for a simulation (supports both old and new layouts)
+// ---- Simulation inputs ----
+//
+// Input contract (all files come from BASE_DATA via prepare_simulation.sh):
+//   final_input.json                buses/departures      web r/w  C, GAMA, analysis
+//   input_data_E01_to{A,B}.csv      boardings             web r/w  C, GAMA
+//     Stop,Timeslot,DistributionType,Param1,Param2
+//     DistributionType: NORMAL (mu,sigma) | NEGATIVE BINOMIAL (r,p) | GEOMETRICAL (p,-)
+//   alighting_params_to{A,B}.csv    alightings            web r/w  C only
+//     Stop,TimeSlot,family,alpha,beta,P
+//     family: betabinom (alpha,beta) | binomial (P) | TERMINAL | TERMINAL_STOP
+//     Fraction of the bus occupancy that gets off at the stop.
+//   input_times_stops_to{A,B}.csv   travel times          web r/w  C, GAMA
+//   input_stops.txt                 stop order            read-only (C reference copy)
+//
+// The C parser tells distribution families apart by string length, so family
+// names and column order must be written back exactly as they were read.
+const INPUT_FILES = {
+  stopsToA:      'input_data_E01_toA.csv',
+  stopsToB:      'input_data_E01_toB.csv',
+  alightToA:     'alighting_params_toA.csv',
+  alightToB:     'alighting_params_toB.csv',
+  timesStopsToA: 'input_times_stops_toA.csv',
+  timesStopsToB: 'input_times_stops_toB.csv',
+};
+
+// Every directory holding a copy of the inputs of a prepared (not yet run)
+// simulation. The GAMA and C projects each get their own copy and the chosen
+// engine reads its own, so edits are written to all of them.
+function editableInputDirs(simPath) {
+  return [
+    path.join(simPath, 'TEST_MOBILITY', 'includes', 'INPUTS'),
+    path.join(simPath, 'C_REWRITE', 'data'),
+  ].filter(p => fs.existsSync(p));
+}
+
+// Resolve the INPUTS directory for a simulation (prepared or already run)
 function resolveInputsPath(simPath) {
-  const newLayout = path.join(simPath, 'TEST_MOBILITY', 'includes', 'INPUTS');
-  if (fs.existsSync(newLayout)) return newLayout;
-  const oldLayout = path.join(simPath, 'includes',);
-  if (fs.existsSync(oldLayout)) return oldLayout;
-  return null;
+  const candidates = [
+    ...editableInputDirs(simPath),
+    path.join(simPath, 'includes', 'INPUTS'), // finished GAMA run
+    path.join(simPath, 'includes'),           // finished C run
+  ];
+  return candidates.find(p => fs.existsSync(path.join(p, 'final_input.json'))) || null;
+}
+
+const MAX_SEED = (1n << 64n) - 1n;
+
+// Returns the seed as a decimal string, null if empty, or throws if invalid.
+function normalizeSeed(raw) {
+  const s = String(raw ?? '').trim();
+  if (s === '') return null;
+  if (!/^\d{1,20}$/.test(s) || BigInt(s) > MAX_SEED) {
+    throw new Error('La semilla debe ser un entero entre 0 y 18446744073709551615');
+  }
+  return BigInt(s).toString();
+}
+
+function randomSeed() {
+  return crypto.randomBytes(8).readBigUInt64BE().toString();
+}
+
+// description.txt values live on a single line between quotes
+function descValue(str) {
+  return String(str).replace(/[\r\n]+/g, ' ').replace(/"/g, "'");
 }
 
 function replicaProgress(simPath, engineType) {
@@ -78,10 +136,11 @@ function replicaProgress(simPath, engineType) {
 // Parse description.txt: `title "..."`, `description "..."`, `line "..."`
 function parseDescription(simPath) {
   const descPath = path.join(simPath, 'description.txt');
-  if (!fs.existsSync(descPath)) return { title: null, description: null, line: null, model: null };
+  const empty = { title: null, description: null, line: null, model: null, seed: null };
+  if (!fs.existsSync(descPath)) return empty;
   try {
     const lines = fs.readFileSync(descPath, 'utf8').split('\n');
-    let title = null, description = null, line = null, model = null;
+    let title = null, description = null, line = null, model = null, seed = null;
     for (const rawLine of lines) {
       const sp = rawLine.indexOf(' ');
       if (sp === -1) continue;
@@ -92,10 +151,11 @@ function parseDescription(simPath) {
       else if (key === 'description') description = val;
       else if (key === 'line') line = val;
       else if (key === 'model') model = val;
+      else if (key === 'seed') seed = val;
     }
-    return { title, description, line, model };
+    return { title, description, line, model, seed };
   } catch (_) {
-    return { title: null, description: null, line: null, model: null };
+    return empty;
   }
 }
 
@@ -299,13 +359,13 @@ app.get('/api/simulations/:id/inputs', (req, res) => {
       });
     };
 
-    const stopsToA      = parseCSVRows(path.join(inputsPath, 'input_data_E01_toA.csv'));
-    const stopsToB      = parseCSVRows(path.join(inputsPath, 'input_data_E01_toB.csv'));
-    const timesStopsToA = parseCSVRows(path.join(inputsPath, 'input_times_stops_toA.csv'));
-    const timesStopsToB = parseCSVRows(path.join(inputsPath, 'input_times_stops_toB.csv'));
-    const description   = parseDescription(simPath);
+    const data = { buses, description: parseDescription(simPath) };
+    for (const [key, file] of Object.entries(INPUT_FILES)) {
+      const filepath = path.join(inputsPath, file);
+      data[key] = fs.existsSync(filepath) ? parseCSVRows(filepath) : [];
+    }
 
-    res.json({ buses, stopsToA, stopsToB, timesStopsToA, timesStopsToB, description });
+    res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -319,27 +379,30 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
   }
 
   const simPath = path.join(DATA_DIR, id);
-  const inputsPath = resolveInputsPath(simPath);
+  const inputDirs = editableInputDirs(simPath);
 
-  if (!inputsPath) {
+  if (inputDirs.length === 0) {
     return res.status(404).json({ error: 'Inputs directory not found' });
   }
 
-  try {
-    const { description, buses, stopsToA, stopsToB, timesStopsToA, timesStopsToB } = req.body;
+  const { description, buses } = req.body;
 
+  let seed;
+  try {
+    seed = normalizeSeed(description?.seed) ?? randomSeed();
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+
+  try {
     // Write description.txt
     const descLines = [];
-    if (description?.title)       descLines.push(`title "${description.title}"`);
-    if (description?.description) descLines.push(`description "${description.description}"`);
+    if (description?.title)       descLines.push(`title "${descValue(description.title)}"`);
+    if (description?.description) descLines.push(`description "${descValue(description.description)}"`);
     descLines.push(`line ${description?.line || 401}`); //HARDCODDED
-    descLines.push(`model ${description?.model || DEFAULT_MODEL_KEY}`);
+    descLines.push(`model ${ENGINES[description?.model] ? description.model : DEFAULT_MODEL_KEY}`);
+    descLines.push(`seed ${seed}`);
     fs.writeFileSync(path.join(simPath, 'description.txt'), descLines.join('\n') + '\n');
-
-    // Write buses JSON
-    if (buses) {
-      fs.writeFileSync(path.join(inputsPath, 'final_input.json'), JSON.stringify(buses, null, 2));
-    }
 
     const writeCSV = (filepath, rows) => {
       if (!rows || rows.length === 0) return;
@@ -349,12 +412,16 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
       fs.writeFileSync(filepath, lines.join('\n') + '\n');
     };
 
-    if (stopsToA)      writeCSV(path.join(inputsPath, 'input_data_E01_toA.csv'),      stopsToA);
-    if (stopsToB)      writeCSV(path.join(inputsPath, 'input_data_E01_toB.csv'),      stopsToB);
-    if (timesStopsToA) writeCSV(path.join(inputsPath, 'input_times_stops_toA.csv'), timesStopsToA);
-    if (timesStopsToB) writeCSV(path.join(inputsPath, 'input_times_stops_toB.csv'), timesStopsToB);
+    for (const dir of inputDirs) {
+      if (buses) {
+        fs.writeFileSync(path.join(dir, 'final_input.json'), JSON.stringify(buses, null, 2));
+      }
+      for (const [key, file] of Object.entries(INPUT_FILES)) {
+        if (req.body[key]) writeCSV(path.join(dir, file), req.body[key]);
+      }
+    }
 
-    res.json({ message: 'Configuración guardada correctamente' });
+    res.json({ message: 'Configuración guardada correctamente', seed });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -375,13 +442,17 @@ app.post('/api/simulations/:id/run', (req, res) => {
     return res.status(404).json({ error: 'run_simulation.sh not found' });
   }
 
+  // Resolve the chosen GAML model from description.txt against the allowlist and
+  // hand it to the bash scripts via GAMA_MODEL_NAME.
+  const { model: modelKey, seed } = parseDescription(path.join(DATA_DIR, id));
+  if (!seed) {
+    return res.status(400).json({ error: 'La simulación no tiene semilla. Guarda la configuración antes de lanzarla.' });
+  }
+
   // Point .last_simulation at this simulation so run_simulation.sh picks it up
   const lastSimFile = path.join(bashScriptsDir, '.last_simulation');
   fs.writeFileSync(lastSimFile, `../data/logs/${id}\n`);
 
-  // Resolve the chosen GAML model from description.txt against the allowlist and
-  // hand it to the bash scripts via GAMA_MODEL_NAME.
-  const { model: modelKey } = parseDescription(path.join(DATA_DIR, id));
   const modelFile = engineFor(modelKey).model || '';
 
   const proc = spawn('bash', [scriptPath], {

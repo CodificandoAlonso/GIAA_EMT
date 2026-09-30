@@ -93,7 +93,7 @@ log_info "=========================================="
 log_info "  GAMA BATCH SIMULATION PREPARATION"
 log_info "=========================================="
 log_info "Batch experiment: $BATCH_NAME"
-log_info "HPC cores: $HPC_CORES"
+log_info "HPC cores: GAMA=$GAMA_HPC_CORES C=$C_HPC_CORES"
 log_info "Source project: $GAMA_PROJECT"
 log_info "Simulation directory: $BASE_DIR"
 

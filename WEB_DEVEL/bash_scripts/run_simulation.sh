@@ -85,10 +85,28 @@ ENGINE_KEY=$(grep -E '^[[:space:]]*model[[:space:]]' "$BASE_DIR/description.txt"
 if [ "$ENGINE_KEY" = "c_engine" ]; then
     ENGINE="c"
     ANALYSIS_SCRIPT="${SCRIPT_DIR}/new_c_eval.py"
+    HPC_CORES=$C_HPC_CORES
 else
     ENGINE="gama"
     ANALYSIS_SCRIPT="${SCRIPT_DIR}/data_extractor.py"
+    HPC_CORES=$GAMA_HPC_CORES
 fi
+
+# 'seed' en description.txt -> MASTER_SEED (lo lee el binario en C, que aborta
+# si no esta definido). La pagina de configuracion siempre la escribe; si falta
+# o no es un entero de 64 bits se genera una y se anota en description.txt para
+# que la ejecucion sea reproducible.
+MASTER_SEED=$(grep -E '^[[:space:]]*seed[[:space:]]' "$BASE_DIR/description.txt" 2>/dev/null \
+              | head -1 | awk '{print $2}' | tr -d '"')
+# Cota 2^64-1 comparada como texto: la aritmetica de bash es de 64 bits con signo.
+if ! [[ "$MASTER_SEED" =~ ^[0-9]{1,20}$ ]] \
+   || { [ ${#MASTER_SEED} -eq 20 ] && [[ "$MASTER_SEED" > "18446744073709551615" ]]; }; then
+    MASTER_SEED=$(od -An -N8 -tu8 /dev/urandom | tr -d ' ')
+    sed -i '/^[[:space:]]*seed[[:space:]]/d' "$BASE_DIR/description.txt" 2>/dev/null
+    echo "seed $MASTER_SEED" >> "$BASE_DIR/description.txt"
+    SEED_GENERATED="yes"
+fi
+export MASTER_SEED
 
 # ----------------------------- FUNCIONES ----------------------------------
 
@@ -151,11 +169,11 @@ log_info "  SIMULATION EXECUTION PIPELINE"
 log_info "=========================================="
 log_info "Engine: $ENGINE (model key: ${ENGINE_KEY:-<unset>})"
 
-if [ "$ENGINE_KEY"  -eq "c_engine" ]; then
-    log_info "HPC cores: $C_HPC_CORES"
-else
-    log_info "HPC cores: $GAMA_HPC_CORES"
+log_info "HPC cores: $HPC_CORES"
+if [ -n "${SEED_GENERATED:-}" ]; then
+    log_warning "No valid seed in description.txt, generated one"
 fi
+log_info "MASTER_SEED: $MASTER_SEED"
 
 
 log_info "Simulation directory: $BASE_DIR"
@@ -553,6 +571,7 @@ printf "%-35s %s\n" "   - Exit code:" "$SIM_EXIT_CODE" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - Result files:" "$RESULT_FILES" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - Total size:" "$TOTAL_SIZE" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - HPC cores:" "$HPC_CORES" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "   - Master seed:" "$MASTER_SEED" | tee -a "$LOG_FILE"
 if [ "$ENGINE" = "gama" ]; then
 printf "%-35s %s\n" "   - JVM heap:" "$JAVA_HEAP" | tee -a "$LOG_FILE"
 fi

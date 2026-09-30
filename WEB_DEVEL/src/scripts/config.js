@@ -27,7 +27,9 @@ function getSimId() {
 // ---- State ----
 
 let simId = null;
-let inputData = { buses: {}, stopsToA: [], stopsToB: [], timesStopsToA: [], timesStopsToB: [] };
+let inputData = {
+  buses: {}, stopsToA: [], stopsToB: [], alightToA: [], alightToB: [], timesStopsToA: [], timesStopsToB: [],
+};
 let currentView = 'buses';
 
 // Route view state
@@ -96,6 +98,8 @@ async function loadInputs() {
   inputData.buses        = data.buses        || {};
   inputData.stopsToA     = data.stopsToA     || [];
   inputData.stopsToB     = data.stopsToB     || [];
+  inputData.alightToA    = data.alightToA    || [];
+  inputData.alightToB    = data.alightToB    || [];
   inputData.timesStopsToA = data.timesStopsToA || [];
   inputData.timesStopsToB = data.timesStopsToB || [];
 
@@ -105,6 +109,7 @@ async function loadInputs() {
     if (data.description.description) document.getElementById('input-description').value = data.description.description;
     if (data.description.line)        document.getElementById('input-line').value         = data.description.line;
     if (data.description.model)       document.getElementById('input-model').value = data.description.model || 'without_agents';
+    if (data.description.seed)        document.getElementById('input-seed').value = data.description.seed;
   }
 
   // Load direction names from general_info for the selected line
@@ -120,13 +125,20 @@ async function saveInputs() {
     description: document.getElementById('input-description').value.trim(),
     line:        document.getElementById('input-line').value,
     model:       document.getElementById('input-model').value,
+    seed:        document.getElementById('input-seed').value.trim(),
   };
+
+  if (description.seed && !/^\d{1,20}$/.test(description.seed)) {
+    throw new Error('La semilla debe ser un número entero positivo (máx. 20 cifras)');
+  }
 
   const body = {
     description,
     buses:        inputData.buses,
     stopsToA:     inputData.stopsToA,
     stopsToB:     inputData.stopsToB,
+    alightToA:    inputData.alightToA,
+    alightToB:    inputData.alightToB,
     timesStopsToA: inputData.timesStopsToA,
     timesStopsToB: inputData.timesStopsToB,
   };
@@ -138,6 +150,8 @@ async function saveInputs() {
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  // Empty seed -> the server generates one; show it so the run can be reproduced
+  if (data.seed) document.getElementById('input-seed').value = data.seed;
   return data;
 }
 
@@ -886,55 +900,100 @@ async function buildSvgMapConfig(svgEl, dirData, dirKey) {
   }
 }
 
-// ---- Distribution metadata ----
+// ---- Distribution helpers ----
+//
+// The user only sees means; the family of each row is kept and its parameters
+// are rescaled here. Family names must be written back verbatim (the C parser
+// identifies them by string length).
+//
+// Boardings (input_data_E01_*.csv), passengers arriving at the stop per hour:
+//   NORMAL             Param1 = μ, Param2 = σ   mean = μ
+//   NEGATIVE BINOMIAL  Param1 = r, Param2 = p   mean = r(1-p)/p
+//   GEOMETRICAL        Param1 = p               mean = (1-p)/p
+// Alightings (alighting_params_*.csv), fraction of the bus occupancy getting off:
+//   binomial           P                        mean = P
+//   betabinom          alpha, beta              mean = α/(α+β)
+//   TERMINAL*          first/last stop, not sampled
 
-const DISTRIBUTIONS = {
-  'NORMAL': {
-    label: 'Distribución Normal',
-    csvValue: 'NORMAL',
-    p1: { name: 'μ — media', hint: 'Valor central esperado de pasajeros' },
-    p2: { name: 'σ — desv. típica', hint: 'Dispersión alrededor de la media (σ > 0)' },
-    cheatsheet: 'Simétrica. Útil cuando los datos se concentran en torno a un valor central con variabilidad constante.',
-  },
-  'NEGATIVE BINOMIAL': {
-    label: 'Distribución Binomial Negativa',
-    csvValue: 'NEGATIVE BINOMIAL',
-    p1: { name: 'p — prob. de éxito', hint: 'Probabilidad de éxito por ensayo (0 < p ≤ 1)' },
-    p2: { name: 'r — nº de éxitos', hint: 'Número de éxitos objetivo (r > 0). Controla la dispersión.' },
-    cheatsheet: 'Modela conteos con sobredispersión (varianza > media).',
-  },
-  'GEOMETRICAL': {
-    label: 'Distribución Geométrica',
-    csvValue: 'GEOMETRICAL',
-    p1: { name: 'p — prob. de éxito', hint: 'Probabilidad de éxito por ensayo (0 < p ≤ 1)' },
-    p2: { name: '— (no utilizado)', hint: 'Este parámetro no aplica a la distribución geométrica' },
-    cheatsheet: 'Caso especial de la Binomial Negativa con r = 1',
-  },
-};
-
-const DIST_OPTIONS = Object.keys(DISTRIBUTIONS).map(k =>
-  `<option value="${k}">${DISTRIBUTIONS[k].label}</option>`
-).join('');
-
-function distLabel(csvVal) {
-  return DISTRIBUTIONS[csvVal]?.label ?? csvVal;
-}
-
-// Compute the theoretical mean of a distribution from its stored parameters.
-// NORMAL:            mean = μ = Param1
-// NEGATIVE BINOMIAL: mean = r*(1-p)/p
-// GEOMETRICAL:       mean = 1/p
-function computeDistMean(distType, p1, p2) {
-  const n1 = parseFloat(p1), n2 = parseFloat(p2);
-   const dt = distType.trim();
-  if (distType === 'NORMAL') return isNaN(n1) ? 0 : n1;
-  if (distType === 'NEGATIVE BINOMIAL') {
-    return (isNaN(n1) || isNaN(n2) || n2 <= 0) ? 0 : n1 * (1 - n2) / n2;
-  }
-  if (distType === 'GEOMETRICAL') {
-    return (isNaN(n1) || n1 <= 0) ? 0 : (1 - n1) / n1;
+function boardingMean(row) {
+  const n1 = parseFloat(row.Param1), n2 = parseFloat(row.Param2);
+  switch (String(row.DistributionType).trim()) {
+    case 'NORMAL':
+      return isNaN(n1) ? 0 : Math.max(n1, 0);
+    case 'NEGATIVE BINOMIAL':
+      return (isNaN(n1) || isNaN(n2) || n2 <= 0) ? 0 : n1 * (1 - n2) / n2;
+    case 'GEOMETRICAL':
+      return (isNaN(n1) || n1 <= 0) ? 0 : (1 - n1) / n1;
   }
   return 0;
+}
+
+// Success probability p' that multiplies the mean (1-p)/p by k: p' = 1 / (1 + k(1-p)/p)
+function scaledSuccessProb(p, k) {
+  return 1 / (1 + k * (1 - p) / p);
+}
+
+// Multiply the mean number of boardings of a row by k
+function scaleBoarding(row, k) {
+  switch (String(row.DistributionType).trim()) {
+    case 'NORMAL':
+      row.Param1 = String(parseFloat(row.Param1) * k);
+      break;
+    case 'NEGATIVE BINOMIAL': {
+      const p = parseFloat(row.Param2);
+      if (p > 0 && p < 1) row.Param2 = String(scaledSuccessProb(p, k));
+      break;
+    }
+    case 'GEOMETRICAL': {
+      const p = parseFloat(row.Param1);
+      if (p > 0 && p < 1) row.Param1 = String(scaledSuccessProb(p, k));
+      break;
+    }
+  }
+}
+
+const MAX_ALIGHT_FRACTION = 0.999;
+const MIN_BETABIN_FRACTION = 1e-6; // α must stay > 0 for the beta sampler
+
+function isTerminalAlight(row) {
+  return String(row.family).trim().startsWith('TERMINAL');
+}
+
+function alightFraction(row) {
+  switch (String(row.family).trim()) {
+    case 'binomial': {
+      const p = parseFloat(row.P);
+      return isNaN(p) ? 0 : p;
+    }
+    case 'betabinom': {
+      const a = parseFloat(row.alpha), b = parseFloat(row.beta);
+      return (a + b > 0) ? a / (a + b) : 0;
+    }
+  }
+  return 0;
+}
+
+// Set the mean alighting fraction of a row. Beta-binomial keeps α+β, so the
+// over-dispersion of the fitted distribution is preserved.
+function setAlightFraction(row, fraction) {
+  const f = Math.min(Math.max(fraction, 0), MAX_ALIGHT_FRACTION);
+  switch (String(row.family).trim()) {
+    case 'binomial':
+      row.P = String(f);
+      break;
+    case 'betabinom': {
+      const c = parseFloat(row.alpha) + parseFloat(row.beta);
+      if (!(c > 0)) return;
+      const m = Math.max(f, MIN_BETABIN_FRACTION);
+      row.alpha = String(m * c);
+      row.beta  = String((1 - m) * c);
+      break;
+    }
+  }
+}
+
+function avg(values) {
+  return values.length ? values.reduce((s, v) => s + v, 0) / values.length : 0;
 }
 
 // Convert seconds (float) → "MM:SS" string
@@ -961,9 +1020,43 @@ function mmssToSeconds(str) {
 
 // ---- Stop info panel ----
 
-function getStopRows(stopId, dirKey) {
+function rowTimeslot(row) {
+  return Number(row.Timeslot ?? row.TimeSlot);
+}
+
+function getBoardRows(stopId, dirKey) {
   const rows = dirKey === 'toA' ? inputData.stopsToA : inputData.stopsToB;
   return rows.filter(r => String(r.Stop) === String(stopId));
+}
+
+function getAlightRows(stopId, dirKey) {
+  const rows = dirKey === 'toA' ? inputData.alightToA : inputData.alightToB;
+  return rows.filter(r => String(r.Stop) === String(stopId));
+}
+
+// Value of an editable input only if the user changed it (avoids drift from
+// re-applying the rounded value that was displayed)
+function changedNumber(panel, id) {
+  const el = panel.querySelector(`#${id}`);
+  if (!el || el.disabled || el.value.trim() === el.defaultValue.trim()) return null;
+  return parseFloat(el.value.replace(',', '.'));
+}
+
+// Scale boardings so their average mean goes from `orig` to `target`
+function applyBoardingTarget(rows, target, orig) {
+  if (!(orig > 0)) return false;
+  const k = Math.max(target / orig, 1e-6);
+  rows.forEach(r => scaleBoarding(r, k));
+  return true;
+}
+
+// Move the average alighting fraction of `rows` from `orig` to `target`,
+// keeping the relative profile across timeslots
+function applyAlightingTarget(rows, target, orig) {
+  const active = rows.filter(r => !isTerminalAlight(r));
+  if (orig > 0) active.forEach(r => setAlightFraction(r, alightFraction(r) * target / orig));
+  else          active.forEach(r => setAlightFraction(r, target));
+  return active.length > 0;
 }
 
 function showConfigStopInfo(stopId, stopProps, dirKey) {
@@ -971,7 +1064,8 @@ function showConfigStopInfo(stopId, stopProps, dirKey) {
   if (!panel) return;
   panel.style.display = 'block';
 
-  const rows = getStopRows(stopId, dirKey);
+  const boardRows  = getBoardRows(stopId, dirKey);
+  const alightRows = getAlightRows(stopId, dirKey);
   const dirLabel = dirKey === 'toA' ? `&#8594; ${DIR_LABEL.toA}` : `&#8592; ${DIR_LABEL.toB}`;
   const dirClass = dirKey === 'toA' ? 'dir-label-a' : 'dir-label-b';
 
@@ -986,90 +1080,95 @@ function showConfigStopInfo(stopId, stopProps, dirKey) {
     </div>
   `;
 
-  if (rows.length === 0) {
+  if (boardRows.length === 0 && alightRows.length === 0) {
     content += `<p class="rcfg-no-data">No hay datos de pasajeros para esta parada en la dirección seleccionada.</p>`;
   } else if (_routeFilter === 'general') {
-    content += buildStopGeneralView(rows);
+    content += buildStopGeneralView(boardRows, alightRows);
   } else {
-    content += buildStopTimeslotView(rows, _selectedTs);
+    content += buildStopTimeslotView(boardRows, alightRows, _selectedTs);
   }
 
   panel.innerHTML = content;
   panel.querySelector('#rcfg-panel-close')?.addEventListener('click', closeConfigInfoPanel);
 
-  if (_routeFilter === 'general') {
-    panel.querySelector('#rcfg-apply-general-means')?.addEventListener('click', () => {
-      const origBoard = parseFloat(panel.querySelector('#rcfg-board-mean-original').value);
-      const origDrop  = parseFloat(panel.querySelector('#rcfg-drop-mean-original').value);
-      const newBoard  = parseFloat(panel.querySelector('#rcfg-board-mean-input').value);
-      const newDrop   = parseFloat(panel.querySelector('#rcfg-drop-mean-input').value);
+  const general = _routeFilter === 'general';
+  const scopeBoard  = general ? boardRows  : boardRows.filter(r => rowTimeslot(r) === _selectedTs);
+  const scopeAlight = general ? alightRows : alightRows.filter(r => rowTimeslot(r) === _selectedTs);
 
-      if (!isNaN(newBoard) && origBoard > 0) {
-        const pct = (newBoard / origBoard - 1) * 100;
-        applyStopChangeByType(stopId, dirKey, 'Board', pct, null);
-      }
-      if (!isNaN(newDrop) && origDrop > 0) {
-        const pct = (newDrop / origDrop - 1) * 100;
-        applyStopChangeByType(stopId, dirKey, 'DropOff', pct, null);
-      }
-      toast(`Parada ${stopId}: valores actualizados en todas las franjas`, 'success');
-      showConfigStopInfo(stopId, stopProps, dirKey);
-    });
-  } else {
-    panel.querySelector('#rcfg-apply-ts-means')?.addEventListener('click', () => {
-      const origBoard = parseFloat(panel.querySelector('#rcfg-ts-board-original').value);
-      const origDrop  = parseFloat(panel.querySelector('#rcfg-ts-drop-original').value);
-      const newBoard  = parseFloat(panel.querySelector('#rcfg-ts-board-input').value);
-      const newDrop   = parseFloat(panel.querySelector('#rcfg-ts-drop-input').value);
+  panel.querySelector('#rcfg-apply-stop')?.addEventListener('click', () => {
+    const newBoard = changedNumber(panel, 'rcfg-board-mean-input');
+    const newPct   = changedNumber(panel, 'rcfg-alight-pct-input');
 
-      if (!isNaN(newBoard) && origBoard > 0) {
-        const pct = (newBoard / origBoard - 1) * 100;
-        applyStopChangeByType(stopId, dirKey, 'Board', pct, _selectedTs);
+    if (newBoard !== null && (isNaN(newBoard) || newBoard < 0)) {
+      toast('Media de subidas inválida: introduce un número ≥ 0', 'error'); return;
+    }
+    if (newPct !== null && (isNaN(newPct) || newPct < 0 || newPct > MAX_ALIGHT_FRACTION * 100)) {
+      toast(`Porcentaje de bajadas inválido: introduce un valor entre 0 y ${MAX_ALIGHT_FRACTION * 100}`, 'error'); return;
+    }
+    if (newBoard === null && newPct === null) {
+      toast('No hay cambios que aplicar', 'info'); return;
+    }
+
+    if (newBoard !== null) {
+      const orig = avg(scopeBoard.map(boardingMean));
+      if (!applyBoardingTarget(scopeBoard, newBoard, orig)) {
+        toast('La media de subidas actual es 0: no se puede escalar', 'error');
       }
-      if (!isNaN(newDrop) && origDrop > 0) {
-        const pct = (newDrop / origDrop - 1) * 100;
-        applyStopChangeByType(stopId, dirKey, 'DropOff', pct, _selectedTs);
-      }
-      toast(`Parada ${stopId} franja ${_selectedTs}h: valores actualizados`, 'success');
-      showConfigStopInfo(stopId, stopProps, dirKey);
-    });
-  }
+    }
+    if (newPct !== null) {
+      const orig = avg(scopeAlight.filter(r => !isTerminalAlight(r)).map(alightFraction));
+      applyAlightingTarget(scopeAlight, newPct / 100, orig);
+    }
+
+    toast(general
+      ? `Parada ${stopId}: valores actualizados en todas las franjas`
+      : `Parada ${stopId} franja ${_selectedTs}h: valores actualizados`, 'success');
+    showConfigStopInfo(stopId, stopProps, dirKey);
+  });
+}
+
+function stopStatInput(id, label, value, disabledMsg) {
+  return `
+    <div class="rcfg-stat rcfg-stat-editable">
+      <span class="rcfg-stat-label">${label}</span>
+      <input type="text" inputmode="decimal" class="rcfg-mean-input" id="${id}"
+             value="${value}" ${disabledMsg ? 'disabled' : ''} />
+      ${disabledMsg ? `<span class="rcfg-modify-hint">${disabledMsg}</span>` : ''}
+    </div>
+  `;
+}
+
+// Alighting % input: disabled for terminal stops or when there is no data
+function alightStat(rows, label) {
+  const active = rows.filter(r => !isTerminalAlight(r));
+  let msg = null;
+  if (rows.length === 0)        msg = 'Sin datos de bajadas';
+  else if (active.length === 0) msg = 'Parada de cabecera/final: no se modelan bajadas parciales';
+  const pct = avg(active.map(alightFraction)) * 100;
+  return stopStatInput('rcfg-alight-pct-input', label, msg ? '—' : pct.toFixed(2), msg);
+}
+
+function boardStat(rows, label) {
+  const mean = avg(rows.map(boardingMean));
+  return stopStatInput('rcfg-board-mean-input', label,
+    rows.length ? mean.toFixed(2) : '—', rows.length ? null : 'Sin datos de subidas');
 }
 
 // ---- General view: mean passenger inputs ----
 
-function buildStopGeneralView(rows) {
-  const timeslots = [...new Set(rows.map(r => Number(r.Timeslot)))].sort((a, b) => a - b);
-  const boardRows = rows.filter(r => r.DataType === 'Board');
-  const dropRows  = rows.filter(r => r.DataType === 'DropOff');
-
-  // Average theoretical mean across all timeslots
-  const avgMean = (arr) => {
-    if (!arr.length) return 0;
-    return arr.reduce((s, r) => s + computeDistMean(r.DistributionType, r.Param1, r.Param2), 0) / arr.length;
-  };
-
-  const boardMean = avgMean(boardRows);
-  const dropMean  = avgMean(dropRows);
+function buildStopGeneralView(boardRows, alightRows) {
+  const timeslots = [...new Set([...boardRows, ...alightRows].map(rowTimeslot))].sort((a, b) => a - b);
 
   return `
     <div class="rcfg-panel-section">
       <h4>Pasajeros en esta parada</h4>
       <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
-        Media de pasajeros por hora de servicio. Cambia el valor y pulsa <strong>Aplicar</strong>
+        Valores medios de todas las franjas. Cambia un valor y pulsa <strong>Aplicar</strong>
         para escalar <em>todas las franjas horarias</em> proporcionalmente.
       </p>
       <div class="rcfg-stats-grid">
-        <div class="rcfg-stat rcfg-stat-editable">
-          <span class="rcfg-stat-label">&#8679; Media de pasajeros que llegan a la parada por hora</span>
-          <input type="text" inputmode="decimal" class="rcfg-mean-input" id="rcfg-board-mean-input"
-                 value="${boardMean.toFixed(2)}" />
-        </div>
-        <div class="rcfg-stat rcfg-stat-editable">
-          <span class="rcfg-stat-label">&#8681; Número medio de pasajeros que se bajan en la parada por cada bus</span>
-          <input type="text" inputmode="decimal" class="rcfg-mean-input" id="rcfg-drop-mean-input"
-                 value="${dropMean.toFixed(2)}" />
-        </div>
+        ${boardStat(boardRows, '&#8679; Media de pasajeros que llegan a la parada por hora')}
+        ${alightStat(alightRows, '&#8681; % medio de la ocupación del autobús que se baja en la parada')}
         <div class="rcfg-stat">
           <span class="rcfg-stat-label">Franjas con datos</span>
           <span class="rcfg-stat-value">${timeslots.length}</span>
@@ -1077,122 +1176,30 @@ function buildStopGeneralView(rows) {
         </div>
       </div>
       <div class="rcfg-apply-row">
-        <button class="btn btn-primary btn-sm" id="rcfg-apply-general-means">Aplicar a todas las franjas</button>
+        <button class="btn btn-primary btn-sm" id="rcfg-apply-stop">Aplicar a todas las franjas</button>
       </div>
     </div>
-    <input type="hidden" id="rcfg-board-mean-original" value="${boardMean}" />
-    <input type="hidden" id="rcfg-drop-mean-original"  value="${dropMean}" />
   `;
 }
 
 // ---- Timeslot view: mean passenger inputs for selected hour ----
 
-function buildStopTimeslotView(rows, ts) {
-  const boardRow = rows.find(r => r.DataType === 'Board'   && Number(r.Timeslot) === ts);
-  const dropRow  = rows.find(r => r.DataType === 'DropOff' && Number(r.Timeslot) === ts);
-
-  const boardMean = Math.max(boardRow ? computeDistMean(boardRow.DistributionType, boardRow.Param1, boardRow.Param2) : 0, 0);
-  const dropMean  = Math.max(dropRow  ? computeDistMean(dropRow.DistributionType,  dropRow.Param1,  dropRow.Param2)  : 0, 0);
+function buildStopTimeslotView(boardRows, alightRows, ts) {
+  const tsBoard  = boardRows.filter(r => rowTimeslot(r) === ts);
+  const tsAlight = alightRows.filter(r => rowTimeslot(r) === ts);
 
   return `
     <div class="rcfg-panel-section">
       <h4>Franja horaria: ${ts}:00 – ${ts + 1}:00</h4>
       <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
-        Cambia el valor y pulsa <strong>Aplicar</strong> para modificar <em>solo esta franja</em>.
+        Cambia un valor y pulsa <strong>Aplicar</strong> para modificar <em>solo esta franja</em>.
       </p>
       <div class="rcfg-stats-grid">
-        <div class="rcfg-stat rcfg-stat-editable">
-          <span class="rcfg-stat-label">&#8679; Número de pasajeros que llegan a la parada en esta franja</span>
-          <input type="text" inputmode="decimal" class="rcfg-mean-input" id="rcfg-ts-board-input"
-                 value="${boardMean.toFixed(2)}"
-                 ${!boardRow ? 'disabled' : ''} />
-          ${!boardRow ? '<span class="rcfg-modify-hint">Sin datos para esta franja</span>' : ''}
-        </div>
-        <div class="rcfg-stat rcfg-stat-editable">
-          <span class="rcfg-stat-label">&#8681; Número de pasajeros que se bajan en la parada por autobús</span>
-          <input type="text" inputmode="decimal" class="rcfg-mean-input" id="rcfg-ts-drop-input"
-                 value="${dropMean.toFixed(2)}"
-                 ${!dropRow ? 'disabled' : ''} />
-          ${!dropRow ? '<span class="rcfg-modify-hint">Sin datos para esta franja</span>' : ''}
-        </div>
+        ${boardStat(tsBoard, '&#8679; Número de pasajeros que llegan a la parada en esta franja')}
+        ${alightStat(tsAlight, '&#8681; % de la ocupación del autobús que se baja en la parada')}
       </div>
       <div class="rcfg-apply-row">
-        <button class="btn btn-primary btn-sm" id="rcfg-apply-ts-means">Aplicar a esta franja</button>
-      </div>
-    </div>
-    <input type="hidden" id="rcfg-ts-board-original" value="${boardMean}" />
-    <input type="hidden" id="rcfg-ts-drop-original"  value="${dropMean}" />
-  `;
-}
-
-// ---- Slider widget helper ----
-
-function sliderHtml(sliderId, displayId, btnId, btnLabel) {
-  return `
-    <div class="rcfg-slider-wrap">
-      <div class="rcfg-slider-labels">
-        <span>−100%</span><span>0%</span><span>+200%</span>
-      </div>
-      <input type="range" id="${sliderId}" class="rcfg-slider" min="-100" max="200" value="0" step="1" />
-      <div class="rcfg-slider-value-row">
-        <span class="rcfg-slider-value-label">Ajuste:</span>
-        <span id="${displayId}" class="rcfg-slider-display">0%</span>
-        <button class="btn btn-primary btn-sm" id="${btnId}">${btnLabel}</button>
-      </div>
-    </div>
-  `;
-}
-
-function wireSlider(panel, sliderId, displayId) {
-  const slider  = panel.querySelector(`#${sliderId}`);
-  const display = panel.querySelector(`#${displayId}`);
-  if (slider && display) {
-    slider.addEventListener('input', () => {
-      display.textContent = (Number(slider.value) > 0 ? '+' : '') + slider.value + '%';
-    });
-  }
-  return slider;
-}
-
-function buildDistTypeEditor(tag, labelHtml, row) {
-  const distVal  = row?.DistributionType ?? 'NORMAL';
-  const d        = DISTRIBUTIONS[distVal] ?? DISTRIBUTIONS['NORMAL'];
-  const p1val    = row ? Number(row.Param1).toFixed(6) : '0';
-  const p2val    = row ? Number(row.Param2).toFixed(6) : '0';
-
-  // Build select with current value selected
-  const distOpts = Object.keys(DISTRIBUTIONS).map(k =>
-    `<option value="${k}" ${k === distVal ? 'selected' : ''}>${DISTRIBUTIONS[k].label}</option>`
-  ).join('');
-
-  return `
-    <div class="rcfg-dtype-card">
-      <div class="rcfg-dtype-header">
-        <span class="rcfg-dtype-title">${labelHtml}</span>
-        <select class="rcfg-dist-select" id="rcfg-dist-${tag}">${distOpts}</select>
-      </div>
-
-      <div class="rcfg-params-grid">
-        <div class="rcfg-param-field">
-          <label class="rcfg-param-label" id="rcfg-p1-label-${tag}">${d.p1.name}</label>
-          <input type="number" class="rcfg-param-input" id="rcfg-p1-${tag}" value="${p1val}" step="any" />
-          <span class="rcfg-param-hint" id="rcfg-p1-hint-${tag}">${d.p1.hint}</span>
-        </div>
-        <div class="rcfg-param-field">
-          <label class="rcfg-param-label" id="rcfg-p2-label-${tag}">${d.p2.name}</label>
-          <input type="number" class="rcfg-param-input" id="rcfg-p2-${tag}" value="${p2val}" step="any" />
-          <span class="rcfg-param-hint" id="rcfg-p2-hint-${tag}">${d.p2.hint}</span>
-        </div>
-      </div>
-
-      <div class="rcfg-dtype-actions">
-        <span class="rcfg-scale-label" style="display:block;margin-bottom:0.35rem;">Escalar esta franja:</span>
-        ${sliderHtml(`rcfg-slider-ts-${tag}`, `rcfg-disp-ts-${tag}`, `rcfg-scale-ts-${tag}`, 'Aplicar aquí')}
-        <span class="rcfg-scale-label" style="display:block;margin:0.65rem 0 0.35rem;">Escalar todas las franjas:</span>
-        ${sliderHtml(`rcfg-slider-all-${tag}`, `rcfg-disp-all-${tag}`, `rcfg-scale-all-${tag}`, 'Aplicar a todas')}
-        <button class="btn btn-sm btn-primary rcfg-save-ts-btn" id="rcfg-save-ts-${tag}" style="margin-top:0.75rem;">
-          &#10003; Guardar distribución y parámetros en franja ${_selectedTs}h
-        </button>
+        <button class="btn btn-primary btn-sm" id="rcfg-apply-stop">Aplicar a esta franja</button>
       </div>
     </div>
   `;
@@ -1328,76 +1335,6 @@ function buildSectionTimeslotView(row, ts) {
 }
 
 // ---- Data modification helpers ----
-
-// Scale Param1+Param2 for ALL dataTypes of a stop (used by general slider)
-function applyStopChange(stopId, dirKey, pct, timeslot) {
-  const rows = dirKey === 'toA' ? inputData.stopsToA : inputData.stopsToB;
-  const factor = Math.max(1 + pct / 100, 1e-6); // Avoid negative or zero scaling
-
-  for (const row of rows) {
-    if (String(row.Stop) !== String(stopId)) continue;
-    if (timeslot !== null && Number(row.Timeslot) !== timeslot) continue;
-
-    if (row.DistributionType === 'NORMAL') {
-    row.Param1 = String(parseFloat(row.Param1) * factor);
-    }
-    else if (row.DistributionType.trim() === 'NEGATIVE BINOMIAL') {
-    row.Param1 = String(1 / (1 + factor * (1 - row.Param1) /row.Param1)); // p' = 1 / (1 + k*(1-p)/p) 
-  }
-    else if (row.DistributionType.trim() === 'GEOMETRICAL') {
-    row.Param1 = String(row.Param1 / factor);    
-  }
-  }
-}
-
-
-
-//todo: REVIEW FORMULA FOR REFACTORING
-// Scale Param1+Param2 for a specific dataType ('Board' | 'DropOff') of a stop
-function applyStopChangeByType(stopId, dirKey, dataType, pct, timeslot) {
-  const rows = dirKey === 'toA' ? inputData.stopsToA : inputData.stopsToB;
-  const factor = Math.max(1 + pct / 100, 1e-6); // Avoid negative or zero scaling
-  for (const row of rows) {
-    if (String(row.Stop) !== String(stopId)) continue;
-    if (row.DataType !== dataType) continue;
-    if (timeslot !== null && Number(row.Timeslot) !== timeslot) continue;
-
-    if (row.DistributionType === 'NORMAL') {
-    row.Param1 = String(parseFloat(row.Param1) * factor);
-    }
-    else if (row.DistributionType === 'NEGATIVE BINOMIAL') {
-    row.Param1 = String(1 / (1 + factor * (1 - parseFloat(row.Param1)) /parseFloat(row.Param1))); // p' = 1 / (1 + k*(1-p)/p) 
-  }
-    else if (row.DistributionType === 'GEOMETRICAL') {
-    row.Param1 = String(parseFloat(row.Param1) / factor);    
-  }
-
-  }
-}
-// Set exact distribution type + params for a specific dataType + timeslot
-function setStopParams(stopId, dirKey, dataType, timeslot, distType, p1, p2) {
-  const rows = dirKey === 'toA' ? inputData.stopsToA : inputData.stopsToB;
-  const csvDist = DISTRIBUTIONS[distType]?.csvValue ?? distType;
-  for (const row of rows) {
-    if (String(row.Stop) !== String(stopId)) continue;
-    if (row.DataType !== dataType) continue;
-    if (Number(row.Timeslot) !== timeslot) continue;
-    row.DistributionType = csvDist;
-    row.Param1 = String(p1);
-    row.Param2 = String(p2);
-    return;
-  }
-  // Row doesn't exist yet — create it
-  const arr = dirKey === 'toA' ? inputData.stopsToA : inputData.stopsToB;
-  arr.push({
-    Stop: String(stopId),
-    Timeslot: String(timeslot),
-    DataType: dataType,
-    DistributionType: csvDist,
-    Param1: String(p1),
-    Param2: String(p2),
-  });
-}
 
 function applySectionChange(sectionKey, dirKey, pct, timeslot) {
   const rows = dirKey === 'toA' ? inputData.timesStopsToA : inputData.timesStopsToB;
