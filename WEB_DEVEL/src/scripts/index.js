@@ -16,6 +16,21 @@ const MODEL_LABELS = {
   c_engine:       'Motor en C',
 };
 
+const STATUS_ERROR = 'Error';
+const STATUS_DONE  = 'Completada';
+
+function escHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// "SIMULATION: mensaje" for the first recorded failure of a simulation
+function errorSummary(error) {
+  if (!error) return '';
+  return `${error.phase}: ${error.message}`;
+}
+
 function formatNum(n) {
   if (n === null || n === undefined || isNaN(n)) return '—';
   return Number(n).toLocaleString('es-ES');
@@ -31,9 +46,15 @@ function renderCard(sim) {
   card.setAttribute('data-sim-id', sim.id);
 
   const [datePart, timePart] = (sim.datetime || '—  —').split(' ');
-  const chartsHtml = sim.hasCharts
-    ? '<span class="charts-badge ready">&#10003; Gráficas listas</span>'
-    : '<span class="charts-badge pending">&#9711; Sin gráficas</span>';
+  const isError = sim.status === STATUS_ERROR;
+  const chartsHtml = isError
+    ? `<span class="charts-badge error" title="${escHtml(errorSummary(sim.error))}">&#10005; ERROR</span>`
+    : sim.hasCharts
+      ? '<span class="charts-badge ready">&#10003; Gráficas listas</span>'
+      : '<span class="charts-badge pending">&#9711; Sin gráficas</span>';
+  const errorHtml = isError
+    ? `<div class="sim-error-reason">${escHtml(errorSummary(sim.error))}</div>`
+    : '';
 
   const titleHtml = sim.title
     ? `<div class="sim-title">${sim.title}</div>`
@@ -62,8 +83,9 @@ function renderCard(sim) {
       </div>
       <div class="sim-meta-row">
         <span class="meta-label">Estado</span>
-        <span class="meta-value">${sim.status}</span>
+        <span class="meta-value${isError ? ' status-error' : ''}">${sim.status}</span>
       </div>
+      ${errorHtml}
     </div>
     <div class="sim-card-footer">
       ${chartsHtml}
@@ -75,7 +97,7 @@ function renderCard(sim) {
   `;
 
   // Render initial progress bar for in-progress simulations
-  if (sim.status !== 'Completada') {
+  if (sim.status !== STATUS_DONE && !isError) {
     const bar = document.createElement('div');
     bar.className = 'sim-progress-bar';
     bar.style.width = `${Math.min(100, Math.round(sim.runCount / 10))}%`;
@@ -301,6 +323,11 @@ document.addEventListener('DOMContentLoaded', () => {
     showCompletionBanner(id, title);
     endsimprocess(id);
     toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
+    loadSimulations();
+  });
+
+  socket.on('sim_failed', ({ id, title, error }) => {
+    toast(`Simulaci\u00f3n con ERROR: ${title || id} (${errorSummary(error)})`, 'error');
     loadSimulations();
   });
 

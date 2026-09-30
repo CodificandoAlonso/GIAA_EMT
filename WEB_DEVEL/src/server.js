@@ -119,8 +119,11 @@ function descValue(str) {
 
 function replicaProgress(simPath, engineType) {
   if (engineType === 'c') {
-    const done = fs.existsSync(path.join(simPath, '.done'));
-    return { runCount: done ? 1000 : 0, percentage: done ? 100 : 0 };
+    // The C engine writes a single results.csv, moved to RESULTS/ once the
+    // binary has finished; from then on only the analysis is pending.
+    const simulated = fs.existsSync(path.join(simPath, '.done'))
+                   || fs.existsSync(path.join(simPath, 'RESULTS', 'results.csv'));
+    return { runCount: simulated ? 1000 : 0, percentage: simulated ? 100 : 0 };
   }
   const activePath    = path.join(simPath, 'TEST_MOBILITY', 'logs', 'RESULTS');
   const completedPath = path.join(simPath, 'RESULTS');
@@ -132,6 +135,70 @@ function replicaProgress(simPath, engineType) {
   return { runCount, percentage: Math.min(100, Math.round(runCount / 10)) };
 }
 
+
+// ---- Simulation status ----
+//
+// run_simulation.sh leaves two markers in the simulation directory:
+//   .error  one line per failure, "time|PHASE|exitCode|message" (first = cause)
+//   .done   simulation + analysis finished without errors (plots complete)
+const STATUS = {
+  RUNNING:       'En progreso',
+  WAITING_PLOTS: 'Esperando Gr\u00e1ficas',
+  DONE:          'Completada',
+  ERROR:         'Error',
+};
+
+function readErrors(simPath) {
+  let raw;
+  try { raw = fs.readFileSync(path.join(simPath, '.error'), 'utf8'); } catch (_) { return null; }
+  const errors = raw.split('\n').filter(l => l.trim()).map(line => {
+    const [time, phase, code, ...msg] = line.split('|');
+    return { time, phase, code: Number(code), message: msg.join('|') };
+  });
+  return errors.length ? errors : null;
+}
+
+// Simulations that finished before the .done marker existed: the pipeline
+// log ends with "=== Pipeline finished ===" only after the analysis step.
+// Finished is a terminal state, so positive answers are cached.
+const _legacyFinished = new Set();
+function legacyFinished(simPath) {
+  if (_legacyFinished.has(simPath)) return true;
+  if (!fs.existsSync(path.join(simPath, 'PLOTS', 'json_output_general_info.json'))) return false;
+  try {
+    const log = fs.readdirSync(simPath).find(f => f.endsWith('.log'));
+    if (!log) return false;
+    const fd = fs.openSync(path.join(simPath, log), 'r');
+    const size = fs.fstatSync(fd).size;
+    const buf = Buffer.alloc(Math.min(size, 4096));
+    fs.readSync(fd, buf, 0, buf.length, size - buf.length);
+    fs.closeSync(fd);
+    if (!buf.toString('utf8').includes('=== Pipeline finished ===')) return false;
+  } catch (_) {
+    return false;
+  }
+  _legacyFinished.add(simPath);
+  return true;
+}
+
+function chartsReady(simPath) {
+  return fs.existsSync(path.join(simPath, '.done')) || legacyFinished(simPath);
+}
+
+// { status, runCount, percentage, hasCharts, errors } for a simulation directory
+function simStatus(simPath) {
+  const engineType = engineFor(parseDescription(simPath).model).type;
+  const { runCount, percentage } = replicaProgress(simPath, engineType);
+  const errors = readErrors(simPath);
+  const hasCharts = !errors && chartsReady(simPath);
+
+  let status = STATUS.RUNNING;
+  if (errors)                status = STATUS.ERROR;
+  else if (hasCharts)        status = STATUS.DONE;
+  else if (runCount >= 1000) status = STATUS.WAITING_PLOTS;
+
+  return { status, runCount, percentage, hasCharts, errors };
+}
 
 // Parse description.txt: `title "..."`, `description "..."`, `line "..."`
 function parseDescription(simPath) {
@@ -168,13 +235,7 @@ app.get('/api/simulations', (req, res) => {
       .map(e => {
         const id = e.name;
         const simPath = path.join(DATA_DIR, id);
-        const resultsPath = path.join(simPath, 'RESULTS');
-        const chartsPath = path.join(simPath, 'PLOTS');
-        let status = 'En progreso';
-        let runCount = 0;
-        runCount = replicaProgress(simPath, engineFor(parseDescription(simPath).model).type).runCount;
-
-        const hasCharts = fs.existsSync(chartsPath) && fs.readdirSync(chartsPath).some(f => f.endsWith('.json'));
+        const { status, runCount, hasCharts, errors } = simStatus(simPath);
 
         // Parse datetime from folder name: SIMULATION_YYYYMMDD_HHMMSS
         const match = id.match(/SIMULATION_(\d{8})_(\d{6})/);
@@ -184,14 +245,9 @@ app.get('/api/simulations', (req, res) => {
           const t = match[2];
           datetime = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)} ${t.slice(0, 2)}:${t.slice(2, 4)}:${t.slice(4, 6)}`;
         }
-        if (runCount === 1000){
-          status = 'Completada';
-        }
-        else{ 
-          status = 'En progreso';
-        }
         const { title, description, model} = parseDescription(simPath);
-        return { id, datetime, runCount, hasCharts, title, description, status, model };
+        return { id, datetime, runCount, hasCharts, title, description, status, model,
+                 error: errors ? errors[0] : null };
       })
       .sort((a, b) => b.id.localeCompare(a.id));
 
@@ -214,12 +270,8 @@ app.get('/api/simulations/:id', (req, res) => {
     return res.status(404).json({ error: 'Simulation not found' });
   }
 
-  const resultsPath = path.join(simPath, 'RESULTS');
   const chartsPath = path.join(simPath, 'PLOTS');
-
-  // Count runs
-  let runCount = 0;
-  runCount = replicaProgress(simPath, engineFor(parseDescription(simPath).model).type).runCount;
+  const { status, runCount, hasCharts, errors } = simStatus(simPath);
 
   // List chart images
   let charts = [];
@@ -249,7 +301,7 @@ app.get('/api/simulations/:id', (req, res) => {
   }
 
   const { title, description, model } = parseDescription(simPath);
-  res.json({ id, datetime, runCount, charts, logContent, title, description , model});
+  res.json({ id, datetime, runCount, charts, logContent, title, description, model, status, hasCharts, errors });
 });
 
 
@@ -463,6 +515,20 @@ app.post('/api/simulations/:id/run', (req, res) => {
   });
   proc.unref();
 
+  // Safety net: if the pipeline dies without recording why (killed, bash
+  // error before the markers exist...), record it so the UI shows Error.
+  proc.on('exit', (code, signal) => {
+    if (code === 0) return;
+    const simPath = path.join(DATA_DIR, id);
+    if (!fs.existsSync(simPath) || readErrors(simPath)) return;
+    const time = new Date().toISOString().replace('T', ' ').slice(0, 19);
+    const reason = signal ? `signal ${signal}` : `exit code ${code}`;
+    try {
+      fs.appendFileSync(path.join(simPath, '.error'),
+        `${time}|RUNNER|${code ?? 1}|run_simulation.sh terminated with ${reason}\n`);
+    } catch (_) {}
+  });
+
   //Emit an alert via websockets to call for every index instance to rebuil.d the page in order to show the new sim info bar
   io.emit('new_sim_launched', { id, title: req.body?.title || id });
 
@@ -656,27 +722,10 @@ function getInProgressSimulations() {
         const id = e.name;
         const simPath = path.join(DATA_DIR, id);
 
-        // Try active-run path first, fall back to post-cleanup path
-        const chartsPath = path.join(simPath, 'PLOTS');
-        const engineType = engineFor(parseDescription(simPath).model).type;
-        const { runCount, percentage } = replicaProgress(simPath, engineType);
-
-        let status = '';
-        if (runCount >= 1000){
-          const hasCharts = fs.existsSync(chartsPath) && fs.readdirSync(chartsPath).some(f => f.endsWith('.json'));
-          if (hasCharts){
-            status = 'Completada';
-          }
-          else{
-            status = 'Esperando Gr\u00e1ficas';
-          }
-        }
-        else{
-          status = 'En progreso';
-        }
-        return { id, runCount, percentage, status };
+        const { status, runCount, percentage, errors } = simStatus(simPath);
+        return { id, runCount, percentage, status, error: errors ? errors[0] : null };
       })
-      .filter(s => s.status !== 'Completada');
+      .filter(s => s.status === STATUS.RUNNING || s.status === STATUS.WAITING_PLOTS);
   } catch (_) {
     return [];
   }
@@ -696,13 +745,15 @@ setInterval(() => {
   const inProgress = getInProgressSimulations();
   const currentIds = new Set(inProgress.map(s => s.id));
 
-  // Detect completions: was tracked last tick, now gone from in-progress list
+  // Detect completions/failures: was tracked last tick, now gone from in-progress list
   for (const id of _trackedInProgress) {
     if (!currentIds.has(id)) {
-      const { title } = parseDescription(path.join(DATA_DIR, id));
       const simPath = path.join(DATA_DIR, id);
       if (!fs.existsSync(simPath)) continue;  // deleted, not completed
-      io.emit('sim_completed', { id, title });
+      const { title } = parseDescription(simPath);
+      const { status, errors } = simStatus(simPath);
+      if (status === STATUS.ERROR) io.emit('sim_failed', { id, title, error: errors[0] });
+      else                         io.emit('sim_completed', { id, title });
     }
   }
 

@@ -141,10 +141,29 @@ log_success() {
     echo -e "[$(date +'%Y-%m-%d %H:%M:%S')] ${GREEN}[SUCCESS]${NC} $1" | tee -a "$LOG_FILE"
 }
 
+# Marcadores de estado que lee el servidor (server.js, simStatus):
+#   .error -> la ejecucion ha fallado. Una linea por fallo con el formato
+#             "fecha|FASE|codigo|mensaje"; la primera es la causa que se
+#             muestra en la interfaz.
+#   .done  -> simulacion y analisis terminados sin ningun error: las graficas
+#             y los JSON estan completos.
+ERROR_FILE="${BASE_DIR}/.error"
+DONE_FILE="${BASE_DIR}/.done"
+
+# record_error FASE CODIGO MENSAJE
+record_error() {
+    log_error "$3"
+    printf '%s|%s|%s|%s\n' "$(date +'%Y-%m-%d %H:%M:%S')" "$1" "$2" "${3//|//}" >> "$ERROR_FILE"
+}
+
+has_error() {
+    [ -s "$ERROR_FILE" ]
+}
 
 cleanup_on_exit() {
     echo ""
     log_warning "Execution interrupted by user"
+    record_error "INTERRUPTED" 130 "Ejecucion interrumpida por una senal (SIGINT/SIGTERM)"
     # [MOD] SIGTERM (no -9) al monitor: necesita capturarlo para volcar el
     # summary. Con -9 se pierde la ejecucion interrumpida entera.
     if [ -n "${MONITOR_PID:-}" ]; then
@@ -163,6 +182,9 @@ trap cleanup_on_exit SIGINT SIGTERM
 # ========================== BEGIN ===========================
 
 PIPELINE_START=$(date +%s)
+
+# Un relanzamiento parte de cero: se descartan los marcadores de la ejecucion anterior.
+rm -f "$ERROR_FILE" "$DONE_FILE"
 
 log_info "=========================================="
 log_info "  SIMULATION EXECUTION PIPELINE"
@@ -282,14 +304,14 @@ else
     log_info "Binary: $C_BIN"
 
     if [ ! -x "$C_BIN" ]; then
-        log_error "C engine binary not found or not executable: $C_BIN"
         log_error "Rebuild the image (make release) or set EMT_C_BIN"
+        record_error "SETUP" 1 "C engine binary not found or not executable: $C_BIN"
         exit 1
     fi
 
     C_INPUTS="$BASE_DIR/C_REWRITE/data"
     if [ ! -d "$C_INPUTS" ]; then
-        log_error "Inputs not found at $C_INPUTS. Was the simulation prepared?"
+        record_error "SETUP" 1 "Inputs not found at $C_INPUTS. Was the simulation prepared?"
         exit 1
     fi
 
@@ -300,7 +322,7 @@ else
              alighting_params_toA.csv alighting_params_toB.csv \
              final_input.json; do
         if [ ! -f "$C_INPUTS/$f" ]; then
-            log_error "Missing input file: $C_INPUTS/$f"
+            record_error "SETUP" 1 "Missing input file: $C_INPUTS/$f"
             exit 1
         fi
         cp "$C_INPUTS/$f" "$BASE_DIR/data/$f"
@@ -310,7 +332,7 @@ else
     # input_stops.txt no lo gestiona la interfaz: es fijo por linea y se
     # toma de la copia de referencia que va dentro de la imagen.
     if [ ! -f "$C_DATA_REF/input_stops.txt" ]; then
-        log_error "Missing reference file: $C_DATA_REF/input_stops.txt"
+        record_error "SETUP" 1 "Missing reference file: $C_DATA_REF/input_stops.txt"
         exit 1
     fi
     cp "$C_DATA_REF/input_stops.txt" "$BASE_DIR/data/input_stops.txt"
@@ -360,7 +382,8 @@ BATCH_TIME=$((BATCH_END - BATCH_START))
 if [ $SIM_EXIT_CODE -eq 0 ]; then
     log_success "Simulation completed in $(format_time $BATCH_TIME)"
 else
-    log_error "Simulation FAILED with exit code $SIM_EXIT_CODE after $(format_time $BATCH_TIME)"
+    record_error "SIMULATION" "$SIM_EXIT_CODE" \
+        "Simulation ($ENGINE) FAILED with exit code $SIM_EXIT_CODE after $(format_time $BATCH_TIME)"
 fi
 
 # ------------------- FASE 4: EXTRACCIÓN Y LIMPIEZA -----------------------
@@ -446,9 +469,20 @@ log_info "Total results size: $TOTAL_SIZE"
 if [ "$ENGINE" = "c" ]; then
     # Un fichero por magnitud, con cabecera. anomalies.csv puede faltar de
     # forma legitima: una ejecucion sin retrasos no genera eventos.
-    for f in "RESULTS/results.csv" "PASSENGERS/passengers.csv"; do
+    # Ademas de existir, la cabecera debe empezar como la que escribe el
+    # binario: el analisis no falla con ficheros corruptos, genera graficas vacias.
+    for spec in "RESULTS/results.csv:simulation_id,bus_code,travels_completed,stop_num,direction" \
+                "PASSENGERS/passengers.csv:simulation_id,bus_code,travels_completed,stop_num"; do
+        f="${spec%%:*}"
+        header="${spec#*:}"
         if [ ! -s "$BASE_DIR/$f" ]; then
-            log_error "Missing or empty required output: $f"
+            record_error "OUTPUTS" 1 "Missing or empty required output: $f"
+            SIM_EXIT_CODE=1
+        elif [[ "$(head -1 "$BASE_DIR/$f")" != "$header"* ]]; then
+            record_error "OUTPUTS" 1 "Unexpected header in $f: $(head -1 "$BASE_DIR/$f" | cut -c1-80)"
+            SIM_EXIT_CODE=1
+        elif [ "$(wc -l < "$BASE_DIR/$f")" -lt 2 ]; then
+            record_error "OUTPUTS" 1 "No data rows in $f"
             SIM_EXIT_CODE=1
         else
             log_info "$f: $(( $(wc -l < "$BASE_DIR/$f") - 1 )) rows"
@@ -457,6 +491,8 @@ if [ "$ENGINE" = "c" ]; then
     if [ ! -s "$BASE_DIR/EVENTS/anomalies.csv" ]; then
         log_warning "EVENTS/anomalies.csv absent or empty (no delay events recorded)"
     fi
+elif [ "$RESULT_FILES" -eq 0 ]; then
+    record_error "OUTPUTS" 1 "GAMA produced no result CSV files in RESULTS/"
 fi
 
 # [MOD] Validacion de la monitorizacion: si el summary no existe, el
@@ -485,7 +521,17 @@ MISSING_PACKAGES=()
 PLOT_COUNT=0
 JSON_COUNT=0
 
+# Sin resultados no hay nada que analizar: el analisis solo anadiria un
+# segundo error que taparia la causa real.
+if has_error; then
+    log_warning "Skipping data extraction: the pipeline already failed (see $ERROR_FILE)"
+    PYTHON_EXIT_CODE=1
+    EXTRACTION_TIME=0
+    SKIP_ANALYSIS="yes"
+fi
+
 for pkg in "${REQUIRED_PACKAGES[@]}"; do
+    [ -n "${SKIP_ANALYSIS:-}" ] && break
     if ! python3 -c "import ${pkg}" 2>/dev/null; then
         MISSING_PACKAGES+=("$pkg")
     fi
@@ -496,7 +542,7 @@ if [ ${#MISSING_PACKAGES[@]} -gt 0 ]; then
     log_info "Installing missing dependencies..."
     pip3 install --break-system-packages "${MISSING_PACKAGES[@]}" >> "$LOG_FILE" 2>&1
     if [ $? -ne 0 ]; then
-        log_error "Failed to install Python dependencies. Aborting data extraction."
+        record_error "DEPENDENCIES" 1 "Failed to install Python dependencies: ${MISSING_PACKAGES[*]}"
         PYTHON_EXIT_CODE=1
         EXTRACTION_END=$(date +%s)
         EXTRACTION_TIME=$((EXTRACTION_END - EXTRACTION_START))
@@ -505,7 +551,7 @@ else
     log_info "All Python dependencies satisfied"
 fi
 
-if [ "${PYTHON_EXIT_CODE:-0}" -eq 0 ]; then
+if [ -z "${SKIP_ANALYSIS:-}" ] && [ "${PYTHON_EXIT_CODE:-0}" -eq 0 ]; then
     log_info "Running $(basename "$ANALYSIS_SCRIPT") (plots=$SIM_PLOTS dpi=$SIM_PLOT_DPI workers=$SIM_WORKERS)..."
 
     python3 "$ANALYSIS_SCRIPT" >> "$LOG_FILE" 2>&1
@@ -515,18 +561,18 @@ if [ "${PYTHON_EXIT_CODE:-0}" -eq 0 ]; then
     EXTRACTION_TIME=$((EXTRACTION_END - EXTRACTION_START))
 fi
 
-if [ $PYTHON_EXIT_CODE -eq 0 ]; then
+if [ $PYTHON_EXIT_CODE -eq 0 ] && ! has_error; then
     PLOT_COUNT=$(find "$BASE_DIR/PLOTS" -name "*.png" 2>/dev/null | wc -l)
     JSON_COUNT=$(find "$BASE_DIR/PLOTS" -name "*.json" 2>/dev/null | wc -l)
     log_success "Data extraction completed in $(format_time $EXTRACTION_TIME)"
     log_info "Generated $PLOT_COUNT plots and $JSON_COUNT JSON files"
-    # [NUEVO] Marca de finalizacion. El servidor la usa para el progreso del
-    # motor en C, donde no puede contar replicas en el sistema de ficheros
-    # porque solo hay un results.csv.
-    touch "$BASE_DIR/.done"
-else
-    log_error "Data extraction FAILED with exit code $PYTHON_EXIT_CODE after $(format_time $EXTRACTION_TIME)"
+    # Marca de finalizacion: se escribe al final del analisis, cuando ya
+    # existen todas las figuras y JSON. El servidor la usa como "Graficas listas".
+    touch "$DONE_FILE"
+elif [ -z "${SKIP_ANALYSIS:-}" ]; then
     log_error "Check $LOG_FILE for Python traceback"
+    record_error "ANALYSIS" "$PYTHON_EXIT_CODE" \
+        "$(basename "$ANALYSIS_SCRIPT") FAILED with exit code $PYTHON_EXIT_CODE after $(format_time $EXTRACTION_TIME)"
 fi
 
 # ------------------- FINAL STRUCTURE LOG ----------------------------------
@@ -591,5 +637,10 @@ echo "" | tee -a "$LOG_FILE"
 echo "Simulation: $BASE_DIR" | tee -a "$LOG_FILE"
 echo "Log file: $LOG_FILE" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
+
+if has_error; then
+    log_error "=== Pipeline finished with errors: $(head -1 "$ERROR_FILE" | cut -d'|' -f2-) ==="
+    exit 1
+fi
 
 log_success "=== Pipeline finished ==="
