@@ -1,0 +1,1284 @@
+{
+    "4010": {
+        "2646-7:55": {
+            "Mean_Occupation_Percentage": 42.78658333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3726.5960000000014,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 87.83420006846865
+        },
+        "5727-8:53": {
+            "Mean_Occupation_Percentage": 14.439062499999999,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2614.3859999999986,
+            "Percentage_sims_delay_departure": 70.5,
+            "Mean_Minutes_departure_delay": 468.0482269503546,
+            "Regularity_value": 100.0
+        },
+        "2646-9:56": {
+            "Mean_Occupation_Percentage": 19.288333333333334,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3076.260000000002,
+            "Percentage_sims_delay_departure": 8.3,
+            "Mean_Minutes_departure_delay": 212.53012048192772,
+            "Regularity_value": 100.0
+        },
+        "5727-10:53": {
+            "Mean_Occupation_Percentage": 19.5384375,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2750.9680000000008,
+            "Percentage_sims_delay_departure": 17.4,
+            "Mean_Minutes_departure_delay": 201.45977011494253,
+            "Regularity_value": 97.28654662008397
+        },
+        "2646-11:51": {
+            "Mean_Occupation_Percentage": 31.216333333333335,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3054.413999999997,
+            "Percentage_sims_delay_departure": 3.5000000000000004,
+            "Mean_Minutes_departure_delay": 93.2,
+            "Regularity_value": 92.92307904682667
+        },
+        "5727-12:54": {
+            "Mean_Occupation_Percentage": 33.1890625,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3134.0959999999977,
+            "Percentage_sims_delay_departure": 1.6,
+            "Mean_Minutes_departure_delay": 120.625,
+            "Regularity_value": 86.00767905411004
+        },
+        "2646-13:49": {
+            "Mean_Occupation_Percentage": 32.806583333333336,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3103.1860000000015,
+            "Percentage_sims_delay_departure": 32.0,
+            "Mean_Minutes_departure_delay": 215.48125,
+            "Regularity_value": 89.35696411059313
+        },
+        "5727-15:16": {
+            "Mean_Occupation_Percentage": 33.815104166666664,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3260.985999999997,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 89.48136896429992
+        }
+    },
+    "4007": {
+        "2646-6:44": {
+            "Mean_Occupation_Percentage": 49.60458333333334,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3551.9140000000007,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 88.09903304800153
+        },
+        "5727-7:44": {
+            "Mean_Occupation_Percentage": 19.026770833333334,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2599.0499999999993,
+            "Percentage_sims_delay_departure": 47.8,
+            "Mean_Minutes_departure_delay": 282.35146443514645,
+            "Regularity_value": 98.70375769018104
+        },
+        "2646-8:40": {
+            "Mean_Occupation_Percentage": 30.126083333333337,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3341.743999999999,
+            "Percentage_sims_delay_departure": 6.4,
+            "Mean_Minutes_departure_delay": 194.5,
+            "Regularity_value": 97.10679090834292
+        },
+        "5727-9:39": {
+            "Mean_Occupation_Percentage": 22.526354166666668,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2874.699999999997,
+            "Percentage_sims_delay_departure": 31.900000000000002,
+            "Mean_Minutes_departure_delay": 273.45454545454544,
+            "Regularity_value": 93.291154309592
+        },
+        "2646-10:39": {
+            "Mean_Occupation_Percentage": 27.8005,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3034.2059999999983,
+            "Percentage_sims_delay_departure": 9.4,
+            "Mean_Minutes_departure_delay": 203.82978723404256,
+            "Regularity_value": 96.34929636105517
+        },
+        "5727-11:40": {
+            "Mean_Occupation_Percentage": 21.814062500000002,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2757.872000000003,
+            "Percentage_sims_delay_departure": 7.7,
+            "Mean_Minutes_departure_delay": 184.02597402597402,
+            "Regularity_value": 96.94947734052103
+        },
+        "2646-12:44": {
+            "Mean_Occupation_Percentage": 34.30625,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3031.868000000002,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 90.51591853731152
+        },
+        "5727-14:16": {
+            "Mean_Occupation_Percentage": 33.833020833333336,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3296.525999999998,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 92.34526328990009
+        },
+        "2646-15:19": {
+            "Mean_Occupation_Percentage": 28.060833333333335,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2925.7739999999976,
+            "Percentage_sims_delay_departure": 10.5,
+            "Mean_Minutes_departure_delay": 198.9904761904762,
+            "Regularity_value": 95.41878013331406
+        },
+        "5727-16:17": {
+            "Mean_Occupation_Percentage": 30.026562499999997,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3103.764000000003,
+            "Percentage_sims_delay_departure": 5.8999999999999995,
+            "Mean_Minutes_departure_delay": 130.47457627118644,
+            "Regularity_value": 96.4116664024758
+        },
+        "2646-17:15": {
+            "Mean_Occupation_Percentage": 24.759000000000004,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3116.847999999998,
+            "Percentage_sims_delay_departure": 15.9,
+            "Mean_Minutes_departure_delay": 198.40251572327045,
+            "Regularity_value": 98.33366942428063
+        },
+        "5727-18:17": {
+            "Mean_Occupation_Percentage": 38.43729166666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3445.883999999991,
+            "Percentage_sims_delay_departure": 8.3,
+            "Mean_Minutes_departure_delay": 190.14457831325302,
+            "Regularity_value": 82.67428330692957
+        },
+        "2646-19:18": {
+            "Mean_Occupation_Percentage": 25.485000000000003,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3071.1639999999898,
+            "Percentage_sims_delay_departure": 33.7,
+            "Mean_Minutes_departure_delay": 274.75370919881306,
+            "Regularity_value": 92.89719504222978
+        }
+    },
+    "4004": {
+        "2646-6:07": {
+            "Mean_Occupation_Percentage": 37.577666666666666,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2976.5499999999993,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 92.51928777209096
+        },
+        "5727-7:07": {
+            "Mean_Occupation_Percentage": 24.770208333333336,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2590.4559999999983,
+            "Percentage_sims_delay_departure": 6.0,
+            "Mean_Minutes_departure_delay": 172.16666666666666,
+            "Regularity_value": 89.60923926511616
+        },
+        "2646-8:06": {
+            "Mean_Occupation_Percentage": 41.636916666666664,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3650.884000000002,
+            "Percentage_sims_delay_departure": 0.1,
+            "Mean_Minutes_departure_delay": 194.0,
+            "Regularity_value": 89.55783940966626
+        },
+        "5727-9:06": {
+            "Mean_Occupation_Percentage": 14.680937499999999,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2716.2920000000013,
+            "Percentage_sims_delay_departure": 57.49999999999999,
+            "Mean_Minutes_departure_delay": 324.3895652173913,
+            "Regularity_value": 100.0
+        },
+        "2646-10:06": {
+            "Mean_Occupation_Percentage": 19.033916666666666,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2941.6500000000015,
+            "Percentage_sims_delay_departure": 8.0,
+            "Mean_Minutes_departure_delay": 232.475,
+            "Regularity_value": 100.0
+        },
+        "5727-11:08": {
+            "Mean_Occupation_Percentage": 17.933020833333334,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2645.662000000004,
+            "Percentage_sims_delay_departure": 2.1999999999999997,
+            "Mean_Minutes_departure_delay": 194.36363636363637,
+            "Regularity_value": 99.86836701343735
+        },
+        "2646-13:57": {
+            "Mean_Occupation_Percentage": 21.56266666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2941.286,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 97.44493489232109
+        },
+        "5727-14:54": {
+            "Mean_Occupation_Percentage": 38.43635416666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3374.225999999995,
+            "Percentage_sims_delay_departure": 5.6000000000000005,
+            "Mean_Minutes_departure_delay": 145.46428571428572,
+            "Regularity_value": 87.51246428276032
+        },
+        "2646-15:53": {
+            "Mean_Occupation_Percentage": 31.099333333333334,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3016.0420000000013,
+            "Percentage_sims_delay_departure": 34.599999999999994,
+            "Mean_Minutes_departure_delay": 245.33526011560693,
+            "Regularity_value": 92.1714395426653
+        },
+        "5727-16:53": {
+            "Mean_Occupation_Percentage": 35.02583333333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3259.203999999998,
+            "Percentage_sims_delay_departure": 11.600000000000001,
+            "Mean_Minutes_departure_delay": 210.6551724137931,
+            "Regularity_value": 87.36639222522736
+        },
+        "2646-17:54": {
+            "Mean_Occupation_Percentage": 30.652916666666663,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3246.6459999999934,
+            "Percentage_sims_delay_departure": 16.8,
+            "Mean_Minutes_departure_delay": 220.58333333333334,
+            "Regularity_value": 91.8529493878344
+        },
+        "5727-18:53": {
+            "Mean_Occupation_Percentage": 32.461875,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3298.470000000001,
+            "Percentage_sims_delay_departure": 25.7,
+            "Mean_Minutes_departure_delay": 246.98054474708172,
+            "Regularity_value": 89.52141363157521
+        },
+        "2646-19:54": {
+            "Mean_Occupation_Percentage": 25.275166666666664,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3092.8060000000114,
+            "Percentage_sims_delay_departure": 24.0,
+            "Mean_Minutes_departure_delay": 237.28333333333333,
+            "Regularity_value": 92.73434800284382
+        },
+        "5727-20:54": {
+            "Mean_Occupation_Percentage": 24.084479166666668,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2888.2860000000073,
+            "Percentage_sims_delay_departure": 13.5,
+            "Mean_Minutes_departure_delay": 207.95555555555555,
+            "Regularity_value": 96.36085628357706
+        }
+    },
+    "4002": {
+        "2646-5:52": {
+            "Mean_Occupation_Percentage": 42.32625,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2744.5519999999997,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 88.40521951515885
+        },
+        "5727-6:49": {
+            "Mean_Occupation_Percentage": 18.23677083333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2437.2880000000005,
+            "Percentage_sims_delay_departure": 0.5,
+            "Mean_Minutes_departure_delay": 52.0,
+            "Regularity_value": 98.51048439604641
+        },
+        "2646-7:45": {
+            "Mean_Occupation_Percentage": 50.22541666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3764.4500000000007,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 86.16300268573644
+        },
+        "5727-8:42": {
+            "Mean_Occupation_Percentage": 16.422604166666666,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2585.2440000000024,
+            "Percentage_sims_delay_departure": 78.8,
+            "Mean_Minutes_departure_delay": 503.9517766497462,
+            "Regularity_value": 98.4838549404618
+        },
+        "2646-9:45": {
+            "Mean_Occupation_Percentage": 22.258166666666668,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3121.6059999999998,
+            "Percentage_sims_delay_departure": 7.5,
+            "Mean_Minutes_departure_delay": 322.88,
+            "Regularity_value": 99.96889523511148
+        },
+        "5727-12:21": {
+            "Mean_Occupation_Percentage": 19.90895833333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2789.7739999999976,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        },
+        "2646-13:24": {
+            "Mean_Occupation_Percentage": 27.07175,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2975.6560000000027,
+            "Percentage_sims_delay_departure": 0.1,
+            "Mean_Minutes_departure_delay": 58.0,
+            "Regularity_value": 95.94364360954873
+        },
+        "5727-14:42": {
+            "Mean_Occupation_Percentage": 34.7271875,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3314.3559999999998,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 89.7897118885232
+        },
+        "2646-15:40": {
+            "Mean_Occupation_Percentage": 21.321833333333334,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2869.238000000005,
+            "Percentage_sims_delay_departure": 33.7,
+            "Mean_Minutes_departure_delay": 248.80118694362017,
+            "Regularity_value": 99.49876397552562
+        },
+        "5727-16:41": {
+            "Mean_Occupation_Percentage": 36.49125,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3278.2019999999975,
+            "Percentage_sims_delay_departure": 4.5,
+            "Mean_Minutes_departure_delay": 171.33333333333334,
+            "Regularity_value": 86.8546829796351
+        },
+        "2646-17:42": {
+            "Mean_Occupation_Percentage": 38.29625,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3358.315999999999,
+            "Percentage_sims_delay_departure": 17.0,
+            "Mean_Minutes_departure_delay": 177.49411764705883,
+            "Regularity_value": 87.5027113171529
+        },
+        "5727-18:42": {
+            "Mean_Occupation_Percentage": 35.81197916666666,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3367.722000000009,
+            "Percentage_sims_delay_departure": 31.900000000000002,
+            "Mean_Minutes_departure_delay": 250.92789968652036,
+            "Regularity_value": 86.71854881262026
+        },
+        "2646-19:39": {
+            "Mean_Occupation_Percentage": 38.8915,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3276.6560000000027,
+            "Percentage_sims_delay_departure": 51.9,
+            "Mean_Minutes_departure_delay": 358.242774566474,
+            "Regularity_value": 83.12267702885056
+        },
+        "5727-20:42": {
+            "Mean_Occupation_Percentage": 24.13,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2873.1359999999986,
+            "Percentage_sims_delay_departure": 27.1,
+            "Mean_Minutes_departure_delay": 307.3874538745387,
+            "Regularity_value": 97.47085804229535
+        }
+    },
+    "4003": {
+        "5727-5:56": {
+            "Mean_Occupation_Percentage": 10.424687500000001,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2187.75,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        },
+        "2646-6:54": {
+            "Mean_Occupation_Percentage": 40.788666666666664,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3483.0740000000005,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 90.12132367115733
+        },
+        "5727-7:55": {
+            "Mean_Occupation_Percentage": 18.3265625,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2622.3060000000005,
+            "Percentage_sims_delay_departure": 34.599999999999994,
+            "Mean_Minutes_departure_delay": 264.73988439306356,
+            "Regularity_value": 97.11629618981938
+        },
+        "2646-8:53": {
+            "Mean_Occupation_Percentage": 32.001416666666664,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3372.430000000004,
+            "Percentage_sims_delay_departure": 4.7,
+            "Mean_Minutes_departure_delay": 198.04255319148936,
+            "Regularity_value": 95.33056629550454
+        },
+        "5727-9:52": {
+            "Mean_Occupation_Percentage": 16.603541666666665,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2785.7839999999997,
+            "Percentage_sims_delay_departure": 33.800000000000004,
+            "Mean_Minutes_departure_delay": 280.7692307692308,
+            "Regularity_value": 99.38054009878472
+        },
+        "2646-12:10": {
+            "Mean_Occupation_Percentage": 34.56175,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3044.9579999999987,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 90.29526923685889
+        },
+        "5727-13:19": {
+            "Mean_Occupation_Percentage": 22.121249999999996,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2984.0899999999965,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        },
+        "2646-14:18": {
+            "Mean_Occupation_Percentage": 26.487916666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2948.199999999997,
+            "Percentage_sims_delay_departure": 6.3,
+            "Mean_Minutes_departure_delay": 151.55555555555554,
+            "Regularity_value": 95.26668926817902
+        },
+        "5727-15:55": {
+            "Mean_Occupation_Percentage": 31.070312499999996,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3210.980000000003,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 91.74545431461021
+        },
+        "2646-16:54": {
+            "Mean_Occupation_Percentage": 30.541249999999998,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3194.162000000004,
+            "Percentage_sims_delay_departure": 18.9,
+            "Mean_Minutes_departure_delay": 196.9206349206349,
+            "Regularity_value": 92.19740220357599
+        },
+        "5727-17:56": {
+            "Mean_Occupation_Percentage": 36.35135416666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3408.7479999999923,
+            "Percentage_sims_delay_departure": 12.2,
+            "Mean_Minutes_departure_delay": 174.29508196721312,
+            "Regularity_value": 87.79710049131089
+        },
+        "2646-18:53": {
+            "Mean_Occupation_Percentage": 23.870166666666666,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3065.8499999999913,
+            "Percentage_sims_delay_departure": 50.1,
+            "Mean_Minutes_departure_delay": 336.87824351297405,
+            "Regularity_value": 95.39719685356049
+        },
+        "5727-19:52": {
+            "Mean_Occupation_Percentage": 34.74885416666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3170.6900000000023,
+            "Percentage_sims_delay_departure": 23.9,
+            "Mean_Minutes_departure_delay": 337.69874476987445,
+            "Regularity_value": 87.85181171111849
+        },
+        "2646-21:52": {
+            "Mean_Occupation_Percentage": 42.13708333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3263.4820000000036,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 74.5724269306962
+        }
+    },
+    "4001": {
+        "2646-5:27": {
+            "Mean_Occupation_Percentage": 41.69666666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2625.4120000000003,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 95.58565242240586
+        },
+        "5727-6:32": {
+            "Mean_Occupation_Percentage": 14.002604166666666,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2287.9079999999994,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        },
+        "2646-7:31": {
+            "Mean_Occupation_Percentage": 52.480083333333326,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3739.522000000001,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 87.40459876572211
+        },
+        "5727-8:30": {
+            "Mean_Occupation_Percentage": 19.508645833333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2653.0360000000037,
+            "Percentage_sims_delay_departure": 67.60000000000001,
+            "Mean_Minutes_departure_delay": 473.17455621301775,
+            "Regularity_value": 93.64860982546186
+        },
+        "5727-13:07": {
+            "Mean_Occupation_Percentage": 25.454270833333332,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3052.769999999997,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 98.66906536744823
+        },
+        "2646-14:06": {
+            "Mean_Occupation_Percentage": 21.468416666666666,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2885.529999999999,
+            "Percentage_sims_delay_departure": 10.100000000000001,
+            "Mean_Minutes_departure_delay": 161.66336633663366,
+            "Regularity_value": 99.08533162295761
+        },
+        "5727-15:06": {
+            "Mean_Occupation_Percentage": 37.607395833333335,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3325.1800000000003,
+            "Percentage_sims_delay_departure": 2.1999999999999997,
+            "Mean_Minutes_departure_delay": 127.72727272727273,
+            "Regularity_value": 87.60285195846816
+        },
+        "2646-16:06": {
+            "Mean_Occupation_Percentage": 31.38458333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3082.659999999996,
+            "Percentage_sims_delay_departure": 24.2,
+            "Mean_Minutes_departure_delay": 202.5785123966942,
+            "Regularity_value": 91.9700696461444
+        },
+        "5727-17:07": {
+            "Mean_Occupation_Percentage": 39.18666666666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3359.8740000000034,
+            "Percentage_sims_delay_departure": 9.2,
+            "Mean_Minutes_departure_delay": 182.95652173913044,
+            "Regularity_value": 83.56316876568492
+        },
+        "2646-18:06": {
+            "Mean_Occupation_Percentage": 30.923916666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3185.684000000001,
+            "Percentage_sims_delay_departure": 37.5,
+            "Mean_Minutes_departure_delay": 242.96,
+            "Regularity_value": 89.41866592519612
+        },
+        "5727-19:05": {
+            "Mean_Occupation_Percentage": 34.075520833333336,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3270.4179999999906,
+            "Percentage_sims_delay_departure": 25.7,
+            "Mean_Minutes_departure_delay": 271.9533073929961,
+            "Regularity_value": 79.99479607973727
+        },
+        "2646-20:05": {
+            "Mean_Occupation_Percentage": 21.469250000000002,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3062.4199999999983,
+            "Percentage_sims_delay_departure": 27.0,
+            "Mean_Minutes_departure_delay": 260.8222222222222,
+            "Regularity_value": 96.26357476270883
+        },
+        "5727-21:07": {
+            "Mean_Occupation_Percentage": 24.6959375,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2811.1440000000002,
+            "Percentage_sims_delay_departure": 8.1,
+            "Mean_Minutes_departure_delay": 212.12345679012347,
+            "Regularity_value": 97.35407199561305
+        },
+        "2646-22:10": {
+            "Mean_Occupation_Percentage": 27.649916666666662,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3065.8659999999945,
+            "Percentage_sims_delay_departure": 0.2,
+            "Mean_Minutes_departure_delay": 50.0,
+            "Regularity_value": 71.6541857516333
+        }
+    },
+    "4005": {
+        "5727-6:13": {
+            "Mean_Occupation_Percentage": 9.373333333333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2171.6539999999986,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        },
+        "2646-7:17": {
+            "Mean_Occupation_Percentage": 44.72233333333334,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3499.0819999999985,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 87.00451143116533
+        },
+        "5727-8:17": {
+            "Mean_Occupation_Percentage": 20.56697916666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2694.4739999999983,
+            "Percentage_sims_delay_departure": 42.199999999999996,
+            "Mean_Minutes_departure_delay": 359.9194312796209,
+            "Regularity_value": 89.87842890806128
+        },
+        "2646-9:13": {
+            "Mean_Occupation_Percentage": 25.477500000000003,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3360.5099999999948,
+            "Percentage_sims_delay_departure": 14.299999999999999,
+            "Mean_Minutes_departure_delay": 291.06293706293707,
+            "Regularity_value": 85.5927349873497
+        },
+        "5727-10:23": {
+            "Mean_Occupation_Percentage": 14.654375,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2639.485999999997,
+            "Percentage_sims_delay_departure": 3.6999999999999997,
+            "Mean_Minutes_departure_delay": 176.97297297297297,
+            "Regularity_value": 100.0
+        },
+        "2646-11:22": {
+            "Mean_Occupation_Percentage": 26.93466666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2938.261999999995,
+            "Percentage_sims_delay_departure": 0.5,
+            "Mean_Minutes_departure_delay": 178.4,
+            "Regularity_value": 99.1829285022114
+        },
+        "5727-13:40": {
+            "Mean_Occupation_Percentage": 24.970104166666665,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3051.2920000000013,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 99.08808150204823
+        },
+        "2646-14:41": {
+            "Mean_Occupation_Percentage": 30.419,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2973.3960000000006,
+            "Percentage_sims_delay_departure": 6.1,
+            "Mean_Minutes_departure_delay": 158.36065573770492,
+            "Regularity_value": 94.26229939163362
+        },
+        "5727-15:44": {
+            "Mean_Occupation_Percentage": 38.42875,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3347.091999999997,
+            "Percentage_sims_delay_departure": 1.4000000000000001,
+            "Mean_Minutes_departure_delay": 141.57142857142858,
+            "Regularity_value": 85.33418453066322
+        },
+        "2646-16:42": {
+            "Mean_Occupation_Percentage": 30.045083333333334,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3164.556000000004,
+            "Percentage_sims_delay_departure": 35.6,
+            "Mean_Minutes_departure_delay": 239.93820224719101,
+            "Regularity_value": 93.92908832725124
+        },
+        "5727-17:44": {
+            "Mean_Occupation_Percentage": 40.3009375,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3452.350000000006,
+            "Percentage_sims_delay_departure": 13.600000000000001,
+            "Mean_Minutes_departure_delay": 214.36764705882354,
+            "Regularity_value": 85.32892888518255
+        },
+        "2646-18:42": {
+            "Mean_Occupation_Percentage": 26.065749999999998,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3088.0699999999924,
+            "Percentage_sims_delay_departure": 49.6,
+            "Mean_Minutes_departure_delay": 356.8790322580645,
+            "Regularity_value": 93.91941470922991
+        },
+        "5727-20:17": {
+            "Mean_Occupation_Percentage": 29.936666666666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3074.3880000000063,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 84.41204076234528
+        },
+        "2646-21:22": {
+            "Mean_Occupation_Percentage": 22.887583333333332,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2980.255999999994,
+            "Percentage_sims_delay_departure": 0.7000000000000001,
+            "Mean_Minutes_departure_delay": 142.57142857142858,
+            "Regularity_value": 90.12921872956798
+        },
+        "5727-22:28": {
+            "Mean_Occupation_Percentage": 48.64979166666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2985.7820000000065,
+            "Percentage_sims_delay_departure": 0.8999999999999999,
+            "Mean_Minutes_departure_delay": 93.55555555555556,
+            "Regularity_value": 72.13273220201064
+        }
+    },
+    "4006": {
+        "2646-6:27": {
+            "Mean_Occupation_Percentage": 50.81633333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3394.4540000000015,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 96.80626530948476
+        },
+        "5727-7:33": {
+            "Mean_Occupation_Percentage": 19.015729166666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2528.464,
+            "Percentage_sims_delay_departure": 11.600000000000001,
+            "Mean_Minutes_departure_delay": 208.17241379310346,
+            "Regularity_value": 100.0
+        },
+        "2646-8:29": {
+            "Mean_Occupation_Percentage": 32.20483333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3405.881999999998,
+            "Percentage_sims_delay_departure": 0.8999999999999999,
+            "Mean_Minutes_departure_delay": 200.66666666666666,
+            "Regularity_value": 93.53260824200966
+        },
+        "2646-10:54": {
+            "Mean_Occupation_Percentage": 30.41975,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3091.970000000001,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 93.47395698895085
+        },
+        "5727-11:53": {
+            "Mean_Occupation_Percentage": 18.68375,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2723.7180000000008,
+            "Percentage_sims_delay_departure": 12.7,
+            "Mean_Minutes_departure_delay": 172.53543307086613,
+            "Regularity_value": 99.50153719827301
+        },
+        "2646-12:55": {
+            "Mean_Occupation_Percentage": 21.474416666666666,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2855.4479999999967,
+            "Percentage_sims_delay_departure": 0.1,
+            "Mean_Minutes_departure_delay": 290.0,
+            "Regularity_value": 98.94756491483243
+        },
+        "5727-13:55": {
+            "Mean_Occupation_Percentage": 41.81270833333334,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3343.1699999999983,
+            "Percentage_sims_delay_departure": 1.9,
+            "Mean_Minutes_departure_delay": 93.6842105263158,
+            "Regularity_value": 83.8979795604684
+        },
+        "2646-14:55": {
+            "Mean_Occupation_Percentage": 30.374249999999996,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2995.2839999999997,
+            "Percentage_sims_delay_departure": 24.0,
+            "Mean_Minutes_departure_delay": 206.86666666666667,
+            "Regularity_value": 92.8991373691999
+        },
+        "5727-17:31": {
+            "Mean_Occupation_Percentage": 35.30677083333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3319.271999999997,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 92.33381189357294
+        },
+        "2646-18:31": {
+            "Mean_Occupation_Percentage": 26.201666666666668,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3088.899999999994,
+            "Percentage_sims_delay_departure": 24.2,
+            "Mean_Minutes_departure_delay": 259.8677685950413,
+            "Regularity_value": 94.02645194703507
+        },
+        "5727-19:27": {
+            "Mean_Occupation_Percentage": 27.2534375,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3134.4619999999995,
+            "Percentage_sims_delay_departure": 28.1,
+            "Mean_Minutes_departure_delay": 292.83985765124555,
+            "Regularity_value": 88.72390927523148
+        },
+        "2646-20:40": {
+            "Mean_Occupation_Percentage": 31.879916666666663,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3164.7820000000065,
+            "Percentage_sims_delay_departure": 0.4,
+            "Mean_Minutes_departure_delay": 94.5,
+            "Regularity_value": 83.62447744055876
+        },
+        "5727-21:36": {
+            "Mean_Occupation_Percentage": 26.482499999999998,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2774.636000000013,
+            "Percentage_sims_delay_departure": 31.5,
+            "Mean_Minutes_departure_delay": 274.0825396825397,
+            "Regularity_value": 91.72332629067787
+        },
+        "2646-22:42": {
+            "Mean_Occupation_Percentage": 11.814166666666665,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2674.583999999988,
+            "Percentage_sims_delay_departure": 0.1,
+            "Mean_Minutes_departure_delay": 68.0,
+            "Regularity_value": 100.0
+        }
+    },
+    "4014": {
+        "2646-23:00": {
+            "Mean_Occupation_Percentage": 8.56925,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2209.577999999994,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        }
+    },
+    "4011": {
+        "2646-9:35": {
+            "Mean_Occupation_Percentage": 42.11875,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3394.4100000000035,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 87.848834997812
+        },
+        "5727-10:38": {
+            "Mean_Occupation_Percentage": 19.12739583333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2725.086000000003,
+            "Percentage_sims_delay_departure": 14.6,
+            "Mean_Minutes_departure_delay": 164.95890410958904,
+            "Regularity_value": 98.85593558124452
+        },
+        "2646-11:35": {
+            "Mean_Occupation_Percentage": 24.017666666666663,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2901.2940000000017,
+            "Percentage_sims_delay_departure": 3.3000000000000003,
+            "Mean_Minutes_departure_delay": 115.63636363636364,
+            "Regularity_value": 100.0
+        },
+        "5727-12:38": {
+            "Mean_Occupation_Percentage": 30.50177083333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3042.2319999999963,
+            "Percentage_sims_delay_departure": 0.6,
+            "Mean_Minutes_departure_delay": 29.0,
+            "Regularity_value": 90.91888498318627
+        },
+        "2646-13:34": {
+            "Mean_Occupation_Percentage": 24.170666666666666,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2932.113999999994,
+            "Percentage_sims_delay_departure": 18.2,
+            "Mean_Minutes_departure_delay": 190.75824175824175,
+            "Regularity_value": 98.00354923899798
+        },
+        "5727-14:31": {
+            "Mean_Occupation_Percentage": 46.3759375,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3479.5540000000037,
+            "Percentage_sims_delay_departure": 15.0,
+            "Mean_Minutes_departure_delay": 225.8,
+            "Regularity_value": 83.81577468377218
+        },
+        "2646-15:31": {
+            "Mean_Occupation_Percentage": 27.245166666666666,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2941.2779999999984,
+            "Percentage_sims_delay_departure": 42.9,
+            "Mean_Minutes_departure_delay": 243.2074592074592,
+            "Regularity_value": 96.23487845155789
+        },
+        "5727-16:28": {
+            "Mean_Occupation_Percentage": 31.352083333333336,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3151.4060000000027,
+            "Percentage_sims_delay_departure": 14.799999999999999,
+            "Mean_Minutes_departure_delay": 177.02702702702703,
+            "Regularity_value": 93.49709239970848
+        },
+        "2646-17:27": {
+            "Mean_Occupation_Percentage": 32.017916666666665,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3220.12000000001,
+            "Percentage_sims_delay_departure": 17.599999999999998,
+            "Mean_Minutes_departure_delay": 211.57954545454547,
+            "Regularity_value": 93.46705270679678
+        },
+        "5727-18:30": {
+            "Mean_Occupation_Percentage": 39.47083333333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3455.3800000000047,
+            "Percentage_sims_delay_departure": 11.5,
+            "Mean_Minutes_departure_delay": 204.2608695652174,
+            "Regularity_value": 81.80458144952813
+        },
+        "5727-20:31": {
+            "Mean_Occupation_Percentage": 31.004062499999996,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3013.7780000000057,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 88.6001563239841
+        },
+        "5727-22:50": {
+            "Mean_Occupation_Percentage": 29.53364583333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2668.220000000001,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 87.06590423349168
+        }
+    },
+    "4008": {
+        "2646-7:06": {
+            "Mean_Occupation_Percentage": 43.65775,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3448.3960000000006,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 99.9894609212498
+        },
+        "5727-8:05": {
+            "Mean_Occupation_Percentage": 19.189375000000002,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2686.7259999999987,
+            "Percentage_sims_delay_departure": 43.2,
+            "Mean_Minutes_departure_delay": 331.25,
+            "Regularity_value": 90.415640550787
+        },
+        "2646-9:04": {
+            "Mean_Occupation_Percentage": 28.304333333333332,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3434.0639999999985,
+            "Percentage_sims_delay_departure": 6.5,
+            "Mean_Minutes_departure_delay": 182.58461538461538,
+            "Regularity_value": 81.85295524937992
+        },
+        "5727-10:10": {
+            "Mean_Occupation_Percentage": 17.593645833333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2702.1399999999994,
+            "Percentage_sims_delay_departure": 10.7,
+            "Mean_Minutes_departure_delay": 147.86915887850466,
+            "Regularity_value": 100.0
+        },
+        "2646-11:08": {
+            "Mean_Occupation_Percentage": 25.3845,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2920.7000000000044,
+            "Percentage_sims_delay_departure": 1.3,
+            "Mean_Minutes_departure_delay": 178.6153846153846,
+            "Regularity_value": 97.77452978248984
+        },
+        "5727-12:07": {
+            "Mean_Occupation_Percentage": 19.159479166666664,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2777.332000000002,
+            "Percentage_sims_delay_departure": 3.2,
+            "Mean_Minutes_departure_delay": 95.3125,
+            "Regularity_value": 98.18230913735144
+        },
+        "2646-13:10": {
+            "Mean_Occupation_Percentage": 31.89033333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3054.699999999997,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 92.6771017572078
+        },
+        "5727-14:05": {
+            "Mean_Occupation_Percentage": 34.3903125,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3282.850000000006,
+            "Percentage_sims_delay_departure": 25.2,
+            "Mean_Minutes_departure_delay": 236.5873015873016,
+            "Regularity_value": 92.14675844281476
+        },
+        "2646-15:06": {
+            "Mean_Occupation_Percentage": 23.682,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2861.7520000000004,
+            "Percentage_sims_delay_departure": 23.3,
+            "Mean_Minutes_departure_delay": 250.6609442060086,
+            "Regularity_value": 98.37330195157706
+        },
+        "5727-16:06": {
+            "Mean_Occupation_Percentage": 29.478125,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3098.475999999995,
+            "Percentage_sims_delay_departure": 3.9,
+            "Mean_Minutes_departure_delay": 163.12820512820514,
+            "Regularity_value": 93.33179649666411
+        },
+        "2646-17:06": {
+            "Mean_Occupation_Percentage": 29.926750000000002,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3196.0520000000033,
+            "Percentage_sims_delay_departure": 6.5,
+            "Mean_Minutes_departure_delay": 150.55384615384617,
+            "Regularity_value": 93.26081981135
+        },
+        "5727-19:39": {
+            "Mean_Occupation_Percentage": 28.702708333333337,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3098.5580000000045,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 90.9964937389164
+        },
+        "2646-20:54": {
+            "Mean_Occupation_Percentage": 21.158166666666663,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2952.4860000000044,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 94.89143051135197
+        },
+        "5727-21:51": {
+            "Mean_Occupation_Percentage": 21.63447916666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2644.5380000000005,
+            "Percentage_sims_delay_departure": 11.5,
+            "Mean_Minutes_departure_delay": 220.22608695652173,
+            "Regularity_value": 99.73817807498506
+        },
+        "2646-23:16": {
+            "Mean_Occupation_Percentage": 9.127166666666668,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2225.2639999999956,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        }
+    },
+    "4012": {
+        "2646-16:18": {
+            "Mean_Occupation_Percentage": 27.815666666666665,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3049.173999999999,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        },
+        "5727-17:19": {
+            "Mean_Occupation_Percentage": 33.735312500000006,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3273.5420000000013,
+            "Percentage_sims_delay_departure": 4.6,
+            "Mean_Minutes_departure_delay": 150.2608695652174,
+            "Regularity_value": 94.93971656061689
+        },
+        "2646-18:19": {
+            "Mean_Occupation_Percentage": 29.971416666666666,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3147.3879999999917,
+            "Percentage_sims_delay_departure": 21.3,
+            "Mean_Minutes_departure_delay": 229.68075117370893,
+            "Regularity_value": 91.72036979992838
+        },
+        "5727-19:17": {
+            "Mean_Occupation_Percentage": 32.66739583333334,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3225.550000000003,
+            "Percentage_sims_delay_departure": 23.200000000000003,
+            "Mean_Minutes_departure_delay": 214.48275862068965,
+            "Regularity_value": 83.76772488984103
+        },
+        "2646-20:19": {
+            "Mean_Occupation_Percentage": 23.25283333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3042.76400000001,
+            "Percentage_sims_delay_departure": 12.1,
+            "Mean_Minutes_departure_delay": 216.4793388429752,
+            "Regularity_value": 89.3840020206785
+        },
+        "5727-21:21": {
+            "Mean_Occupation_Percentage": 26.326354166666665,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2822.774000000005,
+            "Percentage_sims_delay_departure": 5.5,
+            "Mean_Minutes_departure_delay": 219.8181818181818,
+            "Regularity_value": 87.31389130873417
+        },
+        "2646-22:26": {
+            "Mean_Occupation_Percentage": 18.622666666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2879.9500000000116,
+            "Percentage_sims_delay_departure": 0.1,
+            "Mean_Minutes_departure_delay": 110.0,
+            "Regularity_value": 85.08643577228288
+        },
+        "5727-23:27": {
+            "Mean_Occupation_Percentage": 7.503333333333333,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2319.8880000000063,
+            "Percentage_sims_delay_departure": 1.9,
+            "Mean_Minutes_departure_delay": 147.05263157894737,
+            "Regularity_value": 100.0
+        }
+    },
+    "4009": {
+        "5727-7:20": {
+            "Mean_Occupation_Percentage": 18.1059375,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2487.0519999999997,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 100.0
+        },
+        "2646-8:18": {
+            "Mean_Occupation_Percentage": 40.1915,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3594.224000000002,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 84.87861039180429
+        },
+        "5727-9:15": {
+            "Mean_Occupation_Percentage": 15.1,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2729.7180000000008,
+            "Percentage_sims_delay_departure": 65.4,
+            "Mean_Minutes_departure_delay": 405.6666666666667,
+            "Regularity_value": 100.0
+        },
+        "2646-10:25": {
+            "Mean_Occupation_Percentage": 37.38316666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3176.7660000000033,
+            "Percentage_sims_delay_departure": 2.7,
+            "Mean_Minutes_departure_delay": 236.14814814814815,
+            "Regularity_value": 90.23115411960701
+        },
+        "5727-11:24": {
+            "Mean_Occupation_Percentage": 22.06791666666667,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2739.6100000000006,
+            "Percentage_sims_delay_departure": 17.5,
+            "Mean_Minutes_departure_delay": 184.13714285714286,
+            "Regularity_value": 98.65947999310727
+        },
+        "2646-12:26": {
+            "Mean_Occupation_Percentage": 30.45275,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2981.5999999999985,
+            "Percentage_sims_delay_departure": 0.5,
+            "Mean_Minutes_departure_delay": 162.0,
+            "Regularity_value": 93.6558137086268
+        },
+        "5727-13:30": {
+            "Mean_Occupation_Percentage": 23.174999999999997,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3011.056000000004,
+            "Percentage_sims_delay_departure": 0.4,
+            "Mean_Minutes_departure_delay": 23.0,
+            "Regularity_value": 100.0
+        },
+        "2646-14:27": {
+            "Mean_Occupation_Percentage": 20.79058333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 2868.775999999998,
+            "Percentage_sims_delay_departure": 10.7,
+            "Mean_Minutes_departure_delay": 182.89719626168224,
+            "Regularity_value": 99.4771594998236
+        },
+        "5727-15:31": {
+            "Mean_Occupation_Percentage": 47.15927083333334,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3466.902000000002,
+            "Percentage_sims_delay_departure": 0.4,
+            "Mean_Minutes_departure_delay": 59.0,
+            "Regularity_value": 79.89525854448249
+        },
+        "2646-16:30": {
+            "Mean_Occupation_Percentage": 32.60916666666667,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3149.014000000003,
+            "Percentage_sims_delay_departure": 44.7,
+            "Mean_Minutes_departure_delay": 266.0268456375839,
+            "Regularity_value": 95.0434746055939
+        },
+        "5727-18:05": {
+            "Mean_Occupation_Percentage": 29.9371875,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3331.403999999995,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 87.82377383018094
+        },
+        "2646-19:06": {
+            "Mean_Occupation_Percentage": 25.0555,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3119.2660000000033,
+            "Percentage_sims_delay_departure": 20.1,
+            "Mean_Minutes_departure_delay": 201.35323383084577,
+            "Regularity_value": 91.4873640848535
+        },
+        "5727-20:05": {
+            "Mean_Occupation_Percentage": 33.569583333333334,
+            "Direction": "toB",
+            "Mean_time_of_trip": 3161.1600000000035,
+            "Percentage_sims_delay_departure": 18.099999999999998,
+            "Mean_Minutes_departure_delay": 211.59116022099448,
+            "Regularity_value": 78.24604282057408
+        },
+        "2646-21:06": {
+            "Mean_Occupation_Percentage": 21.079083333333333,
+            "Direction": "to_A",
+            "Mean_time_of_trip": 3007.7580000000016,
+            "Percentage_sims_delay_departure": 11.899999999999999,
+            "Mean_Minutes_departure_delay": 160.25210084033614,
+            "Regularity_value": 89.66771217032546
+        },
+        "5727-23:16": {
+            "Mean_Occupation_Percentage": 25.893229166666664,
+            "Direction": "toB",
+            "Mean_time_of_trip": 2627.720000000001,
+            "Percentage_sims_delay_departure": 0.0,
+            "Mean_Minutes_departure_delay": null,
+            "Regularity_value": 90.23549836476865
+        }
+    }
+}

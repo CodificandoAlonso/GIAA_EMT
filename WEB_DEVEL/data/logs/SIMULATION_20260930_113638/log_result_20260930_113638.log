@@ -1,0 +1,130 @@
+[2026-09-30 11:36:38] [0;34m[INFO][0m ==========================================
+[2026-09-30 11:36:38] [0;34m[INFO][0m   GAMA BATCH SIMULATION PREPARATION
+[2026-09-30 11:36:38] [0;34m[INFO][0m ==========================================
+[2026-09-30 11:36:38] [0;34m[INFO][0m Batch experiment: batch_1000
+[2026-09-30 11:36:38] [0;34m[INFO][0m HPC cores: GAMA=12 C=5
+[2026-09-30 11:36:38] [0;34m[INFO][0m Source project: ../../GAMA/src/TEST_MOBILITY
+[2026-09-30 11:36:38] [0;34m[INFO][0m Simulation directory: ../data/logs/SIMULATION_20260930_113638
+[2026-09-30 11:36:38] [0;34m[INFO][0m --- Phase 1: Pre-cleanup ---
+[2026-09-30 11:36:38] [0;34m[INFO][0m Removing previous symlinks from original project...
+[2026-09-30 11:36:38] [0;32m[SUCCESS][0m Pre-cleanup completed in 0s
+[2026-09-30 11:36:38] [0;34m[INFO][0m --- Phase 2: Project Snapshot ---
+[2026-09-30 11:36:38] [0;34m[INFO][0m Copying full GAMA project to simulation directory...
+[2026-09-30 11:36:38] [0;34m[INFO][0m --- Phase 2.2: Copying C DIR Inside the sim directory ---
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/alighting_params_toA.csv to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/alighting_params_toB.csv to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/final_input.json to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/input_data_E01_toA.csv to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/input_data_E01_toB.csv to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/input_stops.txt to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/input_times_stops_toA.csv to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/input_times_stops_toB.csv to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/ROUTE to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/server.js to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;34m[INFO][0m copying ../../BASE_DATA/STOPS to C's and GAMA's data folders
+[2026-09-30 11:36:38] [0;32m[SUCCESS][0m Project snapshot created in 0s
+[2026-09-30 11:36:38] [0;34m[INFO][0m Copied model path: ../data/logs/SIMULATION_20260930_113638/TEST_MOBILITY/models/mobility_performance.gaml
+[2026-09-30 11:36:38] [0;34m[INFO][0m Inputs can be modified at: ../data/logs/SIMULATION_20260930_113638/TEST_MOBILITY/includes/
+[2026-09-30 11:39:15] [0;34m[INFO][0m ==========================================
+[2026-09-30 11:39:15] [0;34m[INFO][0m   SIMULATION EXECUTION PIPELINE
+[2026-09-30 11:39:15] [0;34m[INFO][0m ==========================================
+[2026-09-30 11:39:15] [0;34m[INFO][0m Engine: c (model key: c_engine)
+[2026-09-30 11:39:15] [0;34m[INFO][0m HPC cores: 5
+[2026-09-30 11:39:15] [0;34m[INFO][0m MASTER_SEED: 577684
+[2026-09-30 11:39:15] [0;34m[INFO][0m Concurrent runs at start: 1 (exclusive: no)
+[2026-09-30 11:39:15] [0;34m[INFO][0m Simulation directory: /app/WEB_DEVEL/data/logs/SIMULATION_20260930_113638
+[2026-09-30 11:39:15] [0;34m[INFO][0m --- Phase 1: Simulation ---
+[2026-09-30 11:39:15] [0;34m[INFO][0m Binary: /app/C_REWRITE/simulation
+[2026-09-30 11:39:15] [0;34m[INFO][0m Inputs staged at /app/WEB_DEVEL/data/logs/SIMULATION_20260930_113638/data
+[2026-09-30 11:39:15] [0;34m[INFO][0m Resource monitor started (PID 1257) -> /app/WEB_DEVEL/data/logs/SIMULATION_20260930_113638/MONITOR
+[monitor_resources] summary -> /app/WEB_DEVEL/data/logs/SIMULATION_20260930_113638/MONITOR/monitor_summary.json
+[2026-09-30 11:39:17] [0;34m[INFO][0m Stopping resource monitor...
+[2026-09-30 11:39:17] [0;32m[SUCCESS][0m Simulation completed in 2s
+[2026-09-30 11:39:17] [0;34m[INFO][0m --- Phase 4: Extract & Cleanup ---
+[2026-09-30 11:39:17] [0;34m[INFO][0m Extracting results, events, and inputs...
+[2026-09-30 11:39:17] [0;34m[INFO][0m Removing copied GAMA project files...
+[2026-09-30 11:39:17] [0;34m[INFO][0m Removing copied C proyect files...
+[2026-09-30 11:39:17] [0;34m[INFO][0m Removing C engine staging directory...
+[2026-09-30 11:39:17] [0;34m[INFO][0m Removing GAMA workspace directories...
+[2026-09-30 11:39:17] [0;32m[SUCCESS][0m Extract & cleanup completed in 0s
+[2026-09-30 11:39:17] [0;34m[INFO][0m --- Phase 5: Results Validation ---
+[2026-09-30 11:39:17] [0;34m[INFO][0m Result CSV files generated: 1
+[2026-09-30 11:39:17] [0;34m[INFO][0m Event CSV files generated: 1
+[2026-09-30 11:39:17] [0;34m[INFO][0m Passenger CSV files generated: 1
+[2026-09-30 11:39:17] [0;34m[INFO][0m Total results size: 87M
+[2026-09-30 11:39:17] [0;34m[INFO][0m RESULTS/results.csv: 2160000 rows
+[2026-09-30 11:39:17] [0;34m[INFO][0m PASSENGERS/passengers.csv: 1392030 rows
+[2026-09-30 11:39:17] [0;32m[SUCCESS][0m Resource monitor summary present
+[2026-09-30 11:39:17] [0;34m[INFO][0m --- Phase 6: Data Extraction & Analysis ---
+[2026-09-30 11:39:17] [0;34m[INFO][0m All Python dependencies satisfied
+[2026-09-30 11:39:17] [0;34m[INFO][0m Running new_c_eval.py (plots=all dpi=300 workers=5)...
+Cargando datos...
+  2160000 filas de resultados, 1000 replicas
+Explotando tiempos de espera...
+  'list_passengers_time' contiene instantes de creacion: se convierte a espera (current_time - creacion)
+Agrupando resultados...
+Procesando paradas sentido A...
+Procesando paradas sentido B...
+Procesando autobuses...
+Procesando tiempos entre paradas...
+
+=== Equivalencia de distribuciones (Bhattacharyya >= 0.97) ===
+  paradas fuera de la comparacion: [2646, 5727]
+  ocupacion   311/ 437 =   71.17%   (no evaluables: 0, coeff medio: 0.960778978663632)
+             sesgo medio -3.046 (-0.26 sigma), 81.5% de celdas por debajo
+  tiempo      463/ 464 =   99.78%   (no evaluables: 11, coeff medio: 0.9990378774795278)
+             sesgo medio +0.128 (+0.00 sigma), 49.4% de celdas por debajo
+  conjunto    774/ 901 =   85.90%   (no evaluables: 11, coeff medio: 0.9804816746132166)
+Dibujando 1091 graficas con 5 procesos...
+
+Hecho.
+[2026-09-30 11:40:27] [0;32m[SUCCESS][0m Data extraction completed in 1m 10s
+[2026-09-30 11:40:27] [0;34m[INFO][0m Generated 1097 plots and 5 JSON files
+[2026-09-30 11:40:27] [0;34m[INFO][0m Final simulation directory structure:
+[2026-09-30 11:40:27] [0;34m[INFO][0m   /app/WEB_DEVEL/data/logs/SIMULATION_20260930_113638/
+[2026-09-30 11:40:27] [0;34m[INFO][0m   ├── RESULTS/          (simulation output CSVs)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   ├── EVENTS/           (event logs)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   ├── PASSENGERS/       (passenger wait-time logs)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   ├── MONITOR/          (resource timeseries, summary, GC log)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   ├── PLOTS/
+[2026-09-30 11:40:27] [0;34m[INFO][0m   │   ├── to_A/         (occupation & time distribution plots)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   │   ├── to_B/         (occupation & time distribution plots)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   │   ├── general/      (aggregate occupation plots)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   │   ├── monitoring/   (CPU, memory, power & progress plots)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   │   ├── buses/        (per-bus per-trip plots + general_info.json)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   │   └── json_output_general_info.json
+[2026-09-30 11:40:27] [0;34m[INFO][0m   ├── includes/         (frozen simulation parameters)
+[2026-09-30 11:40:27] [0;34m[INFO][0m   └── log_result_*.log  (pipeline log)
+==========================================
+     EXECUTION SUMMARY
+==========================================
+
+0. Engine:                          c
+
+1. Pre-cleanup:                     n/a (prepare_simulation.sh)
+
+2. Project snapshot:                n/a (prepare_simulation.sh)
+
+3. Simulation:                      2s
+   - Exit code:                     0
+   - Result files:                  1
+   - Total size:                    87M
+   - HPC cores:                     5
+   - Master seed:                   577684
+   - Monitor summary:               yes
+
+4. Extract & cleanup:               0s
+
+5. Data extraction & analysis:      1m 10s
+   - Exit code:                     0
+   - Plots generated:               1097
+   - JSON files generated:          5
+
+------------------------------------------
+TOTAL PIPELINE TIME:                1m 12s
+==========================================
+
+Simulation: /app/WEB_DEVEL/data/logs/SIMULATION_20260930_113638
+Log file: /app/WEB_DEVEL/data/logs/SIMULATION_20260930_113638/log_result_20260930_113638.log
+
+[2026-09-30 11:40:27] [0;32m[SUCCESS][0m === Pipeline finished ===
