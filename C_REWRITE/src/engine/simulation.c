@@ -2,6 +2,7 @@
 #include "math/distributions/generic/generic_distro.h"
 #include "math/math_utils.h"
 #include "config/config.h"
+#include "math/random/RNG.h"
 
 #include<stdbool.h>
 
@@ -549,7 +550,7 @@ sim_context startup_thread_parameters(const global_inmutable_params *global_para
 
 
 
-void restart_agents(sim_context *simulation_variables){
+void restart_agents(sim_context *simulation_variables, u64 seed){
   
     for (size_t n = 0; n < simulation_variables->buses_size; n ++){
         simulation_variables->buses[n].agent.reset_agent((void *)&simulation_variables->buses[n]);
@@ -568,6 +569,7 @@ void restart_agents(sim_context *simulation_variables){
     memset(simulation_variables->random_gen_params, 0,
        simulation_variables->stops_size * sizeof *simulation_variables->random_gen_params);
 
+    RNG_reset(simulation_variables->random_generator,seed , simulation_variables->simulation_id);
 }
 
 void delete_agents(sim_context *simulation_variables){
@@ -620,12 +622,11 @@ void *replica_worker(void *arg) {
 
 void run_simulation_thread(sim_context *simulation_init_variables, u16 id){
 
-    restart_agents(simulation_init_variables);
-
 
 
     simulation_init_variables->simulation_id = id;
 
+    restart_agents(simulation_init_variables, simulation_init_variables->initial_seed);
 
     //Once the global params are set, with all the agents initialized, this is simply 2 function calls and
     //a check. First, update environment, second, update agents, and check ending condition. Thats it.

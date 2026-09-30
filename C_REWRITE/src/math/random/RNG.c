@@ -33,6 +33,25 @@ RNG *RNG_init(uint64_t state, uint64_t inc){
 }
 
 
+void RNG_reset(RNG *rng, uint64_t new_state, uint64_t new_inc){
+
+    rng->state = 0U;
+    rng->inc = (new_inc << 1u) | 1u;
+
+    pcg32_random_r(rng);
+
+    rng->state += new_state;
+
+    pcg32_random_r(rng);
+
+}
+
+
+
+
+
+
+
 
 void RNG_destroy(RNG* rng_gen){
     free(rng_gen);

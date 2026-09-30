@@ -19,6 +19,20 @@ int main(void)
     
 
 
+
+
+    //REad and see if MASTER_SEED IS SET.
+
+    char *MASTER_SEED = getenv("MASTER_SEED");
+
+    if (MASTER_SEED == NULL){
+        perror("Error: MASTER_SEED ENV not declared in binary scope's execution\n");
+        exit(-1);
+    }
+
+    u64 master_seed = strtoul(MASTER_SEED, NULL, 10);
+
+
     //construct the inputs as parsed by the data.
 
     //distribution data as an input_data_matrix
@@ -52,7 +66,7 @@ int main(void)
         exit(-1);
     }
 
-    run_monte_carlo_replicas(&global_input_params);
+    run_monte_carlo_replicas(&global_input_params, master_seed);
 
     free((void *)stops_data_distributions);
 

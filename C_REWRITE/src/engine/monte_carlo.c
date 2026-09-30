@@ -16,7 +16,7 @@
 
 
 
-int run_monte_carlo_replicas(const global_inmutable_params *global_input_params){
+int run_monte_carlo_replicas(const global_inmutable_params *global_input_params, u64 seed){
 
     _Atomic size_t next_sim;
 
@@ -43,16 +43,16 @@ int run_monte_carlo_replicas(const global_inmutable_params *global_input_params)
     }
 
     for (size_t i = 0; i< N_THREADS; i++){
-        threads_array[i] = startup_thread_parameters(global_input_params, 1433, i);
+        threads_array[i] = startup_thread_parameters(global_input_params, seed, i);
         threads_array[i].next_sim = &next_sim;
         threads_array[i].writter = &worker_thread_parameters;
+        threads_array[i].initial_seed = seed;
         
         if (pthread_create(&array_threads[i], NULL, replica_worker, (void *)&threads_array[i]) != 0){
             perror("Error creating thread\n");
             exit(-2);
         }
     }
-
     for (size_t i = 0; i< N_THREADS; i++){
         pthread_join(array_threads[i],NULL);
     }
@@ -61,9 +61,3 @@ int run_monte_carlo_replicas(const global_inmutable_params *global_input_params)
 
     return 0;
 }
-
-
-
-
-
-

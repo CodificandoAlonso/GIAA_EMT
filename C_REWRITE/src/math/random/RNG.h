@@ -18,6 +18,9 @@ struct RNG{ uint64_t state;  uint64_t inc;};
 
 RNG* RNG_init(uint64_t state, uint64_t inc);
 
+void RNG_reset(RNG *rng, uint64_t new_state, uint64_t new_inc);
+
+
 void RNG_destroy(RNG *rng_gen);
 
 uint32_t pcg32_random_r (RNG *rng);

@@ -18,7 +18,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 #DATA DIR
-DATA_DIR="../../BASE_DATA"
+DATA_DIR="../../BASE_DATA/*"
 
 #GAMA
 GAMA_SRC="/opt/gama-platform/headless/"
@@ -129,20 +129,20 @@ log_info "Copying full GAMA project to simulation directory..."
 cp -r "$GAMA_PROJECT" "$BASE_DIR/TEST_MOBILITY"
 
 #WE ARE GONNA REMOVE THE DATA FROM TEST_MOBILITY
-rm "$BASE_DIR/TEST_MOBILITY/includes/INPUTS/*"
+rm "$BASE_DIR/TEST_MOBILITY/includes/INPUTS/"*
 
 log_info "--- Phase 2.2: Copying C DIR Inside the sim directory ---"
 
 cp -r "$C_PROJECT" "$BASE_DIR/C_REWRITE"
 
 #WE ARE GONNA REMOVE THE DATA FROM C_REWRITE
-rm "$BASE_DIR/C_REWRITE/data/*"
+rm -rf "$BASE_DIR/C_REWRITE/data/"*
 
 #NOW, FOR BOTH FILES
 
 for f in $DATA_DIR; do
     filename="$f"
-    echo "copying $filename to C's and GAMA's data folders"
+    log_info "copying $filename to C's and GAMA's data folders"
     cp -r $filename "$BASE_DIR/C_REWRITE/data/"
     cp -r $filename "$BASE_DIR/TEST_MOBILITY/includes/INPUTS/"
 done

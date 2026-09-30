@@ -36,6 +36,7 @@ typedef struct sim_context {
     /* ---- set once per thread, never reset ---- */
     const global_inmutable_params *global_params;
     RNG                        *random_generator;
+    u64                         initial_seed;
     worker_thread_params          *writter;        /* the three output queues */
     _Atomic size_t                *next_sim;   /* shared claim counter */
 
@@ -87,7 +88,7 @@ void start_simulation(sim_context *simulation_variables);
 
 void delete_agents(sim_context *simulation_variables);
 
-void restart_agents(sim_context *simulation_variables);
+void restart_agents(sim_context *simulation_variables, u64 seed);
 
 /**
  * @brief function called before starting up the monte carlo replicas
