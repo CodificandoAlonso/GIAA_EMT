@@ -219,6 +219,8 @@ async function loadDetail(simId) {
       }
     }
 
+    renderErrors(detail.errors);
+
     loadGeodata(simId);
     loadPlotsInfo(simId);
 
@@ -241,6 +243,26 @@ async function loadDetail(simId) {
     `;
     toast('Error al cargar la simulación: ' + err.message, 'error');
   }
+}
+
+// ---- Pipeline errors ----
+
+function renderErrors(errors) {
+  const card = document.getElementById('sim-error-card');
+  if (!card || !errors?.length) return;
+  const rows = errors.map(e => `
+    <li>
+      <span class="sim-error-time">${escHtml(e.time || '')}</span>
+      <strong>${escHtml(e.phase || '')}</strong>
+      <span class="sim-error-code">(código ${escHtml(String(e.code))})</span>
+      &mdash; ${escHtml(e.message || '')}
+    </li>`).join('');
+  card.innerHTML = `
+    <h3>&#10005; La simulación ha fallado</h3>
+    <ul>${rows}</ul>
+    <p>Consulta el log de ejecución más abajo para ver el detalle.</p>
+  `;
+  card.style.display = 'block';
 }
 
 // ---- Route map (SVG renderer) ----

@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const { execFile, spawn } = require('child_process');
 const { Server } = require('socket.io');
+const crypto = require('crypto');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -21,6 +22,8 @@ const ENGINES = {
   c_engine:       { type: 'c' },
 };
 const DEFAULT_MODEL_KEY = 'without_agents';
+const SIM_ID_RE = /^SIMULATION_\d{8}_\d{6}$/;
+const BASH_SCRIPTS_DIR = path.join(__dirname, '..', 'bash_scripts');
 const engineFor = (key) => ENGINES[key] || ENGINES[DEFAULT_MODEL_KEY];
 
 
@@ -50,19 +53,79 @@ app.get('/favicon.ico', (req, res) => {
 
 
 
-// Resolve the INPUTS directory for a simulation (supports both old and new layouts)
+// ---- Simulation inputs ----
+//
+// Input contract (all files come from BASE_DATA via prepare_simulation.sh):
+//   final_input.json                buses/departures      web r/w  C, GAMA, analysis
+//   input_data_E01_to{A,B}.csv      boardings             web r/w  C, GAMA
+//     Stop,Timeslot,DistributionType,Param1,Param2
+//     DistributionType: NORMAL (mu,sigma) | NEGATIVE BINOMIAL (r,p) | GEOMETRICAL (p,-)
+//   alighting_params_to{A,B}.csv    alightings            web r/w  C only
+//     Stop,TimeSlot,family,alpha,beta,P
+//     family: betabinom (alpha,beta) | binomial (P) | TERMINAL | TERMINAL_STOP
+//     Fraction of the bus occupancy that gets off at the stop.
+//   input_times_stops_to{A,B}.csv   travel times          web r/w  C, GAMA
+//   input_stops.txt                 stop order            read-only (C reference copy)
+//
+// The C parser tells distribution families apart by string length, so family
+// names and column order must be written back exactly as they were read.
+const INPUT_FILES = {
+  stopsToA:      'input_data_E01_toA.csv',
+  stopsToB:      'input_data_E01_toB.csv',
+  alightToA:     'alighting_params_toA.csv',
+  alightToB:     'alighting_params_toB.csv',
+  timesStopsToA: 'input_times_stops_toA.csv',
+  timesStopsToB: 'input_times_stops_toB.csv',
+};
+
+// Every directory holding a copy of the inputs of a prepared (not yet run)
+// simulation. The GAMA and C projects each get their own copy and the chosen
+// engine reads its own, so edits are written to all of them.
+function editableInputDirs(simPath) {
+  return [
+    path.join(simPath, 'TEST_MOBILITY', 'includes', 'INPUTS'),
+    path.join(simPath, 'C_REWRITE', 'data'),
+  ].filter(p => fs.existsSync(p));
+}
+
+// Resolve the INPUTS directory for a simulation (prepared or already run)
 function resolveInputsPath(simPath) {
-  const newLayout = path.join(simPath, 'TEST_MOBILITY', 'includes', 'INPUTS');
-  if (fs.existsSync(newLayout)) return newLayout;
-  const oldLayout = path.join(simPath, 'includes',);
-  if (fs.existsSync(oldLayout)) return oldLayout;
-  return null;
+  const candidates = [
+    ...editableInputDirs(simPath),
+    path.join(simPath, 'includes', 'INPUTS'), // finished GAMA run
+    path.join(simPath, 'includes'),           // finished C run
+  ];
+  return candidates.find(p => fs.existsSync(path.join(p, 'final_input.json'))) || null;
+}
+
+const MAX_SEED = (1n << 64n) - 1n;
+
+// Returns the seed as a decimal string, null if empty, or throws if invalid.
+function normalizeSeed(raw) {
+  const s = String(raw ?? '').trim();
+  if (s === '') return null;
+  if (!/^\d{1,20}$/.test(s) || BigInt(s) > MAX_SEED) {
+    throw new Error('La semilla debe ser un entero entre 0 y 18446744073709551615');
+  }
+  return BigInt(s).toString();
+}
+
+function randomSeed() {
+  return crypto.randomBytes(8).readBigUInt64BE().toString();
+}
+
+// description.txt values live on a single line between quotes
+function descValue(str) {
+  return String(str).replace(/[\r\n]+/g, ' ').replace(/"/g, "'");
 }
 
 function replicaProgress(simPath, engineType) {
   if (engineType === 'c') {
-    const done = fs.existsSync(path.join(simPath, '.done'));
-    return { runCount: done ? 1000 : 0, percentage: done ? 100 : 0 };
+    // The C engine writes a single results.csv, moved to RESULTS/ once the
+    // binary has finished; from then on only the analysis is pending.
+    const simulated = fs.existsSync(path.join(simPath, '.done'))
+                   || fs.existsSync(path.join(simPath, 'RESULTS', 'results.csv'));
+    return { runCount: simulated ? 1000 : 0, percentage: simulated ? 100 : 0 };
   }
   const activePath    = path.join(simPath, 'TEST_MOBILITY', 'logs', 'RESULTS');
   const completedPath = path.join(simPath, 'RESULTS');
@@ -75,13 +138,290 @@ function replicaProgress(simPath, engineType) {
 }
 
 
+// ---- Simulation status ----
+//
+// run_simulation.sh leaves two markers in the simulation directory:
+//   .error  one line per failure, "time|PHASE|exitCode|message" (first = cause)
+//   .done   simulation + analysis finished without errors (plots complete)
+const STATUS = {
+  PREPARED:      'Preparada',
+  QUEUED:        'En cola',
+  RUNNING:       'En progreso',
+  WAITING_PLOTS: 'Esperando Gr\u00e1ficas',
+  DONE:          'Completada',
+  ERROR:         'Error',
+};
+
+function readErrors(simPath) {
+  let raw;
+  try { raw = fs.readFileSync(path.join(simPath, '.error'), 'utf8'); } catch (_) { return null; }
+  const errors = raw.split('\n').filter(l => l.trim()).map(line => {
+    const [time, phase, code, ...msg] = line.split('|');
+    return { time, phase, code: Number(code), message: msg.join('|') };
+  });
+  return errors.length ? errors : null;
+}
+
+// Simulations that finished before the .done marker existed: the pipeline
+// log ends with "=== Pipeline finished ===" only after the analysis step.
+// Finished is a terminal state, so positive answers are cached.
+const _legacyFinished = new Set();
+function legacyFinished(simPath) {
+  if (_legacyFinished.has(simPath)) return true;
+  if (!fs.existsSync(path.join(simPath, 'PLOTS', 'json_output_general_info.json'))) return false;
+  try {
+    const log = fs.readdirSync(simPath).find(f => f.endsWith('.log'));
+    if (!log) return false;
+    const fd = fs.openSync(path.join(simPath, log), 'r');
+    const size = fs.fstatSync(fd).size;
+    const buf = Buffer.alloc(Math.min(size, 4096));
+    fs.readSync(fd, buf, 0, buf.length, size - buf.length);
+    fs.closeSync(fd);
+    if (!buf.toString('utf8').includes('=== Pipeline finished ===')) return false;
+  } catch (_) {
+    return false;
+  }
+  _legacyFinished.add(simPath);
+  return true;
+}
+
+function chartsReady(simPath) {
+  return fs.existsSync(path.join(simPath, '.done')) || legacyFinished(simPath);
+}
+
+// { status, runCount, percentage, hasCharts, errors } for a simulation directory
+function simStatus(simPath) {
+  const engineType = engineFor(parseDescription(simPath).model).type;
+  const { runCount, percentage } = replicaProgress(simPath, engineType);
+  const errors = readErrors(simPath);
+  const hasCharts = !errors && chartsReady(simPath);
+
+  let status = STATUS.RUNNING;
+  if (isQueued(simPath))       status = STATUS.QUEUED;
+  else if (errors)             status = STATUS.ERROR;
+  else if (hasCharts)          status = STATUS.DONE;
+  else if (runCount >= 1000)   status = STATUS.WAITING_PLOTS;
+  else if (!wasLaunched(simPath)) status = STATUS.PREPARED;
+
+  return { status, runCount, percentage, hasCharts, errors };
+}
+
+// ---- Run queue ----
+//
+// Every simulation is identified by its own directory, passed explicitly to
+// prepare_simulation.sh / run_simulation.sh (no shared .last_simulation).
+// Launch requests are queued with a <sim>/.queued marker (so the queue
+// survives a server restart) and started when there is room:
+//   - at most MAX_RUNS runs at once, and MAX_RUNS_PER_ENGINE per engine;
+//   - an "exclusive" run (energy measurements) starts only when nothing else
+//     is running and blocks everything behind it until it finishes. The
+//     resource monitor reads the whole container cgroup, so only exclusive
+//     runs have isolated metrics.
+// run_simulation.sh writes <sim>/.pid while alive; on startup, runs whose
+// process is gone without .done/.error are marked as failed.
+const MAX_RUNS = Number(process.env.EMT_MAX_RUNS) || 2;
+const MAX_RUNS_PER_ENGINE = {
+  // One GAMA batch already uses most of the heap and cores of the container.
+  gama: Number(process.env.EMT_MAX_GAMA_RUNS) || 1,
+  c:    Number(process.env.EMT_MAX_C_RUNS)    || 2,
+};
+
+// id -> { pid, engine, exclusive, adopted } for runs started by (or found
+// alive by) this server process
+const running = new Map();
+
+function isQueued(simPath) {
+  return fs.existsSync(path.join(simPath, '.queued'));
+}
+
+// Anything run_simulation.sh leaves behind once started
+function wasLaunched(simPath) {
+  return running.has(path.basename(simPath))
+      || ['.pid', 'MONITOR', 'RESULTS', '.error', '.done'].some(f => fs.existsSync(path.join(simPath, f)));
+}
+
+function processAlive(pid) {
+  try {
+    process.kill(pid, 0);
+  } catch (err) {
+    return err.code === 'EPERM';
+  }
+  // Guard against PID reuse after a restart
+  try {
+    return fs.readFileSync(`/proc/${pid}/cmdline`, 'utf8').includes('run_simulation.sh');
+  } catch (_) {
+    return true; // no /proc (non-Linux): trust kill(0)
+  }
+}
+
+function nowStamp() {
+  return new Date().toISOString().replace('T', ' ').slice(0, 19);
+}
+
+// Records a RUNNER error unless the pipeline already finished or reported one
+function recordRunnerError(id, message) {
+  const simPath = path.join(DATA_DIR, id);
+  if (!fs.existsSync(simPath) || readErrors(simPath) || fs.existsSync(path.join(simPath, '.done'))) return;
+  try {
+    fs.appendFileSync(path.join(simPath, '.error'), `${nowStamp()}|RUNNER|1|${message}\n`);
+  } catch (_) {}
+}
+
+function queuedSims() {
+  let entries = [];
+  try { entries = fs.readdirSync(DATA_DIR); } catch (_) { return []; }
+  return entries
+    .filter(id => SIM_ID_RE.test(id) && !running.has(id))
+    .map(id => {
+      try {
+        const q = JSON.parse(fs.readFileSync(path.join(DATA_DIR, id, '.queued'), 'utf8'));
+        return { id, queuedAt: q.queuedAt || 0 };
+      } catch (_) { return null; }
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.queuedAt - b.queuedAt || a.id.localeCompare(b.id));
+}
+
+function queuePosition(id) {
+  return queuedSims().findIndex(q => q.id === id) + 1;
+}
+
+function canStart(engine, exclusive) {
+  const runs = [...running.values()];
+  if (runs.some(r => r.exclusive)) return false;
+  if (exclusive) return runs.length === 0;
+  return runs.length < MAX_RUNS
+      && runs.filter(r => r.engine === engine).length < (MAX_RUNS_PER_ENGINE[engine] || 1);
+}
+
+// Highest number of simultaneous runs seen during each running simulation
+function recordConcurrency() {
+  const n = running.size;
+  for (const [id, r] of running) {
+    const file = path.join(DATA_DIR, id, '.concurrency');
+    let info = { exclusive: r.exclusive, maxConcurrentRuns: 0 };
+    try { info = { ...info, ...JSON.parse(fs.readFileSync(file, 'utf8')) }; } catch (_) {}
+    if (n > info.maxConcurrentRuns) {
+      info.maxConcurrentRuns = n;
+      try { fs.writeFileSync(file, JSON.stringify(info) + '\n'); } catch (_) {}
+    }
+  }
+}
+
+function startRun(id) {
+  const simPath = path.join(DATA_DIR, id);
+  const { model: modelKey, exclusive } = parseDescription(simPath);
+  const engine = engineFor(modelKey);
+  fs.rmSync(path.join(simPath, '.queued'), { force: true });
+
+  const proc = spawn('bash', [path.join(BASH_SCRIPTS_DIR, 'run_simulation.sh'), simPath], {
+    cwd: BASH_SCRIPTS_DIR,
+    detached: true,
+    stdio: 'ignore',
+    env: {
+      ...process.env,
+      GAMA_MODEL_NAME: engine.model || '',
+      EMT_CONCURRENT_RUNS: String(running.size + 1),
+      EMT_EXCLUSIVE: exclusive ? 'yes' : 'no',
+    },
+  });
+  proc.unref();
+  running.set(id, { pid: proc.pid, engine: engine.type, exclusive, adopted: false });
+  recordConcurrency();
+
+  // Safety net: if the pipeline dies without recording why (killed, bash
+  // error before the markers exist...), record it so the UI shows Error.
+  proc.on('exit', (code, signal) => {
+    running.delete(id);
+    if (code !== 0) {
+      recordRunnerError(id, `run_simulation.sh terminated with ${signal ? `signal ${signal}` : `exit code ${code}`}`);
+    }
+    pumpQueue();
+  });
+  proc.on('error', (err) => {
+    running.delete(id);
+    recordRunnerError(id, `could not start run_simulation.sh: ${err.message}`);
+    pumpQueue();
+  });
+}
+
+// Start queued runs in FIFO order while limits allow. A queued exclusive run
+// that cannot start yet blocks the ones behind it, so it is not starved.
+function pumpQueue() {
+  for (const { id } of queuedSims()) {
+    const simPath = path.join(DATA_DIR, id);
+    const { model, exclusive } = parseDescription(simPath);
+    const engine = engineFor(model).type;
+    if (canStart(engine, exclusive)) {
+      try { startRun(id); } catch (err) { recordRunnerError(id, `could not start: ${err.message}`); }
+    } else if (exclusive) {
+      break;
+    }
+  }
+}
+
+// Runs inherited from a previous server process have no 'exit' event:
+// poll them, and drop the ones whose process is gone.
+function reapAdoptedRuns() {
+  let changed = false;
+  for (const [id, r] of running) {
+    if (r.adopted && !processAlive(r.pid)) {
+      running.delete(id);
+      recordRunnerError(id, 'run_simulation.sh is no longer running (server or container restarted)');
+      changed = true;
+    }
+  }
+  if (changed) pumpQueue();
+}
+
+// On startup: adopt runs that are still alive, fail the ones that died with
+// the previous server process, then resume the queue.
+function recoverRuns() {
+  let entries = [];
+  try { entries = fs.readdirSync(DATA_DIR); } catch (_) { return; }
+  for (const id of entries.filter(e => SIM_ID_RE.test(e))) {
+    const pidFile = path.join(DATA_DIR, id, '.pid');
+    if (!fs.existsSync(pidFile)) continue;
+    const pid = Number(fs.readFileSync(pidFile, 'utf8').trim());
+    if (pid && processAlive(pid)) {
+      const { model, exclusive } = parseDescription(path.join(DATA_DIR, id));
+      running.set(id, { pid, engine: engineFor(model).type, exclusive, adopted: true });
+    } else {
+      fs.rmSync(pidFile, { force: true });
+      recordRunnerError(id, 'run_simulation.sh is no longer running (server or container restarted)');
+    }
+  }
+  pumpQueue();
+}
+
+// New directory SIMULATION_<local time>; mkdir is atomic, so two requests in
+// the same second get consecutive seconds instead of sharing a directory.
+function reserveSimId() {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  const pad = (n) => String(n).padStart(2, '0');
+  let t = Date.now();
+  for (let i = 0; i < 600; i++, t += 1000) {
+    const d = new Date(t);
+    const id = `SIMULATION_${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`
+             + `_${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+    try {
+      fs.mkdirSync(path.join(DATA_DIR, id));
+      return id;
+    } catch (err) {
+      if (err.code !== 'EEXIST') throw err;
+    }
+  }
+  throw new Error('Could not reserve a simulation id');
+}
+
 // Parse description.txt: `title "..."`, `description "..."`, `line "..."`
 function parseDescription(simPath) {
   const descPath = path.join(simPath, 'description.txt');
-  if (!fs.existsSync(descPath)) return { title: null, description: null, line: null, model: null };
+  const empty = { title: null, description: null, line: null, model: null, seed: null, exclusive: false };
+  if (!fs.existsSync(descPath)) return empty;
   try {
     const lines = fs.readFileSync(descPath, 'utf8').split('\n');
-    let title = null, description = null, line = null, model = null;
+    let title = null, description = null, line = null, model = null, seed = null, exclusive = false;
     for (const rawLine of lines) {
       const sp = rawLine.indexOf(' ');
       if (sp === -1) continue;
@@ -92,10 +432,12 @@ function parseDescription(simPath) {
       else if (key === 'description') description = val;
       else if (key === 'line') line = val;
       else if (key === 'model') model = val;
+      else if (key === 'seed') seed = val;
+      else if (key === 'exclusive') exclusive = val === 'yes';
     }
-    return { title, description, line, model };
+    return { title, description, line, model, seed, exclusive };
   } catch (_) {
-    return { title: null, description: null, line: null, model: null };
+    return empty;
   }
 }
 
@@ -108,13 +450,7 @@ app.get('/api/simulations', (req, res) => {
       .map(e => {
         const id = e.name;
         const simPath = path.join(DATA_DIR, id);
-        const resultsPath = path.join(simPath, 'RESULTS');
-        const chartsPath = path.join(simPath, 'PLOTS');
-        let status = 'En progreso';
-        let runCount = 0;
-        runCount = replicaProgress(simPath, engineFor(parseDescription(simPath).model).type).runCount;
-
-        const hasCharts = fs.existsSync(chartsPath) && fs.readdirSync(chartsPath).some(f => f.endsWith('.json'));
+        const { status, runCount, hasCharts, errors } = simStatus(simPath);
 
         // Parse datetime from folder name: SIMULATION_YYYYMMDD_HHMMSS
         const match = id.match(/SIMULATION_(\d{8})_(\d{6})/);
@@ -124,14 +460,9 @@ app.get('/api/simulations', (req, res) => {
           const t = match[2];
           datetime = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)} ${t.slice(0, 2)}:${t.slice(2, 4)}:${t.slice(4, 6)}`;
         }
-        if (runCount === 1000){
-          status = 'Completada';
-        }
-        else{ 
-          status = 'En progreso';
-        }
         const { title, description, model} = parseDescription(simPath);
-        return { id, datetime, runCount, hasCharts, title, description, status, model };
+        return { id, datetime, runCount, hasCharts, title, description, status, model,
+                 error: errors ? errors[0] : null };
       })
       .sort((a, b) => b.id.localeCompare(a.id));
 
@@ -154,12 +485,8 @@ app.get('/api/simulations/:id', (req, res) => {
     return res.status(404).json({ error: 'Simulation not found' });
   }
 
-  const resultsPath = path.join(simPath, 'RESULTS');
   const chartsPath = path.join(simPath, 'PLOTS');
-
-  // Count runs
-  let runCount = 0;
-  runCount = replicaProgress(simPath, engineFor(parseDescription(simPath).model).type).runCount;
+  const { status, runCount, hasCharts, errors } = simStatus(simPath);
 
   // List chart images
   let charts = [];
@@ -189,7 +516,7 @@ app.get('/api/simulations/:id', (req, res) => {
   }
 
   const { title, description, model } = parseDescription(simPath);
-  res.json({ id, datetime, runCount, charts, logContent, title, description , model});
+  res.json({ id, datetime, runCount, charts, logContent, title, description, model, status, hasCharts, errors });
 });
 
 
@@ -246,26 +573,25 @@ app.get('/api/simulations/:id/geodata', (req, res) => {
 
 // Prepare new simulation: run prepare_simulation.sh and return the new simId
 app.post('/api/simulations/prepare', (req, res) => {
-  const bashScriptsDir = path.join(__dirname, '..', 'bash_scripts');
-  const scriptPath = path.join(bashScriptsDir, 'prepare_simulation.sh');
-  const lastSimFile = path.join(bashScriptsDir, '.last_simulation');
+  const scriptPath = path.join(BASH_SCRIPTS_DIR, 'prepare_simulation.sh');
 
   if (!fs.existsSync(scriptPath)) {
     return res.status(404).json({ error: 'prepare_simulation.sh not found' });
   }
 
-  execFile('bash', [scriptPath], { cwd: bashScriptsDir, timeout: 120000 }, (err, stdout, stderr) => {
-    if (err) return res.status(500).json({ error: err.message, stderr });
-    try {
-      const baseDirLine = fs.readFileSync(lastSimFile, 'utf8').trim();
-      const simId = path.basename(baseDirLine);
-      if (!simId.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-        return res.status(500).json({ error: 'Invalid simulation ID returned by prepare script: ' + simId });
-      }
-      res.json({ simId });
-    } catch (readErr) {
-      res.status(500).json({ error: 'Could not read simulation ID: ' + readErr.message });
+  let simId;
+  try {
+    simId = reserveSimId();
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+
+  execFile('bash', [scriptPath, simId], { cwd: BASH_SCRIPTS_DIR, timeout: 120000 }, (err, stdout, stderr) => {
+    if (err) {
+      fs.rmSync(path.join(DATA_DIR, simId), { recursive: true, force: true });
+      return res.status(500).json({ error: err.message, stderr });
     }
+    res.json({ simId });
   });
 });
 
@@ -299,13 +625,13 @@ app.get('/api/simulations/:id/inputs', (req, res) => {
       });
     };
 
-    const stopsToA      = parseCSVRows(path.join(inputsPath, 'input_data_E01_toA.csv'));
-    const stopsToB      = parseCSVRows(path.join(inputsPath, 'input_data_E01_toB.csv'));
-    const timesStopsToA = parseCSVRows(path.join(inputsPath, 'input_times_stops_toA.csv'));
-    const timesStopsToB = parseCSVRows(path.join(inputsPath, 'input_times_stops_toB.csv'));
-    const description   = parseDescription(simPath);
+    const data = { buses, description: parseDescription(simPath) };
+    for (const [key, file] of Object.entries(INPUT_FILES)) {
+      const filepath = path.join(inputsPath, file);
+      data[key] = fs.existsSync(filepath) ? parseCSVRows(filepath) : [];
+    }
 
-    res.json({ buses, stopsToA, stopsToB, timesStopsToA, timesStopsToB, description });
+    res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -319,27 +645,31 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
   }
 
   const simPath = path.join(DATA_DIR, id);
-  const inputsPath = resolveInputsPath(simPath);
+  const inputDirs = editableInputDirs(simPath);
 
-  if (!inputsPath) {
+  if (inputDirs.length === 0) {
     return res.status(404).json({ error: 'Inputs directory not found' });
   }
 
-  try {
-    const { description, buses, stopsToA, stopsToB, timesStopsToA, timesStopsToB } = req.body;
+  const { description, buses } = req.body;
 
+  let seed;
+  try {
+    seed = normalizeSeed(description?.seed) ?? randomSeed();
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+
+  try {
     // Write description.txt
     const descLines = [];
-    if (description?.title)       descLines.push(`title "${description.title}"`);
-    if (description?.description) descLines.push(`description "${description.description}"`);
+    if (description?.title)       descLines.push(`title "${descValue(description.title)}"`);
+    if (description?.description) descLines.push(`description "${descValue(description.description)}"`);
     descLines.push(`line ${description?.line || 401}`); //HARDCODDED
-    descLines.push(`model ${description?.model || DEFAULT_MODEL_KEY}`);
+    descLines.push(`model ${ENGINES[description?.model] ? description.model : DEFAULT_MODEL_KEY}`);
+    descLines.push(`seed ${seed}`);
+    descLines.push(`exclusive ${description?.exclusive ? 'yes' : 'no'}`);
     fs.writeFileSync(path.join(simPath, 'description.txt'), descLines.join('\n') + '\n');
-
-    // Write buses JSON
-    if (buses) {
-      fs.writeFileSync(path.join(inputsPath, 'final_input.json'), JSON.stringify(buses, null, 2));
-    }
 
     const writeCSV = (filepath, rows) => {
       if (!rows || rows.length === 0) return;
@@ -349,12 +679,16 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
       fs.writeFileSync(filepath, lines.join('\n') + '\n');
     };
 
-    if (stopsToA)      writeCSV(path.join(inputsPath, 'input_data_E01_toA.csv'),      stopsToA);
-    if (stopsToB)      writeCSV(path.join(inputsPath, 'input_data_E01_toB.csv'),      stopsToB);
-    if (timesStopsToA) writeCSV(path.join(inputsPath, 'input_times_stops_toA.csv'), timesStopsToA);
-    if (timesStopsToB) writeCSV(path.join(inputsPath, 'input_times_stops_toB.csv'), timesStopsToB);
+    for (const dir of inputDirs) {
+      if (buses) {
+        fs.writeFileSync(path.join(dir, 'final_input.json'), JSON.stringify(buses, null, 2));
+      }
+      for (const [key, file] of Object.entries(INPUT_FILES)) {
+        if (req.body[key]) writeCSV(path.join(dir, file), req.body[key]);
+      }
+    }
 
-    res.json({ message: 'Configuración guardada correctamente' });
+    res.json({ message: 'Configuración guardada correctamente', seed });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -364,38 +698,43 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
 // Launch batch simulation (run_simulation.sh) for a prepared simulation
 app.post('/api/simulations/:id/run', (req, res) => {
   const { id } = req.params;
-  if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
+  if (!SIM_ID_RE.test(id)) {
     return res.status(400).json({ error: 'Invalid simulation ID' });
   }
 
-  const bashScriptsDir = path.join(__dirname, '..', 'bash_scripts');
-  const scriptPath = path.join(bashScriptsDir, 'run_simulation.sh');
-
-  if (!fs.existsSync(scriptPath)) {
+  const simPath = path.join(DATA_DIR, id);
+  if (!fs.existsSync(simPath)) {
+    return res.status(404).json({ error: 'Simulation not found' });
+  }
+  if (!fs.existsSync(path.join(BASH_SCRIPTS_DIR, 'run_simulation.sh'))) {
     return res.status(404).json({ error: 'run_simulation.sh not found' });
   }
 
-  // Point .last_simulation at this simulation so run_simulation.sh picks it up
-  const lastSimFile = path.join(bashScriptsDir, '.last_simulation');
-  fs.writeFileSync(lastSimFile, `../data/logs/${id}\n`);
+  const { seed, exclusive } = parseDescription(simPath);
+  if (!seed) {
+    return res.status(400).json({ error: 'La simulación no tiene semilla. Guarda la configuración antes de lanzarla.' });
+  }
+  if (running.has(id) || isQueued(simPath)) {
+    return res.status(409).json({ error: 'La simulación ya está en ejecución o en cola.' });
+  }
 
-  // Resolve the chosen GAML model from description.txt against the allowlist and
-  // hand it to the bash scripts via GAMA_MODEL_NAME.
-  const { model: modelKey } = parseDescription(path.join(DATA_DIR, id));
-  const modelFile = engineFor(modelKey).model || '';
+  // A relaunch starts clean: results of the previous attempt no longer apply.
+  for (const marker of ['.error', '.done']) fs.rmSync(path.join(simPath, marker), { force: true });
+  fs.writeFileSync(path.join(simPath, '.queued'), JSON.stringify({ queuedAt: Date.now(), exclusive }) + '\n');
+  pumpQueue();
 
-  const proc = spawn('bash', [scriptPath], {
-    cwd: bashScriptsDir,
-    detached: true,
-    stdio: 'ignore',
-    env: { ...process.env, GAMA_MODEL_NAME: modelFile },
-  });
-  proc.unref();
+  const started = running.has(id);
+  const position = started ? 0 : queuePosition(id);
 
   //Emit an alert via websockets to call for every index instance to rebuil.d the page in order to show the new sim info bar
-  io.emit('new_sim_launched', { id, title: req.body?.title || id });
+  io.emit('new_sim_launched', { id, title: parseDescription(simPath).title || id, queued: !started });
 
-  res.json({ message: 'Simulación lanzada', simId: id });
+  res.json({
+    message: started ? 'Simulación lanzada' : `Simulación en cola (posición ${position})`,
+    simId: id,
+    queued: !started,
+    position,
+  });
 });
 
 
@@ -409,7 +748,11 @@ app.delete('/api/simulations/:id', (req, res) => {
   if (!fs.existsSync(simPath)) {
     return res.status(404).json({ error: 'Simulation not found' });
   }
+  if (running.has(id)) {
+    return res.status(409).json({ error: 'La simulación está en ejecución; espera a que termine para eliminarla.' });
+  }
   try {
+    // A queued simulation leaves the queue with its directory.
     fs.rmSync(simPath, { recursive: true, force: true });
     res.json({ message: 'Simulation deleted' });
   } catch (err) {
@@ -585,27 +928,11 @@ function getInProgressSimulations() {
         const id = e.name;
         const simPath = path.join(DATA_DIR, id);
 
-        // Try active-run path first, fall back to post-cleanup path
-        const chartsPath = path.join(simPath, 'PLOTS');
-        const engineType = engineFor(parseDescription(simPath).model).type;
-        const { runCount, percentage } = replicaProgress(simPath, engineType);
-
-        let status = '';
-        if (runCount >= 1000){
-          const hasCharts = fs.existsSync(chartsPath) && fs.readdirSync(chartsPath).some(f => f.endsWith('.json'));
-          if (hasCharts){
-            status = 'Completada';
-          }
-          else{
-            status = 'Esperando Gr\u00e1ficas';
-          }
-        }
-        else{
-          status = 'En progreso';
-        }
-        return { id, runCount, percentage, status };
+        const { status, runCount, percentage, errors } = simStatus(simPath);
+        const position = status === STATUS.QUEUED ? queuePosition(id) : 0;
+        return { id, runCount, percentage, status, position, error: errors ? errors[0] : null };
       })
-      .filter(s => s.status !== 'Completada');
+      .filter(s => [STATUS.QUEUED, STATUS.RUNNING, STATUS.WAITING_PLOTS].includes(s.status));
   } catch (_) {
     return [];
   }
@@ -622,16 +949,19 @@ const _trackedInProgress = new Set();
 // Broadcast in-progress sim states to all connected clients every second.
 // Also fires sim_completed when a sim transitions out of the in-progress list.
 setInterval(() => {
+  reapAdoptedRuns();
   const inProgress = getInProgressSimulations();
   const currentIds = new Set(inProgress.map(s => s.id));
 
-  // Detect completions: was tracked last tick, now gone from in-progress list
+  // Detect completions/failures: was tracked last tick, now gone from in-progress list
   for (const id of _trackedInProgress) {
     if (!currentIds.has(id)) {
-      const { title } = parseDescription(path.join(DATA_DIR, id));
       const simPath = path.join(DATA_DIR, id);
       if (!fs.existsSync(simPath)) continue;  // deleted, not completed
-      io.emit('sim_completed', { id, title });
+      const { title } = parseDescription(simPath);
+      const { status, errors } = simStatus(simPath);
+      if (status === STATUS.ERROR) io.emit('sim_failed', { id, title, error: errors[0] });
+      else                         io.emit('sim_completed', { id, title });
     }
   }
 
@@ -646,5 +976,6 @@ setInterval(() => {
 
 // ---- Start server ----
 httpServer.listen(PORT, () => {
+  recoverRuns();
   console.log(`EMT GAMA Dashboard running at http://localhost:${PORT}`);
 });

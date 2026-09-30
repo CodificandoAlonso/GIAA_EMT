@@ -23,6 +23,15 @@
 # Author: Héctor Álvarez Marcos
 # ==========================================================================
 
+# Usage: run_simulation.sh [SIMULATION_DIR]
+#   The web server always passes the simulation directory, so several runs
+#   can coexist. Without it the directory is read from .last_simulation
+#   (manual use from the command line).
+
+# Relative paths (.last_simulation, ../data/known_data used by the analysis
+# scripts) are resolved against this script's directory.
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+
 # ----------------------------- Settings ------------------------------
 
 # Colors
@@ -32,7 +41,20 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-BASE_DIR=$(cat ./.last_simulation)
+BASE_DIR="${1:-$(cat ./.last_simulation 2>/dev/null)}"
+if [ -z "$BASE_DIR" ] || [ ! -d "$BASE_DIR" ]; then
+    echo "Simulation directory not found: '${BASE_DIR}'" >&2
+    exit 2
+fi
+# Absolute from here on: the GAMA run changes directory (see WORK_DIR).
+BASE_DIR="$(cd "$BASE_DIR" && pwd)"
+# Read by the analysis scripts instead of .last_simulation.
+export SIM_DIR="$BASE_DIR"
+
+# Per-run working directory. gama-headless.sh creates its .workspaceN folders
+# in the current directory; keeping them here means cleaning them up can
+# never touch a simulation running in parallel.
+WORK_DIR="${BASE_DIR}/.work"
 GAMA_SRC="/opt/headless/"
 MODEL_NAME="${GAMA_MODEL_NAME:-mobility_performance.gaml}"
 BATCH_NAME="batch_1000"
@@ -85,10 +107,28 @@ ENGINE_KEY=$(grep -E '^[[:space:]]*model[[:space:]]' "$BASE_DIR/description.txt"
 if [ "$ENGINE_KEY" = "c_engine" ]; then
     ENGINE="c"
     ANALYSIS_SCRIPT="${SCRIPT_DIR}/new_c_eval.py"
+    HPC_CORES=$C_HPC_CORES
 else
     ENGINE="gama"
     ANALYSIS_SCRIPT="${SCRIPT_DIR}/data_extractor.py"
+    HPC_CORES=$GAMA_HPC_CORES
 fi
+
+# 'seed' en description.txt -> MASTER_SEED (lo lee el binario en C, que aborta
+# si no esta definido). La pagina de configuracion siempre la escribe; si falta
+# o no es un entero de 64 bits se genera una y se anota en description.txt para
+# que la ejecucion sea reproducible.
+MASTER_SEED=$(grep -E '^[[:space:]]*seed[[:space:]]' "$BASE_DIR/description.txt" 2>/dev/null \
+              | head -1 | awk '{print $2}' | tr -d '"')
+# Cota 2^64-1 comparada como texto: la aritmetica de bash es de 64 bits con signo.
+if ! [[ "$MASTER_SEED" =~ ^[0-9]{1,20}$ ]] \
+   || { [ ${#MASTER_SEED} -eq 20 ] && [[ "$MASTER_SEED" > "18446744073709551615" ]]; }; then
+    MASTER_SEED=$(od -An -N8 -tu8 /dev/urandom | tr -d ' ')
+    sed -i '/^[[:space:]]*seed[[:space:]]/d' "$BASE_DIR/description.txt" 2>/dev/null
+    echo "seed $MASTER_SEED" >> "$BASE_DIR/description.txt"
+    SEED_GENERATED="yes"
+fi
+export MASTER_SEED
 
 # ----------------------------- FUNCIONES ----------------------------------
 
@@ -123,10 +163,29 @@ log_success() {
     echo -e "[$(date +'%Y-%m-%d %H:%M:%S')] ${GREEN}[SUCCESS]${NC} $1" | tee -a "$LOG_FILE"
 }
 
+# Marcadores de estado que lee el servidor (server.js, simStatus):
+#   .error -> la ejecucion ha fallado. Una linea por fallo con el formato
+#             "fecha|FASE|codigo|mensaje"; la primera es la causa que se
+#             muestra en la interfaz.
+#   .done  -> simulacion y analisis terminados sin ningun error: las graficas
+#             y los JSON estan completos.
+ERROR_FILE="${BASE_DIR}/.error"
+DONE_FILE="${BASE_DIR}/.done"
+
+# record_error FASE CODIGO MENSAJE
+record_error() {
+    log_error "$3"
+    printf '%s|%s|%s|%s\n' "$(date +'%Y-%m-%d %H:%M:%S')" "$1" "$2" "${3//|//}" >> "$ERROR_FILE"
+}
+
+has_error() {
+    [ -s "$ERROR_FILE" ]
+}
 
 cleanup_on_exit() {
     echo ""
     log_warning "Execution interrupted by user"
+    record_error "INTERRUPTED" 130 "Ejecucion interrumpida por una senal (SIGINT/SIGTERM)"
     # [MOD] SIGTERM (no -9) al monitor: necesita capturarlo para volcar el
     # summary. Con -9 se pierde la ejecucion interrumpida entera.
     if [ -n "${MONITOR_PID:-}" ]; then
@@ -136,25 +195,39 @@ cleanup_on_exit() {
     fi
     log_warning "TRYING TO TERMINATE SIMULATION PROCESS... ${SIM_PID:-}"
     kill -9 ${SIM_PID:-} 2>/dev/null
-    rm -rf ./.workspace*
+    rm -rf "$WORK_DIR"
     log_info "Cleanup done after interruption"
     exit 1
 }
 trap cleanup_on_exit SIGINT SIGTERM
 
+# .pid lets the server tell a live run from one that died with it (e.g. a
+# container restart) and so should be reported as an error.
+echo $$ > "$BASE_DIR/.pid"
+trap 'rm -f "$BASE_DIR/.pid"' EXIT
+
 # ========================== BEGIN ===========================
 
 PIPELINE_START=$(date +%s)
+
+# Un relanzamiento parte de cero: se descartan los marcadores de la ejecucion anterior.
+rm -f "$ERROR_FILE" "$DONE_FILE"
 
 log_info "=========================================="
 log_info "  SIMULATION EXECUTION PIPELINE"
 log_info "=========================================="
 log_info "Engine: $ENGINE (model key: ${ENGINE_KEY:-<unset>})"
 
-if [ "$ENGINE_KEY"  -eq "c_engine" ]; then
-    log_info "HPC cores: $C_HPC_CORES"
-else
-    log_info "HPC cores: $GAMA_HPC_CORES"
+log_info "HPC cores: $HPC_CORES"
+if [ -n "${SEED_GENERATED:-}" ]; then
+    log_warning "No valid seed in description.txt, generated one"
+fi
+log_info "MASTER_SEED: $MASTER_SEED"
+if [ -n "${EMT_CONCURRENT_RUNS:-}" ]; then
+    log_info "Concurrent runs at start: $EMT_CONCURRENT_RUNS (exclusive: ${EMT_EXCLUSIVE:-no})"
+    if [ "$EMT_CONCURRENT_RUNS" -gt 1 ]; then
+        log_warning "Other runs share the container: resource/energy metrics of this run are not isolated"
+    fi
 fi
 
 
@@ -189,7 +262,8 @@ if [ "$ENGINE" = "gama" ]; then
     export JAVA_TOOL_OPTIONS="-Denable_debug=false -Denable_logging=false -XX:+UseG1GC -Xlog:gc*:file=${MONITOR_DIR}/gc.log:time,uptime,level:filecount=1,filesize=100m"
 
     #-m heap and HPC_CORES "threads" which parallelyzes the simulations
-    "${GAMA_SRC}gama-headless.sh" -m $JAVA_HEAP -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" \
+    mkdir -p "$WORK_DIR"
+    ( cd "$WORK_DIR" && exec "${GAMA_SRC}gama-headless.sh" -m $JAVA_HEAP -hpc $HPC_CORES -batch $BATCH_NAME "$SIM_MODEL_PATH" ) \
     >> "$LOG_FILE" 2>&1 &
 
     SIM_PID=$!
@@ -264,14 +338,14 @@ else
     log_info "Binary: $C_BIN"
 
     if [ ! -x "$C_BIN" ]; then
-        log_error "C engine binary not found or not executable: $C_BIN"
         log_error "Rebuild the image (make release) or set EMT_C_BIN"
+        record_error "SETUP" 1 "C engine binary not found or not executable: $C_BIN"
         exit 1
     fi
 
     C_INPUTS="$BASE_DIR/C_REWRITE/data"
     if [ ! -d "$C_INPUTS" ]; then
-        log_error "Inputs not found at $C_INPUTS. Was the simulation prepared?"
+        record_error "SETUP" 1 "Inputs not found at $C_INPUTS. Was the simulation prepared?"
         exit 1
     fi
 
@@ -282,7 +356,7 @@ else
              alighting_params_toA.csv alighting_params_toB.csv \
              final_input.json; do
         if [ ! -f "$C_INPUTS/$f" ]; then
-            log_error "Missing input file: $C_INPUTS/$f"
+            record_error "SETUP" 1 "Missing input file: $C_INPUTS/$f"
             exit 1
         fi
         cp "$C_INPUTS/$f" "$BASE_DIR/data/$f"
@@ -292,7 +366,7 @@ else
     # input_stops.txt no lo gestiona la interfaz: es fijo por linea y se
     # toma de la copia de referencia que va dentro de la imagen.
     if [ ! -f "$C_DATA_REF/input_stops.txt" ]; then
-        log_error "Missing reference file: $C_DATA_REF/input_stops.txt"
+        record_error "SETUP" 1 "Missing reference file: $C_DATA_REF/input_stops.txt"
         exit 1
     fi
     cp "$C_DATA_REF/input_stops.txt" "$BASE_DIR/data/input_stops.txt"
@@ -342,7 +416,8 @@ BATCH_TIME=$((BATCH_END - BATCH_START))
 if [ $SIM_EXIT_CODE -eq 0 ]; then
     log_success "Simulation completed in $(format_time $BATCH_TIME)"
 else
-    log_error "Simulation FAILED with exit code $SIM_EXIT_CODE after $(format_time $BATCH_TIME)"
+    record_error "SIMULATION" "$SIM_EXIT_CODE" \
+        "Simulation ($ENGINE) FAILED with exit code $SIM_EXIT_CODE after $(format_time $BATCH_TIME)"
 fi
 
 # ------------------- FASE 4: EXTRACCIÓN Y LIMPIEZA -----------------------
@@ -404,7 +479,7 @@ if [ "$ENGINE" = "c" ]; then
 fi
 
 log_info "Removing GAMA workspace directories..."
-rm -rf ./.workspace*
+rm -rf "$WORK_DIR"
 
 POST_CLEANUP_END=$(date +%s)
 POST_CLEANUP_TIME=$((POST_CLEANUP_END - POST_CLEANUP_START))
@@ -428,9 +503,20 @@ log_info "Total results size: $TOTAL_SIZE"
 if [ "$ENGINE" = "c" ]; then
     # Un fichero por magnitud, con cabecera. anomalies.csv puede faltar de
     # forma legitima: una ejecucion sin retrasos no genera eventos.
-    for f in "RESULTS/results.csv" "PASSENGERS/passengers.csv"; do
+    # Ademas de existir, la cabecera debe empezar como la que escribe el
+    # binario: el analisis no falla con ficheros corruptos, genera graficas vacias.
+    for spec in "RESULTS/results.csv:simulation_id,bus_code,travels_completed,stop_num,direction" \
+                "PASSENGERS/passengers.csv:simulation_id,bus_code,travels_completed,stop_num"; do
+        f="${spec%%:*}"
+        header="${spec#*:}"
         if [ ! -s "$BASE_DIR/$f" ]; then
-            log_error "Missing or empty required output: $f"
+            record_error "OUTPUTS" 1 "Missing or empty required output: $f"
+            SIM_EXIT_CODE=1
+        elif [[ "$(head -1 "$BASE_DIR/$f")" != "$header"* ]]; then
+            record_error "OUTPUTS" 1 "Unexpected header in $f: $(head -1 "$BASE_DIR/$f" | cut -c1-80)"
+            SIM_EXIT_CODE=1
+        elif [ "$(wc -l < "$BASE_DIR/$f")" -lt 2 ]; then
+            record_error "OUTPUTS" 1 "No data rows in $f"
             SIM_EXIT_CODE=1
         else
             log_info "$f: $(( $(wc -l < "$BASE_DIR/$f") - 1 )) rows"
@@ -439,6 +525,8 @@ if [ "$ENGINE" = "c" ]; then
     if [ ! -s "$BASE_DIR/EVENTS/anomalies.csv" ]; then
         log_warning "EVENTS/anomalies.csv absent or empty (no delay events recorded)"
     fi
+elif [ "$RESULT_FILES" -eq 0 ]; then
+    record_error "OUTPUTS" 1 "GAMA produced no result CSV files in RESULTS/"
 fi
 
 # [MOD] Validacion de la monitorizacion: si el summary no existe, el
@@ -457,8 +545,9 @@ EXTRACTION_START=$(date +%s)
 
 log_info "--- Phase 6: Data Extraction & Analysis ---"
 
-# El script de analisis resuelve .last_simulation y todas las rutas
-# relativas con os.getcwd(), asi que debe invocarse desde este directorio.
+# El script de analisis lee la simulacion de SIM_DIR y resuelve el resto de
+# rutas relativas con os.getcwd(), asi que debe invocarse desde este directorio
+# (el cd del principio lo garantiza).
 # [MOD] SCRIPT_DIR ya definido en el bloque de settings.
 
 # --- Dependency check ---
@@ -467,7 +556,17 @@ MISSING_PACKAGES=()
 PLOT_COUNT=0
 JSON_COUNT=0
 
+# Sin resultados no hay nada que analizar: el analisis solo anadiria un
+# segundo error que taparia la causa real.
+if has_error; then
+    log_warning "Skipping data extraction: the pipeline already failed (see $ERROR_FILE)"
+    PYTHON_EXIT_CODE=1
+    EXTRACTION_TIME=0
+    SKIP_ANALYSIS="yes"
+fi
+
 for pkg in "${REQUIRED_PACKAGES[@]}"; do
+    [ -n "${SKIP_ANALYSIS:-}" ] && break
     if ! python3 -c "import ${pkg}" 2>/dev/null; then
         MISSING_PACKAGES+=("$pkg")
     fi
@@ -478,7 +577,7 @@ if [ ${#MISSING_PACKAGES[@]} -gt 0 ]; then
     log_info "Installing missing dependencies..."
     pip3 install --break-system-packages "${MISSING_PACKAGES[@]}" >> "$LOG_FILE" 2>&1
     if [ $? -ne 0 ]; then
-        log_error "Failed to install Python dependencies. Aborting data extraction."
+        record_error "DEPENDENCIES" 1 "Failed to install Python dependencies: ${MISSING_PACKAGES[*]}"
         PYTHON_EXIT_CODE=1
         EXTRACTION_END=$(date +%s)
         EXTRACTION_TIME=$((EXTRACTION_END - EXTRACTION_START))
@@ -487,7 +586,7 @@ else
     log_info "All Python dependencies satisfied"
 fi
 
-if [ "${PYTHON_EXIT_CODE:-0}" -eq 0 ]; then
+if [ -z "${SKIP_ANALYSIS:-}" ] && [ "${PYTHON_EXIT_CODE:-0}" -eq 0 ]; then
     log_info "Running $(basename "$ANALYSIS_SCRIPT") (plots=$SIM_PLOTS dpi=$SIM_PLOT_DPI workers=$SIM_WORKERS)..."
 
     python3 "$ANALYSIS_SCRIPT" >> "$LOG_FILE" 2>&1
@@ -497,18 +596,18 @@ if [ "${PYTHON_EXIT_CODE:-0}" -eq 0 ]; then
     EXTRACTION_TIME=$((EXTRACTION_END - EXTRACTION_START))
 fi
 
-if [ $PYTHON_EXIT_CODE -eq 0 ]; then
+if [ $PYTHON_EXIT_CODE -eq 0 ] && ! has_error; then
     PLOT_COUNT=$(find "$BASE_DIR/PLOTS" -name "*.png" 2>/dev/null | wc -l)
     JSON_COUNT=$(find "$BASE_DIR/PLOTS" -name "*.json" 2>/dev/null | wc -l)
     log_success "Data extraction completed in $(format_time $EXTRACTION_TIME)"
     log_info "Generated $PLOT_COUNT plots and $JSON_COUNT JSON files"
-    # [NUEVO] Marca de finalizacion. El servidor la usa para el progreso del
-    # motor en C, donde no puede contar replicas en el sistema de ficheros
-    # porque solo hay un results.csv.
-    touch "$BASE_DIR/.done"
-else
-    log_error "Data extraction FAILED with exit code $PYTHON_EXIT_CODE after $(format_time $EXTRACTION_TIME)"
+    # Marca de finalizacion: se escribe al final del analisis, cuando ya
+    # existen todas las figuras y JSON. El servidor la usa como "Graficas listas".
+    touch "$DONE_FILE"
+elif [ -z "${SKIP_ANALYSIS:-}" ]; then
     log_error "Check $LOG_FILE for Python traceback"
+    record_error "ANALYSIS" "$PYTHON_EXIT_CODE" \
+        "$(basename "$ANALYSIS_SCRIPT") FAILED with exit code $PYTHON_EXIT_CODE after $(format_time $EXTRACTION_TIME)"
 fi
 
 # ------------------- FINAL STRUCTURE LOG ----------------------------------
@@ -553,6 +652,7 @@ printf "%-35s %s\n" "   - Exit code:" "$SIM_EXIT_CODE" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - Result files:" "$RESULT_FILES" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - Total size:" "$TOTAL_SIZE" | tee -a "$LOG_FILE"
 printf "%-35s %s\n" "   - HPC cores:" "$HPC_CORES" | tee -a "$LOG_FILE"
+printf "%-35s %s\n" "   - Master seed:" "$MASTER_SEED" | tee -a "$LOG_FILE"
 if [ "$ENGINE" = "gama" ]; then
 printf "%-35s %s\n" "   - JVM heap:" "$JAVA_HEAP" | tee -a "$LOG_FILE"
 fi
@@ -572,5 +672,10 @@ echo "" | tee -a "$LOG_FILE"
 echo "Simulation: $BASE_DIR" | tee -a "$LOG_FILE"
 echo "Log file: $LOG_FILE" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
+
+if has_error; then
+    log_error "=== Pipeline finished with errors: $(head -1 "$ERROR_FILE" | cut -d'|' -f2-) ==="
+    exit 1
+fi
 
 log_success "=== Pipeline finished ==="

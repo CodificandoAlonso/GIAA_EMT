@@ -27,3 +27,5 @@ C_REWRITE/simulation
 
 # C engine test outputs (~190 MB, regenerated per simulation)
 C_REWRITE/data/outputs/
+# Simulation runs (GBs). docker-compose mounts this directory as a volume.
+WEB_DEVEL/data/logs/

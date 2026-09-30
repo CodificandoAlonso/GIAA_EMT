@@ -8,6 +8,15 @@
 # Author: Héctor Álvarez Marcos
 # ==========================================================================
 
+# Usage: prepare_simulation.sh [SIMULATION_YYYYMMDD_HHMMSS]
+#   With an id (what the web server does) the simulation directory is created
+#   under that name and nothing else is written, so several simulations can be
+#   prepared and run at the same time. Without it a timestamped id is generated
+#   and saved to .last_simulation, for manual use from the command line.
+
+# All relative paths below are relative to this script's directory.
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+
 # ----------------------------- Settings ------------------------------
 
 # Colors
@@ -33,8 +42,17 @@ C_HPC_CORES=5
 
 # ----------------------------- Directories --------------------------------
 
-TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
-BASE_DIR="../data/logs/SIMULATION_${TIMESTAMP}"
+if [ -n "${1:-}" ]; then
+    SIM_ID="$1"
+    if ! [[ "$SIM_ID" =~ ^SIMULATION_[0-9]{8}_[0-9]{6}$ ]]; then
+        echo "Invalid simulation id: $SIM_ID" >&2
+        exit 2
+    fi
+else
+    SIM_ID="SIMULATION_$(date +%Y%m%d_%H%M%S)"
+fi
+TIMESTAMP="${SIM_ID#SIMULATION_}"
+BASE_DIR="../data/logs/${SIM_ID}"
 
 mkdir -p "../data/logs"
 mkdir -p "$BASE_DIR"
@@ -78,8 +96,6 @@ log_success() {
 cleanup_on_exit() {
     echo ""
     log_warning "Execution interrupted by user"
-    kill $GAMA_PID 2>/dev/null
-    rm -rf ./.workspace*
     log_info "Cleanup done after interruption"
     exit 1
 }
@@ -93,7 +109,7 @@ log_info "=========================================="
 log_info "  GAMA BATCH SIMULATION PREPARATION"
 log_info "=========================================="
 log_info "Batch experiment: $BATCH_NAME"
-log_info "HPC cores: $HPC_CORES"
+log_info "HPC cores: GAMA=$GAMA_HPC_CORES C=$C_HPC_CORES"
 log_info "Source project: $GAMA_PROJECT"
 log_info "Simulation directory: $BASE_DIR"
 
@@ -109,9 +125,8 @@ rm -rf "$GAMA_PROJECT/logs/RESULTS"
 rm -rf "$GAMA_PROJECT/logs/EVENTS"
 rm -rf "$GAMA_PROJECT/logs/PASSENGERS"
 
-# Remove GAMA workspace directories
-log_info "Removing previous GAMA workspace directories..."
-rm -rf ./.workspace*
+# GAMA workspaces are no longer created here: each run keeps its own under
+# <simulation>/.work (see run_simulation.sh), so there is nothing shared to clean.
 
 CLEANUP_END=$(date +%s)
 CLEANUP_TIME=$((CLEANUP_END - CLEANUP_START))
@@ -161,4 +176,7 @@ log_success "Project snapshot created in $(format_time $SNAPSHOT_TIME)"
 log_info "Copied model path: $SIM_MODEL_PATH"
 log_info "Inputs can be modified at: $BASE_DIR/TEST_MOBILITY/includes/"
 
-echo "$BASE_DIR" > ./.last_simulation
+if [ -z "${1:-}" ]; then
+    echo "$BASE_DIR" > ./.last_simulation
+fi
+echo "$SIM_ID"
