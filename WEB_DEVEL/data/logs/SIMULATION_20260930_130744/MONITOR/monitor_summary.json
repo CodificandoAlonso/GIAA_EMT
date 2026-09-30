@@ -1,0 +1,38 @@
+{
+  "mode": "run",
+  "label": "c_engine",
+  "duration_s": 18.101,
+  "samples": 182,
+  "interval_s": 0.1,
+  "t0_mono": 9875162.215171102,
+  "t0_wall": 1790773688.381085,
+  "cores_assumed": 5,
+  "cpu_time_s": 27.1,
+  "cpu_user_s": 26.406,
+  "cpu_system_s": 0.694,
+  "cpu_pct_core_mean": 149.72,
+  "cpu_pct_core_max": 162.11,
+  "cpu_pct_alloc_mean": 29.94,
+  "memory_peak_bytes": 265760768,
+  "memory_peak_sampled_bytes": 265760768,
+  "memory_peak_gb": 0.248,
+  "io_read_bytes": 0,
+  "io_write_bytes": 100777984,
+  "io_available": true,
+  "replicas_done": 0,
+  "replicas_per_hour": null,
+  "cpu_s_per_replica": null,
+  "host": {
+    "cpu_model": "11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz",
+    "cpu_count_visible": 4,
+    "cgroup_v2": true,
+    "memory_peak_available": true,
+    "affinity": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "timeseries": "/app/WEB_DEVEL/data/logs/SIMULATION_20260930_130744/MONITOR/monitor_timeseries.csv"
+}
