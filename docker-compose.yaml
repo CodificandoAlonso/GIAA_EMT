@@ -47,4 +47,4 @@ services:
       resources:
         limits:
           cpus: "1.5"
-          memory: "1G"
+          memory: "3G"

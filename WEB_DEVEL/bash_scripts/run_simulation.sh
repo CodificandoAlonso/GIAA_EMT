@@ -98,7 +98,7 @@ MONITOR_INTERVAL_C="${EMT_MONITOR_INTERVAL_C:-0.1}"
 # y los CSV de Bhattacharyya.
 export SIM_PLOTS="${SIM_PLOTS:-all}"
 export SIM_PLOT_DPI="${SIM_PLOT_DPI:-300}"
-export SIM_WORKERS="${SIM_WORKERS:-$C_HPC_CORES}"
+export SIM_WORKERS=2
 
 # 'model' en description.txt -> motor. Cualquier valor que no sea c_engine
 # (incluida su ausencia) cae en GAMA, que es el comportamiento previo.
