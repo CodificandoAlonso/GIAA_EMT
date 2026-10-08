@@ -25,6 +25,8 @@
 %\documentclass[a4paper,fleqn,longmktitle]{cas-sc}
 
 \usepackage[numbers,sort&compress]{natbib}
+\usepackage[inkscapelatex=false]{svg}
+
 
 %\usepackage[authoryear]{natbib}
 %\usepackage[authoryear,longnamesfirst]{natbib}
@@ -54,7 +56,7 @@
 \shortauthors{Short authors, Carbo, Molina y Hector, for the in-page authors}  
 
 % Main title of the paper
-\title [mode = title]{Here goes the title}  
+\title [mode = title]{Draft paper base bach thesis}  
 
 % Title footnote mark
 % eg: \tnotemark[1]
@@ -141,18 +143,19 @@
 \begin{abstract}
 Here goes the abstract%% Remove this line from your manuscript.
 
-Lo pongo aqui no se muy bien por que. Creo que el enfoque adecuado para el paper debe ser el de,
-especificar que en casos donde los datos se presenten únicamente en forma de nº de carga y nº de
-descarga, mientras que la solucion general suele ser el representar al pasajero como agente
-e inferir su deseo mediante una OD matrix, al tener estas restricciones de datos junto 
-a que el objetivo no es analizar el comportamiento de los pasajeros, sino teniendo en cuenta el 
-número de pasajeros, analizar cómo se comportan los autobuses, un enfoque que no use OD, que se 
-suele estimar por IPF (con busqueda de maxima entropia y que DEPENDE MUCHO de la matriz semilla
-inicial, normalmente obtenida de encuestas o datos de tarjeta), se propone un enfoque donde la 
-carga y descarga se infiere de forma independiente. Esto se suma a, debido a que no se busca
-estudiar el comportamiento particular de pasajeros concretos, se puede reducir la granularidad
-al cargarnos el agente concreto, al no requerir de procesos coginitivos en él que alteren el
-comportamiento.
+% Lo pongo aqui no se muy bien por que. Creo que el enfoque adecuado para el paper debe ser el de,
+% especificar que en casos donde los datos se presenten únicamente en forma de nº de carga y nº de
+% descarga, mientras que la solucion general suele ser el representar al pasajero como agente
+% e inferir su deseo mediante una OD matrix, al tener estas restricciones de datos junto 
+% a que el objetivo no es analizar el comportamiento de los pasajeros, sino teniendo en cuenta el 
+% número de pasajeros, analizar cómo se comportan los autobuses, un enfoque que no use OD, que se 
+% suele estimar por IPF (con busqueda de maxima entropia y que DEPENDE MUCHO de la matriz semilla
+% inicial, normalmente obtenida de encuestas o datos de tarjeta), se propone un enfoque donde la 
+% carga y descarga se infiere de forma independiente. Esto se suma a, debido a que no se busca
+% estudiar el comportamiento particular de pasajeros concretos, se puede reducir la granularidad
+% al cargarnos el agente concreto, al no requerir de procesos coginitivos en él que alteren el
+% comportamiento.
+ABSTRAC ABSTRACT ABSTRACT
 \end{abstract}
 
 % Use if graphical abstract is present
@@ -183,7 +186,8 @@ Public transport offer analysis can result a very complicated task for governmen
 If the analysis is performed over real data recovered from trips across days, multiple month data window
 with same configuration is required in order to obtain statistically accurate results. The binding constraint
 in this case, however, is not the volume of the data stored, but rather the dependency 
-a small change in offer configuration can shift the data results towards inconsistencies due to that derivative.
+a small change in service supply configuration can shift the data results towards inconsistencies
+due to that derivative.
 For this specific problem. multiple entities relies on simulation techniques for the purpose of analyzing without
 real deployement.
 Cases like \cite{manser2020designing,sun2021transitgym,talusan2025dispatch} present different simulation
@@ -207,7 +211,6 @@ At a microscopic level, the BDI can represent individual behaviour
 In a mesoscopic scope, that 
 
 
-
 (Aqui el posicionamiento del trabajo dentro del SOTA y su "aportacion" (el modelado del sistema))
 
 
@@ -225,6 +228,14 @@ as agents. In this case, the context will still be mesoscopic, due to the fact t
 being modelled with a specific BDI architecture, but its just been used as a statistical count for bus
 capacity.
 
+
+REGARDING OD, esto es un borrador de cosas que puedo poner, pero ns
+This modelling decision is one of the reasons the use of OD matrixes is discarded in this work.
+As having APC data from the buses, the reconstruction of individual paths from boarding to
+alighting is a fucjing disgrace. Also, when no
+heuristic to build the matrix is declared, IPF \cite{DeberiaircitadeIPF} method can be used with
+a NULL seeding \cite{Oaqui}. As in this work no external surveys or data at all to construct
+OD matrixes are available, the use of empirical fitted distributions suits as a counter-option.
 
 
 
@@ -253,6 +264,16 @@ confundirlo con una aproximación.
 La validación: equivalencia distribucional contra datos reales de EMT por parada y franja, con 
 caracterización explícita de dónde y por qué mecanismo falla el modelo.
 P7 — Estructura del documento. Dos frase}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -313,7 +334,11 @@ As for the purpose of this work, no cognitive reasoning is represented neither f
 Thus, the emergent intelligence comes from the interaction between agents and environment, as per
 \citet{brooks1991representation}, that emergent behaviour guarantees an agency right itself.
 
+
 \subsection{Agents and protocols}
+The agents defined in this scenarios are formalized as reactive agents. This decision 
+
+
 In the two proposed implementations, three agents are defined:
 
 \begin{itemize}
@@ -321,6 +346,88 @@ In the two proposed implementations, three agents are defined:
   \item stop
   \item Passenger
 \end{itemize}
+
+\newlength{\figh}
+
+\begin{figure}[!t]
+  \centering
+  \setlength{\figh}{0.62\linewidth}
+  \begin{minipage}[t]{0.764\figh}
+    \centering
+    \includesvg[height=\figh]{figs/protocols/en/solicitud_de_embarque_en}\par
+    \smallskip {\small (a) Boarding request}
+  \end{minipage}\hspace{0.04\linewidth}
+  \begin{minipage}[t]{0.676\figh}
+    \centering
+    \includesvg[height=\figh]{figs/protocols/en/diagrama_solicitud_de_descenso_en}\par
+    \smallskip {\small (b) Alighting request}
+  \end{minipage}
+  \caption{FIPA-Request interaction protocols for passenger requests.}
+  \label{fig:requests}
+\end{figure}
+
+
+\begin{figure}[!t]
+  \centering
+  \setlength{\figh}{0.62\linewidth}
+  \begin{minipage}[t]{0.764\figh}
+    \centering
+    \includesvg[height=\figh]{figs/protocols/en/notificacion_de_llegada_en}\par
+    \smallskip {\small (a) Boarding request}
+  \end{minipage}\hspace{0.04\linewidth}
+  \begin{minipage}[t]{0.676\figh}
+    \centering
+    \includesvg[height=\figh]{figs/protocols/en/aviso_de_embarque_en}\par
+    \smallskip {\small (b) Alighting request}
+  \end{minipage}
+  \caption{FIPA-Request interaction protocols for a bus arriving to a stop.}
+  \label{fig:requests}
+\end{figure}
+
+
+
+
+
+\section{Data calibration}
+
+The system will rely on parametric data obtained through analysis of empirical 8 month
+operational window timespan.
+
+The data covers all stop related information for every time in a day a bus reaches a stop.
+
+In this work, as per cardinality constraints due to not reaching enough statistical data
+for covering all scenarios, only the labour days are included in the parametric analysis.
+Moreover, the freeday data is also excluded from the analysis, as it changes the behaviour
+of the buses occupation.
+The time series anal
+
+\subsection{Attributes for calibration}
+The system is modelled for receiving four attributes.
+
+For every stop, disaggregated into its timeslots, it expects distribution fitted parameters
+for both boarding and alighting processes.
+
+The boarding value represents the number of people arriving to a stop each hour, and it will
+use it as a passengers generator ratio.
+
+On the other hand, the alighting values are modelled as independent samples per bus arrival.
+Each time a bus reaches a stop, the system will pick a random sampling out of the distribution
+corresponding to the combination (stop-timeslot).
+
+
+\textbf{Things to mention: Why only labour, why no freeday, why no possibility of decouple
+stationality and analysis via temporal series}
+
+\textbf{Also, mention the chosen distribution families, the why use of negbins and geoms,
+cause the variance > mean (poisson is variance == mean)
+Also, mention the NO OD data, and as i chose not to infer with IPF NULL seeding, its constructed
+by independent consideration of boarding and alighting.}
+
+\subsection{Parametric implementation}
+
+
+
+
 
 \section{Implementations and results}\label{}
 
@@ -330,8 +437,15 @@ conversations, and a headless batch mode that improves performance across runs.
 
 \subsection{Simulation parameters}
 For the simulation characterization, the layout of route Express 01 is used. The route
-operates in two directions, labelled Cibeles and La Peseta, with 15 and 12 stops
-respectively.
+operates between the central square \textit{Cibeles}, located in the city center of the Spanish capital,
+and \textit{La Peseta}, located in the southern neibourhood of Carabanchel.
+The route has 15 and 12 stops for each direction respectively, and its core behavour reflects
+the day by day of madrid's workers: Going to the center earlier in the morning to work and coming back home after lunch.
+The route's prime time in Cibeles's direction comes between 7 and 9 in 
+the morning, boarding passengers in the first stops of the trip, and alighting them at the final ones.
+The same behaviour is inversed in La Peseta's direction, presenting its prime time after 3 pm, 
+capturing the tendency of workers to return to its homeplace.
+
 
 
 The specific parameterization used is shown in table \ref{tbl_sim_params}.

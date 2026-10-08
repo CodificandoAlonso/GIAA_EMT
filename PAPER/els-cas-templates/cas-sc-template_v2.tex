@@ -1,0 +1,487 @@
+%% 
+%% Copyright 2019-2024 Elsevier Ltd
+%% 
+%% This file is part of the 'CAS Bundle'.
+%% --------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3c of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for cas-sc documentclass for 
+%% double column output.
+
+\documentclass[a4paper,fleqn]{cas-sc}
+
+% If the frontmatter runs over more than one page
+% use the longmktitle option.
+
+%\documentclass[a4paper,fleqn,longmktitle]{cas-sc}
+
+\usepackage[numbers,sort&compress]{natbib}
+
+%\usepackage[authoryear]{natbib}
+%\usepackage[authoryear,longnamesfirst]{natbib}
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+% Uncomment and use as if needed
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newdefinition{rmk}{Remark}
+%\newproof{pf}{Proof}
+%\newproof{pot}{Proof of Theorem \ref{thm}}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% Short title
+\shorttitle{Short title, for the in-page naming}    
+
+% Short author
+\shortauthors{Short authors, Carbo, Molina y Hector, for the in-page authors}  
+
+% Main title of the paper
+\title [mode = title]{Draft paper v2 with more or less fixed dropoffs}  
+
+% Title footnote mark
+% eg: \tnotemark[1]
+\tnotemark[1] 
+
+% Title footnote 1.
+% eg: \tnotetext[1]{Title footnote text}
+\tnotetext[1]{} 
+
+% First author
+%
+% Options: Use if required
+% eg: \author[1,3]{Author Name}[type=editor,
+%       style=chinese,
+%       auid=000,
+%       bioid=1,
+%       prefix=Sir,
+%       orcid=0000-0000-0000-0000,
+%       facebook=<facebook id>,
+%       twitter=<twitter id>,
+%       linkedin=<linkedin id>,
+%       gplus=<gplus id>]
+
+\author[1]{}%[<options>]
+
+% Corresponding author indication
+\cormark[1]
+
+% Footnote of the first author
+\fnmark[1]
+
+% Email id of the first author
+\ead{}
+
+% URL of the first author
+\ead[url]{}
+
+% Credit authorship
+% eg: \credit{Conceptualization of this study, Methodology, Software}
+\credit{}
+
+% Address/affiliation
+% Address/affiliation
+\affiliation[1]{organization={Computer Science Department, Universidad Carlos III de Madrid},
+            addressline={Av. Gregorio Peces-Barba Martínez 22}, 
+            city={Colmenarejo},
+%          citysep={}, % Uncomment if no comma needed between city and postcode
+            postcode={28270}, 
+            state={Madrid},
+            country={Spain}}
+\author[2]{}%[]
+
+% Footnote of the second author
+\fnmark[2]
+
+% Email id of the second author
+\ead{}
+
+% URL of the second author
+\ead[url]{}
+
+% Credit authorship
+\credit{}
+
+% Address/affiliation
+% \affiliation[2]{organization={},
+%             addressline={}, 
+%             city={},
+% %          citysep={}, % Uncomment if no comma needed between city and postcode
+%             postcode={}, 
+%             state={},
+%             country={}}
+
+% Corresponding author text
+\cortext[1]{Corresponding author}
+
+% Footnote text
+\fntext[1]{}
+
+% For a title note without a number/mark
+%\nonumnote{}
+
+% Here goes the abstract
+\begin{abstract}
+Here goes the abstract%% Remove this line from your manuscript.
+
+Lo pongo aqui no se muy bien por que. Creo que el enfoque adecuado para el paper debe ser el de,
+especificar que en casos donde los datos se presenten únicamente en forma de nº de carga y nº de
+descarga, mientras que la solucion general suele ser el representar al pasajero como agente
+e inferir su deseo mediante una OD matrix, al tener estas restricciones de datos junto 
+a que el objetivo no es analizar el comportamiento de los pasajeros, sino teniendo en cuenta el 
+número de pasajeros, analizar cómo se comportan los autobuses, un enfoque que no use OD, que se 
+suele estimar por IPF (con busqueda de maxima entropia y que DEPENDE MUCHO de la matriz semilla
+inicial, normalmente obtenida de encuestas o datos de tarjeta), se propone un enfoque donde la 
+carga y descarga se infiere de forma independiente. Esto se suma a, debido a que no se busca
+estudiar el comportamiento particular de pasajeros concretos, se puede reducir la granularidad
+al cargarnos el agente concreto, al no requerir de procesos coginitivos en él que alteren el
+comportamiento.
+\end{abstract}
+
+% Use if graphical abstract is present
+%\begin{graphicalabstract}
+%\includegraphics{}
+%\end{graphicalabstract}
+
+% Research highlights
+\begin{highlights}
+\item 
+\item 
+\item 
+\end{highlights}
+
+
+% Keywords
+% Each keyword is seperated by \sep
+\begin{keywords}
+ \sep \sep \sep
+\end{keywords}
+
+\maketitle
+
+% Main text
+\section{Introduction and literature review}\label{}
+
+Public transport offer analysis can result a very complicated task for governmental entities.
+If the analysis is performed over real data recovered from trips across days, multiple month data window
+with same configuration is required in order to obtain statistically accurate results. The binding constraint
+in this case, however, is not the volume of the data stored, but rather the dependency 
+a small change in offer configuration can shift the data results towards inconsistencies due to that derivative.
+For this specific problem. multiple entities relies on simulation techniques for the purpose of analyzing without
+real deployement.
+Cases like \cite{manser2020designing,sun2021transitgym,talusan2025dispatch} present different simulation
+techniques applied in the public transport domain.
+
+This work presents two modelling solutions based on the MAS paradigm.
+Using the multi agent paradigm in the transport simulation field is a well known and implemented technique
+that has increase among the last years \cite{huang2022overview}.
+
+Some of them take advantage of the cognitive contribution that the use of certain architectures, like BDI
+(Belief Desire Intention) brings.
+
+Nontheless, the transport simulation problems 
+are indeed a type of problem with a strong variable and dynamic environment, so the use of the ABM
+is appropiate regardless of the agent taxonomy itself. This disctintion is given depending on 
+the scope the simulation is aiming and the set of data avaliable.
+
+At a microscopic level, the BDI can represent individual behaviour 
+
+
+In a mesoscopic scope, that 
+
+
+
+(Aqui el posicionamiento del trabajo dentro del SOTA y su "aportacion" (el modelado del sistema))
+
+
+Tendré que hablar de que el enfoque de la simulacion es una mezcla entre mesoscopico y microscopico.
+Al fin y al cabo es demostrar que para el objetivo de análisis a nivel vehicular de un autobus,
+ambos son enfoques validos mediante el modelado que excluye el nivel cognitivo de la entidad
+pasajero, convirtiendolo meramente en un valor agregado a la carga del autobus, pero manteniendo
+la fidelidad estadística con los datos observables por la EMT.
+
+
+This work focus its scope over the bus capacity of demand absortion, so the mesoscopic approach seems to
+suit better, specially considering the computational cost it inquires the indiscrecionary granularity augment.
+However, a mixed scope can be considered in one of the two proposed solutions, as it models passengers
+as agents. In this case, the context will still be mesoscopic, due to the fact that the agent itself is not
+being modelled with a specific BDI architecture, but its just been used as a statistical count for bus
+capacity.
+
+
+
+
+\textit{P3 — MAS dentro de la simulación de transporte. Aquí entra tu micro/meso, pero como marco heredado,
+ no como aportación. Establece los tres niveles clásicos —macroscópico agregado, mesoscópico por paquetes, 
+ microscópico por individuo— y sitúa el MAS en el microscópico. Cita MATSim y BusMezzo como los 
+ representantes. Este párrafo existe para montar el siguiente.
+P4 — La dependencia oculta del enfoque microscópico. El párrafo bisagra, y el que más te va a costar. 
+El argumento: modelar al pasajero como agente exige darle un destino, y el destino no está en los datos APC. 
+La literatura resuelve eso estimando matrices OD —IPF con matriz semilla, formulaciones bayesianas— y cada 
+método arrastra sus supuestos. Aquí citas la literatura OD (IPF-null, Ji et al., el bayesiano de 2024). La 
+frase clave: la granularidad del modelo está acoplada a un problema de estimación que el objetivo analítico
+ no necesariamente requiere.
+P5 — El hueco. Cuando el objetivo es el comportamiento del vehículo y no el itinerario del viajero, 
+reconstruir
+ la OD es resolver un problema más difícil que el planteado. Y no existe en la literatura un criterio, 
+ medible sobre datos, para decidir hasta dónde llega la agencia que puedes conceder. Parunak et al.
+  (1998) dan la versión cualitativa; la multi-level ABM aborda la agregación como aproximación, no como 
+  equivalencia.
+P6 — La aportación. Tres frases, una por pieza, y en este orden:
+El criterio: el nivel de agencia admisible está acotado por la granularidad de los datos de calibración; 
+por encima de esa cota el comportamiento del agente es infalsable.
+La consecuencia de diseño: dos arquitecturas idénticas en distribución por construcción, una con pasajero 
+reificado y otra con demanda agregada en la parada, que permiten aislar el coste de la reificación sin 
+confundirlo con una aproximación.
+La validación: equivalencia distribucional contra datos reales de EMT por parada y franja, con 
+caracterización explícita de dónde y por qué mecanismo falla el modelo.
+P7 — Estructura del documento. Dos frase}
+
+
+
+
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+
+\section{Proposed solutions: two different approaches}\label{}
+
+As for the purpose of this work, no cognitive reasoning is represented neither for the bus nor the passenger.
+Thus, the emergent intelligence comes from the interaction between agents and environment, as per
+\citet{brooks1991representation}, that emergent behaviour guarantees an agency right itself.
+
+\subsection{Agents and protocols}
+In the two proposed implementations, three agents are defined:
+
+\begin{itemize}
+  \item bus
+  \item stop
+  \item Passenger
+\end{itemize}
+
+
+\section{Data calibration}
+
+The system will rely on parametric data obtained through analysis of empirical 8 month operational window timespan.
+
+\textbf{Things to mention: Why only labour, why no freeday, why no possibility of decouple stationality and analysis via 
+temporal series}
+
+\textbf{Also, mention the chosen distribution families, the why use of negbins and geoms, cause the variance > mean (poisson is variance == mean)
+Also, mention the NO OD data, and as i chose not to infer with IPF NULL seeding, its constructed by independent consideration of
+boarding and alighting.
+Here also the dependent alighting sampling with binomial and betabinomial, considering the changes it tooks.
+Now also in the protocol exchange, the bus passes the N of passengers it has}
+
+
+
+
+\section{Implementations and results}\label{}
+
+Both proposed architectures run in the dedicated agent platform GAMA \cite{taillandier2019gama}.
+The election is based on both the inclusion of FIPA inboxing, allowing implementation-defined
+conversations, and a headless batch mode that improves performance across runs.
+
+\subsection{Simulation parameters}
+For the simulation characterization, the layout of route Express 01 is used. The route
+operates in two directions, labelled Cibeles and La Peseta, with 15 and 12 stops
+respectively.
+
+
+The specific parameterization used is shown in table \ref{tbl_sim_params}.
+
+\begin{table}%[]
+\caption{Simulation parameters}\label{tbl_sim_params}
+\begin{tabular*}{\tblwidth}{@{}LL@{}}
+\toprule
+  Parameter & Value \\ % Table header row
+\midrule
+ Line & E01 (Cibeles-La Peseta) \\
+ Total physical buses & 12 buses\\
+ Total trips & 163 trips\\
+ Initial TimeSlot & 5 \\
+ Extra dwell time per passenger & 5 seconds \\
+ Simulation time step & 2 seconds \\
+ Minimum protocol dwell ($E_{\min}$) & 4 * Simulation time step \\
+ Monte Carlo replicas & 1000 \\
+
+\bottomrule
+\end{tabular*}
+\end{table}
+
+Before the results are presented, some specifications about the simulations itself are introduced.
+The field \texttt{Extra dwell time per passenger} is used with both a premise and a comparison.
+
+First, it assumes that the boarding and alighting processes happen in parallel, as in regular bus
+operations those occur in different physical doors.
+
+Secondly, the dwell extra time ($E$) will be the result of the following equation:
+
+\begin{equation}\label{eq:dwell}
+E = \max\bigl( \max(b,\, a)\, t_p,\; E_{\min} \bigr)
+\end{equation}
+
+\noindent where $b$ and $a$ are the numbers of boarding and alighting
+passengers at the stop, $t_p$ is the extra dwell time per passenger, and
+$E_{\min}$ is the minimum dwell imposed by the interaction protocol.
+
+In relation to the necesary input files required to run the simulation, 
+
+
+\subsection{Results}
+
+
+
+\section{Conclusions}\label{}
+% Numbered list
+% Use the style of numbering in square brackets.
+% If nothing is used, default style will be taken.
+%\begin{enumerate}[a)]
+%\item 
+%\item 
+%\item 
+%\end{enumerate}  
+
+% Unnumbered list
+%\begin{itemize}
+%\item 
+%\item 
+%\item 
+%\end{itemize}  
+
+% Description list
+%\begin{description}
+%\item[]
+%\item[] 
+%\item[] 
+%\end{description}  
+
+\clearpage %%Remove this from your manuscript
+
+
+% % Figure
+% \begin{figure}%[]
+%   \centering
+% %    \includegraphics{}
+%     \caption{}\label{fig1}
+% \end{figure}
+
+
+% \begin{table}%[]
+% \caption{}\label{tbl1}
+% \begin{tabular*}{\tblwidth}{@{}LL@{}}
+% \toprule
+%   &  \\ % Table header row
+% \midrule
+%  & \\
+%  & \\
+%  & \\
+%  & \\
+% \bottomrule
+% \end{tabular*}
+% \end{table}
+
+
+
+
+
+
+
+% Uncomment and use as the case may be
+%\begin{theorem} 
+%\end{theorem}
+
+% Uncomment and use as the case may be
+%\begin{lemma} 
+%\end{lemma}
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+\section{}\label{}
+
+% To print the credit authorship contribution details
+\printcredits
+
+%% Loading bibliography style file
+\bibliographystyle{elsarticle-num-names}
+%\bibliographystyle{cas-model2-names}
+
+% Loading bibliography database
+\bibliography{cas-refs}
+
+% Biography
+%\bio{}
+% Here goes the biography details.
+%\endbio
+
+%\bio{pic1}
+% Here goes the biography details.
+%\endbio
+
+\end{document}
+

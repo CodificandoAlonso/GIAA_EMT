@@ -1,14 +1,15 @@
 Here goes the abstract%% Remove this line from your manuscript.
 
-Lo pongo aqui no se muy bien por que. Creo que el enfoque adecuado para el paper debe ser el de,
-especificar que en casos donde los datos se presenten únicamente en forma de nº de carga y nº de
-descarga, mientras que la solucion general suele ser el representar al pasajero como agente
-e inferir su deseo mediante una OD matrix, al tener estas restricciones de datos junto
-a que el objetivo no es analizar el comportamiento de los pasajeros, sino teniendo en cuenta el
-número de pasajeros, analizar cómo se comportan los autobuses, un enfoque que no use OD, que se
-suele estimar por IPF (con busqueda de maxima entropia y que DEPENDE MUCHO de la matriz semilla
-inicial, normalmente obtenida de encuestas o datos de tarjeta), se propone un enfoque donde la
-carga y descarga se infiere de forma independiente. Esto se suma a, debido a que no se busca
-estudiar el comportamiento particular de pasajeros concretos, se puede reducir la granularidad
-al cargarnos el agente concreto, al no requerir de procesos coginitivos en él que alteren el
-comportamiento.
+% Lo pongo aqui no se muy bien por que. Creo que el enfoque adecuado para el paper debe ser el de,
+% especificar que en casos donde los datos se presenten únicamente en forma de nº de carga y nº de
+% descarga, mientras que la solucion general suele ser el representar al pasajero como agente
+% e inferir su deseo mediante una OD matrix, al tener estas restricciones de datos junto
+% a que el objetivo no es analizar el comportamiento de los pasajeros, sino teniendo en cuenta el
+% número de pasajeros, analizar cómo se comportan los autobuses, un enfoque que no use OD, que se
+% suele estimar por IPF (con busqueda de maxima entropia y que DEPENDE MUCHO de la matriz semilla
+% inicial, normalmente obtenida de encuestas o datos de tarjeta), se propone un enfoque donde la
+% carga y descarga se infiere de forma independiente. Esto se suma a, debido a que no se busca
+% estudiar el comportamiento particular de pasajeros concretos, se puede reducir la granularidad
+% al cargarnos el agente concreto, al no requerir de procesos coginitivos en él que alteren el
+% comportamiento.
+ABSTRAC ABSTRACT ABSTRACT
