@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.9.14)  6 OCT 2026 17:50
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.8.18)  10 OCT 2026 14:08
  system commands enabled.
 **cas-sc-sample.tex
 (./cas-sc-sample.tex
@@ -529,10 +529,113 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 (/usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-***********************************************************
- Stix and Charis fonts are not available 
- in TeX system. Hence CMR fonts are used.
-***********************************************************
+(/usr/share/texmf-dist/tex/latex/stix/stix.sty
+Package: stix 2018/04/17 v1.1.3-latex STIX fonts support package
+
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+LaTeX Font Info:    Changing ? sub-encoding to TS1/0 on input line 75.
+)
+LaTeX Encoding Info:    Text command \textpertenthousand (encoding T1) is not d
+eclared on input line 51.
+LaTeX Encoding Info:    Redeclaring text command \textpertenthousand (encoding 
+?) on input line 52.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 76.
+LaTeX Font Info:    Encoding `OML' has changed to `LS1' for symbol font
+(Font)              `letters' in the math version `normal' on input line 76.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> LS1/stix/m/it on input line 76.
+LaTeX Font Info:    Encoding `OML' has changed to `LS1' for symbol font
+(Font)              `letters' in the math version `bold' on input line 76.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> LS1/stix/m/it on input line 76.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 77.
+LaTeX Font Info:    Encoding `OT1' has changed to `LS1' for symbol font
+(Font)              `operators' in the math version `normal' on input line 77.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> LS1/stix/m/n on input line 77.
+LaTeX Font Info:    Encoding `OT1' has changed to `LS1' for symbol font
+(Font)              `operators' in the math version `bold' on input line 77.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> LS1/stix/m/n on input line 77.
+\symbold-operators=\mathgroup6
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 79.
+LaTeX Font Info:    Encoding `OMS' has changed to `LS1' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 79.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> LS1/stixscr/m/n on input line 79.
+LaTeX Font Info:    Encoding `OMS' has changed to `LS1' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 79.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> LS1/stixscr/m/n on input line 79.
+\symsymbols2=\mathgroup7
+\symsymbols3=\mathgroup8
+\symsymbols4=\mathgroup9
+\symintegrals=\mathgroup10
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 84.
+LaTeX Font Info:    Encoding `OMX' has changed to `LS2' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 8
+4.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> LS2/stixex/m/n on input line 84.
+LaTeX Font Info:    Encoding `OMX' has changed to `LS2' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 84.
+
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> LS2/stixex/m/n on input line 84.
+\symarrows1=\mathgroup11
+\symarrows2=\mathgroup12
+\symarrows3=\mathgroup13
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  LS1/stix/m/it --> LS1/stix/b/it on input line 88.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  LS1/stix/m/n --> LS1/stix/b/n on input line 89.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  LS1/stixscr/m/n --> LS1/stixscr/b/n on input line 90.
+LaTeX Font Info:    Overwriting symbol font `symbols2' in version `bold'
+(Font)                  LS1/stixfrak/m/n --> LS1/stixfrak/b/n on input line 91.
+
+LaTeX Font Info:    Overwriting symbol font `symbols3' in version `bold'
+(Font)                  LS1/stixbb/m/n --> LS1/stixbb/b/n on input line 92.
+LaTeX Font Info:    Overwriting symbol font `symbols4' in version `bold'
+(Font)                  LS1/stixbb/m/it --> LS1/stixbb/b/it on input line 93.
+LaTeX Font Info:    Overwriting symbol font `integrals' in version `bold'
+(Font)                  LS2/stixcal/m/n --> LS2/stixcal/b/n on input line 94.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  LS2/stixex/m/n --> LS2/stixex/b/n on input line 95.
+LaTeX Font Info:    Overwriting symbol font `arrows1' in version `bold'
+(Font)                  LS1/stixsf/m/n --> LS1/stixsf/b/n on input line 96.
+LaTeX Font Info:    Overwriting symbol font `arrows2' in version `bold'
+(Font)                  LS1/stixsf/m/it --> LS1/stixsf/b/it on input line 97.
+LaTeX Font Info:    Overwriting symbol font `arrows3' in version `bold'
+(Font)                  LS2/stixtt/m/n --> LS2/stixtt/b/n on input line 98.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 99.
+LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 102.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 106.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 108.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 109.
+LaTeX Info: Redefining \yen on input line 456.
+LaTeX Info: Redefining \circledR on input line 458.
+LaTeX Info: Redefining \checkmark on input line 460.
+LaTeX Info: Redefining \maltese on input line 461.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 698.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 699.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 700.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 701.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 702.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 703.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 704.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 705.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 707.
+LaTeX Font Info:    Redeclaring math accent \check on input line 708.
+LaTeX Font Info:    Redeclaring math accent \vec on input line 716.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 728.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 729.
+LaTeX Info: Redefining \vdots on input line 1518.
+LaTeX Info: Redefining \cdots on input line 1522.
+LaTeX Font Info:    Redeclaring math symbol \mathsterling on input line 1978.
+LaTeX Info: Redefining \not on input line 2144.
+)
 (/usr/share/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -558,6 +661,12 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibsep=\skip72
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count351
+)
+LaTeX Font Info:    Trying to load font information for T1+stix on input line 3
+9.
+
+(/usr/share/texmf-dist/tex/latex/stix/t1stix.fd
+File: t1stix.fd 2015/04/17 v1.1.2-latex STIX T1 font definitions
 ) (./build/cas-sc-sample.aux)
 \openout1 = cas-sc-sample.aux
 
@@ -581,6 +690,23 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 39.
+LaTeX Font Info:    Trying to load font information for LS1+stix on input line 
+39.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls1stix.fd
+File: ls1stix.fd 2015/04/17 v1.1.2-latex STIX LS1 font definitions
+)
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for LS2/stix/m/n on input line 39.
+LaTeX Font Info:    Trying to load font information for LS2+stix on input line 
+39.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls2stix.fd
+File: ls2stix.fd 2015/04/17 v1.1.2-latex STIX LS2 font definitions
+)
+LaTeX Font Info:    ... okay on input line 39.
+
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count352
@@ -611,6 +737,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+LaTeX Info: Command `\dddot' is already robust on input line 39.
+LaTeX Info: Command `\ddddot' is already robust on input line 39.
 Package hyperref Info: Link coloring ON on input line 39.
 
 (./build/cas-sc-sample.out) (./build/cas-sc-sample.out)
@@ -667,8 +795,21 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 \verbatim@out=\write4
 
 \openout4 = cas-sc-sample.abs
+LaTeX Font Info:    Trying to load font information for LS1+stixscr on input li
+ne 136.
+(/usr/share/texmf-dist/tex/latex/stix/ls1stixscr.fd
+File: ls1stixscr.fd 2015/04/17 v1.1.2-latex STIX script LS1 font definitions
+)
+LaTeX Font Info:    Trying to load font information for LS2+stixex on input lin
+e 136.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls2stixex.fd
+File: ls2stixex.fd 2015/04/17 v1.1.2-latex STIX extentions LS2 font definitions
+
+)
 LaTeX Font Info:    Trying to load font information for U+msa on input line 136
 .
+
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -678,12 +819,51 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 136
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input l
+ine 136.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls1stixfrak.fd
+File: ls1stixfrak.fd 2015/04/17 v1.1.2-latex STIX fraktur LS1 font definitions
+)
+LaTeX Font Info:    Trying to load font information for LS1+stixbb on input lin
+e 136.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls1stixbb.fd
+File: ls1stixbb.fd 2015/04/17 v1.1.2-latex STIX blackboard LS1 font definitions
+
+)
+LaTeX Font Info:    Trying to load font information for LS2+stixcal on input li
+ne 136.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls2stixcal.fd
+File: ls2stixcal.fd 2015/04/17 v1.1.2-latex STIX calligraphic LS2 font definiti
+ons
+)
+LaTeX Font Info:    Trying to load font information for LS1+stixsf on input lin
+e 136.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls1stixsf.fd
+File: ls1stixsf.fd 2015/04/17 v1.1.2-latex STIX sans-serif LS1 font definitions
+
+)
+LaTeX Font Info:    Trying to load font information for LS2+stixtt on input lin
+e 136.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls2stixtt.fd
+File: ls2stixtt.fd 2015/04/17 v1.1.2-latex STIX typewriter LS2 font definitions
+
+)
 <figs/cas-grabs.pdf, id=4, 142.26349pt x 85.3579pt>
 File: figs/cas-grabs.pdf Graphic file (type pdf)
 <use figs/cas-grabs.pdf>
 Package luatex.def Info: figs/cas-grabs.pdf  used on input line 136.
 (luatex.def)             Requested size: 142.26312pt x 85.35768pt.
- [0
+LaTeX Font Info:    Trying to load font information for TS1+stix on input line 
+140.
+
+(/usr/share/texmf-dist/tex/latex/stix/ts1stix.fd
+File: ts1stix.fd 2015/04/17 v1.1.2-latex STIX TS1 font definitions
+) [0
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}<./figs/cas-grabs.pdf>]
 warning  (pdf backend): ignoring duplicate destination with the name 'page.0'
@@ -711,7 +891,7 @@ Package hyperref Warning: Ignoring empty anchor on input line 150.
 
 Package hyperref Warning: Ignoring empty anchor on input line 150.
 
-<thumbnails/cas-email.jpeg, id=26, 225.84375pt x 225.84375pt>
+<thumbnails/cas-email.jpeg, id=24, 225.84375pt x 225.84375pt>
 File: thumbnails/cas-email.jpeg Graphic file (type jpg)
 <use thumbnails/cas-email.jpeg>
 Package luatex.def Info: thumbnails/cas-email.jpeg  used on input line 150.
@@ -719,7 +899,7 @@ Package luatex.def Info: thumbnails/cas-email.jpeg  used on input line 150.
 
 Package hyperref Warning: Ignoring empty anchor on input line 150.
 
-<thumbnails/cas-url.jpeg, id=27, 225.84375pt x 225.84375pt>
+<thumbnails/cas-url.jpeg, id=25, 225.84375pt x 225.84375pt>
 File: thumbnails/cas-url.jpeg Graphic file (type jpg)
 <use thumbnails/cas-url.jpeg>
 Package luatex.def Info: thumbnails/cas-url.jpeg  used on input line 150.
@@ -758,24 +938,24 @@ ine 214.
 Package natbib Warning: Citation `Vehlowetal2013' on page 2 undefined on input 
 line 214.
 
-<figs/cas-munnar-2024.jpg, id=57, 5352.99875pt x 3011.25pt>
+<figs/cas-munnar-2024.jpg, id=45, 5352.99875pt x 3011.25pt>
 File: figs/cas-munnar-2024.jpg Graphic file (type jpg)
 <use figs/cas-munnar-2024.jpg>
 Package luatex.def Info: figs/cas-munnar-2024.jpg  used on input line 228.
 (luatex.def)             Requested size: 421.49629pt x 237.09125pt.
-[2]
+[2<./figs/cas-munnar-2024.jpg>]
 \c@theorem=\count358
- [3<./figs/cas-munnar-2024.jpg>]
+ [3]
 
 LaTeX Warning: The counter will not be printed.
              The label is: \textbullet  on input line 380.
 
-[4] (./build/cas-sc-sample.bbl
+(./build/cas-sc-sample.bbl [4]
 
 Package natbib Warning: Empty `thebibliography' environment on input line 15.
 
 )
-<figs/cas-pic1.pdf, id=98, 218.8175pt x 218.8175pt>
+<figs/cas-pic1.pdf, id=81, 218.8175pt x 218.8175pt>
 File: figs/cas-pic1.pdf Graphic file (type pdf)
 <use figs/cas-pic1.pdf>
 Package luatex.def Info: figs/cas-pic1.pdf  used on input line 432.
@@ -812,43 +992,32 @@ Package rerunfilecheck Info: File `cas-sc-sample.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 14182 strings out of 476076
+ 16880 strings out of 476076
  100000,662416 words of node,token memory allocated
- 851 words of node memory still in use:
-   13 hlist, 2 vlist, 3 rule, 14 glue, 5 kern, 8 glyph, 29 attribute, 62 glue_sp
-ec, 29 attribute_list, 1 write, 1 pdf_action, 1 pdf_setmatrix, 1 pdf_save, 1 pdf
-_restore nodes
-   avail lists: 1:1,2:880,3:439,4:148,5:486,6:100,7:7340,8:36,9:623,10:25,11:664
+ 1711 words of node memory still in use:
+   13 hlist, 2 vlist, 3 rule, 14 glue, 110 kern, 15 glyph, 102 attribute, 62 glu
+e_spec, 102 attribute_list, 1 write, 1 pdf_setmatrix, 1 pdf_save, 1 pdf_restore 
+nodes
+   avail lists: 1:2,2:744,3:456,4:148,5:960,6:102,7:7790,8:36,9:622,10:20,11:630
 
- 36250 multiletter control sequences out of 65536+600000
- 85 fonts using 5499303 bytes
+ 38880 multiletter control sequences out of 65536+600000
+ 151 fonts using 11341799 bytes
  87i,11n,96p,279b,507s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fonts
-/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm
--ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
-share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx10.
-pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-di
-st/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/l
-m/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/t
-exmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/lm/lmri10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri7.pfb></usr
-/share/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/share/texmf-dist/fonts/t
-ype1/public/lm/lmri9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmss9.pfb>
-</usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf-dist
-/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cm-super/sftt1000.pfb>
-Output written on cas-sc-sample.pdf (7 pages, 1178390 bytes).
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texm
+f-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/
+stix-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/stix-ts1.enc}</usr/share
+/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/share/texmf-dist/
+fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/share/texmf-dist/fonts/type
+1/public/stix/STIXGeneral-Regular.pfb></usr/share/texmf-dist/fonts/type1/public/
+lm/lmss9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fo
+nts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf-dist/fonts/type1/public
+/stix/stix-mathex.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathit
+.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb>
+Output written on cas-sc-sample.pdf (7 pages, 968670 bytes).
 
-PDF statistics: 195 PDF objects out of 1000 (max. 8388607)
- 151 compressed objects within 2 object streams
+PDF statistics: 130 PDF objects out of 1000 (max. 8388607)
+ 102 compressed objects within 2 object streams
  32 named destinations out of 1000 (max. 1048576)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -53,7 +53,7 @@
 \shorttitle{Short title, for the in-page naming}    
 
 % Short author
-\shortauthors{Short authors, Carbo, Molina y Hector, for the in-page authors}  
+\shortauthors{H. Álvarez, J. Carbó, J.M. Molina}  
 
 % Main title of the paper
 \title [mode = title]{Draft paper base bach thesis}  
@@ -80,7 +80,11 @@
 %       linkedin=<linkedin id>,
 %       gplus=<gplus id>]
 
-\author[1]{}%[<options>]
+\author[1]{H. Álvarez}[type=author,
+        style=spanish,
+        auid=000,
+        bioid=1,
+        orcid=0000-0000-0000-0000]
 
 % Corresponding author indication
 \cormark[1]
@@ -89,16 +93,17 @@
 \fnmark[1]
 
 % Email id of the first author
-\ead{}
+\ead{hectoral@pa.uc3m.es}
 
 % URL of the first author
 \ead[url]{}
 
 % Credit authorship
 % eg: \credit{Conceptualization of this study, Methodology, Software}
-\credit{}
+\credit{Aqui va la contribucion mia}
 
-% Address/affiliation
+
+
 % Address/affiliation
 \affiliation[1]{organization={Computer Science Department, Universidad Carlos III de Madrid},
             addressline={Av. Gregorio Peces-Barba Martínez 22}, 
@@ -107,19 +112,44 @@
             postcode={28270}, 
             state={Madrid},
             country={Spain}}
-\author[2]{}%[]
+
+
+
+\author[1]{J. Carbó}[type=author,
+        style=spanish,
+        auid=000,
+        bioid=1,
+        orcid=0000-0000-0000-0000]
 
 % Footnote of the second author
-\fnmark[2]
+\fnmark[1]
 
 % Email id of the second author
-\ead{}
+\ead{jcarbo@inf.uc3m.es}
 
 % URL of the second author
 \ead[url]{}
 
 % Credit authorship
-\credit{}
+\credit{Aqui va la contribucion de Javier/José Manuel}
+
+\author[1]{J.M. Molina}[type=author,
+        style=spanish,
+        auid=000,
+        bioid=1,
+        orcid=0000-0000-0000-0000]
+
+% Footnote of the second author
+\fnmark[1]
+
+% Email id of the second author
+\ead{molina@ia.uc3m.es}
+
+% URL of the second author
+\ead[url]{}
+
+% Credit authorship
+\credit{Aqui va la otra contribucion de Javier/José Manuel}
 
 % Address/affiliation
 % \affiliation[2]{organization={},
@@ -131,7 +161,7 @@
 %             country={}}
 
 % Corresponding author text
-\cortext[1]{Corresponding author}
+%\cortext[1]{Corresponding author}
 
 % Footnote text
 \fntext[1]{}
@@ -178,166 +208,119 @@ ABSTRAC ABSTRACT ABSTRACT
 \end{keywords}
 
 \maketitle
+\section{Introduction and literature review}\label{sec:intro}
 
-% Main text
-\section{Introduction and literature review}\label{}
+Analysing public transport supply from observed operation can be a very complicated task for
+governmental entities.
+The quantities that determine whether capacity is
+enough, such as peak loads and the occurrence of full buses, are extreme
+values, and estimating them reliably requires a large number of observations
+taken under the same conditions \cite{furth2006using}. The binding constraint,
+however, is not the volume of data itself but the length of the period over
+which the service configuration remains unchanged. Each modification of the supply
+thus restarts the sample.
+For this problem, multiple entities rely on simulation techniques to analyse
+supply without real deployment \cite{toledo2010mesoscopic}.
 
-Public transport offer analysis can result a very complicated task for governmental entities.
-If the analysis is performed over real data recovered from trips across days, multiple month data window
-with same configuration is required in order to obtain statistically accurate results. The binding constraint
-in this case, however, is not the volume of the data stored, but rather the dependency 
-a small change in service supply configuration can shift the data results towards inconsistencies
-due to that derivative.
-For this specific problem. multiple entities relies on simulation techniques for the purpose of analyzing without
-real deployement.
-Cases like \cite{manser2020designing,sun2021transitgym,talusan2025dispatch} present different simulation
-techniques applied in the public transport domain.
-
-This work presents two modelling solutions based on the MAS paradigm.
-Using the multi agent paradigm in the transport simulation field is a well known and implemented technique
-that has increase among the last years \cite{huang2022overview}.
-
-Some of them take advantage of the cognitive contribution that the use of certain paradigms, like BDI
-(Belief Desire Intention) brings.
-In the transport simulation field, this kind of agents are used to model the specific behaviour of entities
-like passengers and buses in a microscopic level, with the purpose of analyzing and tracing all of their movements
-across the simulation. Tools like MATSim \cite{horni2016matsim} offers the capacity to build
-MAS under this BDI architecture, with cases like 
+This work focuses on the capacity of buses to absorb demand studying a digital simulation
+of a bus route in Madrid, Spain, using a multi-agent system.
 
 
-The goal in this work is to change the scope to a mesoscopic level, where the passengers are used
-for analyzing the bus capacity, and origin and destination of individual entities is not necesary required.
+The multi-agent paradigm is a well-known and widely implemented technique in
+transport simulation, and its use has increased in recent years
+\cite{huang2022overview,divassonj2025abm,bastarianto2023agent}.
+Despite this, in public transport, the main area of study in which it applies is
+mostly real-time control systems \cite{balbo2024extended}, whereas this work focuses
+on demand level analysis.
+
+Some of the works among the literature of MAS in transportation take advantage of the
+cognitive contribution certain paradigms
+such as BDI (Belief-Desire-Intention) offer, like
+modeling drivers and evacuees who must take decisions during a
+simulation \cite{padgham2014integrating,singh2016integrating}.
+Such architectures are appropriate when the decision process of each individual
+agent is the object of study; when the focus is the aggregate behaviour of the
+system, simpler agents are enough \cite{adam2016bdi}.
+The architectural decision of which types of agents to use for a certain MAS depends on the
+purpose the simulation aims at and on the set of
+data available.
 
 
-Nontheless, the transport simulation problems 
-are indeed a type of problem with a strong variable and dynamic environment, so the use of the ABM
-is appropiate regardless of the agent taxonomy itself. This disctintion is given depending on 
-the scope the simulation is aiming and the set of data avaliable.
+In terms of granularity and nature of the simulation, different types
+appear in literature: macroscopic, mesoscopic and microscopic \cite{burghout2004hybrid}.
+Microscopic simulations refer to those which describe the individual exact behaviour
+of entities, with a level of detail up to second by second.
+On the other hand, macroscopic simulations do not represent that individual behaviour,
+but rather use a global perspective to obtain aggregated level indicators and without
+the need to model invidividual entities.
+In the middle of those appear the mesoscopic. While it is used to represent aggregated
+level indicators, it still relies on using individual entities as so, but without the
+need of having them modelled at detail \cite{toledo2010mesoscopic}.
 
-At a microscopic level, the BDI can represent individual behaviour 
-
-
-In a mesoscopic scope, that 
-
-
-(Aqui el posicionamiento del trabajo dentro del SOTA y su "aportacion" (el modelado del sistema))
-
-
-Tendré que hablar de que el enfoque de la simulacion es una mezcla entre mesoscopico y microscopico.
-Al fin y al cabo es demostrar que para el objetivo de análisis a nivel vehicular de un autobus,
-ambos son enfoques validos mediante el modelado que excluye el nivel cognitivo de la entidad
-pasajero, convirtiendolo meramente en un valor agregado a la carga del autobus, pero manteniendo
-la fidelidad estadística con los datos observables por la EMT.
+The mesoscopic approach seems to suit better for the purpose of this work, as
+each bus is represented as an entity, but its movement among the route
+comes from sampled data from fitted distributions and does not change by traffic dynamic
+inside the simulation.
+A microscopic level of detail is something this kind of problem does
+not require \cite{toledo2010mesoscopic}.
 
 
-This work focus its scope over the bus capacity of demand absortion, so the mesoscopic approach seems to
-suit better, specially considering the computational cost it inquires the indiscrecionary granularity augment.
-However, a mixed scope can be considered in one of the two proposed solutions, as it models passengers
-as agents. In this case, the context will still be mesoscopic, due to the fact that the agent itself is not
-being modelled with a specific BDI architecture, but its just been used as a statistical count for bus
-capacity.
+In this work passengers are used to analyse bus capacity, and the origin and destination of
+individual entities are not required.
+No external surveys or other data from which to construct OD matrices are
+available. The usual approach is to infer the matrices via IPF with null seeding
+\cite{furth1992bus,mccord2010iterative}, while in this work
+the boarding and alighting of passengers is done via fitted distributions from real data operations.
+This decision comes from the goal of the work. OD matrices assigns
+origin and destination to passengers, but here the problem requires only to know how many boards
+and alightings occurs in a specific stop given a bus arrival.
+Several bus simulators already operate from stop-level counts without an OD
+matrix. BusMezzo \cite{toledo2010mesoscopic} is a mesoscopic simulator in
+which passengers are not represented individually. Arrivals at stops follow a
+Poisson process, and the number of alighting passengers is drawn from those on
+board. BusSim \cite{kieu2020dealing} is an agent-based model with bus and stop
+agents in which passengers represents aggregate quantities, built on
+synthetic data for short-term prediction. Talusan et al.
+\cite{talusan2025dispatch} constructs an event-based simulator with APC
+(Automatic Passenger Counting) data to evaluate dispatching decisions. These works establish
+that occupancy can be studied without passenger destinations. However,
+first and third works are not multi-agent systems, the second is not calibrated
+on real operation, and none of them models the same line with and without
+individual passengers.
 
+For the agents used in this paper, as the work studies no individual decision 
+and the available data contain
+no information about one, no cognitive reasoning is represented for either
+the bus or the passenger. The agents are therefore reactive in the classification
+of Wooldridge and Jennings \cite{wooldridge1995intelligent}: they act in
+response to events and to the messages they receive. They are not purely
+reactive, however, as they keep an internal state
+\cite{wooldridge1999intelligent}.
+The form they have of interaction is through FIPA interaction protocols \cite{}.
+The communication between different entities is the core of the behaviour of the
+system.
 
-REGARDING OD, esto es un borrador de cosas que puedo poner, pero ns
-This modelling decision is one of the reasons the use of OD matrixes is discarded in this work.
-As having APC data from the buses, the reconstruction of individual paths from boarding to
-alighting is a fucjing disgrace. Also, when no
-heuristic to build the matrix is declared, IPF \cite{DeberiaircitadeIPF} method can be used with
-a NULL seeding \cite{Oaqui}. As in this work no external surveys or data at all to construct
-OD matrixes are available, the use of empirical fitted distributions suits as a counter-option.
+From the engineering side, this work provides a multi-agent model of line E01
+of EMT Madrid, calibrated with the boardings and alightings recorded by the
+operator and used to analyse occupancy and demand absorption.
+From the artificial intelligence side, it addresses how fine the agents of
+such a system need to be. Two solutions are built that share the same bus
+model and the same interaction protocols between reactive agents, and differ
+only in whether each passenger is an agent or passengers are counts held by
+stops and buses.
+Comparing them isolates what the passenger agent contributes, in results and
+in computational cost, when the available data record only counts.
 
+The remainder of the paper is organised as follows.
+Section~\ref{sec:solutions} presents the two proposed solutions, defining the
+agents and the interaction protocols between them.
+Section~\ref{sec:data} describes the operational data and how the boarding and
+alighting distributions are calibrated from them.
+Section~\ref{sec:results} details the implementation in GAMA, the simulation
+parameters for line E01 and the results obtained.
+Finally, Section~\ref{sec:conclusions} draws the conclusions.
 
-
-\textit{P3 — MAS dentro de la simulación de transporte. Aquí entra tu micro/meso, pero como marco heredado,
- no como aportación. Establece los tres niveles clásicos —macroscópico agregado, mesoscópico por paquetes, 
- microscópico por individuo— y sitúa el MAS en el microscópico. Cita MATSim y BusMezzo como los 
- representantes. Este párrafo existe para montar el siguiente.
-P4 — La dependencia oculta del enfoque microscópico. El párrafo bisagra, y el que más te va a costar. 
-El argumento: modelar al pasajero como agente exige darle un destino, y el destino no está en los datos APC. 
-La literatura resuelve eso estimando matrices OD —IPF con matriz semilla, formulaciones bayesianas— y cada 
-método arrastra sus supuestos. Aquí citas la literatura OD (IPF-null, Ji et al., el bayesiano de 2024). La 
-frase clave: la granularidad del modelo está acoplada a un problema de estimación que el objetivo analítico
- no necesariamente requiere.
-P5 — El hueco. Cuando el objetivo es el comportamiento del vehículo y no el itinerario del viajero, 
-reconstruir
- la OD es resolver un problema más difícil que el planteado. Y no existe en la literatura un criterio, 
- medible sobre datos, para decidir hasta dónde llega la agencia que puedes conceder. Parunak et al.
-  (1998) dan la versión cualitativa; la multi-level ABM aborda la agregación como aproximación, no como 
-  equivalencia.
-P6 — La aportación. Tres frases, una por pieza, y en este orden:
-El criterio: el nivel de agencia admisible está acotado por la granularidad de los datos de calibración; 
-por encima de esa cota el comportamiento del agente es infalsable.
-La consecuencia de diseño: dos arquitecturas idénticas en distribución por construcción, una con pasajero 
-reificado y otra con demanda agregada en la parada, que permiten aislar el coste de la reificación sin 
-confundirlo con una aproximación.
-La validación: equivalencia distribucional contra datos reales de EMT por parada y franja, con 
-caracterización explícita de dónde y por qué mecanismo falla el modelo.
-P7 — Estructura del documento. Dos frase}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-a
-
-
-\section{Proposed solutions: two different approaches}\label{}
+\section{Proposed solutions: two different approaches}\label{sec:solutions}
 
 As for the purpose of this work, no cognitive reasoning is represented neither for the bus nor the passenger.
 Thus, the emergent intelligence comes from the interaction between agents and environment, as per
@@ -345,8 +328,10 @@ Thus, the emergent intelligence comes from the interaction between agents and en
 
 
 \subsection{Agents and protocols}
-The agents defined in this scenarios are formalized as reactive agents. This decision 
 
+As stated before, the agents that are modelled in this work are reactive agents under the wooldridge
+and Jennings taxonomy, but they kept themselves an internal state, which gives them not the full reactivity
+core, but more 
 
 In the two proposed implementations, three agents are defined:
 
@@ -397,9 +382,9 @@ In the two proposed implementations, three agents are defined:
 
 
 
-\section{Data calibration}
+\section{Data calibration}\label{sec:data}
 
-The system will rely on parametric data obtained through analysis of empirical 8 month
+The system uses parametric data obtained through analysis of empirical 8 month
 operational window timespan.
 
 The data covers all stop related information for every time in a day a bus reaches a stop.
@@ -438,7 +423,7 @@ by independent consideration of boarding and alighting.}
 
 
 
-\section{Implementations and results}\label{}
+\section{Implementations and results}\label{sec:results}
 
 Both proposed architectures run in the dedicated agent platform GAMA \cite{taillandier2019gama}.
 The election is based on both the inclusion of FIPA inboxing, allowing implementation-defined
@@ -459,21 +444,20 @@ capturing the tendency of workers to return to its homeplace.
 
 The specific parameterization used is shown in table \ref{tbl_sim_params}.
 
-\begin{table}%[]
-\caption{Simulation parameters}\label{tbl_sim_params}
+\begin{table}[width=.9\linewidth,cols=2,pos=h]
+\caption{Simulation parameters.}\label{tbl_sim_params}
 \begin{tabular*}{\tblwidth}{@{}LL@{}}
 \toprule
-  Parameter & Value \\ % Table header row
+Parameter & Value \\
 \midrule
- Line & E01 (Cibeles-La Peseta) \\
- Total physical buses & 12 buses\\
- Total trips & 163 trips\\
- Initial TimeSlot & 5 \\
- Extra dwell time per passenger & 5 seconds \\
- Simulation time step & 2 seconds \\
- Minimum protocol dwell ($E_{\min}$) & 4 * Simulation time step \\
- Monte Carlo replicas & 1000 \\
-
+Line & E01 (Cibeles--La Peseta) \\
+Physical buses & 12 \\
+Trips per day & 163 \\
+Initial time slot & 5 \\
+Extra dwell time per passenger ($t_p$) & 5 s \\
+Simulation time step ($\Delta t$) & 2 s \\
+Minimum protocol dwell ($E_{\min}$) & $4\,\Delta t$ \\
+Monte Carlo replicas & 1000 \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -501,7 +485,7 @@ In relation to the necesary input files required to run the simulation,
 
 
 
-\section{Conclusions}\label{}
+\section{Conclusions}\label{sec:conclusions}
 % Numbered list
 % Use the style of numbering in square brackets.
 % If nothing is used, default style will be taken.

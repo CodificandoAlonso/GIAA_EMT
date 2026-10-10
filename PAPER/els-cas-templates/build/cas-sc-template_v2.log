@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.9.14)  7 OCT 2026 14:32
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.8.18)  10 OCT 2026 20:58
  system commands enabled.
 **cas-sc-template_v2.tex
 (./cas-sc-template_v2.tex
@@ -529,10 +529,113 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 (/usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-***********************************************************
- Stix and Charis fonts are not available 
- in TeX system. Hence CMR fonts are used.
-***********************************************************
+(/usr/share/texmf-dist/tex/latex/stix/stix.sty
+Package: stix 2018/04/17 v1.1.3-latex STIX fonts support package
+
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+LaTeX Font Info:    Changing ? sub-encoding to TS1/0 on input line 75.
+)
+LaTeX Encoding Info:    Text command \textpertenthousand (encoding T1) is not d
+eclared on input line 51.
+LaTeX Encoding Info:    Redeclaring text command \textpertenthousand (encoding 
+?) on input line 52.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 76.
+LaTeX Font Info:    Encoding `OML' has changed to `LS1' for symbol font
+(Font)              `letters' in the math version `normal' on input line 76.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> LS1/stix/m/it on input line 76.
+LaTeX Font Info:    Encoding `OML' has changed to `LS1' for symbol font
+(Font)              `letters' in the math version `bold' on input line 76.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> LS1/stix/m/it on input line 76.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 77.
+LaTeX Font Info:    Encoding `OT1' has changed to `LS1' for symbol font
+(Font)              `operators' in the math version `normal' on input line 77.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> LS1/stix/m/n on input line 77.
+LaTeX Font Info:    Encoding `OT1' has changed to `LS1' for symbol font
+(Font)              `operators' in the math version `bold' on input line 77.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> LS1/stix/m/n on input line 77.
+\symbold-operators=\mathgroup6
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 79.
+LaTeX Font Info:    Encoding `OMS' has changed to `LS1' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 79.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> LS1/stixscr/m/n on input line 79.
+LaTeX Font Info:    Encoding `OMS' has changed to `LS1' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 79.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> LS1/stixscr/m/n on input line 79.
+\symsymbols2=\mathgroup7
+\symsymbols3=\mathgroup8
+\symsymbols4=\mathgroup9
+\symintegrals=\mathgroup10
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 84.
+LaTeX Font Info:    Encoding `OMX' has changed to `LS2' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 8
+4.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> LS2/stixex/m/n on input line 84.
+LaTeX Font Info:    Encoding `OMX' has changed to `LS2' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 84.
+
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> LS2/stixex/m/n on input line 84.
+\symarrows1=\mathgroup11
+\symarrows2=\mathgroup12
+\symarrows3=\mathgroup13
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  LS1/stix/m/it --> LS1/stix/b/it on input line 88.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  LS1/stix/m/n --> LS1/stix/b/n on input line 89.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  LS1/stixscr/m/n --> LS1/stixscr/b/n on input line 90.
+LaTeX Font Info:    Overwriting symbol font `symbols2' in version `bold'
+(Font)                  LS1/stixfrak/m/n --> LS1/stixfrak/b/n on input line 91.
+
+LaTeX Font Info:    Overwriting symbol font `symbols3' in version `bold'
+(Font)                  LS1/stixbb/m/n --> LS1/stixbb/b/n on input line 92.
+LaTeX Font Info:    Overwriting symbol font `symbols4' in version `bold'
+(Font)                  LS1/stixbb/m/it --> LS1/stixbb/b/it on input line 93.
+LaTeX Font Info:    Overwriting symbol font `integrals' in version `bold'
+(Font)                  LS2/stixcal/m/n --> LS2/stixcal/b/n on input line 94.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  LS2/stixex/m/n --> LS2/stixex/b/n on input line 95.
+LaTeX Font Info:    Overwriting symbol font `arrows1' in version `bold'
+(Font)                  LS1/stixsf/m/n --> LS1/stixsf/b/n on input line 96.
+LaTeX Font Info:    Overwriting symbol font `arrows2' in version `bold'
+(Font)                  LS1/stixsf/m/it --> LS1/stixsf/b/it on input line 97.
+LaTeX Font Info:    Overwriting symbol font `arrows3' in version `bold'
+(Font)                  LS2/stixtt/m/n --> LS2/stixtt/b/n on input line 98.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 99.
+LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 102.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 106.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 108.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 109.
+LaTeX Info: Redefining \yen on input line 456.
+LaTeX Info: Redefining \circledR on input line 458.
+LaTeX Info: Redefining \checkmark on input line 460.
+LaTeX Info: Redefining \maltese on input line 461.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 698.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 699.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 700.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 701.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 702.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 703.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 704.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 705.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 707.
+LaTeX Font Info:    Redeclaring math accent \check on input line 708.
+LaTeX Font Info:    Redeclaring math accent \vec on input line 716.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 728.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 729.
+LaTeX Info: Redefining \vdots on input line 1518.
+LaTeX Info: Redefining \cdots on input line 1522.
+LaTeX Font Info:    Redeclaring math symbol \mathsterling on input line 1978.
+LaTeX Info: Redefining \not on input line 2144.
+)
 (/usr/share/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -558,6 +661,12 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibsep=\skip72
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count351
+)
+LaTeX Font Info:    Trying to load font information for T1+stix on input line 4
+5.
+
+(/usr/share/texmf-dist/tex/latex/stix/t1stix.fd
+File: t1stix.fd 2015/04/17 v1.1.2-latex STIX T1 font definitions
 )
 (./build/cas-sc-template_v2.aux
 
@@ -595,7 +704,23 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 45.
 LaTeX Font Info:    ... okay on input line 45.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 45.
 LaTeX Font Info:    ... okay on input line 45.
- (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 45.
+LaTeX Font Info:    Trying to load font information for LS1+stix on input line 
+45.
+ (/usr/share/texmf-dist/tex/latex/stix/ls1stix.fd
+File: ls1stix.fd 2015/04/17 v1.1.2-latex STIX LS1 font definitions
+)
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for LS2/stix/m/n on input line 45.
+LaTeX Font Info:    Trying to load font information for LS2+stix on input line 
+45.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls2stix.fd
+File: ls2stix.fd 2015/04/17 v1.1.2-latex STIX LS2 font definitions
+)
+LaTeX Font Info:    ... okay on input line 45.
+
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count352
 \scratchdimen=\dimen270
@@ -625,6 +750,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+LaTeX Info: Command `\dddot' is already robust on input line 45.
+LaTeX Info: Command `\ddddot' is already robust on input line 45.
 Package hyperref Info: Link coloring ON on input line 45.
 
 (./build/cas-sc-template_v2.out) (./build/cas-sc-template_v2.out)
@@ -669,9 +796,25 @@ Package hyperref Info: Link coloring ON on input line 45.
 \verbatim@out=\write4
 
 \openout4 = cas-sc-template_v2.abs
-[0
+LaTeX Font Info:    Trying to load font information for TS1+stix on input line 
+166.
+(/usr/share/texmf-dist/tex/latex/stix/ts1stix.fd
+File: ts1stix.fd 2015/04/17 v1.1.2-latex STIX TS1 font definitions
+) [0
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Trying to load font information for LS1+stixscr on input li
+ne 177.
+ (/usr/share/texmf-dist/tex/latex/stix/ls1stixscr.fd
+File: ls1stixscr.fd 2015/04/17 v1.1.2-latex STIX script LS1 font definitions
+)
+LaTeX Font Info:    Trying to load font information for LS2+stixex on input lin
+e 177.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls2stixex.fd
+File: ls2stixex.fd 2015/04/17 v1.1.2-latex STIX extentions LS2 font definitions
+
+)
 LaTeX Font Info:    Trying to load font information for U+msa on input line 177
 .
 
@@ -683,6 +826,40 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 177
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input l
+ine 177.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls1stixfrak.fd
+File: ls1stixfrak.fd 2015/04/17 v1.1.2-latex STIX fraktur LS1 font definitions
+)
+LaTeX Font Info:    Trying to load font information for LS1+stixbb on input lin
+e 177.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls1stixbb.fd
+File: ls1stixbb.fd 2015/04/17 v1.1.2-latex STIX blackboard LS1 font definitions
+
+)
+LaTeX Font Info:    Trying to load font information for LS2+stixcal on input li
+ne 177.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls2stixcal.fd
+File: ls2stixcal.fd 2015/04/17 v1.1.2-latex STIX calligraphic LS2 font definiti
+ons
+)
+LaTeX Font Info:    Trying to load font information for LS1+stixsf on input lin
+e 177.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls1stixsf.fd
+File: ls1stixsf.fd 2015/04/17 v1.1.2-latex STIX sans-serif LS1 font definitions
+
+)
+LaTeX Font Info:    Trying to load font information for LS2+stixtt on input lin
+e 177.
+
+(/usr/share/texmf-dist/tex/latex/stix/ls2stixtt.fd
+File: ls2stixtt.fd 2015/04/17 v1.1.2-latex STIX typewriter LS2 font definitions
+
 )
 Overfull \hbox (117.0831pt too wide) detected at line 177
 []
@@ -698,7 +875,7 @@ Package hyperref Warning: Ignoring empty anchor on input line 177.
 
 Package hyperref Warning: Ignoring empty anchor on input line 177.
 
-<thumbnails/cas-email.jpeg, id=13, 225.84375pt x 225.84375pt>
+<thumbnails/cas-email.jpeg, id=12, 225.84375pt x 225.84375pt>
 File: thumbnails/cas-email.jpeg Graphic file (type jpg)
 <use thumbnails/cas-email.jpeg>
 Package luatex.def Info: thumbnails/cas-email.jpeg  used on input line 177.
@@ -706,7 +883,7 @@ Package luatex.def Info: thumbnails/cas-email.jpeg  used on input line 177.
 
 Package hyperref Warning: Ignoring empty anchor on input line 177.
 
-<thumbnails/cas-url.jpeg, id=14, 225.84375pt x 225.84375pt>
+<thumbnails/cas-url.jpeg, id=13, 225.84375pt x 225.84375pt>
 File: thumbnails/cas-url.jpeg Graphic file (type jpg)
 <use thumbnails/cas-url.jpeg>
 Package luatex.def Info: thumbnails/cas-url.jpeg  used on input line 177.
@@ -717,46 +894,59 @@ Package hyperref Warning: Ignoring empty anchor on input line 177.
 
 Package hyperref Warning: Ignoring empty anchor on input line 177.
 
+
+Package natbib Warning: Citation `manser2020designing' on page 1 undefined on i
+nput line 189.
+
+
+Package natbib Warning: Citation `sun2021transitgym' on page 1 undefined on inp
+ut line 189.
+
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
-21.
+55.
 (/usr/share/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [1<./thumbnails/cas-email.jpeg><./thumbnails/cas-url.jpeg>]
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
 [2
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-] [3] [4] (./build/cas-sc-template_v2.bbl) [5
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+Missing character: There is no — (U+2014) in font t1-stixgeneral-italic!
+] [3] [4] (./build/cas-sc-template_v2.bbl)
+
+Package natbib Warning: There were undefined citations.
+
+[5
 
 ] (./build/cas-sc-template_v2.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
+
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -765,42 +955,30 @@ Package rerunfilecheck Info: File `cas-sc-template_v2.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 14116 strings out of 476076
+ 16805 strings out of 476076
  100000,662416 words of node,token memory allocated
- 616 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 8 glue, 4 kern, 1 glyph, 16 attribute, 62 glue_spec
-, 16 attribute_list, 1 write nodes
-   avail lists: 2:515,3:207,4:88,5:530,6:66,7:8106,8:28,9:408,10:34,11:622
- 36208 multiletter control sequences out of 65536+600000
- 85 fonts using 5499303 bytes
+ 1254 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 8 glue, 100 kern, 3 glyph, 52 attribute, 62 glue_sp
+ec, 52 attribute_list, 1 write nodes
+   avail lists: 2:472,3:163,4:84,5:955,6:67,7:9221,8:28,9:406,10:35,11:714
+ 38831 multiletter control sequences out of 65536+600000
+ 151 fonts using 11341799 bytes
  87i,12n,96p,284b,498s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texm
-f-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm
--ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/
-share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
-share/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf-dist/fonts/t
-ype1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmcsc10.p
-fb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist
-/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lm
-r17.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-
-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm
-/lmri10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri7.pfb></usr/share/t
-exmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/lm/lmri9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmss9.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf-dist/fonts/t
-ype1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
-uper/sftt1000.pfb>
-Output written on cas-sc-template_v2.pdf (6 pages, 475381 bytes).
+f-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/
+stix-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/stix-ts1.enc}</usr/share
+/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/share/texmf-dist/
+fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/share/texmf-dist/fonts/type
+1/public/stix/STIXGeneral-Regular.pfb></usr/share/texmf-dist/fonts/type1/public/
+lm/lmss9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fo
+nts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf-dist/fonts/type1/public
+/stix/stix-mathex.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathit
+.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb>
+Output written on cas-sc-template_v2.pdf (6 pages, 264134 bytes).
 
-PDF statistics: 181 PDF objects out of 1000 (max. 8388607)
- 142 compressed objects within 2 object streams
- 26 named destinations out of 1000 (max. 1048576)
+PDF statistics: 112 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
+ 24 named destinations out of 1000 (max. 1048576)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{7}
+\begin{thebibliography}{18}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -11,38 +11,24 @@
 \providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
 \providecommand{\bibinfo}[2]{#2}
 \ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Techreport
+\bibitem[{Furth et~al.(2006)Furth, Hemily, Muller, and
+  Strathman}]{furth2006using}
+\bibinfo{author}{P.~G. Furth}, \bibinfo{author}{B.~Hemily},
+  \bibinfo{author}{T.~H.~J. Muller}, \bibinfo{author}{J.~G. Strathman},
+  \bibinfo{title}{Using Archived {AVL-APC} Data to Improve Transit Performance
+  and Management}, \bibinfo{type}{TCRP Report} \bibinfo{number}{113},
+  Transportation Research Board, \bibinfo{address}{Washington, DC},
+  \bibinfo{year}{2006}. \DOIprefix\doi{10.17226/13907}.
 %Type = Article
-\bibitem[{Manser et~al.(2020)Manser, Becker, H\"{o}rl, and
-  Axhausen}]{manser2020designing}
-\bibinfo{author}{P.~Manser}, \bibinfo{author}{H.~Becker},
-  \bibinfo{author}{S.~H\"{o}rl}, \bibinfo{author}{K.~W. Axhausen},
-\newblock \bibinfo{title}{Designing a large-scale public transport network
-  using agent-based microsimulation},
-\newblock \bibinfo{journal}{Transportation Research Part A: Policy and
-  Practice} \bibinfo{volume}{137} (\bibinfo{year}{2020})
-  \bibinfo{pages}{1--15}.
-%Type = Inproceedings
-\bibitem[{Sun et~al.(2021)Sun, Gui, Neema, Chen, Ugirumurera, Severino,
-  Pugliese, Laszka, and Dubey}]{sun2021transitgym}
-\bibinfo{author}{R.~Sun}, \bibinfo{author}{R.~Gui}, \bibinfo{author}{H.~Neema},
-  \bibinfo{author}{Y.~Chen}, \bibinfo{author}{J.~Ugirumurera},
-  \bibinfo{author}{J.~Severino}, \bibinfo{author}{P.~Pugliese},
-  \bibinfo{author}{A.~Laszka}, \bibinfo{author}{A.~Dubey},
-\newblock \bibinfo{title}{{TRANSIT-GYM}: A simulation and evaluation engine for
-  analysis of bus transit systems},
-\newblock in: \bibinfo{booktitle}{2021 IEEE International Conference on Smart
-  Computing (SMARTCOMP)}, \bibinfo{year}{2021}, pp. \bibinfo{pages}{69--76}.
-%Type = Article
-\bibitem[{Talusan et~al.(2025)Talusan, Han, Rogers, Mukhopadhyay, Laszka,
-  Freudberg, and Dubey}]{talusan2025dispatch}
-\bibinfo{author}{J.~P. Talusan}, \bibinfo{author}{C.~Han},
-  \bibinfo{author}{D.~Rogers}, \bibinfo{author}{A.~Mukhopadhyay},
-  \bibinfo{author}{A.~Laszka}, \bibinfo{author}{D.~Freudberg},
-  \bibinfo{author}{A.~Dubey},
-\newblock \bibinfo{title}{An end-to-end solution for public transit stationing
-  and dispatch problem},
-\newblock \bibinfo{journal}{ACM Transactions on Cyber-Physical Systems}
-  (\bibinfo{year}{2025}).
+\bibitem[{Toledo et~al.(2010)Toledo, Cats, Burghout, and
+  Koutsopoulos}]{toledo2010mesoscopic}
+\bibinfo{author}{T.~Toledo}, \bibinfo{author}{O.~Cats},
+  \bibinfo{author}{W.~Burghout}, \bibinfo{author}{H.~N. Koutsopoulos},
+\newblock \bibinfo{title}{Mesoscopic simulation for transit operations},
+\newblock \bibinfo{journal}{Transportation Research Part C: Emerging
+  Technologies} \bibinfo{volume}{18} (\bibinfo{year}{2010})
+  \bibinfo{pages}{896--908}. \DOIprefix\doi{10.1016/j.trc.2010.02.008}.
 %Type = Article
 \bibitem[{Huang et~al.(2022)Huang, Cui, Zhang, Tong, Shi, and
   Liu}]{huang2022overview}
@@ -54,12 +40,122 @@
 \newblock \bibinfo{journal}{Journal of Advanced Transportation}
   \bibinfo{volume}{2022} (\bibinfo{year}{2022}) \bibinfo{pages}{1252534}.
   \DOIprefix\doi{10.1155/2022/1252534}.
-%Type = Book
-\bibitem[{Horni et~al.(2016)Horni, Nagel, and Axhausen}]{horni2016matsim}
-\bibinfo{editor}{A.~Horni}, \bibinfo{editor}{K.~Nagel}, \bibinfo{editor}{K.~W.
-  Axhausen} (Eds.), \bibinfo{title}{The Multi-Agent Transport Simulation
-  {MATSim}}, \bibinfo{publisher}{Ubiquity Press}, \bibinfo{address}{London},
-  \bibinfo{year}{2016}. \DOIprefix\doi{10.5334/baw}.
+%Type = Article
+\bibitem[{Divasson-J. et~al.(2025)Divasson-J., Macarulla, Garcia, and
+  Borges}]{divassonj2025abm}
+\bibinfo{author}{A.~Divasson-J.}, \bibinfo{author}{A.~M. Macarulla},
+  \bibinfo{author}{J.~I. Garcia}, \bibinfo{author}{C.~E. Borges},
+\newblock \bibinfo{title}{Agent-based modeling in urban human mobility: A
+  systematic review},
+\newblock \bibinfo{journal}{Cities} \bibinfo{volume}{158}
+  (\bibinfo{year}{2025}) \bibinfo{pages}{105697}.
+  \DOIprefix\doi{10.1016/j.cities.2024.105697}.
+%Type = Article
+\bibitem[{Bastarianto et~al.(2023)Bastarianto, Hancock, Choudhury, and
+  Manley}]{bastarianto2023agent}
+\bibinfo{author}{F.~F. Bastarianto}, \bibinfo{author}{T.~O. Hancock},
+  \bibinfo{author}{C.~F. Choudhury}, \bibinfo{author}{E.~Manley},
+\newblock \bibinfo{title}{Agent-based models in urban transportation: Review,
+  challenges, and opportunities},
+\newblock \bibinfo{journal}{European Transport Research Review}
+  \bibinfo{volume}{15} (\bibinfo{year}{2023}) \bibinfo{pages}{19}.
+  \DOIprefix\doi{10.1186/s12544-023-00590-5}.
+%Type = Article
+\bibitem[{Balbo et~al.(2024)Balbo, Mandiau, and Zargayouna}]{balbo2024extended}
+\bibinfo{author}{F.~Balbo}, \bibinfo{author}{R.~Mandiau},
+  \bibinfo{author}{M.~Zargayouna},
+\newblock \bibinfo{title}{Extended review of multi-agent solutions to advanced
+  public transportation systems challenges},
+\newblock \bibinfo{journal}{Public Transport} \bibinfo{volume}{16}
+  (\bibinfo{year}{2024}) \bibinfo{pages}{159--186}.
+  \DOIprefix\doi{10.1007/s12469-023-00332-9}.
+%Type = Inproceedings
+\bibitem[{Padgham et~al.(2014)Padgham, Nagel, Singh, and
+  Chen}]{padgham2014integrating}
+\bibinfo{author}{L.~Padgham}, \bibinfo{author}{K.~Nagel},
+  \bibinfo{author}{D.~Singh}, \bibinfo{author}{Q.~Chen},
+\newblock \bibinfo{title}{Integrating {BDI} agents into a {MATSim} simulation},
+\newblock in: \bibinfo{editor}{T.~Schaub}, \bibinfo{editor}{G.~Friedrich},
+  \bibinfo{editor}{B.~O'Sullivan} (Eds.), \bibinfo{booktitle}{ECAI 2014: 21st
+  European Conference on Artificial Intelligence}, volume \bibinfo{volume}{263}
+  of \textit{\bibinfo{series}{Frontiers in Artificial Intelligence and
+  Applications}}, \bibinfo{publisher}{IOS Press}, \bibinfo{address}{Amsterdam},
+  \bibinfo{year}{2014}, pp. \bibinfo{pages}{681--686}.
+  \DOIprefix\doi{10.3233/978-1-61499-419-0-681}.
+%Type = Article
+\bibitem[{Singh et~al.(2016)Singh, Padgham, and Logan}]{singh2016integrating}
+\bibinfo{author}{D.~Singh}, \bibinfo{author}{L.~Padgham},
+  \bibinfo{author}{B.~Logan},
+\newblock \bibinfo{title}{Integrating {BDI} agents with agent-based simulation
+  platforms},
+\newblock \bibinfo{journal}{Autonomous Agents and Multi-Agent Systems}
+  \bibinfo{volume}{30} (\bibinfo{year}{2016}) \bibinfo{pages}{1050--1071}.
+  \DOIprefix\doi{10.1007/s10458-016-9332-x}.
+%Type = Article
+\bibitem[{Adam and Gaudou(2016)}]{adam2016bdi}
+\bibinfo{author}{C.~Adam}, \bibinfo{author}{B.~Gaudou},
+\newblock \bibinfo{title}{{BDI} agents in social simulations: A survey},
+\newblock \bibinfo{journal}{The Knowledge Engineering Review}
+  \bibinfo{volume}{31} (\bibinfo{year}{2016}) \bibinfo{pages}{207--238}.
+  \DOIprefix\doi{10.1017/S0269888916000096}.
+%Type = Phdthesis
+\bibitem[{Burghout(2004)}]{burghout2004hybrid}
+\bibinfo{author}{W.~Burghout}, \bibinfo{title}{Hybrid microscopic-mesoscopic
+  traffic simulation}, Ph.D. thesis, Royal Institute of Technology (KTH),
+  \bibinfo{address}{Stockholm, Sweden}, \bibinfo{year}{2004}. \URLprefix
+  \url{https://kth.se/polopoly_fs/1.742065.1600688570!/hybrid%20mesoscopic.pdf}.
+%Type = Article
+\bibitem[{Furth and Navick(1992)}]{furth1992bus}
+\bibinfo{author}{P.~G. Furth}, \bibinfo{author}{D.~S. Navick},
+\newblock \bibinfo{title}{Bus route {O-D} matrix generation: Relationship
+  between biproportional and recursive methods},
+\newblock \bibinfo{journal}{Transportation Research Record}
+  (\bibinfo{year}{1992}) \bibinfo{pages}{14--21}.
+%Type = Article
+\bibitem[{McCord et~al.(2010)McCord, Mishalani, Goel, and
+  Strohl}]{mccord2010iterative}
+\bibinfo{author}{M.~R. McCord}, \bibinfo{author}{R.~G. Mishalani},
+  \bibinfo{author}{P.~Goel}, \bibinfo{author}{B.~Strohl},
+\newblock \bibinfo{title}{Iterative proportional fitting procedure to determine
+  bus route passenger origin--destination flows},
+\newblock \bibinfo{journal}{Transportation Research Record}
+  \bibinfo{volume}{2145} (\bibinfo{year}{2010}) \bibinfo{pages}{59--65}.
+  \DOIprefix\doi{10.3141/2145-07}.
+%Type = Article
+\bibitem[{Kieu et~al.(2020)Kieu, Malleson, and Heppenstall}]{kieu2020dealing}
+\bibinfo{author}{L.-M. Kieu}, \bibinfo{author}{N.~Malleson},
+  \bibinfo{author}{A.~Heppenstall},
+\newblock \bibinfo{title}{Dealing with uncertainty in agent-based models for
+  short-term predictions},
+\newblock \bibinfo{journal}{Royal Society Open Science} \bibinfo{volume}{7}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{191074}.
+  \DOIprefix\doi{10.1098/rsos.191074}.
+%Type = Article
+\bibitem[{Talusan et~al.(2025)Talusan, Han, Rogers, Mukhopadhyay, Laszka,
+  Freudberg, and Dubey}]{talusan2025dispatch}
+\bibinfo{author}{J.~P. Talusan}, \bibinfo{author}{C.~Han},
+  \bibinfo{author}{D.~Rogers}, \bibinfo{author}{A.~Mukhopadhyay},
+  \bibinfo{author}{A.~Laszka}, \bibinfo{author}{D.~Freudberg},
+  \bibinfo{author}{A.~Dubey},
+\newblock \bibinfo{title}{An end-to-end solution for public transit stationing
+  and dispatch problem},
+\newblock \bibinfo{journal}{ACM Transactions on Cyber-Physical Systems}
+  \bibinfo{volume}{9} (\bibinfo{year}{2025}) \bibinfo{pages}{43}.
+  \DOIprefix\doi{10.1145/3754454}.
+%Type = Article
+\bibitem[{Wooldridge and Jennings(1995)}]{wooldridge1995intelligent}
+\bibinfo{author}{M.~Wooldridge}, \bibinfo{author}{N.~R. Jennings},
+\newblock \bibinfo{title}{Intelligent agents: theory and practice},
+\newblock \bibinfo{journal}{The Knowledge Engineering Review}
+  \bibinfo{volume}{10} (\bibinfo{year}{1995}) \bibinfo{pages}{115--152}.
+  \DOIprefix\doi{10.1017/S0269888900008122}.
+%Type = Incollection
+\bibitem[{Wooldridge(1999)}]{wooldridge1999intelligent}
+\bibinfo{author}{M.~Wooldridge},
+\newblock \bibinfo{title}{Intelligent agents},
+\newblock in: \bibinfo{editor}{G.~Weiss} (Ed.), \bibinfo{booktitle}{Multiagent
+  Systems: A Modern Approach to Distributed Artificial Intelligence},
+  \bibinfo{publisher}{MIT Press}, \bibinfo{year}{1999}.
 %Type = Article
 \bibitem[{Brooks(1991)}]{brooks1991representation}
 \bibinfo{author}{R.~A. Brooks},
