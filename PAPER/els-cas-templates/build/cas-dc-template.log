@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.9.14)  6 OCT 2026 17:50
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.9.14)  9 OCT 2026 11:02
  system commands enabled.
 **cas-dc-template.tex
 (./cas-dc-template.tex
@@ -742,13 +742,13 @@ Package rerunfilecheck Info: File `cas-dc-template.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 14141 strings out of 476076
+ 14148 strings out of 476076
  100000,662416 words of node,token memory allocated
  599 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 8 glue, 4 kern, 1 glyph, 13 attribute, 61 glue_spec
 , 13 attribute_list, 1 write nodes
-   avail lists: 2:501,3:200,4:90,5:199,6:46,7:4156,8:26,9:363,10:14,11:284
- 36237 multiletter control sequences out of 65536+600000
+   avail lists: 2:535,3:220,4:90,5:211,6:46,7:4494,8:26,9:381,10:14,11:302
+ 36243 multiletter control sequences out of 65536+600000
  82 fonts using 5251143 bytes
  87i,9n,96p,281b,479s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texm
@@ -766,10 +766,10 @@ texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/share/texmf-dist/fonts/type1/pu
 blic/lm/lmri9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmss9.pfb></usr/s
 hare/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf-dist/fonts/
 type1/public/cm-super/sftt0800.pfb>
-Output written on cas-dc-template.pdf (3 pages, 304860 bytes).
+Output written on cas-dc-template.pdf (3 pages, 305603 bytes).
 
-PDF statistics: 116 PDF objects out of 1000 (max. 8388607)
- 91 compressed objects within 1 object stream
- 17 named destinations out of 1000 (max. 1048576)
+PDF statistics: 118 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 1048576)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 

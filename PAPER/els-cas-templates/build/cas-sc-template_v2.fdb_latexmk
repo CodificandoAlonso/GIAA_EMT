@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex build/cas-sc-template_v2"] 1791376349.26647 "build/cas-sc-template_v2.aux" "build/cas-sc-template_v2.bbl" "build/cas-sc-template_v2" 1791376349.92245 0
-  "./cas-refs.bib" 1790580388.93601 2755 064ca860ee93031ee96b0aa98cae1eab ""
+["bibtex build/cas-sc-template_v2"] 1791536537.94028 "build/cas-sc-template_v2.aux" "build/cas-sc-template_v2.bbl" "build/cas-sc-template_v2" 1791536537.96158 0
+  "./cas-refs.bib" 1791536455.41106 2982 3dafa5b9f16daf0e0f7ab3b54e65566f ""
   "/usr/share/texmf-dist/bibtex/bst/elsarticle/elsarticle-num-names.bst" 1775415801 28896 ef8ea1833e4d69d9f60b6db23b4bea61 ""
   "build/cas-sc-template_v2.aux" 1791376349.80601 2889 a4f1a2891358444c84fd838106ac98d1 "lualatex"
   (generated)
   "build/cas-sc-template_v2.bbl"
   "build/cas-sc-template_v2.blg"
   (rewritten before read)
-["lualatex"] 1791376349.28727 "cas-sc-template_v2.tex" "build/out/cas-sc-template_v2.pdf" "cas-sc-template_v2" 1791376349.92257 0
+["lualatex"] 1791376349.28727 "cas-sc-template_v2.tex" "build/out/cas-sc-template_v2.pdf" "cas-sc-template_v2" 1791536537.96162 0
   "/home/hector/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1789378051.20605 127314 7c5efae986e60281c7ad546cf8ed9a14 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm" 1775415801 1536 0b0b8ca286de6a006b681926403f35cd ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1775415801 1536 06717a2b50de47d4087ac0e6cd759455 ""
@@ -214,7 +214,7 @@
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1789378022 5659438 d0680f59d0e13b095f189c0e99027a21 ""
   "build/cas-sc-template_v2.abs" 1791376349.7377 1124 b886c1022151b41e0c03b75f72d92816 "lualatex"
   "build/cas-sc-template_v2.aux" 1791376349.80601 2889 a4f1a2891358444c84fd838106ac98d1 "lualatex"
-  "build/cas-sc-template_v2.bbl" 1791376349.28201 3836 71a9a424b4f47954057d84d9adbabe04 "bibtex build/cas-sc-template_v2"
+  "build/cas-sc-template_v2.bbl" 1791536537.95406 3836 71a9a424b4f47954057d84d9adbabe04 "bibtex build/cas-sc-template_v2"
   "build/cas-sc-template_v2.out" 1791376349.73011 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
   "cas-common.sty" 1788509203.39208 76688 c602be3da196cb506acc84d1fa26b134 ""
   "cas-sc-template_v2.tex" 1791373109.04833 14547 7af962d4786f6f8ebfa8084a22b75a30 ""

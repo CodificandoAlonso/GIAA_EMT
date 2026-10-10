@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.9.14)  7 OCT 2026 14:32
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.9.14)  9 OCT 2026 11:02
  system commands enabled.
 **cas-sc-template.tex
 (./cas-sc-template.tex
@@ -833,34 +833,42 @@ Package hyperref Warning: Ignoring empty anchor on input line 180.
 
 Package hyperref Warning: Ignoring empty anchor on input line 180.
 
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
-Missing character: There is no — (U+2014) in font ec-lmri10!
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
-58.
+40.
 (/usr/share/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [1
+) [1<./thumbnails/cas-email.jpeg><./thumbnails/cas-url.jpeg>]
+
+Package natbib Warning: Citation `DeberiaircitadeIPF' on page 2 undefined on in
+put line 244.
+
+
+Package natbib Warning: Citation `Oaqui' on page 2 undefined on input line 245.
+
+
 Missing character: There is no — (U+2014) in font ec-lmri10!
 Missing character: There is no — (U+2014) in font ec-lmri10!
 Missing character: There is no — (U+2014) in font ec-lmri10!
 Missing character: There is no — (U+2014) in font ec-lmri10!
-<./thumbnails/cas-email.jpeg><./thumbnails/cas-url.jpeg>] [2
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+[2
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
+Missing character: There is no — (U+2014) in font ec-lmri10!
 Missing character: There is no — (U+2014) in font ec-lmri10!
 Missing character: There is no — (U+2014) in font ec-lmri10!
 Missing character: There is no — (U+2014) in font ec-lmri10!
@@ -871,51 +879,43 @@ Missing character: There is no — (U+2014) in font ec-lmri10!
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `') on input line 343.
+               Default added (so using `') on input line 360.
 
-<./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf, id=54, 362.10281pt x 475.
+<./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf, id=53, 362.10281pt x 475.
 02469pt>
 File: ./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf Graphic file (type pd
 f)
 <use ./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf>
 Package luatex.def Info: ./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf  u
-sed on input line 348.
+sed on input line 365.
 (luatex.def)             Requested size: 362.10191pt x 475.02351pt.
-<./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf, id=55, 362.10281
+<./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf, id=54, 362.10281
 pt x 535.2497pt>
 File: ./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf Graphic file
  (type pdf)
 <use ./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf>
 Package luatex.def Info: ./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-r
-aw.pdf  used on input line 353.
+aw.pdf  used on input line 370.
 (luatex.def)             Requested size: 362.10191pt x 535.24838pt.
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `') on input line 361.
+               Default added (so using `') on input line 378.
 
-<./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf, id=56, 362.10281pt x 55
+<./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf, id=55, 362.10281pt x 55
 0.30594pt>
 File: ./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf Graphic file (type 
 pdf)
 <use ./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf>
 Package luatex.def Info: ./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf 
- used on input line 366.
+ used on input line 383.
 (luatex.def)             Requested size: 362.10191pt x 550.3046pt.
-<./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf, id=57, 362.10281pt x 542.7778
+<./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf, id=56, 362.10281pt x 542.7778
 2pt>
 File: ./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf Graphic file (type pdf)
 <use ./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf>
 Package luatex.def Info: ./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf  used 
-on input line 371.
+on input line 388.
 (luatex.def)             Requested size: 362.10191pt x 542.77649pt.
-
-Package natbib Warning: Citation `DeberiaircitadeIPF' on page 3 undefined on in
-put line 411.
-
-
-Package natbib Warning: Citation `Oaqui' on page 3 undefined on input line 412.
-
-
 [3] [4] [5<./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf><./svg-inkscape/d
 iagrama_solicitud_de_descenso_en_svg-raw.pdf>] [6<./svg-inkscape/notificacion_de
 _llegada_en_svg-raw.pdf><./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf>]
@@ -939,13 +939,13 @@ Package rerunfilecheck Info: File `cas-sc-template.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 16391 strings out of 476076
+ 16398 strings out of 476076
  100000,794899 words of node,token memory allocated
  618 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 8 glue, 4 kern, 1 glyph, 17 attribute, 61 glue_spec
 , 17 attribute_list, 2 write nodes
-   avail lists: 2:702,3:206,4:88,5:683,6:69,7:9796,8:28,9:423,10:34,11:760
- 38320 multiletter control sequences out of 65536+600000
+   avail lists: 2:602,3:230,4:92,5:509,6:71,7:7903,8:28,9:412,10:34,11:638
+ 38326 multiletter control sequences out of 65536+600000
  85 fonts using 5499303 bytes
  94i,12n,96p,313b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texm
@@ -971,10 +971,10 @@ lic/lm/lmri9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmss9.pfb></usr/sh
 are/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf-dist/fonts/t
 ype1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
 uper/sftt1000.pfb>
-Output written on cas-sc-template.pdf (8 pages, 573169 bytes).
+Output written on cas-sc-template.pdf (8 pages, 573998 bytes).
 
-PDF statistics: 278 PDF objects out of 1000 (max. 8388607)
- 208 compressed objects within 3 object streams
- 32 named destinations out of 1000 (max. 1048576)
+PDF statistics: 283 PDF objects out of 1000 (max. 8388607)
+ 213 compressed objects within 3 object streams
+ 33 named destinations out of 1000 (max. 1048576)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

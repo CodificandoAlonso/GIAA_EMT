@@ -6,45 +6,45 @@ Database file #1: cas-refs.bib
 Warning--I didn't find a database entry for "DeberiaircitadeIPF"
 Warning--I didn't find a database entry for "Oaqui"
 Reallocated singl_function (elt_size=8) to 100 items from 50.
-You've used 6 entries,
+You've used 7 entries,
             2918 wiz_defined-function locations,
-            667 strings with 6680 characters,
-and the built_in function-call counts, 5033 in all, are:
-= -- 334
-> -- 297
+            674 strings with 6825 characters,
+and the built_in function-call counts, 5629 in all, are:
+= -- 370
+> -- 325
 < -- 2
-+ -- 115
-- -- 105
-* -- 638
-:= -- 733
-add.period$ -- 8
-call.type$ -- 6
-change.case$ -- 65
-chr.to.int$ -- 6
-cite$ -- 6
-duplicate$ -- 333
-empty$ -- 310
-format.name$ -- 121
-if$ -- 896
++ -- 127
+- -- 114
+* -- 713
+:= -- 817
+add.period$ -- 10
+call.type$ -- 7
+change.case$ -- 74
+chr.to.int$ -- 7
+cite$ -- 7
+duplicate$ -- 379
+empty$ -- 361
+format.name$ -- 133
+if$ -- 1007
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 75
-newline$ -- 45
-num.names$ -- 24
-pop$ -- 122
+missing$ -- 83
+newline$ -- 48
+num.names$ -- 29
+pop$ -- 140
 preamble$ -- 1
-purify$ -- 65
+purify$ -- 73
 quote$ -- 0
-skip$ -- 75
+skip$ -- 85
 stack$ -- 0
-substring$ -- 187
-swap$ -- 284
+substring$ -- 201
+swap$ -- 315
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 54
+type$ -- 60
 warning$ -- 0
-while$ -- 28
+while$ -- 31
 width$ -- 0
-write$ -- 95
+write$ -- 107
 (There were 2 warnings)

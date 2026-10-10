@@ -222,12 +222,12 @@ INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm
 INPUT ./thumbnails/cas-url.jpeg
 INPUT ./thumbnails/cas-url.jpeg
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr9.tfm
 INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmss.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmss9.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri9.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmss10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm
@@ -235,6 +235,7 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT ./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf
 INPUT ./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf
 INPUT ./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf
@@ -244,7 +245,6 @@ INPUT ./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf
 INPUT ./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf
 INPUT ./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf
 INPUT ./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm

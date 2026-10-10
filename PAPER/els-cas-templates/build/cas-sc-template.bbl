@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -54,6 +54,12 @@
 \newblock \bibinfo{journal}{Journal of Advanced Transportation}
   \bibinfo{volume}{2022} (\bibinfo{year}{2022}) \bibinfo{pages}{1252534}.
   \DOIprefix\doi{10.1155/2022/1252534}.
+%Type = Book
+\bibitem[{Horni et~al.(2016)Horni, Nagel, and Axhausen}]{horni2016matsim}
+\bibinfo{editor}{A.~Horni}, \bibinfo{editor}{K.~Nagel}, \bibinfo{editor}{K.~W.
+  Axhausen} (Eds.), \bibinfo{title}{The Multi-Agent Transport Simulation
+  {MATSim}}, \bibinfo{publisher}{Ubiquity Press}, \bibinfo{address}{London},
+  \bibinfo{year}{2016}. \DOIprefix\doi{10.5334/baw}.
 %Type = Article
 \bibitem[{Brooks(1991)}]{brooks1991representation}
 \bibinfo{author}{R.~A. Brooks},
