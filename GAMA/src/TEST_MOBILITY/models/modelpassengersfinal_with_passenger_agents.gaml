@@ -100,7 +100,7 @@ global
 
 		float gamma_val <- gamma_rnd(r, (1 - p) / p);
 
-		// Defensive guard only: poisson() is non-negative by definition
+		// Defensive guard only. poisson() is non-negative by definition
 		return max(0, poisson(gamma_val));
 
 	} //End function sample_negative_binomial

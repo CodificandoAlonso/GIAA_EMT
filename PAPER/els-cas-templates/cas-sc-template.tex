@@ -264,7 +264,6 @@ inside the simulation.
 A microscopic level of detail is something this kind of problem does
 not require \cite{toledo2010mesoscopic}.
 
-
 In this work passengers are used to analyse bus capacity, and the origin and destination of
 individual entities are not required.
 No external surveys or other data from which to construct OD matrices are
@@ -296,7 +295,7 @@ of Wooldridge and Jennings \cite{wooldridge1995intelligent}: they act in
 response to events and to the messages they receive. They are not purely
 reactive, however, as they keep an internal state
 \cite{wooldridge1999intelligent}.
-The form they have of interaction is through FIPA interaction protocols \cite{}.
+The form they have of interaction is through FIPA interaction protocols \cite{poslad2007specifying}.
 The communication between different entities is the core of the behaviour of the
 system.
 
@@ -305,7 +304,7 @@ of EMT Madrid, calibrated with the boardings and alightings recorded by the
 operator and used to analyse occupancy and demand absorption.
 From the artificial intelligence side, it addresses how fine the agents of
 such a system need to be. Two solutions are built that share the same bus
-model and the same interaction protocols between reactive agents, and differ
+model and similar interaction protocols between reactive agents, and differ
 only in whether each passenger is an agent or passengers are counts held by
 stops and buses.
 Comparing them isolates what the passenger agent contributes, in results and
@@ -322,31 +321,122 @@ Finally, Section~\ref{sec:conclusions} draws the conclusions.
 
 \section{Proposed solutions: two different approaches}\label{sec:solutions}
 
-As for the purpose of this work, no cognitive reasoning is represented neither for the bus nor the passenger.
-Thus, the emergent intelligence comes from the interaction between agents and environment, as per
-\citet{brooks1991representation}, that emergent behaviour guarantees an agency right itself.
+Transport simulations usually represent each passenger as an agent, because a
+passenger is an entity that makes choices \cite{cats2016dynamic}. The data
+available here record only how many passengers board and alight at each stop,
+so there is no individual choice to represent. Two solutions are therefore
+built. The first solution keeps the passenger as an agent, as far as the data allow,
+but the decision to alight is not its own. As a bus approaches a stop, the environment
+draws the number of alighting passengers from the
+fitted distribution and marks that many passengers on board, which then
+request to alight when the bus asks. The second solution removes the passenger
+agent, and buses and stops keep only the number of passengers. Comparing the
+two shows what the passenger agent contributes when its behaviour cannot be
+derived from the data.
 
 
 \subsection{Agents and protocols}
 
-As stated before, the agents that are modelled in this work are reactive agents under the wooldridge
-and Jennings taxonomy, but they kept themselves an internal state, which gives them not the full reactivity
-core, but more 
+As introduced in Section~\ref{sec:intro}, the agents modelled in this work are
+reactive in the classification of Wooldridge and Jennings
+\cite{wooldridge1995intelligent}. Their behaviour is a fixed set of rules
+activated by events and by the messages they receive, with no deliberation.
+They are, more specifically, agents with state \cite{wooldridge1999intelligent},
+since each one keeps information between events, such as the occupancy of a
+bus or the queue of passengers waiting at a stop, and acts according to it.
+Each agent controls its own state and decides its response to a request
+according to it; a bus, for instance, accepts or refuses a boarding request
+depending on its remaining capacity.
+This section defines the agents of the two solutions and the interaction
+protocols through which they communicate.
 
 In the two proposed implementations, three agents are defined:
 
 \begin{itemize}
-  \item bus
-  \item stop
-  \item Passenger
+  \item Bus: Representing a phisical bus inside the simulation. It has a list of the trips it is
+  scheduled to run, and keeps track of which and how many passengers has on board.
+  It can present three different modes, which relates to its
+  \textit{scheduled starting point}, the \textit{communications when its at a stop}, and
+  the \textit{transit between stops}.
+  \item Stop: Representing each stop of the bus route. It keeps track of which and how many passengers
+  are waiting to the bus in what its considered its \textit{passengers custody} mode.
+  When a bus arrives, it changes to \textit{communicating with a bus}.
+  \item Passenger: This agent only appears in the first implementation. It represents each passenger
+  individually, and has two possible modes:\textit{waiting at a stop} and \textit{on a bus}. 
+  It has a moment of creation timestamp, which represents at which exact time it appears at a stop.
 \end{itemize}
 
-The protocols are defined in figures \ref{fig:requests_first}, \ref{fig:requests_seconds}.
+The agents interact through FIPA protocols, specifically Request \cite{fipa2002request} and Query
+\cite{fipa2002query} types. Table \ref{tab:protocols} lists them in the order
+in which they run each time a bus serves a stop. Since the agents share a
+common vocabulary and their responses follow fixed rules, only the message
+paths that can occur in the simulation are implemented: a request is always
+agreed to, except in the boarding request.
 
+In the first solution, as a bus approaches a stop it sends an \emph{alighting
+query} to each passenger on board, which answers whether it will alight
+according to the mark set by the environment. The bus then sends an
+\emph{alighting request} to each passenger that answered affirmatively; the
+passenger confirms and is removed from the simulation, and the bus updates its
+list of passengers, which frees capacity. Next, the bus sends an \emph{arrival
+notification} to the stop, and the stop sends a \emph{boarding notice} to each
+waiting passenger, containing the reference of the bus to address. Each
+passenger then sends a \emph{boarding request} to the bus, including the time
+it has waited. This is the only protocol with a refusal: the bus agrees while
+it has capacity and refuses once it is full, in which case the passenger
+remains at the stop. Finally, the bus sends a \emph{count update} to the stop
+with the passengers that boarded and their waiting times, which the stop
+records.
+
+In the second solution there are no passenger agents and two protocols remain.
+On arrival, the bus sends an \emph{arrival query} to the stop, which returns
+the number of passengers waiting and the number that must alight, the latter
+obtained from the environment. The bus applies both figures against its
+capacity and closes the visit with a \emph{count update} carrying the number
+of passengers that boarded.
+
+Every exchange consists of three messages, except a refused boarding request,
+which takes two. In the first solution the number of messages per stop visit
+therefore grows with the passengers on board and waiting, whereas in the
+second it is constant at six.
+
+\begin{table}[width=\linewidth,cols=4,pos=t]
+\caption{Interaction protocols of the two solutions, in order of execution
+during a stop visit.}\label{tab:protocols}
+\begin{tabular*}{\tblwidth}{@{}p{.20\linewidth}p{.22\linewidth}p{.09\linewidth}p{.40\linewidth}@{}}
+\toprule
+Protocol & Initiator $\rightarrow$ participant & Type & Purpose \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{First solution}} \\
+Alighting query & Bus $\rightarrow$ passenger on board & Query &
+  Whether the passenger alights at the next stop \\
+Alighting request & Bus $\rightarrow$ alighting passenger & Request &
+  The passenger leaves the bus and is removed \\
+Arrival notification & Bus $\rightarrow$ stop & Request &
+  The stop starts notifying its waiting passengers \\
+Boarding notice & Stop $\rightarrow$ waiting passenger & Request &
+  Tells the passenger which bus to address \\
+Boarding request & Passenger $\rightarrow$ bus & Request &
+  The bus agrees, or refuses when full \\
+Count update & Bus $\rightarrow$ stop & Request &
+  Who boarded and their waiting times \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Second solution}} \\
+Arrival query & Bus $\rightarrow$ stop & Query &
+  Number waiting and number alighting \\
+Count update & Bus $\rightarrow$ stop & Request &
+  Number of passengers that boarded \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+
+The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:},
+\ref{fig:}, 
 
 \newlength{\figh}
 
-\begin{figure}[t]
+\begin{figure}
   \centering
   \setlength{\figh}{0.62\linewidth}
   \begin{minipage}[t]{0.764\figh}
@@ -364,7 +454,7 @@ The protocols are defined in figures \ref{fig:requests_first}, \ref{fig:requests
 \end{figure}
 
 
-\begin{figure}[!t]
+\begin{figure}
   \centering
   \setlength{\figh}{0.62\linewidth}
   \begin{minipage}[t]{0.764\figh}
@@ -380,6 +470,150 @@ The protocols are defined in figures \ref{fig:requests_first}, \ref{fig:requests
   \caption{FIPA-Request interaction protocols for a bus arriving to a stop.}
   \label{fig:requests_seconds}
 \end{figure}
+
+\subsection{Environment}\label{sec:environment}
+ 
+Some elements of the model do not belong to the domain of any agent and are
+handled by the environment. Those are the passage of time,
+the movement of buses between stops, the generation of passengers, the
+selection of the passengers that alight, and the time a bus remains at a stop.
+They are the same in both solutions, except where stated.
+ 
+\paragraph{Time and movement}
+
+Time advances in discrete steps of length $\Delta t$, from the start of the
+service day until the last bus has completed all its scheduled trips. The
+movement of a bus between two stops ignores spatial position and is purely
+temporal. This process consists of a travel time to be completed and a counter that
+increases by $\Delta t$ at each step. This avoids spatial computation and
+reduces the computational load.
+ 
+\paragraph{Generation of agents}
+
+Bus and stop agents are created before the simulation starts: one stop agent
+for each stop of each direction of the route, and one bus agent for each
+physical vehicle, which receives the list of its scheduled departures and the
+stop where its service begins. A bus agent is removed once it has completed
+its service.
+ 
+Passengers are generated during the simulation. At the start of each hour $h$,
+a value $\tau_h$ is drawn for every stop from the boarding distribution of that
+stop and time slot. Since that distribution is fitted to the boardings
+aggregated over one hour, $\tau_h$ is the number of passengers that appear at
+the stop during that hour. They are created progressively. At each step an
+increment is added to a counter kept for the stop, and whenever its integer
+part reaches one or more, that number of passengers is created and subtracted
+from the counter. The increment is not constant within the hour but follows a
+line that pivots on the midpoint of the hour and reaches, at its end, the
+increment of the following hour:
+\begin{equation}\label{eq:generation}
+g_h(t) = \delta_h + \frac{2\,(\delta_{h+1}-\delta_h)}{T}
+         \left(t - t_h - \frac{T}{2}\right),
+\qquad t \in [t_h,\, t_h + T),
+\end{equation}
+where $t_h$ is the start of hour $h$, $T$ its duration, $N$ the number of steps
+it contains and $\delta_h = \tau_h / N$. The mean of $g_h$ over the hour is
+$\delta_h$, so the number of passengers generated in the hour is still
+$\tau_h$; only the instants at which they appear are redistributed.
+
+Note that generating passengers during hour $h$ requires $\tau_{h+1}$, the
+number of passengers of the following hour. Each value is therefore sampled
+one hour in advance. At the start of the simulation both $\tau_5$ and $\tau_6$
+are sampled, where 5 and 6 are its first two time slots, and at the start of
+every later hour $h$ the value sampled an hour earlier becomes $\tau_h$ and a
+new $\tau_{h+1}$ is drawn.
+ 
+In the first solution each generated passenger is an agent linked to its stop.
+In the second, generation increases an integer counter at the stop, and the
+instant of generation of each passenger is stored in a list, so that waiting
+times can still be obtained.
+ 
+\paragraph{Selection of alighting passengers}
+
+The selection of the passengers that alight must correspond to the fitted
+distributions. A destination cannot be assigned to a passenger when it is
+created, because the stop at which it alights would depend on which bus
+carries it and on the moment the bus reaches each stop; fixing it in advance
+would be arbitrary. Moreover, any such assignment would make the number of
+alightings per arrival an emergent quantity, sensitive to delays, bunching and
+refusals for lack of capacity, and it would deviate from the alighting
+distributions, which are fitted per arrival.
+ 
+The selection is therefore made by the environment at the moment of alighting,
+the only point at which an empirical distribution supports it. In the first
+solution it is triggered by the bus when it starts the alighting query: a
+value is drawn from the alighting distribution of the next stop and time slot,
+and its integer part $n$ gives the number of passengers to alight. The $n$
+passengers on board that waited longest at their stop are marked. The
+criterion is deterministic, and choosing it over any other is irrelevant to
+the purpose of the model, which is to reproduce the observed alighting counts.
+The mark is the interface between the global selection and the reactive
+behaviour of the passenger, which still carries out the corresponding
+protocol. At the last stop of each direction all passengers alight.
+ 
+In the second solution the stop invokes the same mechanism when it receives
+the arrival query, and transmits the resulting number to the bus. In neither
+solution does the knowledge behind the selection belong to an agent, they
+only transmit its result.
+ 
+\paragraph{Time at a stop}
+In simulation steps, the exchange of messages at a stop takes the same time
+whatever the number of passengers involved. The time a bus remains at a stop
+is therefore extended to reflect the real duration of boarding and alighting,
+under two premises. First, boarding and alighting take place in parallel, one
+through each door, so the duration is bounded by the slower of the two flows
+and not by their sum. Second, each passenger takes an approximately constant
+time $t_p$. The time added at a stop is
+\begin{equation}\label{eq:dwell}
+E = \max\bigl( \max(b,\, a)\, t_p,\; E_{\min} \bigr),
+\end{equation}
+where $b$ and $a$ are the numbers of boarding and alighting passengers and
+$E_{\min}$ is the time taken by the message exchanges, which is the minimum.
+As a limitation, this minimum also applies at stops with no activity, where a
+real bus would not stop; the bias is a small constant overhead per stop.
+ 
+\subsection{Differences between the two solutions}\label{sec:differences}
+ 
+Both solutions share the bus and stop agents, the schedule and capacity of the
+buses, the movement between stops, the generation of passengers, the selection
+of alighting passengers, the time at a stop and the recorded outputs.
+Table~\ref{tbl:differences} summarises where they differ.
+ 
+\begin{table}[width=\linewidth,cols=3,pos=t]
+\caption{Differences between the two solutions.}\label{tbl:differences}
+\begin{tabular*}{\tblwidth}{@{}>{\raggedright\arraybackslash}p{.24\linewidth}>{\raggedright\arraybackslash}p{.34\linewidth}>{\raggedright\arraybackslash}p{.34\linewidth}@{}}
+\toprule
+ & First solution & Second solution \\
+\midrule
+Passenger & Agent, from its creation at a stop until it alights &
+  Not an agent; counted at stops and buses \\
+Occupancy of a bus & List of the passenger agents on board &
+  Number of passengers on board \\
+State of a stop & List of the passenger agents waiting &
+  Number of passengers waiting and list of their instants of generation \\
+Role of a stop & Mediates between bus and passengers &
+  Reports to the bus the passengers waiting and alighting \\
+Alighting & Each marked passenger answers the bus &
+  The stop transmits the number \\
+Waiting time & Sent by each passenger in its boarding request &
+  Obtained by the stop from the instants of generation \\
+Protocols & Six & Two \\
+Messages per stop visit & Grow with the passengers involved & Six \\
+\bottomrule
+\end{tabular*}
+\end{table}
+ 
+\subsection{Recorded outputs}\label{sec:outputs}
+ 
+Both solutions record the same data, so that the indicators are obtained in
+the same way. Each time a bus serves a stop, the following are stored: the
+passengers that boarded, the passengers that could not board because the bus
+was full, the passengers that alighted, the occupancy of the bus after the
+operation, and the travel time from the previous stop. The waiting time of
+each passenger that boarded is stored as well. Departures from the first stop
+that take place later than scheduled are recorded as delays.
+% CHECK: define here, from your chapter 6, how occupancy and demand
+% absorption are computed from these records (exact formula of each).
 
 
 

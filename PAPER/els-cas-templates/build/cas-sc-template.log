@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.8.18)  11 OCT 2026 01:05
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.8.18)  11 OCT 2026 21:48
  system commands enabled.
 **cas-sc-template.tex
 (./cas-sc-template.tex
@@ -788,7 +788,11 @@ LaTeX Font Info:    Trying to load font information for T1+stix on input line 4
 
 (/usr/share/texmf-dist/tex/latex/stix/t1stix.fd
 File: t1stix.fd 2015/04/17 v1.1.2-latex STIX T1 font definitions
-) (./build/cas-sc-template.aux)
+) (./build/cas-sc-template.aux
+
+LaTeX Warning: Label `eq:dwell' multiply defined.
+
+)
 \openout1 = cas-sc-template.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
@@ -814,8 +818,7 @@ LaTeX Font Info:    ... okay on input line 47.
 LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 47.
 LaTeX Font Info:    Trying to load font information for LS1+stix on input line 
 47.
-
-(/usr/share/texmf-dist/tex/latex/stix/ls1stix.fd
+ (/usr/share/texmf-dist/tex/latex/stix/ls1stix.fd
 File: ls1stix.fd 2015/04/17 v1.1.2-latex STIX LS1 font definitions
 )
 LaTeX Font Info:    ... okay on input line 47.
@@ -892,15 +895,6 @@ Package hyperref Info: Link coloring ON on input line 47.
 * \@mparswitchfalse
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
-
-("|'inkscape' -V ")
-
-Package svg Warning: No version of Inkscape was detected by invoking
-(svg)                `inkscape -V'
-(svg)                so the Inkscape export will fail quite sure as the
-(svg)                command is probably unknown to your OS. You could set
-(svg)                `inkscapeversion=<version>' manually but this is very
-(svg)                unlikely to work on input line 47.
 
 \verbatim@out=\write5
 
@@ -1001,75 +995,91 @@ Package hyperref Warning: Ignoring empty anchor on input line 210.
 Package hyperref Warning: Ignoring empty anchor on input line 210.
 
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
-90.
+89.
 (/usr/share/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [1<./thumbnails/cas-email.jpeg><./thumbnails/cas-url.jpeg>]
+) [1<./thumbnails/cas-email.jpeg><./thumbnails/cas-url.jpeg>] [2]
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <9> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 410.
+
+Underfull \hbox (badness 10000) in alignment at lines 406--430
+[][][][]
+ []
+
+
+LaTeX Warning: Reference `fig:' on page 3 undefined on input line 434.
+
+
+LaTeX Warning: Reference `fig:' on page 3 undefined on input line 435.
+
 \figh=\skip73
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `') on input line 349.
-
-<./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf, id=67, 362.10281pt x 475.
+<./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf, id=88, 362.10281pt x 475.
 02469pt>
 File: ./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf Graphic file (type pd
 f)
 <use ./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf>
 Package luatex.def Info: ./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf  u
-sed on input line 354.
+sed on input line 444.
 (luatex.def)             Requested size: 362.10191pt x 475.02351pt.
-<./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf, id=68, 362.10281
+<./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf, id=89, 362.10281
 pt x 535.2497pt>
 File: ./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf Graphic file
  (type pdf)
 <use ./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-raw.pdf>
 Package luatex.def Info: ./svg-inkscape/diagrama_solicitud_de_descenso_en_svg-r
-aw.pdf  used on input line 359.
+aw.pdf  used on input line 449.
 (luatex.def)             Requested size: 362.10191pt x 535.24838pt.
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `') on input line 367.
-
-<./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf, id=69, 362.10281pt x 55
+<./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf, id=90, 362.10281pt x 55
 0.30594pt>
 File: ./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf Graphic file (type 
 pdf)
 <use ./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf>
 Package luatex.def Info: ./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf 
- used on input line 372.
+ used on input line 462.
 (luatex.def)             Requested size: 362.10191pt x 550.3046pt.
-<./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf, id=70, 362.10281pt x 542.7778
+<./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf, id=91, 362.10281pt x 542.7778
 2pt>
 File: ./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf Graphic file (type pdf)
 <use ./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf>
 Package luatex.def Info: ./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf  used 
-on input line 377.
+on input line 467.
 (luatex.def)             Requested size: 362.10191pt x 542.77649pt.
-[2] [3] [4<./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf><./svg-inkscape/d
-iagrama_solicitud_de_descenso_en_svg-raw.pdf>] [5<./svg-inkscape/notificacion_de
-_llegada_en_svg-raw.pdf><./svg-inkscape/aviso_de_embarque_en_svg-raw.pdf>]
-(./build/cas-sc-template.bbl) [6
+[3] [4<./svg-inkscape/solicitud_de_embarque_en_svg-raw.pdf><./svg-inkscape/diagr
+ama_solicitud_de_descenso_en_svg-raw.pdf>]
+Underfull \hbox (badness 10000) in alignment at lines 584--603
+[][][]
+ []
 
-] (./build/cas-sc-template.aux)
+[5<./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf><./svg-inkscape/aviso_d
+e_embarque_en_svg-raw.pdf>] [6] [7] (./build/cas-sc-template.bbl) [8
+
+]
+(./build/cas-sc-template.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `cas-sc-template.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 )
 
 Here is how much of LuaTeX's memory you used:
- 19155 strings out of 476076
- 100000,794899 words of node,token memory allocated
- 1672 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 7 glue, 145 kern, 7 glyph, 94 attribute, 61 glue_sp
-ec, 94 attribute_list, 2 write, 1 pdf_action nodes
-   avail lists: 2:676,3:534,4:148,5:1146,6:74,7:10517,8:71,9:459,10:32,11:827
- 41004 multiletter control sequences out of 65536+600000
- 151 fonts using 11341799 bytes
- 94i,12n,96p,313b,551s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 19190 strings out of 476076
+ 125007,794899 words of node,token memory allocated
+ 2175 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 7 glue, 202 kern, 13 glyph, 138 attribute, 61 glue_
+spec, 138 attribute_list, 2 write, 1 pdf_action nodes
+   avail lists: 2:828,3:636,4:170,5:1230,6:121,7:11342,8:71,9:881,10:32,11:877
+ 41024 multiletter control sequences out of 65536+600000
+ 154 fonts using 11589879 bytes
+ 94i,12n,96p,313b,544s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texm
 f-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/
 stix-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/stix-ts1.enc}</usr/share
@@ -1077,14 +1087,16 @@ stix-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/stix-ts1.enc}</usr/share
 fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/share/texmf-dist/fonts/type
 1/public/stix/STIXGeneral-Regular.pfb></usr/share/texmf-dist/fonts/type1/public/
 lm/lmss9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fo
-nts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf-dist/fonts/type1/public
-/stix/stix-mathex.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathit
-.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb>
-Output written on cas-sc-template.pdf (7 pages, 380244 bytes).
+re/texmf-dist/fonts/type1/public/lm/lmsso9.pfb></usr/share/texmf-dist/fonts/type
+1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-supe
+r/sftt1000.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></
+usr/share/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/share/texmf-d
+ist/fonts/type1/public/stix/stix-mathrm.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/stix/stix-mathsf.pfb>
+Output written on cas-sc-template.pdf (9 pages, 422482 bytes).
 
-PDF statistics: 257 PDF objects out of 1000 (max. 8388607)
- 205 compressed objects within 3 object streams
- 43 named destinations out of 1000 (max. 1048576)
+PDF statistics: 299 PDF objects out of 1000 (max. 8388607)
+ 243 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 1048576)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

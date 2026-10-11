@@ -3,48 +3,47 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: cas-sc-template.aux
 The style file: elsarticle-num-names.bst
 Database file #1: cas-refs.bib
-Warning--I didn't find a database entry for ""
 Reallocated singl_function (elt_size=8) to 100 items from 50.
 Warning--empty pages in wooldridge1999intelligent
-You've used 18 entries,
+You've used 21 entries,
             2918 wiz_defined-function locations,
-            763 strings with 9079 characters,
-and the built_in function-call counts, 12840 in all, are:
-= -- 941
-> -- 569
-< -- 9
-+ -- 215
-- -- 193
-* -- 1604
-:= -- 1829
-add.period$ -- 33
-call.type$ -- 18
-change.case$ -- 155
-chr.to.int$ -- 18
-cite$ -- 19
-duplicate$ -- 929
-empty$ -- 890
-format.name$ -- 248
-if$ -- 2344
-int.to.chr$ -- 1
+            779 strings with 9684 characters,
+and the built_in function-call counts, 14284 in all, are:
+= -- 1053
+> -- 616
+< -- 11
++ -- 236
+- -- 208
+* -- 1766
+:= -- 2048
+add.period$ -- 40
+call.type$ -- 21
+change.case$ -- 175
+chr.to.int$ -- 20
+cite$ -- 22
+duplicate$ -- 1048
+empty$ -- 998
+format.name$ -- 268
+if$ -- 2609
+int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 193
-newline$ -- 101
-num.names$ -- 76
-pop$ -- 296
+missing$ -- 213
+newline$ -- 112
+num.names$ -- 88
+pop$ -- 331
 preamble$ -- 1
-purify$ -- 153
+purify$ -- 173
 quote$ -- 0
-skip$ -- 204
+skip$ -- 233
 stack$ -- 0
-substring$ -- 540
-swap$ -- 745
+substring$ -- 578
+swap$ -- 822
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 162
+type$ -- 189
 warning$ -- 1
-while$ -- 82
+while$ -- 92
 width$ -- 0
-write$ -- 267
-(There were 2 warnings)
+write$ -- 306
+(There was 1 warning)

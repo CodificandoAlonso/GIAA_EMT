@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{23}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -53,6 +53,15 @@
 \newblock \URLprefix
   \url{https://kth.se/polopoly_fs/1.742065.1600688570!/hybrid%20mesoscopic.pdf}.
 %Type = Article
+\bibitem[{Cats et~al.(2016)Cats, West and Eliasson}]{cats2016dynamic}
+\bibinfo{author}{Cats, O.}, \bibinfo{author}{West, J.},
+  \bibinfo{author}{Eliasson, J.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{A dynamic stochastic model for evaluating congestion
+  and crowding effects in transit systems}.
+\newblock \bibinfo{journal}{Transportation Research Part B: Methodological}
+  \bibinfo{volume}{89}, \bibinfo{pages}{43--57}.
+\newblock \DOIprefix\doi{10.1016/j.trb.2016.04.001}.
+%Type = Article
 \bibitem[{Divasson-J. et~al.(2025)Divasson-J., Macarulla, Garcia and
   Borges}]{divassonj2025abm}
 \bibinfo{author}{Divasson-J., A.}, \bibinfo{author}{Macarulla, A.M.},
@@ -64,9 +73,17 @@
   \bibinfo{pages}{105697}.
 \newblock \DOIprefix\doi{10.1016/j.cities.2024.105697}.
 %Type = Misc
-\bibitem[{{Foundation for Intelligent Physical Agents}(2002)}]{fipa2002request}
+\bibitem[{{Foundation for Intelligent Physical Agents}(2002a)}]{fipa2002query}
 \bibinfo{author}{{Foundation for Intelligent Physical Agents}},
-  \bibinfo{year}{2002}.
+  \bibinfo{year}{2002}a.
+\newblock \bibinfo{title}{{FIPA} query interaction protocol specification}.
+\newblock \bibinfo{howpublished}{Document SC00027H, Standard}.
+\newblock \URLprefix \url{http://www.fipa.org/specs/fipa00027/SC00027H.html}.
+%Type = Misc
+\bibitem[{{Foundation for Intelligent Physical
+  Agents}(2002b)}]{fipa2002request}
+\bibinfo{author}{{Foundation for Intelligent Physical Agents}},
+  \bibinfo{year}{2002}b.
 \newblock \bibinfo{title}{{FIPA} request interaction protocol specification}.
 \newblock \bibinfo{howpublished}{Document SC00026H, Standard}.
 \newblock \URLprefix \url{http://www.fipa.org/specs/fipa00026/SC00026H.html}.
@@ -133,6 +150,14 @@
   Press}, \bibinfo{address}{Amsterdam}. pp. \bibinfo{pages}{681--686}.
 \newblock \DOIprefix\doi{10.3233/978-1-61499-419-0-681}.
 %Type = Article
+\bibitem[{Poslad(2007)}]{poslad2007specifying}
+\bibinfo{author}{Poslad, S.}, \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{Specifying protocols for multi-agent systems
+  interaction}.
+\newblock \bibinfo{journal}{ACM Transactions on Autonomous and Adaptive
+  Systems} \bibinfo{volume}{2}, \bibinfo{pages}{15}.
+\newblock \DOIprefix\doi{10.1145/1293731.1293735}.
+%Type = Article
 \bibitem[{Singh et~al.(2016)Singh, Padgham and Logan}]{singh2016integrating}
 \bibinfo{author}{Singh, D.}, \bibinfo{author}{Padgham, L.},
   \bibinfo{author}{Logan, B.}, \bibinfo{year}{2016}.
@@ -176,6 +201,15 @@
 \newblock \bibinfo{journal}{Transportation Research Part C: Emerging
   Technologies} \bibinfo{volume}{18}, \bibinfo{pages}{896--908}.
 \newblock \DOIprefix\doi{10.1016/j.trc.2010.02.008}.
+%Type = Article
+\bibitem[{Weyns et~al.(2007)Weyns, Omicini and Odell}]{weyns2007environment}
+\bibinfo{author}{Weyns, D.}, \bibinfo{author}{Omicini, A.},
+  \bibinfo{author}{Odell, J.}, \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{Environment as a first-class abstraction in
+  multi-agent systems}.
+\newblock \bibinfo{journal}{Autonomous Agents and Multi-Agent Systems}
+  \bibinfo{volume}{14}, \bibinfo{pages}{5--30}.
+\newblock \DOIprefix\doi{10.1007/s10458-006-0012-0}.
 %Type = Incollection
 \bibitem[{Wooldridge(1999)}]{wooldridge1999intelligent}
 \bibinfo{author}{Wooldridge, M.}, \bibinfo{year}{1999}.
