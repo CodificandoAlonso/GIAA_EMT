@@ -354,7 +354,7 @@ else
     for f in input_data_E01_toA.csv input_data_E01_toB.csv \
              input_times_stops_toA.csv input_times_stops_toB.csv \
              alighting_params_toA.csv alighting_params_toB.csv \
-             final_input.json; do
+             final_input.json input_tryout.json; do
         if [ ! -f "$C_INPUTS/$f" ]; then
             record_error "SETUP" 1 "Missing input file: $C_INPUTS/$f"
             exit 1
