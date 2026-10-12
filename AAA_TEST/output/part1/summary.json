@@ -1,0 +1,118 @@
+{
+  "days_total": 158,
+  "days_valid": 148,
+  "days_invalid_empty_slots": 10,
+  "days_invalid_low_volume": 0,
+  "trips_total": 25811,
+  "duplicates_same_dep": 58,
+  "duplicates_restart": 15,
+  "fragments": 714,
+  "valid_days_trips_per_dir_median": {
+    "toA": 84.0,
+    "toB": 83.0
+  },
+  "valid_days_vehicles_median": 12.0,
+  "corr_trips_vehicles": 0.801,
+  "trips_per_vehicle_day": {
+    "count": 148.0,
+    "mean": 14.04,
+    "std": 1.89,
+    "min": 10.53,
+    "25%": 12.7,
+    "50%": 13.82,
+    "75%": 15.18,
+    "max": 20.17
+  },
+  "planned_trips_per_dir": {
+    "toA": 98,
+    "toB": 93
+  },
+  "reference_synthetic": {
+    "trips": {
+      "toA": 84,
+      "toB": 83
+    },
+    "vehicles": 13,
+    "l1": 7.0,
+    "trips_per_vehicle": 12.85
+  },
+  "reference_real_date": "2025-07-28",
+  "reference_real": {
+    "l1_departures": 19.0,
+    "trips_total": 153.0,
+    "vehicles": 13,
+    "headway_mad_min": 2.243918918918919,
+    "vehicles_diff": 1.0,
+    "chain_breaks": 0,
+    "chain_overlaps": 0,
+    "eligible": true,
+    "weekday": "L",
+    "month": "2025-07"
+  },
+  "eligible_days": 7,
+  "days_with_chain_breaks": 125,
+  "best_unconstrained_date": "2025-07-14",
+  "best_unconstrained": {
+    "l1_departures": 17.0,
+    "trips_total": 175.0,
+    "vehicles": 16,
+    "headway_mad_min": 2.1725225225225224,
+    "vehicles_diff": 4.0,
+    "chain_breaks": 2,
+    "chain_overlaps": 1,
+    "eligible": false,
+    "weekday": "L",
+    "month": "2025-07"
+  },
+  "reference_real_trips": {
+    "toA": 77,
+    "toB": 76
+  },
+  "target_trips_per_dir": {
+    "toA": 82.0,
+    "toB": 80.0
+  },
+  "final_input_json_matches_date": null,
+  "final_input_json_trips": {
+    "toA": 82,
+    "toB": 81
+  },
+  "final_input_json_vehicles": 12,
+  "final_input_json_l1": 11.0,
+  "anomalous_trip_removal_effect": {
+    "trips_per_day_all": 167.0,
+    "trips_per_day_without_anomalous": 145.0,
+    "anomalous_trip_share": 0.1125,
+    "headway_p90_all_min": 24.5,
+    "headway_p90_without_anomalous_min": 27.9,
+    "headways_over_30min_all": 1122,
+    "headways_over_30min_without_anomalous": 1711
+  },
+  "weekday_means": {
+    "L": {
+      "trips_toA": 84.6,
+      "trips_toB": 83.2,
+      "vehicles": 12.5
+    },
+    "M": {
+      "trips_toA": 80.3,
+      "trips_toB": 78.9,
+      "vehicles": 11.4
+    },
+    "X": {
+      "trips_toA": 81.4,
+      "trips_toB": 80.0,
+      "vehicles": 11.6
+    },
+    "J": {
+      "trips_toA": 82.1,
+      "trips_toB": 81.0,
+      "vehicles": 11.7
+    },
+    "V": {
+      "trips_toA": 81.0,
+      "trips_toB": 80.0,
+      "vehicles": 11.6
+    }
+  }
+}

@@ -43,6 +43,7 @@ def build_trips() -> pd.DataFrame:
             dep=("dep", "first"), date=("EventDate", "first"), slot=("TimeSlot", "first"),
             vehicle=("LogicVehicle", "first"), weekday=("Weekday", "first"),
             n_stops=("Stop", "size"), has_header=("is_header", "any"),
+            first_pos=("pos", "min"), last_pos=("pos", "max"),
             first_pass=("pass_time", "min"), last_pass=("pass_time", "max"),
             anom_thr=("thr", "any"), anom_cons=("cons", "any"),
             occ_seq=("Occupation", lambda s: tuple(s)),
@@ -63,25 +64,39 @@ def mark_duplicates(trips: pd.DataFrame) -> pd.DataFrame:
                    el mismo servicio registrado dos veces.
     dup_restart    el mismo coche vuelve a salir en el mismo sentido < 5 min despues:
                    reinicio del viaje en el equipo embarcado.
-    En cada grupo se conserva el registro con mas paradas.
+    fragment       continuacion de un viaje partido en dos TripId: mismo coche y
+                   sentido, sale < 60 min despues del anterior y empieza en una
+                   parada posterior a la ultima registrada por el anterior.
+    En cada grupo se conserva el registro con mas paradas (o el primer trozo).
     """
     trips = trips.copy()
     trips["dup_same_dep"] = False
     trips["dup_restart"] = False
+    trips["fragment"] = False
 
     order = trips.sort_values(["dir", "dep", "n_stops"], ascending=[True, True, False])
     trips.loc[order.index[order.duplicated(["dir", "dep"])], "dup_same_dep"] = True
 
     rest = trips[~trips["dup_same_dep"]].sort_values(["dir", "vehicle", "dep"])
     gap = rest.groupby(["dir", "vehicle"])["dep"].diff().dt.total_seconds() / 60
-    nxt = rest.groupby(["dir", "vehicle"])["dep"].diff(-1).dt.total_seconds().abs() / 60
     # De cada pareja (< 5 min), descarta el que tenga menos paradas registradas
     for idx in rest.index[gap < 5]:
         prev_idx = rest.index[rest.index.get_loc(idx) - 1]
         loser = idx if trips.at[idx, "n_stops"] <= trips.at[prev_idx, "n_stops"] else prev_idx
         trips.at[loser, "dup_restart"] = True
-    del nxt
-    trips["duplicate"] = trips["dup_same_dep"] | trips["dup_restart"]
+
+    rest = trips[~(trips["dup_same_dep"] | trips["dup_restart"])].sort_values(["date", "vehicle", "dep"])
+    g = rest.groupby(["date", "vehicle"])
+    prev_dir = g["dir"].shift()
+    prev_last = g["last_pos"].shift()
+    gap = g["dep"].diff().dt.total_seconds() / 60
+    prev_trip = g["TripId"].shift()
+    is_frag = (prev_dir == rest["dir"]) & (gap < 60) & (rest["first_pos"] > prev_last)
+    trips.loc[rest.index[is_frag], "fragment"] = True
+    trips["fragment_of"] = None
+    trips.loc[rest.index[is_frag], "fragment_of"] = prev_trip[is_frag].values
+
+    trips["duplicate"] = trips["dup_same_dep"] | trips["dup_restart"] | trips["fragment"]
     return trips
 
 
@@ -174,6 +189,96 @@ def allocation_for_day(trips: pd.DataFrame, date: str) -> dict:
     return dict(sorted(alloc.items()))
 
 
+def apportion(m: pd.DataFrame, totals: dict) -> pd.Series:
+    """Salidas enteras por (sentido, franja) que suman el total diario mediano de
+    cada sentido, repartidas segun el perfil medio por franja (restos mayores)."""
+    out = {}
+    mean = m.mean()
+    for d in DIRS:
+        share = mean[d] / mean[d].sum()
+        raw = share * totals[d]
+        base = np.floor(raw)
+        left = int(round(totals[d] - base.sum()))
+        order = (raw - base).sort_values(ascending=False).index[:left]
+        base[order] += 1
+        for s_, v in base.items():
+            out[(d, s_)] = int(v)
+    return pd.Series(out)
+
+
+def synthetic_allocation(trips: pd.DataFrame, valid_dates, target: pd.Series):
+    """Dotacion de referencia construida con los 8 meses de dias validos.
+
+    1. Salidas por (sentido, franja): el total diario mediano de cada sentido,
+       repartido segun el perfil medio por franja de los dias validos (apportion).
+    2. Minuto de cada salida dentro de la franja: cuantiles (j + 0.5) / k de las
+       horas de salida reales de esa franja y sentido en todos los dias validos,
+       de modo que las salidas caen donde caen de verdad (no equiespaciadas).
+    3. Encadenado de coches: el coche que sale de una cabecera queda libre en la
+       otra cuando llega (duracion mediana del viaje completo en esa franja, que
+       ya incluye la espera en terminal: el paso por la terminal coincide con la
+       siguiente salida). Asignacion voraz en orden de salida, primero el coche
+       que mas lleva esperando; si no hay ninguno libre se anade uno. Sin
+       posicionamientos en vacio, es la flota minima para ese horario.
+    """
+    t = trips[(~trips["duplicate"]) & trips["date"].isin(valid_dates)]
+    minute = t["dep"].dt.hour * 60 + t["dep"].dt.minute + t["dep"].dt.second / 60
+
+    deps = []
+    for d in DIRS:
+        for s in TIMESLOTS:
+            k = int(round(target[(d, s)]))
+            if k == 0:
+                continue
+            pool = minute[(t["dir"] == d) & (t["slot"] == s)].values
+            q = np.quantile(pool, [(j + 0.5) / k for j in range(k)])
+            mins = np.round(q).astype(int)
+            for j in range(1, len(mins)):           # salidas distintas y crecientes
+                mins[j] = max(mins[j], mins[j - 1] + 1)
+            deps += [(int(m), d) for m in mins]
+    deps.sort()
+
+    full = t[t["full"]]
+    dur = full.groupby(["dir", "slot"])["duration_min"].median()
+    def duration(d, s):
+        for delta in (0, -1, 1, -2, 2, -3, 3):
+            if (d, s + delta) in dur.index:
+                return float(dur[(d, s + delta)])
+        return float(full.loc[full["dir"] == d, "duration_min"].median())
+
+    other = {"toA": "toB", "toB": "toA"}
+    waiting = {"toA": [], "toB": []}        # coches esperando en la cabecera de cada sentido
+    buses = []                              # lista de [ (minuto, sentido), ... ]
+    for m, d in deps:
+        free = [b for b in waiting[d] if b[0] <= m]
+        if free:
+            bus = min(free, key=lambda b: b[0])
+            waiting[d].remove(bus)
+            idx = bus[1]
+        else:
+            idx = len(buses)
+            buses.append([])
+        buses[idx].append((m, d))
+        waiting[other[d]].append((m + duration(d, m // 60), idx))
+
+    alloc = {}
+    for i, b in enumerate(buses):
+        alloc[str(4001 + i)] = [[str(HEADER[d]), f"{m // 60}:{m % 60:02d}"] for m, d in b]
+    return alloc, dur
+
+
+def allocation_headways(alloc: dict) -> pd.DataFrame:
+    rows = []
+    for deps in alloc.values():
+        for stop, hhmm in deps:
+            h, mm = map(int, hhmm.split(":"))
+            rows.append(("toA" if int(stop) == HEADER["toA"] else "toB", h * 60 + mm))
+    df = pd.DataFrame(rows, columns=["dir", "minute"]).sort_values(["dir", "minute"])
+    df["slot"] = df["minute"] // 60
+    df["headway"] = df.groupby("dir")["minute"].diff()
+    return df.dropna(subset=["headway"])
+
+
 def chain_check(trips: pd.DataFrame, date: str) -> dict:
     """Coherencia de las cadenas de cada coche: los sentidos deberian alternarse."""
     t = trips[(~trips["duplicate"]) & (trips["date"] == date)].sort_values("dep")
@@ -198,7 +303,7 @@ def plot_daily(day: pd.DataFrame, ref_date: str, plt):
     ax.scatter(pd.to_datetime(bad["date"]), bad["trips_toA"], s=36, facecolor="none",
                edgecolor=INK["primary"], lw=1.2, zorder=5, label="día descartado")
     ax.axvline(pd.to_datetime(ref_date), color=INK["secondary"], ls="--", lw=1)
-    ax.annotate("día de referencia", (pd.to_datetime(ref_date), ax.get_ylim()[1]),
+    ax.annotate("mejor día real", (pd.to_datetime(ref_date), ax.get_ylim()[1]),
                 xytext=(4, -12), textcoords="offset points", color=INK["secondary"], fontsize=9)
     ax.set_ylabel("viajes / día")
     ax.set_title("Viajes registrados por día laborable (sin gratuidad)")
@@ -208,20 +313,23 @@ def plot_daily(day: pd.DataFrame, ref_date: str, plt):
 
 
 def plot_slots(per_slot: pd.DataFrame, plt):
-    fig, axes = plt.subplots(1, 2, figsize=(12, 3.8), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4.2), sharey=True)
     for ax, d in zip(axes, DIRS):
         s = per_slot[per_slot["dir"] == d]
         ax.fill_between(s["slot"], s["p25"], s["p75"], color=COLOR[d], alpha=0.18, lw=0,
-                        label="p25–p75 días válidos")
-        ax.plot(s["slot"], s["median"], color=COLOR[d], label="mediana")
-        ax.plot(s["slot"], s["reference_day"], color=INK["primary"], lw=1.4, marker="o", ms=4,
-                label="día de referencia")
-        ax.plot(s["slot"], s["planned"], color=INK["secondary"], lw=1.2, ls="--", label="planificado")
+                        label="p25–p75 de los días válidos")
+        ax.plot(s["slot"], s["median"], color=COLOR[d], label="mediana de los días válidos")
+        ax.plot(s["slot"], s["reference_synthetic"], color=INK["primary"], lw=0, marker="o", ms=5,
+                label="dotación de referencia")
+        ax.plot(s["slot"], s["final_input_json"], color=INK["secondary"], lw=0, marker="x", ms=6,
+                label="final_input.json actual")
+        ax.plot(s["slot"], s["planned"], color=INK["secondary"], lw=1.2, ls="--", label="horario planificado")
         ax.set_title(f"{d}: salidas por franja")
         ax.set_xlabel("franja (hora de salida)")
         ax.set_xticks(TIMESLOTS[::2])
     axes[0].set_ylabel("salidas")
-    axes[0].legend(loc="upper left", fontsize=8)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=5, bbox_to_anchor=(0.5, -0.06), fontsize=9)
     fig.savefig(os.path.join(OUT, "departures_per_slot.png"))
     plt.close(fig)
 
@@ -292,15 +400,33 @@ def main():
     cand["headway_mad_min"] = pd.Series(devs)
     veh_med = day.loc[day["valid"], "vehicles"].median()
     cand["vehicles_diff"] = (cand["vehicles"] - veh_med).abs()
-    cand = cand.sort_values(["l1_departures", "vehicles_diff", "headway_mad_min"])
+    chains = {date: chain_check(trips, date) for date in m.index}
+    cand["chain_breaks"] = pd.Series({k: v["consecutive_same_direction"] for k, v in chains.items()})
+    cand["chain_overlaps"] = pd.Series({k: v["overlapping_trips"] for k, v in chains.items()})
+    # Criterio: (1) cadenas coherentes (cada coche alterna sentido y no solapa viajes:
+    # si no, falta algun viaje registrado y el simulador "teletransportaria" el coche),
+    # (2) coches dentro de +-1 de la mediana, (3) minima distancia al perfil de
+    # salidas por franja, (4) desempate por regularidad de intervalos.
+    cand["eligible"] = ((cand["chain_breaks"] == 0) & (cand["chain_overlaps"] == 0)
+                        & (cand["vehicles_diff"] <= 1))
+    cand = cand.sort_values(["eligible", "l1_departures", "headway_mad_min", "vehicles_diff"],
+                            ascending=[False, True, True, True])
     cand = cand.join(day.set_index("date")[["weekday", "month"]])
     cand.reset_index().rename(columns={"index": "date"}).to_csv(
         os.path.join(OUT, "reference_candidates.csv"), index=False)
     ref_date = cand.index[0]
+    best_unconstrained = cand.sort_values(["l1_departures", "headway_mad_min"]).index[0]
 
-    ref_alloc = allocation_for_day(trips, ref_date)
+    real_alloc = allocation_for_day(trips, ref_date)
+    with open(os.path.join(OUT, "reference_real_day.json"), "w") as f:
+        json.dump(real_alloc, f, indent=1)
+
+    totals = {d: int(round(day.loc[day["valid"], f"trips_{d}"].median())) for d in DIRS}
+    synth_target = apportion(m, totals)
+    synth_alloc, durations = synthetic_allocation(trips, valid_dates, synth_target)
     with open(os.path.join(OUT, "reference_allocation.json"), "w") as f:
-        json.dump(ref_alloc, f, indent=1)
+        json.dump(synth_alloc, f, indent=1)
+    durations.unstack(0).round(1).to_csv(os.path.join(OUT, "trip_duration_per_slot.csv"))
 
     with open(os.path.join(ROOT, "BASE_DATA", "final_input.json")) as f:
         base_alloc = json.load(f)
@@ -320,7 +446,8 @@ def main():
         "p75": m.quantile(0.75),
         "mean": m.mean().round(2),
         "planned": planned_per_slot(),
-        "reference_day": allocation_per_slot(ref_alloc),
+        "reference_synthetic": allocation_per_slot(synth_alloc),
+        "reference_real_day": allocation_per_slot(real_alloc),
         "final_input_json": allocation_per_slot(base_alloc),
     })
     per_slot.index.names = ["dir", "slot"]
@@ -328,6 +455,8 @@ def main():
     per_slot.to_csv(os.path.join(OUT, "departures_per_slot.csv"), index=False)
 
     hw_stats = hw.groupby(["dir", "slot"])["headway"].describe(percentiles=[0.1, 0.5, 0.9]).round(1)
+    hw_stats["synthetic_median"] = allocation_headways(synth_alloc).groupby(["dir", "slot"])["headway"].median()
+    hw_stats["final_input_json_median"] = allocation_headways(base_alloc).groupby(["dir", "slot"])["headway"].median()
     hw_stats.to_csv(os.path.join(OUT, "headways_per_slot.csv"))
 
     vd = day[day["valid"]]
@@ -366,16 +495,25 @@ def main():
         "trips_total": int(len(trips)),
         "duplicates_same_dep": int(trips["dup_same_dep"].sum()),
         "duplicates_restart": int(trips["dup_restart"].sum()),
+        "fragments": int(trips["fragment"].sum()),
         "valid_days_trips_per_dir_median": {d: float(vd[f"trips_{d}"].median()) for d in DIRS},
         "valid_days_vehicles_median": float(vd["vehicles"].median()),
         "corr_trips_vehicles": round(float(corr), 3),
         "trips_per_vehicle_day": trips_per_vehicle,
         "planned_trips_per_dir": {d: int(planned_per_slot()[d].sum()) for d in DIRS},
-        "reference_date": ref_date,
-        "reference": cand.loc[ref_date].to_dict(),
-        "reference_trips": {d: int(allocation_per_slot(ref_alloc)[d].sum()) for d in DIRS},
-        "reference_vehicles": len(ref_alloc),
-        "reference_chain_check": chain_check(trips, ref_date),
+        "reference_synthetic": {
+            "trips": {d: int(allocation_per_slot(synth_alloc)[d].sum()) for d in DIRS},
+            "vehicles": len(synth_alloc),
+            "l1": float((allocation_per_slot(synth_alloc) - target).abs().sum()),
+            "trips_per_vehicle": round(sum(len(v) for v in synth_alloc.values()) / len(synth_alloc), 2),
+        },
+        "reference_real_date": ref_date,
+        "reference_real": cand.loc[ref_date].to_dict(),
+        "eligible_days": int(cand["eligible"].sum()),
+        "days_with_chain_breaks": int((cand["chain_breaks"] > 0).sum()),
+        "best_unconstrained_date": best_unconstrained,
+        "best_unconstrained": cand.loc[best_unconstrained].to_dict(),
+        "reference_real_trips": {d: int(allocation_per_slot(real_alloc)[d].sum()) for d in DIRS},
         "target_trips_per_dir": {d: float(target[d].sum()) for d in DIRS},
         "final_input_json_matches_date": base_match,
         "final_input_json_trips": {d: int(allocation_per_slot(base_alloc)[d].sum()) for d in DIRS},

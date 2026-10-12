@@ -1,0 +1,28 @@
+variant,dir,day,cause,cells
+A,toA,ALL,asimetría moderada,4
+A,toA,ALL,"suelo en 0 (ocupación baja, asimetría a la derecha)",11
+A,toA,ALL,techo por el corte en 75 (asimetría a la izquierda),1
+A,toA,diario,asimetría moderada,130
+A,toA,diario,"colas pesadas (curtosis alta, simétrica)",1
+A,toA,diario,"muestra pequeña (n < 50, criterio z = 1,96)",9
+A,toA,diario,"suelo en 0 (ocupación baja, asimetría a la derecha)",186
+A,toA,diario,techo por el corte en 75 (asimetría a la izquierda),37
+A,toB,ALL,asimetría moderada,12
+A,toB,ALL,"suelo en 0 (ocupación baja, asimetría a la derecha)",14
+A,toB,diario,asimetría moderada,130
+A,toB,diario,"muestra pequeña (n < 50, criterio z = 1,96)",20
+A,toB,diario,"suelo en 0 (ocupación baja, asimetría a la derecha)",173
+A,toB,diario,techo por el corte en 75 (asimetría a la izquierda),42
+B_err_edc,toA,ALL,asimetría moderada,2
+B_err_edc,toA,ALL,"suelo en 0 (ocupación baja, asimetría a la derecha)",7
+B_err_edc,toA,ALL,techo por el corte en 75 (asimetría a la izquierda),3
+B_err_edc,toA,diario,asimetría moderada,96
+B_err_edc,toA,diario,"muestra pequeña (n < 50, criterio z = 1,96)",6
+B_err_edc,toA,diario,"suelo en 0 (ocupación baja, asimetría a la derecha)",157
+B_err_edc,toA,diario,techo por el corte en 75 (asimetría a la izquierda),34
+B_err_edc,toB,ALL,asimetría moderada,7
+B_err_edc,toB,ALL,"suelo en 0 (ocupación baja, asimetría a la derecha)",2
+B_err_edc,toB,diario,asimetría moderada,90
+B_err_edc,toB,diario,"muestra pequeña (n < 50, criterio z = 1,96)",13
+B_err_edc,toB,diario,"suelo en 0 (ocupación baja, asimetría a la derecha)",130
+B_err_edc,toB,diario,techo por el corte en 75 (asimetría a la izquierda),38

@@ -1,0 +1,19 @@
+dir,group,rows,trips,z_mean,abs_z_mean,share_abs_z_gt2,terminal_residual_median,terminal_residual_p90
+toA,viajes limpios,153381,11653,-0.0,0.793,0.0372,1.0,7.0
+toA,anómalos: antes de la anomalía,9097,1298,0.446,1.217,0.1623,3.0,15.0
+toA,anómalos: después de la anomalía,4969,1298,0.86,1.272,0.1787,3.0,15.0
+toA,errores claros: antes del error,5158,695,-0.321,0.992,0.087,0.0,9.0
+toA,errores claros: después del error,2316,695,0.061,0.869,0.0574,0.0,9.0
+toA,solo Occupation < 0,102,20,-0.632,1.073,0.1569,0.0,3.1999999999999993
+toA,solo Occupation >= 75,6380,577,1.499,1.561,0.2708,7.0,19.0
+toA,solo Board/DropOff fuera de rango,45,9,-0.325,0.568,0.0222,11.0,14.4
+toA,solo ruptura de conservación,5424,389,0.158,0.881,0.0579,2.0,13.0
+toB,viajes limpios,118648,11282,0.0,0.785,0.0396,0.0,6.0
+toB,anómalos: antes de la anomalía,8339,1578,-0.26,1.031,0.0758,0.0,17.0
+toB,anómalos: después de la anomalía,5522,1578,0.814,1.235,0.1722,0.0,17.0
+toB,errores claros: antes del error,7326,1091,-0.468,0.985,0.0648,0.0,12.0
+toB,errores claros: después del error,2202,1091,-0.07,0.841,0.0758,0.0,12.0
+toB,solo Occupation < 0,264,48,-0.456,1.018,0.0947,0.0,0.0
+toB,solo Occupation >= 75,4123,452,1.367,1.46,0.2149,6.5,23.0
+toB,solo Board/DropOff fuera de rango,96,11,0.37,0.591,0.0,5.5,15.299999999999999
+toB,solo ruptura de conservación,4222,381,0.19,0.9,0.0673,2.0,26.0

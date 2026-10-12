@@ -1,0 +1,7 @@
+dir,variant,cells,mean_abs_d_mean,max_abs_d_mean,mean_d_mean,cells_abs_d_mean_gt1,bhattacharyya_mean,bhattacharyya_max,normal_changed
+toA,B_all,285.0,0.556,2.69,-0.433,48.0,0.002,0.02,8.0
+toA,B_err,285.0,0.191,1.506,0.15,4.0,0.0,0.026,5.0
+toA,B_err_edc,285.0,0.207,1.506,0.011,1.0,0.001,0.026,8.0
+toB,B_all,228.0,0.355,1.532,-0.134,7.0,0.004,0.526,13.0
+toB,B_err,228.0,0.318,1.5,0.283,2.0,0.003,0.526,8.0
+toB,B_err_edc,228.0,0.246,1.5,0.154,2.0,0.004,0.526,17.0

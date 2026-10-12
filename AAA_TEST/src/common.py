@@ -67,7 +67,11 @@ def load_direction(direction: str, workdays_only: bool = True) -> pd.DataFrame:
     workdays_only aplica el filtro del proyecto: laborables sin gratuidad
     (DayType == "LA" y FreeDay == 0).
     """
-    frames = [pd.read_csv(f, encoding="utf-8") for f in sorted(glob.glob(FILES[direction]))]
+    frames = []
+    for f in sorted(glob.glob(FILES[direction])):
+        x = pd.read_csv(f, encoding="utf-8")
+        x["file_row"] = np.arange(len(x))       # orden original del fichero de la parada
+        frames.append(x)
     df = pd.concat(frames, ignore_index=True)
     df = df[df["Direction"] == DIRECTION[direction]].copy()
     if workdays_only:
