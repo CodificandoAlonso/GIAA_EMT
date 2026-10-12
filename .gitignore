@@ -41,3 +41,7 @@ GTFS
 .idea
 
 
+
+# Copia local de DATOS/data para los analisis de AAA_TEST (ya esta en el repo)
+AAA_TEST/data/
+AAA_TEST/**/__pycache__/
