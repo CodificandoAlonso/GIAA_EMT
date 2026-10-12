@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex build/cas-sc-template"] 1791827523.32223 "build/cas-sc-template.aux" "build/cas-sc-template.bbl" "build/cas-sc-template" 1791827524.66103 0
+["bibtex build/cas-sc-template"] 1791839427.0201 "build/cas-sc-template.aux" "build/cas-sc-template.bbl" "build/cas-sc-template" 1791839428.2908 0
   "./cas-refs.bib" 1791826708.59153 11165 4961e144341a5b25d06b588843935437 ""
   "/usr/share/texmf-dist/bibtex/bst/elsarticle/elsarticle-num-names.bst" 1775415801 28896 ef8ea1833e4d69d9f60b6db23b4bea61 ""
-  "build/cas-sc-template.aux" 1791827524.42215 10402 01159d57fe5fb1849f632708cc1bb8a9 "lualatex"
+  "build/cas-sc-template.aux" 1791839428.06784 10268 f0a918ea4d182c065cecba8959ffc42b "lualatex"
   (generated)
   "build/cas-sc-template.bbl"
   "build/cas-sc-template.blg"
   (rewritten before read)
-["lualatex"] 1791827523.38286 "cas-sc-template.tex" "build/out/cas-sc-template.pdf" "cas-sc-template" 1791827524.66119 0
+["lualatex"] 1791839427.08326 "cas-sc-template.tex" "build/out/cas-sc-template.pdf" "cas-sc-template" 1791839428.29097 0
   "/home/hector/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1790284292.48455 127314 7c5efae986e60281c7ad546cf8ed9a14 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm" 1775415801 1536 0b0b8ca286de6a006b681926403f35cd ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1775415801 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -217,12 +217,12 @@
   "/usr/share/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1775415801 13566 16df94dd2de231b2bca0aaa0190941fe ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1787079083 5388821 3a3a435a487e4cbc819e69494cd5514c ""
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1787079598 5657511 76329fb9af487c4a67a2674746e75e92 ""
-  "build/cas-sc-template.abs" 1791827524.12713 1174 19230d471ee15e1978356a6c549f5fa8 "lualatex"
-  "build/cas-sc-template.aux" 1791827524.42215 10402 01159d57fe5fb1849f632708cc1bb8a9 "lualatex"
-  "build/cas-sc-template.bbl" 1791827523.37562 14108 7d657d1131ea46f56c1bb9f966755fcd "bibtex build/cas-sc-template"
-  "build/cas-sc-template.out" 1791827524.11533 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
+  "build/cas-sc-template.abs" 1791839427.79387 1174 19230d471ee15e1978356a6c549f5fa8 "lualatex"
+  "build/cas-sc-template.aux" 1791839428.06784 10268 f0a918ea4d182c065cecba8959ffc42b "lualatex"
+  "build/cas-sc-template.bbl" 1791839427.07646 14108 7d657d1131ea46f56c1bb9f966755fcd "bibtex build/cas-sc-template"
+  "build/cas-sc-template.out" 1791839427.78282 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
   "cas-common.sty" 1714814802 76688 c602be3da196cb506acc84d1fa26b134 ""
-  "cas-sc-template.tex" 1791827519.16107 40660 74050c6618dd336d69fe087ea9c73fca ""
+  "cas-sc-template.tex" 1791839422.79797 40722 8246a54cf86eae107c11df5d52c909db ""
   "cas-sc.cls" 1714814956 4410 65b518b1d7581e9c4ebe84b81471ee59 ""
   "svg-inkscape/actualizacion_recuento_en_svg-raw.pdf" 1791827522.63983 14197 015abc8cace04c6a264c854707df7954 ""
   "svg-inkscape/aviso_de_embarque_en_svg-raw.pdf" 1791632085.00279 26378 8df3f5088d42d6dea1d467d113e4bcb7 ""

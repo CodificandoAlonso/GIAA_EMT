@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.8.18)  12 OCT 2026 19:52
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.8.18)  12 OCT 2026 23:10
  system commands enabled.
 **cas-sc-template.tex
 (./cas-sc-template.tex
@@ -1095,15 +1095,13 @@ Underfull \hbox (badness 10000) in alignment at lines 618--637
 [5<./svg-inkscape/notificacion_de_llegada_en_svg-raw.pdf><./svg-inkscape/aviso_d
 e_embarque_en_svg-raw.pdf>] [6<./svg-inkscape/solicitud_de_embarque_en_svg-raw.p
 df><./svg-inkscape/actualizacion_recuento_en_svg-raw.pdf>] [7<./svg-inkscape/con
-sulta_llegada_en_svg-raw.pdf>] [8] [9] (./build/cas-sc-template.bbl [10
-
-]
+sulta_llegada_en_svg-raw.pdf>] [8] (./build/cas-sc-template.bbl [9]
 Underfull \hbox (badness 2753) in paragraph at lines 264--268
 []\T1/stix/m/n/8 GAMA Plat-form, Run-ning head-less, GAMA Plat-form doc-u-men-ta
 -tion, ????. URL: [][]$\T1/cmtt/m/n/8 https://gama-[]platform.org/wiki/1.9.3/
  []
 
-) [11] (./build/cas-sc-template.aux)
+) [10] (./build/cas-sc-template.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -1120,16 +1118,15 @@ Package rerunfilecheck Info: File `cas-sc-template.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 19286 strings out of 476076
+ 19283 strings out of 476076
  156265,794899 words of node,token memory allocated
- 2489 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 7 glue, 250 kern, 13 glyph, 152 attribute, 61 glue_
-spec, 152 attribute_list, 2 write, 4 pdf_action nodes
-   avail lists: 1:1,2:1032,3:774,4:214,5:1389,6:132,7:13885,8:71,9:973,10:32,11:
-925
- 41089 multiletter control sequences out of 65536+600000
+ 2512 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 7 glue, 253 kern, 13 glyph, 154 attribute, 61 glue_
+spec, 154 attribute_list, 2 write, 4 pdf_action nodes
+   avail lists: 2:1029,3:818,4:234,5:1387,6:132,7:14472,8:71,9:973,10:32,11:964
+ 41088 multiletter control sequences out of 65536+600000
  153 fonts using 11507079 bytes
- 94i,12n,96p,313b,560s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,12n,96p,313b,544s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fonts
 /enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/
 stix-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/stix/stix-ts1.enc}</usr/share
@@ -1143,10 +1140,10 @@ ix-mathcal.pfb></usr/share/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></
 usr/share/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/share/texmf-d
 ist/fonts/type1/public/stix/stix-mathrm.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/stix/stix-mathsf.pfb>
-Output written on cas-sc-template.pdf (12 pages, 456341 bytes).
+Output written on cas-sc-template.pdf (11 pages, 455645 bytes).
 
-PDF statistics: 396 PDF objects out of 1000 (max. 8388607)
- 321 compressed objects within 4 object streams
- 78 named destinations out of 1000 (max. 1048576)
+PDF statistics: 390 PDF objects out of 1000 (max. 8388607)
+ 316 compressed objects within 4 object streams
+ 76 named destinations out of 1000 (max. 1048576)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
