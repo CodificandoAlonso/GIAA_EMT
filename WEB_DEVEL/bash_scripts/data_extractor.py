@@ -1,13 +1,220 @@
-#/usr/bin/python
+#!/usr/bin/env python
+"""
+Analisis de la simulacion GAMA — version optimizada.
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import os
+Mismo contrato de entrada que la version original (un CSV por replica en
+RESULTS/, EVENTS/ y PASSENGERS/, con la linea de cabecera que escribe GAMA)
+y mismas salidas (JSONs, PNGs, CSVs de Bhattacharyya). Los cambios son de
+estructura interna, no de formato:
+
+  1. Lectura: los 3 x N_SIMS ficheros se concatenan en memoria descartando
+     la primera linea de cada uno (equivalente exacto a skiprows=1) y se
+     parsean con UNA llamada a read_csv por carpeta, en lugar de 3000
+     read_csv seguidos de concat.
+  2. Las listas de espera se convierten a float de forma vectorizada (una
+     sola conversion sobre la concatenacion) en lugar de ast.literal_eval
+     fila a fila, y se explotan UNA vez a formato largo; antes se
+     re-aplanaban dentro de cada bucle de parada y de franja.
+  3. Los filtros booleanos repetidos dentro de bucles anidados se sustituyen
+     por unas pocas agrupaciones (groupby) calculadas de antemano.
+  4. Los momentos centrales se calculan con numpy en una sola pasada.
+  5. El dibujado se acumula en una cola y se reparte entre procesos al final;
+     cada trabajador reutiliza una unica figura.
+
+Los valores numericos coinciden con la version original salvo en la ultima
+cifra decimal (el orden de suma de algunas medias cambia). Diferencias de
+comportamiento deliberadas, solo en casos limite que en la original
+abortaban la ejecucion o contaminaban el porcentaje:
+
+  - Celda de datos conocidos inexistente o NaN: se registra como
+    'sin_dato_esperado' (no evaluable). La original abortaba si faltaba la
+    fila y, si el valor era NaN, contaba la celda como evaluada y no
+    fusionable.
+  - Viaje sin filas en alguna parada de referencia: duracion/regularidad a
+    NaN en lugar de ZeroDivisionError / IndexError.
+
+Variables de entorno:
+    SIM_N        numero de replicas a leer (defecto 1000, igual que antes)
+    SIM_PLOTS    all (defecto) | summary | none
+    SIM_PLOT_DPI 300 (defecto); 150 reduce el tiempo de rasterizado a ~1/4
+    SIM_WORKERS  numero de procesos de dibujado (defecto: nucleos)
+"""
+
+import io
 import json
-import ast
+import math
+import os
+import time as _time
+from math import exp, log, sqrt
+
+import matplotlib
+matplotlib.use("Agg")
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 from scipy.stats import norm
 
+_T0 = _time.perf_counter()
+
+
+def _tick(msg):
+    print(f"[{_time.perf_counter() - _T0:7.1f} s] {msg}")
+
+
+# ---------------------------------------------------------------------------
+# Configuracion
+# ---------------------------------------------------------------------------
+N_SIMS = int(os.environ.get("SIM_N", "1000"))
+PLOT_MODE = os.environ.get("SIM_PLOTS", "all").lower()   # all | summary | none
+PLOT_DPI = int(os.environ.get("SIM_PLOT_DPI", "300"))
+N_WORKERS = int(os.environ.get("SIM_WORKERS", str(os.cpu_count() or 4)))
+
+PLOT_STYLE = "seaborn-v0_8-whitegrid"
+
+COLUMNS_RESULTS = [
+    "simulation_id", "bus_code", "travels_completed", "stop_num", "direction",
+    "current_time", "timeslot", "departure_timeslot", "boards",
+    "residual_boards", "dropoffs", "occupation", "time_between_stops",
+]
+
+COLUMNS_EVENTS = [
+    "simulation_id", "bus_code", "travels_completed", "stop_num", "direction",
+    "timeslot", "event_code", "time_event", "param_event_1", "param_event_2",
+]
+
+COLUMNS_PASSENGERS = [
+    "simulation_id", "bus_code", "travels_completed", "stop_num", "timeslot",
+    "current_time", "list_passengers_time",
+]
+
+
+# ---------------------------------------------------------------------------
+# Paradas cabecera excluidas de la COMPARACION de distribuciones.
+#
+# 2646 (La Peseta) y 5727 (Cibeles) son cabecera y terminal segun el sentido.
+# En la terminal la magnitud registrada son bajadas, y en la cabecera la
+# ocupacion es el resultado inmediato del embarque: en ninguno de los dos
+# casos se compara lo mismo que en una parada intermedia.
+#
+# ALCANCE: SOLO la comparacion de distribuciones de ocupacion. Las medias
+# siguen calculandose sobre TODAS las paradas. No se aplica a los tiempos
+# entre paradas salvo que se active la bandera de abajo.
+# ---------------------------------------------------------------------------
+EXCLUDED_STOPS = {2646, 5727}
+EXCLUDE_TERMINALS_IN_TIMES = False
+
+MAX_CAPACITY = 80
+threshold = 0.97
+
+
+# ---------------------------------------------------------------------------
+# Cola de dibujado
+#
+# Dibujar es la mayor parte del tiempo total y es trivialmente paralelizable:
+# cada grafica es independiente. Se acumulan descripciones serializables
+# (arrays ya calculados, etiquetas y ruta de salida) y se reparten al final.
+# ---------------------------------------------------------------------------
+_plot_jobs = []
+
+
+def enqueue(job):
+    if PLOT_MODE == "all":
+        _plot_jobs.append(job)
+
+
+_FIG = None
+
+
+def _worker_init():
+    global _FIG
+    plt.style.use(PLOT_STYLE)
+    _FIG = plt.figure()
+
+
+def _fig(size):
+    """Figura reutilizada: crear y destruir una por grafica cuesta mas que
+    dibujarla cuando hay un millar de ellas."""
+    global _FIG
+    if _FIG is None:
+        _worker_init()
+    _FIG.clf()
+    _FIG.set_size_inches(*size)
+    return _FIG
+
+
+def _render_bar(job):
+    fig = _fig((12, 5))
+    ax = fig.add_subplot(111)
+    x = np.arange(len(job["x_labels"]))
+    ax.bar(x, job["values"], width=0.4, label=job["legend"])
+    ax.set_xticks(x + 0.2)
+    ax.set_xticklabels(job["x_labels"], rotation=90)
+    ax.set_ylabel(job["ylabel"])
+    ax.set_xlabel(job["xlabel"])
+    ax.set_title(job["title"])
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(job["path"], dpi=PLOT_DPI)
+
+
+def _render_dist(job):
+    fig = _fig((12, 5))
+    ax = fig.add_subplot(111)
+    x = job["x"]
+    ax.plot(x, job["y1"], color="blue", linewidth=2, label=job["sim_label"])
+    ax.fill_between(x, job["y1"], alpha=0.15, color="blue")
+    ax.plot(x, job["y2"], color="red", linewidth=2, label=job["exp_label"])
+    ax.fill_between(x, job["y2"], alpha=0.15, color="red")
+    ax.set_xlabel(job["xlabel"])
+    ax.set_ylabel("Densidad de probabilidad")
+    ax.set_title(job["title"])
+    ax.legend(title=job["legend_title"], loc="upper right")
+    fig.tight_layout()
+    fig.savefig(job["path"], dpi=PLOT_DPI)
+
+
+_RENDERERS = {"bar": _render_bar, "dist": _render_dist}
+
+
+def _render(job):
+    _RENDERERS[job["kind"]](job)
+
+
+def flush_plots():
+    if not _plot_jobs:
+        return
+    _tick(f"Dibujando {len(_plot_jobs)} graficas con {N_WORKERS} procesos...")
+    if N_WORKERS <= 1:
+        _worker_init()
+        for job in _plot_jobs:
+            _render(job)
+        return
+    import multiprocessing as mp
+    ctx = mp.get_context("fork") if hasattr(os, "fork") else mp.get_context()
+    with ctx.Pool(N_WORKERS, initializer=_worker_init) as pool:
+        for _ in pool.imap_unordered(_render, _plot_jobs, chunksize=8):
+            pass
+
+
+def save_barcode(horizontal_data, vertical_data, horizontal_label,
+                 vertical_label, leyend, label, filename):
+    enqueue({
+        "kind": "bar",
+        "x_labels": list(horizontal_data),
+        "values": [float(v) if v is not None and np.isfinite(v) else np.nan
+                   for v in vertical_data],
+        "xlabel": horizontal_label,
+        "ylabel": vertical_label,
+        "legend": leyend,
+        "title": label,
+        "path": filename,
+    })
+
+
+# ---------------------------------------------------------------------------
+# Carga
+# ---------------------------------------------------------------------------
 # SIM_DIR (exported by run_simulation.sh) names the simulation to analyse;
 # .last_simulation is only a fallback for running this script by hand.
 sim_dir = os.environ.get("SIM_DIR")
@@ -17,174 +224,279 @@ if not sim_dir:
 # Every path below is built as f"{os.getcwd()}/{sim_dir}/...".
 sim_dir = os.path.relpath(sim_dir, os.getcwd())
 
-
-
 DESCRIPTION = {}
-
 with open(f"{os.getcwd()}/{sim_dir}/description.txt", "r") as f:
     for line in f:
-        parts = line.strip().split(" ", 1)  # split only on first space
+        parts = line.strip().split(" ", 1)
         if len(parts) == 2:
             DESCRIPTION[parts[0]] = parts[1]
 
 if DESCRIPTION.get("line") == "401":
-    stops_list_toA = [2646, 562, 4090, 4188, 5939, 3995, 3991, 3903, 2539, 2535, 1929, 4032, 5360, 82, 5727]
-    stops_list_toB = [5727, 81, 1167, 2538, 3929, 3990, 3994, 5938, 4187, 2964, 649, 2646]
+    stops_list_toA = [2646, 562, 4090, 4188, 5939, 3995, 3991, 3903, 2539,
+                      2535, 1929, 4032, 5360, 82, 5727]
+    stops_list_toB = [5727, 81, 1167, 2538, 3929, 3990, 3994, 5938, 4187,
+                      2964, 649, 2646]
     to_A = "Cibeles"
     to_B = "La Peseta"
 
 
-# ---------------------------------------------------------------------------
-# Paradas cabecera excluidas de la COMPARACION de distribuciones.
-#
-# 2646 (La Peseta) y 5727 (Cibeles) son cabecera y terminal segun el sentido.
-# En la terminal la magnitud registrada son bajadas, y en la cabecera la
-# ocupacion es el resultado inmediato del embarque: en ninguno de los dos
-# casos se compara lo mismo que en una parada intermedia, de modo que su
-# coeficiente de Bhattacharyya no es homogeneo con el resto y distorsiona el
-# porcentaje de equivalencia.
-#
-# ALCANCE: SOLO la comparacion de distribuciones de ocupacion. Las medias
-# (KPIs globales, ocupacion por franja, ocupacion por viaje) siguen
-# calculandose sobre TODAS las paradas, sin cambios respecto al original.
-#
-# NO se aplica a los tiempos entre paradas: el tramo 2646-562 es una medida
-# de transito legitima con valor esperado propio. Poner a True la bandera de
-# abajo si se quiere excluir tambien los tramos que tocan una cabecera.
-# ---------------------------------------------------------------------------
-EXCLUDED_STOPS = {2646, 5727}
-EXCLUDE_TERMINALS_IN_TIMES = False
+def read_sim_logs(folder, columns, required=True, str_cols=()):
+    """Lee los N_SIMS logs de una carpeta como un unico DataFrame.
 
+    Cada fichero se abre en binario, se descarta su primera linea (la
+    cabecera de GAMA, igual que skiprows=1 en la version original) y los
+    cuerpos se concatenan en memoria. El parseo es una sola llamada a
+    read_csv, con lo que desaparecen 1000 inicializaciones del lector y el
+    concat posterior. El orden de filas es el mismo: replica 0, 1, 2, ...
 
-#HARDCODDED NUMBER OF SIMS
-N_SIMS = 1000
+    required=False reproduce el try/except de EVENTS: un fichero ausente o
+    con solo cabecera no aporta filas.
+    """
+    base = f"{os.getcwd()}/{sim_dir}/{folder}"
+    chunks = []
+    missing = 0
+    for i in range(N_SIMS):
+        path = f"{base}/log_Simulation {i}.csv"
+        try:
+            with open(path, "rb") as fh:
+                fh.readline()
+                body = fh.read()
+        except FileNotFoundError:
+            if required:
+                raise
+            missing += 1
+            continue
+        if body:
+            if not body.endswith(b"\n"):
+                body += b"\n"
+            chunks.append(body)
 
-columns = ["simulation_id", "bus_code", "travels_completed","stop_num", "direction", "current_time","timeslot", "departure_timeslot",
-           "boards","residual_boards","dropoffs", "occupation", "time_between_stops"]
+    if missing:
+        print(f"  {folder}: {missing} replicas sin fichero (sin filas)")
+    if not chunks:
+        return pd.DataFrame(columns=columns)
 
-joint_dataframe_results = pd.DataFrame(columns=columns)
-
-dataframes_to_join_results = []
-for iteration in range(0,N_SIMS):
-    new_dataframe = pd.read_csv(f"{os.getcwd()}/{sim_dir}/RESULTS/log_Simulation {iteration}.csv", skiprows = 1,
-            names = columns, encoding="utf-8")
-    dataframes_to_join_results.append(new_dataframe)
-
-
-
-joint_dataframe_results = pd.concat(data for data in dataframes_to_join_results)
-
-
-N_SIMS = 1000
-
-
-columns = ["simulation_id", "bus_code","travels_completed", "stop_num", "direction","timeslot", "event_code", 
-           "time_event","param_event_1", "param_event_2"]
-
-joint_dataframe_events = pd.DataFrame(columns=columns)
-
-dataframes_to_join_events = []
-for iteration in range(0,N_SIMS):
+    buf = b"".join(chunks)
+    kw = dict(header=None, names=columns, encoding="utf-8",
+              dtype={c: str for c in str_cols})
+    # pyarrow parsea en varios hilos; si no esta instalado o rechaza algo,
+    # se cae al motor C, que es el que usaba la version original.
     try:
-        new_dataframe = pd.read_csv(f"{os.getcwd()}/{sim_dir}//EVENTS/log_Simulation {iteration}.csv",skiprows = 1,
-                             names = columns, encoding="utf-8")
-        dataframes_to_join_events.append(new_dataframe)
-    except:
-        pass
+        return pd.read_csv(io.BytesIO(buf), engine="pyarrow", **kw)
+    except Exception:
+        return pd.read_csv(io.BytesIO(buf), low_memory=False, **kw)
 
 
-joint_dataframe_events = pd.concat(data for data in dataframes_to_join_events)
+_tick("Cargando datos...")
+
+joint_dataframe_results = read_sim_logs(
+    "RESULTS", COLUMNS_RESULTS, str_cols=("current_time",))
+
+joint_dataframe_events = read_sim_logs(
+    "EVENTS", COLUMNS_EVENTS, required=False,
+    str_cols=("time_event", "param_event_1"))
+
+joint_dataframe_passengers = read_sim_logs(
+    "PASSENGERS", COLUMNS_PASSENGERS,
+    str_cols=("current_time", "list_passengers_time"))
+
+print(f"  {len(joint_dataframe_results)} filas de resultados, "
+      f"{len(joint_dataframe_passengers)} de pasajeros, "
+      f"{len(joint_dataframe_events)} eventos")
 
 
-columns = ["simulation_id", "bus_code","travels_completed", "stop_num", "timeslot", "current_time","list_passengers_time"]
-
-joint_dataframe_passengers = pd.DataFrame(columns=columns)
-
-dataframes_to_join_passengers = []
-for iteration in range(0,N_SIMS):
-    new_dataframe = pd.read_csv(f"{os.getcwd()}/{sim_dir}//PASSENGERS/log_Simulation {iteration}.csv", skiprows = 1,
-                names=columns, encoding="utf-8")
-    dataframes_to_join_passengers.append(new_dataframe)
-
-
-
-joint_dataframe_passengers = pd.concat(data for data in dataframes_to_join_passengers)
-
-
-
-joint_dataframe_passengers["list_passengers_time"] = (
-    joint_dataframe_passengers["list_passengers_time"]
-    .apply(ast.literal_eval)
-)
-known_occupation_values_toA = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_OCCUPATION_toA.csv")
-known_occupation_values_toB = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_OCCUPATION_toB.csv")
-known_times_stops_toA = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_times_stops_toA.csv")
-known_times_stops_toB = pd.read_csv(f"{os.getcwd()}/../data/known_data/NORMAL_times_stops_toB.csv")
+def to_seconds(value):
+    """Convierte a segundos tanto 'HH:MM[:SS]' como un numero de segundos."""
+    if value is None or (isinstance(value, float) and math.isnan(value)):
+        return float("nan")
+    if isinstance(value, (int, float, np.integer, np.floating)):
+        return float(value)
+    s = str(value).strip()
+    if ":" in s:
+        parts = [int(p) for p in s.split(":")]
+        while len(parts) < 3:
+            parts.append(0)
+        return parts[0] * 3600 + parts[1] * 60 + parts[2]
+    return float(s)
 
 
-timeslots = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+def to_seconds_series(series):
+    """Version vectorizada de to_seconds para una columna 'H:MM[:SS]'.
+
+    Una jornada tiene como mucho unas decenas de miles de instantes
+    distintos frente a millones de filas: se convierte cada valor distinto
+    una sola vez y se reexpande con los codigos de factorize.
+    """
+    if pd.api.types.is_numeric_dtype(series):
+        return series.astype(float)
+    codes, uniques = pd.factorize(series)
+    conv = np.array([to_seconds(u) for u in uniques], dtype=np.float64)
+    out = np.full(len(series), np.nan)
+    ok = codes >= 0
+    out[ok] = conv[codes[ok]]
+    return pd.Series(out, index=series.index)
+
+
+joint_dataframe_results["current_time_s"] = to_seconds_series(
+    joint_dataframe_results["current_time"])
+
+
+# ---------------------------------------------------------------------------
+# Tiempos de espera: explosion unica a formato largo.
+#
+# GAMA escribe cada lista como '[12.0,30.5,...]'. En lugar de evaluar cada
+# fila con ast.literal_eval, se limpian los corchetes con operaciones de
+# cadena de pandas, se concatena todo y se convierte a float en una sola
+# llamada. El numero de elementos por fila sale de contar separadores, y
+# se comprueba contra el total convertido: cualquier valor malformado
+# aborta con la fila culpable, igual que abortaba literal_eval.
+# ---------------------------------------------------------------------------
+def explode_wait_lists(series):
+    # Corchetes y comillas exteriores fuera; ';' -> ',' por si la lista
+    # llegara con el separador que se puso al guardarla.
+    txt = (series.fillna("").astype(str)
+           .str.strip("[]\"' ")
+           .str.replace(";", ",", regex=False))
+    nonempty = txt.str.len().to_numpy() > 0
+    rows = txt[nonempty].tolist()
+
+    lens = np.zeros(len(txt), dtype=np.int64)
+    if not rows:
+        return np.empty(0, dtype=np.float64), lens
+
+    # Elementos por fila sin recorrer las filas en Python: se unen con un
+    # separador de fila ('|') y se cuentan las comas entre separadores.
+    joined = "|".join(rows)
+    raw = np.frombuffer(joined.encode("ascii", "replace"), dtype=np.uint8)
+    commas = np.cumsum(raw == ord(","))
+    bounds = np.flatnonzero(raw == ord("|"))
+    per_row_commas = np.diff(np.concatenate(
+        ([0], commas[bounds], [commas[-1]])))
+    lens[nonempty] = per_row_commas + 1
+    total = int(lens.sum())
+
+    try:
+        flat = np.fromstring(joined.replace("|", ","), dtype=np.float64,
+                             sep=",")
+    except ValueError:
+        flat = np.empty(0, dtype=np.float64)
+
+    if flat.size != total:
+        for i, v in enumerate(txt.tolist()):
+            try:
+                if v:
+                    [float(x) for x in v.split(",")]
+            except ValueError:
+                raise ValueError(
+                    f"list_passengers_time malformado en la fila {i}: "
+                    f"{series.iloc[i]!r}") from None
+        raise ValueError("list_passengers_time: recuento de valores "
+                         f"inconsistente ({flat.size} != {total})")
+    return flat, lens
+
+
+_tick("Explotando tiempos de espera...")
+
+_flat, _lens = explode_wait_lists(
+    joint_dataframe_passengers["list_passengers_time"])
+_total = int(_flat.size)
+_rowidx = np.repeat(np.arange(len(_lens), dtype=np.int64), _lens)
+
+_pass_stop = joint_dataframe_passengers["stop_num"].to_numpy()
+_pass_ts = joint_dataframe_passengers["timeslot"].to_numpy()
+
+waits_df = pd.DataFrame({
+    "stop_num": _pass_stop[_rowidx],
+    "timeslot": _pass_ts[_rowidx],
+    "wait": _flat,
+})
+
+MEAN_WAIT_GLOBAL = float(np.nanmean(_flat)) if _total else float("nan")
+_wait_by_stop = (waits_df.groupby("stop_num")["wait"].mean().to_dict()
+                 if _total else {})
+_wait_by_stop_ts = (
+    waits_df.groupby(["stop_num", "timeslot"])["wait"].mean().to_dict()
+    if _total else {})
+
+del _flat, _rowidx, waits_df
+
+
+# ---------------------------------------------------------------------------
+# Datos conocidos
+# ---------------------------------------------------------------------------
+known_occupation_values_toA = pd.read_csv(
+    f"{os.getcwd()}/../data/known_data/NORMAL_OCCUPATION_toA.csv")
+known_occupation_values_toB = pd.read_csv(
+    f"{os.getcwd()}/../data/known_data/NORMAL_OCCUPATION_toB.csv")
+known_times_stops_toA = pd.read_csv(
+    f"{os.getcwd()}/../data/known_data/NORMAL_times_stops_toA.csv")
+known_times_stops_toB = pd.read_csv(
+    f"{os.getcwd()}/../data/known_data/NORMAL_times_stops_toB.csv")
+
+timeslots = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+             22, 23]
+
+
+def _index_first(df, col):
+    """Indexa por `col` quedandose con la primera fila de cada clave, que es
+    la que devolvia el .iloc[0] de la version original."""
+    t = df.set_index(col)
+    return t[~t.index.duplicated(keep="first")]
+
+
+_known_occ = {
+    "to_A": _index_first(known_occupation_values_toA, "Stop"),
+    "to_B": _index_first(known_occupation_values_toB, "Stop"),
+}
+_known_tim = {
+    "to_A": _index_first(known_times_stops_toA, "StopsCodes"),
+    "to_B": _index_first(known_times_stops_toB, "StopsCodes"),
+}
+
+
+def known_occupation(direction, stopcode, timeslot):
+    tab = _known_occ[direction]
+    try:
+        row = tab.loc[stopcode]
+    except KeyError:
+        return float("nan"), float("nan")
+    return float(row[f"Mean_{timeslot}"]), float(row[f"std_{timeslot}"])
+
+
+def known_time(direction, key, timeslot):
+    tab = _known_tim[direction]
+    try:
+        row = tab.loc[key]
+    except KeyError:
+        return float("nan"), float("nan")
+    return float(row[f"Mean_{timeslot}"]), float(row[f"Std_{timeslot}"])
+
 
 regularity_toA = {}
 regularity_toB = {}
 
-
-#trim the first and the last instances of known_times_toA and toB, then for each timeslot, navigate trough the columns and compute the man of the times. The full goal
-# is to known the standard time between the 2 and the n-1 stops in a direction to then later on do the regularity value
-
 known_times_stops_toA_regularity = known_times_stops_toA.iloc[1:-1]
 known_times_stops_toB_regularity = known_times_stops_toB.iloc[1:-1]
 
-
-
 for timeslot in timeslots:
     col_name = f"Mean_{timeslot}"
-    theoretical_time_toA = known_times_stops_toA_regularity[col_name].sum()
-    regularity_toA[timeslot] = theoretical_time_toA
-    #special case for toB, incase timeslot 5 is selected.
+    regularity_toA[timeslot] = known_times_stops_toA_regularity[col_name].sum()
+    # caso especial toB: la franja 5 no tiene datos, se usa la 6
     if timeslot == 5:
-        col_name = f"Mean_6"
-        theoretical_time_toB = known_times_stops_toB_regularity[col_name].sum()
-        regularity_toB[timeslot] = theoretical_time_toB
+        regularity_toB[timeslot] = (
+            known_times_stops_toB_regularity["Mean_6"].sum())
     else:
-        theoretical_time_toB = known_times_stops_toB_regularity[col_name].sum()
-        regularity_toB[timeslot] = theoretical_time_toB
-
-
-
-# la idea de esto es generar gráficas a mansalva. La idea detrás ed esto es poder tener tantas gráficas como se guste y en la interfaz de usuario poder agrupar esas gráficas para que se den varios puntos de vista.
-
-
-
-
-#-------------------------------------------------------------------------
-#-----------------------Imported from fussion gauss-----------------------
-#-------------------------------------------------------------------------
-import math
-
-from math import sqrt
-
-from math import log
-
-from math import exp
-
-
-
-
-threshold = 0.97
+        regularity_toB[timeslot] = (
+            known_times_stops_toB_regularity[col_name].sum())
 
 
 # ---------------------------------------------------------------------------
 # Registro de comparaciones Bhattacharyya.
 #
 # Una fila por celda (tipo, sentido, parada/tramo, franja), TAMBIEN si la
-# celda se descarta. Las funciones de comparacion tienen returns tempranos
-# (varianza esperada nula, menos de dos muestras, varianza simulada nula):
-# si solo se contasen las celdas que llegan a dibujarse, el denominador del
-# porcentaje seria falso. Se reportan por eso dos porcentajes, sobre celdas
-# evaluadas y sobre celdas totales.
-#
-# Las paradas de EXCLUDED_STOPS no se registran: quedan fuera del numerador
-# y del denominador, no cuentan como "no evaluables".
+# celda se descarta, para que el denominador del porcentaje sea honesto. Se
+# reportan dos porcentajes: sobre celdas evaluadas y sobre celdas totales.
+# Las paradas de EXCLUDED_STOPS no se registran.
 # ---------------------------------------------------------------------------
 bhatt_registry = []
 
@@ -192,14 +504,7 @@ bhatt_registry = []
 def register_bhatt(tipo, direction, key, timeslot, coeff=None, dist=None,
                    estado="evaluada", metodo=None, n_sim=0,
                    mean_sim=None, std_sim=None, mean_esp=None, std_esp=None):
-    """tipo: 'ocupacion' | 'tiempo'.  key: codigo de parada o 'A-B'.
-
-    Se guardan las medias y desviaciones de ambos lados: sin ellas el
-    coeficiente dice QUE una celda falla, pero no HACIA DONDE. Con ellas se
-    distingue un desfase sistematico de nivel (todas las celdas por debajo)
-    de un error de perfil (unas por encima y otras por debajo, que se
-    cancelan en la media global).
-    """
+    """tipo: 'ocupacion' | 'tiempo'.  key: codigo de parada o 'A-B'."""
     sesgo = None
     if mean_sim is not None and mean_esp is not None:
         sesgo = float(mean_sim) - float(mean_esp)
@@ -211,23 +516,22 @@ def register_bhatt(tipo, direction, key, timeslot, coeff=None, dist=None,
         "direccion": direction,
         "elemento": str(key),
         "franja": timeslot,
-        "metodo": metodo,                    # 'normal' | 'kde' | None
+        "metodo": metodo,
         "n_sim": n_sim,
         "coeff": coeff,
         "distancia": dist,
-        "estado": estado,                    # evaluada | sin_* (motivo)
+        "estado": estado,
         "fusionable": (None if coeff is None else bool(coeff >= threshold)),
         "mean_sim": (None if mean_sim is None else float(mean_sim)),
         "std_sim": (None if std_sim is None else float(std_sim)),
         "mean_esp": (None if mean_esp is None else float(mean_esp)),
         "std_esp": (None if std_esp is None else float(std_esp)),
-        "sesgo": sesgo,                      # sim - esperado
-        "sesgo_sigmas": sesgo_sigmas,        # normalizado por sigma esperada
+        "sesgo": sesgo,
+        "sesgo_sigmas": sesgo_sigmas,
     })
 
 
 def resumen_bhatt(sub):
-    """Agrega un subconjunto del registro a un diccionario de metricas."""
     n = len(sub)
     ev = sub[sub["estado"] == "evaluada"]
     n_ev = len(ev)
@@ -251,95 +555,79 @@ def tramo_excluido(par):
 
 
 def bhattacharyya_distance(mean_1, mean_2, std_1, std_2):
-    return 0.25*((mean_1 -mean_2)**2/(std_1**2 + std_2**2)) + 0.5*(log((std_1**2 + std_2**2)/(2*(std_1 * std_2))))
-
+    return (0.25 * ((mean_1 - mean_2) ** 2 / (std_1 ** 2 + std_2 ** 2))
+            + 0.5 * log((std_1 ** 2 + std_2 ** 2) / (2 * (std_1 * std_2))))
 
 
 def bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2):
-    return (sqrt(2*(std_1*std_2/(std_1**2 + std_2**2))))*exp(-(((mean_1 -mean_2)**2)/(4*(std_1**2 + std_2**2))))
+    return (sqrt(2 * (std_1 * std_2 / (std_1 ** 2 + std_2 ** 2)))
+            * exp(-(((mean_1 - mean_2) ** 2) / (4 * (std_1 ** 2 + std_2 ** 2)))))
 
 
-import numpy as np
+# ---------------------------------------------------------------------------
+# Momentos y normalidad: una pasada vectorizada en lugar de cinco generadores
+# de Python por celda. El criterio de decision es el de la version original.
+# ---------------------------------------------------------------------------
+def _moments(x):
+    """Devuelve (n, media, m2, m3, m4) en una sola pasada."""
+    n = x.size
+    mean = x.mean()
+    d = x - mean
+    d2 = d * d
+    m2 = d2.mean()
+    m3 = (d2 * d).mean()
+    m4 = (d2 * d2).mean()
+    return n, float(mean), float(m2), float(m3), float(m4)
 
 
+def is_normal_simplified(variables):
+    """Devuelve (aprox_normal, muestra_saneada, media, desviacion)."""
+    x = np.asarray(variables, dtype=float)
+    x = x[np.isfinite(x)]
 
-def central_moment(x, r):
-    mean = np.nanmean(x)
-    return sum((xi - mean) ** r for xi in x) / len(x)
-
-
-def kurtosis(x):
-    return (central_moment(x, 4) / central_moment(x, 2) ** 2) -3
-
-def skewness(x):
-    return central_moment(x, 3) / central_moment(x, 2)**(3/2)
-
-
-def is_normal_simplified(variables:list):
-
-
-    if len(variables) == 0:
-        return np.bool_(False), [], 0, 0
-
-    elif len(variables) < 50: #CASO Z score 1.96
+    if x.size == 0:
+        return np.bool_(False), x, 0, 0
+    elif x.size < 50:
         z_crit = 1.96
-    elif len(variables) < 300: #CASO Z score 3.29
+    elif x.size < 300:
         z_crit = 3.29
     else:
         z_crit = "False"
 
-    skew = skewness(variables)
-    kurt = kurtosis(variables)
+    n, mean, m2, m3, m4 = _moments(x)
 
+    # Varianza nula: en la original asimetria y curtosis salian NaN y la
+    # comparacion devolvia False. Mismo resultado, sin el aviso de numpy.
+    if m2 <= 1e-12:
+        return np.bool_(False), x, float(mean), 0.0
 
-    n = len(variables)
+    skew = m3 / m2 ** 1.5
+    kurt = (m4 / m2 ** 2) - 3
 
     se_skew = math.sqrt(6.0 / n)
     se_kurt = math.sqrt(24.0 / n)
-
-    mean = np.nanmean(variables)
-    std_dev = math.sqrt(central_moment(variables, 2))
-    z_skew = skew / se_skew
-    z_kurt = kurt / se_kurt
+    std_dev = math.sqrt(m2)
 
     if z_crit != "False":
-        approx_normal = (abs(z_skew) <= z_crit) and (abs(z_kurt) <= z_crit)
-
+        approx_normal = (abs(skew / se_skew) <= z_crit) and \
+                        (abs(kurt / se_kurt) <= z_crit)
     else:
         approx_normal = (abs(skew) <= 2) and (abs(kurt) + 3 <= 7)
 
-    return approx_normal, variables, mean, std_dev
+    return np.bool_(approx_normal), x, mean, std_dev
 
 
-
- #KPI 1. % de ocupación medio. % de ocupacion por franja horaria. % de ocupación de cada autobús en acda una de sus franjas
-MAX_CAPACITY = 80
-
-def time_to_seconds(time_str, include_seconds: bool):
-    if include_seconds:
-        h, m, s = map(int, time_str.split(":"))
-    else:
-        h,m = map(int, time_str.split(":"))
-        s = 0
-    return h * 3600 + m * 60 + s
-
-
-def time_to_minutes(time_str, include_seconds: bool):
-    if include_seconds:
-        h, m, s = map(int, time_str.split(":"))
-    else:
-        h,m = map(int, time_str.split(":"))
-        s = 0
-    return h * 60 + m + s/60
-
-
-def regularity_calc(theoretical_interval, real_interval, in_time_format: bool) -> float:
+def regularity_calc(theoretical_interval, real_interval,
+                    in_time_format: bool) -> float:
     if not in_time_format:
-        It = time_to_minutes(theoretical_interval, False)
-        Ir = time_to_minutes(real_interval, False)
+        It = to_seconds(theoretical_interval) / 60
+        Ir = to_seconds(real_interval) / 60
     else:
         It = theoretical_interval / 60
         Ir = real_interval / 60
+
+    if np.isnan(Ir) or np.isnan(It):
+        return float("nan")
 
     if Ir > 2 * It:
         return 0.0
@@ -347,721 +635,535 @@ def regularity_calc(theoretical_interval, real_interval, in_time_format: bool) -
     if It <= 10:
         if Ir - It <= 2:
             return 100.0
-        else:
-            return 100 * (1 - ((Ir - (It + 2)) / (It - 2)))
-
+        return 100 * (1 - ((Ir - (It + 2)) / (It - 2)))
     elif It <= 25:
         if Ir <= 1.2 * It:
             return 100.0
-        else:
-            return 100 * (1 - ((Ir - 1.2 * It) / (0.8 * It)))
-
+        return 100 * (1 - ((Ir - 1.2 * It) / (0.8 * It)))
     else:
         if Ir - It <= 5:
             return 100.0
-        else:
-            return 100 * (1 - ((Ir - (It + 5)) / (It - 5)))
-
-#La easy.
-percentage_occupation_per_stop = 0
+        return 100 * (1 - ((Ir - (It + 5)) / (It - 5)))
 
 
-json_output_general_info = {}
+# ---------------------------------------------------------------------------
+# Comparacion de distribuciones. El coeficiente se calcula aqui (hace falta
+# para el registro); solo el dibujado se difiere.
+# ---------------------------------------------------------------------------
+def _compare(tipo, sim_data, mean_2, std_2, direction, key, timeslot,
+             is_normal, plot):
+    """Nucleo comun a ocupacion y tiempos. `plot` describe el dibujado."""
+    sim_data = np.asarray(sim_data, dtype=float)
+    sim_data = sim_data[np.isfinite(sim_data)]
 
+    if not np.isfinite(mean_2) or not np.isfinite(std_2):
+        register_bhatt(tipo, direction, key, timeslot,
+                       estado="sin_dato_esperado", n_sim=sim_data.size)
+        return
 
+    if std_2 <= 1e-9 or sim_data.size < 2:
+        register_bhatt(tipo, direction, key, timeslot,
+                       estado=("sin_varianza_esperada" if std_2 <= 1e-9
+                               else "sin_datos_sim"),
+                       n_sim=sim_data.size)
+        return
 
-data_toA = joint_dataframe_results[joint_dataframe_results["direction"] == "toA"]
-data_toB = joint_dataframe_results[joint_dataframe_results["direction"] == "toB"]
+    x_min_exp = mean_2 - 4 * std_2
+    x_max_exp = mean_2 + 4 * std_2
 
-json_output_general_info["Occupation_toA"] = (data_toA["occupation"].mean()/MAX_CAPACITY)*100
-json_output_general_info["Occupation_toB"] = (data_toB["occupation"].mean()/MAX_CAPACITY)*100
-json_output_general_info["Occupation"] = (joint_dataframe_results["occupation"].mean()/MAX_CAPACITY)*100
+    mean_1 = float(sim_data.mean())
+    std_1 = float(sim_data.std(ddof=1))
 
-#extract also the logical buses that run the sim to save it in the general info
-logic_buses = joint_dataframe_results["bus_code"].unique()
-json_output_general_info["Logical_Buses"] = len(logic_buses)
+    if is_normal:
+        if std_1 <= 1e-9:
+            register_bhatt(tipo, direction, key, timeslot,
+                           estado="sin_varianza_sim", metodo="normal",
+                           n_sim=sim_data.size)
+            return
 
-#also add the total number of trips that were made
-trips_counter = 0
-for bus in logic_buses:
-    data_per_bus = joint_dataframe_results[joint_dataframe_results["bus_code"] == bus]["travels_completed"]
-    trips_counter += (max(data_per_bus) + 1)# +1 because travels_completed starts at 0
+        x_min = min(mean_1 - 4 * std_1, x_min_exp)
+        x_max = max(mean_1 + 4 * std_1, x_max_exp)
+        x = np.linspace(x_min, x_max, 500)
 
-json_output_general_info["Total_Trips"] = trips_counter
+        y1 = norm.pdf(x, mean_1, std_1)
+        y2 = norm.pdf(x, mean_2, std_2)
 
-#add also the mean wait time per passenger
+        bhatt_dist = bhattacharyya_distance(mean_1, mean_2, std_1, std_2)
+        bhatt_coeff = bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2)
+        sim_label = f"Simulación Normal (μ={mean_1:.2f}, σ={std_1:.2f})"
+    else:
+        from scipy.stats import gaussian_kde
 
+        if std_1 <= 1e-9:
+            register_bhatt(tipo, direction, key, timeslot,
+                           estado="sin_varianza_sim", metodo="kde",
+                           n_sim=sim_data.size)
+            return
+        kde = gaussian_kde(sim_data)
+        x_min = min(float(sim_data.min()) - 1, x_min_exp)
+        x_max = max(float(sim_data.max()) + 1, x_max_exp)
+        x = np.linspace(x_min, x_max, 500)
 
-#compute time will go brrrr
-mean_time_awaital_passenger = np.nanmean(
-    [t for data in joint_dataframe_passengers["list_passengers_time"] for t in data]
-)
+        y1 = kde(x)
+        y2 = norm.pdf(x, mean_2, std_2)
 
-json_output_general_info["Mean_await_passengers"] = mean_time_awaital_passenger
+        # Coeficiente de Bhattacharyya por integracion trapezoidal
+        bhatt_coeff = float(np.trapezoid(np.sqrt(y1 * y2), x))
+        bhatt_coeff = min(bhatt_coeff, 1.0)
+        bhatt_dist = -np.log(bhatt_coeff) if bhatt_coeff > 0 else np.inf
+        sim_label = f"Simulación KDE (n={sim_data.size})"
 
-json_output_general_info["Regularity_value"] = 0
-regularity_global = []
+    veredict = ("Fusionables ('Equivalentes')" if bhatt_coeff >= threshold
+                else "No fusionables (Distintas)")
 
+    register_bhatt(tipo, direction, key, timeslot,
+                   coeff=float(bhatt_coeff), dist=float(bhatt_dist),
+                   estado="evaluada",
+                   metodo=("normal" if is_normal else "kde"),
+                   n_sim=sim_data.size,
+                   mean_sim=mean_1, std_sim=std_1,
+                   mean_esp=float(mean_2), std_esp=float(std_2))
 
-#Empiezan las graficassss
-#graficas de evolucion a lo largo del tiempon de valor de %Occupation
-list_occupation_values_toA = []
-
-list_occupation_values_toB = []
-list_occupation = []
-for timeslot in timeslots:
-    data_toA_per_ts = data_toA[data_toA["departure_timeslot"] == timeslot]
-    data_toB_per_ts = data_toB[data_toB["departure_timeslot"] == timeslot]
-    data_general = joint_dataframe_results[joint_dataframe_results["departure_timeslot"] == timeslot]
-    list_occupation_values_toA.append((data_toA_per_ts["occupation"].mean()/MAX_CAPACITY)*100)
-    list_occupation_values_toB.append((data_toB_per_ts["occupation"].mean()/MAX_CAPACITY)*100)
-    list_occupation.append((data_general["occupation"].mean()/MAX_CAPACITY)*100)
-
-
-plt.style.use('seaborn-v0_8-whitegrid')
-
-
-def save_barcode(horizontal_data, vertical_data, horizontal_label, vertical_label, leyend, label, filename):
-    x = np.arange(len(horizontal_data))
-    plt.figure(figsize=(12,5))
-    plt.bar(x, vertical_data, width=0.4, label=leyend)
-    plt.xticks(x + 0.2, horizontal_data, rotation=90)
-    plt.ylabel(vertical_label)
-    plt.xlabel(horizontal_label)
-    plt.title(label)
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(filename, dpi=300)
-    plt.close()
-
+    enqueue({
+        "kind": "dist",
+        "x": x, "y1": y1, "y2": y2,
+        "sim_label": sim_label,
+        "exp_label": f"Esperado (μ={mean_2:.2f}, σ={std_2:.2f})",
+        "xlabel": plot["xlabel"],
+        "title": plot["title"],
+        "legend_title": (f"Distancia de Bhattacharyya = {bhatt_dist:.4f}  "
+                         f"coeff = {bhatt_coeff:.4f}\n→ {veredict}"),
+        "path": plot["path"],
+    })
 
 
 def compute_and_save_distribution_comparasion(
-    sim_data,
-    mean_2, std_2,
-    direction, stopcode, timeslot,
-    is_normal=True
+    sim_data, mean_2, std_2, direction, stopcode, timeslot, is_normal=True
 ):
     # Cabeceras fuera del numerador y del denominador del porcentaje.
     if int(stopcode) in EXCLUDED_STOPS:
         return
-
-    if std_2 <= 1e-9 or len(sim_data) < 2:
-        register_bhatt("ocupacion", direction, stopcode, timeslot,
-                       estado=("sin_varianza_esperada" if std_2 <= 1e-9
-                               else "sin_datos_sim"),
-                       n_sim=len(sim_data))
-        return
-
-    x_min_exp = mean_2 - 4 * std_2
-    x_max_exp = mean_2 + 4 * std_2
-
-    if is_normal:
-        #Bhattacharyya as normal
-        mean_1 = np.mean(sim_data)
-        std_1  = np.std(sim_data, ddof=1)
-        if std_1 <= 1e-9:
-            register_bhatt("ocupacion", direction, stopcode, timeslot,
-                           estado="sin_varianza_sim", metodo="normal",
-                           n_sim=len(sim_data))
-            return
-
-        x_min = min(mean_1 - 4 * std_1, x_min_exp)
-        x_max = max(mean_1 + 4 * std_1, x_max_exp)
-        x = np.linspace(x_min, x_max, 500)
-
-        y1 = norm.pdf(x, mean_1, std_1)
-        y2 = norm.pdf(x, mean_2, std_2)
-
-        bhatt_dist  = bhattacharyya_distance(mean_1, mean_2, std_1, std_2)
-        bhatt_coeff = bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2)
-        sim_label = f"Simulación Normal (μ={mean_1:.2f}, σ={std_1:.2f})"
-    else:
-        #KDE + Bhattacharyya
-        from scipy.stats import gaussian_kde
-
-        if np.std(sim_data, ddof=1) <= 1e-9:
-            register_bhatt("ocupacion", direction, stopcode, timeslot,
-                           estado="sin_varianza_sim", metodo="kde",
-                           n_sim=len(sim_data))
-            return
-        kde = gaussian_kde(sim_data)
-        x_min = min(np.min(sim_data) - 1, x_min_exp)
-        x_max = max(np.max(sim_data) + 1, x_max_exp)
-        x = np.linspace(x_min, x_max, 500)
-
-        y1 = kde(x)
-        y2 = norm.pdf(x, mean_2, std_2)
-
-        # Bhattacharyya coefficient trapezoidal integration
-        bc_integrand = np.sqrt(y1 * y2)
-        bhatt_coeff  = np.trapezoid(bc_integrand, x)
-        bhatt_coeff  = min(bhatt_coeff, 1.0)
-        bhatt_dist   = -np.log(bhatt_coeff) if bhatt_coeff > 0 else np.inf
-        sim_label = f"Simulación KDE (n={len(sim_data)})"
-
-    veredict = ("Fusionables ('Equivalentes')" if bhatt_coeff >= threshold
-               else "No fusionables (Distintas)")
-
-    register_bhatt("ocupacion", direction, stopcode, timeslot,
-                   coeff=float(bhatt_coeff), dist=float(bhatt_dist),
-                   estado="evaluada",
-                   metodo=("normal" if is_normal else "kde"),
-                   n_sim=len(sim_data),
-                   mean_sim=float(np.mean(sim_data)),
-                   std_sim=float(np.std(sim_data, ddof=1)),
-                   mean_esp=float(mean_2), std_esp=float(std_2))
-
-    plt.figure(figsize=(12, 5))
-    plt.plot(x, y1, color="blue", linewidth=2, label=sim_label)
-    plt.fill_between(x, y1, alpha=0.15, color="blue")
-    plt.plot(x, y2, color="red", linewidth=2,
-             label=f"Esperado (μ={mean_2:.2f}, σ={std_2:.2f})")
-    plt.fill_between(x, y2, alpha=0.15, color="red")
-
-    plt.xlabel("Ocupación del Autobús al paso por parada")
-    plt.ylabel("Densidad de probabilidad")
-    plt.title(f"Comparativa de distribuciones – parada {stopcode}, Franja {timeslot}")
-    plt.legend(
-        title=(f"Distancia de Bhattacharyya = {bhatt_dist:.4f}  "
-               f"coeff = {bhatt_coeff:.4f}\n→ {veredict}"),
-        loc="upper right"
-    )
-    plt.tight_layout()
-    plt.savefig(
-        f"{os.getcwd()}/{sim_dir}/PLOTS/{direction}/stops/"
-        f"occupation_comparaison_{stopcode}_per_timeslot_{timeslot}.png",
-        dpi=300
-    )
-    plt.close()
+    _compare(
+        "ocupacion", sim_data, mean_2, std_2, direction, stopcode, timeslot,
+        is_normal,
+        {
+            "xlabel": "Ocupación del Autobús al paso por parada",
+            "title": (f"Comparativa de distribuciones – parada {stopcode}, "
+                      f"Franja {timeslot}"),
+            "path": (f"{os.getcwd()}/{sim_dir}/PLOTS/{direction}/stops/"
+                     f"occupation_comparaison_{stopcode}"
+                     f"_per_timeslot_{timeslot}.png"),
+        })
 
 
 def compute_and_save_distribution_comparasion_times(
-    sim_data,
-    mean_2, std_2,
-    direction, stopcode, timeslot,
-    is_normal=True
+    sim_data, mean_2, std_2, direction, stopcode, timeslot, is_normal=True
 ):
     # Los tramos solo se excluyen si se ha pedido explicitamente.
     if tramo_excluido(stopcode):
         return
-
     tramo = f"{stopcode[0]}-{stopcode[1]}"
-
-    if std_2 <= 1e-9 or len(sim_data) < 2:
-        register_bhatt("tiempo", direction, tramo, timeslot,
-                       estado=("sin_varianza_esperada" if std_2 <= 1e-9
-                               else "sin_datos_sim"),
-                       n_sim=len(sim_data))
-        return
-
-    x_min_exp = mean_2 - 4 * std_2
-    x_max_exp = mean_2 + 4 * std_2
-
-    if is_normal:
-        mean_1 = np.mean(sim_data)
-        std_1  = np.std(sim_data, ddof=1)
-        if std_1 <= 1e-9:
-            register_bhatt("tiempo", direction, tramo, timeslot,
-                           estado="sin_varianza_sim", metodo="normal",
-                           n_sim=len(sim_data))
-            return
-
-        x_min = min(mean_1 - 4 * std_1, x_min_exp)
-        x_max = max(mean_1 + 4 * std_1, x_max_exp)
-        x = np.linspace(x_min, x_max, 500)
-
-        y1 = norm.pdf(x, mean_1, std_1)
-        y2 = norm.pdf(x, mean_2, std_2)
-
-        bhatt_dist  = bhattacharyya_distance(mean_1, mean_2, std_1, std_2)
-        bhatt_coeff = bhattacharyya_coefficient(mean_1, mean_2, std_1, std_2)
-        sim_label = f"Simulación Normal (μ={mean_1:.2f}, σ={std_1:.2f})"
-    else:
-        from scipy.stats import gaussian_kde
-
-        if np.std(sim_data, ddof=1) <= 1e-9:
-            register_bhatt("tiempo", direction, tramo, timeslot,
-                           estado="sin_varianza_sim", metodo="kde",
-                           n_sim=len(sim_data))
-            return
-        
-        kde = gaussian_kde(sim_data)
-        x_min = min(np.min(sim_data) - 1, x_min_exp)
-        x_max = max(np.max(sim_data) + 1, x_max_exp)
-        x = np.linspace(x_min, x_max, 500)
-
-        y1 = kde(x)
-        y2 = norm.pdf(x, mean_2, std_2)
-
-        bc_integrand = np.sqrt(y1 * y2)
-        bhatt_coeff  = np.trapezoid(bc_integrand, x)
-        bhatt_coeff  = min(bhatt_coeff, 1.0)
-        bhatt_dist   = -np.log(bhatt_coeff) if bhatt_coeff > 0 else np.inf
-        sim_label = f"Simulación KDE (n={len(sim_data)})"
-
-    verdict = ("Fusionables ('Equivalentes')" if bhatt_coeff >= threshold
-               else "No fusionables (Distintas)")
-
-    register_bhatt("tiempo", direction, tramo, timeslot,
-                   coeff=float(bhatt_coeff), dist=float(bhatt_dist),
-                   estado="evaluada",
-                   metodo=("normal" if is_normal else "kde"),
-                   n_sim=len(sim_data),
-                   mean_sim=float(np.mean(sim_data)),
-                   std_sim=float(np.std(sim_data, ddof=1)),
-                   mean_esp=float(mean_2), std_esp=float(std_2))
-
-    plt.figure(figsize=(12, 5))
-    plt.plot(x, y1, color="blue", linewidth=2, label=sim_label)
-    plt.fill_between(x, y1, alpha=0.15, color="blue")
-    plt.plot(x, y2, color="red", linewidth=2,
-             label=f"Esperado (μ={mean_2:.2f}, σ={std_2:.2f})")
-    plt.fill_between(x, y2, alpha=0.15, color="red")
-
-    plt.xlabel(f"Tiempo medio entre paradas {stopcode[0]}-{stopcode[1]} medido en segundos")
-    plt.ylabel("Densidad de probabilidad")
-    plt.title(f"Comparativa de distribuciones – paradas {stopcode[0]}-{stopcode[1]}, Franja {timeslot}")
-    plt.legend(
-        title=(f"Distancia de Bhattacharyya = {bhatt_dist:.4f}  "
-               f"coeff = {bhatt_coeff:.4f}\n→ {verdict}"),
-        loc="upper right"
-    )
-    plt.tight_layout()
-    plt.savefig(
-        f"{os.getcwd()}/{sim_dir}/PLOTS/{direction}/times/"
-        f"time_between_stops_comparaison_{stopcode[0]}-{stopcode[1]}_per_timeslot_{timeslot}.png",
-        dpi=300
-    )
-    plt.close()
+    _compare(
+        "tiempo", sim_data, mean_2, std_2, direction, tramo, timeslot,
+        is_normal,
+        {
+            "xlabel": (f"Tiempo medio entre paradas {stopcode[0]}-"
+                       f"{stopcode[1]} medido en segundos"),
+            "title": (f"Comparativa de distribuciones – paradas "
+                      f"{stopcode[0]}-{stopcode[1]}, Franja {timeslot}"),
+            "path": (f"{os.getcwd()}/{sim_dir}/PLOTS/{direction}/times/"
+                     f"time_between_stops_comparaison_{stopcode[0]}-"
+                     f"{stopcode[1]}_per_timeslot_{timeslot}.png"),
+        })
 
 
-save_barcode(timeslots, list_occupation_values_toA , "TimeSlots", "% de Ocupación",  f"Sentido {to_A}", "Ocupación del bus por franja horaria", f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/occupation_per_timeslot_toA.png")
+# ---------------------------------------------------------------------------
+# Agrupaciones precalculadas: unas pocas pasadas sobre los datos y despues
+# todo son consultas a diccionario, en lugar de una mascara booleana sobre
+# el DataFrame completo por cada celda.
+# ---------------------------------------------------------------------------
+def group_arrays(df, keys, value):
+    """{clave: ndarray} con los valores finitos de `value` por grupo, en el
+    orden original de las filas."""
+    sub = df[keys + [value]].dropna(subset=[value])
+    if not len(sub):
+        return {}
+    return {k: v.to_numpy(dtype=float)
+            for k, v in sub.groupby(keys, sort=False)[value]}
 
-save_barcode(timeslots, list_occupation_values_toB , "TimeSlots", "% de Ocupación",  f"Sentido {to_B}", "Ocupación del bus por franja horaria", f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/occupation_per_timeslot_toB.png")
 
-save_barcode(timeslots, list_occupation , "TimeSlots", "% de Ocupación",  "Datos Generales", "Ocupación del bus por franja horaria",
-             f"{os.getcwd()}/{sim_dir}/PLOTS/general/occupation_per_timeslot_general.png")
+def group_means(df, keys, value):
+    sub = df[keys + [value]]
+    if not len(sub):
+        return {}
+    return sub.groupby(keys, sort=False)[value].mean().to_dict()
 
+
+def gmean(d, key):
+    v = d.get(key)
+    return float("nan") if v is None else v
+
+
+_tick("Agrupando resultados...")
+
+data_toA = joint_dataframe_results[joint_dataframe_results["direction"] == "toA"]
+data_toB = joint_dataframe_results[joint_dataframe_results["direction"] == "toB"]
+
+_by_dir = {"to_A": data_toA, "to_B": data_toB}
+
+# Arrays por (parada, franja de salida): necesarios para normalidad y KDE.
+G_OCC_DEP = {d: group_arrays(df, ["stop_num", "departure_timeslot"],
+                             "occupation")
+             for d, df in _by_dir.items()}
+G_DROP_DEP = {d: group_arrays(df, ["stop_num", "departure_timeslot"],
+                              "dropoffs")
+              for d, df in _by_dir.items()}
+
+# Medias por (parada, franja de paso): boards, residuales y bajadas.
+M_BOARDS_TS = {d: group_means(df, ["stop_num", "timeslot"], "boards")
+               for d, df in _by_dir.items()}
+M_RESID_TS = {d: group_means(df, ["stop_num", "timeslot"], "residual_boards")
+              for d, df in _by_dir.items()}
+M_DROP_TS = {d: group_means(df, ["stop_num", "timeslot"], "dropoffs")
+             for d, df in _by_dir.items()}
+
+# Tiempos entre paradas por (parada, franja de paso).
+G_TIME_TS = {d: group_arrays(df, ["stop_num", "timeslot"],
+                             "time_between_stops")
+             for d, df in _by_dir.items()}
+M_TIME_TS = {d: group_means(df, ["stop_num", "timeslot"], "time_between_stops")
+             for d, df in _by_dir.items()}
+M_TIME_ALL = {d: group_means(df, ["stop_num"], "time_between_stops")
+              for d, df in _by_dir.items()}
+
+
+# ---------------------------------------------------------------------------
+# KPIs generales
+# ---------------------------------------------------------------------------
+json_output_general_info = {}
+
+json_output_general_info["Occupation_toA"] = (
+    data_toA["occupation"].mean() / MAX_CAPACITY) * 100
+json_output_general_info["Occupation_toB"] = (
+    data_toB["occupation"].mean() / MAX_CAPACITY) * 100
+json_output_general_info["Occupation"] = (
+    joint_dataframe_results["occupation"].mean() / MAX_CAPACITY) * 100
+
+logic_buses = joint_dataframe_results["bus_code"].unique()
+json_output_general_info["Logical_Buses"] = len(logic_buses)
+
+# +1 porque travels_completed empieza en 0
+_max_trip = joint_dataframe_results.groupby("bus_code")["travels_completed"].max()
+json_output_general_info["Total_Trips"] = int((_max_trip + 1).sum())
+
+json_output_general_info["Mean_await_passengers"] = MEAN_WAIT_GLOBAL
+json_output_general_info["Regularity_value"] = 0
+regularity_global = []
+
+
+# --- graficas de evolucion del % de ocupacion a lo largo del dia ----------
+_occ_dep_toA = data_toA.groupby("departure_timeslot")["occupation"].mean()
+_occ_dep_toB = data_toB.groupby("departure_timeslot")["occupation"].mean()
+_occ_dep_all = joint_dataframe_results.groupby(
+    "departure_timeslot")["occupation"].mean()
+
+list_occupation_values_toA = [
+    (_occ_dep_toA.get(ts, np.nan) / MAX_CAPACITY) * 100 for ts in timeslots]
+list_occupation_values_toB = [
+    (_occ_dep_toB.get(ts, np.nan) / MAX_CAPACITY) * 100 for ts in timeslots]
+list_occupation = [
+    (_occ_dep_all.get(ts, np.nan) / MAX_CAPACITY) * 100 for ts in timeslots]
+
+plt.style.use(PLOT_STYLE)
+
+save_barcode(timeslots, list_occupation_values_toA, "TimeSlots",
+             "% de Ocupación", f"Sentido {to_A}",
+             "Ocupación del bus por franja horaria",
+             f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/"
+             f"occupation_per_timeslot_toA.png")
+
+save_barcode(timeslots, list_occupation_values_toB, "TimeSlots",
+             "% de Ocupación", f"Sentido {to_B}",
+             "Ocupación del bus por franja horaria",
+             f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/"
+             f"occupation_per_timeslot_toB.png")
+
+save_barcode(timeslots, list_occupation, "TimeSlots", "% de Ocupación",
+             "Datos Generales", "Ocupación del bus por franja horaria",
+             f"{os.getcwd()}/{sim_dir}/PLOTS/general/"
+             f"occupation_per_timeslot_general.png")
 
 
 stops_list_toA = [int(data) for data in stops_list_toA]
 stops_list_toB = [int(data) for data in stops_list_toB]
 
-
-
 json_stops_info_toA = {}
 json_stops_info_toB = {}
 
 
-for stopcode in stops_list_toA:
-    #obtain the data from that stop and extract per timeslots its value
-    list_per_ts_per_stop = []
-    json_stops_info_toA[f"{stopcode}"] = {}
+def procesa_paradas(direction, stops_here, out_json, plots_subdir):
+    """Bucle de paradas, comun a ambos sentidos.
 
-    data_stopcode = data_toA[data_toA["stop_num"] == stopcode]
+    La ultima parada del sentido es terminal: la magnitud registrada son
+    bajadas y no ocupacion, y no hay embarques.
+    """
+    occ_dep = G_OCC_DEP[direction]
+    drop_dep = G_DROP_DEP[direction]
+    m_boards = M_BOARDS_TS[direction]
+    m_resid = M_RESID_TS[direction]
+    m_drop = M_DROP_TS[direction]
 
-    # Marca para la interfaz: la parada se calcula igual que siempre, solo
-    # queda fuera del porcentaje de equivalencia de distribuciones.
-    json_stops_info_toA[f"{stopcode}"]["excluded_from_bhatt"] = bool(stopcode in EXCLUDED_STOPS)
+    for stopcode in stops_here:
+        es_terminal = (stopcode == stops_here[-1])
+        j = out_json[f"{stopcode}"] = {}
+        # Marca para la interfaz: la parada se calcula igual que siempre, solo
+        # queda fuera del porcentaje de equivalencia de distribuciones.
+        j["excluded_from_bhatt"] = bool(stopcode in EXCLUDED_STOPS)
+        j["Occupation_percentage_per_timeslot"] = {}
+        j["Board_dropoff_per_timeslot"] = {}
 
-    json_stops_info_toA[f"{stopcode}"]["Occupation_percentage_per_timeslot"] = {}
-
-    json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"] = {}
-
-    if stopcode == stops_list_toA[-1]:
-        for timeslot in timeslots:
-            data_for_occupation = data_stopcode[data_stopcode["departure_timeslot"] == timeslot]
-            actual_percentage = (data_for_occupation["dropoffs"].mean()/MAX_CAPACITY)*100
-            list_per_ts_per_stop.append((actual_percentage, data_for_occupation["dropoffs"],0, 0,data_for_occupation["dropoffs"].mean()))
-            json_stops_info_toA[f"{stopcode}"]["Occupation_percentage_per_timeslot"][timeslot] = actual_percentage
-            json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot] = {}
-            json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["boards"] = 0
-            json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["unable_boards"] = 0
-            json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["dropoffs"] = data_for_occupation["dropoffs"].mean()
-
-
-
-        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/stops/occupation_per_timeslot_{stopcode}.png")
-
-    else:
+        pct_por_ts = []
+        muestras_por_ts = []
+        boards_por_ts = []
+        resid_por_ts = []
+        drop_por_ts = []
 
         for timeslot in timeslots:
-            data_per_ts_per_stop = data_stopcode[data_stopcode["timeslot"] == timeslot]
-            data_for_occupation = data_stopcode[data_stopcode["departure_timeslot"] == timeslot]
+            fuente = drop_dep if es_terminal else occ_dep
+            vals = fuente.get((stopcode, timeslot))
+            if vals is None:
+                vals = np.array([], dtype=float)
+            muestras_por_ts.append(vals)
 
-            actual_percentage = (data_for_occupation["occupation"].mean()/MAX_CAPACITY)*100
-            list_per_ts_per_stop.append((actual_percentage, data_for_occupation["occupation"], data_per_ts_per_stop["boards"].mean(), data_per_ts_per_stop["residual_boards"].mean(), data_per_ts_per_stop["dropoffs"].mean()))
-            json_stops_info_toA[f"{stopcode}"]["Occupation_percentage_per_timeslot"][timeslot] = actual_percentage
-            json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot] = {}
-            json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["boards"] = data_per_ts_per_stop["boards"].mean()
-            json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["unable_boards"] = data_per_ts_per_stop["residual_boards"].mean()
-            json_stops_info_toA[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["dropoffs"] = data_per_ts_per_stop["dropoffs"].mean()
+            media = float(vals.mean()) if vals.size else float("nan")
+            pct = (media / MAX_CAPACITY) * 100
+            pct_por_ts.append(pct)
 
-        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/stops/occupation_per_timeslot_{stopcode}.png")
+            if es_terminal:
+                b = r = 0
+                d = media
+            else:
+                b = gmean(m_boards, (stopcode, timeslot))
+                r = gmean(m_resid, (stopcode, timeslot))
+                d = gmean(m_drop, (stopcode, timeslot))
 
-    json_stops_info_toA[f"{stopcode}"]["Occupation_percentage"] = np.nanmean([data[0] for data in list_per_ts_per_stop])
-    json_stops_info_toA[f"{stopcode}"]["mean_boards"] = np.nanmean([data[2] for data in list_per_ts_per_stop])
-    json_stops_info_toA[f"{stopcode}"]["unable_boards"] = np.nanmean([data[3] for data in list_per_ts_per_stop])
-    json_stops_info_toA[f"{stopcode}"]["mean_dropoffs"] = np.nanmean([data[4] for data in list_per_ts_per_stop])
+            boards_por_ts.append(b)
+            resid_por_ts.append(r)
+            drop_por_ts.append(d)
 
+            j["Occupation_percentage_per_timeslot"][timeslot] = pct
+            j["Board_dropoff_per_timeslot"][timeslot] = {
+                "boards": b, "unable_boards": r, "dropoffs": d,
+            }
 
+        save_barcode(timeslots, pct_por_ts, "TimeSlots", "% de Ocupación",
+                     f"Stop {stopcode}",
+                     "Ocupación media por franja horaria de los autobuses",
+                     f"{os.getcwd()}/{sim_dir}/PLOTS/{plots_subdir}/stops/"
+                     f"occupation_per_timeslot_{stopcode}.png")
 
+        j["Occupation_percentage"] = np.nanmean(pct_por_ts)
+        j["mean_boards"] = np.nanmean(boards_por_ts)
+        j["unable_boards"] = np.nanmean(resid_por_ts)
+        j["mean_dropoffs"] = np.nanmean(drop_por_ts)
 
-    #Important KPI. Theoretical vs Real Distribution of Occupation per Timeslot per Stop
-    for iter_ts in range(0, (timeslots[-1] - timeslots[0]) + 1):
-        #Very important. Lets compare now the distribution of occupation in that stop VS the theoreticall distribution obtained in the statistical part
-        normal_sim, vars_sim, mean_sim, std_sim = is_normal_simplified(list_per_ts_per_stop[iter_ts][1].tolist())
+        # KPI: distribucion teorica frente a simulada, por franja.
+        for idx, timeslot in enumerate(timeslots):
+            normal_sim, vars_sim, _, _ = is_normal_simplified(
+                muestras_por_ts[idx])
+            mean_known, std_known = known_occupation(
+                direction, stopcode, timeslot)
+            compute_and_save_distribution_comparasion(
+                vars_sim, mean_known, std_known, direction, stopcode,
+                timeslot, normal_sim)
 
-        #now, obtain the ts corresponding to this iteration
-        timeslot = timeslots[iter_ts]
-        #obtain the mean and std coirresponmding to this stop and this ts
-        data_stop = known_occupation_values_toA[known_occupation_values_toA["Stop"] == stopcode]
-        mean_known = data_stop[f"Mean_{timeslot}"].iloc[0]
-        std_known = data_stop[f"std_{timeslot}"].iloc[0]
-
-        compute_and_save_distribution_comparasion(vars_sim, mean_known, std_known, "to_A", stopcode, timeslot, normal_sim)
-
-
-    #Per stop. Compute the mean time of awaital per passenger(Normal and per timeslot)
-
-        #first normal mean time of awaital
-    data_passengers_in_stop = joint_dataframe_passengers[joint_dataframe_passengers["stop_num"] == stopcode]
-    mean_time_awaital_passenger = np.nanmean(
-    [t for data in data_passengers_in_stop["list_passengers_time"] for t in data]
-    )
-
-    json_stops_info_toA[f"{stopcode}"]["Mean_await_time_general"] = mean_time_awaital_passenger
-
-    json_stops_info_toA[f"{stopcode}"]["Mean_await_time_per_timeslot"] = {}
-
-    for timeslot in timeslots:
-        data_passengers_timeslotted = data_passengers_in_stop[data_passengers_in_stop["timeslot"] == timeslot]
-        mean_time_awaital_passenger_timeslotted = np.nanmean(
-        [t for data in data_passengers_timeslotted["list_passengers_time"] for t in data]
-        )
-        json_stops_info_toA[f"{stopcode}"]["Mean_await_time_per_timeslot"][timeslot] = mean_time_awaital_passenger_timeslotted
-
-
-
-for stopcode in stops_list_toB:
-    #obtain the data from that stop and extract per timeslots its value
-    list_per_ts_per_stop = []
-
-    json_stops_info_toB[f"{stopcode}"] = {}
-    json_stops_info_toB[f"{stopcode}"]["excluded_from_bhatt"] = bool(stopcode in EXCLUDED_STOPS)
-    json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"] = {}
+        # Tiempo medio de espera por pasajero (ambos sentidos, como antes).
+        j["Mean_await_time_general"] = _wait_by_stop.get(
+            stopcode, float("nan"))
+        j["Mean_await_time_per_timeslot"] = {
+            ts: _wait_by_stop_ts.get((stopcode, ts), float("nan"))
+            for ts in timeslots
+        }
 
 
-    json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"] = {}
+_tick("Procesando paradas sentido A...")
+procesa_paradas("to_A", stops_list_toA, json_stops_info_toA, "to_A")
 
-    data_stopcode = data_toB[data_toB["stop_num"] == stopcode]
-    if stopcode == stops_list_toB[-1]:
-        for timeslot in timeslots:
-            data_for_occupation = data_stopcode[data_stopcode["departure_timeslot"] == timeslot]
-            actual_percentage = (data_for_occupation["dropoffs"].mean()/MAX_CAPACITY)*100
-            list_per_ts_per_stop.append((actual_percentage, data_for_occupation["dropoffs"],0, 0,data_for_occupation["dropoffs"].mean()))
-            json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"][timeslot] = actual_percentage
-            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot] = {}
-            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["boards"] = 0
-            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["unable_boards"] = 0
-            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["dropoffs"] = data_for_occupation["dropoffs"].mean()
-
-        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/stops/occupation_per_timeslot_{stopcode}.png")
-    else:
-        for timeslot in timeslots:
-            data_per_ts_per_stop = data_stopcode[data_stopcode["timeslot"] == timeslot]
-            data_for_occupation = data_stopcode[data_stopcode["departure_timeslot"] == timeslot]
-
-            actual_percentage = (data_for_occupation["occupation"].mean()/MAX_CAPACITY)*100
-            list_per_ts_per_stop.append((actual_percentage, data_for_occupation["occupation"], data_per_ts_per_stop["boards"].mean(), data_per_ts_per_stop["residual_boards"].mean(), data_per_ts_per_stop["dropoffs"].mean()))
-            json_stops_info_toB[f"{stopcode}"]["Occupation_percentage_per_timeslot"][timeslot] = actual_percentage
-            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot] = {}
-            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["boards"] = data_per_ts_per_stop["boards"].mean()
-            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["unable_boards"] = data_per_ts_per_stop["residual_boards"].mean()
-            json_stops_info_toB[f"{stopcode}"]["Board_dropoff_per_timeslot"][timeslot]["dropoffs"] = data_per_ts_per_stop["dropoffs"].mean()
-
-        save_barcode(timeslots, [data[0] for data in list_per_ts_per_stop] , "TimeSlots", "% de Ocupación",  f"Stop {stopcode}", "Ocupación media por franja horaria de los autobuses", f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/stops/occupation_per_timeslot_{stopcode}.png")
+_tick("Procesando paradas sentido B...")
+procesa_paradas("to_B", stops_list_toB, json_stops_info_toB, "to_B")
 
 
-    json_stops_info_toB[f"{stopcode}"]["Occupation_percentage"] = np.nanmean([data[0] for data in list_per_ts_per_stop])
-    json_stops_info_toB[f"{stopcode}"]["Occupation_percentage"] = np.nanmean([data[0] for data in list_per_ts_per_stop])
-    json_stops_info_toB[f"{stopcode}"]["mean_boards"] = np.nanmean([data[2] for data in list_per_ts_per_stop])
-    json_stops_info_toB[f"{stopcode}"]["unable_boards"] = np.nanmean([data[3] for data in list_per_ts_per_stop])
-    json_stops_info_toB[f"{stopcode}"]["mean_dropoffs"] = np.nanmean([data[4] for data in list_per_ts_per_stop])
-
-
-
-    #Important KPI. Theoretical vs Real Distribution of Occupation per Timeslot per Stop
-    for iter_ts in range(0, ((timeslots[-1] - timeslots[0]) + 1)):
-        #Very important. Lets compare now the distribution of occupation in that stop VS the theoreticall distribution obtained in the statistical part
-        normal_sim, vars_sim, mean_sim, std_sim = is_normal_simplified(list_per_ts_per_stop[iter_ts][1].tolist())
-
-        #now, obtain the ts corresponding to this iteration
-        timeslot = timeslots[iter_ts]
-        #obtain the mean and std coirresponmding to this stop and this ts
-        data_stop = known_occupation_values_toB[known_occupation_values_toB["Stop"] == stopcode]
-        mean_known = data_stop[f"Mean_{timeslot}"].iloc[0]
-        std_known = data_stop[f"std_{timeslot}"].iloc[0]
-
-        compute_and_save_distribution_comparasion(vars_sim, mean_known, std_known, "to_B", stopcode, timeslot, normal_sim)
-
-
-
-        #Per stop. Compute the mean time of awaital per passenger(Normal and per timeslot)
-
-        #first normal mean time of awaital
-    data_passengers_in_stop = joint_dataframe_passengers[joint_dataframe_passengers["stop_num"] == stopcode]
-    mean_time_awaital_passenger = np.nanmean(
-    [t for data in data_passengers_in_stop["list_passengers_time"] for t in data]
-    )
-
-    json_stops_info_toB[f"{stopcode}"]["Mean_await_time_general"] = mean_time_awaital_passenger
-
-    json_stops_info_toB[f"{stopcode}"]["Mean_await_time_per_timeslot"] = {}
-
-    for timeslot in timeslots:
-        data_passengers_timeslotted = data_passengers_in_stop[data_passengers_in_stop["timeslot"] == timeslot]
-        mean_time_awaital_passenger_timeslotted = np.nanmean(
-        [t for data in data_passengers_timeslotted["list_passengers_time"] for t in data]
-        )
-        json_stops_info_toB[f"{stopcode}"]["Mean_await_time_per_timeslot"][timeslot] = mean_time_awaital_passenger_timeslotted
-
-#Now occupation per physical bus
+# ---------------------------------------------------------------------------
+# Ocupacion por autobus fisico
+# ---------------------------------------------------------------------------
+_tick("Procesando autobuses...")
 unique_bus = joint_dataframe_results["bus_code"].unique()
 
-
 input_json_route = f"{os.getcwd()}/{sim_dir}/includes/INPUTS/final_input.json"
-
 with open(input_json_route, "r") as f:
     input_json = json.load(f)
 
+# Una pasada por cada magnitud que el bucle recalculaba con mascaras.
+_bts = ["bus_code", "travels_completed", "stop_num"]
+M_TRIP_STOP_OCC = group_means(joint_dataframe_results, _bts, "occupation")
+M_TRIP_STOP_DROP = group_means(joint_dataframe_results, _bts, "dropoffs")
+M_TRIP_STOP_TIME = group_means(joint_dataframe_results, _bts, "current_time_s")
+M_TRIP_OCC = group_means(joint_dataframe_results,
+                         ["bus_code", "travels_completed"], "occupation")
+F_TRIP_STOP_TS = (joint_dataframe_results
+                  .groupby(_bts, sort=False)["timeslot"].first().to_dict())
+TRIPS_BY_BUS = (joint_dataframe_results
+                .groupby("bus_code", sort=False)["travels_completed"]
+                .unique().to_dict())
+
+# bus_code NO se convierte a numero: en GAMA es el id del JSON de entrada y
+# puede no ser numerico.
+if len(joint_dataframe_events):
+    _ev = joint_dataframe_events
+    _delay = (to_seconds_series(_ev["time_event"])
+              - to_seconds_series(_ev["param_event_1"]))
+    _g = _delay.groupby([_ev["bus_code"], _ev["travels_completed"]],
+                        sort=False)
+    EV_COUNT = _g.size().to_dict()
+    EV_DELAY = _g.mean().to_dict()
+else:
+    EV_COUNT, EV_DELAY = {}, {}
+
 new_bus_json_data = {}
 
-
 for bus in unique_bus:
-
-    trip_occupation_percentage = 0
-
-    data_per_bus = joint_dataframe_results[joint_dataframe_results["bus_code"] == bus]
-    events_per_bus = joint_dataframe_events[joint_dataframe_events["bus_code"] == bus]
-
-    unique_trips = data_per_bus['travels_completed'].unique()
-    unique_trips = [int(data) for data in unique_trips]
-
     new_bus_json_data[f"{bus}"] = {}
+    unique_trips = [int(t) for t in TRIPS_BY_BUS.get(bus, [])]
 
-
-
-
-
-
-
-
-    #Loop over each trip
     for trip in unique_trips:
-
-        events_per_unique_trip =events_per_bus[events_per_bus["travels_completed"] == trip]
-
-        total_percentage_of_delays_per_trip = (len(events_per_unique_trip)/N_SIMS)*100
-        mean_delay_in_minutes_per_trip = (pd.Series([time_to_seconds(data, True) for data in events_per_unique_trip["time_event"]]) - pd.Series([time_to_seconds(data, False) for data in events_per_unique_trip["param_event_1"]])).mean()
-
-
+        n_events = EV_COUNT.get((bus, trip), 0)
+        total_percentage_of_delays_per_trip = (n_events / N_SIMS) * 100
+        mean_delay_in_minutes_per_trip = EV_DELAY.get((bus, trip),
+                                                      float("nan"))
 
         data_inputs = input_json[str(bus)][trip]
 
-        data_simulation_per_trip = data_per_bus[data_per_bus['travels_completed'] == trip]
-        trip_occupation_percentage = (data_simulation_per_trip["occupation"].mean()/MAX_CAPACITY)*100
+        trip_occupation_percentage = (
+            gmean(M_TRIP_OCC, (bus, trip)) / MAX_CAPACITY) * 100
 
-        events_per_trip_per_bus = events_per_bus[events_per_bus['travels_completed'] == trip]
+        mean_time_of_trip = float("nan")
+        regularity_value = float("nan")
 
-        mean_time_of_trip = 0
-        #Extract the mean ocupation for saving the plot
-
-        list_mean_values = []
-        direction = ""
         if int(data_inputs[0]) == stops_list_toA[0]:
             direction = "to_A"
-
-            #extract the mean estimated time. Calculating the mean arrival time to stop stops_list_toA[-1] and the mean departure time from stops_list_toA[-1]
-            data_per_trip_last_stop = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toA[-1]]
-            time_per_last_stop = data_per_trip_last_stop["current_time"]
-            time_per_last_stop = [time_to_seconds(data, True) for data in time_per_last_stop]
-            data_per_trip_first_stop = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toA[0]]
-            time_per_first_stop = data_per_trip_first_stop["current_time"]
-            time_per_first_stop = [time_to_seconds(data, True) for data in time_per_first_stop]
-            mean_time_of_trip = sum(time_per_last_stop)/len(time_per_last_stop) - sum(time_per_first_stop)/len(time_per_first_stop)
-
-
-            data_top_regularity_interval = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toA[-2]]
-            time_top_regularity_interval = data_top_regularity_interval["current_time"]
-            time_top_regularity_interval = [time_to_seconds(data, True) for data in time_top_regularity_interval]
-            data_bottom_regularity_interval = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toA[1]]
-            time_bottom_regularity_interval = data_bottom_regularity_interval["current_time"]
-            time_bottom_regularity_interval = [time_to_seconds(data, True) for data in time_bottom_regularity_interval]
-
-            regularity_interval = np.nanmean(time_top_regularity_interval) - np.nanmean(time_bottom_regularity_interval)
-            timeslot_trip = data_per_trip_last_stop["timeslot"].iloc[0]
-            if timeslot_trip > 23:
-                timeslot_trip = 23
-            regularity_value = regularity_calc(regularity_toA[timeslot_trip],regularity_interval, True)
-            regularity_global.append(regularity_value)
-
-            for stop in stops_list_toA:
-                data_per_trip_per_stop = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stop]
-                if stop != stops_list_toA[-1]:
-                    list_mean_values.append( (data_per_trip_per_stop["occupation"].mean()/MAX_CAPACITY)*100)
-                else:
-                    list_mean_values.append( (data_per_trip_per_stop["dropoffs"].mean()/MAX_CAPACITY)*100)
-
-
-            save_barcode(stops_list_toA, list_mean_values , f"Paradas en sentido {to_A}", "% de Ocupación",  f"Ocupación del viaje nº: {trip}", f"Ocupación del autobús por parada para el bus: {bus} con salida estimada {data_inputs[1]}", f"{os.getcwd()}/{sim_dir}/PLOTS/buses/mean_occupation_per_stop_toA_{bus}_{trip}.png")
-
-
-
-
+            stops_here = stops_list_toA
+            regularity_table = regularity_toA
         else:
             direction = "toB"
-            #extract the mean estimated time. Calculating the mean arrival time to stop stops_list_toA[-1] and the mean departure time from stops_list_toA[-1]
-            data_per_trip_last_stop = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toB[-1]]
-            time_per_last_stop = data_per_trip_last_stop["current_time"]
-            time_per_last_stop = [time_to_seconds(data, True) for data in time_per_last_stop]
-            data_per_trip_first_stop = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toB[0]]
-            time_per_first_stop = data_per_trip_first_stop["current_time"]
-            time_per_first_stop = [time_to_seconds(data, True) for data in time_per_first_stop]
-            mean_time_of_trip = sum(time_per_last_stop)/len(time_per_last_stop) - sum(time_per_first_stop)/len(time_per_first_stop)
+            stops_here = stops_list_toB
+            regularity_table = regularity_toB
 
+        # Duracion media: llegada media a la terminal - paso medio por cabecera
+        t_last = gmean(M_TRIP_STOP_TIME, (bus, trip, stops_here[-1]))
+        t_first = gmean(M_TRIP_STOP_TIME, (bus, trip, stops_here[0]))
+        mean_time_of_trip = t_last - t_first
 
-            data_top_regularity_interval = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toB[-2]]
-            time_top_regularity_interval = data_top_regularity_interval["current_time"]
-            time_top_regularity_interval = [time_to_seconds(data, True) for data in time_top_regularity_interval]
-            data_bottom_regularity_interval = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stops_list_toB[1]]
-            time_bottom_regularity_interval = data_bottom_regularity_interval["current_time"]
-            time_bottom_regularity_interval = [time_to_seconds(data, True) for data in time_bottom_regularity_interval]
+        # Regularidad entre la segunda y la penultima parada
+        t_top = gmean(M_TRIP_STOP_TIME, (bus, trip, stops_here[-2]))
+        t_bottom = gmean(M_TRIP_STOP_TIME, (bus, trip, stops_here[1]))
+        ts_last = F_TRIP_STOP_TS.get((bus, trip, stops_here[-1]))
 
-            regularity_interval = np.nanmean(time_top_regularity_interval) - np.nanmean(time_bottom_regularity_interval)
-            timeslot_trip = data_per_trip_last_stop["timeslot"].iloc[0]
+        if ts_last is not None and np.isfinite(ts_last):
+            timeslot_trip = int(ts_last)
             if timeslot_trip > 23:
                 timeslot_trip = 23
-            regularity_value = regularity_calc(regularity_toB[timeslot_trip],regularity_interval, True)
+            regularity_value = regularity_calc(
+                regularity_table[timeslot_trip], t_top - t_bottom, True)
             regularity_global.append(regularity_value)
 
+        list_mean_values = []
+        for stop in stops_here:
+            if stop != stops_here[-1]:
+                v = gmean(M_TRIP_STOP_OCC, (bus, trip, stop))
+            else:
+                v = gmean(M_TRIP_STOP_DROP, (bus, trip, stop))
+            list_mean_values.append((v / MAX_CAPACITY) * 100)
+
+        if direction == "to_A":
+            save_barcode(stops_list_toA, list_mean_values,
+                         f"Paradas en sentido {to_A}", "% de Ocupación",
+                         f"Ocupación del viaje nº: {trip}",
+                         f"Ocupación del autobús por parada para el bus: "
+                         f"{bus} con salida estimada {data_inputs[1]}",
+                         f"{os.getcwd()}/{sim_dir}/PLOTS/buses/"
+                         f"mean_occupation_per_stop_toA_{bus}_{trip}.png")
+        else:
+            save_barcode(stops_list_toB, list_mean_values,
+                         f"Paradas en sentido {to_B}", "% de ocupación",
+                         f"Ocupación del viaje nº: {trip}",
+                         f"Ocupación del autobús por parada para el bus: "
+                         f"{bus} con salida estimada {data_inputs[1]}",
+                         f"{os.getcwd()}/{sim_dir}/PLOTS/buses/"
+                         f"mean_occupation_per_stop_toB_{bus}_{trip}.png")
+
+        new_bus_json_data[f"{bus}"][f"{data_inputs[0]}-{data_inputs[1]}"] = {
+            "Mean_Occupation_Percentage": trip_occupation_percentage,
+            "Direction": direction,
+            "Mean_time_of_trip": mean_time_of_trip,
+            "Percentage_sims_delay_departure": total_percentage_of_delays_per_trip,
+            "Mean_Minutes_departure_delay": mean_delay_in_minutes_per_trip,
+            "Regularity_value": regularity_value,
+        }
 
 
+# ---------------------------------------------------------------------------
+# Tiempos entre paradas
+# ---------------------------------------------------------------------------
+_tick("Procesando tiempos entre paradas...")
 
 
-            for stop in stops_list_toB:
-                data_per_trip_per_stop = data_simulation_per_trip[data_simulation_per_trip["stop_num"] == stop]
-                if stop != stops_list_toB[-1]:
-                    list_mean_values.append( (data_per_trip_per_stop["occupation"].mean()/MAX_CAPACITY)*100)
-                else:
-                    list_mean_values.append( (data_per_trip_per_stop["dropoffs"].mean()/MAX_CAPACITY)*100)
+def procesa_tiempos(direction, stops_here, out_json):
+    """El tiempo entre paradas se registra en la parada de llegada."""
+    out_json["times_stops"] = {}
+    g_arr = G_TIME_TS[direction]
+    m_ts = M_TIME_TS[direction]
+    m_all = M_TIME_ALL[direction]
 
-            save_barcode(stops_list_toB, list_mean_values , f"Paradas en sentido {to_B}", "% de ocupación",  f"Ocupación del viaje nº: {trip}", f"Ocupación del autobús por parada para el bus: {bus} con salida estimada {data_inputs[1]}", f"{os.getcwd()}/{sim_dir}/PLOTS/buses/mean_occupation_per_stop_toB_{bus}_{trip}.png")
+    for counter, stop in enumerate(stops_here[1:]):
+        prev = stops_here[counter]
+        key = f"{prev}-{stop}"
+        entry = out_json["times_stops"][key] = {}
+        entry["general_time"] = gmean(m_all, stop)
+        entry["time_per_timeslot"] = {}
+        entry["expected_time_per_timeslot"] = {}
 
+        expected_times = []
+        for timeslot in timeslots:
+            entry["time_per_timeslot"][timeslot] = gmean(m_ts,
+                                                         (stop, timeslot))
+            vals = g_arr.get((stop, timeslot))
+            if vals is None:
+                vals = np.array([], dtype=float)
 
-        #Now data_inputs will act as the key for the data for that specific trip. The data will be. Mean % of occupation. (Mean % of occupation per stop(indicating direction)) Mean %of delays and Mean minutes of delay in case it exists.
-        new_bus_json_data[f"{bus}"][f"{data_inputs[0]}-{data_inputs[1]}"] = {"Mean_Occupation_Percentage": trip_occupation_percentage, "Direction": direction, "Mean_time_of_trip": mean_time_of_trip, "Percentage_sims_delay_departure": total_percentage_of_delays_per_trip, "Mean_Minutes_departure_delay" : mean_delay_in_minutes_per_trip, "Regularity_value": regularity_value}
+            normal_sim, var_sim, _, _ = is_normal_simplified(vals)
+            mean_known, std_known = known_time(direction, key, timeslot)
+            expected_times.append(mean_known)
+            entry["expected_time_per_timeslot"][timeslot] = mean_known
 
+            compute_and_save_distribution_comparasion_times(
+                var_sim, mean_known, std_known, direction, [prev, stop],
+                timeslot, normal_sim)
 
-
-
-#Time between stops.
-json_stops_info_toA["times_stops"] = {}
-counter = 0
-for stop in stops_list_toA[1:]:
-
-    json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"] = {}
-
-    #first, select all the instances from results which contains the stop_code 'stop'
-    data_stop = joint_dataframe_results[joint_dataframe_results["stop_num"] == stop]
-    data_stop = data_stop[data_stop["direction"] == "toA"]
-
-    #the general value would be the mean of that column
-    json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["general_time"] = data_stop["time_between_stops"].mean()
-
-
-
-    json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["time_per_timeslot"] = {}
-    json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["expected_time_per_timeslot"] = {}
-
-    times_known = known_times_stops_toA[known_times_stops_toA["StopsCodes"] == f"{stops_list_toA[counter]}-{stop}"]
-
-    expected_times = []
-
-    #now iterate for every timeslot to obtain its val
-    for timeslot in timeslots:
-        data_stop_per_timeslot = data_stop[data_stop["timeslot"] == timeslot]["time_between_stops"]
-        json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["time_per_timeslot"][timeslot] = data_stop_per_timeslot.mean()
-
-        normal_sim, var_sim, mean_sim, std_sim = is_normal_simplified(data_stop_per_timeslot.tolist())
-
-        mean_known = times_known[f"Mean_{timeslot}"].iloc[0]
-        std_known = times_known[f"Std_{timeslot}"].iloc[0]
-
-        expected_times.append(mean_known)
-        json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["expected_time_per_timeslot"][timeslot] = mean_known
-
-        compute_and_save_distribution_comparasion_times(var_sim, mean_known, std_known, "to_A", [stops_list_toA[counter],stop], timeslot, normal_sim)
+        entry["expected_time"] = np.mean(expected_times)
 
 
+procesa_tiempos("to_A", stops_list_toA, json_stops_info_toA)
+procesa_tiempos("to_B", stops_list_toB, json_stops_info_toB)
 
-    json_stops_info_toA["times_stops"][f"{stops_list_toA[counter]}-{stop}"]["expected_time"] = np.mean(expected_times)
-
-    counter += 1
-
-
-json_stops_info_toB["times_stops"] = {}
-counter = 0
-for stop in stops_list_toB[1:]:
-
-    json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"] = {}
-
-    #first, select all the instances from results which contains the stop_code 'stop'
-    data_stop = joint_dataframe_results[joint_dataframe_results["stop_num"] == stop]
-    data_stop = data_stop[data_stop["direction"] == "toB"]
-
-    #the general value would be the mean of that column
-    json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["general_time"] = data_stop["time_between_stops"].mean()
-
-    json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["time_per_timeslot"] = {}
-    json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["expected_time_per_timeslot"] = {}
-
-
-
-    times_known = known_times_stops_toB[known_times_stops_toB["StopsCodes"] == f"{stops_list_toB[counter]}-{stop}"]
-
-    expected_times = []
-
-    #now iterate for every timeslot to obtain its val
-    for timeslot in timeslots:
-        data_stop_per_timeslot = data_stop[data_stop["timeslot"] == timeslot]["time_between_stops"]
-        json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["time_per_timeslot"][timeslot] = data_stop_per_timeslot.mean()
-
-        normal_sim, var_sim, mean_sim, std_sim = is_normal_simplified(data_stop_per_timeslot.tolist())
-
-        mean_known = times_known[f"Mean_{timeslot}"].iloc[0]
-        std_known = times_known[f"Std_{timeslot}"].iloc[0]
-        expected_times.append(mean_known)        
-        json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["expected_time_per_timeslot"][timeslot] = mean_known
-
-        compute_and_save_distribution_comparasion_times(var_sim, mean_known, std_known, "to_B", [stops_list_toB[counter],stop], timeslot, normal_sim)
-
-    json_stops_info_toB["times_stops"][f"{stops_list_toB[counter]}-{stop}"]["expected_time"] = np.mean(expected_times)
-
-    counter += 1
-
-
-
-json_output_general_info["Regularity_value"] = np.nanmean(regularity_global)
+json_output_general_info["Regularity_value"] = (
+    np.nanmean(regularity_global) if regularity_global else float("nan"))
 
 
 # ---------------------------------------------------------------------------
 # Porcentaje de distribuciones equivalentes (coeficiente de Bhattacharyya)
 #
-# Agregacion a cuatro niveles y separando ocupacion de tiempos entre paradas,
-# porque son magnitudes distintas con distinto numero de celdas y no deben
-# promediarse juntas salvo como cifra de contexto ('conjunto').
+# Agregacion a cuatro niveles separando ocupacion de tiempos entre paradas;
+# 'conjunto' es solo una cifra de contexto.
 # ---------------------------------------------------------------------------
 df_bhatt = pd.DataFrame(bhatt_registry)
 
@@ -1081,13 +1183,13 @@ if len(df_bhatt):
         if not len(sub):
             continue
         _res = resumen_bhatt(sub)
-        _ev = sub[sub["estado"] == "evaluada"].dropna(subset=["sesgo"])
-        if len(_ev):
-            _res["sesgo_medio"] = float(_ev["sesgo"].astype(float).mean())
+        _ev2 = sub[sub["estado"] == "evaluada"].dropna(subset=["sesgo"])
+        if len(_ev2):
+            _res["sesgo_medio"] = float(_ev2["sesgo"].astype(float).mean())
             _res["sesgo_medio_sigmas"] = float(
-                _ev["sesgo_sigmas"].dropna().astype(float).mean())
+                _ev2["sesgo_sigmas"].dropna().astype(float).mean())
             _res["pct_celdas_por_debajo"] = float(
-                100.0 * (_ev["sesgo"].astype(float) < 0).mean())
+                100.0 * (_ev2["sesgo"].astype(float) < 0).mean())
         bhatt_summary["general"][tipo] = _res
         bhatt_summary["por_direccion"][tipo] = {
             str(x): resumen_bhatt(sub[sub["direccion"] == x])
@@ -1101,31 +1203,30 @@ if len(df_bhatt):
             str(int(x)): resumen_bhatt(sub[sub["franja"] == x])
             for x in sorted(sub["franja"].unique())
         }
-    # Cifra de contexto: ocupacion y tiempos juntos.
     bhatt_summary["general"]["conjunto"] = resumen_bhatt(df_bhatt)
 
 json_output_general_info["Bhattacharyya"] = bhatt_summary
 
 # Cifras planas para la interfaz, sin navegar el diccionario.
 for _t in ("ocupacion", "tiempo", "conjunto"):
-    _g = bhatt_summary["general"].get(_t)
-    if _g:
-        json_output_general_info[f"Pct_equivalentes_{_t}"] = _g["pct_fusionables"]
+    _g2 = bhatt_summary["general"].get(_t)
+    if _g2:
+        json_output_general_info[f"Pct_equivalentes_{_t}"] = _g2["pct_fusionables"]
 
 print(f"\n=== Equivalencia de distribuciones (Bhattacharyya >= {threshold}) ===")
 print(f"  paradas fuera de la comparacion: {sorted(EXCLUDED_STOPS)}")
 for _t in ("ocupacion", "tiempo", "conjunto"):
-    _g = bhatt_summary["general"].get(_t)
-    if not _g:
+    _g2 = bhatt_summary["general"].get(_t)
+    if not _g2:
         continue
-    _p = "n/d" if _g["pct_fusionables"] is None else f"{_g['pct_fusionables']:.2f}%"
-    print(f"  {_t:10} {_g['fusionables']:4}/{_g['evaluadas']:4} = {_p:>8}"
-          f"   (no evaluables: {_g['no_evaluables']}, "
-          f"coeff medio: {_g['coeff_medio']})")
-    if _g.get("sesgo_medio") is not None:
-        print(f"             sesgo medio {_g['sesgo_medio']:+.3f} "
-              f"({_g['sesgo_medio_sigmas']:+.2f} sigma), "
-              f"{_g['pct_celdas_por_debajo']:.1f}% de celdas por debajo")
+    _p = "n/d" if _g2["pct_fusionables"] is None else f"{_g2['pct_fusionables']:.2f}%"
+    print(f"  {_t:10} {_g2['fusionables']:4}/{_g2['evaluadas']:4} = {_p:>8}"
+          f"   (no evaluables: {_g2['no_evaluables']}, "
+          f"coeff medio: {_g2['coeff_medio']})")
+    if _g2.get("sesgo_medio") is not None:
+        print(f"             sesgo medio {_g2['sesgo_medio']:+.3f} "
+              f"({_g2['sesgo_medio_sigmas']:+.2f} sigma), "
+              f"{_g2['pct_celdas_por_debajo']:.1f}% de celdas por debajo")
 
 
 def sanitize_for_json(obj):
@@ -1143,16 +1244,16 @@ def sanitize_for_json(obj):
 
 
 with open(f"{os.getcwd()}/{sim_dir}/PLOTS/buses/general_info.json", "w") as f:
-    json.dump(sanitize_for_json(new_bus_json_data), f,indent=4)
+    json.dump(sanitize_for_json(new_bus_json_data), f, indent=4)
 
 with open(f"{os.getcwd()}/{sim_dir}/PLOTS/json_output_general_info.json", "w") as f:
-    json.dump(sanitize_for_json(json_output_general_info), f,indent=4)
+    json.dump(sanitize_for_json(json_output_general_info), f, indent=4)
 
 with open(f"{os.getcwd()}/{sim_dir}/PLOTS/to_A/general_info_toA.json", "w") as f:
-    json.dump(sanitize_for_json(json_stops_info_toA), f,indent=4)
+    json.dump(sanitize_for_json(json_stops_info_toA), f, indent=4)
 
 with open(f"{os.getcwd()}/{sim_dir}/PLOTS/to_B/general_info_toB.json", "w") as f:
-    json.dump(sanitize_for_json(json_stops_info_toB), f,indent=4)
+    json.dump(sanitize_for_json(json_stops_info_toB), f, indent=4)
 
 
 # ---------------------------------------------------------------------------
@@ -1184,7 +1285,7 @@ def fig_bhatt_pct_por_franja(summary, outfile):
               f"(Bhattacharyya >= {threshold})")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(outfile, dpi=300)
+    plt.savefig(outfile, dpi=PLOT_DPI)
     plt.close()
 
 
@@ -1205,7 +1306,7 @@ def fig_bhatt_histograma(df, outfile):
     plt.title("Distribucion del coeficiente de Bhattacharyya")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(outfile, dpi=300)
+    plt.savefig(outfile, dpi=PLOT_DPI)
     plt.close()
 
 
@@ -1232,14 +1333,15 @@ def fig_bhatt_sim_vs_esperado(df, tipo, outfile):
     plt.plot([0, lim], [0, lim], ls="--", lw=1.2, color="black",
              label="identidad")
     _b = float(ev["sesgo"].astype(float).mean())
-    plt.xlim(0, lim); plt.ylim(0, lim)
+    plt.xlim(0, lim)
+    plt.ylim(0, lim)
     plt.xlabel("Media esperada (datos EMT)")
     plt.ylabel("Media simulada")
     plt.title(f"Simulado frente a esperado por celda ({tipo})\n"
               f"sesgo medio = {_b:+.2f}")
     plt.legend(loc="upper left")
     plt.tight_layout()
-    plt.savefig(outfile, dpi=300)
+    plt.savefig(outfile, dpi=PLOT_DPI)
     plt.close()
 
 
@@ -1262,7 +1364,7 @@ def fig_bhatt_pct_por_elemento(summary, tipo, outfile):
     plt.title("Equivalencia por "
               f"{'parada' if tipo == 'ocupacion' else 'tramo'} ({tipo})")
     plt.tight_layout()
-    plt.savefig(outfile, dpi=300)
+    plt.savefig(outfile, dpi=PLOT_DPI)
     plt.close()
 
 
@@ -1281,18 +1383,24 @@ if len(df_bhatt):
                                   "clave": _k, **_m})
     pd.DataFrame(_rows).to_csv(f"{BHATT_DIR}/bhatt_resumen.csv", index=False)
 
-    fig_bhatt_pct_por_franja(bhatt_summary,
-                             f"{BHATT_DIR}/bhatt_pct_por_franja.png")
-    fig_bhatt_histograma(df_bhatt,
-                         f"{BHATT_DIR}/bhatt_histograma_coeff.png")
-    fig_bhatt_pct_por_elemento(bhatt_summary, "ocupacion",
-                               f"{BHATT_DIR}/bhatt_pct_por_parada.png")
-    fig_bhatt_pct_por_elemento(bhatt_summary, "tiempo",
-                               f"{BHATT_DIR}/bhatt_pct_por_tramo.png")
-    fig_bhatt_sim_vs_esperado(df_bhatt, "ocupacion",
-                              f"{BHATT_DIR}/bhatt_sim_vs_esperado_ocupacion.png")
-    fig_bhatt_sim_vs_esperado(df_bhatt, "tiempo",
-                              f"{BHATT_DIR}/bhatt_sim_vs_esperado_tiempo.png")
+    if PLOT_MODE in ("all", "summary"):
+        fig_bhatt_pct_por_franja(bhatt_summary,
+                                 f"{BHATT_DIR}/bhatt_pct_por_franja.png")
+        fig_bhatt_histograma(df_bhatt,
+                             f"{BHATT_DIR}/bhatt_histograma_coeff.png")
+        fig_bhatt_pct_por_elemento(bhatt_summary, "ocupacion",
+                                   f"{BHATT_DIR}/bhatt_pct_por_parada.png")
+        fig_bhatt_pct_por_elemento(bhatt_summary, "tiempo",
+                                   f"{BHATT_DIR}/bhatt_pct_por_tramo.png")
+        fig_bhatt_sim_vs_esperado(df_bhatt, "ocupacion",
+                                  f"{BHATT_DIR}/bhatt_sim_vs_esperado_ocupacion.png")
+        fig_bhatt_sim_vs_esperado(df_bhatt, "tiempo",
+                                  f"{BHATT_DIR}/bhatt_sim_vs_esperado_tiempo.png")
 
     with open(f"{BHATT_DIR}/bhatt_summary.json", "w") as f:
         json.dump(sanitize_for_json(bhatt_summary), f, indent=4)
+
+
+flush_plots()
+
+_tick("Hecho.")

@@ -1,0 +1,6 @@
+title "Nueva prueba base GAMA"
+description "Sin agentes pasajero"
+line 401
+model without_agents
+seed 14971154995719203221
+exclusive no

@@ -1,4 +1,4 @@
-\begin{thebibliography}{21}
+\begin{thebibliography}{30}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -190,6 +190,58 @@
   \bibinfo{year}{2002}{\natexlab{b}}. \URLprefix
   \url{http://www.fipa.org/specs/fipa00027/SC00027H.html}.
 %Type = Article
+\bibitem[{Leys et~al.(2013)Leys, Ley, Klein, Bernard, and
+  Licata}]{leys2013detecting}
+\bibinfo{author}{C.~Leys}, \bibinfo{author}{C.~Ley},
+  \bibinfo{author}{O.~Klein}, \bibinfo{author}{P.~Bernard},
+  \bibinfo{author}{L.~Licata},
+\newblock \bibinfo{title}{Detecting outliers: Do not use standard deviation
+  around the mean, use absolute deviation around the median},
+\newblock \bibinfo{journal}{Journal of Experimental Social Psychology}
+  \bibinfo{volume}{49} (\bibinfo{year}{2013}) \bibinfo{pages}{764--766}.
+%Type = Article
+\bibitem[{Akaike(1974)}]{akaike1974new}
+\bibinfo{author}{H.~Akaike},
+\newblock \bibinfo{title}{A new look at the statistical model identification},
+\newblock \bibinfo{journal}{IEEE Transactions on Automatic Control}
+  \bibinfo{volume}{19} (\bibinfo{year}{1974}) \bibinfo{pages}{716--723}.
+  \DOIprefix\doi{10.1109/TAC.1974.1100705}.
+%Type = Article
+\bibitem[{D'Agostino and Pearson(1973)}]{dagostino1973tests}
+\bibinfo{author}{R.~B. D'Agostino}, \bibinfo{author}{E.~S. Pearson},
+\newblock \bibinfo{title}{Tests for departure from normality. {Empirical}
+  results for the distributions of $b_2$ and $\sqrt{b_1}$},
+\newblock \bibinfo{journal}{Biometrika} \bibinfo{volume}{60}
+  (\bibinfo{year}{1973}) \bibinfo{pages}{613--622}.
+%Type = Article
+\bibitem[{Kim(2013)}]{kim2013normality}
+\bibinfo{author}{H.-Y. Kim},
+\newblock \bibinfo{title}{Statistical notes for clinical researchers: Assessing
+  normal distribution (2) using skewness and kurtosis},
+\newblock \bibinfo{journal}{Restorative Dentistry \& Endodontics}
+  \bibinfo{volume}{38} (\bibinfo{year}{2013}) \bibinfo{pages}{52--54}.
+  \DOIprefix\doi{10.5395/rde.2013.38.1.52}.
+%Type = Article
+\bibitem[{Rosner(1983)}]{rosner1983}
+\bibinfo{author}{B.~Rosner},
+\newblock \bibinfo{title}{Percentage points for a generalized {ESD}
+  many-outlier procedure},
+\newblock \bibinfo{journal}{Technometrics} \bibinfo{volume}{25}
+  (\bibinfo{year}{1983}) \bibinfo{pages}{165--172}.
+  \DOIprefix\doi{10.1080/00401706.1983.10487848}.
+%Type = Article
+\bibitem[{Box and Muller(1958)}]{box1958}
+\bibinfo{author}{G.~E.~P. Box}, \bibinfo{author}{M.~E. Muller},
+\newblock \bibinfo{title}{A note on the generation of random normal deviates},
+\newblock \bibinfo{journal}{The Annals of Mathematical Statistics}
+  \bibinfo{volume}{29} (\bibinfo{year}{1958}) \bibinfo{pages}{610--611}.
+  \DOIprefix\doi{10.1214/aoms/1177706645}.
+%Type = Book
+\bibitem[{Devroye(1986)}]{devroye1986}
+\bibinfo{author}{L.~Devroye}, \bibinfo{title}{Non-Uniform Random Variate
+  Generation}, \bibinfo{publisher}{Springer-Verlag}, \bibinfo{address}{New
+  York}, \bibinfo{year}{1986}. \DOIprefix\doi{10.1007/978-1-4613-8643-8}.
+%Type = Article
 \bibitem[{Taillandier et~al.(2019)Taillandier, Gaudou, Grignard, Huynh,
   Marilleau, Caillou, Philippon, and Drogoul}]{taillandier2019gama}
 \bibinfo{author}{P.~Taillandier}, \bibinfo{author}{B.~Gaudou},
@@ -201,5 +253,17 @@
 \newblock \bibinfo{journal}{GeoInformatica} \bibinfo{volume}{23}
   (\bibinfo{year}{2019}) \bibinfo{pages}{299--322}.
   \DOIprefix\doi{10.1007/s10707-018-00339-6}.
+%Type = Misc
+\bibitem[{{GAMA Platform}(????{\natexlab{a}})}]{gama_fipa}
+\bibinfo{author}{{GAMA Platform}}, \bibinfo{title}{Using {FIPA} {ACL}},
+  \bibinfo{howpublished}{GAMA Platform documentation}, ????{\natexlab{a}}.
+  \URLprefix \url{https://gama-platform.org/wiki/UsingFIPAACL},
+  \bibinfo{note}{accessed 12 October 2026}.
+%Type = Misc
+\bibitem[{{GAMA Platform}(????{\natexlab{b}})}]{gama_headless}
+\bibinfo{author}{{GAMA Platform}}, \bibinfo{title}{Running headless},
+  \bibinfo{howpublished}{GAMA Platform documentation}, ????{\natexlab{b}}.
+  \URLprefix \url{https://gama-platform.org/wiki/1.9.3/RunningHeadless},
+  \bibinfo{note}{accessed 12 October 2026}.
 
 \end{thebibliography}

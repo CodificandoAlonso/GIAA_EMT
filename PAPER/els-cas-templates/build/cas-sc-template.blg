@@ -5,45 +5,47 @@ The style file: elsarticle-num-names.bst
 Database file #1: cas-refs.bib
 Reallocated singl_function (elt_size=8) to 100 items from 50.
 Warning--empty pages in wooldridge1999intelligent
-You've used 21 entries,
+Warning--empty year in gama_fipa; set to ????
+Warning--empty year in gama_headless; set to ????
+You've used 30 entries,
             2918 wiz_defined-function locations,
-            779 strings with 9684 characters,
-and the built_in function-call counts, 14284 in all, are:
-= -- 1053
-> -- 616
-< -- 11
-+ -- 236
-- -- 208
-* -- 1766
-:= -- 2048
-add.period$ -- 40
-call.type$ -- 21
-change.case$ -- 175
-chr.to.int$ -- 20
-cite$ -- 22
-duplicate$ -- 1048
-empty$ -- 998
-format.name$ -- 268
-if$ -- 2609
-int.to.chr$ -- 2
+            839 strings with 11147 characters,
+and the built_in function-call counts, 19290 in all, are:
+= -- 1451
+> -- 757
+< -- 19
++ -- 295
+- -- 253
+* -- 2324
+:= -- 2767
+add.period$ -- 56
+call.type$ -- 30
+change.case$ -- 236
+chr.to.int$ -- 28
+cite$ -- 33
+duplicate$ -- 1438
+empty$ -- 1395
+format.name$ -- 332
+if$ -- 3543
+int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 213
-newline$ -- 112
-num.names$ -- 88
-pop$ -- 331
+missing$ -- 287
+newline$ -- 151
+num.names$ -- 124
+pop$ -- 459
 preamble$ -- 1
-purify$ -- 173
+purify$ -- 231
 quote$ -- 0
-skip$ -- 233
+skip$ -- 325
 stack$ -- 0
-substring$ -- 578
-swap$ -- 822
+substring$ -- 836
+swap$ -- 1085
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 189
-warning$ -- 1
-while$ -- 92
+type$ -- 267
+warning$ -- 3
+while$ -- 131
 width$ -- 0
-write$ -- 306
-(There was 1 warning)
+write$ -- 426
+(There were 3 warnings)

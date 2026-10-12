@@ -46,5 +46,5 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1.5"
-          memory: "3G"
+          cpus: "8"
+          memory: "5G"

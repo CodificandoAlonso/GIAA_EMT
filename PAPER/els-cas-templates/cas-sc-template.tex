@@ -441,18 +441,17 @@ The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:},
   \setlength{\figh}{0.62\linewidth}
   \begin{minipage}[t]{0.764\figh}
     \centering
-    \includesvg[height=\figh]{figs/protocols/en/solicitud_de_embarque_en}\par
-    \smallskip {\small (a) Boarding request}
+    \includesvg[height=\figh]{figs/protocols/en/consulta_de_descenso_en}\par
+    \smallskip {\small (a) Alighting query}
   \end{minipage}\hspace{0.04\linewidth}
   \begin{minipage}[t]{0.676\figh}
     \centering
     \includesvg[height=\figh]{figs/protocols/en/diagrama_solicitud_de_descenso_en}\par
     \smallskip {\small (b) Alighting request}
   \end{minipage}
-  \caption{FIPA-Request interaction protocols for passenger requests.}
+  \caption{FIPA-Request interaction protocols from first solution (1/3)}
   \label{fig:requests_first}
 \end{figure}
-
 
 \begin{figure}
   \centering
@@ -460,16 +459,51 @@ The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:},
   \begin{minipage}[t]{0.764\figh}
     \centering
     \includesvg[height=\figh]{figs/protocols/en/notificacion_de_llegada_en}\par
-    \smallskip {\small (a) Boarding request}
+    \smallskip {\small (a) Arrival notification}
   \end{minipage}\hspace{0.04\linewidth}
   \begin{minipage}[t]{0.676\figh}
     \centering
     \includesvg[height=\figh]{figs/protocols/en/aviso_de_embarque_en}\par
-    \smallskip {\small (b) Alighting request}
+    \smallskip {\small (b) Boarding notice}
   \end{minipage}
-  \caption{FIPA-Request interaction protocols for a bus arriving to a stop.}
+  \caption{FIPA-Request interaction protocols from first solution (2/3)}
   \label{fig:requests_seconds}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \setlength{\figh}{0.62\linewidth}
+  \begin{minipage}[t]{0.764\figh}
+    \centering
+    \includesvg[height=\figh]{figs/protocols/en/solicitud_de_embarque_en}\par
+    \smallskip {\small (a) Boarding request}
+  \end{minipage}\hspace{0.04\linewidth}
+  \begin{minipage}[t]{0.676\figh}
+    \centering
+    \includesvg[height=\figh]{figs/protocols/en/actualizacion_recuento_en}\par
+    \smallskip {\small (b) Count update}
+  \end{minipage}
+  \caption{FIPA-Request interaction protocols from first solution (3/3)}
+  \label{fig:requests_seconds}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \setlength{\figh}{0.62\linewidth}
+  \begin{minipage}[t]{0.764\figh}
+    \centering
+    \includesvg[height=\figh]{figs/protocols/en/consulta_llegada_en}\par
+    \smallskip {\small (a) Arrival query}
+  \end{minipage}\hspace{0.04\linewidth}
+  \begin{minipage}[t]{0.676\figh}
+    \centering
+    \includesvg[height=\figh]{figs/protocols/en/actualizacion_recuento_en}\par
+    \smallskip {\small (b) Count update (duplicated)}
+  \end{minipage}
+  \caption{FIPA-Request interaction protocols from second solution}
+  \label{fig:requests_seconds}
+\end{figure}
+
 
 \subsection{Environment}\label{sec:environment}
  
@@ -612,6 +646,14 @@ was full, the passengers that alighted, the occupancy of the bus after the
 operation, and the travel time from the previous stop. The waiting time of
 each passenger that boarded is stored as well. Departures from the first stop
 that take place later than scheduled are recorded as delays.
+
+The complete outputs are recomputed into defined Key Performance Indicators (KPIs)
+for demand absorption measurement.
+
+This indicators can be divided into three main categories, depending of the scope
+they are aimed at: general values, route values, and trip values.
+
+The general values presents the following indicators with its comptue method
 % CHECK: define here, from your chapter 6, how occupancy and demand
 % absorption are computed from these records (exact formula of each).
 
@@ -621,52 +663,145 @@ that take place later than scheduled are recorded as delays.
 
 \section{Data calibration}\label{sec:data}
 
-The system uses parametric data obtained through analysis of empirical 8 month
-operational window timespan.
+\subsection{Operational data}\label{sec:data_source}
 
-The data covers all stop related information for every time in a day a bus reaches a stop.
+The simulator is built on the operational records of line E01 provided by
+EMT Madrid, covering an eight-month window starting July 2025.
+The records follow a two-table model linked by a trip identifier. Each
+departure from a terminal is an entry of the first table, with its date,
+time, time slot, direction, vehicle and type of day. Each arrival of that
+trip at a stop is an entry of the second table, with the time of arrival, its
+time slot, and the number of passengers that boarded and alighted. The
+occupancy after each stop is computed as the previous occupancy plus the
+boardings minus the alightings.
 
-In this work, as per cardinality constraints due to not reaching enough statistical data
-for covering all scenarios, only the labour days are included in the parametric analysis.
-Moreover, the freeday data is also excluded from the analysis, as it changes the behaviour
-of the buses occupation.
-The time series anal
+Cleaning focus on the boarding, alighting and occupancy fields, where
+negative values and extreme values derived from APC recording errors were found.
+The cleaning also involved the removal of any recorded occupancy value above
+a stablished threshold of 80 passengers.
+The removed records amount, on average, to one record
+every two days of data at each stop.
 
-\subsection{Attributes for calibration}
-The system is modelled for receiving four attributes.
+The study is restricted to normal days, defined as working days without free
+fare. Weekends and public holidays are excluded because the window starts in
+July 2025, so their number of observations is small compared with working
+days, and parameters fitted on them would be biased by the small sample. Days
+with free fare are excluded because the outlier analysis showed that their
+occupancy is systematically higher than on the remaining working days, and
+they add noise to the distributions. The window does not cover a full annual
+cycle, so seasonal effects cannot be separated from the data, and the fitted
+parameters describe the observed period.
 
-For every stop, disaggregated into its timeslots, it expects distribution fitted parameters
-for both boarding and alighting processes.
+\subsection{Calibration of the inputs}\label{sec:data_inputs}
 
-The boarding value represents the number of people arriving to a stop each hour, and it will
-use it as a passengers generator ratio.
+The simulator receives four inputs: the boardings and alightings at each stop,
+the travel times between consecutive stops, and the schedule of the buses.
+The first three are fitted per time slot, using the slot of the moment at
+which the bus serves the stop; the schedule is taken directly from the
+operator, as the list of departures of each physical bus.
 
-On the other hand, the alighting values are modelled as independent samples per bus arrival.
-Each time a bus reaches a stop, the system will pick a random sampling out of the distribution
-corresponding to the combination (stop-timeslot).
+Boardings and alightings are modelled separately, and no origin-destination
+matrix is estimated (Section~\ref{sec:intro}). They are also modelled at
+different levels, according to how they are used. Boardings are aggregated
+per stop and hour, since the simulator uses them as the number of passengers
+that appear at the stop during that hour
+(Section~\ref{sec:environment}). Alightings are modelled per bus arrival,
+since that is the moment at which the simulator draws them.
 
+Unlike occupancy, boardings and alightings are not normal in all cases: many
+stop and slot combinations show values close to zero and long right tails.
+Three candidate distributions are therefore considered: normal, negative
+binomial and geometric. For each stop and time slot, outliers are first
+removed with the median absolute deviation, which does not assume any
+particular distribution \cite{leys2013detecting}; a goodness-of-fit test is
+then run for each candidate, and the candidate with the lowest Akaike
+information criterion \cite{akaike1974new} among those not rejected is
+selected. When all three are rejected, the one with the lowest criterion is
+kept. Overall, the normal distribution is selected in 62.4\% of the cases, the
+negative binomial in 23.9\%, more often for boardings than for alightings, and
+the geometric in the remaining 13.7\%.
 
-\textbf{Things to mention: Why only labour, why no freeday, why no possibility of decouple
-stationality and analysis via temporal series}
+Travel times between consecutive stops showed signs of normality from the
+first visual inspection, so they are fitted only to normal distributions, per
+segment and time slot. Table~\ref{tbl:nonrejection} gives the share of stop
+or segment and time slot combinations whose fitted distribution is not
+rejected.
 
-\textbf{Also, mention the chosen distribution families, the why use of negbins and geoms,
-cause the variance > mean (poisson is variance == mean)
-Also, mention the NO OD data, and as i chose not to infer with IPF NULL seeding, its constructed
-by independent consideration of boarding and alighting.}
+\begin{table}[width=.8\linewidth,cols=3,pos=t]
+\caption{Share of combinations whose fitted distribution is not rejected, per
+direction of the line.}\label{tbl:nonrejection}
+\begin{tabular*}{\tblwidth}{@{}LLL@{}}
+\toprule
+Variable & Towards Cibeles & Towards La Peseta \\
+\midrule
+Boardings & 90.60\% & 87.56\% \\
+Alightings & 93.61\% & 90.91\% \\
+Travel times & 95.49\% & 90.43\% \\
+Occupancy (validation) & 94.39\% & 88.60\% \\
+\bottomrule
+\end{tabular*}
+\end{table}
 
-\subsection{Parametric implementation}
+Since alightings are drawn per bus arrival and independently of the number of
+passengers on board, the number of alightings over a period grows with the
+number of buses that serve the stop. The parameters are therefore tied to the
+service observed in the data, and the model reproduces that service; it is
+not suited to evaluating changes of frequency without recalibration.
 
+\subsection{Reference for validation}\label{sec:data_validation}
 
+Occupancy is not an input of the simulator. It results from the combination
+of boardings, alightings and the number of buses. It is used after the
+simulation as the reference to validate the model. Its normality was studied
+per stop and time slot with a test based on skewness and kurtosis at a
+significance level of 0.05 \cite{dagostino1973tests,kim2013normality}, with outliers
+detected by the generalised ESD test \cite{rosner1983}. Treating all
+working days together gives a higher share of non-rejected combinations than
+treating each weekday separately, so no distinction by weekday is made in the
+rest of the work. For this variable, the time slot is that of the departure of
+the trip from its terminal. Rejections concentrate in the last time slot of
+the day, which has the fewest buses and therefore the fewest observations.
 
+The terminal stops are excluded from this reference. It was reported that the
+transition between consecutive trips is not always recorded at the right
+moment, so the passengers boarding the next trip can be counted as occupancy
+at the last stop of the previous one, and vice versa.
+
+\subsection{Parametric implementation}\label{sec:data_sampling}
+
+The fitted parameters are loaded before the simulation starts and updated
+every hour of simulated time. Values are drawn with different methods for each family
+according to what the platform offers. Normal values use the native generator
+of GAMA, based on the Box--Muller transform \cite{box1958}.
+The negative binomial is sampled as a Gamma--Poisson mixture
+\cite{devroye1986}, which is valid for non-integer values of $r$:
+\begin{equation}\label{eq:negbin}
+\lambda \sim \mathrm{Gamma}\!\left(r,\ \frac{1-p}{p}\right), \qquad
+X \mid \lambda \sim \mathrm{Poisson}(\lambda),
+\end{equation}
+with the Gamma distribution in shape and scale form. The geometric
+distribution has a closed-form inverse:
+\begin{equation}\label{eq:geom}
+X = \left\lfloor \frac{\ln U}{\ln(1-p)} \right\rfloor, \qquad
+U \sim \mathcal{U}(0,1),
+\end{equation}
+with support $\{0, 1, 2, \dots\}$, consistent with the parametrisation used in
+the fitting.
 
 
 \section{Implementations and results}\label{sec:results}
 
-Both proposed architectures run in the dedicated agent platform GAMA \cite{taillandier2019gama}.
-The election is based on both the inclusion of FIPA inboxing, allowing implementation-defined
-conversations, and a headless batch mode that improves performance across runs.
+Both solutions are implemented in GAMA \cite{taillandier2019gama}, a platform
+dedicated to agent-based modelling and simulation. It was chosen for two of
+its features. Its FIPA skill provides each agent with a mailbox and supports
+the FIPA communicative acts and interaction protocols, as well as
+conversations whose sequence is defined by the modeller \cite{gama_fipa}. Its
+headless mode runs experiments from the command line without the graphical
+interface, so the replicas can be executed in batch \cite{gama_headless}.
 
-\subsection{Simulation parameters}
+
+\subsection{Case study}
+
 For the simulation characterization, the layout of route Express 01 is used. The route
 operates between the central square \textit{Cibeles}, located in the city center of the Spanish capital,
 and \textit{La Peseta}, located in the southern neibourhood of Carabanchel.
@@ -677,10 +812,13 @@ the morning, boarding passengers in the first stops of the trip, and alighting t
 The same behaviour is inversed in La Peseta's direction, presenting its prime time after 3 pm, 
 capturing the tendency of workers to return to its homeplace.
 
+\subsection{Simulation setup}
 
-
-The specific parameterization used is shown in table \ref{tbl_sim_params}.
-
+Table~\ref{tbl_sim_params} lists the parameters of the experiments. The time
+step $\Delta t$, the time per passenger $t_p$ and the minimum time at a stop
+$E_{\min}$ are those of Eq.~(\ref{eq:dwell}), and the capacity of the buses
+is the one adopted in Section~\ref{sec:data_source}.
+ 
 \begin{table}[width=.9\linewidth,cols=2,pos=h]
 \caption{Simulation parameters.}\label{tbl_sim_params}
 \begin{tabular*}{\tblwidth}{@{}LL@{}}
@@ -689,36 +827,40 @@ Parameter & Value \\
 \midrule
 Line & E01 (Cibeles--La Peseta) \\
 Physical buses & 12 \\
-Trips per day & 163 \\
-Initial time slot & 5 \\
-Extra dwell time per passenger ($t_p$) & 5 s \\
-Simulation time step ($\Delta t$) & 2 s \\
-Minimum protocol dwell ($E_{\min}$) & $4\,\Delta t$ \\
-Monte Carlo replicas & 1000 \\
+Scheduled trips per day & 163 \\ % CHECK: both directions, normal working day?
+Bus capacity & 80 passengers \\
+Start of the simulation & 05:00 \\ % CHECK: was "Initial time slot 5"
+Time step ($\Delta t$) & 2 s \\
+Time per passenger ($t_p$) & 5 s \\
+Minimum time at a stop ($E_{\min}$) & $4\,\Delta t$ \\ % CHECK: same in both solutions?
+Replicas per solution & 1000 \\ % CHECK: per solution or in total?
 \bottomrule
 \end{tabular*}
 \end{table}
 
-Before the results are presented, some specifications about the simulations itself are introduced.
-The field \texttt{Extra dwell time per passenger} is used with both a premise and a comparison.
-
-First, it assumes that the boarding and alighting processes happen in parallel, as in regular bus
-operations those occur in different physical doors.
-
-Secondly, the dwell extra time ($E$) will be the result of the following equation:
-
-\begin{equation}\label{eq:dwell}
-E = \max\bigl( \max(b,\, a)\, t_p,\; E_{\min} \bigr)
-\end{equation}
-
-\noindent where $b$ and $a$ are the numbers of boarding and alighting
-passengers at the stop, $t_p$ is the extra dwell time per passenger, and
-$E_{\min}$ is the minimum dwell imposed by the interaction protocol.
-
-In relation to the necesary input files required to run the simulation, 
+% TODO 1 (execution, 2-3 sentences): how the replicas were run: headless
+% batch experiment, one random seed per replica, how many replicas at once,
+% and that both solutions ran on the same machine under the same limits.
+% Give the machine (CPU, cores, memory) and any container limits: the run
+% times compared in the results mean nothing without them.
+% TODO 2 (what is measured, 1 sentence): the outputs of
+% Section~\ref{sec:outputs}, plus the wall-clock time of each replica and,
+% if you add it, the number of messages exchanged per replica.
 
 
-\subsection{Results}
+\subsection{Evaluation}\label{sec:evaluation}
+ 
+% TODO 3 (validation, 2-3 sentences): how each solution is compared with the
+% observed occupancy of Section~\ref{sec:data_validation}: per stop and time
+% slot, which two distributions are compared, with which measure (the
+% Bhattacharyya coefficient in the thesis), and the acceptance threshold.
+% State what supports the threshold you use.
+% TODO 4 (solution against solution, 1-2 sentences): the measure of the
+% difference between the two solutions per stop and time slot, and what it
+% is compared against.
+% TODO 5 (cost, 1 sentence): run time per replica and, if counted, messages.
+ 
+
 
 
 

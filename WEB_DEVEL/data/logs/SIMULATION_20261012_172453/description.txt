@@ -1,0 +1,6 @@
+title "Segunda prueba base GAMA"
+description "A ver si funcionan dos en paralelo"
+line 401
+model with_agents
+seed 14178434936948905341
+exclusive no

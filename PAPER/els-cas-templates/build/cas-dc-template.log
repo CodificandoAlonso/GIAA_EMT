@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.8.18)  11 OCT 2026 21:00
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.8.18)  12 OCT 2026 19:40
  system commands enabled.
 **cas-dc-template.tex
 (./cas-dc-template.tex
@@ -947,13 +947,13 @@ Package rerunfilecheck Info: File `cas-dc-template.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 17266 strings out of 476076
- 125007,662416 words of node,token memory allocated
- 1071 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 8 glue, 50 kern, 3 glyph, 55 attribute, 61 glue_spe
-c, 55 attribute_list, 1 write, 10 pdf_action nodes
-   avail lists: 2:988,3:598,4:202,5:1115,6:76,7:11652,8:71,9:689,10:11,11:754
- 39250 multiletter control sequences out of 65536+600000
+ 17303 strings out of 476076
+ 156263,662416 words of node,token memory allocated
+ 1214 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 8 glue, 69 kern, 3 glyph, 64 attribute, 61 glue_spe
+c, 64 attribute_list, 1 write, 12 pdf_action nodes
+   avail lists: 2:1268,3:800,4:266,5:1436,6:99,7:15280,8:71,9:875,10:14,11:997
+ 39278 multiletter control sequences out of 65536+600000
  148 fonts using 11091495 bytes
  87i,9n,96p,281b,479s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texmf
@@ -964,12 +964,13 @@ texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texmf
 type1/public/stix/STIXGeneral-Italic.pfb></usr/share/texmf-dist/fonts/type1/publ
 ic/stix/STIXGeneral-Regular.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lms
 s9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/tex
-mf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/share/texmf-dist/fonts/typ
-e1/public/stix/stix-mathrm.pfb>
-Output written on cas-dc-template.pdf (3 pages, 200337 bytes).
+mf-dist/fonts/type1/public/stix/stix-mathex.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/stix/stix-mathit.pfb></usr/share/texmf-dist/fonts/type1/public/stix/st
+ix-mathrm.pfb>
+Output written on cas-dc-template.pdf (3 pages, 206779 bytes).
 
-PDF statistics: 127 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 33 named destinations out of 1000 (max. 1048576)
+PDF statistics: 149 PDF objects out of 1000 (max. 8388607)
+ 131 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 1048576)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 

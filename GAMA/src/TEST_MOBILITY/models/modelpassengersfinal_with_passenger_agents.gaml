@@ -245,8 +245,8 @@ global
       	
       	
       	//Read input for normal days distributions
-      	file input_data_e01_toA <- csv_file("../includes/INPUTS/input_data_E01_toA.csv");
-      	file input_data_e01_toB <- csv_file("../includes/INPUTS/input_data_E01_toB.csv");
+      	file input_data_e01_toA <- csv_file("../includes/INPUTS/old_input_data_E01_toA.csv");
+      	file input_data_e01_toB <- csv_file("../includes/INPUTS/old_input_data_E01_toB.csv");
       	
       	//Convert it as matrix
       	matrix input_as_matrix_toA <- matrix(input_data_e01_toA);
@@ -2359,5 +2359,5 @@ experiment test type: gui {
 
 
 
-experiment batch_1000 type: batch repeat: 1000 parallel: 12 until: empty(bus) {
+experiment batch_1000 type: batch repeat: 1000 parallel: 8 until: empty(bus) {
 }

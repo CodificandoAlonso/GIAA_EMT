@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex build/cas-dc-template"] 1791745203.01993 "build/cas-dc-template.aux" "build/cas-dc-template.bbl" "build/cas-dc-template" 1791745204.04231 0
+["bibtex build/cas-dc-template"] 1791826803.75719 "build/cas-dc-template.aux" "build/cas-dc-template.bbl" "build/cas-dc-template" 1791826804.87095 0
   "./cas-model2-names.bst" 1714813730 31802 28b630660245c09f173aac55be552b29 ""
-  "./cas-refs.bib" 1791745200.17901 8337 7e464a966be8e5e7a6afa34560266e51 ""
-  "build/cas-dc-template.aux" 1791745203.85114 3004 965ab55344b74f02b8c1c4428cc2c3c8 "lualatex"
+  "./cas-refs.bib" 1791826708.59153 11165 4961e144341a5b25d06b588843935437 ""
+  "build/cas-dc-template.aux" 1791826804.65917 3522 56aa61f4ec65403b3ccc2380ffb73991 "lualatex"
   (generated)
   "build/cas-dc-template.bbl"
   "build/cas-dc-template.blg"
   (rewritten before read)
-["lualatex"] 1791745203.07092 "cas-dc-template.tex" "build/out/cas-dc-template.pdf" "cas-dc-template" 1791745204.04246 0
+["lualatex"] 1791826803.80888 "cas-dc-template.tex" "build/out/cas-dc-template.pdf" "cas-dc-template" 1791826804.87109 0
   "/home/hector/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1790284292.48455 127314 7c5efae986e60281c7ad546cf8ed9a14 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1775415801 916 f87d7c45f9c908e672703b83b72241a3 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm" 1775415801 924 9904cf1d39e9767e7a3622f2a125a565 ""
@@ -43,6 +43,7 @@
   "/usr/share/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb" 1775415801 250376 86937501504e07e9745bc88e006094b2 ""
   "/usr/share/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb" 1775415801 221139 7b7742dd20e0010cb85b7f92956bac16 ""
   "/usr/share/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb" 1775415801 547522 a9135ac84940b576091fbefc78a79500 ""
+  "/usr/share/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb" 1775415801 26156 d6751631159a7cd0a5d264b2d10a82fe ""
   "/usr/share/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb" 1775415801 41474 772656494141d29334d3e80c9a859c10 ""
   "/usr/share/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb" 1775415801 40662 35fc2ef7e5426524c472184c87cb4d57 ""
   "/usr/share/texmf-dist/fonts/vf/public/stix/t1-stixgeneralsc.vf" 1775415801 1924 0897a65b0de596367f65e150a518f29a ""
@@ -192,10 +193,10 @@
   "/usr/share/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1775415801 13566 16df94dd2de231b2bca0aaa0190941fe ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1787079083 5388821 3a3a435a487e4cbc819e69494cd5514c ""
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1787079598 5657511 76329fb9af487c4a67a2674746e75e92 ""
-  "build/cas-dc-template.abs" 1791745203.68207 75 5bdb5ed470e5b8c9002371297f1d177b "lualatex"
-  "build/cas-dc-template.aux" 1791745203.85114 3004 965ab55344b74f02b8c1c4428cc2c3c8 "lualatex"
-  "build/cas-dc-template.bbl" 1791745203.06483 11618 01d9dfd9f1e1a58bd1b3039f1f0dc046 "bibtex build/cas-dc-template"
-  "build/cas-dc-template.out" 1791745203.67314 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
+  "build/cas-dc-template.abs" 1791826804.48899 75 5bdb5ed470e5b8c9002371297f1d177b "lualatex"
+  "build/cas-dc-template.aux" 1791826804.65917 3522 56aa61f4ec65403b3ccc2380ffb73991 "lualatex"
+  "build/cas-dc-template.bbl" 1791826803.80191 15012 cc97b6a4ad933066ffde16ae60231f28 "bibtex build/cas-dc-template"
+  "build/cas-dc-template.out" 1791826804.47917 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
   "cas-common.sty" 1714814802 76688 c602be3da196cb506acc84d1fa26b134 ""
   "cas-dc-template.tex" 1788362393.73653 4886 aa5cd9b059ac61055881e678be33eb59 ""
   "cas-dc.cls" 1714814956 4395 40b8ed97981966f9bde1c9d1561f114f ""

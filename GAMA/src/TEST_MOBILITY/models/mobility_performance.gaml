@@ -178,8 +178,8 @@ global
       	
       	
       	//Read input for normal days distributions
-      	file input_data_e01_toA <- csv_file("../includes/INPUTS/input_data_E01_toA.csv");
-      	file input_data_e01_toB <- csv_file("../includes/INPUTS/input_data_E01_toB.csv");
+      	file input_data_e01_toA <- csv_file("../includes/INPUTS/old_input_data_E01_toA.csv");
+      	file input_data_e01_toB <- csv_file("../includes/INPUTS/old_input_data_E01_toB.csv");
       	
       	//Convert it as matrix
       	matrix input_as_matrix_toA <- matrix(input_data_e01_toA);
@@ -1589,11 +1589,14 @@ species stop skills: [fipa]  {
     //is negative, that wont affect the passengers already created
     int passengers_generated;
     
-    //Variable to wait for the answer back from the bus when its processing passengers
-    bool waiting_for_bus_answer<- false;
-    
-    
-    
+     //Variable to wait for the answer back from the bus when its processing passengers
+     bool waiting_for_bus_answer<- false;
+     
+    //Instant (in seconds) in which the serving bus arrived to the stop. It closes the waiting time of the
+    //passengers who board it, the same instant in which the passenger-agent model freezes time_in_stop
+    float bus_arrival_time <- 0.0;
+   
+
     //variable to save the time in stop for each passenger
     list<list> passengers_with_time;
     
@@ -1647,13 +1650,17 @@ species stop skills: [fipa]  {
 		message queryFromInitiator <- queries at 0;
 		
 		if (list(queryFromInitiator.contents)[0] != 'Bus arrived to stop'){
-			write "QUE PUÑETAAS";
+			write "Error default line message protocol should never enter here";
 		}
 		
 		//Infer the number of passengers that are gonna drop off. Synthesized at world level,
 		//the stop only transmits the value through the FIPA reply.
 		int dropoff_passengers <- world.infer_dropoffs(stopNum);
 		
+		//The waiting time of the passengers ends here, at the bus arrival, not after the dwell time
+		bus_arrival_time <- world.time_to_seconds(current_time);
+
+
 		//ANSWER BACK WITH FIPA PROTOCOL QUERY
 		do agree message: queryFromInitiator contents: ["Here is the passenger list"];
 		do inform message: queryFromInitiator contents: [int(self.passengers_generated), dropoff_passengers];
@@ -1683,8 +1690,7 @@ species stop skills: [fipa]  {
 			
 			//Extract the values from the number of passengers who actually board.
 			loop iter from: 0 to: (number_of_boards - 1){
-				float actual_time <- world.time_to_seconds(current_time);
-				time_from_passengers << actual_time - float(first(self.passengers_with_time[0][1]));
+				time_from_passengers << self.bus_arrival_time - float(first(self.passengers_with_time[0][1]));
 				self.passengers_with_time >> first(self.passengers_with_time);
 			}
 		
@@ -1772,5 +1778,5 @@ experiment test type: gui {
 
 
 
-experiment batch_1000 type: batch repeat: 1000 parallel: 12 until: empty(bus) {
+experiment batch_1000 type: batch repeat: 1000 parallel: 8 until: empty(bus) {
 }

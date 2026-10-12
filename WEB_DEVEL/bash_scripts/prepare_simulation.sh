@@ -34,7 +34,7 @@ GAMA_SRC="/opt/gama-platform/headless/"
 GAMA_PROJECT="../../GAMA/src/TEST_MOBILITY"
 MODEL_NAME="mobility_performance.gaml"
 BATCH_NAME="batch_1000"
-GAMA_HPC_CORES=12
+GAMA_HPC_CORES=8
 
 #C
 C_PROJECT="../../C_REWRITE"

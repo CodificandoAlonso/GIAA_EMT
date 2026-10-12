@@ -63,7 +63,7 @@ SIM_MODEL_PATH="${BASE_DIR}/TEST_MOBILITY/models/${MODEL_NAME}"
 # [MOD] 16 -> 12: debe coincidir con el numero de CPUs del cpuset del
 # contenedor (0-11 = los 12 hilos logicos de los 6 P-cores). Con 16 hilos
 # contra 12 CPUs habria throttling CFS y varianza no determinista.
-GAMA_HPC_CORES=12
+GAMA_HPC_CORES=8
 
 C_HPC_CORES=5
 

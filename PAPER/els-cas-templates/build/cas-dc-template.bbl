@@ -1,4 +1,4 @@
-\begin{thebibliography}{23}
+\begin{thebibliography}{32}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -19,6 +19,13 @@
   \bibinfo{volume}{31}, \bibinfo{pages}{207--238}.
 \newblock \DOIprefix\doi{10.1017/S0269888916000096}.
 %Type = Article
+\bibitem[{Akaike(1974)}]{akaike1974new}
+\bibinfo{author}{Akaike, H.}, \bibinfo{year}{1974}.
+\newblock \bibinfo{title}{A new look at the statistical model identification}.
+\newblock \bibinfo{journal}{IEEE Transactions on Automatic Control}
+  \bibinfo{volume}{19}, \bibinfo{pages}{716--723}.
+\newblock \DOIprefix\doi{10.1109/TAC.1974.1100705}.
+%Type = Article
 \bibitem[{Balbo et~al.(2024)Balbo, Mandiau and Zargayouna}]{balbo2024extended}
 \bibinfo{author}{Balbo, F.}, \bibinfo{author}{Mandiau, R.},
   \bibinfo{author}{Zargayouna, M.}, \bibinfo{year}{2024}.
@@ -38,6 +45,14 @@
 \newblock \bibinfo{journal}{European Transport Research Review}
   \bibinfo{volume}{15}, \bibinfo{pages}{19}.
 \newblock \DOIprefix\doi{10.1186/s12544-023-00590-5}.
+%Type = Article
+\bibitem[{Box and Muller(1958)}]{box1958}
+\bibinfo{author}{Box, G.E.P.}, \bibinfo{author}{Muller, M.E.},
+  \bibinfo{year}{1958}.
+\newblock \bibinfo{title}{A note on the generation of random normal deviates}.
+\newblock \bibinfo{journal}{The Annals of Mathematical Statistics}
+  \bibinfo{volume}{29}, \bibinfo{pages}{610--611}.
+\newblock \DOIprefix\doi{10.1214/aoms/1177706645}.
 %Type = Article
 \bibitem[{Brooks(1991)}]{brooks1991representation}
 \bibinfo{author}{Brooks, R.A.}, \bibinfo{year}{1991}.
@@ -61,6 +76,20 @@
 \newblock \bibinfo{journal}{Transportation Research Part B: Methodological}
   \bibinfo{volume}{89}, \bibinfo{pages}{43--57}.
 \newblock \DOIprefix\doi{10.1016/j.trb.2016.04.001}.
+%Type = Article
+\bibitem[{D'Agostino and Pearson(1973)}]{dagostino1973tests}
+\bibinfo{author}{D'Agostino, R.B.}, \bibinfo{author}{Pearson, E.S.},
+  \bibinfo{year}{1973}.
+\newblock \bibinfo{title}{Tests for departure from normality. {Empirical}
+  results for the distributions of $b_2$ and $\sqrt{b_1}$}.
+\newblock \bibinfo{journal}{Biometrika} \bibinfo{volume}{60},
+  \bibinfo{pages}{613--622}.
+%Type = Book
+\bibitem[{Devroye(1986)}]{devroye1986}
+\bibinfo{author}{Devroye, L.}, \bibinfo{year}{1986}.
+\newblock \bibinfo{title}{Non-Uniform Random Variate Generation}.
+\newblock \bibinfo{publisher}{Springer-Verlag}, \bibinfo{address}{New York}.
+\newblock \DOIprefix\doi{10.1007/978-1-4613-8643-8}.
 %Type = Article
 \bibitem[{Divasson-J. et~al.(2025)Divasson-J., Macarulla, Garcia and
   Borges}]{divassonj2025abm}
@@ -106,6 +135,21 @@
   between biproportional and recursive methods}.
 \newblock \bibinfo{journal}{Transportation Research Record} ,
   \bibinfo{pages}{14--21}.
+%Type = Misc
+\bibitem[{{GAMA Platform}(a)}]{gama_headless}
+\bibinfo{author}{{GAMA Platform}}, a.
+\newblock \bibinfo{title}{Running headless}.
+\newblock \bibinfo{howpublished}{GAMA Platform documentation}.
+\newblock \URLprefix
+  \url{https://gama-platform.org/wiki/1.9.3/RunningHeadless}.
+  \bibinfo{note}{accessed 12 October 2026}.
+%Type = Misc
+\bibitem[{{GAMA Platform}(b)}]{gama_fipa}
+\bibinfo{author}{{GAMA Platform}}, b.
+\newblock \bibinfo{title}{Using {FIPA} {ACL}}.
+\newblock \bibinfo{howpublished}{GAMA Platform documentation}.
+\newblock \URLprefix \url{https://gama-platform.org/wiki/UsingFIPAACL}.
+  \bibinfo{note}{accessed 12 October 2026}.
 %Type = Article
 \bibitem[{Huang et~al.(2022)Huang, Cui, Zhang, Tong, Shi and
   Liu}]{huang2022overview}
@@ -126,6 +170,24 @@
 \newblock \bibinfo{journal}{Royal Society Open Science} \bibinfo{volume}{7},
   \bibinfo{pages}{191074}.
 \newblock \DOIprefix\doi{10.1098/rsos.191074}.
+%Type = Article
+\bibitem[{Kim(2013)}]{kim2013normality}
+\bibinfo{author}{Kim, H.Y.}, \bibinfo{year}{2013}.
+\newblock \bibinfo{title}{Statistical notes for clinical researchers: Assessing
+  normal distribution (2) using skewness and kurtosis}.
+\newblock \bibinfo{journal}{Restorative Dentistry \& Endodontics}
+  \bibinfo{volume}{38}, \bibinfo{pages}{52--54}.
+\newblock \DOIprefix\doi{10.5395/rde.2013.38.1.52}.
+%Type = Article
+\bibitem[{Leys et~al.(2013)Leys, Ley, Klein, Bernard and
+  Licata}]{leys2013detecting}
+\bibinfo{author}{Leys, C.}, \bibinfo{author}{Ley, C.}, \bibinfo{author}{Klein,
+  O.}, \bibinfo{author}{Bernard, P.}, \bibinfo{author}{Licata, L.},
+  \bibinfo{year}{2013}.
+\newblock \bibinfo{title}{Detecting outliers: Do not use standard deviation
+  around the mean, use absolute deviation around the median}.
+\newblock \bibinfo{journal}{Journal of Experimental Social Psychology}
+  \bibinfo{volume}{49}, \bibinfo{pages}{764--766}.
 %Type = Article
 \bibitem[{McCord et~al.(2010)McCord, Mishalani, Goel and
   Strohl}]{mccord2010iterative}
@@ -157,6 +219,14 @@
 \newblock \bibinfo{journal}{ACM Transactions on Autonomous and Adaptive
   Systems} \bibinfo{volume}{2}, \bibinfo{pages}{15}.
 \newblock \DOIprefix\doi{10.1145/1293731.1293735}.
+%Type = Article
+\bibitem[{Rosner(1983)}]{rosner1983}
+\bibinfo{author}{Rosner, B.}, \bibinfo{year}{1983}.
+\newblock \bibinfo{title}{Percentage points for a generalized {ESD}
+  many-outlier procedure}.
+\newblock \bibinfo{journal}{Technometrics} \bibinfo{volume}{25},
+  \bibinfo{pages}{165--172}.
+\newblock \DOIprefix\doi{10.1080/00401706.1983.10487848}.
 %Type = Article
 \bibitem[{Singh et~al.(2016)Singh, Padgham and Logan}]{singh2016integrating}
 \bibinfo{author}{Singh, D.}, \bibinfo{author}{Padgham, L.},
