@@ -1,0 +1,179 @@
+Table 3 - Empirical validation against known_data, C-engine run (Analysis C)
+============================================================================
+
+Run: SIMULATION_20261012_205659 (C engine, model key c_engine). Reference: WEB_DEVEL/data/known_data, used as is.
+Pre-specified definitions (the same as AAA_TEST/sim_comparison, fixed before any comparison):
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule: P(O >= 60) >= 0.1; crowding threshold 60 of capacity 80
+  peak slots: (7, 8, 9, 17, 18, 19); bootstrap: resamples of complete replicas, seed 20261013
+
+Calibration-period validation: the reference is a fitted normal of the same operational records that calibrate the inputs.
+
+C1 - Occupancy by direction x stop x trip-departure slot (475 strata, terminal visits excluded)
+-----------------------------------------------------------------------------------------------
+W1 against the untruncated N(mu, sigma), in passengers, from CDFs on a 0.1 pax grid. BC = project method, accepted if
+>= 0.97; W1 accepted if <= 2.0 pax. P60 error = P_sim(O >= 60) - P_emp(O >= 60) in percentage points.
+               metric C engine
+               strata  475.000
+mean |mean err| (pax)    4.043
+    mean err (signed)   -3.786
+       max |mean err|   18.026
+          mean SD err   -0.040
+        mean |SD err|    1.745
+    mean |median err|    5.469
+       mean |p90 err|    4.692
+            W1 median    4.235
+               W1 p90    9.146
+               W1 max   18.026
+            BC median    0.977
+               BC min    0.384
+        accepted BC %   57.263
+        accepted W1 %   18.737
+  failing strata (BC)  203.000
+   W1 mean in failing    7.094
+    mean |P60 err| pp    2.124
+     max |P60 err| pp   20.550
+
+Mean W1 over strata: 4.866 pax, 95 % replica-bootstrap CI [4.833, 4.908] (tolerance 2.0).
+
+Acceptance method: {'normal': 470, 'kde': 5}
+
+10 strata with the largest W1
+dir  stop  dep_slot emp_mean emp_sd sim_mean sim_sd     W1    BC BC_method P60_err_pp
+toB  2538         5   31.941  6.875   13.915  8.770 18.026 0.512    normal     -0.003
+toB  1167         5   32.310  6.536   14.492  9.243 17.818 0.523    normal     -0.002
+toA  4032         6   54.723 13.319   41.765 18.185 12.958 0.899    normal    -14.724
+toB  1167        21   50.601 15.975   38.039 14.844 12.570 0.919    normal    -20.550
+toB  1167        17   50.016 17.603   37.807 15.779 12.247 0.933    normal    -19.669
+toB  2538        21   45.470 15.411   33.292 13.033 12.208 0.907    normal    -14.432
+toA  1929         6   56.787 13.371   44.716 19.346 12.070 0.906    normal    -15.789
+toB  2538        17   47.374 17.245   35.767 14.784 11.678 0.931    normal    -17.198
+toB    81         5   24.923  5.199   13.589  9.064 11.340 0.692    normal     -0.000
+toB  3929        17   47.981 16.028   36.672 16.391 11.337 0.941    normal    -13.267
+
+Mean error (sim - emp) and W1 by trip-departure slot
+ dep_slot emp_mean sim_mean mean_err   W1 accepted_BC_pct
+        5    27.04    24.02    -3.02 6.72           16.00
+        6    27.20    22.03    -5.17 5.94           12.00
+        7    28.61    26.28    -2.33 4.22           48.00
+        8    24.60    20.60    -4.00 5.09           52.00
+        9    22.65    22.15    -0.50 2.26           96.00
+       10    22.61    20.92    -1.69 2.44          100.00
+       11    23.53    20.93    -2.59 3.17           88.00
+       12    24.84    21.63    -3.21 3.88           92.00
+       13    25.43    23.85    -1.58 2.97          100.00
+       14    28.08    24.78    -3.31 4.28           84.00
+       15    29.15    25.16    -3.99 4.78           56.00
+       16    28.57    22.75    -5.82 6.32           44.00
+       17    31.57    25.97    -5.60 6.11           72.00
+       18    32.41    26.40    -6.00 6.78           32.00
+       19    28.86    23.32    -5.54 6.38           40.00
+       20    28.16    22.90    -5.26 5.89           32.00
+       21    27.50    22.20    -5.30 5.88           40.00
+       22    22.77    21.11    -1.66 3.75           80.00
+       23    18.81    13.45    -5.37 5.60            4.00
+
+Mean error and W1 by stop (route order)
+dir  stop emp_mean sim_mean mean_err   W1
+toA  2646     6.08     5.52    -0.56 1.74
+toA   562    10.21     9.80    -0.41 1.86
+toA  4090    13.92    12.75    -1.16 2.69
+toA  4188    26.32    21.92    -4.40 5.67
+toA  5939    28.01    23.47    -4.54 5.80
+toA  3995    35.02    29.74    -5.28 6.92
+toA  3991    37.52    32.23    -5.29 6.91
+toA  3903    36.23    30.94    -5.29 6.59
+toA  2539    37.71    33.12    -4.59 6.14
+toA  2535    38.52    33.76    -4.76 6.17
+toA  1929    37.98    33.19    -4.79 6.02
+toA  4032    35.31    30.52    -4.79 5.81
+toA  5360    26.98    23.38    -3.60 5.07
+toA    82    17.96    15.50    -2.47 3.94
+toB  5727    16.85    15.40    -1.44 2.60
+toB    81    31.82    27.15    -4.66 5.41
+toB  1167    39.96    32.83    -7.13 7.60
+toB  2538    37.78    30.84    -6.93 7.37
+toB  3929    34.23    28.89    -5.34 5.84
+toB  3990    31.07    26.45    -4.62 5.15
+toB  3994    25.54    21.55    -3.99 4.69
+toB  5938    23.78    19.98    -3.80 4.56
+toB  4187    13.86    11.99    -1.87 2.75
+toB  2964    10.32     8.73    -1.59 2.32
+toB   649     8.06     6.70    -1.35 2.03
+
+Share of visits at capacity (O = 80), by slot group
+   scope simulated P(O = 80) % empirical P(X >= 79.5) %
+  global                 0.740                    0.472
+    peak                 0.917                    0.697
+off-peak                 0.659                    0.368
+(unweighted mean over strata)
+
+C3 - Segment travel times by segment x slot of the visit
+--------------------------------------------------------
+The simulator draws times from the same fitted normals that known_data holds, so this validates the sampling and calibration
+procedure, not an independently learned traffic model.
+                  metric     C engine
+                  strata          464
+                 MAE (s)        2.208
+              MAE 95% CI [2.10, 2.31]
+            mean err (s)        0.279
+       mean |sd err| (s)        1.895
+          mean |q05 err|        2.016
+          mean |q50 err|        2.046
+          mean |q95 err|        6.032
+               W1 median        0.872
+                  W1 p90        5.209
+                  W1 max       51.918
+            cover95 mean        0.948
+             cover95 min        0.833
+strata |mean err| > 10 s           29
+
+10 segment x slot strata with the largest W1
+dir       seg  slot  n_sim emp_mean  emp_sd sim_mean  sim_sd mean_err     W1 cover95
+toA  2646-562    23   1060  250.693 114.930  302.492 245.256   51.799 51.918   0.900
+toB   5727-81    10   3933  766.037 230.817  817.031 282.252   50.994 51.763   0.894
+toB   5727-81     9   4252  882.141 347.046  846.536 330.754  -35.605 37.321   0.961
+toB   5727-81     8   5383  710.545 292.998  680.115 267.836  -30.430 34.261   0.962
+toA  2646-562     6   3667  596.962 233.424  567.689 233.733  -29.273 30.233   0.944
+toA  2646-562    10   4151  485.185 245.453  513.305 262.770   28.119 28.693   0.925
+toB   5727-81    21   4296  694.298 177.529  718.208 202.723   23.910 25.977   0.912
+toA 4188-5939    23   1791  257.524  51.170  281.534  78.587   24.010 23.980   0.835
+toA  2646-562    21   3483  541.177 271.305  547.119 245.584    5.942 23.889   0.957
+toB   5727-81    16   6277  734.896 188.459  757.287 197.634   22.391 22.360   0.937
+
+Mean error (sim - emp, s) by slot
+ slot mean_err
+    5    -2.34
+    6    -2.13
+    7    -0.58
+    8    -1.39
+    9    -1.35
+   10     4.28
+   11     1.24
+   12    -0.02
+   13    -0.93
+   14    -0.43
+   15     0.89
+   16     0.42
+   17    -0.69
+   18    -0.48
+   19     0.34
+   20     0.31
+   21     2.03
+   22     0.92
+   23     4.05
+
+C2 and C4 - Boardings, alightings and waiting times
+---------------------------------------------------
+known_data has no reference for boardings, alightings or waiting times: not validated. Alightings are an imposed calibrated input.
+
+C5 - Reporting levels (occupancy, W1 against known_data)
+--------------------------------------------------------
+                                          level  strata W1 mean    W1 95% CI W1 max BC min accepted BC % accepted W1 % mean |mean err| mean |P60 err| pp
+                            global (all strata)     475   4.866 [4.83, 4.91] 18.026  0.384        57.263        18.737           4.043             2.124
+excl. terminals 2646/5727 (pipeline convention)     437   5.101 [5.06, 5.14] 18.026  0.512        55.149        15.332           4.247             2.300
+                                     peak slots     150   5.141 [5.08, 5.22] 12.247  0.925        56.667        18.667           4.207             2.938
+                                       off-peak     325   4.740 [4.70, 4.79] 18.026  0.384        57.538        18.769           3.967             1.748
+                            high-demand tertile     158   7.182 [7.11, 7.26] 12.958  0.860        44.937         2.532           6.211             5.501
+                     strata with mean >= 40 pax      80   7.658 [7.55, 7.77] 12.958  0.899        37.500         1.250           6.705             7.015

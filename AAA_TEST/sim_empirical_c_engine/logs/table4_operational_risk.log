@@ -1,0 +1,60 @@
+Table 4 - Operational risk against the empirical reference, C-engine run (Analysis D)
+=====================================================================================
+
+Run: SIMULATION_20261012_205659 (C engine, model key c_engine). Reference: WEB_DEVEL/data/known_data, used as is.
+Pre-specified definitions (the same as AAA_TEST/sim_comparison, fixed before any comparison):
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule: P(O >= 60) >= 0.1; crowding threshold 60 of capacity 80
+  peak slots: (7, 8, 9, 17, 18, 19); bootstrap: resamples of complete replicas, seed 20261013
+
+
+D1 - Occupancy exceedance P(O >= c), % of bus-stop visits (terminal visits excluded)
+------------------------------------------------------------------------------------
+Empirical: known_data normals mixed with the simulated visit weights; P_emp(O >= c) = P(X >= c - 0.5). For c = 80 the empirical value is
+the probability that observed load reaches or exceeds capacity (demand); simulated O = 80 means a full bus (occupancy is capped).
+   scope  c empirical % C engine %         95% CI sim - emp (pp)  CI excludes empirical
+  global 40      25.269     16.835 [16.73, 16.93]         -8.434                   True
+  global 60       5.884      4.529   [4.48, 4.58]         -1.354                   True
+  global 70       2.029      2.150   [2.11, 2.19]          0.121                   True
+  global 80       0.534      0.778   [0.76, 0.80]          0.243                   True
+    peak 40      28.347     18.514 [18.34, 18.66]         -9.832                   True
+    peak 60       7.340      5.260   [5.15, 5.35]         -2.080                   True
+    peak 70       2.658      2.567   [2.50, 2.64]         -0.091                   True
+    peak 80       0.737      0.989   [0.95, 1.02]          0.252                   True
+off-peak 40      23.480     15.859 [15.74, 15.99]         -7.621                   True
+off-peak 60       5.037      4.105   [4.04, 4.19]         -0.933                   True
+off-peak 70       1.665      1.908   [1.86, 1.96]          0.243                   True
+off-peak 80       0.417      0.655   [0.63, 0.68]          0.238                   True
+
+Stratified absolute error of P(O >= c) against the empirical normal (475 strata), pp
+ c mean |err| pp p90 |err| max |err|  strata |err| > 5 pp  strata |err| > 10 pp sim CI excludes emp %
+60         2.124     6.762    20.550                   68                    25                86.737
+70         1.131     3.324    17.257                   33                     8                84.000
+80         0.557     1.474    12.448                   13                     2                85.053
+
+D2 - Denied boardings (descriptive: no empirical reference)
+-----------------------------------------------------------
+                               measure   mean    p5    p95
+   visits with denied boarding per day  14.08  4.00  26.00
+             denied passengers per day 127.62 23.00 273.05
+share of visits with denied boarding %   0.67             
+         share of visits at capacity %   0.78             
+
+Worst direction x stop x slot cells by denied passengers per day
+dir  stop  slot  visits  share denied_per_day
+toA  3995     7    5727 0.0917         9.0130
+toA  4188    22    3239 0.1136         8.5160
+toA  2539     8    5972 0.1211         8.0230
+toA  3991     7    5441 0.1180         7.1530
+toA  3903     8    5795 0.0758         5.2450
+toA  2535     8    5953 0.1078         4.8750
+toA  2539     7    5182 0.0926         3.7980
+toA  3903     7    5327 0.0794         3.6730
+
+D5 - Decision against the empirical reference: issue if P(O >= 60) >= 0.1 per stratum
+-------------------------------------------------------------------------------------
+ flagged empirical  flagged C engine agreement % kappa  false negatives  false positives Spearman rho (P60)  top-10 overlap  top-20 overlap  CI straddles rule
+                98                69      90.526 0.675               37                8              0.937               6              13                 10
+False negatives by departure slot: {13: 2, 14: 1, 16: 6, 17: 8, 18: 8, 19: 5, 20: 4, 21: 3}
+False positives by departure slot: {5: 1, 8: 1, 9: 2, 13: 3, 22: 1}

@@ -108,13 +108,13 @@ C3 - Segment travel times by segment x slot of the visit
 --------------------------------------------------------
 Times are sampled by the simulator from the same fitted normal distributions that known_data holds (plan 6, C3):
 this validates the sampling and calibration procedure, not an independently learned traffic model.
-MAE = mean over strata of |pooled simulated mean - empirical mean|, replica-bootstrap CI. cover95 = share of simulated
+MAE = mean over strata of |pooled simulated mean - empirical mean|, point +- 1.96 bootstrap SE over replicas. cover95 = share of simulated
 times inside mu +- 1.96 sigma (nominal 95 % if the simulator reproduces the normal; lower where the normal has
 negative support truncated/clipped by the simulator).
                   metric           IA           AG
                   strata          464          464
             MAE mean (s)      2.71746     2.670257
-              MAE 95% CI [2.70, 2.90] [2.67, 2.88]
+              MAE 95% CI [2.62, 2.82] [2.57, 2.77]
             mean err (s)     1.168921     1.070921
        mean |sd err| (s)     1.842495     1.827539
           mean |q05 err|     2.470318     2.376515

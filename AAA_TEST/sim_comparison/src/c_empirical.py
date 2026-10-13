@@ -160,7 +160,8 @@ def c3_mae_ci(v: pd.DataFrame, t: pd.DataFrame, seed: int):
         boot = (w @ ssum) / (w @ scnt)
     mae = np.nanmean(np.abs(boot - mu), axis=1)
     point = np.nanmean(np.abs(ssum.sum(0) / scnt.sum(0) - mu))
-    return point, np.percentile(mae, 2.5), np.percentile(mae, 97.5), mae
+    # |.| is convex, so percentile/basic intervals of the resampled MAE are biased: centre on the point estimate, use the bootstrap SE
+    return point, point - 1.96 * mae.std(ddof=1), point + 1.96 * mae.std(ddof=1), mae
 
 
 # --------------------------------------------------------------------------
@@ -327,7 +328,7 @@ def main():
     log.h("C3 - Segment travel times by segment x slot of the visit")
     log.p("Times are sampled by the simulator from the same fitted normal distributions that known_data holds (plan 6, C3):")
     log.p("this validates the sampling and calibration procedure, not an independently learned traffic model.")
-    log.p("MAE = mean over strata of |pooled simulated mean - empirical mean|, replica-bootstrap CI. cover95 = share of simulated")
+    log.p("MAE = mean over strata of |pooled simulated mean - empirical mean|, point +- 1.96 bootstrap SE over replicas. cover95 = share of simulated")
     log.p("times inside mu +- 1.96 sigma (nominal 95 % if the simulator reproduces the normal; lower where the normal has")
     log.p("negative support truncated/clipped by the simulator).")
     rows = []

@@ -1,0 +1,50 @@
+# Empirical validation of the C-engine run `SIMULATION_20261012_205659`
+
+Same empirical analysis as `AAA_TEST/sim_comparison` (plan sections 6, and the empirical sides of 7 and 9), applied to one run.
+There is no IA/AG pair here, so no Δ_s and no equivalence tests. Pre-specified margins and acceptance rules are the same
+(`src/config.py`). Regenerate everything with `python3 src/run_all.py` (about 1 minute).
+
+| | |
+|---|---|
+| Run | `SIMULATION_20261012_205659`, engine `c` (`c_engine`), 1,000 replicas in one `results.csv`, 3 s simulation time |
+| Schedule | 167 trips per replica (the GAMA runs use 163: only `final_input.json` differs; stops, boarding, alighting and segment-time inputs are byte-identical) |
+| Reference | `WEB_DEVEL/data/known_data` (fitted normals per stop and slot), used as is. Calibration-period validation, not independent |
+
+## Results
+
+**Integrity (Table 1).** Clean: 2,256 visits per replica, no duplicates or missing values, flow conservation holds in every visit
+(the GAMA IA run lost passengers in 887), no capacity violations. 16,245 visits at capacity (0.72 %).
+
+**Occupancy (Table 3, Figs 1–2).** Over the 475 direction × stop × departure-slot strata:
+- Mean W1 against `known_data` is 4.87 pax (CI 4.83–4.91), against a 2 pax tolerance; only 18.7 % of strata are within it.
+- 57.3 % of strata reach BC ≥ 0.97 (the pipeline convention without terminals is in Table 3, C5). This is better than the GAMA runs (AG 36.2 %, IA 37.9 %).
+- The model **underestimates occupancy**: mean signed error −3.8 pax, in every direction and group. The SD is right on average (error −0.04 pax), unlike GAMA (+4).
+- The error is concentrated where it matters: high-demand strata (W1 7.2, 44.9 % accepted by BC, 2.5 % by W1), strata with mean ≥ 40 (W1 7.7, signed error −6.6 pax), mid-route stops (W1 5.8), and slots 5–6, 16–21 and 23. Low-demand strata and the departure terminal fit much better (W1 2.5 and 2.2, about 46–58 % accepted by W1).
+- Largest errors: toB stops 2538, 1167 and 81 at slot 5 (W1 11–18 pax: the simulation is about 15 pax too low) and the evening peak at toB 1167, 2538.
+
+**Travel times (C3).** 464 strata with data: MAE 2.2 s (CI 2.1–2.3), mean error +0.3 s, coverage of the 95 % interval 94.8 %, 29 strata with |error| > 10 s (the worst: segment 2646-562 in slot 23 and 5727-81 in slots 9, 10, 8). As in the GAMA runs this validates the sampling procedure, not an independent traffic model.
+
+**Operational risk (Table 4, Fig 3).** Against the empirical normals, P(O ≥ c) is **underestimated in the middle and slightly overestimated in the tail**:
+
+| c | empirical | C engine | sim − emp |
+|---|---|---|---|
+| 40 | 25.3 % | 16.8 % | −8.4 pp |
+| 60 | 5.9 % | 4.5 % | −1.4 pp |
+| 70 | 2.0 % | 2.2 % | +0.1 pp |
+| 80 | 0.53 % | 0.78 % | +0.24 pp |
+
+With the 0.10 rule at 60 pax, the model flags 69 strata against 98 empirically: 37 false negatives (mostly evening slots 16–21) and 8 false positives, agreement 90.5 % (κ = 0.68), top-10 overlap 6/10, Spearman 0.94. The GAMA runs flag more strata than the data (144 / 146 against 98), so the error has opposite signs in the two engines. Denied boardings (no empirical reference): 14 visits and 128 passengers per day on average, against 38–40 and 323–364 for GAMA.
+
+**Robustness (Table 6).** The conclusions hold across all 16 groups and all metrics (W1, clipped W1, KS, two Bhattacharyya versions): most strata fail at the project rule or at W1 ≤ 2 pax; they pass at BC ≥ 0.90 (94.5 %) and W1 ≤ 5 pax (59 %). Input-perturbation sensitivity (F4) needs new simulations and was not done.
+
+## Reading
+The C engine is closer to `known_data` than both GAMA runs on average (W1 4.9 against 6.9–7.0 pax, BC acceptance 57 % against 36–38 %, SD correct), but it is biased low in occupancy, especially in high-demand strata and evening slots, and fails the 2 pax tolerance in most strata. Its error is mostly a bias in the mean; the GAMA runs' is mostly an excess of variance and mass at the capacity cap. This run uses a different schedule (167 trips) than the GAMA runs, so differences between engines cannot be attributed to the engine alone. See `logs/context_vs_gama.log`.
+
+## Limitations
+- One run, one engine, one schedule: no between-run uncertainty, only replica-bootstrap CIs.
+- The reference is a fitted normal, and the project cuts observed occupancy at 75 passengers, so the empirical tail is itself uncertain.
+- No empirical reference exists for boardings, alightings or waiting times; the waiting-time part of the C-engine output (`PASSENGERS`) was not analysed.
+- Cause of the bias (calibration, schedule or engine) is not isolated.
+
+## Files
+`logs/table1_integrity.log`, `table3_empirical_validation.log`, `table4_operational_risk.log`, `table6_robustness.log`, `context_vs_gama.log` and the per-stratum CSVs; `figures/fig1_occupancy_distributions.png`, `fig2_error_map.png`, `fig3_exceedance_curves.png`, `fig_travel_error.png`.

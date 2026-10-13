@@ -1,0 +1,61 @@
+Table 6 - Robustness of the empirical fit, C-engine run (Analysis F)
+====================================================================
+
+Run: SIMULATION_20261012_205659 (C engine, model key c_engine). Reference: WEB_DEVEL/data/known_data, used as is.
+Pre-specified definitions (the same as AAA_TEST/sim_comparison, fixed before any comparison):
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule: P(O >= 60) >= 0.1; crowding threshold 60 of capacity 80
+  peak slots: (7, 8, 9, 17, 18, 19); bootstrap: resamples of complete replicas, seed 20261013
+
+
+F1/F2 - Empirical fit by stratum group
+--------------------------------------
+Groups come from config (peak slots), known_data (demand tertiles of the empirical mean), route position and the model INPUTS
+(boarding intensity = mean of the input boarding distributions per stop; alighting proxy = mean beta-binomial alpha/(alpha+beta)).
+                           group  strata W1 mean    W1 95% CI mean err (signed) mean |mean err| accepted BC % accepted W1 % mean P60 err pp (signed)
+                      all strata     475   4.866 [4.83, 4.91]            -3.786           4.043        57.263        18.737                   -1.027
+                            peak     150   5.141 [5.08, 5.22]            -3.994           4.207        56.667        18.667                   -1.961
+                        off-peak     325   4.740 [4.70, 4.79]            -3.690           3.967        57.538        18.769                   -0.597
+                             toA     266   5.094 [5.05, 5.15]            -3.709           4.045        55.263        15.789                   -0.353
+                             toB     209   4.576 [4.53, 4.64]            -3.885           4.039        59.809        22.488                   -1.885
+                      demand low     158   2.531 [2.51, 2.56]            -1.502           1.859        63.291        45.570                    0.016
+                   demand medium     159   4.886 [4.84, 4.94]            -3.862           4.058        63.522         8.176                    0.095
+                     demand high     158   7.182 [7.11, 7.26]            -5.995           6.211        44.937         2.532                   -3.200
+                  mean >= 40 pax      80   7.658 [7.55, 7.77]            -6.559           6.705        37.500         1.250                   -4.768
+    position: departure terminal      38   2.174 [2.13, 2.23]            -1.001           1.697        81.579        57.895                    0.041
+     position: terminal-adjacent     152   3.865 [3.83, 3.90]            -2.796           3.186        57.895        27.632                   -1.185
+             position: mid-route     285   5.760 [5.71, 5.81]            -4.686           4.812        53.684         8.772                   -1.086
+      high-demand boarding stops     171   4.916 [4.88, 4.97]            -3.834           4.142        58.480        23.977                   -1.267
+            other boarding stops     304   4.838 [4.80, 4.88]            -3.759           3.987        56.579        15.789                   -0.892
+high alighting-probability stops     152   4.156 [4.13, 4.19]            -3.188           3.449        57.895        23.026                   -0.464
+           other alighting stops     323   5.201 [5.16, 5.25]            -4.068           4.322        56.966        16.718                   -1.292
+
+F3 - Sensitivity to the distance and to the acceptance threshold
+----------------------------------------------------------------
+                         metric   mean median worst stratum
+       W1 (primary, raw normal) 4.8665 4.2353       18.0257
+W1 vs normal clipped to [0, 80] 4.7479 4.1322       18.0257
+                   KS vs normal 0.2170 0.2097        0.8386
+     BC normal-normal (moments) 0.9643 0.9777        0.4792
+              BC project method 0.9637 0.9771        0.3844
+
+Share of strata accepted (%) under alternative thresholds
+                    rule accepted %
+       BC project >= 0.9      94.53
+      BC project >= 0.93      89.89
+      BC project >= 0.95      81.05
+      BC project >= 0.97      57.26
+      BC project >= 0.99      30.74
+ BC normal-normal >= 0.9      94.53
+BC normal-normal >= 0.95      81.68
+             W1 <= 1 pax       5.05
+             W1 <= 2 pax      18.74
+             W1 <= 3 pax      34.32
+             W1 <= 4 pax      46.74
+             W1 <= 5 pax      58.95
+
+F4 / F5
+-------
+F4 (perturbation of the input calibration) needs new simulations: not done. F5: one route, working days, calibration-period validation only;
+this run uses a 167-trip schedule (the GAMA runs 163).

@@ -1,0 +1,34 @@
+Table 1 - Data integrity of the C-engine run (Analysis A)
+=========================================================
+
+Run: SIMULATION_20261012_205659 (C engine, model key c_engine). Reference: WEB_DEVEL/data/known_data, used as is.
+Pre-specified definitions (the same as AAA_TEST/sim_comparison, fixed before any comparison):
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule: P(O >= 60) >= 0.1; crowding threshold 60 of capacity 80
+  peak slots: (7, 8, 9, 17, 18, 19); bootstrap: resamples of complete replicas, seed 20261013
+
+
+A1/A2 - Completeness, coverage and flow conservation
+----------------------------------------------------
+Event order as in GAMA: alighting, then boarding up to capacity; occupancy is recorded after the stop.
+                      check        value
+                   replicas         1000
+                     visits      2256000
+         visits_per_replica [2256, 2256]
+          trips_per_replica   [167, 167]
+             duplicate_keys            0
+                    missing            0
+    conservation_violations            0
+            lost_passengers            0
+               occ_negative            0
+               occ_above_80            0
+          alight_gt_onboard            0
+      terminal_occ_not_zero            0
+denied_while_below_capacity            0
+         visits_at_capacity        16245
+           visits_after_24h         3467
+
+Anomaly events (EVENTS/anomalies.csv): 29222 rows over 1000 replicas.
+Schedule: 167 trips per replica; the GAMA runs of AAA_TEST/sim_comparison use 163 trips (final_input.json differs).
+Inputs for stops, boarding and alighting distributions and segment times are byte-identical to those runs.
