@@ -1,0 +1,161 @@
+Analysis B2 - Distributional comparison IA vs AG
+================================================
+
+Pre-specified definitions (fixed before any comparison was computed):
+  margin occupancy_pax          = 2.0
+  margin travel_time_s          = 10.0
+  margin trip_duration_s        = 60.0
+  margin flow_per_visit_pax     = 0.5
+  margin wait_median_s          = 30.0
+  margin wait_tail_s            = 60.0
+  margin prob_pp                = 2.0
+  margin denied_rel             = 0.1
+  margin headway_cv             = 0.05
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule (D5): P(O >= 60) >= 0.10
+  crowding threshold: 60 passengers (75 % of capacity 80)
+  peak slots: (7, 8, 9, 17, 18, 19)
+  bootstrap: 1000 resamples of complete replicas, seed 20261013
+  equivalence: 95 % CI of the IA-AG difference inside +-margin -> EQUIVALENT;
+               CI entirely outside -> NOT EQUIVALENT; otherwise INCONCLUSIVE
+
+
+B2 - Distributional comparison IA vs AG (pooled over replicas; strata = direction x stop x slot)
+------------------------------------------------------------------------------------------------
+W1 = Wasserstein-1 (exact, scipy) in the variable's unit. BC = Bhattacharyya coefficient on a common
+discretisation: unit bins for counts/occupancy, 10 s bins for travel times, 30 s bins for waits, 1 min
+for delays. d_* = IA - AG (quantiles in the variable's unit, tail probabilities in percentage points).
+Occupancy strata: trip departure slot; other variables: slot of the visit. Terminal visits excluded
+for occupancy/boardings/denied, first stops excluded for alightings/travel times.
+
+* occupancy (pax)
+    strata                             475
+    pooled W1                          0.1343
+    pooled BC                          1.0000
+    pooled d_mean                      -0.0646
+    pooled d_p50                       0.0000
+    pooled d_p90                       0.0000
+    pooled d_p95                       -1.0000
+    pooled d_p99                       0.0000
+    strata W1 median                   0.4264
+    strata W1 p90                      0.8697
+    strata W1 max                      1.6954
+    strata with W1 <= margin %         100.0000
+    strata BC median                   0.9954
+    strata BC min                      0.9829
+    margin                             2.0000
+    pooled d_P(O>=60) (pp)             -0.1979
+    strata max |d_P(O>=60)| (pp)       2.5131
+    pooled d_P(O>=80) (pp)             -0.1167
+    strata max |d_P(O>=80)| (pp)       2.6600
+
+* boardings per visit (pax)
+    strata                             473
+    pooled W1                          0.0082
+    pooled BC                          1.0000
+    pooled d_mean                      -0.0063
+    pooled d_p50                       0.0000
+    pooled d_p90                       0.0000
+    pooled d_p95                       0.0000
+    pooled d_p99                       0.0000
+    strata W1 median                   0.0676
+    strata W1 p90                      0.3227
+    strata W1 max                      1.1359
+    strata with W1 <= margin %         97.0402
+    strata BC median                   0.9986
+    strata BC min                      0.3162
+    margin                             0.5000
+    pooled d_P(B=0) (pp)               0.1503
+    strata max |d_P(B=0)| (pp)         30.0000
+
+* alightings per visit (pax)
+    strata                             474
+    pooled W1                          0.0163
+    pooled BC                          1.0000
+    pooled d_mean                      -0.0093
+    pooled d_p50                       0.0000
+    pooled d_p90                       0.0000
+    pooled d_p95                       0.0000
+    pooled d_p99                       -1.0000
+    strata W1 median                   0.0466
+    strata W1 p90                      0.2181
+    strata W1 max                      20.3333
+    strata with W1 <= margin %         95.7806
+    strata BC median                   0.9992
+    strata BC min                      0.0000
+    margin                             0.5000
+    pooled d_P(A=0) (pp)               -0.0203
+    strata max |d_P(A=0)| (pp)         66.6667
+
+* denied per visit (pax)
+    strata                             473
+    pooled W1                          0.0200
+    pooled BC                          1.0000
+    pooled d_mean                      -0.0200
+    pooled d_p50                       0.0000
+    pooled d_p90                       0.0000
+    pooled d_p95                       0.0000
+    pooled d_p99                       -1.0000
+    strata W1 median                   0.0027
+    strata W1 p90                      0.0779
+    strata W1 max                      0.8882
+    strata with W1 <= margin %         99.5772
+    strata BC median                   0.9995
+    strata BC min                      0.9877
+    margin                             0.5000
+    pooled d_P(denied>0) (pp)          -0.1116
+    strata max |d_P(denied>0)| (pp)    2.0947
+
+* segment travel time (s)
+    strata                             474
+    pooled W1                          0.1627
+    pooled BC                          1.0000
+    pooled d_mean                      0.0352
+    pooled d_p50                       0.0000
+    pooled d_p90                       2.0000
+    pooled d_p95                       0.0000
+    pooled d_p99                       0.0000
+    strata W1 median                   0.9980
+    strata W1 p90                      3.3229
+    strata W1 max                      38.3333
+    strata with W1 <= margin %         98.7342
+    strata BC median                   0.9981
+    strata BC min                      0.0000
+    margin                             10.0000
+
+* waiting time (s)
+    strata                             469
+    pooled W1                          4.9300
+    pooled BC                          0.9999
+    pooled d_mean                      -2.5376
+    pooled d_p50                       0.0000
+    pooled d_p90                       -10.0000
+    pooled d_p95                       -18.0000
+    pooled d_p99                       -62.0000
+    strata W1 median                   10.0777
+    strata W1 p90                      41.1736
+    strata W1 max                      327.5000
+    strata with W1 <= margin %         85.0746
+    strata BC median                   0.9978
+    strata BC min                      0.0000
+    margin                             30.0000
+    pooled d_P(W>15min) (pp)           -0.3224
+    strata max |d_P(W>15min)| (pp)     50.0000
+
+* departure delay of DELAY events (min)
+    strata                             31
+    pooled W1                          1.1678
+    pooled BC                          0.9865
+    pooled d_mean                      -1.1678
+    pooled d_p50                       -1.0000
+    pooled d_p90                       -3.0000
+    pooled d_p95                       -4.0000
+    pooled d_p99                       -5.0000
+    strata W1 median                   1.0757
+    strata W1 p90                      1.9124
+    strata W1 max                      2.5778
+    strata with W1 <= margin %         100.0000
+    strata BC median                   0.9631
+    strata BC min                      0.3536
+    margin                             inf

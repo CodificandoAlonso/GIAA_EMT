@@ -1,0 +1,62 @@
+Table 2 - Global KPI comparison IA vs AG (Analysis B1)
+======================================================
+
+Pre-specified definitions (fixed before any comparison was computed):
+  margin occupancy_pax          = 2.0
+  margin travel_time_s          = 10.0
+  margin trip_duration_s        = 60.0
+  margin flow_per_visit_pax     = 0.5
+  margin wait_median_s          = 30.0
+  margin wait_tail_s            = 60.0
+  margin prob_pp                = 2.0
+  margin denied_rel             = 0.1
+  margin headway_cv             = 0.05
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule (D5): P(O >= 60) >= 0.10
+  crowding threshold: 60 passengers (75 % of capacity 80)
+  peak slots: (7, 8, 9, 17, 18, 19)
+  bootstrap: 1000 resamples of complete replicas, seed 20261013
+  equivalence: 95 % CI of the IA-AG difference inside +-margin -> EQUIVALENT;
+               CI entirely outside -> NOT EQUIVALENT; otherwise INCONCLUSIVE
+
+
+B1 - Global KPIs (replica level, n = 1000 replicas per model)
+-------------------------------------------------------------
+Mean over replicas, 95 % percentile CI from 1000 bootstrap resamples of complete replicas (independent
+resampling per model, replicas are not matched). Occupancy KPIs exclude terminal visits (O = 0 by rule).
+'margin' is absolute in the KPI unit (relative KPIs: 10 % of the AG value).
+                                 KPI unit  IA mean            IA 95% CI  AG mean            AG 95% CI   IA-AG        diff 95% CI rel. diff % Cohen d margin  equivalence
+                      Mean occupancy  pax   25.270     [25.192, 25.348]   25.335     [25.254, 25.421]  -0.065    [-0.180, 0.046]      -0.255  -0.051  2.000   EQUIVALENT
+                    Median occupancy  pax   20.243     [20.156, 20.335]   20.185     [20.084, 20.284]   0.058    [-0.069, 0.187]       0.287   0.039  2.000   EQUIVALENT
+                        Occupancy SD  pax   21.430     [21.377, 21.480]   21.577     [21.524, 21.635]  -0.147   [-0.223, -0.074]      -0.681  -0.167  2.000   EQUIVALENT
+                       Occupancy p90  pax   58.022     [57.826, 58.215]   58.416     [58.212, 58.620]  -0.393   [-0.685, -0.126]      -0.673  -0.120  2.000   EQUIVALENT
+                       Occupancy p95  pax   69.965     [69.743, 70.169]   70.428     [70.207, 70.651]  -0.462   [-0.776, -0.169]      -0.657  -0.131  2.000   EQUIVALENT
+                 Visits with O >= 40    %   23.716     [23.573, 23.850]   23.894     [23.751, 24.047]  -0.178    [-0.371, 0.025]      -0.744  -0.076  2.000   EQUIVALENT
+                 Visits with O >= 60    %    9.305       [9.207, 9.399]    9.502       [9.403, 9.605]  -0.198   [-0.344, -0.066]      -2.083  -0.121  2.000   EQUIVALENT
+                 Visits with O >= 70    %    5.254       [5.179, 5.326]    5.437       [5.364, 5.514]  -0.183   [-0.291, -0.082]      -3.369  -0.150  2.000   EQUIVALENT
+         Visits at capacity (O = 80)    %    2.184       [2.141, 2.225]    2.301       [2.258, 2.347]  -0.117   [-0.183, -0.055]      -5.072  -0.164  2.000   EQUIVALENT
+                   Mean waiting time    s  501.518   [500.609, 502.431]  503.984   [502.769, 505.271]  -2.466   [-3.961, -1.019]      -0.489  -0.137 60.000   EQUIVALENT
+                 Median waiting time    s  432.916   [432.409, 433.402]  431.796   [431.176, 432.441]   1.120     [0.279, 1.959]       0.259   0.118 30.000   EQUIVALENT
+                    Waiting time p90    s  997.857  [995.592, 1000.076] 1008.716 [1005.900, 1011.677] -10.859  [-14.317, -7.165]      -1.076  -0.258 60.000   EQUIVALENT
+                    Waiting time p95    s 1197.950 [1194.771, 1201.407] 1218.275 [1213.877, 1222.771] -20.325 [-25.563, -15.130]      -1.668  -0.316 60.000   EQUIVALENT
+                    Waiting time p99    s 1703.241 [1691.565, 1715.383] 1763.745 [1748.237, 1780.158] -60.504 [-79.817, -40.844]      -3.430  -0.263 60.000 INCONCLUSIVE
+                 Waiting time CVaR95    s 1526.673 [1519.284, 1534.421] 1563.854 [1554.063, 1574.533] -37.181 [-50.466, -24.982]      -2.378  -0.248 60.000   EQUIVALENT
+                      Waits > 15 min    %   13.664     [13.582, 13.741]   13.981     [13.884, 14.080]  -0.317   [-0.444, -0.196]      -2.268  -0.218  2.000   EQUIVALENT
+            Mean segment travel time    s  203.983   [203.881, 204.083]  203.947   [203.844, 204.044]   0.035    [-0.099, 0.184]       0.017   0.021 10.000   EQUIVALENT
+                  Mean trip duration    s 2942.505 [2941.103, 2943.830] 2916.603 [2915.000, 2918.095]  25.902   [23.832, 28.250]       0.888   1.081 60.000   EQUIVALENT
+        Headway CV (mean over stops)    -    0.550       [0.548, 0.551]    0.572       [0.570, 0.574]  -0.022   [-0.025, -0.020]      -3.902  -0.738  0.050   EQUIVALENT
+         Headways < 2 min (bunching)    %    7.015       [6.932, 7.104]    7.819       [7.723, 7.915]  -0.804   [-0.929, -0.677]     -10.284  -0.550  2.000   EQUIVALENT
+                DELAY events per day    n   13.360     [13.155, 13.588]   13.940     [13.691, 14.169]  -0.580   [-0.882, -0.259]      -4.161  -0.161           no margin
+    Mean delay of delayed departures  min    4.298       [4.236, 4.355]    5.350       [5.262, 5.435]  -1.051   [-1.161, -0.950]     -19.653  -0.834           no margin
+                 Boardings per visit  pax    4.267       [4.259, 4.275]    4.273       [4.265, 4.282]  -0.006    [-0.017, 0.005]      -0.136  -0.044  0.500   EQUIVALENT
+                Alightings per visit  pax    4.265       [4.257, 4.273]    4.273       [4.265, 4.282]  -0.009    [-0.020, 0.002]      -0.202  -0.066  0.500   EQUIVALENT
+                   Boardings per day  pax 9396.837 [9378.927, 9414.605] 9409.638 [9391.406, 9428.959] -12.801  [-37.884, 11.375]      -0.136  -0.044           no margin
+            Denied boardings per day  pax  323.370   [313.569, 333.316]  364.076   [352.224, 376.473] -40.706 [-56.712, -25.309]     -11.181  -0.221 36.408 INCONCLUSIVE
+ Visits with denied boarding per day    n   37.948     [37.164, 38.719]   40.224     [39.444, 41.051]  -2.276   [-3.544, -1.192]      -5.658  -0.175  4.022   EQUIVALENT
+Share of visits with denied boarding    %    1.723       [1.688, 1.758]    1.827       [1.791, 1.864]  -0.103   [-0.161, -0.054]      -5.658  -0.175  2.000   EQUIVALENT
+           Denied per affected visit  pax    8.242       [8.112, 8.373]    8.682       [8.538, 8.840]  -0.440   [-0.644, -0.244]      -5.068  -0.187           no margin
+          Trips with denied boarding    %    8.522       [8.361, 8.658]    8.862       [8.706, 9.025]  -0.340   [-0.564, -0.133]      -3.835  -0.137  2.000   EQUIVALENT
+         Completed trips per replica    n  163.000   [163.000, 163.000]  163.000   [163.000, 163.000]   0.000     [0.000, 0.000]       0.000                   no margin
+         Bus-stop visits per replica    n 2202.000 [2202.000, 2202.000] 2202.000 [2202.000, 2202.000]   0.000     [0.000, 0.000]       0.000                   no margin
+Summary: {'EQUIVALENT': 24, 'no margin': 6, 'INCONCLUSIVE': 2}

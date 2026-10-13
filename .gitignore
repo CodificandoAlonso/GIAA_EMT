@@ -45,3 +45,6 @@ GTFS
 # Copia local de DATOS/data para los analisis de AAA_TEST (ya esta en el repo)
 AAA_TEST/data/
 AAA_TEST/**/__pycache__/
+
+# Parsed simulation cache of AAA_TEST/sim_comparison
+AAA_TEST/sim_comparison/cache/

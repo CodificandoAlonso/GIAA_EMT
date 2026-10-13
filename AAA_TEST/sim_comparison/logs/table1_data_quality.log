@@ -1,0 +1,101 @@
+Table 1 - Dataset coverage and quality (Analysis A)
+===================================================
+
+Pre-specified definitions (fixed before any comparison was computed):
+  margin occupancy_pax          = 2.0
+  margin travel_time_s          = 10.0
+  margin trip_duration_s        = 60.0
+  margin flow_per_visit_pax     = 0.5
+  margin wait_median_s          = 30.0
+  margin wait_tail_s            = 60.0
+  margin prob_pp                = 2.0
+  margin denied_rel             = 0.1
+  margin headway_cv             = 0.05
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule (D5): P(O >= 60) >= 0.10
+  crowding threshold: 60 passengers (75 % of capacity 80)
+  peak slots: (7, 8, 9, 17, 18, 19)
+  bootstrap: 1000 resamples of complete replicas, seed 20261013
+  equivalence: 95 % CI of the IA-AG difference inside +-margin -> EQUIVALENT;
+               CI entirely outside -> NOT EQUIVALENT; otherwise INCONCLUSIVE
+
+AG = SIMULATION_20261012_170524 (GAMA, without_agents) | IA = SIMULATION_20261012_172453 (GAMA, with_agents)
+Inputs: byte-identical includes/INPUTS in both runs; schedule final_input.json (12 buses, 82 + 81 trips).
+
+A1 - Completeness and coverage
+------------------------------
+model  replicas files RESULTS/EVENTS/PASSENGERS trips/replica (min-max) visits/replica (min-max)  duplicate visit keys  missing values (visits)  visits after 24:00
+   IA      1000                  1000/1000/1000     163-163 (sched 163)     2202-2202 (exp 2202)                     0                        0                3607
+   AG      1000                  1000/1000/1000     163-163 (sched 163)     2202-2202 (exp 2202)                     0                        0                3369
+Same scheduled service (bus, trip, direction, stop) in IA and AG: True (2202 vs 2202 distinct visit keys). No replica failed or was excluded.
+
+A2 - Passenger-flow conservation O_i = O_(i-1) + B_i - A_i, capacity and terminal rules
+---------------------------------------------------------------------------------------
+Event order (GAMA): alighting, then boarding up to capacity; occupancy is recorded after the stop.
+B = boarded passengers ('boards' column), A = alightings ('dropoffs'), denied = 'residual_boards'.
+                                   check          IA          AG
+                                  visits 2202000.000 2202000.000
+                 conservation violations     887.000       0.000
+                             % of visits       0.040       0.000
+                       replicas affected     589.000       0.000
+passengers lost (sum of negative deltas)    6178.000       0.000
+                first-stop occ != boards       0.000       0.000
+                       terminal occ != 0       0.000       0.000
+                                 occ < 0       0.000       0.000
+                                occ > 80       0.000       0.000
+                       alight > on board       0.000       0.000
+                         negative counts       0.000       0.000
+                  denied while occ < cap       0.000       0.000
+                      visits at capacity   44541.000   46921.000
+IA: violations by stop position in route = {8: 4, 9: 29, 10: 180, 11: 116, 12: 11, 13: 59, 14: 488}
+Every violation in IA has a negative delta: occupancy falls below previous + boarded - alighted,
+i.e. passengers leave the bus without being counted as alightings. They are spread over the day
+(not only end of service). They are kept in all analyses (plan: violations are not removed).
+
+A3 - Waiting-time consistency
+-----------------------------
+                                            check         IA        AG
+                                    waiting times    9396837   9409638
+                                   negative waits          0         0
+                                    missing waits          0         0
+                    visits with #waits == boarded  100.000 % 100.000 %
+                                     wait max (s)     8354.0    9480.0
+                                       wait > 1 h       2576      3205
+                      median headway at stops (s)      776.0     772.0
+waits longer than the time since the previous bus     7.85 %    5.25 %
+   ... of which the previous bus denied boardings    32.99 %   61.48 %
+         ... previous bus had room (inconsistent)     489369    188502
+                     inconsistent: % of all waits     5.21 %    2.00 %
+    inconsistent: excess over headway p50/p90 (s) 266 / 1118   28 / 90
+inconsistent: at bunched visits (headway < 120 s)     59.5 %    24.4 %
+One waiting time is recorded per boarded passenger; denied passengers have no waiting time at that visit.
+A wait longer than the time since the previous bus at the same stop means the passenger was already
+queueing when that bus passed. This should only happen if that bus was full (denied boardings > 0):
+the check verifies that left-behind passengers stay in the queue and keep their accumulated wait.
+Finding: some passengers wait longer than the time since a previous bus that still had room.
+  AG: the excess is of the order of a dwell time (median ~30 s): stop times are recorded at departure,
+      so passengers arriving while the previous bus was dwelling appear to have waited longer than the
+      headway. Timing convention, not an error.
+  IA: the excess is much larger (minutes) and concentrates on bunched buses. In the IA model a bus asks
+      the stop to notify waiting passengers on arrival and only boards the passengers that answer that
+      broadcast with a 'Board me' request within 3 cycles (handle_stop_response_and_boards). Passengers
+      arriving after the broadcast, or not served when two buses are at the stop, stay in the queue even
+      if the bus has room. This is a behavioural difference of the IA protocol that lengthens IA waits.
+No passenger arrival timestamps are written, so waits cannot be re-derived independently.
+
+A4 - Time and schedule consistency
+----------------------------------
+                                           check               IA               AG
+                           negative travel times                0                0
+                     non-monotonic times in trip                0                0
+                  travel time at first stop != 0                0                0
+                              slot != hour(time)                0                0
+travel time vs time difference (median |diff| s)             22.0             18.0
+                                    DELAY events            13360            13940
+                    DELAY events with delay <= 0                0                0
+                                     event codes {'DELAY': 13360} {'DELAY': 13940}
+'travel time' = time_between_stops of the arriving stop; 'time difference' = difference of recorded stop
+times between consecutive stops (includes dwell at the previous stop).
+Only delayed departures are written as DELAY events, so a mean departure delay over all trips cannot be
+computed; Analysis B reports the number of DELAY events and their mean delay.
