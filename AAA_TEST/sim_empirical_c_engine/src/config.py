@@ -1,6 +1,6 @@
 """
-Configuration of the empirical-only analysis of the C-engine run SIMULATION_20261012_205659
-(1000 replicas, one results.csv). Same pre-specified margins and acceptance rules as
+Configuration of the empirical-only analysis of a C-engine run (default SIMULATION_20261012_205659, or SIM_RUN=<folder>;
+1000 replicas in one results.csv). Same pre-specified margins and acceptance rules as
 AAA_TEST/sim_comparison (fixed before any comparison was computed); only the empirical part
 (plan section 6, empirical sides of sections 7 and 9) is repeated. There is no IA/AG pair here.
 """
@@ -11,9 +11,11 @@ import subprocess
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, ".."))
 REPO = os.path.abspath(os.path.join(BASE, "..", ".."))
-LOGS = os.path.join(BASE, "logs")
-FIGS = os.path.join(BASE, "figures")
-CACHE = os.path.join(BASE, "cache")
+SIM = os.environ.get("SIM_RUN", "SIMULATION_20261012_205659")    # run to analyse (folder name under WEB_DEVEL/data/logs)
+RUN_ID = SIM.replace("SIMULATION_", "")
+LOGS = os.path.join(BASE, "logs", RUN_ID)
+FIGS = os.path.join(BASE, "figures", RUN_ID)
+CACHE = os.path.join(BASE, "cache", RUN_ID)
 for _d in (LOGS, FIGS, CACHE):
     os.makedirs(_d, exist_ok=True)
 
@@ -32,7 +34,6 @@ def _find_sim_root() -> str:
     raise FileNotFoundError(f"{SIM} not found in {cands}")
 
 
-SIM = "SIMULATION_20261012_205659"
 SIM_ROOT = _find_sim_root()
 KNOWN = os.path.join(REPO, "WEB_DEVEL", "data", "known_data")
 INPUTS = os.path.join(SIM_ROOT, SIM, "includes")

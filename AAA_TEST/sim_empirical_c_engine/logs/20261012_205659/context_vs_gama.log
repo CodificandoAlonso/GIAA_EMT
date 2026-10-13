@@ -8,8 +8,8 @@ Pre-specified definitions (the same as AAA_TEST/sim_comparison, fixed before any
   operational issue rule: P(O >= 60) >= 0.1; crowding threshold 60 of capacity 80
   peak slots: (7, 8, 9, 17, 18, 19); bootstrap: resamples of complete replicas, seed 20261013
 
-Same inputs (stops, boarding, alighting, segment times) but different engine and a different schedule (167 vs 163 trips), so strata
-weights differ slightly. Values for AG and IA are read from AAA_TEST/sim_comparison/logs/c1_occupancy_strata.csv.
+Different engine; schedule 167 trips against 163 in the GAMA runs (see table1_integrity.log for the input comparison).
+Values for AG and IA are read from AAA_TEST/sim_comparison/logs/c1_occupancy_strata.csv.
       run  strata W1 mean W1 median mean |mean err| mean err (signed) mean SD err accepted BC % accepted W1 % mean |P60 err| pp mean P60 err pp (signed)
  C engine     475   4.866     4.235           4.043            -3.786      -0.040        57.263        18.737             2.124                   -1.027
 AG (GAMA)     475   6.978     6.817           4.574            -1.944       4.211        36.211        12.632             4.827                    3.674

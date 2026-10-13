@@ -18,7 +18,7 @@ import pandas as pd
 from scipy.stats import norm, spearmanr
 
 from config import (BC_ACCEPT, BOOTSTRAP, CAPACITY, COLOR, CROWDING, FIGS, INK, INPUTS, ISSUE_PROB, LOGS, MARGINS, PEAK_SLOTS,
-                    REF_LOGS, SEED, THRESHOLDS, TIMESLOTS, W1_ACCEPT_PAX, seq_cmap, setup_matplotlib)
+                    REF_LOGS, SEED, SIM_ROOT, THRESHOLDS, TIMESLOTS, W1_ACCEPT_PAX, seq_cmap, setup_matplotlib)
 from load import integrity, load_known, load_visits
 from metrics import Log, bc_normal, bc_project, boot_weights, ks_vs_normal, save_csv, w1_vs_normal
 from strata import GRID, known_aligned, normal_cdf_grid, occ_hist, pmf_stats, step_cdf_grid, w1_normal_from_counts
@@ -248,8 +248,13 @@ def main():
     log.table(pd.DataFrame({"check": list(ig), "value": [str(v) for v in ig.values()]}))
     log.p("")
     log.p(f"Anomaly events (EVENTS/anomalies.csv): {d['n_events']} rows over 1000 replicas.")
-    log.p("Schedule: 167 trips per replica; the GAMA runs of AAA_TEST/sim_comparison use 163 trips (final_input.json differs).")
-    log.p("Inputs for stops, boarding and alighting distributions and segment times are byte-identical to those runs.")
+    log.p(f"Schedule: {ig['trips_per_replica'][1]} trips per replica; the GAMA runs of AAA_TEST/sim_comparison use 163 trips.")
+    for f in ("input_stops.txt", "input_data_E01_toA.csv", "input_data_E01_toB.csv", "alighting_params_toA.csv", "alighting_params_toB.csv",
+              "input_times_stops_toA.csv", "input_times_stops_toB.csv", "final_input.json"):
+        ref = os.path.join(SIM_ROOT, "SIMULATION_20261012_170524", "includes", "INPUTS", f)
+        mine = os.path.join(INPUTS, f)
+        same = os.path.exists(ref) and os.path.exists(mine) and open(ref, "rb").read() == open(mine, "rb").read()
+        log.p(f"  {f}: {'identical' if same else 'DIFFERENT or missing'} to the GAMA runs' input")
     log.save()
 
     # ---- C1
@@ -458,14 +463,13 @@ def main():
     rows += [{"rule": f"W1 <= {x} pax", "accepted %": 100 * (t["W1"] <= x).mean()} for x in (1, 2, 3, 4, 5)]
     log.table(pd.DataFrame(rows), "{:.2f}")
     log.h("F4 / F5")
-    log.p("F4 (perturbation of the input calibration) needs new simulations: not done. F5: one route, working days, calibration-period validation only;")
-    log.p("this run uses a 167-trip schedule (the GAMA runs 163).")
+    log.p("F4 (perturbation of the input calibration) needs new simulations: not done. F5: one route, working days, calibration-period validation only.")
     log.save()
 
     # ---- context
     log = Log("context_vs_gama.log", "Context - this run next to the GAMA AG and IA runs (AAA_TEST/sim_comparison)")
-    log.p("Same inputs (stops, boarding, alighting, segment times) but different engine and a different schedule (167 vs 163 trips), so strata")
-    log.p("weights differ slightly. Values for AG and IA are read from AAA_TEST/sim_comparison/logs/c1_occupancy_strata.csv.")
+    log.p(f"Different engine; schedule {ig['trips_per_replica'][1]} trips against 163 in the GAMA runs (see table1_integrity.log for the input comparison).")
+    log.p("Values for AG and IA are read from AAA_TEST/sim_comparison/logs/c1_occupancy_strata.csv.")
     ref = pd.read_csv(os.path.join(REF_LOGS, "c1_occupancy_strata.csv"))
     rows = []
     for name, df in (("C engine", t), ("AG (GAMA)", ref[ref["model"] == "AG"]), ("IA (GAMA)", ref[ref["model"] == "IA"])):

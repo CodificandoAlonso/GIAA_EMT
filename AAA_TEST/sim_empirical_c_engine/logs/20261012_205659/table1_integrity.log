@@ -30,5 +30,12 @@ denied_while_below_capacity            0
            visits_after_24h         3467
 
 Anomaly events (EVENTS/anomalies.csv): 29222 rows over 1000 replicas.
-Schedule: 167 trips per replica; the GAMA runs of AAA_TEST/sim_comparison use 163 trips (final_input.json differs).
-Inputs for stops, boarding and alighting distributions and segment times are byte-identical to those runs.
+Schedule: 167 trips per replica; the GAMA runs of AAA_TEST/sim_comparison use 163 trips.
+  input_stops.txt: identical to the GAMA runs' input
+  input_data_E01_toA.csv: identical to the GAMA runs' input
+  input_data_E01_toB.csv: identical to the GAMA runs' input
+  alighting_params_toA.csv: identical to the GAMA runs' input
+  alighting_params_toB.csv: identical to the GAMA runs' input
+  input_times_stops_toA.csv: identical to the GAMA runs' input
+  input_times_stops_toB.csv: identical to the GAMA runs' input
+  final_input.json: DIFFERENT or missing to the GAMA runs' input

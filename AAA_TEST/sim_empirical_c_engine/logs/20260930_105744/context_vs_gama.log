@@ -1,0 +1,33 @@
+Context - this run next to the GAMA AG and IA runs (AAA_TEST/sim_comparison)
+============================================================================
+
+Run: SIMULATION_20260930_105744 (C engine, model key c_engine). Reference: WEB_DEVEL/data/known_data, used as is.
+Pre-specified definitions (the same as AAA_TEST/sim_comparison, fixed before any comparison):
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule: P(O >= 60) >= 0.1; crowding threshold 60 of capacity 80
+  peak slots: (7, 8, 9, 17, 18, 19); bootstrap: resamples of complete replicas, seed 20261013
+
+Different engine; schedule 163 trips against 163 in the GAMA runs (see table1_integrity.log for the input comparison).
+Values for AG and IA are read from AAA_TEST/sim_comparison/logs/c1_occupancy_strata.csv.
+      run  strata W1 mean W1 median mean |mean err| mean err (signed) mean SD err accepted BC % accepted W1 % mean |P60 err| pp mean P60 err pp (signed)
+ C engine     475   4.535     3.481           3.754            -3.221      -0.231        65.895        27.368             1.850                   -0.270
+AG (GAMA)     475   6.978     6.817           4.574            -1.944       4.211        36.211        12.632             4.827                    3.674
+IA (GAMA)     475   6.906     6.766           4.585            -2.008       4.028        37.895        13.895             4.696                    3.491
+
+P(O >= c) in % of visits
+ scope  c empirical % (GAMA weights) empirical % (C weights) C engine %   AG %   IA %
+global 40                     24.613                  24.611     18.065 23.894 23.716
+global 60                      5.621                   5.620      5.233  9.502  9.305
+global 70                      1.927                   1.926      2.599  5.437  5.254
+global 80                      0.506                   0.506      0.998  2.301  2.184
+  peak 40                     27.319                  27.322     19.680 25.533 25.079
+  peak 60                      6.915                   6.916      6.192 11.135 10.646
+  peak 70                      2.487                   2.488      3.225  6.780  6.373
+  peak 80                      0.688                   0.689      1.334  3.131  2.902
+
+Segment travel times
+      run  strata mean err (s) mean |sd err| cover95 mean
+ C engine     464        0.085         1.742        0.949
+AG (GAMA)     464        1.071         1.828        0.949
+IA (GAMA)     464        1.169         1.842        0.949
