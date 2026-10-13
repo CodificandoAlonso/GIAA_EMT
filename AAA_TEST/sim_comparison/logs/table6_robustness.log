@@ -1,0 +1,89 @@
+Table 6 - Robustness (Analysis F)
+=================================
+
+Pre-specified definitions (fixed before any comparison was computed):
+  margin occupancy_pax          = 2.0
+  margin travel_time_s          = 10.0
+  margin trip_duration_s        = 60.0
+  margin flow_per_visit_pax     = 0.5
+  margin wait_median_s          = 30.0
+  margin wait_tail_s            = 60.0
+  margin prob_pp                = 2.0
+  margin denied_rel             = 0.1
+  margin headway_cv             = 0.05
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule (D5): P(O >= 60) >= 0.10
+  crowding threshold: 60 passengers (75 % of capacity 80)
+  peak slots: (7, 8, 9, 17, 18, 19)
+  bootstrap: 1000 resamples of complete replicas, seed 20261013
+  equivalence: 95 % CI of the IA-AG difference inside +-margin -> EQUIVALENT;
+               CI entirely outside -> NOT EQUIVALENT; otherwise INCONCLUSIVE
+
+
+F1/F2 - IA vs AG and empirical fit by stratum group
+---------------------------------------------------
+Strata: direction x stop x departure slot (475). Groups come from config (peak slots), known_data (demand tertiles,
+cuts on the empirical mean occupancy), route position, and the model INPUTS (BASE_DATA): boarding intensity = mean of
+the input boarding distributions per stop (NORMAL: Param1; NEGATIVE BINOMIAL: r(1-p)/p; GEOMETRICAL rows ignored);
+alighting intensity proxy = mean beta-binomial alpha/(alpha+beta) per stop. Terminal-adjacent = first two stops after the
+departure terminal and last two before the final one.
+Columns: mean Delta = W1_IA - W1_AG against known_data (negative favours IA), replica-bootstrap 95 % CI (300 resamples).
+                                                    group  strata W1 IA W1 AG mean Delta (IA-AG) CI low CI high strata IA better % mean |IA-AG| mean occ max |IA-AG| IA-AG equivalent % mean W1(IA,AG)
+                                               all strata     475 6.906 6.978             -0.073 -0.131  -0.018             58.316                 0.369       1.618             96.421          0.495
+                                                     peak     150 7.172 7.353             -0.181 -0.297  -0.085             66.000                 0.378       1.124            100.000          0.539
+                                                 off-peak     325 6.783 6.805             -0.023 -0.090   0.047             54.769                 0.365       1.618             94.769          0.474
+                                                      toA     266 6.610 6.647             -0.037 -0.125   0.033             57.895                 0.296       1.342             97.744          0.433
+                                                      toB     209 7.282 7.400             -0.118 -0.206  -0.027             58.852                 0.462       1.618             94.737          0.573
+                                               demand low     158 5.517 5.592             -0.075 -0.128  -0.023             53.797                 0.317       1.288             96.835          0.372
+                                            demand medium     159 7.420 7.470             -0.050 -0.112   0.019             52.830                 0.363       1.618             94.969          0.526
+                                              demand high     158 7.777 7.870             -0.093 -0.206  -0.001             68.354                 0.427       1.413             97.468          0.586
+                                           mean >= 40 pax      80 8.212 8.313             -0.101 -0.258   0.025             65.000                 0.399       1.413             98.750          0.550
+                             position: departure terminal      38 2.088 2.138             -0.050 -0.116   0.017             55.263                 0.162       0.696            100.000          0.238
+                              position: terminal-adjacent     152 6.605 6.693             -0.088 -0.138  -0.037             57.895                 0.358       1.413             96.711          0.447
+                                      position: mid-route     285 7.708 7.776             -0.068 -0.142   0.004             58.947                 0.402       1.618             95.789          0.554
+     high-demand boarding stops (input mean, top tertile)     171 5.235 5.274             -0.040 -0.097   0.019             54.971                 0.314       1.618             98.246          0.423
+ not high-demand boarding stops (input mean, top tertile)     304 7.846 7.937             -0.091 -0.153  -0.035             60.197                 0.400       1.604             95.395          0.535
+    high alighting-probability stops (input, top tertile)     152 8.746 8.851             -0.104 -0.172  -0.037             59.211                 0.447       1.618             95.395          0.562
+not high alighting-probability stops (input, top tertile)     323 6.040 6.097             -0.058 -0.124  -0.002             57.895                 0.332       1.604             96.904          0.463
+
+Groups whose Delta CI excludes 0: 9/16; the largest |mean Delta| is 0.181 pax (tolerance 2.0). Preferred model by sign of mean Delta: IA in 16, AG in 0 of 16 groups.
+
+F3 - Sensitivity to the distance and to the acceptance threshold (occupancy strata, 475)
+----------------------------------------------------------------------------------------
+                         metric IA mean AG mean IA-AG mean strata where IA closer % preferred (mean)
+       W1 (primary, raw normal)  6.9057  6.9785    -0.0727                  58.3158               IA
+W1 vs normal clipped to [0, 80]  6.7872  6.8599    -0.0727                  58.3158               IA
+                   KS vs normal  0.2595  0.2603    -0.0008                  53.0526               IA
+     BC normal-normal (moments)  0.9248  0.9232     0.0015                  58.3158               IA
+              BC project method  0.9208  0.9192     0.0017                  58.9474               IA
+
+Share of strata accepted (%) under alternative thresholds
+                    rule    IA    AG IA-AG (pp)
+       BC project >= 0.9 77.26 76.63       0.63
+      BC project >= 0.93 66.53 65.47       1.05
+      BC project >= 0.95 55.79 54.11       1.68
+      BC project >= 0.97 37.89 36.21       1.68
+      BC project >= 0.99 15.37 15.58      -0.21
+ BC normal-normal >= 0.9 77.26 76.63       0.63
+BC normal-normal >= 0.95 55.79 54.74       1.05
+             W1 <= 1 pax  3.16  3.37      -0.21
+             W1 <= 2 pax 13.89 12.63       1.26
+             W1 <= 3 pax 20.42 20.84      -0.42
+             W1 <= 4 pax 27.58 27.16       0.42
+             W1 <= 5 pax 35.37 34.11       1.26
+
+Largest |IA - AG| in the share of accepted strata over all 12 rules: 1.68 pp. The sign of the difference changes across rules; it is positive (IA ahead) for most rules and negative for a few, always below 2 pp.
+Mean distance: IA is ahead of AG under every metric (last table above), by about 1 % of the error. Under every rule
+both models accept the same share of strata within about 2 pp, and at the project rule (BC >= 0.97) both reject the majority (IA 37.9 % accepted, AG 36.2 %).
+
+F4 - Input-calibration sensitivity
+----------------------------------
+NOT done. It needs new simulations with perturbed input distributions; the 1000 replicas of each run share one
+set of fitted parameters, so their variability is not uncertainty in the calibration (plan 14).
+
+F5 - External validity
+----------------------
+Demonstrated: one route (line 401, 12 buses, 82 + 81 trips), working days only, one demand regime, validation against
+fitted normals of the same operational period that calibrated the inputs (calibration-period, not out-of-sample).
+Hypotheses, not findings: other routes, holidays or free-travel days, atypical demand, changed frequency or capacity.

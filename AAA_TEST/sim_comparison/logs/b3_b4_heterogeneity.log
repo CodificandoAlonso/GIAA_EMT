@@ -1,0 +1,122 @@
+Analysis B3-B4 - Matched replicas and heterogeneity of IA-AG differences
+========================================================================
+
+Pre-specified definitions (fixed before any comparison was computed):
+  margin occupancy_pax          = 2.0
+  margin travel_time_s          = 10.0
+  margin trip_duration_s        = 60.0
+  margin flow_per_visit_pax     = 0.5
+  margin wait_median_s          = 30.0
+  margin wait_tail_s            = 60.0
+  margin prob_pp                = 2.0
+  margin denied_rel             = 0.1
+  margin headway_cv             = 0.05
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule (D5): P(O >= 60) >= 0.10
+  crowding threshold: 60 passengers (75 % of capacity 80)
+  peak slots: (7, 8, 9, 17, 18, 19)
+  bootstrap: 1000 resamples of complete replicas, seed 20261013
+  equivalence: 95 % CI of the IA-AG difference inside +-margin -> EQUIVALENT;
+               CI entirely outside -> NOT EQUIVALENT; otherwise INCONCLUSIVE
+
+
+B3 - Matched-replica comparison
+-------------------------------
+Not applicable: each GAMA batch draws its own random stream per replica (the MASTER_SEED of the
+pipeline is not used by GAMA and the two runs have different seeds), and IA consumes random numbers
+in a different order (one draw per passenger agent). Replicas are therefore treated as independent
+samples in every CI (independent bootstrap per model).
+
+B4 - Heterogeneity of the IA-AG difference in mean occupancy (strata: direction x stop x departure slot)
+--------------------------------------------------------------------------------------------------------
+Replica-bootstrap 95 % CI (500 resamples) of IA - AG per stratum; equivalence margin +-2.0 pax.
+Demand tertiles from known_data mean occupancy (cut points 18.6 and 33.3 pax),
+defined from the empirical reference, independently of the IA-AG comparison.
+Equivalence of the 475 strata: {'EQUIVALENT': 458, 'INCONCLUSIVE': 17}
+
+by direction
+dir  strata mean d (IA-AG) mean |d| max |d| mean W1 max W1 % equivalent
+toA     266         -0.098    0.296   1.342   0.433  1.346       97.744
+toB     209         -0.021    0.462   1.618   0.573  1.695       94.737
+
+peak (slots 7-9, 17-19) vs off-peak
+ peak  strata mean d (IA-AG) mean |d| max |d| mean W1 max W1 % equivalent
+False     325         -0.001    0.365   1.618   0.474  1.695       94.769
+ True     150         -0.201    0.378   1.124   0.539  1.151      100.000
+
+by demand tertile (known_data)
+demand  strata mean d (IA-AG) mean |d| max |d| mean W1 max W1 % equivalent
+   low     158         -0.087    0.317   1.288   0.372  1.309       96.835
+medium     159         -0.096    0.363   1.618   0.526  1.695       94.969
+  high     158         -0.009    0.427   1.413   0.586  1.464       97.468
+
+by departure slot
+ dep_slot  strata mean d (IA-AG) mean |d| max |d| mean W1 max W1 % equivalent
+        5      25          0.348    0.489   1.105   0.625  1.125      100.000
+        6      25          0.322    0.325   0.661   0.410  0.715      100.000
+        7      25         -0.464    0.473   1.121   0.575  1.137      100.000
+        8      25         -0.121    0.336   0.653   0.492  1.057      100.000
+        9      25         -0.161    0.245   0.593   0.481  0.769      100.000
+       10      25          0.100    0.220   0.643   0.377  0.716      100.000
+       11      25          0.045    0.154   0.362   0.288  0.456      100.000
+       12      25          0.223    0.333   0.950   0.425  0.952      100.000
+       13      25          0.089    0.132   0.328   0.352  0.574      100.000
+       14      25          0.305    0.334   0.842   0.464  0.906      100.000
+       15      25         -0.399    0.449   0.863   0.587  0.869       92.000
+       16      25          0.478    0.485   1.144   0.537  1.144      100.000
+       17      25         -0.314    0.336   0.685   0.503  0.909      100.000
+       18      25         -0.479    0.519   1.124   0.622  1.151      100.000
+       19      25          0.337    0.358   0.819   0.559  0.819      100.000
+       20      25         -0.452    0.475   1.342   0.570  1.346       76.000
+       21      25         -0.402    0.443   0.849   0.500  0.869      100.000
+       22      25         -0.447    0.670   1.618   0.754  1.695       64.000
+       23      25         -0.222    0.231   0.480   0.277  0.528      100.000
+
+by stop (route order within direction)
+dir  stop  strata mean d (IA-AG) mean |d| max |d| mean W1 max W1 % equivalent
+toA  2646      19          0.007    0.097   0.233   0.130  0.242      100.000
+toA   562      19         -0.039    0.127   0.351   0.167  0.399      100.000
+toA  4090      19         -0.026    0.143   0.466   0.183  0.476      100.000
+toA  4188      19         -0.040    0.250   0.497   0.350  0.593      100.000
+toA  5939      19         -0.055    0.269   0.519   0.368  0.559      100.000
+toA  3995      19         -0.096    0.325   0.753   0.437  0.784      100.000
+toA  3991      19         -0.083    0.306   0.732   0.484  0.808      100.000
+toA  3903      19         -0.137    0.363   1.063   0.569  1.063      100.000
+toA  2539      19         -0.165    0.377   1.100   0.592  1.138       94.737
+toA  2535      19         -0.156    0.369   1.124   0.582  1.234       94.737
+toA  1929      19         -0.152    0.369   1.173   0.577  1.281       94.737
+toA  4032      19         -0.126    0.382   1.173   0.562  1.213       94.737
+toA  5360      19         -0.161    0.400   1.342   0.569  1.346       94.737
+toA    82      19         -0.141    0.364   1.264   0.491  1.264       94.737
+toB  5727      19          0.027    0.227   0.696   0.346  0.696      100.000
+toB    81      19          0.073    0.422   1.144   0.536  1.147       94.737
+toB  1167      19          0.051    0.473   1.413   0.608  1.464       94.737
+toB  2538      19          0.044    0.477   1.382   0.634  1.444       94.737
+toB  3929      19         -0.020    0.546   1.618   0.669  1.695       94.737
+toB  3990      19          0.009    0.537   1.604   0.684  1.679       94.737
+toB  3994      19         -0.047    0.490   1.288   0.633  1.309       89.474
+toB  5938      19         -0.029    0.494   1.272   0.632  1.284       89.474
+toB  4187      19         -0.107    0.483   1.238   0.544  1.267       94.737
+toB  2964      19         -0.109    0.482   1.273   0.526  1.286       94.737
+toB   649      19         -0.119    0.451   1.143   0.494  1.156      100.000
+
+10 strata with the largest |IA - AG| mean-occupancy difference
+dir  stop  dep_slot mean_IA mean_AG d_mean ci_low ci_high    W1  equivalence
+toB  3929        22  27.415  29.033 -1.618 -2.663  -0.518 1.695 INCONCLUSIVE
+toB  3990        22  22.489  24.093 -1.604 -2.582  -0.535 1.679 INCONCLUSIVE
+toB  1167        22  40.555  41.969 -1.413 -2.463  -0.292 1.464 INCONCLUSIVE
+toB  2538        22  34.957  36.339 -1.382 -2.453  -0.256 1.444 INCONCLUSIVE
+toA  5360        20  18.749  20.090 -1.342 -2.194  -0.539 1.346 INCONCLUSIVE
+toB  3994        22  15.330  16.618 -1.288 -2.207  -0.335 1.309 INCONCLUSIVE
+toB  2964        22  15.051  16.323 -1.273 -2.160  -0.376 1.286 INCONCLUSIVE
+toB  5938        22  14.042  15.314 -1.272 -2.179  -0.316 1.284 INCONCLUSIVE
+toA    82        20  14.137  15.401 -1.264 -2.019  -0.536 1.264 INCONCLUSIVE
+toB  4187        22  17.529  18.767 -1.238 -2.103  -0.317 1.267 INCONCLUSIVE
+
+Trips with and without denied boardings
+model  trips with denied boarding  trips share % mean occupancy over trip denied per trip
+   IA                       False 149109  91.478                   20.443           0.000
+   IA                        True  13891   8.522                   53.331          23.279
+   AG                       False 148555  91.138                   20.386           0.000
+   AG                        True  14445   8.862                   53.280          25.204

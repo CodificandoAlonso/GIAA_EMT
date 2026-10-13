@@ -1,0 +1,69 @@
+Table 5 - Computational cost (Analysis E)
+=========================================
+
+Pre-specified definitions (fixed before any comparison was computed):
+  margin occupancy_pax          = 2.0
+  margin travel_time_s          = 10.0
+  margin trip_duration_s        = 60.0
+  margin flow_per_visit_pax     = 0.5
+  margin wait_median_s          = 30.0
+  margin wait_tail_s            = 60.0
+  margin prob_pp                = 2.0
+  margin denied_rel             = 0.1
+  margin headway_cv             = 0.05
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule (D5): P(O >= 60) >= 0.10
+  crowding threshold: 60 passengers (75 % of capacity 80)
+  peak slots: (7, 8, 9, 17, 18, 19)
+  bootstrap: 1000 resamples of complete replicas, seed 20261013
+  equivalence: 95 % CI of the IA-AG difference inside +-margin -> EQUIVALENT;
+               CI entirely outside -> NOT EQUIVALENT; otherwise INCONCLUSIVE
+
+
+E1 - Wall-clock time (one measurement per model)
+------------------------------------------------
+Source: pipeline logs. Simulation phase = GAMA headless batch (includes JVM start-up and the writing of the
+RESULTS / EVENTS / PASSENGERS files of 1000 replicas). Pipeline = preparation + simulation + extraction.
+Single run per model: no variance can be estimated, so no CI and no significance claim.
+AG: execution phase began 2026-10-12 17:05:43, log ends 2026-10-12 17:44:59; IA: execution phase began 2026-10-12 17:44:59, log ends 2026-10-12 20:14:52.
+Concurrent runs reported at start: AG 1, IA 1. IA preparation started 2026-10-12 17:24:53 (before AG finished at 2026-10-12 17:44:59)
+but its simulation phase started only after the AG pipeline ended, so the two simulation phases did not overlap.
+           phase  AG (s)  IA (s) AG (h:mm:ss) IA (h:mm:ss) speedup S = T_IA/T_AG reduction R = 1 - T_AG/T_IA (%)
+Simulation phase    2173    8813      0:36:13      2:26:53                  4.06                           75.34
+  Whole pipeline    2356    8993      0:39:16      2:29:53                  3.82                           73.80
+ Data extraction     183     180      0:03:03      0:03:00                  0.98                           -1.67
+
+Throughput and cost per replica (simulation phase, 1000 replicas, 8 cores)
+model replicas/hour wall-clock s per replica core-seconds per replica (8 cores x wall-clock; allocated, not measured CPU)
+   AG       1656.70                     2.17                                                                        17.38
+   IA        408.49                     8.81                                                                        70.50
+Per-replica wall-clock distribution (median, IQR) is not available: the pipeline logs only the total of the batch.
+
+E2 - Output size and workload
+-----------------------------
+  file set  AG MB  IA MB AG KB per replica IA KB per replica
+   RESULTS 125.88 125.89            128.91            128.91
+    EVENTS   0.75   0.72              0.77              0.73
+PASSENGERS 111.81 111.62            114.49            114.30
+
+Bus-stop visits per replica: AG 2202, IA 2202 (same service).
+Boarding passengers per replica (passenger entities created by the model that board): AG 9410, IA 9397.
+CPU time, peak memory, agent messages and protocol exchanges: not measured (not requested / not logged); not estimated.
+
+E3 - Scaling
+------------
+Only one operating point exists (same demand, route and 1000 replicas). Scaling with passenger population, route
+size or replica count cannot be inferred from it; a controlled scaling experiment would be a new experiment (not done).
+
+E4 - Efficiency vs fidelity
+---------------------------
+         scope model runtime (h) mean W1 vs empirical (pax) accepted BC %
+        global    AG       0.604                      6.978        36.211
+        global    IA       2.448                      6.906        37.895
+          peak    AG       0.604                      7.353        37.333
+          peak    IA       2.448                      7.172        38.000
+mean >= 40 pax    AG       0.604                      8.313        28.750
+mean >= 40 pax    IA       2.448                      8.212        30.000
+
+IA needs 1.84 h more wall-clock for 1000 replicas and reduces the mean occupancy W1 by 0.073 pax (1.0 % of the AG error), against a 2 pax tolerance (see Table 3 for the CI).

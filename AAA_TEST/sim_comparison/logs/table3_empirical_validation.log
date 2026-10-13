@@ -1,0 +1,192 @@
+Table 3 - Empirical validation against known_data (Analysis C)
+==============================================================
+
+Pre-specified definitions (fixed before any comparison was computed):
+  margin occupancy_pax          = 2.0
+  margin travel_time_s          = 10.0
+  margin trip_duration_s        = 60.0
+  margin flow_per_visit_pax     = 0.5
+  margin wait_median_s          = 30.0
+  margin wait_tail_s            = 60.0
+  margin prob_pp                = 2.0
+  margin denied_rel             = 0.1
+  margin headway_cv             = 0.05
+  empirical acceptance: Bhattacharyya coefficient >= 0.97 (project rule, data_extractor.py)
+  empirical W1 tolerance: 2.0 passengers
+  operational issue rule (D5): P(O >= 60) >= 0.10
+  crowding threshold: 60 passengers (75 % of capacity 80)
+  peak slots: (7, 8, 9, 17, 18, 19)
+  bootstrap: 1000 resamples of complete replicas, seed 20261013
+  equivalence: 95 % CI of the IA-AG difference inside +-margin -> EQUIVALENT;
+               CI entirely outside -> NOT EQUIVALENT; otherwise INCONCLUSIVE
+
+Reference: known_data normal parameters, used as is. Not independent of the simulation inputs: the same
+operational records calibrate both the inputs and this reference (calibration-period validation, plan 2.3).
+
+C1 - Occupancy by direction x stop x trip-departure slot (475 strata, terminal visits excluded)
+-----------------------------------------------------------------------------------------------
+Distances are against the untruncated N(mu, sigma) of known_data. W1 in passengers, from CDFs on a 0.1 pax grid.
+BC = Bhattacharyya coefficient with the project method (normal-normal if the simulated sample passes the
+simplified normality test, else gaussian KDE vs normal); accepted if BC >= 0.97. W1 accepted if <= 2.0 pax.
+P60 error = P_sim(O >= 60) - P_emp(O >= 60) in percentage points (empirical: normal tail with continuity correction).
+               metric      IA      AG
+               strata 475.000 475.000
+mean |mean err| (pax)   4.585   4.574
+       max |mean err|  20.584  20.315
+          mean SD err   4.028   4.211
+        mean |SD err|   4.612   4.741
+    mean |median err|   6.211   6.187
+       mean |p90 err|   9.074   9.321
+            W1 median   6.766   6.817
+               W1 p90  11.814  11.813
+               W1 max  20.625  20.355
+            BC median   0.957   0.956
+               BC min   0.448   0.390
+        accepted BC %  37.895  36.211
+        accepted W1 %  13.895  12.632
+  failing strata (BC) 295.000 303.000
+   W1 mean in failing   8.918   8.886
+    mean |P60 err| pp   4.696   4.827
+     max |P60 err| pp  42.441  42.401
+
+Primary estimand: Delta_s = W1_IA,s - W1_AG,s (negative favours IA). Mean over strata with a 95 % percentile CI
+from 300 bootstrap resamples of complete replicas (independent per model).
+         group  strata  W1 IA  W1 AG mean Delta (IA-AG)  CI low CI high strata IA better % median Delta max |Delta|
+    all strata     475 6.9057 6.9785            -0.0727 -0.1309 -0.0184            58.3158      -0.0582      1.4460
+          peak     150 7.1723 7.3533            -0.1811 -0.2969 -0.0855            66.0000      -0.1939      0.8144
+      off-peak     325 6.7827 6.8054            -0.0228 -0.0897  0.0473            54.7692      -0.0345      1.4460
+           toA     266 6.6102 6.6472            -0.0370 -0.1249  0.0328            57.8947      -0.0454      0.7045
+           toB     209 7.2818 7.4001            -0.1182 -0.2063 -0.0266            58.8517      -0.0872      1.4460
+    demand low     158 5.5174 5.5924            -0.0750 -0.1276 -0.0232            53.7975      -0.0240      0.8836
+ demand medium     159 7.4200 7.4701            -0.0502 -0.1120  0.0193            52.8302      -0.0318      1.1053
+   demand high     158 7.7765 7.8698            -0.0932 -0.2056 -0.0015            68.3544      -0.1570      1.4460
+mean >= 40 pax      80 8.2118 8.3130            -0.1011 -0.2577  0.0246            65.0000      -0.1472      1.4460
+
+Reading: mean Delta = -0.0727 pax, CI [-0.1309, -0.0184]; margin for a practically relevant fidelity gain = 2.0 pax (config) -> difference within margin
+
+10 strata with the largest W1 (either model)
+model dir  stop  dep_slot emp_mean emp_sd sim_mean sim_sd     W1    BC BC_method P60_err_pp
+   IA toB  2538        23   32.879 12.762   12.294 10.414 20.625 0.670    normal     -1.849
+   AG toB  2538        23   32.879 12.762   12.564 10.888 20.355 0.689    normal     -1.782
+   IA toA  3995        23   32.505 13.418   12.651 13.933 19.922 0.768    normal     -1.912
+   IA toA  3991        23   31.867 12.780   12.047 13.943 19.873 0.759    normal     -1.280
+   IA toA  5939        23   32.708 13.683   13.225 13.589 19.560 0.775    normal     -2.161
+   AG toA  3991        23   31.867 12.780   12.475 14.250 19.451 0.771    normal     -0.980
+   AG toA  3995        23   32.505 13.418   13.126 14.149 19.447 0.781    normal     -1.712
+   AG toA  5939        23   32.708 13.683   13.705 13.638 19.080 0.785    normal     -2.111
+   IA toB  1167        23   36.391 12.245   17.474 10.213 18.927 0.698    normal     -2.890
+   AG toB  2538         5   31.941  6.875   13.164  8.565 18.777 0.476    normal     -0.003
+
+Method of BC acceptance by model
+model BC_method  strata
+   AG       kde      24
+   AG    normal     451
+   IA       kde      20
+   IA    normal     455
+
+5 strata where IA is closest and 5 where AG is closest (Delta = W1_IA - W1_AG)
+dir  stop  dep_slot  W1_IA  W1_AG  Delta
+toB  2538         5 17.672 18.777 -1.105
+toB  1167         5 17.495 18.518 -1.024
+toB    81         5 11.157 12.114 -0.957
+toB    81        16  3.829  4.753 -0.924
+toB  2538        16  4.273  5.186 -0.912
+toB  1167        22  3.575  2.129  1.446
+toB  2538        22  3.778  2.412  1.367
+toB  3929        22  5.038  3.940  1.098
+toB  3929        21 13.939 13.110  0.828
+toB  2538        21 14.039 13.347  0.692
+
+C2 - Boardings and alightings
+-----------------------------
+known_data contains only occupancy and segment travel-time normals. There is no empirical reference for
+boardings or alightings per visit, so they are NOT validated here; the IA vs AG comparison (B2) is the only
+evidence. Alightings are an externally imposed calibrated input (beta-binomial), so agreement between the
+models says nothing about passenger decision-making.
+
+C3 - Segment travel times by segment x slot of the visit
+--------------------------------------------------------
+Times are sampled by the simulator from the same fitted normal distributions that known_data holds (plan 6, C3):
+this validates the sampling and calibration procedure, not an independently learned traffic model.
+MAE = mean over strata of |pooled simulated mean - empirical mean|, replica-bootstrap CI. cover95 = share of simulated
+times inside mu +- 1.96 sigma (nominal 95 % if the simulator reproduces the normal; lower where the normal has
+negative support truncated/clipped by the simulator).
+                  metric           IA           AG
+                  strata          464          464
+            MAE mean (s)      2.71746     2.670257
+              MAE 95% CI [2.70, 2.90] [2.67, 2.88]
+            mean err (s)     1.168921     1.070921
+       mean |sd err| (s)     1.842495     1.827539
+          mean |q05 err|     2.470318     2.376515
+          mean |q50 err|     2.605515     2.558429
+          mean |q95 err|     5.317649     5.302723
+               W1 median     1.331772     1.336162
+                  W1 p90     6.316043     5.901864
+                  W1 max    57.269561     56.35355
+            cover95 mean       0.9487     0.948837
+             cover95 min     0.887016     0.880981
+strata |mean err| > 10 s           29           26
+
+Delta W1 (IA - AG) over 464 common segment x slot strata: mean +0.008 s, median +0.000 s, IA closer in 50.0 % of strata (margin 10 s).
+
+10 segment x slot strata with the largest W1
+model dir      seg  slot  n_sim emp_mean  emp_sd sim_mean  sim_sd mean_err     W1 cover95 negative_support_mass
+   IA toB  5727-81    10   4190  766.037 230.817  823.227 281.666   57.190 57.270   0.889                 0.000
+   AG toB  5727-81    10   4201  766.037 230.817  821.400 286.678   55.363 56.354   0.881                 0.000
+   AG toB  5727-81     9   5515  882.141 347.046  840.642 326.463  -41.499 43.179   0.961                 0.006
+   AG toA 2646-562    10   4415  485.185 245.453  527.764 272.579   42.579 42.522   0.937                 0.024
+   IA toA 2646-562    10   4355  485.185 245.453  527.566 273.052   42.381 42.322   0.937                 0.024
+   IA toB  5727-81     9   5320  882.141 347.046  844.918 328.267  -37.223 38.618   0.958                 0.006
+   IA toB  5727-81     8   4772  710.545 292.998  677.706 265.502  -32.839 37.270   0.968                 0.008
+   IA toB  5727-81    21   4296  694.298 177.529  730.241 204.203   35.943 36.263   0.907                 0.000
+   AG toA 2646-562     6   3252  596.962 233.424  562.345 222.983  -34.617 35.477   0.952                 0.005
+   AG toA 2646-562     5   1739  293.888 171.774  266.601 147.438  -27.287 34.208   0.986                 0.044
+
+Residual pattern: mean error (sim - emp) by slot (mean over segments) and by direction
+ slot    AG    IA
+    5 -3.13 -1.87
+    6 -1.53 -1.24
+    7  0.46  0.33
+    8 -0.97 -0.83
+    9 -0.96 -0.36
+   10  6.11  6.07
+   11  2.70  2.26
+   12  0.60  0.77
+   13 -0.18 -0.36
+   14  0.85  0.81
+   15  1.81  1.90
+   16  2.28  2.01
+   17  0.21 -0.28
+   18  1.02  0.80
+   19  1.39  1.90
+   20  1.41  1.40
+   21  2.22  2.60
+   22  1.57  2.23
+   23  2.64  2.74
+
+model dir  mean mean |err|
+   AG toA 1.071      2.583
+   AG toB 1.071      2.787
+   IA toA 1.293      2.599
+   IA toB 1.002      2.877
+
+C4 - Waiting times
+------------------
+There is no empirical waiting-time reference in known_data. Waiting time is a derived simulation output: it is
+compared between IA and AG (B1/B2) and checked for internal consistency (A3), and is NOT empirically validated.
+
+C5 - Reporting levels (occupancy, W1 against known_data)
+--------------------------------------------------------
+model                                           level  strata W1 mean W1 max BC min accepted BC % accepted W1 % mean |mean err| mean |P60 err| pp
+   IA                     global (pooled over strata)     475   6.906 20.625  0.448        37.895        13.895           4.585             4.696
+   IA                                      peak slots     150   7.172 14.928  0.612        38.000        10.667           4.856             5.493
+   IA                                        off-peak     325   6.783 20.625  0.448        37.846        15.385           4.460             4.328
+   IA excl. terminals 2646/5727 (pipeline convention)     437   7.325 20.625  0.529        34.325         8.696           4.843             5.093
+   IA                             high-demand tertile     158   7.777 18.927  0.698        43.038         1.266           5.416             9.129
+   IA                      strata with mean >= 40 pax      80   8.212 15.387  0.901        30.000         1.250           5.857            11.666
+   AG                     global (pooled over strata)     475   6.978 20.355  0.390        36.211        12.632           4.574             4.827
+   AG                                      peak slots     150   7.353 15.127  0.597        37.333        10.000           4.877             5.904
+   AG                                        off-peak     325   6.805 20.355  0.390        35.692        13.846           4.435             4.330
+   AG excl. terminals 2646/5727 (pipeline convention)     437   7.399 20.355  0.468        32.723         7.780           4.822             5.236
+   AG                             high-demand tertile     158   7.870 18.684  0.716        40.506         1.266           5.371             9.168
+   AG                      strata with mean >= 40 pax      80   8.313 15.087  0.900        28.750         1.250           5.800            11.550
