@@ -55,7 +55,7 @@ const GEODATA_E01 = {
 };
 
 // Direction labels (populated from known_data general_info)
-let DIR_LABEL = { toA: 'Sentido A', toB: 'Sentido B' };
+let DIR_LABEL = { toA: t('Sentido A'), toB: t('Sentido B') };
 
 // Bus terminal stops
 const STOP_TOA = '2646';  // departure stop for toA trips
@@ -131,7 +131,7 @@ async function saveInputs() {
   };
 
   if (description.seed && !/^\d{1,20}$/.test(description.seed)) {
-    throw new Error('La semilla debe ser un número entero positivo (máx. 20 cifras)');
+    throw new Error(t('La semilla debe ser un número entero positivo (máx. 20 cifras)'));
   }
 
   const body = {
@@ -160,25 +160,25 @@ async function saveInputs() {
 async function handleSave() {
   try {
     await saveInputs();
-    toast('Configuración guardada correctamente', 'success');
+    toast(t('Configuración guardada correctamente'), 'success');
   } catch (err) {
-    toast('Error al guardar: ' + err.message, 'error');
+    toast(t('Error al guardar: {error}', { error: err.message }), 'error');
   }
 }
 
 async function handleRun() {
   try {
     await saveInputs();
-    toast('Guardado. Lanzando simulación...', 'info');
+    toast(t('Guardado. Lanzando simulación...'), 'info');
     const res = await fetch(`/api/simulations/${simId}/run`, { method: 'POST' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-      toast(data.error || 'Error al lanzar la simulación', 'error');
+      toast(data.error || t('Error al lanzar la simulación'), 'error');
       return;
     }
     toast(data.queued
-      ? `Simulación en cola (posición ${data.position}): arrancará cuando haya hueco`
-      : 'Simulación lanzada en segundo plano', 'success');
+      ? t('Simulación en cola (posición {position}): arrancará cuando haya hueco', { position: data.position })
+      : t('Simulación lanzada en segundo plano'), 'success');
     setTimeout(() => { window.location.href = '/'; }, 2000);
   } catch (err) {
     toast('Error: ' + err.message, 'error');
@@ -212,9 +212,9 @@ function renderBusesView(container) {
   const filterBar = document.createElement('div');
   filterBar.className = 'buses-editor-filter-bar';
   filterBar.innerHTML = `
-    <span class="analysis-filter-label">Ver por:</span>
-    <button class="filter-btn ${_busViewFilter === 'physical' ? 'active' : ''}" id="bus-filter-physical">&#128652; Autobús físico</button>
-    <button class="filter-btn ${_busViewFilter === 'timeslot' ? 'active' : ''}" id="bus-filter-ts">&#128336; Franja horaria</button>
+    <span class="analysis-filter-label">${t('Ver por:')}</span>
+    <button class="filter-btn ${_busViewFilter === 'physical' ? 'active' : ''}" id="bus-filter-physical">&#128652; ${t('Autobús físico')}</button>
+    <button class="filter-btn ${_busViewFilter === 'timeslot' ? 'active' : ''}" id="bus-filter-ts">&#128336; ${t('Franja horaria')}</button>
     <div id="bus-ts-selector" style="display:${_busViewFilter === 'timeslot' ? 'flex' : 'none'};align-items:center;gap:0.35rem;flex-wrap:wrap;margin-left:0.75rem;"></div>
   `;
   wrap.appendChild(filterBar);
@@ -253,7 +253,7 @@ function renderBusTsSelector(container) {
   container.innerHTML = '';
   const label = document.createElement('span');
   label.className = 'timeslot-selector-label';
-  label.textContent = 'Hora:';
+  label.textContent = t('Hora:');
   container.appendChild(label);
   for (let h = 5; h <= 23; h++) {
     const btn = document.createElement('button');
@@ -286,10 +286,10 @@ function renderPhysicalBusView(container) {
   header.className = 'buses-editor-header';
   header.innerHTML = `
     <div>
-      <h3>Autobuses Físicos</h3>
-      <p class="buses-editor-subtitle">Cada autobús físico tiene una lista de salidas desde los terminales de la línea.</p>
+      <h3>${t('Autobuses Físicos')}</h3>
+      <p class="buses-editor-subtitle">${t('Cada autobús físico tiene una lista de salidas desde los terminales de la línea.')}</p>
     </div>
-    <button class="btn btn-primary btn-sm" id="btn-add-bus">+ Nuevo autobús</button>
+    <button class="btn btn-primary btn-sm" id="btn-add-bus">${t('+ Nuevo autobús')}</button>
   `;
   container.appendChild(header);
 
@@ -300,12 +300,12 @@ function renderPhysicalBusView(container) {
   addBusForm.style.display = 'none';
   addBusForm.innerHTML = `
     <div class="add-bus-form-inner">
-      <label>ID del autobús (número):</label>
-      <input type="text" id="new-bus-id" placeholder="ej. 3599" maxlength="6" />
-      <button class="btn btn-primary btn-sm" id="btn-confirm-add-bus">Crear</button>
-      <button class="btn btn-outline btn-sm" id="btn-cancel-add-bus">Cancelar</button>
+      <label>${t('ID del autobús (número):')}</label>
+      <input type="text" id="new-bus-id" placeholder="${t('ej. 3599')}" maxlength="6" />
+      <button class="btn btn-primary btn-sm" id="btn-confirm-add-bus">${t('Crear')}</button>
+      <button class="btn btn-outline btn-sm" id="btn-cancel-add-bus">${t('Cancelar')}</button>
     </div>
-    <p class="add-bus-form-hint">El ID es el identificador del autobús físico (matrícula/número de unidad).</p>
+    <p class="add-bus-form-hint">${t('El ID es el identificador del autobús físico (matrícula/número de unidad).')}</p>
   `;
   container.appendChild(addBusForm);
 
@@ -327,13 +327,13 @@ function renderPhysicalBusView(container) {
   });
   document.getElementById('btn-confirm-add-bus').addEventListener('click', () => {
     const newId = document.getElementById('new-bus-id').value.trim();
-    if (!newId) { toast('Introduce un ID de autobús', 'error'); return; }
-    if (inputData.buses[newId]) { toast('Ya existe un autobús con ese ID', 'error'); return; }
+    if (!newId) { toast(t('Introduce un ID de autobús'), 'error'); return; }
+    if (inputData.buses[newId]) { toast(t('Ya existe un autobús con ese ID'), 'error'); return; }
     inputData.buses[newId] = [];
     addBusForm.style.display = 'none';
     document.getElementById('new-bus-id').value = '';
     renderBusList();
-    toast(`Autobús ${newId} creado`, 'success');
+    toast(t('Autobús {id} creado', { id: newId }), 'success');
   });
 }
 
@@ -352,8 +352,8 @@ function renderTimeslotBusView(container, ts) {
   header.className = 'buses-editor-header';
   header.innerHTML = `
     <div>
-      <h3>Franja ${ts}:00 – ${ts + 1}:00</h3>
-      <p class="buses-editor-subtitle">${departures.length} salida${departures.length !== 1 ? 's' : ''} programada${departures.length !== 1 ? 's' : ''} en esta franja.</p>
+      <h3>${t('Franja {ts}:00 – {next}:00', { ts, next: ts + 1 })}</h3>
+      <p class="buses-editor-subtitle">${t(departures.length === 1 ? '{n} salida programada en esta franja.' : '{n} salidas programadas en esta franja.', { n: departures.length })}</p>
     </div>
   `;
   container.appendChild(header);
@@ -362,7 +362,7 @@ function renderTimeslotBusView(container, ts) {
     const empty = document.createElement('div');
     empty.className = 'empty-state';
     empty.style.padding = '2rem';
-    empty.innerHTML = `<p>No hay salidas programadas en la franja ${ts}:00 – ${ts + 1}:00.</p>`;
+    empty.innerHTML = `<p>${t('No hay salidas programadas en la franja {ts}:00 – {next}:00.', { ts, next: ts + 1 })}</p>`;
     container.appendChild(empty);
     return;
   }
@@ -374,9 +374,9 @@ function renderTimeslotBusView(container, ts) {
   table.innerHTML = `
     <thead>
       <tr>
-        <th>Autobús</th>
-        <th>Dirección</th>
-        <th>Hora de salida</th>
+        <th>${t('Autobús')}</th>
+        <th>${t('Dirección')}</th>
+        <th>${t('Hora de salida')}</th>
         <th></th>
       </tr>
     </thead>
@@ -393,8 +393,8 @@ function renderTimeslotBusView(container, ts) {
     tr.innerHTML = `
       <td class="trip-idx"><span class="bus-id-badge">${escHtml(dep.busId)}</span></td>
       <td>${dir}</td>
-      <td style="font-family:monospace;">${escHtml(dep.time)}</td>
-      <td><button class="btn btn-sm btn-danger-soft" title="Eliminar salida">&#10005;</button></td>
+      <td style="font-variant-numeric:tabular-nums;">${escHtml(dep.time)}</td>
+      <td><button class="btn btn-sm btn-danger-soft" title="${t('Eliminar salida')}" aria-label="${t('Eliminar salida')}">&#10005;</button></td>
     `;
     tr.querySelector('button').addEventListener('click', () => {
       const trips = inputData.buses[dep.busId];
@@ -403,7 +403,7 @@ function renderTimeslotBusView(container, ts) {
       if (idx !== -1) {
         trips.splice(idx, 1);
         renderBusViewContent();
-        toast('Salida eliminada', 'info');
+        toast(t('Salida eliminada'), 'info');
       }
     });
     tbody.appendChild(tr);
@@ -422,7 +422,7 @@ function renderBusList() {
   const busIds = Object.keys(inputData.buses).sort((a, b) => Number(a) - Number(b));
 
   if (busIds.length === 0) {
-    list.innerHTML = `<div class="empty-state" style="padding:2rem;"><p>No hay autobuses configurados. Añade uno con el botón de arriba.</p></div>`;
+    list.innerHTML = `<div class="empty-state" style="padding:2rem;"><p>${t('No hay autobuses configurados. Añade uno con el botón de arriba.')}</p></div>`;
     return;
   }
 
@@ -443,14 +443,14 @@ function buildBusCard(busId) {
   cardHeader.innerHTML = `
     <div class="bus-card-title">
       <span class="bus-card-icon">&#128652;</span>
-      <span class="bus-card-id">Autobús ${escHtml(busId)}</span>
-      <span class="bus-card-count">${trips.length} salida${trips.length !== 1 ? 's' : ''}</span>
+      <span class="bus-card-id">${escHtml(t('Autobús {id}', { id: busId }))}</span>
+      <span class="bus-card-count">${t(trips.length === 1 ? '{n} salida' : '{n} salidas', { n: trips.length })}</span>
     </div>
     <div class="bus-card-actions">
       <button class="btn btn-sm btn-outline btn-collapse" data-bus="${escHtml(busId)}">
-        <span class="collapse-icon">&#9660;</span> Ver salidas
+        <span class="collapse-icon">&#9660;</span> ${t('Ver salidas')}
       </button>
-      <button class="btn btn-sm btn-danger" data-delete-bus="${escHtml(busId)}">&#128465; Eliminar</button>
+      <button class="btn btn-sm btn-danger" data-delete-bus="${escHtml(busId)}">&#128465; ${t('Eliminar')}</button>
     </div>
   `;
   card.appendChild(cardHeader);
@@ -470,15 +470,15 @@ function buildBusCard(busId) {
     const open = tripsSection.style.display !== 'none';
     tripsSection.style.display = open ? 'none' : 'block';
     btn.querySelector('.collapse-icon').textContent = open ? '▼' : '▲';
-    btn.querySelector('.collapse-icon').nextSibling.textContent = open ? ' Ver salidas' : ' Ocultar';
+    btn.querySelector('.collapse-icon').nextSibling.textContent = open ? ' ' + t('Ver salidas') : ' ' + t('Ocultar');
   });
 
   // Wire up delete bus
   cardHeader.querySelector('[data-delete-bus]').addEventListener('click', () => {
-    if (!confirm(`¿Eliminar el autobús ${busId} y todas sus salidas?`)) return;
+    if (!confirm(t('¿Eliminar el autobús {id} y todas sus salidas?', { id: busId }))) return;
     delete inputData.buses[busId];
     renderBusList();
-    toast(`Autobús ${busId} eliminado`, 'info');
+    toast(t('Autobús {id} eliminado', { id: busId }), 'info');
   });
 
   return card;
@@ -489,7 +489,7 @@ function buildTripsTable(busId) {
   const wrap = document.createElement('div');
 
   if (trips.length === 0) {
-    wrap.innerHTML = `<p class="bus-trips-empty">Sin salidas. Añade una con el botón de abajo.</p>`;
+    wrap.innerHTML = `<p class="bus-trips-empty">${t('Sin salidas. Añade una con el botón de abajo.')}</p>`;
   } else {
     const table = document.createElement('table');
     table.className = 'trips-table';
@@ -497,8 +497,8 @@ function buildTripsTable(busId) {
       <thead>
         <tr>
           <th>#</th>
-          <th>Dirección</th>
-          <th>Hora de salida</th>
+          <th>${t('Dirección')}</th>
+          <th>${t('Hora de salida')}</th>
           <th></th>
         </tr>
       </thead>
@@ -513,10 +513,10 @@ function buildTripsTable(busId) {
         <td class="trip-idx">${idx + 1}</td>
         <td>${dir}</td>
         <td>
-          <input type="text" class="trip-time-input" value="${escHtml(time)}" data-bus="${escHtml(busId)}" data-idx="${idx}" pattern="\\d{1,2}:\\d{2}" title="Formato HH:MM" />
+          <input type="text" class="trip-time-input" value="${escHtml(time)}" data-bus="${escHtml(busId)}" data-idx="${idx}" pattern="\\d{1,2}:\\d{2}" title="${t('Formato HH:MM')}" />
         </td>
         <td>
-          <button class="btn btn-sm btn-danger-soft" data-delete-trip="${idx}" title="Eliminar salida">&#10005;</button>
+          <button class="btn btn-sm btn-danger-soft" data-delete-trip="${idx}" title="${t('Eliminar salida')}" aria-label="${t('Eliminar salida')}">&#10005;</button>
         </td>
       `;
       // Time change handler
@@ -527,7 +527,7 @@ function buildTripsTable(busId) {
       tr.querySelector('[data-delete-trip]').addEventListener('click', () => {
         inputData.buses[busId].splice(idx, 1);
         refreshBusCard(busId);
-        toast('Salida eliminada', 'info');
+        toast(t('Salida eliminada'), 'info');
       });
       tbody.appendChild(tr);
     });
@@ -539,22 +539,22 @@ function buildTripsTable(busId) {
   const addForm = document.createElement('div');
   addForm.className = 'add-trip-form';
   addForm.innerHTML = `
-    <span class="add-trip-label">Nueva salida:</span>
+    <span class="add-trip-label">${t('Nueva salida:')}</span>
     <select class="add-trip-dir">
-      <option value="${STOP_TOA}">&#8594; ${DIR_LABEL.toA} (desde ${STOP_TOA})</option>
-      <option value="${STOP_TOB}">&#8592; ${DIR_LABEL.toB} (desde ${STOP_TOB})</option>
+      <option value="${STOP_TOA}">&#8594; ${DIR_LABEL.toA} ${t('(desde {stop})', { stop: STOP_TOA })}</option>
+      <option value="${STOP_TOB}">&#8592; ${DIR_LABEL.toB} ${t('(desde {stop})', { stop: STOP_TOB })}</option>
     </select>
     <input type="text" class="add-trip-time" placeholder="HH:MM" />
-    <button class="btn btn-sm btn-primary btn-add-trip">+ Añadir</button>
+    <button class="btn btn-sm btn-primary btn-add-trip">${t('+ Añadir')}</button>
   `;
   addForm.querySelector('.btn-add-trip').addEventListener('click', () => {
     const stopId = addForm.querySelector('.add-trip-dir').value;
     const time   = addForm.querySelector('.add-trip-time').value.trim();
-    if (!time.match(/^\d{1,2}:\d{2}$/)) { toast('Hora inválida (usa formato H:MM o HH:MM)', 'error'); return; }
+    if (!time.match(/^\d{1,2}:\d{2}$/)) { toast(t('Hora inválida (usa formato H:MM o HH:MM)'), 'error'); return; }
     if (!inputData.buses[busId]) inputData.buses[busId] = [];
     inputData.buses[busId].push([stopId, time]);
     refreshBusCard(busId);
-    toast('Salida añadida', 'success');
+    toast(t('Salida añadida'), 'success');
   });
   wrap.appendChild(addForm);
 
@@ -569,7 +569,7 @@ function refreshBusCard(busId) {
   // Update count in header
   const trips = inputData.buses[busId] || [];
   const countEl = card.querySelector('.bus-card-count');
-  if (countEl) countEl.textContent = `${trips.length} salida${trips.length !== 1 ? 's' : ''}`;
+  if (countEl) countEl.textContent = t(trips.length === 1 ? '{n} salida' : '{n} salidas', { n: trips.length });
 
   // Rebuild trips table keeping section visible
   const wasVisible = section.style.display !== 'none';
@@ -591,9 +591,9 @@ function renderRouteView(container) {
   filterBar.className = 'route-config-filter-bar';
   filterBar.id = 'route-config-filter-bar';
   filterBar.innerHTML = `
-    <span class="analysis-filter-label">Mostrar por:</span>
-    <button class="filter-btn ${_routeFilter === 'general' ? 'active' : ''}" id="rcfg-general-btn">&#128202; General</button>
-    <button class="filter-btn ${_routeFilter === 'timeslot' ? 'active' : ''}" id="rcfg-ts-btn">&#128336; Franja horaria</button>
+    <span class="analysis-filter-label">${t('Mostrar por:')}</span>
+    <button class="filter-btn ${_routeFilter === 'general' ? 'active' : ''}" id="rcfg-general-btn">&#128202; ${t('General')}</button>
+    <button class="filter-btn ${_routeFilter === 'timeslot' ? 'active' : ''}" id="rcfg-ts-btn">&#128336; ${t('Franja horaria')}</button>
     <div class="rcfg-ts-selector" id="rcfg-ts-selector" style="display:${_routeFilter === 'timeslot' ? 'flex' : 'none'};"></div>
   `;
   wrap.appendChild(filterBar);
@@ -649,7 +649,7 @@ function renderTsSelector(container) {
   container.innerHTML = '';
   const label = document.createElement('span');
   label.className = 'timeslot-selector-label';
-  label.textContent = 'Hora:';
+  label.textContent = t('Hora:');
   container.appendChild(label);
   for (let h = 5; h <= 23; h++) {
     const btn = document.createElement('button');
@@ -712,7 +712,7 @@ async function buildSvgMapConfig(svgEl, dirData, dirKey) {
   loading.setAttribute('text-anchor', 'middle'); loading.setAttribute('dominant-baseline', 'middle');
   loading.setAttribute('fill', '#aaa'); loading.setAttribute('font-size', '13');
   loading.setAttribute('font-family', 'sans-serif');
-  loading.textContent = 'Cargando...';
+  loading.textContent = t('Cargando...');
   svgEl.appendChild(loading);
 
   try {
@@ -749,7 +749,7 @@ async function buildSvgMapConfig(svgEl, dirData, dirKey) {
     for (const s of sortedStops) allCoords.push(s.coords);
 
     if (allCoords.length === 0) {
-      svgEl.innerHTML = `<text x="50%" y="50%" text-anchor="middle" fill="#aaa" font-size="13" font-family="sans-serif">Sin datos</text>`;
+      svgEl.innerHTML = `<text x="50%" y="50%" text-anchor="middle" fill="#aaa" font-size="13" font-family="sans-serif">${t('Sin datos')}</text>`;
       return;
     }
 
@@ -899,7 +899,7 @@ async function buildSvgMapConfig(svgEl, dirData, dirKey) {
     errText.setAttribute('x', '50%'); errText.setAttribute('y', '50%');
     errText.setAttribute('text-anchor', 'middle'); errText.setAttribute('fill', '#e3000f');
     errText.setAttribute('font-size', '13'); errText.setAttribute('font-family', 'sans-serif');
-    errText.textContent = `Error: ${err.message}`;
+    errText.textContent = `${t('Error')}: ${err.message}`;
     svgEl.appendChild(errText);
   }
 }
@@ -1077,7 +1077,7 @@ function showConfigStopInfo(stopId, stopProps, dirKey) {
     <div class="rcfg-panel-header">
       <div class="rcfg-panel-title">
         <span class="section-stop-badge ${dirClass}">${dirLabel}</span>
-        <strong>Parada ${escHtml(stopId)}</strong>
+        <strong>${escHtml(t('Parada {id}', { id: stopId }))}</strong>
         ${stopProps?.stopName ? `<span class="rcfg-stop-name">${escHtml(stopProps.stopName)}</span>` : ''}
       </div>
       <button class="btn btn-sm btn-outline" id="rcfg-panel-close">&#10005;</button>
@@ -1085,7 +1085,7 @@ function showConfigStopInfo(stopId, stopProps, dirKey) {
   `;
 
   if (boardRows.length === 0 && alightRows.length === 0) {
-    content += `<p class="rcfg-no-data">No hay datos de pasajeros para esta parada en la dirección seleccionada.</p>`;
+    content += `<p class="rcfg-no-data">${t('No hay datos de pasajeros para esta parada en la dirección seleccionada.')}</p>`;
   } else if (_routeFilter === 'general') {
     content += buildStopGeneralView(boardRows, alightRows);
   } else {
@@ -1104,19 +1104,19 @@ function showConfigStopInfo(stopId, stopProps, dirKey) {
     const newPct   = changedNumber(panel, 'rcfg-alight-pct-input');
 
     if (newBoard !== null && (isNaN(newBoard) || newBoard < 0)) {
-      toast('Media de subidas inválida: introduce un número ≥ 0', 'error'); return;
+      toast(t('Media de subidas inválida: introduce un número ≥ 0'), 'error'); return;
     }
     if (newPct !== null && (isNaN(newPct) || newPct < 0 || newPct > MAX_ALIGHT_FRACTION * 100)) {
-      toast(`Porcentaje de bajadas inválido: introduce un valor entre 0 y ${MAX_ALIGHT_FRACTION * 100}`, 'error'); return;
+      toast(t('Porcentaje de bajadas inválido: introduce un valor entre 0 y {max}', { max: MAX_ALIGHT_FRACTION * 100 }), 'error'); return;
     }
     if (newBoard === null && newPct === null) {
-      toast('No hay cambios que aplicar', 'info'); return;
+      toast(t('No hay cambios que aplicar'), 'info'); return;
     }
 
     if (newBoard !== null) {
       const orig = avg(scopeBoard.map(boardingMean));
       if (!applyBoardingTarget(scopeBoard, newBoard, orig)) {
-        toast('La media de subidas actual es 0: no se puede escalar', 'error');
+        toast(t('La media de subidas actual es 0: no se puede escalar'), 'error');
       }
     }
     if (newPct !== null) {
@@ -1125,8 +1125,8 @@ function showConfigStopInfo(stopId, stopProps, dirKey) {
     }
 
     toast(general
-      ? `Parada ${stopId}: valores actualizados en todas las franjas`
-      : `Parada ${stopId} franja ${_selectedTs}h: valores actualizados`, 'success');
+      ? t('Parada {id}: valores actualizados en todas las franjas', { id: stopId })
+      : t('Parada {id} franja {ts}h: valores actualizados', { id: stopId, ts: _selectedTs }), 'success');
     showConfigStopInfo(stopId, stopProps, dirKey);
   });
 }
@@ -1146,8 +1146,8 @@ function stopStatInput(id, label, value, disabledMsg) {
 function alightStat(rows, label) {
   const active = rows.filter(r => !isTerminalAlight(r));
   let msg = null;
-  if (rows.length === 0)        msg = 'Sin datos de bajadas';
-  else if (active.length === 0) msg = 'Parada de cabecera/final: no se modelan bajadas parciales';
+  if (rows.length === 0)        msg = t('Sin datos de bajadas');
+  else if (active.length === 0) msg = t('Parada de cabecera/final: no se modelan bajadas parciales');
   const pct = avg(active.map(alightFraction)) * 100;
   return stopStatInput('rcfg-alight-pct-input', label, msg ? '—' : pct.toFixed(2), msg);
 }
@@ -1155,7 +1155,7 @@ function alightStat(rows, label) {
 function boardStat(rows, label) {
   const mean = avg(rows.map(boardingMean));
   return stopStatInput('rcfg-board-mean-input', label,
-    rows.length ? mean.toFixed(2) : '—', rows.length ? null : 'Sin datos de subidas');
+    rows.length ? mean.toFixed(2) : '—', rows.length ? null : t('Sin datos de subidas'));
 }
 
 // ---- General view: mean passenger inputs ----
@@ -1165,22 +1165,21 @@ function buildStopGeneralView(boardRows, alightRows) {
 
   return `
     <div class="rcfg-panel-section">
-      <h4>Pasajeros en esta parada</h4>
+      <h4>${t('Pasajeros en esta parada')}</h4>
       <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
-        Valores medios de todas las franjas. Cambia un valor y pulsa <strong>Aplicar</strong>
-        para escalar <em>todas las franjas horarias</em> proporcionalmente.
+        ${t('Valores medios de todas las franjas. Cambia un valor y pulsa <strong>Aplicar</strong> para escalar <em>todas las franjas horarias</em> proporcionalmente.')}
       </p>
       <div class="rcfg-stats-grid">
-        ${boardStat(boardRows, '&#8679; Media de pasajeros que llegan a la parada por hora')}
-        ${alightStat(alightRows, '&#8681; % medio de la ocupación del autobús que se baja en la parada')}
+        ${boardStat(boardRows, '&#8679; ' + t('Media de pasajeros que llegan a la parada por hora'))}
+        ${alightStat(alightRows, '&#8681; ' + t('% medio de la ocupación del autobús que se baja en la parada'))}
         <div class="rcfg-stat">
-          <span class="rcfg-stat-label">Franjas con datos</span>
+          <span class="rcfg-stat-label">${t('Franjas con datos')}</span>
           <span class="rcfg-stat-value">${timeslots.length}</span>
           <span class="rcfg-stat-dist">${timeslots[0] ?? '—'}h – ${timeslots[timeslots.length - 1] ?? '—'}h</span>
         </div>
       </div>
       <div class="rcfg-apply-row">
-        <button class="btn btn-primary btn-sm" id="rcfg-apply-stop">Aplicar a todas las franjas</button>
+        <button class="btn btn-primary btn-sm" id="rcfg-apply-stop">${t('Aplicar a todas las franjas')}</button>
       </div>
     </div>
   `;
@@ -1194,16 +1193,16 @@ function buildStopTimeslotView(boardRows, alightRows, ts) {
 
   return `
     <div class="rcfg-panel-section">
-      <h4>Franja horaria: ${ts}:00 – ${ts + 1}:00</h4>
+      <h4>${t('Franja horaria: {ts}:00 – {next}:00', { ts, next: ts + 1 })}</h4>
       <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
-        Cambia un valor y pulsa <strong>Aplicar</strong> para modificar <em>solo esta franja</em>.
+        ${t('Cambia un valor y pulsa <strong>Aplicar</strong> para modificar <em>solo esta franja</em>.')}
       </p>
       <div class="rcfg-stats-grid">
-        ${boardStat(tsBoard, '&#8679; Número de pasajeros que llegan a la parada en esta franja')}
-        ${alightStat(tsAlight, '&#8681; % de la ocupación del autobús que se baja en la parada')}
+        ${boardStat(tsBoard, '&#8679; ' + t('Número de pasajeros que llegan a la parada en esta franja'))}
+        ${alightStat(tsAlight, '&#8681; ' + t('% de la ocupación del autobús que se baja en la parada'))}
       </div>
       <div class="rcfg-apply-row">
-        <button class="btn btn-primary btn-sm" id="rcfg-apply-stop">Aplicar a esta franja</button>
+        <button class="btn btn-primary btn-sm" id="rcfg-apply-stop">${t('Aplicar a esta franja')}</button>
       </div>
     </div>
   `;
@@ -1230,14 +1229,14 @@ function showConfigSectionInfo(sectionKey, dirKey) {
     <div class="rcfg-panel-header">
       <div class="rcfg-panel-title">
         <span class="section-stop-badge ${dirClass}">${dirLabel}</span>
-        <strong>Tramo ${escHtml(fromStop)} &#8594; ${escHtml(toStop)}</strong>
+        <strong>${escHtml(t('Tramo {from} → {to}', { from: fromStop, to: toStop }))}</strong>
       </div>
       <button class="btn btn-sm btn-outline" id="rcfg-panel-close">&#10005;</button>
     </div>
   `;
 
   if (!row) {
-    content += `<p class="rcfg-no-data">No hay datos de tiempos para este tramo en la dirección seleccionada.</p>`;
+    content += `<p class="rcfg-no-data">${t('No hay datos de tiempos para este tramo en la dirección seleccionada.')}</p>`;
   } else if (_routeFilter === 'general') {
     content += buildSectionGeneralView(row);
   } else {
@@ -1251,24 +1250,24 @@ function showConfigSectionInfo(sectionKey, dirKey) {
     panel.querySelector('#rcfg-sec-apply-general')?.addEventListener('click', () => {
       const origSecs = parseFloat(panel.querySelector('#rcfg-sec-mean-original').value);
       const newSecs  = mmssToSeconds(panel.querySelector('#rcfg-sec-mean-input').value);
-      if (isNaN(newSecs) || newSecs < 0) { toast('Formato inválido — usa MM:SS (ej: 02:35)', 'error'); return; }
+      if (isNaN(newSecs) || newSecs < 0) { toast(t('Formato inválido — usa MM:SS (ej: 02:35)'), 'error'); return; }
       if (origSecs > 0) {
         const pct = (newSecs / origSecs - 1) * 100;
         applySectionChange(sectionKey, dirKey, pct, null);
       }
-      toast(`Tramo ${sectionKey}: tiempos actualizados en todas las franjas`, 'success');
+      toast(t('Tramo {key}: tiempos actualizados en todas las franjas', { key: sectionKey }), 'success');
       showConfigSectionInfo(sectionKey, dirKey);
     });
   } else {
     panel.querySelector('#rcfg-sec-apply-ts')?.addEventListener('click', () => {
       const origSecs = parseFloat(panel.querySelector('#rcfg-sec-ts-original').value);
       const newSecs  = mmssToSeconds(panel.querySelector('#rcfg-sec-ts-input').value);
-      if (isNaN(newSecs) || newSecs < 0) { toast('Formato inválido — usa MM:SS (ej: 02:35)', 'error'); return; }
+      if (isNaN(newSecs) || newSecs < 0) { toast(t('Formato inválido — usa MM:SS (ej: 02:35)'), 'error'); return; }
       if (origSecs > 0) {
         const pct = (newSecs / origSecs - 1) * 100;
         applySectionChange(sectionKey, dirKey, pct, _selectedTs);
       }
-      toast(`Tramo ${sectionKey} franja ${_selectedTs}h: tiempo actualizado`, 'success');
+      toast(t('Tramo {key} franja {ts}h: tiempo actualizado', { key: sectionKey, ts: _selectedTs }), 'success');
       showConfigSectionInfo(sectionKey, dirKey);
     });
   }
@@ -1284,25 +1283,24 @@ function buildSectionGeneralView(row) {
 
   return `
     <div class="rcfg-panel-section">
-      <h4>Tiempo de tránsito (general)</h4>
+      <h4>${t('Tiempo de tránsito (general)')}</h4>
       <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
-        Tiempo medio de tránsito en este tramo. Cambia el valor y pulsa <strong>Aplicar</strong>
-        para escalar <em>todas las franjas horarias</em> proporcionalmente.
+        ${t('Tiempo medio de tránsito en este tramo. Cambia el valor y pulsa <strong>Aplicar</strong> para escalar <em>todas las franjas horarias</em> proporcionalmente.')}
       </p>
       <div class="rcfg-stats-grid">
         <div class="rcfg-stat rcfg-stat-editable">
-          <span class="rcfg-stat-label">&#128337; Tiempo medio (todas las franjas)</span>
+          <span class="rcfg-stat-label">&#128337; ${t('Tiempo medio (todas las franjas)')}</span>
           <input type="text" class="rcfg-mean-input" id="rcfg-sec-mean-input"
                  value="${secondsToMMSS(avgMeanSecs)}" placeholder="MM:SS" />
-          <span class="rcfg-modify-hint">formato MM:SS</span>
+          <span class="rcfg-modify-hint">${t('formato MM:SS')}</span>
         </div>
         <div class="rcfg-stat">
-          <span class="rcfg-stat-label">Tramo</span>
+          <span class="rcfg-stat-label">${t('Tramo')}</span>
           <span class="rcfg-stat-value" style="font-size:0.85rem;">${escHtml(row.StopsCodes)}</span>
         </div>
       </div>
       <div class="rcfg-apply-row">
-        <button class="btn btn-primary btn-sm" id="rcfg-sec-apply-general">Aplicar a todas las franjas</button>
+        <button class="btn btn-primary btn-sm" id="rcfg-sec-apply-general">${t('Aplicar a todas las franjas')}</button>
       </div>
     </div>
     <input type="hidden" id="rcfg-sec-mean-original" value="${avgMeanSecs}" />
@@ -1315,23 +1313,23 @@ function buildSectionTimeslotView(row, ts) {
 
   return `
     <div class="rcfg-panel-section">
-      <h4>Franja horaria: ${ts}:00 – ${ts + 1}:00</h4>
+      <h4>${t('Franja horaria: {ts}:00 – {next}:00', { ts, next: ts + 1 })}</h4>
       <p class="rcfg-modify-hint" style="margin-bottom:0.75rem;">
-        Cambia el valor y pulsa <strong>Aplicar</strong> para modificar <em>solo esta franja</em>.
+        ${t('Cambia el valor y pulsa <strong>Aplicar</strong> para modificar <em>solo esta franja</em>.')}
       </p>
       <div class="rcfg-stats-grid">
         <div class="rcfg-stat rcfg-stat-editable">
-          <span class="rcfg-stat-label">&#128337; Tiempo medio en esta franja</span>
+          <span class="rcfg-stat-label">&#128337; ${t('Tiempo medio en esta franja')}</span>
           <input type="text" class="rcfg-mean-input" id="rcfg-sec-ts-input"
                  value="${secondsToMMSS(meanSecs)}" placeholder="MM:SS"
                  ${!hasData ? 'disabled' : ''} />
-          <span class="rcfg-modify-hint">${hasData ? 'formato MM:SS' : 'Sin datos para esta franja'}</span>
+          <span class="rcfg-modify-hint">${hasData ? t('formato MM:SS') : t('Sin datos para esta franja')}</span>
         </div>
       </div>
       <div class="rcfg-apply-row">
-        <span class="rcfg-modify-hint">Solo afecta a la franja <strong>${ts}:00 – ${ts + 1}:00</strong>.</span>
+        <span class="rcfg-modify-hint">${t('Solo afecta a la franja <strong>{ts}:00 – {next}:00</strong>.', { ts, next: ts + 1 })}</span>
         <button class="btn btn-primary btn-sm" id="rcfg-sec-apply-ts"
-                ${!hasData ? 'disabled' : ''}>Aplicar a esta franja</button>
+                ${!hasData ? 'disabled' : ''}>${t('Aplicar a esta franja')}</button>
       </div>
     </div>
     <input type="hidden" id="rcfg-sec-ts-original" value="${meanSecs}" />
@@ -1368,23 +1366,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!simId.match(/^SIMULATION_\d{8}_\d{6}$/)) {
     document.getElementById('config-loading').innerHTML = `
       <div class="empty-icon">&#9888;</div>
-      <p>ID de simulación inválido.</p>
-      <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; Volver al dashboard</a>
+      <p>${t('ID de simulación inválido.')}</p>
+      <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; ${t('Volver al dashboard')}</a>
     `;
     return;
   }
 
   document.getElementById('config-sim-id-label').textContent = simId;
-  document.title = `Configurar ${simId} — EMT`;
+  document.title = t('Configurar {id} — EMT', { id: simId });
 
   try {
     await loadInputs();
   } catch (err) {
     document.getElementById('config-loading').innerHTML = `
       <div class="empty-icon">&#9888;</div>
-      <p>Error al cargar los parámetros.</p>
+      <p>${t('Error al cargar los parámetros.')}</p>
       <p style="color:var(--emt-red);font-size:0.85rem;margin-top:0.5rem;">${escHtml(err.message)}</p>
-      <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; Volver al dashboard</a>
+      <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; ${t('Volver al dashboard')}</a>
     `;
     return;
   }
@@ -1406,6 +1404,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const socket = io();
   socket.on('sim_completed', ({ id, title }) => {
-    toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
+    toast(t('Simulación completada: {title}', { title: title || id }), 'success');
   });
 });

@@ -21,6 +21,7 @@
   --accent:       #0865d6;
   --accent-hover: #0752b0;
   --accent-tint:  #E4EDF9;
+  --accent-deep:  #0A3F8C;   /* azul corporativo oscuro para titulares y filetes */
   --accent-wash:  rgba(8, 101, 214, 0.10);
   --accent-edge:  rgba(8, 101, 214, 0.45);
   --on-accent:    #FFFFFF;
@@ -53,8 +54,9 @@
   --ink-on-dark:  #F6F4EE;
 
   /* ---- Tipografía ---- */
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-sans: "Times New Roman", Times, "Liberation Serif", serif;
+  --font-mono: "Times New Roman", Times, "Liberation Serif", serif;   /* cifras: misma familia, numerales tabulares */
+  --font-code: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, "Liberation Mono", monospace;
 
   --fs-xs:    0.72rem;
   --fs-sm:    0.82rem;
@@ -63,7 +65,7 @@
   --fs-lg:    1.25rem;
   --fs-xl:    1.5rem;
   --fs-num:   1.75rem;
-  --fs-label: 0.8rem;   /* versalitas: se ven más pequeñas que la minúscula */
+  --fs-label: 0.88rem;   /* versalitas: se ven más pequeñas que la minúscula */
 
   --fw-regular: 400;
   --fw-medium:  500;
@@ -108,7 +110,7 @@
   padding: 0;
 }
 
-html { font-size: 16px; scroll-behavior: smooth; }
+html { font-size: 17px; scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-sans);
@@ -131,15 +133,15 @@ body {
 
 /* ---- Header ---- */
 header {
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--accent);
+  color: var(--on-accent);
   padding: 0 var(--sp-7);
   min-height: var(--header-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-4);
-  border-bottom: var(--border);
+  border-bottom: 1px solid var(--accent-deep);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -155,8 +157,8 @@ header {
 }
 
 .header-brand .logo-badge {
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--on-accent);
+  color: var(--accent);
   font-weight: var(--fw-strong);
   font-size: var(--fs-base);
   letter-spacing: 0.04em;
@@ -173,7 +175,8 @@ header {
 
 .header-brand span {
   font-size: var(--fs-sm);
-  color: var(--muted);
+  color: var(--on-accent);
+  opacity: 0.85;
   font-weight: var(--fw-regular);
 }
 
@@ -183,6 +186,32 @@ header {
   gap: var(--sp-3);
   flex-shrink: 0;
 }
+
+/* ---- Selector de idioma (en la cabecera azul) ---- */
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--on-accent);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.lang-btn {
+  background: transparent;
+  color: var(--on-accent);
+  border: none;
+  padding: var(--sp-1) var(--sp-3);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--track-label);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.lang-btn + .lang-btn { border-left: 1px solid var(--on-accent); }
+.lang-btn:hover { background: var(--accent-hover); }
+.lang-btn.active { background: var(--on-accent); color: var(--accent); cursor: default; }
+.lang-btn:focus-visible { outline: 2px solid var(--on-accent); outline-offset: -3px; }
 
 /* ---- Buttons ---- */
 .btn {
@@ -216,6 +245,21 @@ header {
   color: var(--on-accent);
 }
 .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+/* Botones sobre la cabecera azul */
+header .btn-white {
+  background: transparent;
+  border-color: var(--on-accent);
+  color: var(--on-accent);
+}
+header .btn-white:hover { background: var(--accent-hover); border-color: var(--on-accent); }
+header .btn-primary {
+  background: var(--on-accent);
+  border-color: var(--on-accent);
+  color: var(--accent);
+}
+header .btn-primary:hover { background: var(--accent-tint); border-color: var(--accent-tint); }
+header :focus-visible { outline-color: var(--on-accent); }
 
 /* Acción secundaria neutra */
 .btn-white {
@@ -306,7 +350,7 @@ main {
   font-size: var(--fs-xl);
   font-weight: var(--fw-strong);
   line-height: 1.2;
-  color: var(--ink);
+  color: var(--accent-deep);
 }
 
 .page-header p {
@@ -328,6 +372,7 @@ main {
 .stat-card {
   background: var(--surface);
   border: var(--border);
+  border-top: 3px solid var(--accent);
   border-radius: var(--radius);
   padding: var(--sp-4) var(--sp-5);
 }
@@ -337,7 +382,7 @@ main {
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-num);
   font-weight: var(--fw-medium);
-  color: var(--ink);
+  color: var(--accent);
   line-height: 1.15;
   margin-top: var(--sp-1);
 }
@@ -390,7 +435,7 @@ main {
   z-index: 1;
 }
 
-.sim-card:hover { border-color: var(--ink-2); }
+.sim-card:hover { border-color: var(--accent); }
 
 .sim-card:focus-visible { outline-offset: 0; }
 
@@ -407,7 +452,7 @@ main {
   font-size: var(--fs-md);
   font-weight: var(--fw-strong);
   line-height: 1.3;
-  color: var(--ink);
+  color: var(--accent-deep);
   margin-bottom: var(--sp-1);
   overflow-wrap: anywhere;
 }
@@ -554,6 +599,7 @@ main {
   background: var(--surface);
   color: var(--ink);
   border: var(--border);
+  border-left: 4px solid var(--accent);
   border-radius: var(--radius);
   padding: var(--sp-6) var(--sp-7);
   margin-bottom: var(--sp-7);
@@ -565,6 +611,7 @@ main {
 }
 
 .detail-hero h2 {
+  color: var(--accent-deep);
   font-size: var(--fs-lg);
   font-weight: var(--fw-strong);
   line-height: 1.25;
@@ -592,7 +639,7 @@ main {
 
 .section-card-header {
   background: var(--surface-2);
-  border-bottom: var(--border);
+  border-bottom: 2px solid var(--accent);
   padding: var(--sp-3) var(--sp-5);
   display: flex;
   align-items: center;
@@ -600,7 +647,7 @@ main {
   gap: var(--sp-2);
   font-weight: var(--fw-strong);
   font-size: var(--fs-base);
-  color: var(--ink);
+  color: var(--accent-deep);
 }
 
 .section-card-header .section-icon { font-size: var(--fs-md); filter: grayscale(1); opacity: 0.7; }
@@ -640,7 +687,7 @@ main {
 .log-viewer {
   background: var(--console-bg);
   color: var(--console-text);
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   font-size: var(--fs-sm);
   line-height: 1.6;
   padding: var(--sp-4) var(--sp-5);
@@ -968,12 +1015,12 @@ footer strong { color: var(--ink); font-weight: var(--fw-strong); }
 .bus-pill:hover,
 .filter-btn:hover,
 .ts-btn:hover,
-.bus-ts-pill:hover { border-color: var(--ink); background: var(--surface-2); }
+.bus-ts-pill:hover { border-color: var(--accent); background: var(--accent-tint); }
 
 .bus-pill.active,
 .filter-btn.active,
 .ts-btn.active,
-.bus-ts-pill.active { background: var(--ink); border-color: var(--ink); color: var(--ink-on-dark); }
+.bus-ts-pill.active { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 
 /* ---- Bus detail grid ---- */
 .bus-detail-grid {
@@ -1024,7 +1071,7 @@ footer strong { color: var(--ink); font-weight: var(--fw-strong); }
 .trip-num       { color: var(--muted); font-weight: var(--fw-strong); font-family: var(--font-mono); }
 .trip-stop      { font-family: var(--font-mono); font-weight: var(--fw-strong); }
 .trip-time-val  { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-.trip-occ       { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: var(--fw-strong); color: var(--ink); }
+.trip-occ       { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: var(--fw-strong); color: var(--accent); }
 
 /* ---- Direction badges ---- */
 .dir-badge {
@@ -1082,7 +1129,7 @@ footer strong { color: var(--ink); font-weight: var(--fw-strong); }
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-lg);
   font-weight: var(--fw-medium);
-  color: var(--ink);
+  color: var(--accent);
 }
 
 .trip-plot-wrap   { border-top: var(--border); padding-top: var(--sp-3); }
@@ -1138,7 +1185,7 @@ footer strong { color: var(--ink); font-weight: var(--fw-strong); }
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-md);
   font-weight: var(--fw-medium);
-  color: var(--ink);
+  color: var(--accent);
 }
 
 /* ---- Timeslot selector ---- */
@@ -1507,9 +1554,9 @@ select:disabled,
 .config-nav-btn:hover { background: var(--surface-2); color: var(--ink); }
 
 .config-nav-btn.active {
-  background: var(--surface-2);
+  background: var(--accent-tint);
   border-left-color: var(--accent);
-  color: var(--ink);
+  color: var(--accent-deep);
   font-weight: var(--fw-strong);
 }
 
@@ -1540,7 +1587,7 @@ select:disabled,
   padding: var(--sp-4) var(--sp-6);
 }
 
-.buses-editor-header h3 { font-size: var(--fs-md); font-weight: var(--fw-strong); margin-bottom: var(--sp-1); }
+.buses-editor-header h3 { font-size: var(--fs-md); font-weight: var(--fw-strong); margin-bottom: var(--sp-1); color: var(--accent-deep); }
 
 .buses-editor-subtitle { font-size: var(--fs-sm); color: var(--muted); }
 
@@ -1767,7 +1814,7 @@ select:disabled,
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-md);
   font-weight: var(--fw-medium);
-  color: var(--ink);
+  color: var(--accent);
 }
 
 .rcfg-no-data {
@@ -1787,7 +1834,7 @@ select:disabled,
   border: var(--border);
   padding: 0 var(--sp-1);
   border-radius: var(--radius);
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   font-size: var(--fs-sm);
 }
 
@@ -1918,7 +1965,7 @@ select:disabled,
   font-size: var(--fs-md);
   font-weight: var(--fw-medium);
   font-variant-numeric: tabular-nums;
-  color: var(--ink);
+  color: var(--accent);
   min-width: 60px;
 }
 
@@ -2083,7 +2130,7 @@ input[type=number] { -moz-appearance: textfield; }
 .rcfg-cs-params {
   font-size: var(--fs-sm);
   color: var(--ink-2);
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
 }
 
 .rcfg-cs-note { font-size: var(--fs-sm); color: var(--muted); }
@@ -2154,7 +2201,7 @@ input[type=number] { -moz-appearance: textfield; }
 
   .btn, .sim-card, .sim-progress-bar, .modal-overlay, .img-modal-overlay,
   .sim-complete-banner, .sim-complete-banner.hiding, .plot-expand-hint,
-  .bus-pill, .filter-btn, .ts-btn, .bus-ts-pill, .config-nav-btn,
+  .bus-pill, .filter-btn, .ts-btn, .bus-ts-pill, .config-nav-btn, .lang-btn,
   .config-field input, .config-field select {
     transition: none;
   }

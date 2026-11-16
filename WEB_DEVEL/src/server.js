@@ -15,6 +15,34 @@ const DATA_DIR = path.join(__dirname, '..', 'data', 'logs');
 const PAGES_DIR = path.join(__dirname, 'pages');
 const IMGS_DIR = path.join(__dirname,'..', 'img');
 
+// ---- Idioma de las respuestas (cookie `lang`, la fija el selector del front) ----
+const MESSAGES = {
+  invalid_id:      { es: 'ID de simulación inválido', en: 'Invalid simulation ID' },
+  not_found:       { es: 'Simulación no encontrada', en: 'Simulation not found' },
+  prepare_missing: { es: 'No se encontró prepare_simulation.sh', en: 'prepare_simulation.sh not found' },
+  run_missing:     { es: 'No se encontró run_simulation.sh', en: 'run_simulation.sh not found' },
+  inputs_missing_prepared: { es: 'No se encontró el directorio de entradas. ¿Se ha preparado la simulación?', en: 'Inputs directory not found. Has the simulation been prepared?' },
+  inputs_missing:  { es: 'No se encontró el directorio de entradas', en: 'Inputs directory not found' },
+  config_saved:    { es: 'Configuración guardada correctamente', en: 'Configuration saved successfully' },
+  no_seed:         { es: 'La simulación no tiene semilla. Guarda la configuración antes de lanzarla.', en: 'The simulation has no seed. Save the configuration before launching it.' },
+  already_running: { es: 'La simulación ya está en ejecución o en cola.', en: 'The simulation is already running or queued.' },
+  launched:        { es: 'Simulación lanzada', en: 'Simulation launched' },
+  queued:          { es: 'Simulación en cola (posición {position})', en: 'Simulation queued (position {position})' },
+  deleted:         { es: 'Simulación eliminada', en: 'Simulation deleted' },
+  delete_running:  { es: 'La simulación está en ejecución; espera a que termine para eliminarla.', en: 'The simulation is running; wait for it to finish before deleting it.' },
+};
+
+function langOf(req) {
+  const m = /(?:^|;\s*)lang=(es|en)\b/.exec(req.headers.cookie || '');
+  return m ? m[1] : 'es';
+}
+
+function msg(req, key, vars = {}) {
+  const entry = MESSAGES[key];
+  const text = entry[langOf(req)] || entry.es;
+  return text.replace(/\{(\w+)\}/g, (m, k) => (vars[k] !== undefined ? vars[k] : m));
+}
+
 
 const ENGINES = {
   with_agents:    { type: 'gama', model: 'modelpassengersfinal_with_passenger_agents.gaml' },
@@ -477,12 +505,12 @@ app.get('/api/simulations', (req, res) => {
 app.get('/api/simulations/:id', (req, res) => {
   const { id } = req.params;
   if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
+    return res.status(400).json({ error: msg(req, 'invalid_id') });
   }
 
   const simPath = path.join(DATA_DIR, id);
   if (!fs.existsSync(simPath)) {
-    return res.status(404).json({ error: 'Simulation not found' });
+    return res.status(404).json({ error: msg(req, 'not_found') });
   }
 
   const chartsPath = path.join(simPath, 'PLOTS');
@@ -524,12 +552,12 @@ app.get('/api/simulations/:id', (req, res) => {
 app.get('/api/simulations/:id/geodata', (req, res) => {
   const { id } = req.params;
   if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
+    return res.status(400).json({ error: msg(req, 'invalid_id') });
   }
 
   const simPath = path.join(DATA_DIR, id);
   if (!fs.existsSync(simPath)) {
-    return res.status(404).json({ error: 'Simulation not found' });
+    return res.status(404).json({ error: msg(req, 'not_found') });
   }
 
   // Detect experiment IDs from includes/ROUTE subdirs (e.g. E01, E02)
@@ -576,7 +604,7 @@ app.post('/api/simulations/prepare', (req, res) => {
   const scriptPath = path.join(BASH_SCRIPTS_DIR, 'prepare_simulation.sh');
 
   if (!fs.existsSync(scriptPath)) {
-    return res.status(404).json({ error: 'prepare_simulation.sh not found' });
+    return res.status(404).json({ error: msg(req, 'prepare_missing') });
   }
 
   let simId;
@@ -599,14 +627,14 @@ app.post('/api/simulations/prepare', (req, res) => {
 app.get('/api/simulations/:id/inputs', (req, res) => {
   const { id } = req.params;
   if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
+    return res.status(400).json({ error: msg(req, 'invalid_id') });
   }
 
   const simPath = path.join(DATA_DIR, id);
   const inputsPath = resolveInputsPath(simPath);
 
   if (!inputsPath) {
-    return res.status(404).json({ error: 'Inputs directory not found. Has the simulation been prepared?' });
+    return res.status(404).json({ error: msg(req, 'inputs_missing_prepared') });
   }
 
   try {
@@ -641,14 +669,14 @@ app.get('/api/simulations/:id/inputs', (req, res) => {
 app.post('/api/simulations/:id/inputs', (req, res) => {
   const { id } = req.params;
   if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
+    return res.status(400).json({ error: msg(req, 'invalid_id') });
   }
 
   const simPath = path.join(DATA_DIR, id);
   const inputDirs = editableInputDirs(simPath);
 
   if (inputDirs.length === 0) {
-    return res.status(404).json({ error: 'Inputs directory not found' });
+    return res.status(404).json({ error: msg(req, 'inputs_missing') });
   }
 
   const { description, buses } = req.body;
@@ -688,7 +716,7 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
       }
     }
 
-    res.json({ message: 'Configuración guardada correctamente', seed });
+    res.json({ message: msg(req, 'config_saved'), seed });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -699,23 +727,23 @@ app.post('/api/simulations/:id/inputs', (req, res) => {
 app.post('/api/simulations/:id/run', (req, res) => {
   const { id } = req.params;
   if (!SIM_ID_RE.test(id)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
+    return res.status(400).json({ error: msg(req, 'invalid_id') });
   }
 
   const simPath = path.join(DATA_DIR, id);
   if (!fs.existsSync(simPath)) {
-    return res.status(404).json({ error: 'Simulation not found' });
+    return res.status(404).json({ error: msg(req, 'not_found') });
   }
   if (!fs.existsSync(path.join(BASH_SCRIPTS_DIR, 'run_simulation.sh'))) {
-    return res.status(404).json({ error: 'run_simulation.sh not found' });
+    return res.status(404).json({ error: msg(req, 'run_missing') });
   }
 
   const { seed, exclusive } = parseDescription(simPath);
   if (!seed) {
-    return res.status(400).json({ error: 'La simulación no tiene semilla. Guarda la configuración antes de lanzarla.' });
+    return res.status(400).json({ error: msg(req, 'no_seed') });
   }
   if (running.has(id) || isQueued(simPath)) {
-    return res.status(409).json({ error: 'La simulación ya está en ejecución o en cola.' });
+    return res.status(409).json({ error: msg(req, 'already_running') });
   }
 
   // A relaunch starts clean: results of the previous attempt no longer apply.
@@ -730,7 +758,7 @@ app.post('/api/simulations/:id/run', (req, res) => {
   io.emit('new_sim_launched', { id, title: parseDescription(simPath).title || id, queued: !started });
 
   res.json({
-    message: started ? 'Simulación lanzada' : `Simulación en cola (posición ${position})`,
+    message: started ? msg(req, 'launched') : msg(req, 'queued', { position }),
     simId: id,
     queued: !started,
     position,
@@ -742,19 +770,19 @@ app.post('/api/simulations/:id/run', (req, res) => {
 app.delete('/api/simulations/:id', (req, res) => {
   const { id } = req.params;
   if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
+    return res.status(400).json({ error: msg(req, 'invalid_id') });
   }
   const simPath = path.join(DATA_DIR, id);
   if (!fs.existsSync(simPath)) {
-    return res.status(404).json({ error: 'Simulation not found' });
+    return res.status(404).json({ error: msg(req, 'not_found') });
   }
   if (running.has(id)) {
-    return res.status(409).json({ error: 'La simulación está en ejecución; espera a que termine para eliminarla.' });
+    return res.status(409).json({ error: msg(req, 'delete_running') });
   }
   try {
     // A queued simulation leaves the queue with its directory.
     fs.rmSync(simPath, { recursive: true, force: true });
-    res.json({ message: 'Simulation deleted' });
+    res.json({ message: msg(req, 'deleted') });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -765,12 +793,12 @@ app.delete('/api/simulations/:id', (req, res) => {
 app.get('/api/simulations/:id/plots-info', (req, res) => {
   const { id } = req.params;
   if (!id.match(/^SIMULATION_\d{8}_\d{6}$/)) {
-    return res.status(400).json({ error: 'Invalid simulation ID' });
+    return res.status(400).json({ error: msg(req, 'invalid_id') });
   }
 
   const simPath = path.join(DATA_DIR, id);
   if (!fs.existsSync(simPath)) {
-    return res.status(404).json({ error: 'Simulation not found' });
+    return res.status(404).json({ error: msg(req, 'not_found') });
   }
 
   const plotsPath = path.join(simPath, 'PLOTS');

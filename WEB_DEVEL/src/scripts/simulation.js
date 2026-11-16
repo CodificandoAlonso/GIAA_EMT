@@ -11,7 +11,7 @@ function toast(msg, type = 'info') {
 
 function formatNum(n) {
   if (n === null || n === undefined || isNaN(n)) return '—';
-  return Number(n).toLocaleString('es-ES');
+  return Number(n).toLocaleString(I18N.locale);
 }
 
 function formatDuration(secs) {
@@ -119,7 +119,7 @@ function scoreToColor(score) {
     b = Math.round(4   + t * (38  - 4));
   }
   const bg = `rgb(${r},${g},${b})`;
-  const label = s === 0 ? 'Normal' : s < 0.26 ? 'Leve' : s < 0.51 ? 'Moderado' : s < 0.76 ? 'Alto' : 'Crítico';
+  const label = t(s === 0 ? 'Normal' : s < 0.26 ? 'Leve' : s < 0.51 ? 'Moderado' : s < 0.76 ? 'Alto' : 'Crítico');
   return { bg, text: '#fff', label };
 }
 
@@ -140,9 +140,9 @@ function alertLegendHtml() {
   ];
   const dots = items.map(({ score, label }) => {
     const c = scoreToColor(score);
-    return `<span class="alert-legend-item"><span class="alert-legend-dot" style="background:${c.bg};"></span>${label}</span>`;
+    return `<span class="alert-legend-item"><span class="alert-legend-dot" style="background:${c.bg};"></span>${t(label)}</span>`;
   }).join('');
-  return `<div class="alert-legend"><span class="alert-legend-label">Nivel de alerta:</span>${dots}</div>`;
+  return `<div class="alert-legend"><span class="alert-legend-label">${t('Nivel de alerta:')}</span>${dots}</div>`;
 }
 
 // Apply alert colors (inline styles) to a list of pill buttons
@@ -197,7 +197,7 @@ function escHtml(str) {
 async function loadDetail(simId) {
   try {
     const detailRes = await fetch(`/api/simulations/${simId}`);
-    if (!detailRes.ok) throw new Error(`Simulación no encontrada (HTTP ${detailRes.status})`);
+    if (!detailRes.ok) throw new Error(t('Simulación no encontrada (HTTP {status})', { status: detailRes.status }));
     const detail = await detailRes.json();
 
     document.getElementById('hero-id').textContent = detail.id;
@@ -205,12 +205,12 @@ async function loadDetail(simId) {
     document.getElementById('hero-subtitle').textContent = detail.description
       ? detail.description
       : (detail.datetime || '');
-    document.title = `${detail.title || detail.id} — EMT Dashboard`;
+    document.title = t('{title} — EMT Dashboard', { title: detail.title || detail.id });
 
     document.getElementById('ds-runs').textContent = formatNum(detail.runCount);
 
     document.getElementById('ds-model').textContent =
-      MODEL_LABELS[detail.model] || MODEL_LABELS['without_agents'];
+      t(MODEL_LABELS[detail.model] || MODEL_LABELS['without_agents']);
       
     if (detail.logContent) {
       const match = detail.logContent.match(/TOTAL PIPELINE TIME:\s*(.+)/);
@@ -228,7 +228,7 @@ async function loadDetail(simId) {
     if (detail.logContent) {
       logEl.innerHTML = colorizeLog(detail.logContent);
     } else {
-      logEl.textContent = 'No se encontró archivo de log.';
+      logEl.textContent = t('No se encontró archivo de log.');
     }
 
     document.getElementById('loading-state').style.display = 'none';
@@ -237,11 +237,11 @@ async function loadDetail(simId) {
   } catch (err) {
     document.getElementById('loading-state').innerHTML = `
       <div class="empty-icon">&#9888;</div>
-      <p>Error al cargar la simulación.</p>
+      <p>${t('Error al cargar la simulación.')}</p>
       <p style="margin-top:0.5rem;font-size:0.83rem;color:var(--emt-red);">${err.message}</p>
-      <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; Volver al dashboard</a>
+      <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; ${t('Volver al dashboard')}</a>
     `;
-    toast('Error al cargar la simulación: ' + err.message, 'error');
+    toast(t('Error al cargar la simulación') + ': ' + err.message, 'error');
   }
 }
 
@@ -254,13 +254,13 @@ function renderErrors(errors) {
     <li>
       <span class="sim-error-time">${escHtml(e.time || '')}</span>
       <strong>${escHtml(e.phase || '')}</strong>
-      <span class="sim-error-code">(código ${escHtml(String(e.code))})</span>
+      <span class="sim-error-code">${escHtml(t('(código {code})', { code: String(e.code) }))}</span>
       &mdash; ${escHtml(e.message || '')}
     </li>`).join('');
   card.innerHTML = `
-    <h3>&#10005; La simulación ha fallado</h3>
+    <h3>&#10005; ${t('La simulación ha fallado')}</h3>
     <ul>${rows}</ul>
-    <p>Consulta el log de ejecución más abajo para ver el detalle.</p>
+    <p>${t('Consulta el log de ejecución más abajo para ver el detalle.')}</p>
   `;
   card.style.display = 'block';
 }
@@ -283,8 +283,8 @@ async function loadDirNames(expId) {
     _dirNames.toB = parseName(data.toB);
     const lA = document.getElementById('occ-toA-label');
     const lB = document.getElementById('occ-toB-label');
-    if (lA) lA.innerHTML = `&#8594; Ocupacion media Sentido ${_dirNames.toA}`;
-    if (lB) lB.innerHTML = `&#8592; Ocupación media Sentido ${_dirNames.toB}`;
+    if (lA) lA.innerHTML = `&#8594; ${escHtml(t('Ocupación media Sentido {name}', { name: _dirNames.toA }))}`;
+    if (lB) lB.innerHTML = `&#8592; ${escHtml(t('Ocupación media Sentido {name}', { name: _dirNames.toB }))}`;
   } catch (_) {}
 }
 
@@ -359,15 +359,15 @@ function renderBusView() {
   const container = document.getElementById('bus-view-container');
 
   if (!_plotsInfo?.busSchedule || Object.keys(_plotsInfo.busSchedule).length === 0) {
-    container.innerHTML = '<div class="empty-state"><p>No hay datos de autobuses disponibles.</p></div>';
+    container.innerHTML = `<div class="empty-state"><p>${t('No hay datos de autobuses disponibles.')}</p></div>`;
     return;
   }
 
   container.innerHTML = `
     <div class="bus-filter-bar">
-      <span class="analysis-filter-label">Ver por:</span>
-      <button class="filter-btn active" id="bus-filter-bus-btn">&#128652; Autobús Físico</button>
-      <button class="filter-btn" id="bus-filter-ts-btn">&#128336; Franja horaria</button>
+      <span class="analysis-filter-label">${t('Ver por:')}</span>
+      <button class="filter-btn active" id="bus-filter-bus-btn">&#128652; ${t('Autobús Físico')}</button>
+      <button class="filter-btn" id="bus-filter-ts-btn">&#128336; ${t('Franja horaria')}</button>
     </div>
     <div id="bus-filter-content"></div>
   `;
@@ -399,7 +399,7 @@ function renderBusByBusView() {
 
   content.innerHTML = `
     <div class="bus-selector-section">
-      <div class="bus-selector-label">Selecciona un autobús físico:</div>
+      <div class="bus-selector-label">${t('Selecciona un autobús físico:')}</div>
       <div class="bus-pills" id="bus-pills">${pillsHtml}</div>
     </div>
     ${alertLegendHtml()}
@@ -454,7 +454,7 @@ function renderBusByTimeslotView() {
 
   content.innerHTML = `
     <div class="bus-ts-header">
-      <span class="analysis-filter-label">Franja horaria:</span>
+      <span class="analysis-filter-label">${t('Franja horaria:')}</span>
       ${pillsHtml}
     </div>
     ${alertLegendHtml()}
@@ -491,9 +491,9 @@ function renderBusTimeslotDetail(trips) {
         <td class="trip-time-val">${t.time}</td>
         <td><span class="dir-badge ${dirClass}">${dirLabel}</span> <span class="bus-id-badge">${t.busId}</span></td>
         <td class="trip-occ">${occ}</td>
-        <td style="font-family:monospace;">${meanDep}</td>
+        <td style="font-variant-numeric:tabular-nums;">${meanDep}</td>
         <td>${tTime}</td>
-        <td style="font-family:monospace;">${regularity}</td>
+        <td style="font-variant-numeric:tabular-nums;">${regularity}</td>
         <td class="trip-alert-col">${alertDotHtml(computeAlertScore(m))}</td>
       </tr>`;
   }).join('');
@@ -501,12 +501,12 @@ function renderBusTimeslotDetail(trips) {
   panel.innerHTML = `
     <div class="bus-detail-grid">
       <div class="bus-trips-section">
-        <div class="bus-section-title">Viajes en esta franja &mdash; ${trips.length} viaje${trips.length !== 1 ? 's' : ''}</div>
+        <div class="bus-section-title">${t(trips.length === 1 ? 'Viajes en esta franja — {n} viaje' : 'Viajes en esta franja — {n} viajes', { n: trips.length })}</div>
         <table class="trip-table">
           <thead>
             <tr>
-              <th>#</th><th>Parada</th><th>Prog.</th>
-              <th>Sentido / Bus</th><th>Ocup.</th><th>Salida</th><th>T. viaje</th><th>Regularidad</th><th class="trip-alert-col">&#9679;</th>
+              <th>#</th><th>${t('Parada')}</th><th>${t('Prog.')}</th>
+              <th>${t('Sentido / Bus')}</th><th>${t('Ocup.')}</th><th>${t('Salida')}</th><th>${t('T. viaje')}</th><th>${t('Regularidad')}</th><th class="trip-alert-col">&#9679;</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -515,7 +515,7 @@ function renderBusTimeslotDetail(trips) {
       <div id="bus-ts-trip-detail" class="trip-detail-panel">
         <div class="empty-state" style="padding:2.5rem;">
           <div class="empty-icon" style="font-size:2rem;">&#128652;</div>
-          <p style="font-size:0.85rem;">Selecciona un viaje para ver detalles</p>
+          <p style="font-size:0.85rem;">${t('Selecciona un viaje para ver detalles')}</p>
         </div>
       </div>
     </div>
@@ -567,9 +567,9 @@ function renderBusDetail(busId, busSchedule, busMetrics, showBusId = false) {
         <td class="trip-time-val">${t.time}</td>
         <td><span class="dir-badge ${dirClass}">${dirLabel}</span>${busCell}</td>
         <td class="trip-occ">${occ}</td>
-        <td style="font-family:monospace;">${meanDep}</td>
+        <td style="font-variant-numeric:tabular-nums;">${meanDep}</td>
         <td>${tTime}</td>
-        <td style="font-family:monospace;">${regularity}</td>
+        <td style="font-variant-numeric:tabular-nums;">${regularity}</td>
         <td class="trip-alert-col">${alertDotHtml(computeAlertScore(m))}</td>
       </tr>`;
   }).join('');
@@ -577,12 +577,12 @@ function renderBusDetail(busId, busSchedule, busMetrics, showBusId = false) {
   panel.innerHTML = `
     <div class="bus-detail-grid">
       <div class="bus-trips-section">
-        <div class="bus-section-title">Autobús ${busId} &mdash; ${trips.length} viaje${trips.length !== 1 ? 's' : ''}</div>
+        <div class="bus-section-title">${t(trips.length === 1 ? 'Autobús {id} — {n} viaje' : 'Autobús {id} — {n} viajes', { id: busId, n: trips.length })}</div>
         <table class="trip-table">
           <thead>
             <tr>
-              <th>#</th><th>Parada</th><th>Prog.</th>
-              <th>Sentido</th><th>Ocup.</th><th>Salida</th><th>T. viaje</th><th>Regularidad</th><th class="trip-alert-col">&#9679;</th>
+              <th>#</th><th>${t('Parada')}</th><th>${t('Prog.')}</th>
+              <th>${t('Sentido')}</th><th>${t('Ocup.')}</th><th>${t('Salida')}</th><th>${t('T. viaje')}</th><th>${t('Regularidad')}</th><th class="trip-alert-col">&#9679;</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -591,7 +591,7 @@ function renderBusDetail(busId, busSchedule, busMetrics, showBusId = false) {
       <div id="trip-detail-panel" class="trip-detail-panel">
         <div class="empty-state" style="padding:2.5rem;">
           <div class="empty-icon" style="font-size:2rem;">&#128652;</div>
-          <p style="font-size:0.85rem;">Selecciona un viaje para ver detalles</p>
+          <p style="font-size:0.85rem;">${t('Selecciona un viaje para ver detalles')}</p>
         </div>
       </div>
     </div>
@@ -611,7 +611,7 @@ function renderTripDetail(trip, panel) {
   const m     = trip.metrics;
   const fmt   = (v, suf = '') => (v != null && !isNaN(v)) ? Number(v).toFixed(2) + suf : '—';
 
-  const dirLabel = trip.direction === 'toA' ? `&#8594; Sentido ${_dirNames.toA}` : `&#8592; Sentido ${_dirNames.toB}`;
+  const dirLabel = trip.direction === 'toA' ? `&#8594; ${escHtml(t('Sentido {name}', { name: _dirNames.toA }))}` : `&#8592; ${escHtml(t('Sentido {name}', { name: _dirNames.toB }))}`;
   const dirClass = trip.direction === 'toA' ? 'dir-badge-a' : 'dir-badge-b';
   const meanDep  = computeMeanDeparture(trip.time, m?.Percentage_sims_delay_departure, m?.Mean_Minutes_departure_delay);
   const regularity = +m.Regularity_value.toFixed(2);
@@ -620,45 +620,45 @@ function renderTripDetail(trip, panel) {
   const plotUrl = busPlotUrls[trip.dirIndex];
   const plotHtml = plotUrl ? `
     <div class="trip-plots-wrap">
-      <div class="trip-plot-label">Ocupación media por parada</div>
+      <div class="trip-plot-label">${t('Ocupación media por parada')}</div>
       <div class="trip-plot-item plot-expandable" onclick="openImgModal('${plotUrl}')">
-        <img class="trip-plot-img" src="${plotUrl}" alt="Gráfica de ocupación" loading="lazy" />
-        <div class="plot-expand-hint">&#128269; Clic para ampliar</div>
+        <img class="trip-plot-img" src="${plotUrl}" alt="${t('Gráfica de ocupación')}" loading="lazy" />
+        <div class="plot-expand-hint">&#128269; ${t('Clic para ampliar')}</div>
       </div>
     </div>` : '';
 
   panel.innerHTML = `
     <div class="trip-detail-header">
       <span class="dir-badge ${dirClass}">${dirLabel}</span>
-      <span class="trip-detail-id">Bus ${trip.busId} &middot; Viaje ${trip.globalIdx ?? trip.dirIndex} &middot; ${trip.stopId} · ${trip.time}</span>
+      <span class="trip-detail-id">${t('Bus {bus} · Viaje {trip} · {stop} · {time}', { bus: trip.busId, trip: trip.globalIdx ?? trip.dirIndex, stop: trip.stopId, time: trip.time })}</span>
     </div>
     <div class="trip-metrics-grid">
       <div class="trip-metric-card">
-        <div class="trip-metric-label">Ocupación media</div>
+        <div class="trip-metric-label">${t('Ocupación media')}</div>
         <div class="trip-metric-value">${fmt(m?.Mean_Occupation_Percentage, '%')}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">Tiempo de viaje</div>
+        <div class="trip-metric-label">${t('Tiempo de viaje')}</div>
         <div class="trip-metric-value">${formatDuration(m?.Mean_time_of_trip)}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">% Simulaciones con retraso</div>
+        <div class="trip-metric-label">${t('% Simulaciones con retraso')}</div>
         <div class="trip-metric-value">${fmt(m?.Percentage_sims_delay_departure, '%')}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">Retraso medio de salida</div>
+        <div class="trip-metric-label">${t('Retraso medio de salida')}</div>
         <div class="trip-metric-value">${formatDuration(m?.Mean_Minutes_departure_delay)}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">Hora programada</div>
+        <div class="trip-metric-label">${t('Hora programada')}</div>
         <div class="trip-metric-value" style="font-size:1rem;">${trip.time}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">Salida media real</div>
+        <div class="trip-metric-label">${t('Salida media real')}</div>
         <div class="trip-metric-value" style="font-size:1rem;">${meanDep}</div>
       </div>
       <div class="trip-metric-card">
-        <div class="trip-metric-label">Valor de Regularidad</div>
+        <div class="trip-metric-label">${t('Valor de Regularidad')}</div>
         <div class="trip-metric-value" style="font-size:1rem;">${regularity}</div>
       </div>
     </div>
@@ -714,7 +714,7 @@ function renderRouteTimeslotBar() {
   const btns  = hours.map(h => `<button class="bus-ts-pill" data-hour="${h}">${h}:00</button>`).join('');
   bar.innerHTML = `
     <div class="bus-ts-header" style="border-bottom:none;padding-bottom:0;">
-      <span class="analysis-filter-label">Franja horaria:</span>
+      <span class="analysis-filter-label">${t('Franja horaria:')}</span>
       ${btns}
     </div>
     ${alertLegendHtml()}
@@ -838,7 +838,7 @@ async function loadGeodata(simId) {
     ]);
 
     if (!data.experiments || data.experiments.length === 0) {
-      container.innerHTML = '<p style="padding:1.5rem;color:var(--emt-gray-600);">No se encontraron datos geoespaciales para esta simulación.</p>';
+      container.innerHTML = `<p style="padding:1.5rem;color:var(--emt-gray-600);">${t('No se encontraron datos geoespaciales para esta simulación.')}</p>`;
       return;
     }
 
@@ -846,7 +846,7 @@ async function loadGeodata(simId) {
     renderDirectionMaps(e01);
 
   } catch (err) {
-    container.innerHTML = `<p style="padding:1.5rem;color:var(--emt-red);">Error al cargar geodata: ${escHtml(err.message)}</p>`;
+    container.innerHTML = `<p style="padding:1.5rem;color:var(--emt-red);">${escHtml(t('Error al cargar geodata: {error}', { error: err.message }))}</p>`;
   }
 }
 
@@ -854,18 +854,18 @@ function renderDirectionMaps(exp) {
   const container = document.getElementById('map-container');
   container.innerHTML = `
     <div class="analysis-filter-bar">
-      <span class="analysis-filter-label">Mostrar info por:</span>
-      <button class="filter-btn active" id="route-filter-general-btn">&#128202; General</button>
-      <button class="filter-btn" id="route-filter-ts-btn">&#128336; Franja horaria</button>
+      <span class="analysis-filter-label">${t('Mostrar info por:')}</span>
+      <button class="filter-btn active" id="route-filter-general-btn">&#128202; ${t('General')}</button>
+      <button class="filter-btn" id="route-filter-ts-btn">&#128336; ${t('Franja horaria')}</button>
     </div>
     <div id="route-ts-bar" style="display:none;border-bottom:1px solid var(--emt-gray-200);"></div>
     <div class="direction-maps">
       <div class="direction-map-panel">
-        <div class="direction-map-label dir-label-a">&#8594; Sentido ${_dirNames.toA}</div>
+        <div class="direction-map-label dir-label-a">&#8594; ${escHtml(t('Sentido {name}', { name: _dirNames.toA }))}</div>
         <svg id="svg-toA" class="route-svg"></svg>
       </div>
       <div class="direction-map-panel">
-        <div class="direction-map-label dir-label-b">&#8592; Sentido ${_dirNames.toB}</div>
+        <div class="direction-map-label dir-label-b">&#8592; ${escHtml(t('Sentido {name}', { name: _dirNames.toB }))}</div>
         <svg id="svg-toB" class="route-svg"></svg>
       </div>
     </div>
@@ -919,7 +919,7 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
   loading.setAttribute('fill', '#aaa');
   loading.setAttribute('font-size', '13');
   loading.setAttribute('font-family', 'sans-serif');
-  loading.textContent = 'Cargando...';
+  loading.textContent = t('Cargando...');
   svgEl.appendChild(loading);
 
   try {
@@ -960,7 +960,7 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
     for (const s of sortedStops) allCoords.push(s.coords);
 
     if (allCoords.length === 0) {
-      svgEl.innerHTML = `<text x="50%" y="50%" text-anchor="middle" fill="#aaa" font-size="13" font-family="sans-serif">Sin datos</text>`;
+      svgEl.innerHTML = `<text x="50%" y="50%" text-anchor="middle" fill="#aaa" font-size="13" font-family="sans-serif">${t('Sin datos')}</text>`;
       return;
     }
 
@@ -1241,7 +1241,7 @@ async function buildSvgMap(svgEl, dirData, dirKey) {
     errText.setAttribute('fill', '#e3000f');
     errText.setAttribute('font-size', '13');
     errText.setAttribute('font-family', 'sans-serif');
-    errText.textContent = `Error: ${err.message}`;
+    errText.textContent = `${t('Error')}: ${err.message}`;
     svgEl.appendChild(errText);
   }
 }
@@ -1268,34 +1268,34 @@ function showStopInfo(p, dirKey) {
         const awaitTime = stopInfo.Mean_await_time_general != null
           ? formatDuration(stopInfo.Mean_await_time_general) : '—';
         const boards_mean = stopInfo.mean_boards != null
-          ? Number(stopInfo.mean_boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          ? Number(stopInfo.mean_boards).toLocaleString(I18N.locale, { maximumFractionDigits: 2 })
           : '—';
         const unable_boards_mean = stopInfo.unable_boards != null
-          ? Number(stopInfo.unable_boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          ? Number(stopInfo.unable_boards).toLocaleString(I18N.locale, { maximumFractionDigits: 2 })
           : '—';
         const dropoffs_mean = stopInfo.mean_dropoffs != null
-          ? Number(stopInfo.mean_dropoffs).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          ? Number(stopInfo.mean_dropoffs).toLocaleString(I18N.locale, { maximumFractionDigits: 2 })
           : '—';
         statsHtml = `
           <div class="stop-stats-box">
             <div class="ss-item">
-              <span class="ss-label">Ocupación media general</span>
+              <span class="ss-label">${t('Ocupación media general')}</span>
               <span class="ss-value">${occPct}</span>
             </div>
             <div class="ss-item">
-              <span class="ss-label">Espera media general</span>
+              <span class="ss-label">${t('Espera media general')}</span>
               <span class="ss-value">${awaitTime}</span>
             </div>
             <div class="ss-item">
-              <span class="ss-label">Media de subida de pasajeros </span>
+              <span class="ss-label">${t('Media de subida de pasajeros')} </span>
               <span class="ss-value">${boards_mean}</span>
             </div>
             <div class="ss-item">
-              <span class="ss-label">Media de pasajeros que no pudieron subir </span>
+              <span class="ss-label">${t('Media de pasajeros que no pudieron subir')} </span>
               <span class="ss-value">${unable_boards_mean}</span>
             </div>
             <div class="ss-item">
-              <span class="ss-label">Media de bajada de pasajeros </span>
+              <span class="ss-label">${t('Media de bajada de pasajeros')} </span>
               <span class="ss-value">${dropoffs_mean}</span>
             </div>
           </div>`;
@@ -1306,11 +1306,11 @@ function showStopInfo(p, dirKey) {
           plotsHtml = `
             <div class="stop-plots-wrap">
               <div class="stop-plot-dir-label ${dirKey === 'toA' ? 'dir-label-a' : 'dir-label-b'}">
-                Ocupación por franja horaria (${dirKey === 'toA' ? '&#8594; ' + _dirNames.toA : '&#8592; ' + _dirNames.toB})
+                ${t('Ocupación por franja horaria ({dir})', { dir: dirKey === 'toA' ? '→ ' + _dirNames.toA : '← ' + _dirNames.toB })}
               </div>
               <div class="stop-plot-item plot-expandable" onclick="openImgModal('${generalPlotUrl}')">
-                <img src="${generalPlotUrl}" alt="Ocupación por franja" loading="lazy" />
-                <div class="plot-expand-hint">&#128269; Clic para ampliar</div>
+                <img src="${generalPlotUrl}" alt="${t('Ocupación por franja')}" loading="lazy" />
+                <div class="plot-expand-hint">&#128269; ${t('Clic para ampliar')}</div>
               </div>
             </div>`;
         }
@@ -1323,34 +1323,34 @@ function showStopInfo(p, dirKey) {
         const awaitTime = stopInfo.Mean_await_time_per_timeslot?.[ts] != null
           ? formatDuration(stopInfo.Mean_await_time_per_timeslot[ts]) : '—';
         const boards_mean = stopInfo.Board_dropoff_per_timeslot?.[ts]?.boards != null
-          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].boards).toLocaleString(I18N.locale, { maximumFractionDigits: 2 })
           : '—';
         const unable_boards_mean = stopInfo.Board_dropoff_per_timeslot?.[ts]?.unable_boards != null
-          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].unable_boards).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].unable_boards).toLocaleString(I18N.locale, { maximumFractionDigits: 2 })
           : '—';
         const dropoffs_mean = stopInfo.Board_dropoff_per_timeslot?.[ts]?.dropoffs != null
-          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].dropoffs).toLocaleString('es-ES', { maximumFractionDigits: 2 })
+          ? Number(stopInfo.Board_dropoff_per_timeslot[ts].dropoffs).toLocaleString(I18N.locale, { maximumFractionDigits: 2 })
           : '—';
         statsHtml = `
           <div class="stop-stats-box">
             <div class="ss-item">
-              <span class="ss-label">Ocupación franja ${ts}:00</span>
+              <span class="ss-label">${t('Ocupación franja {ts}:00', { ts })}</span>
               <span class="ss-value">${occPct}</span>
             </div>
             <div class="ss-item">
-              <span class="ss-label">Espera media franja ${ts}:00</span>
+              <span class="ss-label">${t('Espera media franja {ts}:00', { ts })}</span>
               <span class="ss-value">${awaitTime}</span>
             </div>
             <div class="ss-item">
-                <span class="ss-label">Media de subida de pasajeros </span>
+                <span class="ss-label">${t('Media de subida de pasajeros')} </span>
                 <span class="ss-value">${boards_mean}</span>
               </div>
               <div class="ss-item">
-                <span class="ss-label">Media de pasajeros que no pudieron subir </span>
+                <span class="ss-label">${t('Media de pasajeros que no pudieron subir')} </span>
                 <span class="ss-value">${unable_boards_mean}</span>
               </div>
               <div class="ss-item">
-                <span class="ss-label">Media de bajada de pasajeros </span>
+                <span class="ss-label">${t('Media de bajada de pasajeros')} </span>
                 <span class="ss-value">${dropoffs_mean}</span>
               </div>
           </div>`;
@@ -1361,11 +1361,11 @@ function showStopInfo(p, dirKey) {
           plotsHtml = `
             <div class="stop-plots-wrap">
               <div class="stop-plot-dir-label ${dirKey === 'toA' ? 'dir-label-a' : 'dir-label-b'}">
-                Comparativa ocupación franja ${ts}:00 (${dirKey === 'toA' ? '&#8594; ' + _dirNames.toA : '&#8592; ' + _dirNames.toB})
+                ${t('Comparativa ocupación franja {ts}:00 ({dir})', { ts, dir: dirKey === 'toA' ? '→ ' + _dirNames.toA : '← ' + _dirNames.toB })}
               </div>
               <div class="stop-plot-item plot-expandable" onclick="openImgModal('${plotUrl}')">
-                <img src="${plotUrl}" alt="Ocupación franja ${ts}" loading="lazy" />
-                <div class="plot-expand-hint">&#128269; Clic para ampliar</div>
+                <img src="${plotUrl}" alt="${t('Ocupación franja {ts}', { ts })}" loading="lazy" />
+                <div class="plot-expand-hint">&#128269; ${t('Clic para ampliar')}</div>
               </div>
             </div>`;
         }
@@ -1374,12 +1374,12 @@ function showStopInfo(p, dirKey) {
 
     panel.innerHTML = `
       <div class="route-info-header">
-        <span>&#9679; Parada ${p.stopNum} &middot; ${escHtml(p.stopName)}</span>
+        <span>&#9679; ${escHtml(t('Parada {num} · {name}', { num: p.stopNum, name: p.stopName }))}</span>
         <button class="route-info-close" onclick="closeInfoPanel()">&#10005;</button>
       </div>
       <div class="route-info-body">
-        <div class="route-info-row"><span>Nombre</span><strong>${escHtml(p.stopName)}</strong></div>
-        <div class="route-info-row"><span>N&#250;m. parada</span><strong>${p.stopNum}</strong></div>
+        <div class="route-info-row"><span>${t('Nombre')}</span><strong>${escHtml(p.stopName)}</strong></div>
+        <div class="route-info-row"><span>${t('Núm. parada')}</span><strong>${p.stopNum}</strong></div>
       </div>
       ${statsHtml}
       ${plotsHtml}
@@ -1416,11 +1416,11 @@ function showSectionInfo(sec, dirKey) {
         statsHtml = `
           <div class="stop-stats-box">
             <div class="ss-item">
-              <span class="ss-label">Tiempo de tránsito general</span>
+              <span class="ss-label">${t('Tiempo de tránsito general')}</span>
               <span class="ss-value">${genTime}</span>
             </div>
             <div class="ss-item">
-              <span class="ss-label">Tiempo esperado</span>
+              <span class="ss-label">${t('Tiempo esperado')}</span>
               <span class="ss-value">${expTime}</span>
             </div>
           </div>`;
@@ -1432,16 +1432,16 @@ function showSectionInfo(sec, dirKey) {
         const rawExpected = sectionData.expected_time_per_timeslot?.[ts];
         const resolvedExp = resolveExpectedTimeTs(sectionData, ts);
         const expTsTime   = resolvedExp != null
-          ? formatDuration(resolvedExp) + ((!rawExpected || rawExpected === 0) ? ` (franja ${ts + 1})` : '')
+          ? formatDuration(resolvedExp) + ((!rawExpected || rawExpected === 0) ? ' ' + t('(franja {ts})', { ts: ts + 1 }) : '')
           : '—';
         statsHtml = `
           <div class="stop-stats-box">
             <div class="ss-item">
-              <span class="ss-label">Tiempo de tránsito franja ${ts}:00</span>
+              <span class="ss-label">${t('Tiempo de tránsito franja {ts}:00', { ts })}</span>
               <span class="ss-value">${tsTime}</span>
             </div>
             <div class="ss-item">
-              <span class="ss-label">Tiempo esperado franja ${ts}:00</span>
+              <span class="ss-label">${t('Tiempo esperado franja {ts}:00', { ts })}</span>
               <span class="ss-value">${expTsTime}</span>
             </div>
           </div>`;
@@ -1452,11 +1452,11 @@ function showSectionInfo(sec, dirKey) {
           plotsHtml = `
             <div class="stop-plots-wrap">
               <div class="stop-plot-dir-label ${dirKey === 'toA' ? 'dir-label-a' : 'dir-label-b'}">
-                Comparativa tiempo de tránsito franja ${ts}:00
+                ${t('Comparativa tiempo de tránsito franja {ts}:00', { ts })}
               </div>
               <div class="stop-plot-item plot-expandable" onclick="openImgModal('${plotUrl}')">
-                <img src="${plotUrl}" alt="Tiempo tránsito franja ${ts}" loading="lazy" />
-                <div class="plot-expand-hint">&#128269; Clic para ampliar</div>
+                <img src="${plotUrl}" alt="${t('Tiempo tránsito franja {ts}', { ts })}" loading="lazy" />
+                <div class="plot-expand-hint">&#128269; ${t('Clic para ampliar')}</div>
               </div>
             </div>`;
         }
@@ -1475,10 +1475,10 @@ function showSectionInfo(sec, dirKey) {
         <button class="route-info-close" onclick="closeInfoPanel()">&#10005;</button>
       </div>
       <div class="route-info-body">
-        <div class="route-info-row"><span>Parada origen</span><strong>${sec.from.props.stopNum} &middot; ${escHtml(sec.from.props.stopName)}</strong></div>
-        <div class="route-info-row"><span>Parada destino</span><strong>${sec.to.props.stopNum} &middot; ${escHtml(sec.to.props.stopName)}</strong></div>
+        <div class="route-info-row"><span>${t('Parada origen')}</span><strong>${sec.from.props.stopNum} &middot; ${escHtml(sec.from.props.stopName)}</strong></div>
+        <div class="route-info-row"><span>${t('Parada destino')}</span><strong>${sec.to.props.stopNum} &middot; ${escHtml(sec.to.props.stopName)}</strong></div>
       </div>
-      ${sectionData ? statsHtml : '<div class="route-info-hint" style="padding:0.75rem 1rem;">Sin datos de tránsito para este tramo.</div>'}
+      ${sectionData ? statsHtml : `<div class="route-info-hint" style="padding:0.75rem 1rem;">${t('Sin datos de tránsito para este tramo.')}</div>`}
       ${plotsHtml}
     `;
 
@@ -1500,7 +1500,7 @@ function openImgModal(url) {
     overlay.innerHTML = `
       <div class="img-modal-box">
         <button class="img-modal-close" onclick="closeImgModal()">&#10005;</button>
-        <img id="img-modal-img" src="" alt="Gráfica ampliada" />
+        <img id="img-modal-img" src="" alt="${t('Gráfica ampliada')}" />
       </div>`;
     overlay.addEventListener('click', e => {
       if (e.target === overlay) closeImgModal();
@@ -1528,8 +1528,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!simId || !simId.match(/^SIMULATION_\d{8}_\d{6}$/)) {
     document.getElementById('loading-state').innerHTML = `
       <div class="empty-icon">&#9888;</div>
-      <p>ID de simulación inválido.</p>
-      <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; Volver al dashboard</a>
+      <p>${t('ID de simulación inválido.')}</p>
+      <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; ${t('Volver al dashboard')}</a>
     `;
     return;
   }
@@ -1544,14 +1544,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-delete-sim').addEventListener('click', async () => {
     const label = document.getElementById('hero-date').textContent || simId;
     const confirmed = confirm(
-      `ATENCIÓN: ACCIÓN IRREVERSIBLE\n\nVas a eliminar la simulación:\n"${label}"\n\nEsto borrará permanentemente TODOS los datos, resultados y logs.\n\n¿Estás seguro de que quieres continuar?`
+      t('ATENCIÓN: ACCIÓN IRREVERSIBLE\n\nVas a eliminar la simulación:\n"{label}"\n\nEsto borrará permanentemente TODOS los datos, resultados y logs.\n\n¿Estás seguro de que quieres continuar?', { label })
     );
     if (!confirmed) return;
     try {
       const res = await fetch(`/api/simulations/${simId}`, { method: 'DELETE' });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) { toast(data.error || 'Error al eliminar la simulación', 'error'); return; }
-      toast('Simulación eliminada. Redirigiendo...', 'info');
+      if (!res.ok) { toast(data.error || t('Error al eliminar la simulación'), 'error'); return; }
+      toast(t('Simulación eliminada. Redirigiendo...'), 'info');
       setTimeout(() => { window.location.href = '/'; }, 1800);
     } catch (err) {
       toast('Error: ' + err.message, 'error');
@@ -1560,11 +1560,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const socket = io();
   socket.on('sim_completed', ({ id, title }) => {
-    toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
+    toast(t('Simulación completada: {title}', { title: title || id }), 'success');
   });
 
   socket.on('new_sim_launched', ({ id, title }) => {
-    toast(`Nueva simulación creada: ${title || id}`, 'info');
+    toast(t('Nueva simulación creada: {title}', { title: title || id }), 'info');
   });
 
 });
