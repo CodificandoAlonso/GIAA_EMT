@@ -938,7 +938,29 @@ app.get('/api/simulations/:id/plots-info', (req, res) => {
   if (fs.existsSync(path.join(plotsPath, 'to_B', 'occupation_per_timeslot_toB.png')))
     generalPlots.toB = `${gpBase}/to_B/occupation_per_timeslot_toB.png`;
 
-  res.json({ generalStats, busSchedule, busMetrics, stopPlots, stopPlotsGeneral, busPlots, generalPlots, stopGeneralInfo, timesPlots });
+  // Validation: distribution equivalence (Bhattacharyya) of simulated vs expected data.
+  // Summary + figures live in PLOTS/general; the regression-with-band figures
+  // (validacion_*) come from validacion_ocupacion.py and may not exist.
+  const bhatt = { summary: null, plots: {}, validation: {} };
+  const generalDir = path.join(plotsPath, 'general');
+  try {
+    const raw = fs.readFileSync(path.join(generalDir, 'bhatt_summary.json'), 'utf8');
+    const s = JSON.parse(raw.replace(/\bNaN\b/g, 'null'));
+    bhatt.summary = { umbral: s.umbral, general: s.general, por_direccion: s.por_direccion };
+  } catch (_) {}
+  for (const name of ['sim_vs_esperado_ocupacion', 'sim_vs_esperado_tiempo', 'pct_por_franja',
+                      'pct_por_parada', 'pct_por_tramo', 'histograma_coeff']) {
+    if (fs.existsSync(path.join(generalDir, `bhatt_${name}.png`)))
+      bhatt.plots[name] = `${urlBase}/general/bhatt_${name}.png`;
+  }
+  for (const tipo of ['ocupacion', 'tiempo']) {
+    for (const kind of ['regresion', 'descomposicion']) {
+      if (fs.existsSync(path.join(generalDir, `validacion_${kind}_${tipo}.png`)))
+        bhatt.validation[`${kind}_${tipo}`] = `${urlBase}/general/validacion_${kind}_${tipo}.png`;
+    }
+  }
+
+  res.json({ generalStats, busSchedule, busMetrics, stopPlots, stopPlotsGeneral, busPlots, generalPlots, stopGeneralInfo, timesPlots, bhatt });
 });
 
 

@@ -312,6 +312,31 @@
     'Cambiar el idioma recarga la página y se perderán los cambios sin guardar. ¿Continuar?':
       'Changing the language reloads the page and unsaved changes will be lost. Continue?',
 
+    // Validación (Bhattacharyya)
+    'Validación: simulado frente a esperado': 'Validation: simulated vs expected',
+    'Un par simulado/esperado se considera equivalente si su coeficiente de Bhattacharyya es ≥ {umbral}.':
+      'A simulated/expected pair is considered equivalent if its Bhattacharyya coefficient is ≥ {umbral}.',
+    'Ocupación equivalente': 'Equivalent occupancy',
+    'Tiempo equivalente': 'Equivalent time',
+    'Conjunto equivalente': 'Equivalent overall',
+    '{a} de {b} celdas': '{a} of {b} cells',
+    'Coeficiente medio (ocupación)': 'Mean coefficient (occupancy)',
+    'Coeficiente medio (tiempo)': 'Mean coefficient (time)',
+    'mediana {v}': 'median {v}',
+    'Sesgo medio (ocupación)': 'Mean bias (occupancy)',
+    'Sesgo medio (tiempo)': 'Mean bias (time)',
+    '{v} σ': '{v} σ',
+    'Regresión con banda: ocupación': 'Regression with band: occupancy',
+    'Regresión con banda: tiempo': 'Regression with band: time',
+    'Media simulada frente a esperada: ocupación': 'Simulated vs expected mean: occupancy',
+    'Media simulada frente a esperada: tiempo': 'Simulated vs expected mean: time',
+    'Descomposición de la validación: ocupación': 'Validation decomposition: occupancy',
+    'Descomposición de la validación: tiempo': 'Validation decomposition: time',
+    'Equivalencia por franja horaria': 'Equivalence by time slot',
+    'Equivalencia por parada': 'Equivalence by stop',
+    'Equivalencia por tramo': 'Equivalence by section',
+    'Histograma del coeficiente de Bhattacharyya': 'Bhattacharyya coefficient histogram',
+
     // Alt/aria del selector
     'Cambiar idioma': 'Change language',
   };

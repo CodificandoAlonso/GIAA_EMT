@@ -297,6 +297,7 @@ async function loadPlotsInfo(simId) {
     if (!res.ok) return;
     _plotsInfo = await res.json();
     if (_plotsInfo.generalStats) renderOccupationStats(_plotsInfo.generalStats);
+    renderBhattSection(_plotsInfo.bhatt);
   } catch (_) {}
 }
 
@@ -314,6 +315,66 @@ function renderOccupationStats(s) {
   // Now that plotsInfo is ready, recolor maps and refresh the timeslot bar if visible
   recolorAllMaps();
   if (_routeInfoFilter === 'timeslot') renderRouteTimeslotBar();
+}
+
+// ---- Validation section (Bhattacharyya: simulated vs expected) ----
+
+function renderBhattSection(b) {
+  const card = document.getElementById('bhatt-card');
+  const body = document.getElementById('bhatt-body');
+  if (!card || !body || !b) return;
+  const hasPlots = Object.keys(b.plots || {}).length || Object.keys(b.validation || {}).length;
+  if (!b.summary && !hasPlots) return;
+
+  const pct = v => (v != null && !isNaN(v)) ? Number(v).toFixed(1) + '%' : '—';
+  const num = (v, d = 3) => (v != null && !isNaN(v)) ? Number(v).toFixed(d) : '—';
+  const sgn = (v, d = 2) => (v != null && !isNaN(v)) ? (v > 0 ? '+' : '') + Number(v).toFixed(d) : '—';
+  const g = b.summary?.general || {};
+
+  const kpi = (label, value, sub) => `
+    <div class="stat-card">
+      <div class="stat-label">${escHtml(label)}</div>
+      <div class="stat-value">${value}</div>
+      <div class="stat-sub">${escHtml(sub)}</div>
+    </div>`;
+  const kpis = b.summary ? `
+    <p class="bhatt-intro">${escHtml(t('Un par simulado/esperado se considera equivalente si su coeficiente de Bhattacharyya es ≥ {umbral}.', { umbral: b.summary.umbral }))}</p>
+    <div class="stats-bar bhatt-kpis">
+      ${kpi(t('Ocupación equivalente'), pct(g.ocupacion?.pct_fusionables), t('{a} de {b} celdas', { a: g.ocupacion?.fusionables ?? '—', b: g.ocupacion?.evaluadas ?? '—' }))}
+      ${kpi(t('Tiempo equivalente'), pct(g.tiempo?.pct_fusionables), t('{a} de {b} celdas', { a: g.tiempo?.fusionables ?? '—', b: g.tiempo?.evaluadas ?? '—' }))}
+      ${kpi(t('Conjunto equivalente'), pct(g.conjunto?.pct_fusionables), t('{a} de {b} celdas', { a: g.conjunto?.fusionables ?? '—', b: g.conjunto?.evaluadas ?? '—' }))}
+      ${kpi(t('Coeficiente medio (ocupación)'), num(g.ocupacion?.coeff_medio), t('mediana {v}', { v: num(g.ocupacion?.coeff_mediana) }))}
+      ${kpi(t('Coeficiente medio (tiempo)'), num(g.tiempo?.coeff_medio), t('mediana {v}', { v: num(g.tiempo?.coeff_mediana) }))}
+      ${kpi(t('Sesgo medio (ocupación)'), sgn(g.ocupacion?.sesgo_medio), t('{v} σ', { v: sgn(g.ocupacion?.sesgo_medio_sigmas) }))}
+      ${kpi(t('Sesgo medio (tiempo)'), sgn(g.tiempo?.sesgo_medio), t('{v} σ', { v: sgn(g.tiempo?.sesgo_medio_sigmas) }))}
+    </div>` : '';
+
+  const FIGS = [
+    ['validation', 'regresion_ocupacion',   'Regresión con banda: ocupación'],
+    ['validation', 'regresion_tiempo',      'Regresión con banda: tiempo'],
+    ['plots',      'sim_vs_esperado_ocupacion', 'Media simulada frente a esperada: ocupación'],
+    ['plots',      'sim_vs_esperado_tiempo',    'Media simulada frente a esperada: tiempo'],
+    ['validation', 'descomposicion_ocupacion',  'Descomposición de la validación: ocupación'],
+    ['validation', 'descomposicion_tiempo',     'Descomposición de la validación: tiempo'],
+    ['plots',      'pct_por_franja',        'Equivalencia por franja horaria'],
+    ['plots',      'pct_por_parada',        'Equivalencia por parada'],
+    ['plots',      'pct_por_tramo',         'Equivalencia por tramo'],
+    ['plots',      'histograma_coeff',      'Histograma del coeficiente de Bhattacharyya'],
+  ];
+  const figs = FIGS.filter(([grp, key]) => b[grp]?.[key]).map(([grp, key, label]) => {
+    const url = b[grp][key];
+    return `
+      <div class="chart-img-wrap">
+        <div class="plot-expandable" onclick="openImgModal('${url}')">
+          <img src="${url}" alt="${escHtml(t(label))}" loading="lazy" />
+          <div class="plot-expand-hint">&#128269; ${t('Clic para ampliar')}</div>
+        </div>
+        <div class="chart-name">${escHtml(t(label))}</div>
+      </div>`;
+  }).join('');
+
+  body.innerHTML = kpis + (figs ? `<div class="charts-grid bhatt-figs">${figs}</div>` : '');
+  card.style.display = '';
 }
 
 // ---- View toggle (Route / Bus) ----

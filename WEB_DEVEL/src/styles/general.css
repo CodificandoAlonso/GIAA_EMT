@@ -654,6 +654,11 @@ main {
 
 .section-card-body { padding: var(--sp-5); }
 
+/* ---- Validación (Bhattacharyya) ---- */
+.bhatt-intro { color: var(--muted); font-size: var(--fs-base); margin-bottom: var(--sp-4); }
+.bhatt-kpis { margin-bottom: var(--sp-5); }
+.bhatt-figs { grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+
 /* ---- Charts grid ---- */
 .charts-grid {
   display: grid;
