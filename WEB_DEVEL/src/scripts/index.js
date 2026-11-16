@@ -22,7 +22,7 @@ const STATUS_QUEUED   = 'En cola';
 const STATUS_PREPARED = 'Preparada';
 
 function statusText(status, position) {
-  return status === STATUS_QUEUED && position ? `${status} (#${position})` : status;
+  return status === STATUS_QUEUED && position ? `${t(status)} (#${position})` : t(status);
 }
 
 function escHtml(str) {
@@ -39,7 +39,7 @@ function errorSummary(error) {
 
 function formatNum(n) {
   if (n === null || n === undefined || isNaN(n)) return '—';
-  return Number(n).toLocaleString('es-ES');
+  return Number(n).toLocaleString(I18N.locale);
 }
 
 // ---- Render simulation cards ----
@@ -54,10 +54,10 @@ function renderCard(sim) {
   const [datePart, timePart] = (sim.datetime || '—  —').split(' ');
   const isError = sim.status === STATUS_ERROR;
   const chartsHtml = isError
-    ? `<span class="charts-badge error" title="${escHtml(errorSummary(sim.error))}">&#10005; ERROR</span>`
+    ? `<span class="charts-badge error" title="${escHtml(errorSummary(sim.error))}">&#10005; ${t('ERROR')}</span>`
     : sim.hasCharts
-      ? '<span class="charts-badge ready">&#10003; Gráficas listas</span>'
-      : '<span class="charts-badge pending">&#9711; Sin gráficas</span>';
+      ? `<span class="charts-badge ready">&#10003; ${t('Gráficas listas')}</span>`
+      : `<span class="charts-badge pending">&#9711; ${t('Sin gráficas')}</span>`;
   const errorHtml = isError
     ? `<div class="sim-error-reason">${escHtml(errorSummary(sim.error))}</div>`
     : '';
@@ -80,24 +80,24 @@ function renderCard(sim) {
     <div class="sim-card-body">
       ${descHtml}
       <div class="sim-meta-row">
-        <span class="meta-label">Numero de Repeticiones por experimento</span>
+        <span class="meta-label">${t('Numero de Repeticiones por experimento')}</span>
         <span class="meta-value">${formatNum(sim.runCount)}</span>
       </div>
       <div class="sim-meta-row">
-        <span class="meta-label">Solución</span>
-        <span class="meta-value">${MODEL_LABELS[sim.model] || MODEL_LABELS['without_agents']}</span>
+        <span class="meta-label">${t('Solución')}</span>
+        <span class="meta-value">${t(MODEL_LABELS[sim.model] || MODEL_LABELS['without_agents'])}</span>
       </div>
       <div class="sim-meta-row">
-        <span class="meta-label">Estado</span>
-        <span class="meta-value${isError ? ' status-error' : ''}">${sim.status}</span>
+        <span class="meta-label">${t('Estado')}</span>
+        <span class="meta-value${isError ? ' status-error' : ''}">${t(sim.status)}</span>
       </div>
       ${errorHtml}
     </div>
     <div class="sim-card-footer">
       ${chartsHtml}
       <div style="display:flex;gap:0.5rem;align-items:center;">
-        <button class="btn btn-sm btn-danger" data-delete-sim="${sim.id}" title="Eliminar simulación">&#128465;</button>
-        <button class="btn btn-primary btn-sm">Ver detalle &#8594;</button>
+        <button class="btn btn-sm btn-danger" data-delete-sim="${sim.id}" title="${t('Eliminar simulación')}" aria-label="${t('Eliminar simulación')}">&#128465;</button>
+        <button class="btn btn-primary btn-sm">${t('Ver detalle')} &#8594;</button>
       </div>
     </div>
   `;
@@ -129,14 +129,14 @@ function renderCard(sim) {
 
 async function handleDeleteSim(simId, label) {
   const confirmed = confirm(
-    `ATENCIÓN: ACCIÓN IRREVERSIBLE\n\nVas a eliminar la simulación:\n"${label}"\n\nEsto borrará permanentemente TODOS los datos, resultados y logs.\n\n¿Estás seguro de que quieres continuar?`
+    t('ATENCIÓN: ACCIÓN IRREVERSIBLE\n\nVas a eliminar la simulación:\n"{label}"\n\nEsto borrará permanentemente TODOS los datos, resultados y logs.\n\n¿Estás seguro de que quieres continuar?', { label })
   );
   if (!confirmed) return;
   try {
     const res = await fetch(`/api/simulations/${simId}`, { method: 'DELETE' });
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) { toast(data.error || 'Error al eliminar la simulación', 'error'); return; }
-    toast(`Simulación "${label}" eliminada`, 'info');
+    if (!res.ok) { toast(data.error || t('Error al eliminar la simulación'), 'error'); return; }
+    toast(t('Simulación "{label}" eliminada', { label }), 'info');
     loadSimulations();
   } catch (err) {
     toast('Error: ' + err.message, 'error');
@@ -156,15 +156,15 @@ async function loadSimulations() {
     document.getElementById('stat-total').textContent = formatNum(sims.length);
     document.getElementById('stat-charts').textContent = formatNum(sims.filter(s => s.hasCharts).length);
     document.getElementById('stat-latest').textContent = sims[0]?.datetime?.split(' ')[0] ?? '—';
-    document.getElementById('sim-count-badge').textContent = `${sims.length} simulación${sims.length !== 1 ? 'es' : ''} encontrada${sims.length !== 1 ? 's' : ''}`;
+    document.getElementById('sim-count-badge').textContent = t(sims.length === 1 ? '{n} simulación encontrada' : '{n} simulaciones encontradas', { n: sims.length });
 
     // Render cards
     if (sims.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
           <div class="empty-icon">&#128650;</div>
-          <p>No se han encontrado simulaciones.</p>
-          <p style="margin-top:0.5rem;font-size:0.85rem;">Lanza una nueva simulación con el botón de arriba.</p>
+          <p>${t('No se han encontrado simulaciones.')}</p>
+          <p style="margin-top:0.5rem;font-size:0.85rem;">${t('Lanza una nueva simulación con el botón de arriba.')}</p>
         </div>`;
       return;
     }
@@ -179,10 +179,10 @@ async function loadSimulations() {
     container.innerHTML = `
       <div class="empty-state">
         <div class="empty-icon">&#9888;</div>
-        <p>Error al cargar las simulaciones.</p>
+        <p>${t('Error al cargar las simulaciones.')}</p>
         <p style="margin-top:0.5rem;font-size:0.83rem;color:var(--emt-red);">${err.message}</p>
       </div>`;
-    toast('Error al conectar con el servidor', 'error');
+    toast(t('Error al conectar con el servidor'), 'error');
   }
 }
 
@@ -197,20 +197,20 @@ function closeModal() {
 
 async function triggerGenerate() {
   closeModal();
-  toast('Preparando directorio de simulación...', 'info');
+  toast(t('Preparando directorio de simulación...'), 'info');
   try {
     const res = await fetch('/api/simulations/prepare', { method: 'POST' });
     const data = await res.json();
     if (!res.ok) {
-      toast(data.error || 'Error al preparar la simulación', 'error');
+      toast(data.error || t('Error al preparar la simulación'), 'error');
       return;
     }
-    toast('Directorio creado. Abriendo configuración...', 'success');
+    toast(t('Directorio creado. Abriendo configuración...'), 'success');
     setTimeout(() => {
       window.location.href = `/config/${data.simId}`;
     }, 800);
   } catch (err) {
-    toast('Error al preparar la simulación: ' + err.message, 'error');
+    toast(t('Error al preparar la simulación') + ': ' + err.message, 'error');
   }
 }
 
@@ -224,10 +224,10 @@ function showCompletionBanner(id, title) {
     <div class="sim-complete-banner-inner">
       <span class="sim-complete-icon">&#10003;</span>
       <div>
-        <strong>Simulaci&oacute;n completada</strong>
+        <strong>${t('Simulación completada')}</strong>
         <div class="sim-complete-label">${label}</div>
       </div>
-      <button class="sim-complete-dismiss" aria-label="Cerrar">&times;</button>
+      <button class="sim-complete-dismiss" aria-label="${t('Cerrar')}">&times;</button>
     </div>
   `;
   document.body.appendChild(banner);
@@ -277,12 +277,12 @@ function applySimProgress(sims) {
         // metaValues: [0] nº repeticiones, [1] Solución, [2] Estado.
     // El estado es [2]; comparar contra [1] leia la etiqueta del modelo,
     // que nunca es 'Esperando Graficas', de modo que el guardia no saltaba.
-    if (metaValues[2]?.textContent != 'Esperando Gr\u00e1ficas'){
+    if (metaValues[2]?.textContent != t('Esperando Gr\u00e1ficas')){
     bar.style.width = `${percentage}%`;
     }
 
     // When a sim reaches 100%, fade the bar out after a moment
-    if (runCount >= 1000 && metaValues[2]?.textContent != 'Esperando Gr\u00e1ficas') {
+    if (runCount >= 1000 && metaValues[2]?.textContent != t('Esperando Gr\u00e1ficas')) {
       bar.style.width = '100%';
       setTimeout(() => {
         bar.style.opacity = '0';
@@ -307,7 +307,7 @@ function endsimprocess(id) {
  
     if (metaValues[0]) metaValues[0].textContent = formatNum(1000);
   // [1] es la Solución; escribir ahi borraba el nombre del modelo.
-  if (metaValues[2]) metaValues[2].textContent = "Completada";
+  if (metaValues[2]) metaValues[2].textContent = t('Completada');
 
   setTimeout(() => {
       bar.style.opacity = '0';
@@ -336,17 +336,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     showCompletionBanner(id, title);
     endsimprocess(id);
-    toast(`Simulaci\u00f3n completada: ${title || id}`, 'success');
+    toast(t('Simulación completada: {title}', { title: title || id }), 'success');
     loadSimulations();
   });
 
   socket.on('sim_failed', ({ id, title, error }) => {
-    toast(`Simulaci\u00f3n con ERROR: ${title || id} (${errorSummary(error)})`, 'error');
+    toast(t('Simulación con ERROR: {title} ({error})', { title: title || id, error: errorSummary(error) }), 'error');
     loadSimulations();
   });
 
   socket.on('new_sim_launched', ({ id, title, queued }) => {
-    toast(queued ? `Simulación en cola: ${title || id}` : `Simulación lanzada: ${title || id}`, 'info');
+    toast(queued ? t('Simulación en cola: {title}', { title: title || id }) : t('Simulación lanzada: {title}', { title: title || id }), 'info');
     loadSimulations();
   });
 
