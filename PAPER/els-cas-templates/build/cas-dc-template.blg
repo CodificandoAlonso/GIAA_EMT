@@ -5,45 +5,45 @@ The style file: cas-model2-names.bst
 Database file #1: cas-refs.bib
 Reallocated singl_function (elt_size=8) to 100 items from 50.
 Warning--empty pages in wooldridge1999intelligent
-You've used 32 entries,
+You've used 33 entries,
             2990 wiz_defined-function locations,
-            962 strings with 12618 characters,
-and the built_in function-call counts, 20896 in all, are:
-= -- 1615
-> -- 774
-< -- 19
-+ -- 309
-- -- 265
-* -- 2291
-:= -- 3050
-add.period$ -- 121
-call.type$ -- 32
-change.case$ -- 250
-chr.to.int$ -- 30
-cite$ -- 33
-duplicate$ -- 1577
-empty$ -- 1536
-format.name$ -- 348
-if$ -- 3859
+            968 strings with 12708 characters,
+and the built_in function-call counts, 21382 in all, are:
+= -- 1650
+> -- 784
+< -- 20
++ -- 313
+- -- 268
+* -- 2337
+:= -- 3121
+add.period$ -- 124
+call.type$ -- 33
+change.case$ -- 256
+chr.to.int$ -- 31
+cite$ -- 34
+duplicate$ -- 1620
+empty$ -- 1583
+format.name$ -- 352
+if$ -- 3955
 int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 303
-newline$ -- 200
-num.names$ -- 132
-pop$ -- 517
+missing$ -- 312
+newline$ -- 205
+num.names$ -- 136
+pop$ -- 535
 preamble$ -- 1
-purify$ -- 215
+purify$ -- 220
 quote$ -- 0
-skip$ -- 455
+skip$ -- 468
 stack$ -- 0
-substring$ -- 871
-swap$ -- 1147
+substring$ -- 882
+swap$ -- 1173
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 285
+type$ -- 291
 warning$ -- 1
-while$ -- 141
+while$ -- 144
 width$ -- 0
-write$ -- 513
+write$ -- 527
 (There was 1 warning)

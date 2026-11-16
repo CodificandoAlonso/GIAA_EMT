@@ -1,0 +1,7 @@
+direction,condition (alone),records,days*stops,records per day-stop
+toA,Occupation<0,1016,2370,0.4286919831223629
+toA,Occupation>=80,843,2370,0.3556962025316456
+toA,Board/DropOff <0 or >=80,30,2370,0.012658227848101266
+toB,Occupation<0,1547,1896,0.8159282700421941
+toB,Occupation>=80,479,1896,0.25263713080168776
+toB,Board/DropOff <0 or >=80,24,1896,0.012658227848101266

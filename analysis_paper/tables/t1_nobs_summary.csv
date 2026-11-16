@@ -1,0 +1,9 @@
+direction,variable,n_combinations,min,median,max
+toA,alightings (per bus arrival),285,15,622.0,875
+toA,"boardings (per stop-hour, day sums)",285,152,158.0,158
+toA,"occupation (per visit, departure slot)",285,3,631.0,894
+toA,"travel times (per segment, both arrivals in slot)",266,9,571.0,836
+toB,alightings (per bus arrival),228,0,624.5,818
+toB,"boardings (per stop-hour, day sums)",228,152,158.0,158
+toB,"occupation (per visit, departure slot)",228,3,609.5,883
+toB,"travel times (per segment, both arrivals in slot)",209,0,550.0,772

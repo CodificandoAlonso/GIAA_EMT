@@ -1,0 +1,5 @@
+title "Prueba con energia pasajeros"
+line 401
+model with_agents
+seed 6295919720858325650
+exclusive no

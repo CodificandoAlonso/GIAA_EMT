@@ -1,4 +1,4 @@
-\begin{thebibliography}{30}
+\begin{thebibliography}{31}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -189,6 +189,11 @@
   \bibinfo{howpublished}{Document SC00027H, Standard},
   \bibinfo{year}{2002}{\natexlab{b}}. \URLprefix
   \url{http://www.fipa.org/specs/fipa00027/SC00027H.html}.
+%Type = Book
+\bibitem[{Law(2015)}]{law2015simulation}
+\bibinfo{author}{A.~M. Law}, \bibinfo{title}{Simulation Modeling and Analysis},
+  \bibinfo{edition}{5} ed., \bibinfo{publisher}{McGraw-Hill Education},
+  \bibinfo{address}{New York}, \bibinfo{year}{2015}.
 %Type = Article
 \bibitem[{Leys et~al.(2013)Leys, Ley, Klein, Bernard, and
   Licata}]{leys2013detecting}

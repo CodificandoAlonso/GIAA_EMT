@@ -1,0 +1,3 @@
+direction,n_csv,n_distinct_schemas,columns
+toA,15,1,"TripId, IdExternal, EventDate, EventTime, TimeSlot, Line, Direction, LogicVehicle, Weekday, DayType, Season, FreeDay, TripId.1, Stop, IdExternal.1, EventDate.1, EventTime.1, TimeSlot.1, TemperatureMax, TemperatureMin, RainProbMin, RainProbMax, Board, DropOff, Occupation"
+toB,12,1,"TripId, IdExternal, EventDate, EventTime, TimeSlot, Line, Direction, LogicVehicle, Weekday, DayType, Season, FreeDay, TripId.1, Stop, IdExternal.1, EventDate.1, EventTime.1, TimeSlot.1, TemperatureMax, TemperatureMin, RainProbMin, RainProbMax, Board, DropOff, Occupation"

@@ -1,0 +1,9 @@
+direction,variable,slots_with_fewest_obs
+toA,alightings (per bus arrival),"slot 5 (median n=207), slot 23 (median n=234), slot 22 (median n=438)"
+toA,"boardings (per stop-hour, day sums)","slot 5 (median n=158), slot 6 (median n=158), slot 7 (median n=158)"
+toA,"occupation (per visit, departure slot)","slot 23 (median n=111), slot 5 (median n=349), slot 22 (median n=395)"
+toA,"travel times (per segment, both arrivals in slot)","slot 5 (median n=186), slot 23 (median n=231), slot 22 (median n=401)"
+toB,alightings (per bus arrival),"slot 5 (median n=0), slot 23 (median n=384), slot 6 (median n=422)"
+toB,"boardings (per stop-hour, day sums)","slot 5 (median n=158), slot 6 (median n=158), slot 7 (median n=158)"
+toB,"occupation (per visit, departure slot)","slot 5 (median n=118), slot 23 (median n=224), slot 22 (median n=458)"
+toB,"travel times (per segment, both arrivals in slot)","slot 5 (median n=0), slot 23 (median n=372), slot 6 (median n=406)"

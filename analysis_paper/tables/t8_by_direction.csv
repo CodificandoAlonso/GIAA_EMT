@@ -1,0 +1,9 @@
+direction,state,threshold,n_visits,n_at_threshold,pct
+toA,A before upper cut,occ>=80 (capacity),169906,832,0.48968253034030584
+toA,A before upper cut,occ>=72 (90% of capacity),169906,3460,2.0364201381940603
+toA,B after Occupation<80,occ>=80 (capacity),169074,0,0.0
+toA,B after Occupation<80,occ>=72 (90% of capacity),169074,2628,1.5543489832854254
+toB,A before upper cut,occ>=80 (capacity),134048,470,0.3506206731916925
+toB,A before upper cut,occ>=72 (90% of capacity),134048,2057,1.534524946287897
+toB,B after Occupation<80,occ>=80 (capacity),133578,0,0.0
+toB,B after Occupation<80,occ>=72 (90% of capacity),133578,1587,1.1880698917486412

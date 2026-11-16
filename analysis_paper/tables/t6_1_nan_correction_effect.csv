@@ -1,0 +1,1881 @@
+policy,direction,variable,stop,slot,chosen_original,chosen_corrected,selection_changes,any_pass_original,any_pass_corrected,nb_verdict_changes,geom_verdict_changes
+untestable -> not rejected,toA,boardings,82,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,82,6,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,82,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,82,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,82,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,82,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,82,20,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,82,21,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,82,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,82,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,5,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,562,6,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,562,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,562,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,562,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,562,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,562,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,1929,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,1929,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,2535,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,2535,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2535,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2539,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2539,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2646,5,NEGATIVE BINOMIAL,GEOMETRICAL,True,False,True,False,True
+untestable -> not rejected,toA,boardings,2646,6,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,9,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,10,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2646,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2646,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,15,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,16,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,18,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,19,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,2646,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2646,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,2646,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,2646,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3903,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3903,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3903,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,9,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,10,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,11,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,12,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,13,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,14,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,15,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,16,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,18,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,19,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3903,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3903,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3903,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3903,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,6,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3991,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3991,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3991,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3991,23,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,3995,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3995,6,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,9,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,10,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,11,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,12,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,13,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,14,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,15,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,16,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,18,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,19,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,3995,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3995,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3995,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,3995,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,4032,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,4032,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4032,22,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,4032,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,4090,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4090,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4090,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4090,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,4090,23,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,4188,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4188,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4188,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4188,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4188,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4188,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,4188,11,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,12,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,13,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,14,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,15,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,16,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,18,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,19,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,20,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,21,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,22,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,boardings,4188,23,NORMAL,GEOMETRICAL,True,True,True,False,True
+untestable -> not rejected,toA,boardings,5360,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,5360,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,5360,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,22,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5360,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,boardings,5939,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,5939,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,boardings,5939,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,82,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,82,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,5,NORMAL,GEOMETRICAL,True,False,True,False,True
+untestable -> not rejected,toA,alightings,562,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,7,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,10,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,562,11,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,12,GEOMETRICAL,NEGATIVE BINOMIAL,True,False,True,True,False
+untestable -> not rejected,toA,alightings,562,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,14,GEOMETRICAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> not rejected,toA,alightings,562,15,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,16,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,562,17,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,19,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,20,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,562,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,562,23,NORMAL,NORMAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,1929,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,1929,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,1929,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,2535,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2535,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,9,NORMAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> not rejected,toA,alightings,2539,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,2539,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,3903,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3903,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,3991,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,7,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3991,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,3995,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,8,NORMAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> not rejected,toA,alightings,3995,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,3995,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,8,NORMAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> not rejected,toA,alightings,4032,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4032,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,4090,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,4090,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,12,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,4090,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,16,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,18,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,19,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4090,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,7,GEOMETRICAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> not rejected,toA,alightings,4188,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,4188,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,5,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,alightings,5360,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5360,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,5,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toA,alightings,5727,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5727,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,5939,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,7,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,10,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,5939,17,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,18,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,5939,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toA,alightings,5939,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toA,alightings,5939,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,81,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,81,6,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,9,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,10,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,11,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,12,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,13,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,14,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,15,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,16,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,18,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,19,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,20,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,21,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,22,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,81,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,649,6,NORMAL,GEOMETRICAL,True,False,True,False,True
+untestable -> not rejected,toB,boardings,649,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,True,True,False
+untestable -> not rejected,toB,boardings,649,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,11,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,15,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,649,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,1167,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,1167,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,1167,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,9,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,1167,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,1167,12,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,13,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,14,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,15,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,16,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,18,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,19,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,20,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,1167,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,1167,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,1167,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,2538,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2538,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,2964,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,7,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,2964,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,2964,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,2964,12,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,16,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,2964,20,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,2964,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,2964,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,2964,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3929,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,3929,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3929,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3929,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,9,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,10,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,11,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,12,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,13,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,14,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,15,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,16,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,18,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,19,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,20,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,3929,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3929,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3929,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,3990,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,7,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,3990,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3990,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,3990,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,3994,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,22,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,3994,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,4187,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,7,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,4187,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,4187,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,4187,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,5727,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5727,6,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,7,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,8,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5727,10,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,11,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,12,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,13,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,14,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,15,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,16,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,17,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,18,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,19,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,20,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,21,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,22,NORMAL,NORMAL,False,True,True,False,True
+untestable -> not rejected,toB,boardings,5727,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,5,GEOMETRICAL,GEOMETRICAL,False,False,True,False,True
+untestable -> not rejected,toB,boardings,5938,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,5938,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,8,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,5938,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,10,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,11,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,12,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,5938,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,15,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,boardings,5938,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,boardings,5938,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,81,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,10,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,11,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,81,12,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,15,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,81,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,17,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,81,18,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,81,19,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,81,21,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,81,22,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,81,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,649,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,11,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,15,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,17,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,18,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,19,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,1167,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,22,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,1167,23,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> not rejected,toB,alightings,2538,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2538,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,5,NORMAL,GEOMETRICAL,True,True,True,False,True
+untestable -> not rejected,toB,alightings,2646,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2646,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,2964,23,NORMAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> not rejected,toB,alightings,3929,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3929,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3990,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,3994,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,4187,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,10,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> not rejected,toB,alightings,5938,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,82,6,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,82,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,82,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,82,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,82,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,82,20,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,82,21,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,82,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,82,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,562,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,562,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,1929,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,1929,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,2535,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,2535,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2535,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2539,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,2646,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,2646,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,2646,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3903,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3991,23,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,3995,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,3995,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,4032,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,4032,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4032,22,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,4032,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,4090,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4090,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,4090,23,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,4188,5,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,4188,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,5360,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,5360,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,22,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5360,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,boardings,5939,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,5939,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,boardings,5939,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,82,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,82,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,5,NORMAL,NORMAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,562,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,7,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,10,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,562,11,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,12,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,562,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,15,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,16,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,562,17,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,19,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,20,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,562,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,562,23,NORMAL,NORMAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,1929,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,1929,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,1929,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,2535,5,NEGATIVE BINOMIAL,GEOMETRICAL,True,True,True,True,False
+untestable -> rejected,toA,alightings,2535,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2535,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,9,NORMAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> rejected,toA,alightings,2539,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,2539,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,3903,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3903,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,3991,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,7,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3991,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,3995,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,8,NORMAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> rejected,toA,alightings,3995,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,3995,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,8,NORMAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> rejected,toA,alightings,4032,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4032,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,4090,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,4090,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,12,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,4090,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,16,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,18,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,19,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4090,23,GEOMETRICAL,GEOMETRICAL,False,True,True,True,False
+untestable -> rejected,toA,alightings,4188,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,7,GEOMETRICAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> rejected,toA,alightings,4188,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,4188,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5360,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5727,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,5939,5,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,7,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,10,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,5939,17,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,18,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,5939,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toA,alightings,5939,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toA,alightings,5939,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,81,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,81,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,649,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,649,6,NORMAL,NORMAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,649,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,649,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,649,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,649,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,649,11,GEOMETRICAL,GEOMETRICAL,False,True,True,True,False
+untestable -> rejected,toB,boardings,649,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,649,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,649,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,649,15,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,649,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,649,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,649,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,649,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,649,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,649,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,649,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,649,23,NEGATIVE BINOMIAL,GEOMETRICAL,True,True,False,True,False
+untestable -> rejected,toB,boardings,1167,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,1167,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,9,NORMAL,NORMAL,False,True,True,True,False
+untestable -> rejected,toB,boardings,1167,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,1167,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,2538,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2538,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,2964,6,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,7,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,2964,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,2964,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,2964,12,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,16,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,2964,20,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,2964,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,2964,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,2964,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,3929,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3929,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,3990,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,7,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,15,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,18,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,3990,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3990,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,3990,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,3994,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,22,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,3994,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,4187,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,4187,7,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,4187,8,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,4187,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,20,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,4187,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,5727,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5727,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,5,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,5938,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,5938,7,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,boardings,5938,8,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,5938,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,10,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,11,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,12,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,5938,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,14,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,15,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,17,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,19,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,boardings,5938,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,boardings,5938,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,False,True,False
+untestable -> rejected,toB,alightings,81,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,81,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,10,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,11,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,81,12,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,15,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,81,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,17,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,81,18,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,81,19,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,81,21,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,81,22,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,81,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,9,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,649,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,8,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,11,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,12,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,13,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,14,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,15,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,16,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,17,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,18,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,19,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,1167,20,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,21,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,22,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,1167,23,GEOMETRICAL,GEOMETRICAL,False,False,False,False,False
+untestable -> rejected,toB,alightings,2538,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2538,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,5,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2646,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,9,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,13,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,2964,23,NORMAL,NEGATIVE BINOMIAL,True,True,True,True,False
+untestable -> rejected,toB,alightings,3929,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,21,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,22,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3929,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3990,23,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,10,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,3994,23,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,6,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,10,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,11,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,4187,23,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,6,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,7,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,8,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,9,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,10,GEOMETRICAL,GEOMETRICAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,11,NEGATIVE BINOMIAL,NEGATIVE BINOMIAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,12,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,13,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,14,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,15,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,16,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,17,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,18,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,19,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,20,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,21,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,22,NORMAL,NORMAL,False,True,True,False,False
+untestable -> rejected,toB,alightings,5938,23,NORMAL,NORMAL,False,True,True,False,False

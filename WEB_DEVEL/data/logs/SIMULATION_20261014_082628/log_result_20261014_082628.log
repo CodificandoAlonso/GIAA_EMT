@@ -1,0 +1,166 @@
+[2026-10-14 08:26:28] [0;34m[INFO][0m ==========================================
+[2026-10-14 08:26:28] [0;34m[INFO][0m   GAMA BATCH SIMULATION PREPARATION
+[2026-10-14 08:26:28] [0;34m[INFO][0m ==========================================
+[2026-10-14 08:26:28] [0;34m[INFO][0m Batch experiment: batch_1000
+[2026-10-14 08:26:28] [0;34m[INFO][0m HPC cores: GAMA=6 C=5
+[2026-10-14 08:26:28] [0;34m[INFO][0m Source project: ../../GAMA/src/TEST_MOBILITY
+[2026-10-14 08:26:28] [0;34m[INFO][0m Simulation directory: ../data/logs/SIMULATION_20261014_082628
+[2026-10-14 08:26:28] [0;34m[INFO][0m --- Phase 1: Pre-cleanup ---
+[2026-10-14 08:26:28] [0;34m[INFO][0m Removing previous symlinks from original project...
+[2026-10-14 08:26:28] [0;32m[SUCCESS][0m Pre-cleanup completed in 0s
+[2026-10-14 08:26:28] [0;34m[INFO][0m --- Phase 2: Project Snapshot ---
+[2026-10-14 08:26:28] [0;34m[INFO][0m Copying full GAMA project to simulation directory...
+[2026-10-14 08:26:28] [0;34m[INFO][0m --- Phase 2.2: Copying C DIR Inside the sim directory ---
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/alighting_params_toA.csv to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/alighting_params_toB.csv to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/final_input.json to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/input_data_E01_toA.csv to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/input_data_E01_toB.csv to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/input_stops.txt to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/input_times_stops_toA.csv to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/input_times_stops_toB.csv to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/input_tryout.json to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/old_input_data_E01_toA.csv to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/old_input_data_E01_toB.csv to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/old_input.json to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/ROUTE to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;34m[INFO][0m copying ../../BASE_DATA/STOPS to C's and GAMA's data folders
+[2026-10-14 08:26:28] [0;32m[SUCCESS][0m Project snapshot created in 0s
+[2026-10-14 08:26:28] [0;34m[INFO][0m Copied model path: ../data/logs/SIMULATION_20261014_082628/TEST_MOBILITY/models/mobility_performance.gaml
+[2026-10-14 08:26:28] [0;34m[INFO][0m Inputs can be modified at: ../data/logs/SIMULATION_20261014_082628/TEST_MOBILITY/includes/
+[2026-10-14 08:26:38] [0;34m[INFO][0m ==========================================
+[2026-10-14 08:26:38] [0;34m[INFO][0m   SIMULATION EXECUTION PIPELINE
+[2026-10-14 08:26:38] [0;34m[INFO][0m ==========================================
+[2026-10-14 08:26:38] [0;34m[INFO][0m Engine: gama (model key: with_agents)
+[2026-10-14 08:26:38] [0;34m[INFO][0m HPC cores: 6
+[2026-10-14 08:26:38] [0;34m[INFO][0m MASTER_SEED: 6295919720858325650
+[2026-10-14 08:26:38] [0;34m[INFO][0m Concurrent runs at start: 1 (exclusive: no)
+[2026-10-14 08:26:38] [0;34m[INFO][0m Simulation directory: /app/WEB_DEVEL/data/logs/SIMULATION_20261014_082628
+[2026-10-14 08:26:38] [0;34m[INFO][0m --- Phase 1: Simulation ---
+[2026-10-14 08:26:38] [0;34m[INFO][0m Batch experiment: batch_1000
+[2026-10-14 08:26:38] [0;34m[INFO][0m JVM heap: 11264m
+[2026-10-14 08:26:38] [0;34m[INFO][0m Starting GAMA headless batch execution against copied project...
+[2026-10-14 08:26:38] [0;34m[INFO][0m Resource monitor started (PID 214) -> /app/WEB_DEVEL/data/logs/SIMULATION_20261014_082628/MONITOR
+******************************************************************
+* GAMA version 2025.6.4                                         *
+* http://gama-platform.org                                       *
+* (c) 2007-2025 UMI 209 UMMISCO IRD/SU & Partners                *
+******************************************************************
+Picked up JAVA_TOOL_OPTIONS: -Denable_debug=false -Denable_logging=false -XX:+UseG1GC -Xlog:gc*:file=/app/WEB_DEVEL/data/logs/SIMULATION_20261014_082628/MONITOR/gc.log:time,uptime,level:filecount=1,filesize=100m
+> FLAG  : enable_debug                                  set to________ true
+> FLAG  : enable_logging                                set to________ true
+> FLAG  : use_global_preference_store                   set to________ true
+> JAI   : ImageIO extensions                            loaded for____ BTF|TF8|TIF|TIFF|arx|asc|bmp|btf|gif|jp2|jpeg|jpg|pbm|pgm|png|ppm|tf8|tif|tiff|wbmp
+> GAMA  : version 2025.6.4                              loading on____ Linux 7.2.6-arch2-1, processor amd64, JDK OpenJDK 64-Bit Server VM Eclipse Adoptium version 21.0.12.1+1-LTS
+> GAMA  : Plugin gama.core                              loaded in_____ 339ms
+> GAMA  : Plugin gama.extension.bdi                     loaded in_____ 20ms
+> GAMA  : Plugin gama.extension.database                loaded in_____ 40ms
+> GAMA  : Plugin gama.extension.fipa                    loaded in_____ 5ms
+> GAMA  : Snapshot services                             inactive______ (headless mode)
+> GAMA  : Plugin gama.extension.image                   loaded in_____ 11ms
+> GAMA  : Plugin gama.extension.maths                   loaded in_____ 24ms
+> GAMA  : Plugin gama.extension.network                 loaded in_____ 2ms
+> GAMA  : Plugin gama.extension.pedestrian              loaded in_____ 6ms
+> GAMA  : Plugin gama.extension.physics                 loaded in_____ 5ms
+> GAMA  : Plugin gama.extension.serialize               loaded in_____ 3ms
+> GAMA  : Plugin gama.extension.stats                   loaded in_____ 7ms
+> GAMA  : Plugin gama.extension.traffic                 loaded in_____ 10ms
+> GAMA  : Plugin gama.headless                          loaded in_____ 1ms
+> GAML  : Initializing parser                           done in_______ 83ms
+> GAMA  : Plugin gaml.compiler                          loaded in_____ 85ms
+> GAMA  : Loading extensions to 'create'                done in_______ 3ms
+> GAMA  : Loading extensions to 'save'                  done in_______ 37ms
+> GAMA  : Loading extensions to 'draw'                  done in_______ 1ms
+> GAMA  : Loading extensions to 'event'                 done in_______ 1ms
+> GAMA  : Gathering built-in models                     done in_______ 1ms
+> GAMA  : Loading constants                             done in_______ 63ms
+> GAML  : Plugins with language additions               loaded in_____ 698ms
+GAMA configuring and loading...
+> GAML  : Artifacts                                     built in______ 21ms
+[monitor_resources] summary -> /app/WEB_DEVEL/data/logs/SIMULATION_20261014_082628/MONITOR/monitor_summary.json
+[2026-10-14 11:28:23] [0;34m[INFO][0m Stopping resource monitor...
+[2026-10-14 11:28:23] [0;32m[SUCCESS][0m Simulation completed in 3h 1m 45s
+[2026-10-14 11:28:23] [0;34m[INFO][0m --- Phase 4: Extract & Cleanup ---
+[2026-10-14 11:28:23] [0;34m[INFO][0m Extracting results, events, and inputs...
+[2026-10-14 11:28:23] [0;34m[INFO][0m Removing copied GAMA project files...
+[2026-10-14 11:28:23] [0;34m[INFO][0m Removing copied C proyect files...
+[2026-10-14 11:28:23] [0;34m[INFO][0m Removing GAMA workspace directories...
+[2026-10-14 11:28:23] [0;32m[SUCCESS][0m Extract & cleanup completed in 0s
+[2026-10-14 11:28:23] [0;34m[INFO][0m --- Phase 5: Results Validation ---
+[2026-10-14 11:28:23] [0;34m[INFO][0m Result CSV files generated: 1000
+[2026-10-14 11:28:23] [0;34m[INFO][0m Event CSV files generated: 1000
+[2026-10-14 11:28:23] [0;34m[INFO][0m Passenger CSV files generated: 1000
+[2026-10-14 11:28:23] [0;34m[INFO][0m Total results size: 133M
+[2026-10-14 11:28:23] [0;32m[SUCCESS][0m Resource monitor summary present
+[2026-10-14 11:28:23] [0;34m[INFO][0m --- Phase 6: Data Extraction & Analysis ---
+[2026-10-14 11:28:24] [0;34m[INFO][0m All Python dependencies satisfied
+[2026-10-14 11:28:24] [0;34m[INFO][0m Running data_extractor.py (plots=all dpi=300 workers=2)...
+[    0.0 s] Cargando datos...
+  2256000 filas de resultados, 1454978 de pasajeros, 25650 eventos
+[    2.4 s] Explotando tiempos de espera...
+[    4.3 s] Agrupando resultados...
+[    5.0 s] Procesando paradas sentido A...
+[    5.0 s] Procesando paradas sentido B...
+[    5.4 s] Procesando autobuses...
+[    5.8 s] Procesando tiempos entre paradas...
+
+=== Equivalencia de distribuciones (Bhattacharyya >= 0.97) ===
+  paradas fuera de la comparacion: [2646, 5727]
+  ocupacion   129/ 437 =   29.52%   (no evaluables: 0, coeff medio: 0.9255702488158225)
+             sesgo medio -3.066 (-0.20 sigma), 73.9% de celdas por debajo
+  tiempo      459/ 463 =   99.14%   (no evaluables: 12, coeff medio: 0.9990783404228777)
+             sesgo medio +1.124 (+0.03 sigma), 18.4% de celdas por debajo
+  conjunto    588/ 900 =   65.33%   (no evaluables: 12, coeff medio: 0.9633860781647854)
+[    7.9 s] Dibujando 1097 graficas con 2 procesos...
+[  138.0 s] Hecho.
+[2026-10-14 11:30:43] [0;32m[SUCCESS][0m Data extraction completed in 2m 20s
+[2026-10-14 11:30:43] [0;34m[INFO][0m Generated 1103 plots and 5 JSON files
+[2026-10-14 11:30:43] [0;34m[INFO][0m Final simulation directory structure:
+[2026-10-14 11:30:43] [0;34m[INFO][0m   /app/WEB_DEVEL/data/logs/SIMULATION_20261014_082628/
+[2026-10-14 11:30:43] [0;34m[INFO][0m   ├── RESULTS/          (simulation output CSVs)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   ├── EVENTS/           (event logs)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   ├── PASSENGERS/       (passenger wait-time logs)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   ├── MONITOR/          (resource timeseries, summary, GC log)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   ├── PLOTS/
+[2026-10-14 11:30:43] [0;34m[INFO][0m   │   ├── to_A/         (occupation & time distribution plots)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   │   ├── to_B/         (occupation & time distribution plots)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   │   ├── general/      (aggregate occupation plots)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   │   ├── monitoring/   (CPU, memory, power & progress plots)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   │   ├── buses/        (per-bus per-trip plots + general_info.json)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   │   └── json_output_general_info.json
+[2026-10-14 11:30:43] [0;34m[INFO][0m   ├── includes/         (frozen simulation parameters)
+[2026-10-14 11:30:43] [0;34m[INFO][0m   └── log_result_*.log  (pipeline log)
+==========================================
+     EXECUTION SUMMARY
+==========================================
+
+0. Engine:                          gama
+
+1. Pre-cleanup:                     n/a (prepare_simulation.sh)
+
+2. Project snapshot:                n/a (prepare_simulation.sh)
+
+3. Simulation:                      3h 1m 45s
+   - Exit code:                     0
+   - Result files:                  1000
+   - Total size:                    133M
+   - HPC cores:                     6
+   - Master seed:                   6295919720858325650
+   - JVM heap:                      11264m
+   - Monitor summary:               yes
+
+4. Extract & cleanup:               0s
+
+5. Data extraction & analysis:      2m 20s
+   - Exit code:                     0
+   - Plots generated:               1103
+   - JSON files generated:          5
+
+------------------------------------------
+TOTAL PIPELINE TIME:                3h 4m 5s
+==========================================
+
+Simulation: /app/WEB_DEVEL/data/logs/SIMULATION_20261014_082628
+Log file: /app/WEB_DEVEL/data/logs/SIMULATION_20261014_082628/log_result_20261014_082628.log
+
+[2026-10-14 11:30:43] [0;32m[SUCCESS][0m === Pipeline finished ===

@@ -1,0 +1,25 @@
+direction,scope,condition,n_records,pct,N_total
+toA,all records of direction,Occupation < 0,1470,0.6204102304380856,236940
+toA,all records of direction,Occupation >= 80,1348,0.5689204017894826,236940
+toA,all records of direction,Board < 0,1,0.0004220477758082215,236940
+toA,all records of direction,DropOff < 0,12,0.0050645733096986575,236940
+toA,all records of direction,Board >= 80,24,0.010129146619397315,236940
+toA,all records of direction,DropOff >= 80,28,0.011817337722630201,236940
+toA,normal-day records,Occupation < 0,1016,0.5943466866342194,170944
+toA,normal-day records,Occupation >= 80,843,0.4931439535754399,170944
+toA,normal-day records,Board < 0,1,0.000584986896293523,170944
+toA,normal-day records,DropOff < 0,10,0.00584986896293523,170944
+toA,normal-day records,Board >= 80,14,0.008189816548109323,170944
+toA,normal-day records,DropOff >= 80,15,0.008774803444402846,170944
+toB,all records of direction,Occupation < 0,2328,1.2441480151349964,187116
+toB,all records of direction,Occupation >= 80,756,0.40402744821394215,187116
+toB,all records of direction,Board < 0,0,0.0,187116
+toB,all records of direction,DropOff < 0,16,0.008550845464845337,187116
+toB,all records of direction,Board >= 80,20,0.010688556831056671,187116
+toB,all records of direction,DropOff >= 80,10,0.005344278415528336,187116
+toB,normal-day records,Occupation < 0,1547,1.1407040363373593,135618
+toB,normal-day records,Occupation >= 80,479,0.3531979530740757,135618
+toB,normal-day records,Board < 0,0,0.0,135618
+toB,normal-day records,DropOff < 0,12,0.008848382958014423,135618
+toB,normal-day records,Board >= 80,12,0.008848382958014423,135618
+toB,normal-day records,DropOff >= 80,4,0.0029494609860048074,135618

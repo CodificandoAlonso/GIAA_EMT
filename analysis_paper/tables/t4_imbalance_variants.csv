@@ -1,0 +1,25 @@
+direction,subset,terminals,n_trips,n_visits,sum_boardings,sum_alightings,imbalance_%_(alightings/boardings-1)
+both,"S0 raw, all normal-day visits",with terminals,25811,306562,-753206277,-775799606,2.9996203815492173
+toA,"S0 raw, all normal-day visits",with terminals,12951,170944,-754640240,-776354941,2.8774904714861327
+toB,"S0 raw, all normal-day visits",with terminals,12860,135618,1433963,555335,-61.272710662687956
+both,"S0 raw, all normal-day visits",without terminals,25232,263456,-753499498,-776055586,2.9935106871166184
+toA,"S0 raw, all normal-day visits",without terminals,12643,149741,-754723841,-776537010,2.8902186223636273
+toB,"S0 raw, all normal-day visits",without terminals,12589,113715,1224343,481424,-60.67899273324551
+both,S1 pipeline-cleaned visits (partial trips allowed),with terminals,25777,302652,1522034,1455368,-4.380059840975958
+toA,S1 pipeline-cleaned visits (partial trips allowed),with terminals,12932,169074,797297,742371,-6.88902629760303
+toB,S1 pipeline-cleaned visits (partial trips allowed),with terminals,12845,133578,724737,712997,-1.6198979767833022
+both,S1 pipeline-cleaned visits (partial trips allowed),without terminals,25163,259657,1230327,1200694,-2.408546670925693
+toA,S1 pipeline-cleaned visits (partial trips allowed),without terminals,12615,147930,714180,561321,-21.403427707300683
+toB,S1 pipeline-cleaned visits (partial trips allowed),without terminals,12548,111727,516147,639373,23.874206379190422
+both,"S2 complete trips, raw",with terminals,13437,181656,1430699,558150,-60.987601165584095
+toA,"S2 complete trips, raw",with terminals,6804,102060,501892,565631,12.699744168068028
+toB,"S2 complete trips, raw",with terminals,6633,79596,928807,-7481,-100.80544181945226
+both,"S2 complete trips, raw",without terminals,13437,154782,1243890,395944,-68.16888953203258
+toA,"S2 complete trips, raw",without terminals,6804,88452,444415,449742,1.198654410854716
+toB,"S2 complete trips, raw",without terminals,6633,66330,799475,-53798,-106.72916601519746
+both,S3 complete trips with no visit removed by cleaning,with terminals,12850,174009,895406,856113,-4.38828866458344
+toA,S3 complete trips with no visit removed by cleaning,with terminals,6603,99045,471182,447486,-5.029054590370596
+toB,S3 complete trips with no visit removed by cleaning,with terminals,6247,74964,424224,408627,-3.6765953835709464
+both,S3 complete trips with no visit removed by cleaning,without terminals,12850,148309,718593,700389,-2.5332837920770124
+toA,S3 complete trips with no visit removed by cleaning,without terminals,6603,85839,416368,336104,-19.277177881105178
+toB,S3 complete trips with no visit removed by cleaning,without terminals,6247,62470,302225,364285,20.534370088510222

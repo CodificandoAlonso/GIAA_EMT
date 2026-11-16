@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" style="background: transparent; background-color: transparent; color-scheme: light;" version="1.1" width="481px" height="356px" viewBox="0 0 481 356">
+<defs/>
+<g>
+<g transform="translate(0.5,0.5)">
+<path d="M 0 0 L 310 0 L 310 25 L 300 40 L 0 40 Z" fill="#ffffff" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+<path d="M 310 0 L 480 0 L 480 355 L 0 355 L 0 40" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" pointer-events="none"/>
+</g>
+<g><text x="30.17" y="24.47" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="12px" text-anchor="start" xml:space="preserve"><tspan>Protocol:</tspan><tspan font-style="italic"> Boarding Notice.</tspan><tspan> Type: FIPA-Request</tspan></text></g>
+<g>
+<g transform="translate(0.5,0.5)">
+<rect x="40" y="70" width="120" height="60" fill="#ffffff" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);" stroke="#000000" pointer-events="all"/>
+</g>
+<g><text x="70.64" y="97.27" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="12px" text-anchor="start" xml:space="preserve"><tspan font-style="italic">Stop</tspan><tspan> Agent</tspan></text><text x="100" y="111.67" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="12px" text-anchor="middle">(Initiator)</text></g>
+</g>
+<g>
+<g transform="translate(0.5,0.5)">
+<rect x="320" y="70" width="120" height="60" fill="#ffffff" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);" stroke="#000000" pointer-events="all"/>
+</g>
+<g><text x="334.3" y="97.27" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="12px" text-anchor="start" xml:space="preserve"><tspan font-style="italic">Passenger</tspan><tspan> Agent</tspan></text><text x="380" y="111.67" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="12px" text-anchor="middle">(Participant)</text></g>
+</g>
+<g transform="translate(0.5,0.5)">
+<path d="M 100 345 L 100 130" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+</g>
+<g transform="translate(0.5,0.5)">
+<path d="M 379.5 175 L 379.5 130" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+</g>
+<g transform="translate(0.5,0.5)">
+<path d="M 380 345 L 380 295" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+</g>
+<g transform="translate(0.5,0.5)">
+<rect x="90" y="145" width="20" height="30" fill="#ffffff" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);" stroke="#000000" pointer-events="all"/>
+</g>
+<g transform="translate(0.5,0.5)">
+<rect x="90" y="240" width="20" height="30" fill="#ffffff" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);" stroke="#000000" pointer-events="all"/>
+</g>
+<g transform="translate(0.5,0.5)">
+<rect x="90" y="295" width="20" height="30" fill="#ffffff" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);" stroke="#000000" pointer-events="all"/>
+</g>
+<g transform="translate(0.5,0.5)">
+<rect x="370" y="175" width="20" height="120" fill="#ffffff" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);" stroke="#000000" pointer-events="all"/>
+</g>
+<g transform="translate(0.5,0.5)">
+<path d="M 110 175 L 367.76 175" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" pointer-events="stroke"/>
+<path d="M 361.88 178.5 L 368.88 175 L 361.88 171.5" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" pointer-events="all"/>
+</g>
+<g><text x="240.5" y="170.04" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="11px" text-anchor="middle">request</text></g>
+<g><text x="240" y="204.47" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="12px" text-anchor="middle">(bus arrival notice)</text></g>
+<g transform="translate(0.5,0.5)">
+<path d="M 320 240 L 370 185" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" pointer-events="stroke"/>
+</g>
+<g transform="translate(0.5,0.5)">
+<path d="M 112.24 240 L 320 240" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" pointer-events="stroke"/>
+<path d="M 118.12 236.5 L 111.12 240 L 118.12 243.5" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" pointer-events="all"/>
+</g>
+<g><text x="215.5" y="235.04" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="11px" text-anchor="middle">agree</text></g>
+<g transform="translate(0.5,0.5)">
+<path d="M 112.24 295 L 370 295" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" pointer-events="stroke"/>
+<path d="M 118.12 291.5 L 111.12 295 L 118.12 298.5" fill="none" stroke="#000000" style="stroke: rgb(0, 0, 0);" stroke-miterlimit="10" pointer-events="all"/>
+</g>
+<g><text x="220.5" y="290.04" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="11px" text-anchor="middle">inform-done : inform</text></g>
+<g><text x="225" y="319.47" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="12px" text-anchor="middle">(receipt confirmation)</text></g>
+</g>
+</svg>

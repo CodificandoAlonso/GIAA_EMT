@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="381px" height="313px" viewBox="0 0 381 313">
+<g transform="translate(0.5,0.5)">
+<path d="M 178.7 0 L 380 0 L 380 312 L 0 312 L 0 46" fill="none" stroke="#000000" stroke-miterlimit="10"/>
+<path d="M 80 110 L 80 302" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+<path d="M 300 110 L 300 150" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+<path d="M 300 263 L 300 302" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+<path d="M 0 0 L 178.7 0 L 178.7 34 L 168.7 46 L 0 46 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"/>
+<text x="12.00" y="20.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>Protocol: </tspan><tspan font-style="italic">Alighting Query</tspan></text>
+<text x="12.00" y="37.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>Type: FIPA-Query</tspan></text>
+<rect x="12.0" y="64" width="136" height="46" fill="#ffffff" stroke="#000000"/>
+<text x="47.77" y="84.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan font-style="italic">Bus</tspan><tspan> Agent</tspan></text>
+<text x="52.47" y="101.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>(Initiator)</tspan></text>
+<rect x="232.0" y="64" width="136" height="46" fill="#ffffff" stroke="#000000"/>
+<text x="246.73" y="84.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan font-style="italic">Passenger</tspan><tspan> Agent</tspan></text>
+<text x="262.28" y="101.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>(Participant)</tspan></text>
+<rect x="72.0" y="124" width="16" height="26" fill="#ffffff" stroke="#000000"/>
+<rect x="292.0" y="150" width="16" height="113" fill="#ffffff" stroke="#000000"/>
+<rect x="72.0" y="217" width="16" height="26" fill="#ffffff" stroke="#000000"/>
+<rect x="72.0" y="263" width="16" height="26" fill="#ffffff" stroke="#000000"/>
+<path d="M 88.0 150 L 291.0 150" fill="none" stroke="#000000" stroke-miterlimit="10"/><path d="M 284.0 153.5 L 291.0 150 L 284.0 146.5" fill="none" stroke="#000000" stroke-miterlimit="10"/>
+<text x="166.57" y="144.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>query-if</tspan></text>
+<text x="135.12" y="168.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>(approach query |</tspan></text>
+<text x="130.05" y="185.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>end-of-route query)</tspan></text>
+<path d="M 292.0 160 L 252.0 217" fill="none" stroke="#000000" stroke-miterlimit="10"/>
+<path d="M 252.0 217 L 89.0 217" fill="none" stroke="#000000" stroke-miterlimit="10"/><path d="M 96.0 220.5 L 89.0 217 L 96.0 213.5" fill="none" stroke="#000000" stroke-miterlimit="10"/>
+<text x="152.18" y="211.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>agree</tspan></text>
+<path d="M 292.0 263 L 89.0 263" fill="none" stroke="#000000" stroke-miterlimit="10"/><path d="M 96.0 266.5 L 89.0 263 L 96.0 259.5" fill="none" stroke="#000000" stroke-miterlimit="10"/>
+<text x="137.27" y="257.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>inform-t/f : inform</tspan></text>
+<text x="118.83" y="281.00" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14px" xml:space="preserve"><tspan>(alighting = true | false)</tspan></text>
+</g>
+</svg>

@@ -1,0 +1,9 @@
+variable,direction,paper_%,recomputed_%,k,N,match
+boardings,toA,90.6,90.98,242,266,False
+boardings,toB,87.56,87.08,182,209,False
+alightings,toA,93.61,93.61,249,266,True
+alightings,toB,90.91,90.91,190,209,True
+travel times,toA,95.49,95.86,255,266,False
+travel times,toB,90.43,90.43,189,209,True
+occupation,toA,94.39,94.74,270,285,False
+occupation,toB,88.6,87.28,199,228,False

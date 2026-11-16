@@ -1,0 +1,5 @@
+direction,subset,n_consecutive_pairs,% Occ == prevOcc+Board-DropOff,"% same, calc clipped at 0",n_first_stop_visits,% first stop: Occ == Board-DropOff
+toA,raw (all visits of direction),215266,97.44176971746583,99.11226110951102,14539,26.253525001719513
+toA,"cleaned (pipeline, normal days)",153123,97.55425376984516,99.72048614512516,10336,27.476780185758514
+toB,raw (all visits of direction),164085,96.06301611969405,98.3337904135052,14581,28.441122008092723
+toB,"cleaned (pipeline, normal days)",116428,96.55495241694437,99.63410863366201,11132,28.287818900467123

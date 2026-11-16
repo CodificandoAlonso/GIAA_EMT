@@ -7,45 +7,45 @@ Reallocated singl_function (elt_size=8) to 100 items from 50.
 Warning--empty pages in wooldridge1999intelligent
 Warning--empty year in gama_fipa; set to ????
 Warning--empty year in gama_headless; set to ????
-You've used 30 entries,
+You've used 31 entries,
             2918 wiz_defined-function locations,
-            839 strings with 11147 characters,
-and the built_in function-call counts, 19290 in all, are:
-= -- 1451
-> -- 757
-< -- 19
-+ -- 295
-- -- 253
-* -- 2324
-:= -- 2767
-add.period$ -- 56
-call.type$ -- 30
-change.case$ -- 236
-chr.to.int$ -- 28
-cite$ -- 33
-duplicate$ -- 1438
-empty$ -- 1395
-format.name$ -- 332
-if$ -- 3543
+            845 strings with 11237 characters,
+and the built_in function-call counts, 19739 in all, are:
+= -- 1476
+> -- 767
+< -- 20
++ -- 299
+- -- 256
+* -- 2372
+:= -- 2830
+add.period$ -- 57
+call.type$ -- 31
+change.case$ -- 242
+chr.to.int$ -- 29
+cite$ -- 34
+duplicate$ -- 1480
+empty$ -- 1441
+format.name$ -- 336
+if$ -- 3628
 int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 287
-newline$ -- 151
-num.names$ -- 124
-pop$ -- 459
+missing$ -- 296
+newline$ -- 154
+num.names$ -- 128
+pop$ -- 476
 preamble$ -- 1
-purify$ -- 231
+purify$ -- 237
 quote$ -- 0
-skip$ -- 325
+skip$ -- 336
 stack$ -- 0
-substring$ -- 836
-swap$ -- 1085
+substring$ -- 848
+swap$ -- 1110
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 267
+type$ -- 273
 warning$ -- 3
-while$ -- 131
+while$ -- 134
 width$ -- 0
-write$ -- 426
+write$ -- 438
 (There were 3 warnings)

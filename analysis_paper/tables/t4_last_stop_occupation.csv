@@ -1,0 +1,5 @@
+direction,subset,n_trips,computed_occ_last_mean,median,q25,q75,mean_abs,min,max,recorded_Occ_last_median,rec_q25,rec_q75
+toA,"complete trips, raw",6804,-9.367871840094063,3.0,0.0,7.0,46.5842151675485,-184717,94723,2.0,0.0,5.0
+toA,"complete trips, cleaned (S3)",6603,3.5886718158412845,3.0,0.0,6.0,5.067696501590186,-58,75,1.0,0.0,5.0
+toB,"complete trips, raw",6633,141.15603799185888,2.0,-1.0,5.0,143.25734961555858,-60,498673,1.0,0.0,4.0
+toB,"complete trips, cleaned (S3)",6247,2.496718424843925,2.0,-1.0,5.0,4.207939811109332,-49,93,1.0,0.0,4.0

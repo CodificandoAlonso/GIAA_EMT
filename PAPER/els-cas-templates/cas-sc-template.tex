@@ -26,7 +26,7 @@
 
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[inkscapelatex=false]{svg}
-
+\usepackage{csquotes}
 
 %\usepackage[authoryear]{natbib}
 %\usepackage[authoryear,longnamesfirst]{natbib}
@@ -431,8 +431,8 @@ Count update & Bus $\rightarrow$ stop & Request &
 \end{table}
 
 
-The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:},
-\ref{fig:}, 
+The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:protocols_first},
+\ref{fig:protocols_second}, \ref{fig:protocols_third} and \ref{fig:protocols_fourth}.
 
 \newlength{\figh}
 
@@ -449,8 +449,8 @@ The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:},
     \includesvg[height=\figh]{figs/protocols/en/diagrama_solicitud_de_descenso_en}\par
     \smallskip {\small (b) Alighting request}
   \end{minipage}
-  \caption{FIPA-Request interaction protocols from first solution (1/3)}
-  \label{fig:requests_first}
+  \caption{FIPA interaction protocols from first solution (1/3)}
+  \label{fig:protocols_first}
 \end{figure}
 
 \begin{figure}
@@ -466,8 +466,8 @@ The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:},
     \includesvg[height=\figh]{figs/protocols/en/aviso_de_embarque_en}\par
     \smallskip {\small (b) Boarding notice}
   \end{minipage}
-  \caption{FIPA-Request interaction protocols from first solution (2/3)}
-  \label{fig:requests_seconds}
+  \caption{FIPA interaction protocols from first solution (2/3)}
+  \label{fig:protocols_second}
 \end{figure}
 
 \begin{figure}
@@ -483,8 +483,8 @@ The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:},
     \includesvg[height=\figh]{figs/protocols/en/actualizacion_recuento_en}\par
     \smallskip {\small (b) Count update}
   \end{minipage}
-  \caption{FIPA-Request interaction protocols from first solution (3/3)}
-  \label{fig:requests_seconds}
+  \caption{FIPA interaction protocols from first solution (3/3)}
+  \label{fig:protocols_third}
 \end{figure}
 
 \begin{figure}
@@ -500,8 +500,8 @@ The FIPA diagrams that formalize this protocols are shown in Figures \ref{fig:},
     \includesvg[height=\figh]{figs/protocols/en/actualizacion_recuento_en}\par
     \smallskip {\small (b) Count update (duplicated)}
   \end{minipage}
-  \caption{FIPA-Request interaction protocols from second solution}
-  \label{fig:requests_seconds}
+  \caption{FIPA interaction protocols from second solution}
+  \label{fig:protocols_fourth}
 \end{figure}
 
 
@@ -647,15 +647,67 @@ operation, and the travel time from the previous stop. The waiting time of
 each passenger that boarded is stored as well. Departures from the first stop
 that take place later than scheduled are recorded as delays.
 
-The complete outputs are recomputed into defined Key Performance Indicators (KPIs)
-for demand absorption measurement.
+The complete outputs are aggregated into key performance indicators (KPIs).
 
-This indicators can be divided into three main categories, depending of the scope
+In order to obtain enough precision from the data recorded,
+the simulation repeats across 1000 replicas following a Monte Carlo experiment.
+
+As shown in Figure \ref{fig:montecarlo_Convergence}, starting from 500 replicas,
+the mean occupancy starts to converge. Since the standard error of the mean
+decreases as $1/\sqrt{n}$ \cite{law2015simulation}, increasing the
+number of replicas from 500 to 1000 reduces it by $1-\sqrt{500/1000}\approx 29.3\%$,
+which results in a significance reduction given it does not increase too mmuch the computational
+cost.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{figs/convergence.png}
+  \caption{Monte Carlo convergence of the mean occupancy: cumulative mean
+  (blue), final mean (red, dashed) and 95\% confidence interval (shaded)
+  as a function of the number of replicas.}
+  \label{fig:montecarlo_Convergence}
+\end{figure}
+
+
+The KPIs can be divided into three main categories, depending on the scope
 they are aimed at: general values, route values, and trip values.
 
-The general values presents the following indicators with its comptue method
+The general values present the following indicators with its comptue method:
 
+\paragraph{Mean general occupancy} It measures for every trip the number of passengers it
+records in every stop divided by the maximum passengers considered to fit in a bus.
+The result is the mean value obtained across all Monte Carlo replicas.
 
+\paragraph{Mean occupancy direction \textit{Cibeles}} It measures the same way the previous
+indicator, but only counts trips with destination \textit{Cibeles}.
+
+\paragraph{Mean occupancy direction \textit{La Peseta}} It measures the same way the previous
+indicator, but only counts trips with destination \textit{La Peseta}.
+
+\paragraph{Mean passengers waiting time at stop} It measures since its generation,
+the mean time passed from a passenger until it boards a bus.
+
+\paragraph{Mean regularity value} Measures the mean regularity value across
+trips in the simulations. This measures , on a 0 --- 100 scale, how close the total
+time of a trip (measured between the second and the penultimate last stops) is to
+the expected trip time. The equation that computes the value of regularity for
+each trip is:
+
+\begin{equation}\label{eq:regularity}
+\mathit{IR} = 100\,\min\!\left\{1,\ \max\!\left\{0,\
+  1 - \frac{I_r - I_t - \delta}{I_t - \delta}\right\}\right\},
+\end{equation}
+\noindent where $I_r$ and $I_t$ are the actual and scheduled headways, in
+minutes, and $\delta$ is the tolerance
+\begin{equation}\label{eq:tolerance}
+\delta = \min\bigl\{\max\{2,\ 0.2\,I_t\},\ 5\bigr\}.
+\end{equation}
+
+The stop and trip levels do not add new indicators, they compute the general
+ones on a subset of the records. At the route level, each indicator is computed
+for every stop, using only the visits of buses to that stop. At the trip level,
+it is computed for every trip, using only the stops served by that trip.
+This subsets are also divided by timeslot.
 
 
 

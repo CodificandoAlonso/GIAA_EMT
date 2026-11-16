@@ -1,0 +1,3 @@
+direction,% TimeSlot == hour(EventTime) (terminal departure),% TimeSlot.1 == hour(EventTime.1) (stop arrival),n_visits
+toA,100.0,100.0,236940
+toB,100.0,100.0,187116
