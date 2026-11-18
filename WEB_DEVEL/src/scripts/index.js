@@ -9,21 +9,37 @@ function toast(msg, type = 'info') {
   setTimeout(() => el.remove(), 4000);
 }
 
+const fmt = I18N.fmt;
 
-const MODEL_LABELS = {
-  with_agents:    'Con agentes pasajero',
-  without_agents: 'Sin agentes pasajero',
-  c_engine:       'Motor en C',
-};
-
+// Internal status values (sent by the server, always in Spanish)
 const STATUS_ERROR    = 'Error';
 const STATUS_DONE     = 'Completada';
 const STATUS_QUEUED   = 'En cola';
 const STATUS_PREPARED = 'Preparada';
+const STATUS_RUNNING  = 'En progreso';
+const STATUS_WAITING  = 'Esperando Gr\u00e1ficas';
 
-function statusText(status, position) {
-  return status === STATUS_QUEUED && position ? `${t(status)} (#${position})` : t(status);
-}
+// Status -> filter key, label, symbol. The symbol always accompanies the colour.
+const STATUS_INFO = {
+  [STATUS_DONE]:     { key: 'done',     label: 'Completada',          symbol: '\u2713', tone: 'ok' },
+  [STATUS_ERROR]:    { key: 'failed',   label: 'Fallida',             symbol: '\u2715', tone: 'fail' },
+  [STATUS_RUNNING]:  { key: 'running',  label: 'En curso',            symbol: '\u25CF', tone: 'run' },
+  [STATUS_WAITING]:  { key: 'running',  label: 'Generando gráficas',  symbol: '\u25CF', tone: 'run' },
+  [STATUS_QUEUED]:   { key: 'queued',   label: 'En cola',             symbol: '\u25D4', tone: 'idle' },
+  [STATUS_PREPARED]: { key: 'prepared', label: 'Preparada',           symbol: '\u25CB', tone: 'idle' },
+};
+const statusInfo = s => STATUS_INFO[s] || STATUS_INFO[STATUS_RUNNING];
+
+// model key -> "model" dimension, independent of the engine
+const MODEL_KIND = {
+  with_agents:    'agents',
+  without_agents: 'aggregate',
+  // The C engine keeps passengers as arrays of creation times per stop (no
+  // passenger agents), so it implements the aggregate model.
+  c_engine:       'aggregate',
+};
+const MODEL_LABEL = { agents: 'Con agentes pasajero', aggregate: 'Agregado' };
+const ENGINE_LABEL = { gama: 'GAMA', c: 'C' };
 
 function escHtml(str) {
   return String(str ?? '')
@@ -31,99 +47,231 @@ function escHtml(str) {
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// "SIMULATION: mensaje" for the first recorded failure of a simulation
+// "FASE: mensaje" for the first recorded failure of a simulation
 function errorSummary(error) {
   if (!error) return '';
   return `${error.phase}: ${error.message}`;
 }
 
-function formatNum(n) {
-  if (n === null || n === undefined || isNaN(n)) return '—';
-  return Number(n).toLocaleString(I18N.locale);
+// ---- State ----
+
+let SIMS = [];                                // as returned by /api/simulations
+const view = { q: '', engine: '', model: '', status: '', sort: 'date', dir: 'desc' };
+
+const modelKind = s => MODEL_KIND[s.model] || 'aggregate';   // absent key = default model
+const nameOf = s => s.title || '';
+
+const SORTERS = {
+  name:     (a, b) => nameOf(a).localeCompare(nameOf(b), I18N.locale, { sensitivity: 'base' }),
+  date:     (a, b) => a.id.localeCompare(b.id),
+  engine:   (a, b) => a.engine.localeCompare(b.engine),
+  model:    (a, b) => modelKind(a).localeCompare(modelKind(b)),
+  replicas: (a, b) => (a.runCount || 0) - (b.runCount || 0),
+  status:   (a, b) => statusInfo(a.status).label.localeCompare(statusInfo(b.status).label),
+};
+
+function visibleSims() {
+  const q = view.q.trim().toLowerCase();
+  const rows = SIMS.filter(s =>
+    (!q || `${s.title || ''} ${s.description || ''}`.toLowerCase().includes(q)) &&
+    (!view.engine || s.engine === view.engine) &&
+    (!view.model || modelKind(s) === view.model) &&
+    (!view.status || statusInfo(s.status).key === view.status));
+  const sign = view.dir === 'asc' ? 1 : -1;
+  return rows.sort((a, b) => sign * SORTERS[view.sort](a, b) || b.id.localeCompare(a.id));
 }
 
-// ---- Render simulation cards ----
+// Settings that differ between runs (only keys present in each run's description.txt)
+function varyingParams() {
+  const defs = [
+    { label: 'Ejecución', value: s => (s.exclusive ? 'Exclusiva' : 'Compartida'), present: s => s.seed != null },
+    { label: 'Semilla',   value: s => s.seed,                                      present: s => s.seed != null },
+  ];
+  return defs.filter(d => new Set(SIMS.filter(d.present).map(d.value)).size > 1);
+}
 
-function renderCard(sim) {
-  const card = document.createElement('div');
-  card.className = 'sim-card';
-  card.setAttribute('role', 'button');
-  card.setAttribute('tabindex', '0');
-  card.setAttribute('data-sim-id', sim.id);
+// ---- Summary line ----
 
-  const [datePart, timePart] = (sim.datetime || '—  —').split(' ');
-  const isError = sim.status === STATUS_ERROR;
-  const chartsHtml = isError
-    ? `<span class="charts-badge error" title="${escHtml(errorSummary(sim.error))}">&#10005; ${t('ERROR')}</span>`
-    : sim.hasCharts
-      ? `<span class="charts-badge ready">&#10003; ${t('Gráficas listas')}</span>`
-      : `<span class="charts-badge pending">&#9711; ${t('Sin gráficas')}</span>`;
-  const errorHtml = isError
-    ? `<div class="sim-error-reason">${escHtml(errorSummary(sim.error))}</div>`
-    : '';
+function renderSummary() {
+  const el = document.getElementById('list-summary');
+  const n = SIMS.length;
+  if (!n) { el.textContent = ''; return; }
+  const withCharts = SIMS.filter(s => s.hasCharts).length;
+  const failed = SIMS.filter(s => s.status === STATUS_ERROR).length;
+  const running = SIMS.filter(s => statusInfo(s.status).key === 'running').length;
+  const latest = SIMS.reduce((m, s) => (s.id > m.id ? s : m), SIMS[0]);
 
-  const titleHtml = sim.title
-    ? `<div class="sim-title">${sim.title}</div>`
-    : '';
-  const descHtml = sim.description
-    ? `<div class="sim-description">${sim.description}</div>`
-    : '';
+  const parts = [
+    `<span>${escHtml(t(n === 1 ? '{n} ejecución' : '{n} ejecuciones', { n: fmt.int(n) }))}</span>`,
+    `<span>${escHtml(t('{n} con gráficas', { n: fmt.int(withCharts) }))}</span>`,
+  ];
+  const link = (key, text) => `<a href="#" class="summary-link" data-filter-status="${key}">${escHtml(text)}</a>`;
+  if (failed)  parts.push(link('failed',  t(failed === 1 ? '{n} fallida' : '{n} fallidas', { n: fmt.int(failed) })));
+  if (running) parts.push(link('running', t('{n} en curso', { n: fmt.int(running) })));
+  parts.push(`<span>${escHtml(t('última el {date}', { date: fmt.date(latest.datetime) }))}</span>`);
+  el.innerHTML = parts.join('<span class="sep" aria-hidden="true">\u00b7</span>');
 
-  card.innerHTML = `
-    <div class="sim-card-header">
-      <div>
-        ${titleHtml}
-        <div class="sim-date">${datePart || '—'} ${timePart || ''}</div>
-      </div>
-      <span class="sim-card-badge">GAMA</span>
-    </div>
-    <div class="sim-card-body">
-      ${descHtml}
-      <div class="sim-meta-row">
-        <span class="meta-label">${t('Numero de Repeticiones por experimento')}</span>
-        <span class="meta-value">${formatNum(sim.runCount)}</span>
-      </div>
-      <div class="sim-meta-row">
-        <span class="meta-label">${t('Solución')}</span>
-        <span class="meta-value">${t(MODEL_LABELS[sim.model] || MODEL_LABELS['without_agents'])}</span>
-      </div>
-      <div class="sim-meta-row">
-        <span class="meta-label">${t('Estado')}</span>
-        <span class="meta-value${isError ? ' status-error' : ''}">${t(sim.status)}</span>
-      </div>
-      ${errorHtml}
-    </div>
-    <div class="sim-card-footer">
-      ${chartsHtml}
-      <div style="display:flex;gap:0.5rem;align-items:center;">
-        <button class="btn btn-sm btn-danger" data-delete-sim="${sim.id}" title="${t('Eliminar simulación')}" aria-label="${t('Eliminar simulación')}">&#128465;</button>
-        <button class="btn btn-primary btn-sm">${t('Ver detalle')} &#8594;</button>
-      </div>
-    </div>
-  `;
+  el.querySelectorAll('[data-filter-status]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    view.status = a.dataset.filterStatus;
+    document.getElementById('filter-status').value = view.status;
+    renderTable();
+  }));
+}
 
-  // Render initial progress bar for in-progress simulations
-  if (![STATUS_DONE, STATUS_PREPARED, STATUS_QUEUED].includes(sim.status) && !isError) {
-    const bar = document.createElement('div');
-    bar.className = 'sim-progress-bar';
-    bar.style.width = `${Math.min(100, Math.round(sim.runCount / 10))}%`;
-    card.insertBefore(bar, card.firstChild);
+// ---- Table ----
+
+const COLUMNS = [
+  { id: 'name',     label: 'Nombre',     sort: true },
+  { id: 'date',     label: 'Fecha',      sort: true },
+  { id: 'engine',   label: 'Motor',      sort: true },
+  { id: 'model',    label: 'Modelo',     sort: true },
+  { id: 'replicas', label: 'Réplicas',   sort: true, num: true },
+  { id: 'params',   label: 'Parámetros', sort: false },
+  { id: 'status',   label: 'Estado',     sort: true },
+  { id: 'actions',  label: 'Acciones',   sort: false, hidden: true },
+];
+
+function statusCellHtml(sim) {
+  const info = statusInfo(sim.status);
+  let text = t(info.label);
+  if (sim.status === STATUS_QUEUED && sim.position) text += ` (#${sim.position})`;
+  if (sim.status === STATUS_RUNNING && sim.percentage != null) text += ` ${fmt.pct(sim.percentage, 0)}`;
+  const reason = sim.status === STATUS_ERROR ? errorSummary(sim.error) : '';
+  return `
+    <span class="status status-${info.tone}">
+      <span class="status-symbol" aria-hidden="true">${info.symbol}</span>${escHtml(text)}
+    </span>
+    ${reason ? `<div class="status-reason" title="${escHtml(reason)}">${escHtml(reason)}</div>` : ''}`;
+}
+
+function rowHtml(sim, params) {
+  const name = sim.title ? escHtml(sim.title) : `<span class="untitled">${escHtml(sim.id)}</span>`;
+  const desc = sim.description ? `<div class="row-desc" title="${escHtml(sim.description)}">${escHtml(sim.description)}</div>` : '';
+  const paramsHtml = params.map(p => {
+    const v = p.present(sim) ? p.value(sim) : null;
+    return `<div class="param"><span class="param-label">${escHtml(t(p.label))}</span> <span class="param-value">${v == null ? '\u2014' : escHtml(t(String(v)))}</span></div>`;
+  }).join('');
+  const label = sim.title || sim.id;
+  return `
+    <tr class="sim-row" data-sim-id="${escHtml(sim.id)}">
+      <td class="col-name">
+        <a class="row-title" href="/simulation/${escHtml(sim.id)}">${name}</a>
+        ${desc}
+      </td>
+      <td class="col-date">${escHtml(fmt.dateTime(sim.datetime))}</td>
+      <td class="col-engine">${escHtml(ENGINE_LABEL[sim.engine] || sim.engine)}</td>
+      <td class="col-model">${escHtml(t(MODEL_LABEL[modelKind(sim)]))}</td>
+      <td class="col-replicas num" data-cell="replicas">${escHtml(fmt.int(sim.runCount))}</td>
+      ${params.length ? `<td class="col-params">${paramsHtml}</td>` : ''}
+      <td class="col-status" data-cell="status">${statusCellHtml(sim)}</td>
+      <td class="col-actions">
+        <button type="button" class="row-menu-btn" aria-haspopup="menu" aria-expanded="false"
+                aria-label="${escHtml(t('Acciones de {name}', { name: label }))}" data-menu-for="${escHtml(sim.id)}">\u22ef</button>
+      </td>
+    </tr>`;
+}
+
+function renderTable() {
+  const container = document.getElementById('sim-container');
+  closeRowMenu();
+  if (SIMS.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <p class="empty-title">${t('No se han encontrado simulaciones.')}</p>
+        <p>${t('Lanza una nueva simulación con el botón de arriba.')}</p>
+      </div>`;
+    return;
   }
+  const params = varyingParams();
+  const rows = visibleSims();
+  const cols = COLUMNS.filter(c => c.id !== 'params' || params.length);
 
-  card.querySelector(`[data-delete-sim]`)?.addEventListener('click', (e) => {
+  const head = cols.map(c => {
+    const label = t(c.label);
+    const cls = `col-${c.id}${c.num ? ' num' : ''}`;
+    if (!c.sort) return `<th scope="col" class="${cls}">${c.hidden ? `<span class="visually-hidden">${escHtml(label)}</span>` : escHtml(label)}</th>`;
+    const active = view.sort === c.id;
+    const aria = active ? (view.dir === 'asc' ? 'ascending' : 'descending') : 'none';
+    const arrow = active ? (view.dir === 'asc' ? '\u2191' : '\u2193') : '';
+    return `<th scope="col" class="${cls}" aria-sort="${aria}">
+      <button type="button" class="sort-btn" data-sort="${c.id}">${escHtml(label)}<span class="sort-arrow" aria-hidden="true">${arrow}</span></button></th>`;
+  }).join('');
+
+  const body = rows.length
+    ? rows.map(s => rowHtml(s, params)).join('')
+    : `<tr><td class="no-match" colspan="${cols.length}">${escHtml(t('Ninguna ejecución coincide con los filtros.'))}</td></tr>`;
+
+  container.innerHTML = `
+    <div class="table-wrap">
+      <table class="sim-table" id="sim-table">
+        <caption class="visually-hidden">${escHtml(t('Simulaciones'))}</caption>
+        <thead><tr>${head}</tr></thead>
+        <tbody>${body}</tbody>
+      </table>
+    </div>
+    <p class="result-count" aria-live="polite">${escHtml(t('Mostrando {n} de {total}', { n: fmt.int(rows.length), total: fmt.int(SIMS.length) }))}</p>`;
+
+  container.querySelectorAll('[data-sort]').forEach(b => b.addEventListener('click', () => {
+    const id = b.dataset.sort;
+    if (view.sort === id) view.dir = view.dir === 'asc' ? 'desc' : 'asc';
+    else { view.sort = id; view.dir = id === 'date' || id === 'replicas' ? 'desc' : 'asc'; }
+    renderTable();
+    container.querySelector(`[data-sort="${id}"]`)?.focus();
+  }));
+  container.querySelectorAll('.sim-row').forEach(tr => {
+    tr.addEventListener('click', e => {
+      if (e.target.closest('a, button')) return;
+      window.location.href = `/simulation/${tr.dataset.simId}`;
+    });
+  });
+  container.querySelectorAll('[data-menu-for]').forEach(b => b.addEventListener('click', e => {
     e.stopPropagation();
+    toggleRowMenu(b);
+  }));
+}
+
+// ---- Row menu (delete) ----
+
+let _openMenu = null;
+
+function closeRowMenu() {
+  if (!_openMenu) return;
+  _openMenu.menu.remove();
+  _openMenu.btn.setAttribute('aria-expanded', 'false');
+  _openMenu = null;
+}
+
+function toggleRowMenu(btn) {
+  const same = _openMenu && _openMenu.btn === btn;
+  closeRowMenu();
+  if (same) return;
+  const sim = SIMS.find(s => s.id === btn.dataset.menuFor);
+  if (!sim) return;
+  const menu = document.createElement('div');
+  menu.className = 'row-menu';
+  menu.setAttribute('role', 'menu');
+  menu.innerHTML = `<button type="button" role="menuitem" class="row-menu-item danger">${escHtml(t('Eliminar simulación'))}</button>`;
+  document.body.appendChild(menu);
+  const r = btn.getBoundingClientRect();
+  menu.style.top = `${r.bottom + window.scrollY + 4}px`;
+  menu.style.left = `${Math.max(8, r.right + window.scrollX - menu.offsetWidth)}px`;
+  btn.setAttribute('aria-expanded', 'true');
+  _openMenu = { btn, menu };
+  const item = menu.querySelector('.row-menu-item');
+  item.focus();
+  item.addEventListener('click', () => {
+    closeRowMenu();
     handleDeleteSim(sim.id, sim.title || sim.id);
   });
-
-  card.addEventListener('click', () => {
-    window.location.href = `/simulation/${sim.id}`;
-  });
-  card.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') window.location.href = `/simulation/${sim.id}`;
-  });
-
-  return card;
 }
+
+document.addEventListener('click', e => {
+  if (_openMenu && !_openMenu.menu.contains(e.target)) closeRowMenu();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && _openMenu) { const b = _openMenu.btn; closeRowMenu(); b.focus(); }
+});
 
 // ---- Delete simulation ----
 
@@ -150,37 +298,14 @@ async function loadSimulations() {
   try {
     const res = await fetch('/api/simulations');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const sims = await res.json();
-
-    // Update stats bar
-    document.getElementById('stat-total').textContent = formatNum(sims.length);
-    document.getElementById('stat-charts').textContent = formatNum(sims.filter(s => s.hasCharts).length);
-    document.getElementById('stat-latest').textContent = sims[0]?.datetime?.split(' ')[0] ?? '—';
-    document.getElementById('sim-count-badge').textContent = t(sims.length === 1 ? '{n} simulación encontrada' : '{n} simulaciones encontradas', { n: sims.length });
-
-    // Render cards
-    if (sims.length === 0) {
-      container.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">&#128650;</div>
-          <p>${t('No se han encontrado simulaciones.')}</p>
-          <p style="margin-top:0.5rem;font-size:0.85rem;">${t('Lanza una nueva simulación con el botón de arriba.')}</p>
-        </div>`;
-      return;
-    }
-
-    const grid = document.createElement('div');
-    grid.className = 'sim-grid';
-    sims.forEach(sim => grid.appendChild(renderCard(sim)));
-    container.innerHTML = '';
-    container.appendChild(grid);
-
+    SIMS = await res.json();
+    renderSummary();
+    renderTable();
   } catch (err) {
     container.innerHTML = `
       <div class="empty-state">
-        <div class="empty-icon">&#9888;</div>
-        <p>${t('Error al cargar las simulaciones.')}</p>
-        <p style="margin-top:0.5rem;font-size:0.83rem;color:var(--emt-red);">${err.message}</p>
+        <p class="empty-title">${t('Error al cargar las simulaciones.')}</p>
+        <p class="error-detail">${escHtml(err.message)}</p>
       </div>`;
     toast(t('Error al conectar con el servidor'), 'error');
   }
@@ -189,6 +314,7 @@ async function loadSimulations() {
 // ---- Generate simulation modal ----
 function openModal() {
   document.getElementById('modal-generate').classList.add('open');
+  document.getElementById('btn-modal-confirm').focus();
 }
 
 function closeModal() {
@@ -220,12 +346,13 @@ function showCompletionBanner(id, title) {
   const label = title || id;
   const banner = document.createElement('div');
   banner.className = 'sim-complete-banner';
+  banner.setAttribute('role', 'status');
   banner.innerHTML = `
     <div class="sim-complete-banner-inner">
-      <span class="sim-complete-icon">&#10003;</span>
+      <span class="sim-complete-icon" aria-hidden="true">&#10003;</span>
       <div>
         <strong>${t('Simulación completada')}</strong>
-        <div class="sim-complete-label">${label}</div>
+        <div class="sim-complete-label">${escHtml(label)}</div>
       </div>
       <button class="sim-complete-dismiss" aria-label="${t('Cerrar')}">&times;</button>
     </div>
@@ -245,76 +372,21 @@ function showCompletionBanner(id, title) {
 }
 
 // ---- WebSocket: live simulation progress ----
+// Updates only the replicas and status cells of the affected rows, so open
+// menus, focus and scroll position are not disturbed.
 
-function applySimProgress(sims) {
-  sims.forEach(({ id, runCount, percentage, status, position }) => {
-    const card = document.querySelector(`[data-sim-id="${id}"]`);
-    if (!card) return;
-
-    // Queued runs have not started: no progress bar yet
-    if (status === STATUS_QUEUED) {
-      const metaValues = card.querySelectorAll('.meta-value');
-      if (metaValues[2]) metaValues[2].textContent = statusText(status, position);
-      card.querySelector('.sim-progress-bar')?.remove();
-      return;
-    }
-
-    // Create or update the progress bar element
-    let bar = card.querySelector('.sim-progress-bar');
-    if (!bar) {
-      bar = document.createElement('div');
-      bar.className = 'sim-progress-bar';
-      card.insertBefore(bar, card.firstChild);
-    }
-    
-
-    // Update run count and status text in the meta rows
-    const metaValues = card.querySelectorAll('.meta-value');
-    if (metaValues[0]) metaValues[0].textContent = formatNum(runCount);
-    if (metaValues[2]) metaValues[2].textContent = statusText(status, position);
-
-
-        // metaValues: [0] nº repeticiones, [1] Solución, [2] Estado.
-    // El estado es [2]; comparar contra [1] leia la etiqueta del modelo,
-    // que nunca es 'Esperando Graficas', de modo que el guardia no saltaba.
-    if (metaValues[2]?.textContent != t('Esperando Gr\u00e1ficas')){
-    bar.style.width = `${percentage}%`;
-    }
-
-    // When a sim reaches 100%, fade the bar out after a moment
-    if (runCount >= 1000 && metaValues[2]?.textContent != t('Esperando Gr\u00e1ficas')) {
-      bar.style.width = '100%';
-      setTimeout(() => {
-        bar.style.opacity = '0';
-        setTimeout(() => bar.remove(), 500);
-      }, 1500);
-    }
+function applySimProgress(items) {
+  items.forEach(({ id, runCount, percentage, status, position }) => {
+    const sim = SIMS.find(s => s.id === id);
+    if (!sim) return;
+    Object.assign(sim, { runCount, percentage, status, position });
+    const tr = document.querySelector(`tr[data-sim-id="${CSS.escape(id)}"]`);
+    if (!tr) return;
+    tr.querySelector('[data-cell="replicas"]').textContent = fmt.int(runCount);
+    tr.querySelector('[data-cell="status"]').innerHTML = statusCellHtml(sim);
   });
 }
 
-function endsimprocess(id) {
-  const card = document.querySelector(`[data-sim-id="${id}"]`);
-  if (!card) return;
-
-  let bar = card.querySelector('.sim-progress-bar');
-  if (!bar) {
-    bar = document.createElement('div');
-    bar.className = 'sim-progress-bar';
-    card.insertBefore(bar, card.firstChild);
-  }
-  bar.style.width = `100%`;
-  const metaValues = card.querySelectorAll('.meta-value');
- 
-    if (metaValues[0]) metaValues[0].textContent = formatNum(1000);
-  // [1] es la Solución; escribir ahi borraba el nombre del modelo.
-  if (metaValues[2]) metaValues[2].textContent = t('Completada');
-
-  setTimeout(() => {
-      bar.style.opacity = '0';
-      setTimeout(() => bar.remove(), 500);
-    }, 1500);
-
-}
 // ---- Init ----
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -324,18 +396,29 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-modal-cancel').addEventListener('click', closeModal);
   document.getElementById('btn-modal-confirm').addEventListener('click', triggerGenerate);
 
-  // Close modal on overlay click
+  // Close modal on overlay click / Escape
   document.getElementById('modal-generate').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeModal();
   });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Search and filters
+  const bind = (id, key, ev = 'change') => document.getElementById(id).addEventListener(ev, e => {
+    view[key] = e.target.value;
+    renderTable();
+  });
+  bind('filter-q', 'q', 'input');
+  bind('filter-engine', 'engine');
+  bind('filter-model', 'model');
+  bind('filter-status', 'status');
 
   // Subscribe to live simulation progress updates and completion events
   const socket = io();
   socket.on('sim_progress', applySimProgress);
   socket.on('sim_completed', ({ id, title }) => {
-
     showCompletionBanner(id, title);
-    endsimprocess(id);
     toast(t('Simulación completada: {title}', { title: title || id }), 'success');
     loadSimulations();
   });
@@ -349,5 +432,4 @@ document.addEventListener('DOMContentLoaded', () => {
     toast(queued ? t('Simulación en cola: {title}', { title: title || id }) : t('Simulación lanzada: {title}', { title: title || id }), 'info');
     loadSimulations();
   });
-
 });

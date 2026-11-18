@@ -488,8 +488,10 @@ app.get('/api/simulations', (req, res) => {
           const t = match[2];
           datetime = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)} ${t.slice(0, 2)}:${t.slice(2, 4)}:${t.slice(4, 6)}`;
         }
-        const { title, description, model} = parseDescription(simPath);
+        const { title, description, model, seed, exclusive } = parseDescription(simPath);
+        // engine: derived from the model key (same rule run_simulation.sh uses)
         return { id, datetime, runCount, hasCharts, title, description, status, model,
+                 engine: engineFor(model).type, seed, exclusive,
                  error: errors ? errors[0] : null };
       })
       .sort((a, b) => b.id.localeCompare(a.id));

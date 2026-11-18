@@ -213,8 +213,8 @@ function renderBusesView(container) {
   filterBar.className = 'buses-editor-filter-bar';
   filterBar.innerHTML = `
     <span class="analysis-filter-label">${t('Ver por:')}</span>
-    <button class="filter-btn ${_busViewFilter === 'physical' ? 'active' : ''}" id="bus-filter-physical">&#128652; ${t('Autobús físico')}</button>
-    <button class="filter-btn ${_busViewFilter === 'timeslot' ? 'active' : ''}" id="bus-filter-ts">&#128336; ${t('Franja horaria')}</button>
+    <button class="filter-btn ${_busViewFilter === 'physical' ? 'active' : ''}" id="bus-filter-physical">${t('Autobús físico')}</button>
+    <button class="filter-btn ${_busViewFilter === 'timeslot' ? 'active' : ''}" id="bus-filter-ts">${t('Franja horaria')}</button>
     <div id="bus-ts-selector" style="display:${_busViewFilter === 'timeslot' ? 'flex' : 'none'};align-items:center;gap:0.35rem;flex-wrap:wrap;margin-left:0.75rem;"></div>
   `;
   wrap.appendChild(filterBar);
@@ -442,7 +442,6 @@ function buildBusCard(busId) {
   cardHeader.className = 'bus-card-header';
   cardHeader.innerHTML = `
     <div class="bus-card-title">
-      <span class="bus-card-icon">&#128652;</span>
       <span class="bus-card-id">${escHtml(t('Autobús {id}', { id: busId }))}</span>
       <span class="bus-card-count">${t(trips.length === 1 ? '{n} salida' : '{n} salidas', { n: trips.length })}</span>
     </div>
@@ -450,7 +449,7 @@ function buildBusCard(busId) {
       <button class="btn btn-sm btn-outline btn-collapse" data-bus="${escHtml(busId)}">
         <span class="collapse-icon">&#9660;</span> ${t('Ver salidas')}
       </button>
-      <button class="btn btn-sm btn-danger" data-delete-bus="${escHtml(busId)}">&#128465; ${t('Eliminar')}</button>
+      <button class="btn btn-sm btn-danger" data-delete-bus="${escHtml(busId)}">${t('Eliminar')}</button>
     </div>
   `;
   card.appendChild(cardHeader);
@@ -592,8 +591,8 @@ function renderRouteView(container) {
   filterBar.id = 'route-config-filter-bar';
   filterBar.innerHTML = `
     <span class="analysis-filter-label">${t('Mostrar por:')}</span>
-    <button class="filter-btn ${_routeFilter === 'general' ? 'active' : ''}" id="rcfg-general-btn">&#128202; ${t('General')}</button>
-    <button class="filter-btn ${_routeFilter === 'timeslot' ? 'active' : ''}" id="rcfg-ts-btn">&#128336; ${t('Franja horaria')}</button>
+    <button class="filter-btn ${_routeFilter === 'general' ? 'active' : ''}" id="rcfg-general-btn">${t('General')}</button>
+    <button class="filter-btn ${_routeFilter === 'timeslot' ? 'active' : ''}" id="rcfg-ts-btn">${t('Franja horaria')}</button>
     <div class="rcfg-ts-selector" id="rcfg-ts-selector" style="display:${_routeFilter === 'timeslot' ? 'flex' : 'none'};"></div>
   `;
   wrap.appendChild(filterBar);
@@ -1289,7 +1288,7 @@ function buildSectionGeneralView(row) {
       </p>
       <div class="rcfg-stats-grid">
         <div class="rcfg-stat rcfg-stat-editable">
-          <span class="rcfg-stat-label">&#128337; ${t('Tiempo medio (todas las franjas)')}</span>
+          <span class="rcfg-stat-label">${t('Tiempo medio (todas las franjas)')}</span>
           <input type="text" class="rcfg-mean-input" id="rcfg-sec-mean-input"
                  value="${secondsToMMSS(avgMeanSecs)}" placeholder="MM:SS" />
           <span class="rcfg-modify-hint">${t('formato MM:SS')}</span>
@@ -1319,7 +1318,7 @@ function buildSectionTimeslotView(row, ts) {
       </p>
       <div class="rcfg-stats-grid">
         <div class="rcfg-stat rcfg-stat-editable">
-          <span class="rcfg-stat-label">&#128337; ${t('Tiempo medio en esta franja')}</span>
+          <span class="rcfg-stat-label">${t('Tiempo medio en esta franja')}</span>
           <input type="text" class="rcfg-mean-input" id="rcfg-sec-ts-input"
                  value="${secondsToMMSS(meanSecs)}" placeholder="MM:SS"
                  ${!hasData ? 'disabled' : ''} />
@@ -1365,7 +1364,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!simId.match(/^SIMULATION_\d{8}_\d{6}$/)) {
     document.getElementById('config-loading').innerHTML = `
-      <div class="empty-icon">&#9888;</div>
       <p>${t('ID de simulación inválido.')}</p>
       <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; ${t('Volver al dashboard')}</a>
     `;
@@ -1379,7 +1377,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadInputs();
   } catch (err) {
     document.getElementById('config-loading').innerHTML = `
-      <div class="empty-icon">&#9888;</div>
       <p>${t('Error al cargar los parámetros.')}</p>
       <p style="color:var(--emt-red);font-size:0.85rem;margin-top:0.5rem;">${escHtml(err.message)}</p>
       <a href="/" class="btn btn-outline" style="margin-top:1rem;">&#8592; ${t('Volver al dashboard')}</a>

@@ -22,44 +22,52 @@
       </div>
     </a>
     <nav class="header-nav">
-      <button class="btn btn-white" id="btn-generate">
-        &#9654; Nueva simulación
-      </button>
+      <button class="btn btn-primary" id="btn-generate">Nueva simulación</button>
     </nav>
   </header>
 
   <!-- Main -->
-  <main>
+  <main class="main-wide">
 
-    <!-- Page header -->
-    <div class="page-header">
-      <div>
-        <h2>Simulaciones GAMA</h2>
-        <p>Resultados de experimentos sobre movilidad urbana EMT Madrid</p>
-      </div>
-      <div id="sim-count-badge" style="font-size:0.85rem;color:var(--emt-gray-600);"></div>
-    </div>
+    <h1 class="page-title">Simulaciones</h1>
+    <p class="list-summary" id="list-summary" aria-live="polite"></p>
 
-    <!-- Global stats bar -->
-    <div class="stats-bar" id="stats-bar">
-      <div class="stat-card">
-        <div class="stat-label">Total Simulaciones</div>
-        <div class="stat-value" id="stat-total">—</div>
-        <div class="stat-sub">carpetas en /data/logs</div>
+    <!-- Search and filters -->
+    <form class="list-tools" id="list-tools" role="search" onsubmit="return false">
+      <div class="tool-field tool-grow">
+        <label for="filter-q">Buscar</label>
+        <input type="search" id="filter-q" placeholder="Nombre o descripción" autocomplete="off" />
       </div>
-      <div class="stat-card">
-        <div class="stat-label">Con Gráficas</div>
-        <div class="stat-value" id="stat-charts">—</div>
-        <div class="stat-sub">listas para visualizar</div>
+      <div class="tool-field">
+        <label for="filter-engine">Motor</label>
+        <select id="filter-engine">
+          <option value="">Todos</option>
+          <option value="gama">GAMA</option>
+          <option value="c">C</option>
+        </select>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">Última Ejecución</div>
-        <div class="stat-value" id="stat-latest" style="font-size:1.1rem;padding-top:0.4rem;">—</div>
-        <div class="stat-sub">más reciente</div>
+      <div class="tool-field">
+        <label for="filter-model">Modelo</label>
+        <select id="filter-model">
+          <option value="">Todos</option>
+          <option value="agents">Con agentes pasajero</option>
+          <option value="aggregate">Agregado</option>
+        </select>
       </div>
-    </div>
+      <div class="tool-field">
+        <label for="filter-status">Estado</label>
+        <select id="filter-status">
+          <option value="">Todos</option>
+          <option value="done">Completada</option>
+          <option value="running">En curso</option>
+          <option value="queued">En cola</option>
+          <option value="prepared">Preparada</option>
+          <option value="failed">Fallida</option>
+        </select>
+      </div>
+    </form>
 
-    <!-- Simulation cards -->
+    <!-- Simulations table -->
     <div id="sim-container">
       <div class="loading-state">
         <div class="loading-spinner"></div>
@@ -77,7 +85,7 @@
   <!-- Generate modal -->
   <div class="modal-overlay" id="modal-generate">
     <div class="modal">
-      <h3>&#9654; Lanzar nueva simulación</h3>
+      <h3>Lanzar nueva simulación</h3>
       <p>
         Se ejecutará el pipeline GAMA batch. Esto puede tardar varios minutos dependiendo
         del número de réplicas configurado. ¿Deseas continuar?

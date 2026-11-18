@@ -108,8 +108,8 @@
     'Estadísticas generales obtenidas': 'Overall statistics',
     'Ocupación general': 'Overall occupancy',
     'de capacidad media': 'of average capacity',
-    'Sentido A': 'Direction A',
-    'Sentido B': 'Direction B',
+    'Sentido A': 'Towards A',
+    'Sentido B': 'Towards B',
     'Buses': 'Buses',
     'Buses físicos encargados': 'Physical buses assigned',
     'Viajes totales': 'Total trips',
@@ -133,7 +133,7 @@
     'La simulación ha fallado': 'The simulation has failed',
     'Consulta el log de ejecución más abajo para ver el detalle.': 'See the execution log below for details.',
     'Ocupación media Sentido {name}': 'Mean occupancy Direction {name}',
-    'Sentido {name}': 'Direction {name}',
+    'Sentido {name}': 'Towards {name}',
     'No hay datos de autobuses disponibles.': 'No bus data available.',
     'Ver por:': 'View by:',
     'Autobús Físico': 'Physical bus',
@@ -337,6 +337,61 @@
     'Equivalencia por tramo': 'Equivalence by section',
     'Histograma del coeficiente de Bhattacharyya': 'Bhattacharyya coefficient histogram',
 
+    // Listado
+    'Simulaciones': 'Simulations',
+    'Buscar': 'Search',
+    'Nombre o descripción': 'Name or description',
+    'Motor': 'Engine',
+    'Modelo': 'Model',
+    'Todos': 'All',
+    'Agregado': 'Aggregate',
+    'Fallida': 'Failed',
+    'En curso': 'Running',
+    'Generando gráficas': 'Generating charts',
+    '{n} ejecución': '{n} run',
+    '{n} ejecuciones': '{n} runs',
+    '{n} con gráficas': '{n} with charts',
+    '{n} fallida': '{n} failed',
+    '{n} fallidas': '{n} failed',
+    '{n} en curso': '{n} running',
+    'última el {date}': 'latest on {date}',
+    'Fecha': 'Date',
+    'Réplicas': 'Replicas',
+    'Parámetros': 'Parameters',
+    'Acciones': 'Actions',
+    'Acciones de {name}': 'Actions for {name}',
+    'Exclusiva': 'Exclusive',
+    'Semilla': 'Seed',
+    'Ninguna ejecución coincide con los filtros.': 'No run matches the filters.',
+    'Mostrando {n} de {total}': 'Showing {n} of {total}',
+
+    // Resultados
+    'Información sobre la simulación realizada': 'Information about the simulation run',
+    'Ocupación (% de la capacidad media)': 'Occupancy (% of mean capacity)',
+    'Operación': 'Operation',
+    'Ocupación global': 'Overall occupancy',
+    'Índice de regularidad': 'Regularity index',
+    'Autobuses asignados': 'Buses assigned',
+    'Viajes realizados': 'Trips run',
+    'Espera media de pasajeros': 'Mean passenger wait',
+    'de 100': 'out of 100',
+    'Ocupación': 'Occupancy',
+    'Tiempo': 'Time',
+    'pasajeros': 'passengers',
+    's': 's',
+    'Global': 'Overall',
+    'Magnitud': 'Quantity',
+    'Celdas equivalentes': 'Equivalent cells',
+    '% equivalentes': '% equivalent',
+    'Coef. Bhattacharyya medio': 'Mean Bhattacharyya coefficient',
+    'Mediana': 'Median',
+    'Sesgo medio': 'Mean bias',
+    'Sesgo (σ)': 'Bias (σ)',
+    'cumple el umbral': 'meets the threshold',
+    'no cumple el umbral': 'does not meet the threshold',
+    'Sesgo = media simulada − media esperada. Sesgo (σ) = sesgo dividido por la desviación típica esperada. Se promedian las celdas evaluadas.':
+      'Bias = simulated mean − expected mean. Bias (σ) = bias divided by the expected standard deviation. Evaluated cells are averaged.',
+
     // Alt/aria del selector
     'Cambiar idioma': 'Change language',
   };
@@ -355,7 +410,43 @@
     return s;
   }
 
-  // Traduce un texto estático conservando símbolos iniciales (▶, ←, 🗑…) y los espacios
+
+  // ---- Formato numérico por idioma (Intl) ----
+  // ES: 1.000 · 28,1 % · −3,07   EN: 1,000 · 28.1% · −3.07
+  const LOCALE = lang === 'en' ? 'en-GB' : 'es-ES';
+  const MINUS = '\u2212';
+  const fixMinus = s => s.replace(/-/g, MINUS);
+  const nfCache = {};
+  function nf(opts) {
+    const key = JSON.stringify(opts);
+    return nfCache[key] || (nfCache[key] = new Intl.NumberFormat(LOCALE, { useGrouping: 'always', ...opts }));
+  }
+  const isNum = v => v !== null && v !== undefined && v !== '' && !isNaN(v);
+  const DASH = '\u2014';
+  const fmt = {
+    int:    v => isNum(v) ? fixMinus(nf({ maximumFractionDigits: 0 }).format(v)) : DASH,
+    dec:    (v, d = 2) => isNum(v) ? fixMinus(nf({ minimumFractionDigits: d, maximumFractionDigits: d }).format(v)) : DASH,
+    // v is already a percentage (28.1 means 28.1 %)
+    pct:    (v, d = 1) => isNum(v) ? fixMinus(nf({ style: 'percent', minimumFractionDigits: d, maximumFractionDigits: d }).format(v / 100)) : DASH,
+    // explicit sign: +1,12 / −3,07
+    signed: (v, d = 2) => isNum(v) ? fixMinus(nf({ minimumFractionDigits: d, maximumFractionDigits: d, signDisplay: 'exceptZero' }).format(v)) : DASH,
+    // "2026-10-14 08:26:28" (server time, no zone) -> localised date / date and time
+    date:   s => { const d = parseStamp(s); return d ? new Intl.DateTimeFormat(LOCALE, { day: '2-digit', month: '2-digit', year: 'numeric' }).format(d) : DASH; },
+    dateTime: s => { const d = parseStamp(s); return d ? new Intl.DateTimeFormat(LOCALE, { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }).format(d) : DASH; },
+    // seconds -> "8 min 16 s" / "1 h 02 min"
+    minSec: secs => {
+      if (!isNum(secs)) return DASH;
+      const s = Math.round(secs), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), r = s % 60;
+      if (h > 0) return `${h} h ${String(m).padStart(2, '0')} min`;
+      return `${m} min ${String(r).padStart(2, '0')} s`;
+    },
+  };
+  function parseStamp(s) {
+    const m = typeof s === 'string' && s.match(/^(\d{4})-(\d{2})-(\d{2})(?: (\d{2}):(\d{2})(?::(\d{2}))?)?$/);
+    return m ? new Date(+m[1], +m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0)) : null;
+  }
+
+  // Traduce un texto estático conservando símbolos iniciales (flechas, marcas) y los espacios
   function translateStatic(raw) {
     const m = raw.match(/^([^\p{L}\p{N}]*)([\s\S]*?)(\s*)$/u);
     if (!m || !m[2]) return raw;
@@ -404,9 +495,10 @@
       b.type = 'button';
       b.className = 'lang-btn';
       b.dataset.lang = code;
-      b.textContent = code.toUpperCase();
+      b.textContent = code === 'es' ? 'ES' : 'EN';
       b.setAttribute('aria-pressed', String(code === lang));
-      if (code === lang) b.classList.add('active');
+      b.setAttribute('lang', code);
+      b.title = code === 'es' ? 'Español' : 'English';
       b.addEventListener('click', () => setLang(code));
       wrap.appendChild(b);
     });
@@ -417,7 +509,8 @@
 
   window.I18N = {
     lang,
-    locale: lang === 'en' ? 'en-GB' : 'es-ES',
+    locale: LOCALE,
+    fmt,
     t,
     setLang,
   };
