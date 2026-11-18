@@ -65,9 +65,23 @@
           <option value="failed">Fallida</option>
         </select>
       </div>
+      <div class="tool-field">
+        <label for="sort-by">Ordenar por</label>
+        <div class="sort-control">
+          <select id="sort-by">
+            <option value="date">Fecha</option>
+            <option value="name">Nombre</option>
+            <option value="engine">Motor</option>
+            <option value="model">Modelo</option>
+            <option value="replicas">Réplicas</option>
+            <option value="status">Estado</option>
+          </select>
+          <button type="button" id="sort-dir" class="sort-dir" aria-label="Orden descendente" title="Orden descendente">&#8595;</button>
+        </div>
+      </div>
     </form>
 
-    <!-- Simulations table -->
+    <!-- Simulations -->
     <div id="sim-container">
       <div class="loading-state">
         <div class="loading-spinner"></div>

@@ -383,87 +383,106 @@ main.main-wide {
 .tool-field input:hover,
 .tool-field select:hover { border-color: var(--ink-2); }
 
-/* ---- Listado: tabla ---- */
-.table-wrap { position: relative; overflow-x: auto; }
-
-.sim-table {
-  width: 100%;
-  min-width: 56rem;
-  border-collapse: collapse;
-  border-top: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
-  font-size: var(--fs-cell);
-  line-height: var(--lh-cell);
-  font-variant-numeric: lining-nums tabular-nums;
+/* ---- Listado: tarjetas (ficha con cuadro de datos reglado) ---- */
+.sim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: var(--sp-5);
+  list-style: none;
 }
 
-.sim-table th {
-  text-align: left;
-  font-weight: var(--fw-regular);
+.sim-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+.sim-card:hover { border-color: var(--ink); cursor: pointer; }
+.sim-card:has(.card-link:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Línea de registro: fecha a la izquierda, estado y menú a la derecha */
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4);
+  border-bottom: var(--border);
+}
+.card-date {
+  flex: 1;
   font-size: var(--fs-sm);
   color: var(--muted);
-  padding: var(--sp-3) var(--sp-2);
-  border-bottom: 1px solid var(--ink);
-  white-space: nowrap;
-  vertical-align: bottom;
+  font-variant-numeric: lining-nums tabular-nums;
 }
+.card-status { display: inline-flex; }
 
-.sim-table td {
-  padding: var(--sp-3) var(--sp-2);
-  border-bottom: var(--border);
-  vertical-align: baseline;
-}
-
-.sim-table tbody tr:last-child td { border-bottom: none; }
-.sim-table .num { text-align: right; white-space: nowrap; }
-
-.sort-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: baseline;
-  gap: var(--sp-1);
-}
-.sort-btn:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-th[aria-sort="ascending"] .sort-btn,
-th[aria-sort="descending"] .sort-btn { color: var(--ink); font-weight: var(--fw-strong); }
-.sort-arrow { display: inline-block; min-width: 0.8em; }
-
-.sim-row { cursor: pointer; }
-.sim-row:hover td { background: var(--surface-2); }
-
-.col-name { max-width: 26rem; min-width: 13rem; }
-.col-date { white-space: nowrap; }
-.col-engine { white-space: nowrap; }
-.col-model { min-width: 8rem; }
-.col-params { min-width: 12rem; }
-.sim-table td.col-actions { width: 3.5rem; text-align: right; padding-top: var(--sp-2); vertical-align: top; }
-
-.row-title {
+.card-title {
+  padding: var(--sp-4) var(--sp-4) 0;
   font-size: var(--fs-lg);
   font-weight: var(--fw-strong);
   line-height: 1.25;
-  text-decoration: none;
   overflow-wrap: anywhere;
 }
-.row-title:hover { text-decoration: underline; text-underline-offset: 3px; }
-.row-title .untitled { font-weight: var(--fw-regular); font-size: var(--fs-cell); }
+.card-link { text-decoration: none; }
+.card-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.card-link:focus-visible { outline: none; }
+/* Toda la tarjeta es el enlace: el título se extiende sobre ella */
+.card-link::after { content: ""; position: absolute; inset: 0; }
+.card-title .untitled { font-weight: var(--fw-regular); font-size: var(--fs-cell); }
 
-.row-desc {
-  margin-top: 2px;
+.card-desc {
+  flex: 1;
+  padding: var(--sp-1) var(--sp-4) 0;
   font-size: var(--fs-sm);
+  line-height: 1.45;
   color: var(--muted);
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.param { white-space: nowrap; }
-.param-label { color: var(--muted); font-size: var(--fs-sm); }
+.card-reason {
+  padding: var(--sp-2) var(--sp-4) 0;
+  font-size: var(--fs-sm);
+  line-height: 1.3;
+  color: var(--danger);
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Cuadro de datos: celdas separadas por filetes finos, como un cuadro de rotulación */
+.card-facts {
+  margin-top: var(--sp-4);
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border-top: var(--border);
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
+}
+.fact { background: var(--surface); padding: var(--sp-2) var(--sp-4) var(--sp-3); min-width: 0; }
+.fact-wide { grid-column: 1 / -1; }
+.fact dt { font-size: var(--fs-sm); color: var(--muted); line-height: 1.3; }
+.fact dd {
+  font-size: var(--fs-cell);
+  line-height: var(--lh-cell);
+  color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+  overflow-wrap: anywhere;
+}
+.fact-wide dd { font-size: var(--fs-sm); color: var(--ink-2); }
+
+/* Progreso de una ejecución en curso: una regla fina al pie */
+.card-progress { height: 3px; background: var(--line); }
+.card-progress span { display: block; height: 100%; background: var(--warn); transition: width 0.6s ease; }
 
 /* Estado: etiqueta compacta, siempre con símbolo y texto */
 .status {
@@ -483,26 +502,33 @@ th[aria-sort="descending"] .sort-btn { color: var(--ink); font-weight: var(--fw-
 .status-run  { color: var(--warn);   background: var(--warn-tint); }
 .status-idle { color: var(--ink-2);  background: var(--surface-2); }
 
-.status-reason {
-  margin-top: var(--sp-1);
-  max-width: 14rem;
-  font-size: var(--fs-sm);
-  line-height: 1.3;
-  color: var(--danger);
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow-wrap: anywhere;
-}
+.no-match { text-align: center; color: var(--muted); padding: var(--sp-7) var(--sp-3); }
+.result-count { margin-top: var(--sp-4); font-size: var(--fs-sm); color: var(--muted); }
 
-.no-match { text-align: center; color: var(--muted); padding: var(--sp-7) var(--sp-3) !important; }
-.result-count { margin-top: var(--sp-3); font-size: var(--fs-sm); color: var(--muted); }
+/* Orden: selector + sentido */
+.sort-control { display: flex; }
+.sort-control select { border-radius: var(--radius) 0 0 var(--radius); }
+.sort-dir {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: var(--border-ctl);
+  border-left: none;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--fs-lg);
+  line-height: 1;
+  cursor: pointer;
+}
+.sort-dir:hover { background: var(--surface-2); }
 
 /* Menú de fila */
 .row-menu-btn {
-  width: 2.5rem;
-  height: 2.5rem;
+  position: relative;
+  z-index: 2;
+  width: 2.25rem;
+  height: 2.25rem;
   background: none;
   border: 1px solid transparent;
   border-radius: var(--radius);
@@ -633,7 +659,7 @@ th[aria-sort="descending"] .sort-btn { color: var(--ink); font-weight: var(--fw-
 
 .section-card-body { padding: 0; }
 
-/* ---- Métricas: grupos de cifras sin cajas ---- */
+/* ---- Métricas: cuadro reglado, cada cifra en su celda ---- */
 .metric-group + .metric-group { margin-top: var(--sp-6); }
 
 .metric-group-title {
@@ -642,28 +668,31 @@ th[aria-sort="descending"] .sort-btn { color: var(--ink); font-weight: var(--fw-
   margin-bottom: var(--sp-3);
 }
 
-/* Una fila de etiquetas (alineadas abajo) y una de cifras: todas comparten línea base */
 .metric-row.cols-3 { --cols: 3; }
 .metric-row.cols-4 { --cols: 4; }
 
 .metric-row {
   display: grid;
   grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
-  grid-template-rows: auto auto;
-  column-gap: 0;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-.metric { display: grid; grid-template-rows: subgrid; grid-row: span 2; padding: 0 var(--sp-5); border-left: 1px solid var(--line); }
-.metric:first-child { padding-left: 0; border-left: none; }
-
-.metric-label {
-  align-self: end;
-  font-size: var(--fs-sm);
-  line-height: 1.3;
-  color: var(--muted);
-  padding-bottom: var(--sp-1);
+/* Celdas de la misma altura: etiqueta arriba, cifra abajo (misma línea base en toda la fila) */
+.metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  background: var(--surface);
+  padding: var(--sp-3) var(--sp-4) var(--sp-4);
 }
+
+.metric-label { font-size: var(--fs-sm); line-height: 1.3; color: var(--muted); }
 
 .metric-value {
   font-size: var(--fs-metric);
@@ -2229,9 +2258,7 @@ input[type=number] { -moz-appearance: textfield; }
 
 @media (max-width: 900px) {
   /* Grupos de cuatro métricas: dos columnas (nunca una suelta en su fila) */
-  .metric-row.cols-4 { --cols: 2; row-gap: var(--sp-4); }
-  .cols-4 .metric:nth-child(odd)  { padding-left: 0; border-left: none; }
-  .cols-4 .metric:nth-child(even) { padding-left: var(--sp-5); border-left: 1px solid var(--line); }
+  .metric-row.cols-4 { --cols: 2; }
 }
 
 @media (max-width: 768px) {
@@ -2243,10 +2270,8 @@ input[type=number] { -moz-appearance: textfield; }
 @media (max-width: 600px) {
   :root { --gutter: 16px; }
   .metric-value { white-space: normal; font-size: 1.625rem; }
-  .metric { padding-left: var(--sp-3); padding-right: var(--sp-3); }
   /* Grupos de tres métricas: una columna, todas iguales */
-  .metric-row.cols-3 { --cols: 1; row-gap: var(--sp-3); }
-  .cols-3 .metric { padding-left: 0; border-left: none; }
+  .metric-row.cols-3 { --cols: 1; }
   header { height: auto; min-height: var(--header-h); padding: var(--sp-2) var(--sp-4); flex-wrap: wrap; }
   main { padding: var(--sp-4); }
   main.main-wide { padding: var(--sp-5) var(--gutter) var(--sp-7); }

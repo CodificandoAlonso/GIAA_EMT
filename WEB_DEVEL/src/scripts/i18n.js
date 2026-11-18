@@ -392,6 +392,12 @@
     'Sesgo = media simulada − media esperada. Sesgo (σ) = sesgo dividido por la desviación típica esperada. Se promedian las celdas evaluadas.':
       'Bias = simulated mean − expected mean. Bias (σ) = bias divided by the expected standard deviation. Evaluated cells are averaged.',
 
+    // Tarjetas
+    'Ordenar por': 'Sort by',
+    'Orden ascendente': 'Ascending order',
+    'Orden descendente': 'Descending order',
+    'La semilla solo se aplica al motor en C': 'The seed only applies to the C engine',
+
     // Alt/aria del selector
     'Cambiar idioma': 'Change language',
   };
