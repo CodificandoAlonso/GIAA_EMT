@@ -81,11 +81,15 @@ function visibleSims() {
   return rows.sort((a, b) => sign * SORTERS[view.sort](a, b) || b.id.localeCompare(a.id));
 }
 
-// Settings that differ between runs (only keys present in each run's description.txt)
+// Settings that differ between runs (only keys present in each run's description.txt).
+// The seed is read only by the C engine: run_simulation.sh exports it as MASTER_SEED
+// and never passes it to gama-headless, so GAMA runs show "—" instead of a value
+// that does not control them.
 function varyingParams() {
   const defs = [
     { label: 'Ejecución', value: s => (s.exclusive ? 'Exclusiva' : 'Compartida'), present: s => s.seed != null },
-    { label: 'Semilla',   value: s => s.seed,                                      present: s => s.seed != null },
+    { label: 'Semilla',   value: s => s.seed, present: s => s.seed != null && s.engine === 'c',
+      absentHint: 'La semilla solo se aplica al motor en C' },
   ];
   return defs.filter(d => new Set(SIMS.filter(d.present).map(d.value)).size > 1);
 }
@@ -119,57 +123,64 @@ function renderSummary() {
   }));
 }
 
-// ---- Table ----
-
-const COLUMNS = [
-  { id: 'name',     label: 'Nombre',     sort: true },
-  { id: 'date',     label: 'Fecha',      sort: true },
-  { id: 'engine',   label: 'Motor',      sort: true },
-  { id: 'model',    label: 'Modelo',     sort: true },
-  { id: 'replicas', label: 'Réplicas',   sort: true, num: true },
-  { id: 'params',   label: 'Parámetros', sort: false },
-  { id: 'status',   label: 'Estado',     sort: true },
-  { id: 'actions',  label: 'Acciones',   sort: false, hidden: true },
-];
+// ---- Cards ----
 
 function statusCellHtml(sim) {
   const info = statusInfo(sim.status);
   let text = t(info.label);
   if (sim.status === STATUS_QUEUED && sim.position) text += ` (#${sim.position})`;
   if (sim.status === STATUS_RUNNING && sim.percentage != null) text += ` ${fmt.pct(sim.percentage, 0)}`;
-  const reason = sim.status === STATUS_ERROR ? errorSummary(sim.error) : '';
   return `
     <span class="status status-${info.tone}">
       <span class="status-symbol" aria-hidden="true">${info.symbol}</span>${escHtml(text)}
-    </span>
-    ${reason ? `<div class="status-reason" title="${escHtml(reason)}">${escHtml(reason)}</div>` : ''}`;
+    </span>`;
 }
 
-function rowHtml(sim, params) {
-  const name = sim.title ? escHtml(sim.title) : `<span class="untitled">${escHtml(sim.id)}</span>`;
-  const desc = sim.description ? `<div class="row-desc" title="${escHtml(sim.description)}">${escHtml(sim.description)}</div>` : '';
-  const paramsHtml = params.map(p => {
-    const v = p.present(sim) ? p.value(sim) : null;
-    return `<div class="param"><span class="param-label">${escHtml(t(p.label))}</span> <span class="param-value">${v == null ? '\u2014' : escHtml(t(String(v)))}</span></div>`;
-  }).join('');
-  const label = sim.title || sim.id;
+// Progress rule at the bottom of the card, only while the run is in progress
+function progressHtml(sim) {
+  if (sim.status !== STATUS_RUNNING || sim.percentage == null) return '';
+  return `<div class="card-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+               aria-valuenow="${Math.round(sim.percentage)}"><span style="width:${Math.min(100, sim.percentage)}%"></span></div>`;
+}
+
+function factHtml(label, value, { wide = false, hint = '', cell = '' } = {}) {
   return `
-    <tr class="sim-row" data-sim-id="${escHtml(sim.id)}">
-      <td class="col-name">
-        <a class="row-title" href="/simulation/${escHtml(sim.id)}">${name}</a>
-        ${desc}
-      </td>
-      <td class="col-date">${escHtml(fmt.dateTime(sim.datetime))}</td>
-      <td class="col-engine">${escHtml(ENGINE_LABEL[sim.engine] || sim.engine)}</td>
-      <td class="col-model">${escHtml(t(MODEL_LABEL[modelKind(sim)]))}</td>
-      <td class="col-replicas num" data-cell="replicas">${escHtml(fmt.int(sim.runCount))}</td>
-      ${params.length ? `<td class="col-params">${paramsHtml}</td>` : ''}
-      <td class="col-status" data-cell="status">${statusCellHtml(sim)}</td>
-      <td class="col-actions">
+    <div class="fact${wide ? ' fact-wide' : ''}">
+      <dt>${escHtml(t(label))}</dt>
+      <dd${cell ? ` data-cell="${cell}"` : ''}${hint ? ` title="${escHtml(t(hint))}"` : ''}>${value}</dd>
+    </div>`;
+}
+
+function cardHtml(sim, params) {
+  const title = sim.title ? escHtml(sim.title) : `<span class="untitled">${escHtml(sim.id)}</span>`;
+  const label = sim.title || sim.id;
+  const desc = sim.description
+    ? `<p class="card-desc" title="${escHtml(sim.description)}">${escHtml(sim.description)}</p>`
+    : '<p class="card-desc card-desc-empty"></p>';
+  const facts = [
+    factHtml('Motor', escHtml(ENGINE_LABEL[sim.engine] || sim.engine)),
+    factHtml('Modelo', escHtml(t(MODEL_LABEL[modelKind(sim)]))),
+    factHtml('Réplicas', escHtml(fmt.int(sim.runCount)), { cell: 'replicas' }),
+    ...params.map(p => {
+      const v = p.present(sim) ? escHtml(t(String(p.value(sim)))) : '\u2014';
+      return factHtml(p.label, v, { wide: true, hint: p.present(sim) ? '' : (p.absentHint || '') });
+    }),
+  ].join('');
+  const reason = sim.status === STATUS_ERROR ? errorSummary(sim.error) : '';
+  return `
+    <li class="sim-card" data-sim-id="${escHtml(sim.id)}">
+      <div class="card-top">
+        <time class="card-date" datetime="${escHtml(sim.datetime || '')}">${escHtml(fmt.dateTime(sim.datetime))}</time>
+        <span class="card-status" data-cell="status">${statusCellHtml(sim)}</span>
         <button type="button" class="row-menu-btn" aria-haspopup="menu" aria-expanded="false"
                 aria-label="${escHtml(t('Acciones de {name}', { name: label }))}" data-menu-for="${escHtml(sim.id)}">\u22ef</button>
-      </td>
-    </tr>`;
+      </div>
+      <h2 class="card-title"><a class="card-link" href="/simulation/${escHtml(sim.id)}">${title}</a></h2>
+      ${desc}
+      ${reason ? `<p class="card-reason" title="${escHtml(reason)}">${escHtml(reason)}</p>` : ''}
+      <dl class="card-facts">${facts}</dl>
+      ${progressHtml(sim)}
+    </li>`;
 }
 
 function renderTable() {
@@ -185,44 +196,16 @@ function renderTable() {
   }
   const params = varyingParams();
   const rows = visibleSims();
-  const cols = COLUMNS.filter(c => c.id !== 'params' || params.length);
+  container.innerHTML = rows.length
+    ? `<ul class="sim-grid" role="list">${rows.map(s => cardHtml(s, params)).join('')}</ul>`
+    : `<p class="no-match">${escHtml(t('Ninguna ejecución coincide con los filtros.'))}</p>`;
+  container.insertAdjacentHTML('beforeend',
+    `<p class="result-count" aria-live="polite">${escHtml(t('Mostrando {n} de {total}', { n: fmt.int(rows.length), total: fmt.int(SIMS.length) }))}</p>`);
 
-  const head = cols.map(c => {
-    const label = t(c.label);
-    const cls = `col-${c.id}${c.num ? ' num' : ''}`;
-    if (!c.sort) return `<th scope="col" class="${cls}">${c.hidden ? `<span class="visually-hidden">${escHtml(label)}</span>` : escHtml(label)}</th>`;
-    const active = view.sort === c.id;
-    const aria = active ? (view.dir === 'asc' ? 'ascending' : 'descending') : 'none';
-    const arrow = active ? (view.dir === 'asc' ? '\u2191' : '\u2193') : '';
-    return `<th scope="col" class="${cls}" aria-sort="${aria}">
-      <button type="button" class="sort-btn" data-sort="${c.id}">${escHtml(label)}<span class="sort-arrow" aria-hidden="true">${arrow}</span></button></th>`;
-  }).join('');
-
-  const body = rows.length
-    ? rows.map(s => rowHtml(s, params)).join('')
-    : `<tr><td class="no-match" colspan="${cols.length}">${escHtml(t('Ninguna ejecución coincide con los filtros.'))}</td></tr>`;
-
-  container.innerHTML = `
-    <div class="table-wrap">
-      <table class="sim-table" id="sim-table">
-        <caption class="visually-hidden">${escHtml(t('Simulaciones'))}</caption>
-        <thead><tr>${head}</tr></thead>
-        <tbody>${body}</tbody>
-      </table>
-    </div>
-    <p class="result-count" aria-live="polite">${escHtml(t('Mostrando {n} de {total}', { n: fmt.int(rows.length), total: fmt.int(SIMS.length) }))}</p>`;
-
-  container.querySelectorAll('[data-sort]').forEach(b => b.addEventListener('click', () => {
-    const id = b.dataset.sort;
-    if (view.sort === id) view.dir = view.dir === 'asc' ? 'desc' : 'asc';
-    else { view.sort = id; view.dir = id === 'date' || id === 'replicas' ? 'desc' : 'asc'; }
-    renderTable();
-    container.querySelector(`[data-sort="${id}"]`)?.focus();
-  }));
-  container.querySelectorAll('.sim-row').forEach(tr => {
-    tr.addEventListener('click', e => {
+  container.querySelectorAll('.sim-card').forEach(card => {
+    card.addEventListener('click', e => {
       if (e.target.closest('a, button')) return;
-      window.location.href = `/simulation/${tr.dataset.simId}`;
+      window.location.href = `/simulation/${card.dataset.simId}`;
     });
   });
   container.querySelectorAll('[data-menu-for]').forEach(b => b.addEventListener('click', e => {
@@ -372,7 +355,7 @@ function showCompletionBanner(id, title) {
 }
 
 // ---- WebSocket: live simulation progress ----
-// Updates only the replicas and status cells of the affected rows, so open
+// Updates only the replicas, status and progress of the affected cards, so open
 // menus, focus and scroll position are not disturbed.
 
 function applySimProgress(items) {
@@ -380,10 +363,12 @@ function applySimProgress(items) {
     const sim = SIMS.find(s => s.id === id);
     if (!sim) return;
     Object.assign(sim, { runCount, percentage, status, position });
-    const tr = document.querySelector(`tr[data-sim-id="${CSS.escape(id)}"]`);
-    if (!tr) return;
-    tr.querySelector('[data-cell="replicas"]').textContent = fmt.int(runCount);
-    tr.querySelector('[data-cell="status"]').innerHTML = statusCellHtml(sim);
+    const card = document.querySelector(`.sim-card[data-sim-id="${CSS.escape(id)}"]`);
+    if (!card) return;
+    card.querySelector('[data-cell="replicas"]').textContent = fmt.int(runCount);
+    card.querySelector('[data-cell="status"]').innerHTML = statusCellHtml(sim);
+    card.querySelector('.card-progress')?.remove();
+    card.insertAdjacentHTML('beforeend', progressHtml(sim));
   });
 }
 
@@ -413,6 +398,21 @@ document.addEventListener('DOMContentLoaded', () => {
   bind('filter-engine', 'engine');
   bind('filter-model', 'model');
   bind('filter-status', 'status');
+  bind('sort-by', 'sort');
+  const dirBtn = document.getElementById('sort-dir');
+  const syncDir = () => {
+    const label = t(view.dir === 'asc' ? 'Orden ascendente' : 'Orden descendente');
+    dirBtn.textContent = view.dir === 'asc' ? '\u2191' : '\u2193';
+    dirBtn.setAttribute('aria-label', label);
+    dirBtn.title = label;
+  };
+  dirBtn.addEventListener('click', () => { view.dir = view.dir === 'asc' ? 'desc' : 'asc'; syncDir(); renderTable(); });
+  document.getElementById('sort-by').addEventListener('change', e => {
+    // sensible default direction per field: newest / largest first, text A-Z
+    view.dir = (e.target.value === 'date' || e.target.value === 'replicas') ? 'desc' : 'asc';
+    syncDir();
+  });
+  syncDir();
 
   // Subscribe to live simulation progress updates and completion events
   const socket = io();
