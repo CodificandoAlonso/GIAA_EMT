@@ -1,0 +1,6 @@
+title "An example of a simulation running"
+description "This is a description template for the running simulation"
+line 401
+model with_agents
+seed 7951579282934121547
+exclusive no

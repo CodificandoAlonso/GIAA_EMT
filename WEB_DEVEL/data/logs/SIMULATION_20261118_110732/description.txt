@@ -1,0 +1,6 @@
+title "Another example of how a simulation name looks"
+description "Here the description can be inputted by the user"
+line 401
+model with_agents
+seed 14320184377648311371
+exclusive no

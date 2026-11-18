@@ -1,0 +1,6 @@
+title "The simulations can fail"
+description "In this case, the web shows the error."
+line 401
+model without_agents
+seed 2343395099998827463
+exclusive no

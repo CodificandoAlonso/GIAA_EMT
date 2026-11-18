@@ -53,6 +53,7 @@ FROM eclipse-temurin:21-jre-noble AS runtime
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    nano \
     bash \
     bc \
     procps \

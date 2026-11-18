@@ -1,0 +1,6 @@
+title "The sim cards show the Date and Time the simulation was launched"
+description "This can be used to sort the simulations by time"
+line 401
+model with_agents
+seed 3878605962278986719
+exclusive no
