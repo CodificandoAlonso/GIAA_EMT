@@ -46,44 +46,34 @@
       <!-- Hero -->
       <div class="detail-hero">
         <div>
-          <div style="font-size:0.75rem;opacity:0.7;margin-bottom:0.3rem;font-family:monospace;" id="hero-id"></div>
+          <div class="hero-id" id="hero-id"></div>
           <h2 id="hero-date"></h2>
           <div class="detail-subtitle" id="hero-subtitle"></div>
         </div>
         <div class="detail-hero-actions">
-          <button class="btn btn-white btn-sm" id="btn-download-log">
-            &#8595; Descargar log
-          </button>
-          <button class="btn btn-sm" id="btn-delete-sim"
-                  style="background:#dc2626;color:#fff;border:none;">
-            &#128465; Eliminar simulación
-          </button>
+          <button class="btn btn-white btn-sm" id="btn-download-log">&#8595; Descargar log</button>
+          <button class="btn btn-sm btn-danger" id="btn-delete-sim">Eliminar simulación</button>
         </div>
       </div>
-
-      <!-- Key stats -->
 
       <!-- Shown only when run_simulation.sh recorded failures (.error) -->
       <div class="sim-error-card" id="sim-error-card" style="display:none;"></div>
 
-      <div class="section-card full-width" id="sim-stats-card" style="margin-bottom:1.5rem;">
-        <div class="section-card-header">
-          <span class="section-icon">&#128200;</span>
-          Información sobre la Simulación realizada
-        </div>
+      <div class="section-card full-width section-gap" id="sim-stats-card">
+        <h3 class="section-card-header">Información sobre la simulación realizada</h3>
         <div class="section-card-body">
-          <div class="stats-bar" style="margin-bottom:0;" id="detail-stats-bar">
-            <div class="stat-card">
-              <div class="stat-label">Número de repeticiones por experimento</div>
-              <div class="stat-value" id="ds-runs">—</div>
+          <div class="metric-row cols-3" id="detail-stats-bar">
+            <div class="metric">
+              <div class="metric-label">Número de repeticiones por experimento</div>
+              <div class="metric-value" id="ds-runs">—</div>
             </div>
-            <div class="stat-card">
-              <div class="stat-label">Tiempo total de simulación</div>
-              <div class="stat-value" id="ds-total-time">—</div>
+            <div class="metric">
+              <div class="metric-label">Tiempo total de simulación</div>
+              <div class="metric-value" id="ds-total-time">—</div>
             </div>
-            <div class="stat-card">
-              <div class="stat-label">Solución simulada</div>
-              <div class="stat-value" id="ds-model" style="font-size:1rem;">—</div>
+            <div class="metric">
+              <div class="metric-label">Solución simulada</div>
+              <div class="metric-value metric-text" id="ds-model">—</div>
             </div>
           </div>
         </div>
@@ -92,48 +82,46 @@
       <!-- Main detail grid -->
       <div class="detail-grid">
 
-        <!-- Occupation stats from PLOTS/json_output_general_info.json -->
+        <!-- General statistics from PLOTS/json_output_general_info.json -->
         <div class="section-card full-width" id="occ-plots-card" style="display:none;">
-          <div class="section-card-header">
-            <span class="section-icon">&#128200;</span>
-            Estadísticas generales obtenidas
-          </div>
+          <h3 class="section-card-header">Estadísticas generales obtenidas</h3>
           <div class="section-card-body">
-            <div class="stats-bar" style="margin-bottom:0;">
-              <div class="stat-card">
-                <div class="stat-label">Ocupación general</div>
-                <div class="stat-value" id="occ-general">—</div>
-                <div class="stat-sub">% de capacidad media</div>
+            <div class="metric-group">
+              <h4 class="metric-group-title">Ocupación (% de la capacidad media)</h4>
+              <div class="metric-row cols-3">
+                <div class="metric">
+                  <div class="metric-label">Ocupación global</div>
+                  <div class="metric-value" id="occ-general">—</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label" id="occ-toA-label">Sentido A</div>
+                  <div class="metric-value" id="occ-toA">—</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label" id="occ-toB-label">Sentido B</div>
+                  <div class="metric-value" id="occ-toB">—</div>
+                </div>
               </div>
-              <div class="stat-card">
-                <div class="stat-label" id="occ-toA-label">&#8594; Sentido A</div>
-                <div class="stat-value" id="occ-toA">—</div>
-                <div class="stat-sub">% de capacidad media</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label" id="occ-toB-label">&#8592; Sentido B</div>
-                <div class="stat-value" id="occ-toB">—</div>
-                <div class="stat-sub">% de capacidad media</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Buses</div>
-                <div class="stat-value" id="occ-logical-buses">—</div>
-                <div class="stat-sub">Buses físicos encargados</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Viajes totales</div>
-                <div class="stat-value" id="occ-total-trips">—</div>
-                <div class="stat-sub">viajes ejecutados</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Espera media pasajeros</div>
-                <div class="stat-value" id="occ-mean-await">—</div>
-                <div class="stat-sub">tiempo medio de espera</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Índice de Regularidad</div>
-                <div class="stat-value" id="occ-reg-value">—</div>
-                <div class="stat-sub">Valor medio</div>
+            </div>
+            <div class="metric-group">
+              <h4 class="metric-group-title">Operación</h4>
+              <div class="metric-row cols-4">
+                <div class="metric">
+                  <div class="metric-label">Autobuses asignados</div>
+                  <div class="metric-value" id="occ-logical-buses">—</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Viajes realizados</div>
+                  <div class="metric-value" id="occ-total-trips">—</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Índice de regularidad</div>
+                  <div class="metric-value" id="occ-reg-value">—</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Espera media de pasajeros</div>
+                  <div class="metric-value" id="occ-mean-await">—</div>
+                </div>
               </div>
             </div>
           </div>
@@ -141,26 +129,22 @@
 
         <!-- Validation: simulated vs expected (Bhattacharyya) -->
         <div class="section-card full-width" id="bhatt-card" style="display:none;">
-          <div class="section-card-header">
-            <span class="section-icon">&#128208;</span>
-            Validación: simulado frente a esperado
-          </div>
+          <h3 class="section-card-header">Validación: simulado frente a esperado</h3>
           <div class="section-card-body" id="bhatt-body"></div>
         </div>
 
         <!-- Analysis: route view + bus view -->
         <div class="section-card full-width">
-          <div class="section-card-header">
-            <span class="section-icon">&#128202;</span>
+          <h3 class="section-card-header">
             Análisis de la simulación
-            <div style="margin-left:auto;display:flex;gap:0.75rem;align-items:center;">
+            <div class="section-actions">
               <div id="exp-tabs" style="display:flex;gap:0.5rem;align-items:center;"></div>
               <div style="display:flex;gap:0.25rem;">
-                <button class="btn btn-sm btn-primary" id="view-route-btn">&#128506; Por ruta</button>
-                <button class="btn btn-sm btn-outline" id="view-bus-btn">&#128652; Por autobuses</button>
+                <button class="btn btn-sm btn-tab" id="view-route-btn">Por ruta</button>
+                <button class="btn btn-sm btn-white" id="view-bus-btn">Por autobuses</button>
               </div>
             </div>
-          </div>
+          </h3>
 
           <!-- Route View -->
           <div id="view-route-section">
@@ -180,11 +164,10 @@
 
         <!-- Log viewer -->
         <div class="section-card full-width">
-          <div class="section-card-header">
-            <span class="section-icon">&#128196;</span>
+          <h3 class="section-card-header">
             Log de ejecución
-            <span style="margin-left:auto;font-size:0.78rem;color:var(--emt-gray-600);"> Log Completo</span>
-          </div>
+            <span class="section-aside">Log Completo</span>
+          </h3>
           <div class="section-card-body" style="padding:0;">
             <div class="log-viewer" id="log-viewer">Cargando log...</div>
           </div>
